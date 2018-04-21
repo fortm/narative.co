@@ -1,3 +1,9 @@
+![Narative Logo Header](/project/images/readme/narative-repo-header.png)
+
+<br/>
+<br/>
+<br/>
+
 # Narative.com
 
 Tell a different story, a better one.
