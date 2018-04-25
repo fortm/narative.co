@@ -46,8 +46,9 @@ const NarativeMarkImage = styled.img`
   height: 25rem;
   position: relative;
   top: -4rem;
-  opacity: ${props => (props.hasLoaded ? '1' : '0')};
   transition: all 400ms ${props => props.theme.transitions.easeIn};
+  transition-delay: 300ms;
+  opacity: ${props => (props.hasLoaded ? '1' : '0')};
 
   ${media.large`
     height: 53rem;
@@ -164,10 +165,14 @@ class IndexPage extends Component {
     setTimeout(() => {
       this.setState({ animation: 'start' })
     }, 300)
+
+    this.mark.props.onLoad(this.handleImageLoaded())
   }
 
   handleImageLoaded = () => {
-    this.setState({ image: 'loaded' })
+    setTimeout(() => {
+      this.setState({ image: 'loaded' })
+    }, 300)
   }
 
   handleImageErrored = () => {
@@ -186,6 +191,7 @@ class IndexPage extends Component {
               src={withPrefix('/images/logo/narative-logo-white.svg')}
               alt="Narative logo white"
               onLoad={this.handleImageLoaded}
+              ref={img => (this.mark = img)}
               onError={this.handleImageErrored}
             />
             <WelcomeHeader animation={animation}>
