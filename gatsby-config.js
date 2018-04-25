@@ -5,6 +5,7 @@ const siteMetadata = {
 const plugins = [
   'gatsby-plugin-react-helmet',
   'gatsby-plugin-styled-components',
+  'gatsby-plugin-react-next',
 ]
 
 const modifyWebpackConfig = ({ config, stage }) => {

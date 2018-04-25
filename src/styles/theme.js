@@ -7,7 +7,9 @@
 import { keyframes } from 'styled-components'
 
 const black = '#262626'
+const bg = '#111216'
 const greyBg = '#f9f9f9'
+const grey = '#4c4d51'
 
 const flicker = keyframes`
   0% { opacity: 0.3; }
@@ -15,20 +17,7 @@ const flicker = keyframes`
   100% { opacity: 0.3; }
 `
 
-export const theme = {
-  colors: {
-    black,
-  },
-  animations: {
-    flicker,
-  },
-  placeholder: {
-    dark: 'rgba(#E7EEF5, 0.65)',
-    light: 'rgba(#ebeef0, 0.65)',
-  },
-}
-
-export const easings = {
+const transitions = {
   default: 'cubic-bezier(0.23, 1, 0.32, 1)',
   defaultSpeed: '0.25',
   in: 'cubic-bezier(0.47, 0, 0.745, 0.715)',
@@ -37,4 +26,20 @@ export const easings = {
   outBack: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
   inOut: 'cubic-bezier(0.86, 0, 0.07, 1)',
   inOutBack: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+}
+
+export const theme = {
+  colors: {
+    black,
+    bg,
+    grey,
+  },
+  animations: {
+    flicker,
+  },
+  transitions,
+  placeholder: {
+    dark: 'rgba(#E7EEF5, 0.65)',
+    light: 'rgba(#ebeef0, 0.65)',
+  },
 }

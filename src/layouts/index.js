@@ -1,17 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import { ThemeProvider } from 'styled-components'
-import { Header } from '@components'
+import styled, { ThemeProvider } from 'styled-components'
 import { theme } from '../styles/theme'
 import { globalStyles } from '../styles/global'
 
 // Injecting global styles and reset
 globalStyles()
 
+const WebContainer = styled.div`
+  background: ${theme.colors.bg};
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+`
+
 const Layout = ({ children, data }) => (
   <ThemeProvider theme={theme}>
-    <div>
+    <WebContainer>
       <Helmet
         title={data.site.siteMetadata.title}
         meta={[
@@ -19,9 +25,8 @@ const Layout = ({ children, data }) => (
           { name: 'keywords', content: 'sample, something' },
         ]}
       />
-      <Header siteTitle={data.site.siteMetadata.title} />
       <div>{children()}</div>
-    </div>
+    </WebContainer>
   </ThemeProvider>
 )
 
