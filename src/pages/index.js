@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Link from 'gatsby-link'
+import Link, { withPrefix } from 'gatsby-link'
 import styled from 'styled-components'
 import { media } from '../styles/media'
 
@@ -183,7 +183,7 @@ class IndexPage extends Component {
           <LeftContainer>
             <LogoImage
               animation={animation}
-              src="/static/images/logo/narative-logo-white.svg"
+              src={withPrefix('/images/logo/narative-logo-white.svg')}
               alt="Narative logo white"
               onLoad={this.handleImageLoaded}
               onError={this.handleImageErrored}
@@ -201,7 +201,7 @@ class IndexPage extends Component {
           <RightContainer>
             <NarativeMarkImage
               hasLoaded={image === 'loaded'}
-              src="/static/images/mark/waves/waves.png"
+              src={withPrefix('/images/mark/waves/waves.png')}
             />
             <ContactLinkMobile href="mailto:info@narative.co?Subject=👋%20Narative">
               contact us

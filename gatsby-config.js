@@ -8,6 +8,8 @@ const plugins = [
   'gatsby-plugin-react-next',
 ]
 
+const pathPrefix = `/static`
+
 const modifyWebpackConfig = ({ config, stage }) => {
   config.merge({
     resolve: {
@@ -24,6 +26,7 @@ const modifyWebpackConfig = ({ config, stage }) => {
 
 module.exports = {
   // modifyWebpackConfig,
+  pathPrefix,
   plugins,
   siteMetadata,
 }
