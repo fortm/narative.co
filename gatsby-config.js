@@ -32,6 +32,8 @@ const plugins = [
   },
 ]
 
+const pathPrefix = `/static`
+
 const modifyWebpackConfig = ({ config, stage }) => {
   config.merge({
     resolve: {
@@ -49,5 +51,6 @@ const modifyWebpackConfig = ({ config, stage }) => {
 module.exports = {
   // modifyWebpackConfig,
   plugins,
+  pathPrefix,
   siteMetadata,
 }
