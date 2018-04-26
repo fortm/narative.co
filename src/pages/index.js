@@ -248,7 +248,7 @@ class IndexPage extends Component {
           <LeftContainer>
             <LogoImage
               animation={animation}
-              src={withPrefix('/images/logo/narative-logo-white.svg')}
+              src="/images/logo/narative-logo-white.svg"
               alt="Narative logo white"
               onLoad={this.handleImageLoaded}
               ref={img => (this.mark = img)}
