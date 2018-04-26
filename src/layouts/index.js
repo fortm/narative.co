@@ -21,8 +21,15 @@ const Layout = ({ children, data }) => (
       <Helmet
         title={data.site.siteMetadata.title}
         meta={[
-          { name: 'description', content: 'Sample' },
-          { name: 'keywords', content: 'sample, something' },
+          {
+            name: 'description',
+            content:
+              'Narative is a digital-first design studio that is all about reducing the noise and unnecessary details—using classical techniques with state of the art technologies, we help you solve your problems, grow your business and simply tell your story.',
+          },
+          {
+            name: 'keywords',
+            content: 'Design, Technology, Agency, Excellence',
+          },
         ]}
       />
       <div>{children()}</div>

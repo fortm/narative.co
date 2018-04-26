@@ -115,7 +115,7 @@ export const globalStyles = () => injectGlobal`
     text-rendering: optimizeLegibility;
     cursor: default;
     font-size: 0.625rem;
-    line-height: 1.3;
+    line-height: 1.4;
   }
 
   body {

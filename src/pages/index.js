@@ -16,15 +16,18 @@ const GridContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 91vh;
+  width: 30rem;
+  margin: 0 auto;
 
   ${media.large`
     grid-template-columns: repeat(2, 1fr [col-start]);
+    width: 100%;
   `};
 `
 
 const LogoImage = styled.img`
   max-width: 16rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 
   ${props =>
     props.animation !== 'start' &&
@@ -34,7 +37,6 @@ const LogoImage = styled.img`
   `};
 
   transition: opacity 700ms 200ms cubic-bezier(0.694, 0, 0.335, 1),
-    color 300ms cubic-bezier(0.694, 0, 0.335, 1),
     transform 700ms 200ms cubic-bezier(0.694, 0, 0.335, 1);
 
   ${media.large`
@@ -42,148 +44,139 @@ const LogoImage = styled.img`
     font-size: 16rem;
   `};
 `
-const NarativeMarkImage = styled.img`
-  height: 53rem;
-  position: relative;
-  top: -4rem;
-  transition: all 400ms ${props => props.theme.transitions.easeIn};
-  transition-delay: 300ms;
-  opacity: ${props => (props.hasLoaded ? '1' : '0')};
+
+const NarativeVideoContainer = styled.div`
+  clip-path: polygon(0 40%, 0 0, 100% 60%, 100% 100%);
+  height: auto;
+  width: 30rem;
+  margin-top: 2rem;
 
   ${media.large`
     height: 53rem;
+    width: 49rem;
+  `};
+`
+
+const NarativeVideo = styled.video`
+  position: relative;
+  height: 30rem;
+  transition: all 500ms 200ms cubic-bezier(0.694, 0, 0.335, 1);
+  filter: blur(0);
+
+  ${props =>
+    props.animation !== 'start' &&
+    `
+    filter: blur(0.5rem);
+    
+  `};
+
+  ${media.large`
+    height: 53rem;  
   `};
 `
 
 const WelcomeHeader = styled.h1`
   color: ${props => props.theme.colors.grey};
   font-size: 1.8rem;
-
-  ${props =>
-    props.animation !== 'start' &&
-    `
-    opacity: 0;
-    transform: translate3d(0, 1.4rem, 0);
-  `};
-
-  transition: opacity 700ms 200ms cubic-bezier(0.694, 0, 0.335, 1),
-    color 300ms cubic-bezier(0.694, 0, 0.335, 1),
-    transform 700ms 200ms cubic-bezier(0.694, 0, 0.335, 1);
-  transition-delay: 888ms;
+  margin-bottom: 2rem;
 
   ${media.large`
     font-size: 3.6rem;
-    margin-bottom: 2rem;
   `};
 `
 
 const ContactText = styled.p`
-  font-size: 4.8rem;
+  font-size: 1.6rem;
   font-weight: 500;
-  display: none;
-
-  ${props =>
-    props.animation !== 'start' &&
-    `
-    opacity: 0;
-    transform: translate3d(0, 1.4rem, 0);
-  `};
-
   color: ${props => props.theme.colors.grey};
-  transition: opacity 700ms 200ms cubic-bezier(0.694, 0, 0.335, 1),
-    color 300ms cubic-bezier(0.694, 0, 0.335, 1),
-    transform 700ms 200ms cubic-bezier(0.694, 0, 0.335, 1);
-  transition-delay: 888ms;
 
-  ${media.large`
-    display: block;
-  `};
+  svg {
+    margin-left: 1rem;
+    transition: transform 300ms ${props => props.theme.transitions.in};
+  }
 `
 
 const MainText = styled.p`
   font-size: 1.6rem;
   font-weight: 400;
-  display: none;
-
-  ${props =>
-    props.animation !== 'start' &&
-    `
-    opacity: 0;
-    transform: translate3d(0, 1.4rem, 0);
-  `};
-
   color: ${props => props.theme.colors.grey};
-  transition: opacity 700ms 200ms cubic-bezier(0.694, 0, 0.335, 1),
-    color 300ms cubic-bezier(0.694, 0, 0.335, 1),
-    transform 700ms 200ms cubic-bezier(0.694, 0, 0.335, 1);
-  transition-delay: 888ms;
+  margin-bottom: 2rem;
+`
 
-  ${media.large`
-    display: block;
-  `};
+const BasicText = styled.p`
+  font-size: 1.6rem;
+  font-weight: 400;
 `
 
 const ContactLink = styled.a`
-  font-size: 4.8rem;
-  font-weight: 500;
-  color: #a0a4a9;
+  color: #fff;
   text-decoration: underline;
-`
 
-const ContactLinkMobile = styled.a`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 23rem;
-  height: 4rem;
-  font-size: 1.6rem;
-  font-weight: 500;
-  color: #000;
-  background: #fff;
-  text-align: center;
-
-  margin: 5rem 0;
-
-  ${media.large`
-    display: none;
-  `};
+  &:hover ~ svg {
+    transform: translateX(0.3rem);
+  }
 `
 
 const LeftContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-direction: column;
   width: 100%;
-  height: 53rem;
-  text-align: center;
 
   ${media.large`
-    text-align: left;
+    justify-content: space-between;
     max-width: 36rem;
+    height: 53rem;
   `};
 `
 
 const RightContainer = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-direction: column;
 
   ${media.large`
+    align-items: center;
     justify-content: flex-end;
   `};
 `
 
 const CopyRightContainer = styled.div`
+  display: none;
   font-size: 1.6rem;
   font-weight: 500;
   color: ${props => props.theme.colors.grey};
-  text-align: center;
 
   ${media.large`
-    text-align: left;
+    display: block;
   `};
 `
+
+const CopyRightContainerMobile = styled.div`
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: ${props => props.theme.colors.grey};
+  align-self: flex-start;
+
+  ${media.large`
+    display: none;
+  `};
+`
+
+const ArrowRight = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="30"
+    height="10"
+    viewBox="0 0 30 10"
+  >
+    <path
+      fill="#FFF"
+      fill-rule="evenodd"
+      d="M24.697 0l-.934.881 3.698 3.494H0v1.25h27.461l-3.698 3.494.934.881L30 5z"
+    />
+  </svg>
+)
 
 class IndexPage extends Component {
   state = { animation: '', image: 'loading' }
@@ -222,21 +215,21 @@ class IndexPage extends Component {
               onError={this.handleImageErrored}
             />
             <div>
-              <WelcomeHeader animation={animation}>
-                Some things are worth the wait.
-              </WelcomeHeader>
-              <MainText animation={animation}>
+              <WelcomeHeader>Some things are worth the wait.</WelcomeHeader>
+              <MainText>
                 We’re Narative! And no, we did not misspell it. Narative is a
                 digital-first design studio that is all about reducing the noise
                 and unnecessary details—using classical techniques with state of
                 the art technologies, we help you solve your problems, grow your
                 business and simply tell your story.
               </MainText>
-              <ContactText animation={animation}>
-                contact us for{' '}
+              <ContactText>
+                Our new site is on its way.{' '}
                 <ContactLink href="mailto:info@narative.co?Subject=👋%20Narative">
-                  more info
-                </ContactLink>.
+                  Get in touch
+                </ContactLink>
+                .
+                <ArrowRight />
               </ContactText>
             </div>
             <CopyRightContainer>
@@ -244,13 +237,31 @@ class IndexPage extends Component {
             </CopyRightContainer>
           </LeftContainer>
           <RightContainer>
-            <NarativeMarkImage
-              hasLoaded={image === 'loaded'}
-              src={withPrefix('/images/mark/waves/waves.png')}
-            />
-            <ContactLinkMobile href="mailto:info@narative.co?Subject=👋%20Narative">
-              contact us
-            </ContactLinkMobile>
+            <NarativeVideoContainer>
+              <NarativeVideo
+                preload="none"
+                autoPlay="autoplay"
+                loop="loop"
+                poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
+                animation={animation}
+              >
+                <source
+                  src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
+                  type="video/webm"
+                />
+                <source
+                  src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
+                  type="video/mp4"
+                />
+                <source
+                  src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.ogv"
+                  type="video/ogg"
+                />
+              </NarativeVideo>
+            </NarativeVideoContainer>
+            <CopyRightContainerMobile>
+              © {new Date().getFullYear()} Studio Narative Inc.
+            </CopyRightContainerMobile>
           </RightContainer>
         </GridContainer>
       </PageContainer>
