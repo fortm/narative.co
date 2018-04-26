@@ -9,7 +9,7 @@ import { keyframes } from 'styled-components'
 const black = '#262626'
 const bg = '#111216'
 const greyBg = '#f9f9f9'
-const grey = '#4c4d51'
+const grey = '#7a8085'
 
 const flicker = keyframes`
   0% { opacity: 0.3; }

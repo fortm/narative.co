@@ -6,6 +6,12 @@ const plugins = [
   'gatsby-plugin-react-helmet',
   'gatsby-plugin-styled-components',
   'gatsby-plugin-react-next',
+  {
+    resolve: `gatsby-plugin-google-analytics`,
+    options: {
+      trackingId: 'UA-118232427-1',
+    },
+  },
 ]
 
 const pathPrefix = `/static`

@@ -6,7 +6,7 @@ import { media } from '../styles/media'
 const PageContainer = styled.div`
   max-width: 1100px;
   margin: 0 auto;
-  padding: 3rem 4.5rem;
+  padding: 3rem 2rem;
   background: ${props => props.theme.colors.bg};
 `
 
@@ -38,12 +38,12 @@ const LogoImage = styled.img`
     transform 700ms 200ms cubic-bezier(0.694, 0, 0.335, 1);
 
   ${media.large`
-    margin-bottom: 3.5rem;
+    margin-bottom: 2rem;
     font-size: 16rem;
   `};
 `
 const NarativeMarkImage = styled.img`
-  height: 25rem;
+  height: 53rem;
   position: relative;
   top: -4rem;
   transition: all 400ms ${props => props.theme.transitions.easeIn};
@@ -72,14 +72,37 @@ const WelcomeHeader = styled.h1`
   transition-delay: 888ms;
 
   ${media.large`
-    font-size: 4.8rem;
-    margin-bottom: 3.5rem;
+    font-size: 3.6rem;
+    margin-bottom: 2rem;
   `};
 `
 
 const ContactText = styled.p`
   font-size: 4.8rem;
   font-weight: 500;
+  display: none;
+
+  ${props =>
+    props.animation !== 'start' &&
+    `
+    opacity: 0;
+    transform: translate3d(0, 1.4rem, 0);
+  `};
+
+  color: ${props => props.theme.colors.grey};
+  transition: opacity 700ms 200ms cubic-bezier(0.694, 0, 0.335, 1),
+    color 300ms cubic-bezier(0.694, 0, 0.335, 1),
+    transform 700ms 200ms cubic-bezier(0.694, 0, 0.335, 1);
+  transition-delay: 888ms;
+
+  ${media.large`
+    display: block;
+  `};
+`
+
+const MainText = styled.p`
+  font-size: 1.6rem;
+  font-weight: 400;
   display: none;
 
   ${props =>
@@ -127,12 +150,16 @@ const ContactLinkMobile = styled.a`
 `
 
 const LeftContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
   width: 100%;
+  height: 53rem;
   text-align: center;
 
   ${media.large`
-  text-align: left;
-    max-width: 32rem;
+    text-align: left;
+    max-width: 36rem;
   `};
 `
 
@@ -194,15 +221,27 @@ class IndexPage extends Component {
               ref={img => (this.mark = img)}
               onError={this.handleImageErrored}
             />
-            <WelcomeHeader animation={animation}>
-              great things are worth the wait.
-            </WelcomeHeader>
-            <ContactText animation={animation}>
-              contact us for{' '}
-              <ContactLink href="mailto:info@narative.co?Subject=👋%20Narative">
-                more info
-              </ContactLink>.
-            </ContactText>
+            <div>
+              <WelcomeHeader animation={animation}>
+                Some things are worth the wait.
+              </WelcomeHeader>
+              <MainText animation={animation}>
+                We’re Narative! And no, we did not misspell it. Narative is a
+                digital-first design studio that is all about reducing the noise
+                and unnecessary details—using classical techniques with state of
+                the art technologies, we help you solve your problems, grow your
+                business and simply tell your story.
+              </MainText>
+              <ContactText animation={animation}>
+                contact us for{' '}
+                <ContactLink href="mailto:info@narative.co?Subject=👋%20Narative">
+                  more info
+                </ContactLink>.
+              </ContactText>
+            </div>
+            <CopyRightContainer>
+              © {new Date().getFullYear()} Studio Narative Inc.
+            </CopyRightContainer>
           </LeftContainer>
           <RightContainer>
             <NarativeMarkImage
@@ -214,9 +253,6 @@ class IndexPage extends Component {
             </ContactLinkMobile>
           </RightContainer>
         </GridContainer>
-        <CopyRightContainer>
-          © {new Date().getFullYear()} Studio Narative Inc.
-        </CopyRightContainer>
       </PageContainer>
     )
   }

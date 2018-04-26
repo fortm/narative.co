@@ -8,25 +8,40 @@ import { theme } from './theme'
  * and the very base styles.
  */
 export const globalStyles = () => injectGlobal`
-  /*
-  * The Typekit service used to deliver this font or fonts for use on websites
-  * is provided by Adobe and is subject to these Terms of Use
-  * http://www.adobe.com/products/eulas/tou_typekit. For font license
-  * information, see the list below.
-  *
-  * futura-pt:
-  *   - http://typekit.com/eulas/00000000000000000001008f
-  *   - http://typekit.com/eulas/000000000000000000010090
-  *   - http://typekit.com/eulas/000000000000000000010091
-  *   - http://typekit.com/eulas/000000000000000000010092
-  *   - http://typekit.com/eulas/000000000000000000013365
-  *   - http://typekit.com/eulas/000000000000000000010095
-  *
-  * © 2009-2018 Adobe Systems Incorporated. All Rights Reserved.
-  */
-  /*{"last_published":"2018-04-24 19:13:42 UTC"}*/
+/*
+ * The Typekit service used to deliver this font or fonts for use on websites
+ * is provided by Adobe and is subject to these Terms of Use
+ * http://www.adobe.com/products/eulas/tou_typekit. For font license
+ * information, see the list below.
+ *
+ * meta:
+ *   - http://typekit.com/eulas/00000000000000003b9b06f7
+ *   - http://typekit.com/eulas/00000000000000003b9b06f2
+ * futura-pt:
+ *   - http://typekit.com/eulas/00000000000000000001008f
+ *   - http://typekit.com/eulas/000000000000000000010090
+ *   - http://typekit.com/eulas/000000000000000000013365
+ *   - http://typekit.com/eulas/000000000000000000010095
+ *   - http://typekit.com/eulas/000000000000000000012192
+ *   - http://typekit.com/eulas/000000000000000000012193
+ *
+ * © 2009-2018 Adobe Systems Incorporated. All Rights Reserved.
+ */
+/*{"last_published":"2018-04-25 17:43:29 UTC"}*/
 
-  @import url("https://p.typekit.net/p.css?s=1&k=huf6cwu&ht=tk&f=10879.10880.10881.10882.10884.10885&a=13011269&app=typekit&e=css");
+  @import url("https://p.typekit.net/p.css?s=1&k=huf6cwu&ht=tk&f=5178.5310.10879.10880.10884.10885.15586.15587&a=13011269&app=typekit&e=css");
+
+  @font-face {
+    font-family:"meta";
+    src:url("https://use.typekit.net/af/25ecc8/00000000000000003b9b06f7/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"),url("https://use.typekit.net/af/25ecc8/00000000000000003b9b06f7/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"),url("https://use.typekit.net/af/25ecc8/00000000000000003b9b06f7/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("opentype");
+    font-style:normal;font-weight:700;
+  }
+
+  @font-face {
+    font-family:"meta";
+    src:url("https://use.typekit.net/af/e05dc6/00000000000000003b9b06f2/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3") format("woff2"),url("https://use.typekit.net/af/e05dc6/00000000000000003b9b06f2/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3") format("woff"),url("https://use.typekit.net/af/e05dc6/00000000000000003b9b06f2/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3") format("opentype");
+    font-style:normal;font-weight:500;
+  }
 
   @font-face {
     font-family:"futura-pt";
@@ -42,18 +57,6 @@ export const globalStyles = () => injectGlobal`
 
   @font-face {
     font-family:"futura-pt";
-    src:url("https://use.typekit.net/af/7b3e36/000000000000000000010091/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"),url("https://use.typekit.net/af/7b3e36/000000000000000000010091/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"),url("https://use.typekit.net/af/7b3e36/000000000000000000010091/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("opentype");
-    font-style:normal;font-weight:700;
-  }
-
-  @font-face {
-    font-family:"futura-pt";
-    src:url("https://use.typekit.net/af/04bbac/000000000000000000010092/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff2"),url("https://use.typekit.net/af/04bbac/000000000000000000010092/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("woff"),url("https://use.typekit.net/af/04bbac/000000000000000000010092/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3") format("opentype");
-    font-style:italic;font-weight:700;
-  }
-
-  @font-face {
-    font-family:"futura-pt";
     src:url("https://use.typekit.net/af/0fe518/000000000000000000013365/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/0fe518/000000000000000000013365/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/0fe518/000000000000000000013365/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
     font-style:normal;font-weight:400;
   }
@@ -63,6 +66,21 @@ export const globalStyles = () => injectGlobal`
     src:url("https://use.typekit.net/af/90af1a/000000000000000000010095/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3") format("woff2"),url("https://use.typekit.net/af/90af1a/000000000000000000010095/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3") format("woff"),url("https://use.typekit.net/af/90af1a/000000000000000000010095/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3") format("opentype");
     font-style:italic;font-weight:400;
   }
+
+  @font-face {
+    font-family:"futura-pt";
+    src:url("https://use.typekit.net/af/670570/000000000000000000012192/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3") format("woff2"),url("https://use.typekit.net/af/670570/000000000000000000012192/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3") format("woff"),url("https://use.typekit.net/af/670570/000000000000000000012192/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3") format("opentype");
+    font-style:normal;font-weight:600;
+  }
+
+  @font-face {
+    font-family:"futura-pt";
+    src:url("https://use.typekit.net/af/9a613b/000000000000000000012193/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i6&v=3") format("woff2"),url("https://use.typekit.net/af/9a613b/000000000000000000012193/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i6&v=3") format("woff"),url("https://use.typekit.net/af/9a613b/000000000000000000012193/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i6&v=3") format("opentype");
+    font-style:italic;font-weight:600;
+  }
+
+  .tk-meta { font-family: "meta",serif; }
+  .tk-futura-pt { font-family: "futura-pt",sans-serif; }
 
   @font-face {
     font-family: '-apple-system',
@@ -97,7 +115,7 @@ export const globalStyles = () => injectGlobal`
     text-rendering: optimizeLegibility;
     cursor: default;
     font-size: 0.625rem;
-    line-height: 1.1;
+    line-height: 1.3;
   }
 
   body {
@@ -120,9 +138,10 @@ export const globalStyles = () => injectGlobal`
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-weight: 500;
-    line-height: 1.1;
+    font-weight: 700;
+    line-height: 1.3;
     color ${theme.colors.black};
+    font-family: 'meta';
   }
 
   button,
