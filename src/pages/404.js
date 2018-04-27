@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'gatsby-link'
 import styled, { ThemeProvider } from 'styled-components'
-import theme from '../styles/theme'
+import { theme } from '../styles/theme'
 
 const NotFoundContainer = styled.div`
   display: flex;
