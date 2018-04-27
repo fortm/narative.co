@@ -284,9 +284,7 @@ class IndexPage extends Component {
           <RightContainer>
             <NarativeVideoContainer>
               <NarativeVideo
-                // preload="none"
                 autoPlay="autoplay"
-                loop="loop"
                 controls="false"
                 muted
                 poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
