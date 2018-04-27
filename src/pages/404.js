@@ -2,12 +2,6 @@ import React from 'react'
 import Link from 'gatsby-link'
 import styled from 'styled-components'
 
-const NotFoundNumber = styled.h1`
-  display: flex;
-  font-size: 20rem;
-  color: ${props => props.theme.colors.grey};
-`
-
 const NotFoundContainer = styled.div`
   display: flex;
   align-items: center;
@@ -15,11 +9,21 @@ const NotFoundContainer = styled.div`
   flex-direction: column;
   height: 100vh;
   width: 100vw;
+
+  h1,
+  a {
+    color: ${props => props.theme.colors.grey};
+  }
 `
+
+const NotFoundNumber = styled.h1`
+  display: flex;
+  font-size: 20rem;
+`
+
 const NotFoundLink = styled(Link)`
   text-decoration: underline;
   margin-top: 3rem;
-  color: ${props => props.theme.colors.grey};
 `
 
 const NotFoundPage = () => (
