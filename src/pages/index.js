@@ -60,14 +60,17 @@ const NarativeVideoContainer = styled.div`
 const NarativeVideo = styled.video`
   position: relative;
   height: 30rem;
-  transition: all 500ms 200ms cubic-bezier(0.694, 0, 0.335, 1);
+  transition: filter 500ms 200ms cubic-bezier(0.694, 0, 0.335, 1),
+    transform 10s 3000ms cubic-bezier(0.694, 0, 0.335, 1);
+
   filter: blur(0);
+  transform: scale(1);
 
   ${props =>
     props.animation !== 'start' &&
     `
     filter: blur(0.5rem);
-    
+    transform: scale(1.15);
   `};
 
   ${media.large`
@@ -281,10 +284,11 @@ class IndexPage extends Component {
           <RightContainer>
             <NarativeVideoContainer>
               <NarativeVideo
-                preload="none"
+                // preload="none"
                 autoPlay="autoplay"
                 loop="loop"
-                controls="true"
+                controls="false"
+                muted
                 poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
                 animation={animation}
               >
