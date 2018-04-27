@@ -49,6 +49,7 @@ const NarativeVideoContainer = styled.div`
   height: auto;
   width: 30rem;
   margin-top: 2rem;
+  pointer-events: none;
 
   ${media.large`
     height: 53rem;
