@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'gatsby-link'
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
+import theme from '../styles/theme'
 
 const NotFoundContainer = styled.div`
   display: flex;
@@ -9,16 +10,13 @@ const NotFoundContainer = styled.div`
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-
-  h1,
-  a {
-    color: ${props => props.theme.colors.grey};
-  }
+  color: ${props => props.theme.colors.grey};
 `
 
 const NotFoundNumber = styled.h1`
   display: flex;
   font-size: 20rem;
+  color: ${props => props.theme.colors.grey};
 `
 
 const NotFoundLink = styled(Link)`
@@ -27,10 +25,12 @@ const NotFoundLink = styled(Link)`
 `
 
 const NotFoundPage = () => (
-  <NotFoundContainer>
-    <NotFoundNumber>404</NotFoundNumber>
-    <NotFoundLink to="/">home</NotFoundLink>
-  </NotFoundContainer>
+  <ThemeProvider theme={theme}>
+    <NotFoundContainer>
+      <NotFoundNumber>404</NotFoundNumber>
+      <NotFoundLink to="/">home</NotFoundLink>
+    </NotFoundContainer>
+  </ThemeProvider>
 )
 
 export default NotFoundPage
