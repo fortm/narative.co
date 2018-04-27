@@ -2,7 +2,6 @@
 
 <br/>
 <br/>
-<br/>
 
 # Narative.co
 
@@ -31,6 +30,17 @@ yarn dev
 ```sh
 yarn build
 ```
+
+#### Deploying the website
+
+Deployments are done using [Netlify](https://app.netlify.com/). You must be added to the Netlify organization to deploy.
+
+```sh
+# To deploy, commit and push to master
+git push
+```
+
+Deployments are done automatically on every push to `master`
 
 ## License
 
