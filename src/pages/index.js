@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Link, { withPrefix } from 'gatsby-link'
+import Link from 'gatsby-link'
 import styled from 'styled-components'
 import { media } from '../styles/media'
 
@@ -36,17 +36,16 @@ const LogoImage = styled.img`
     transform: translate3d(0, 1.4rem, 0);
   `};
 
-  transition: opacity 800ms 200ms cubic-bezier(0.694, 0, 0.335, 1),
-    transform 800ms 200ms cubic-bezier(0.694, 0, 0.335, 1);
+  transition: opacity 800ms 400ms cubic-bezier(0.694, 0, 0.335, 1),
+    transform 800ms 400ms cubic-bezier(0.694, 0, 0.335, 1);
 
   ${media.large`
-    margin-bottom: 2rem;
-    font-size: 16rem;
+    margin-bottom: 0;
   `};
 `
 
 const NarativeVideoContainer = styled.div`
-  clip-path: polygon(0 40%, 0 0, 100% 60%, 100% 100%);
+  clip-path: polygon(0 36%, 0 0, 100% 64%, 100% 100%);
   height: auto;
   width: 30rem;
   margin-top: 2rem;
@@ -87,8 +86,8 @@ const WelcomeHeader = styled.h1`
     transform: translate3d(0, 1.4rem, 0);
   `};
 
-  transition: opacity 800ms 400ms cubic-bezier(0.694, 0, 0.335, 1),
-    transform 800ms 400ms cubic-bezier(0.694, 0, 0.335, 1);
+  transition: opacity 800ms 600ms cubic-bezier(0.694, 0, 0.335, 1),
+    transform 800ms 600ms cubic-bezier(0.694, 0, 0.335, 1);
 
   ${media.large`
     font-size: 3.6rem;
@@ -108,8 +107,8 @@ const MainText = styled.p`
     transform: translate3d(0, 1.4rem, 0);
   `};
 
-  transition: opacity 800ms 400ms cubic-bezier(0.694, 0, 0.335, 1),
-    transform 800ms 400ms cubic-bezier(0.694, 0, 0.335, 1);
+  transition: opacity 800ms 600ms cubic-bezier(0.694, 0, 0.335, 1),
+    transform 800ms 600ms cubic-bezier(0.694, 0, 0.335, 1);
 `
 
 const ContactText = styled.p`
@@ -124,8 +123,8 @@ const ContactText = styled.p`
     transform: translate3d(0, 1.4rem, 0);
   `};
 
-  transition: opacity 800ms 400ms cubic-bezier(0.694, 0, 0.335, 1),
-    transform 800ms 400ms cubic-bezier(0.694, 0, 0.335, 1);
+  transition: opacity 800ms 600ms cubic-bezier(0.694, 0, 0.335, 1),
+    transform 800ms 600ms cubic-bezier(0.694, 0, 0.335, 1);
 
   svg {
     margin-left: 1rem;
@@ -184,8 +183,8 @@ const CopyRightContainer = styled.div`
     transform: translate3d(0, 1.4rem, 0);
   `};
 
-  transition: opacity 800ms 600ms cubic-bezier(0.694, 0, 0.335, 1),
-    transform 800ms 600ms cubic-bezier(0.694, 0, 0.335, 1);
+  transition: opacity 800ms 800ms cubic-bezier(0.694, 0, 0.335, 1),
+    transform 800ms 800ms cubic-bezier(0.694, 0, 0.335, 1);
 
   ${media.large`
     display: block;
@@ -212,7 +211,7 @@ const ArrowRight = () => (
   >
     <path
       fill="#FFF"
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="M24.697 0l-.934.881 3.698 3.494H0v1.25h27.461l-3.698 3.494.934.881L30 5z"
     />
   </svg>
@@ -248,7 +247,7 @@ class IndexPage extends Component {
           <LeftContainer>
             <LogoImage
               animation={animation}
-              src={withPrefix('/images/logo/narative-logo-white.svg')}
+              src={'/images/logo/narative-logo-white.svg'}
               alt="Narative logo white"
               onLoad={this.handleImageLoaded}
               ref={img => (this.mark = img)}
@@ -259,7 +258,7 @@ class IndexPage extends Component {
                 Some things are worth the wait.
               </WelcomeHeader>
               <MainText animation={animation}>
-                We’re Narative! And no, we did not misspell it. Narative is a
+                We’re Narative! Yes, that is with one R. Narative is a
                 digital-first design studio that is all about reducing the noise
                 and unnecessary details—using classical techniques with state of
                 the art technologies, we help you solve your problems, grow your
@@ -284,6 +283,7 @@ class IndexPage extends Component {
                 preload="none"
                 autoPlay="autoplay"
                 loop="loop"
+                controls="true"
                 poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
                 animation={animation}
               >

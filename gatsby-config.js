@@ -51,6 +51,6 @@ const modifyWebpackConfig = ({ config, stage }) => {
 module.exports = {
   // modifyWebpackConfig,
   plugins,
-  pathPrefix,
+  // pathPrefix,
   siteMetadata,
 }
