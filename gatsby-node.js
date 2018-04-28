@@ -14,6 +14,7 @@ const modifyWebpackConfig = ({ config, stage }) => {
         '@components': path.resolve(__dirname, 'src/components/'),
         '@layouts': path.resolve(__dirname, 'src/layouts/'),
         '@pages': path.resolve(__dirname, 'src/pages/'),
+        '@styles': path.resolve(__dirname, 'src/styles/'),
         '@utils': path.resolve(__dirname, 'src/utils/'),
       },
     },

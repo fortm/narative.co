@@ -2,8 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import styled, { ThemeProvider } from 'styled-components'
-import { theme } from '../styles/theme'
-import { globalStyles } from '../styles/global'
+import { globalStyles, theme } from '@styles'
 
 // Injecting global styles and reset
 globalStyles()

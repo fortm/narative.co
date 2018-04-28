@@ -38,7 +38,7 @@ export const media = {
       ${css(...args)};
     }
   `,
-  xsmll: (...args) => css`
+  xsmall: (...args) => css`
     @media (min-width: 400px) {
       ${css(...args)};
     }

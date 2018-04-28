@@ -1,14 +1,8 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
 import styled from 'styled-components'
-import { media } from '../styles/media'
-
-const PageContainer = styled.div`
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 3rem 2rem;
-  background: ${props => props.theme.colors.bg};
-`
+import { media, transitions } from '@styles'
+import { Container, Logo } from '@components'
 
 const GridContainer = styled.div`
   display: grid;
@@ -25,19 +19,10 @@ const GridContainer = styled.div`
   `};
 `
 
-const LogoImage = styled.img`
+const LogoContainer = styled.div`
   max-width: 16rem;
   margin-bottom: 2rem;
-
-  ${props =>
-    props.animation !== 'start' &&
-    `
-    opacity: 0;
-    transform: translate3d(0, 1.4rem, 0);
-  `};
-
-  transition: opacity 800ms 400ms cubic-bezier(0.694, 0, 0.335, 1),
-    transform 800ms 400ms cubic-bezier(0.694, 0, 0.335, 1);
+  ${transitions.fadeUp};
 
   ${media.large`
     margin-bottom: 0;
@@ -60,18 +45,7 @@ const NarativeVideoContainer = styled.div`
 const NarativeVideo = styled.video`
   position: relative;
   height: 30rem;
-  transition: filter 500ms 200ms cubic-bezier(0.694, 0, 0.335, 1),
-    transform 10s 3000ms cubic-bezier(0.694, 0, 0.335, 1);
-
-  filter: blur(0);
-  transform: scale(1);
-
-  ${props =>
-    props.animation !== 'start' &&
-    `
-    filter: blur(0.5rem);
-    transform: scale(1.15);
-  `};
+  ${transitions.blurIn};
 
   ${media.large`
     height: 53rem;  
@@ -82,16 +56,7 @@ const WelcomeHeader = styled.h1`
   color: ${props => props.theme.colors.grey};
   font-size: 1.8rem;
   margin-bottom: 2rem;
-
-  ${props =>
-    props.animation !== 'start' &&
-    `
-    opacity: 0;
-    transform: translate3d(0, 1.4rem, 0);
-  `};
-
-  transition: opacity 800ms 600ms cubic-bezier(0.694, 0, 0.335, 1),
-    transform 800ms 600ms cubic-bezier(0.694, 0, 0.335, 1);
+  ${transitions.fadeUp};
 
   ${media.large`
     font-size: 3.6rem;
@@ -103,32 +68,14 @@ const MainText = styled.p`
   font-weight: 400;
   color: ${props => props.theme.colors.grey};
   margin-bottom: 2rem;
-
-  ${props =>
-    props.animation !== 'start' &&
-    `
-    opacity: 0;
-    transform: translate3d(0, 1.4rem, 0);
-  `};
-
-  transition: opacity 800ms 600ms cubic-bezier(0.694, 0, 0.335, 1),
-    transform 800ms 600ms cubic-bezier(0.694, 0, 0.335, 1);
+  ${transitions.fadeUp};
 `
 
 const ContactText = styled.p`
   font-size: 1.6rem;
   font-weight: 500;
   color: ${props => props.theme.colors.grey};
-
-  ${props =>
-    props.animation !== 'start' &&
-    `
-    opacity: 0;
-    transform: translate3d(0, 1.4rem, 0);
-  `};
-
-  transition: opacity 800ms 600ms cubic-bezier(0.694, 0, 0.335, 1),
-    transform 800ms 600ms cubic-bezier(0.694, 0, 0.335, 1);
+  ${transitions.fadeUp};
 
   svg {
     margin-left: 1rem;
@@ -179,16 +126,7 @@ const CopyRightContainer = styled.div`
   font-size: 1.6rem;
   font-weight: 500;
   color: ${props => props.theme.colors.grey};
-
-  ${props =>
-    props.animation !== 'start' &&
-    `
-    opacity: 0;
-    transform: translate3d(0, 1.4rem, 0);
-  `};
-
-  transition: opacity 800ms 800ms cubic-bezier(0.694, 0, 0.335, 1),
-    transform 800ms 800ms cubic-bezier(0.694, 0, 0.335, 1);
+  ${transitions.fadeUp};
 
   ${media.large`
     display: block;
@@ -222,53 +160,36 @@ const ArrowRight = () => (
 )
 
 class IndexPage extends Component {
-  state = { animation: '', image: 'loading' }
+  state = { animation: '' }
 
   componentDidMount() {
     setTimeout(() => {
       this.setState({ animation: 'start' })
     }, 300)
-
-    this.mark.props.onLoad(this.handleImageLoaded())
-  }
-
-  handleImageLoaded = () => {
-    setTimeout(() => {
-      this.setState({ image: 'loaded' })
-    }, 300)
-  }
-
-  handleImageErrored = () => {
-    this.setState({ image: 'failed to load' })
   }
 
   render() {
-    const { animation, image } = this.state
+    const { animation } = this.state
 
     return (
-      <PageContainer>
+      <Container background="dark">
         <GridContainer>
           <LeftContainer>
-            <LogoImage
-              animation={animation}
-              src={'/images/logo/narative-logo-white.svg'}
-              alt="Narative logo white"
-              onLoad={this.handleImageLoaded}
-              ref={img => (this.mark = img)}
-              onError={this.handleImageErrored}
-            />
+            <LogoContainer animation={animation}>
+              <Logo />
+            </LogoContainer>
             <div>
-              <WelcomeHeader animation={animation}>
+              <WelcomeHeader animation={animation} transitionDelay={600}>
                 Some things are worth the wait.
               </WelcomeHeader>
-              <MainText animation={animation}>
+              <MainText animation={animation} transitionDelay={600}>
                 We’re Narative! Yes, that is with one R. Narative is a
                 digital-first design studio that is all about reducing the noise
                 and unnecessary details—using classical techniques with state of
                 the art technologies, we help you solve your problems, grow your
                 business and simply tell your story.
               </MainText>
-              <ContactText animation={animation}>
+              <ContactText animation={animation} transitionDelay={600}>
                 Our new site is on its way.{' '}
                 <ContactLink href="mailto:info@narative.co?Subject=👋%20Narative">
                   Get in touch
@@ -277,7 +198,7 @@ class IndexPage extends Component {
                 <ArrowRight />
               </ContactText>
             </div>
-            <CopyRightContainer animation={animation}>
+            <CopyRightContainer animation={animation} transitionDelay={800}>
               © {new Date().getFullYear()} Narative Studio Inc.
             </CopyRightContainer>
           </LeftContainer>
@@ -309,7 +230,7 @@ class IndexPage extends Component {
             </CopyRightContainerMobile>
           </RightContainer>
         </GridContainer>
-      </PageContainer>
+      </Container>
     )
   }
 }

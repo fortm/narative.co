@@ -1,9 +1,11 @@
-import AnimatedProcess from './animated-process/animated-process'
-import Header from './header/header'
-import Navigation from './navigation/navigation'
+import Container from './container/Container'
+import Header from './header/Header'
+import Logo from './logo/Logo'
+import Navigation from './navigation/Navigation'
 
 export default {
-  AnimatedProcess,
+  Container,
   Header,
+  Logo,
   Navigation,
 }
