@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Link from 'gatsby-link'
 import styled from 'styled-components'
 import { media, transitions } from '@styles'
-import { Container, Logo } from '@components'
+import { Container, Form, Logo } from '@components'
 
 const GridContainer = styled.div`
   display: grid;
@@ -52,11 +52,14 @@ const NarativeVideo = styled.video`
   `};
 `
 
+const TextContainer = styled.div`
+  ${transitions.fadeUp};
+`
+
 const WelcomeHeader = styled.h1`
   color: ${props => props.theme.colors.grey};
   font-size: 1.8rem;
   margin-bottom: 2rem;
-  ${transitions.fadeUp};
 
   ${media.large`
     font-size: 3.6rem;
@@ -68,14 +71,12 @@ const MainText = styled.p`
   font-weight: 400;
   color: ${props => props.theme.colors.grey};
   margin-bottom: 2rem;
-  ${transitions.fadeUp};
 `
 
 const ContactText = styled.p`
   font-size: 1.6rem;
   font-weight: 500;
   color: ${props => props.theme.colors.grey};
-  ${transitions.fadeUp};
 
   svg {
     margin-left: 1rem;
@@ -144,6 +145,14 @@ const CopyRightContainerMobile = styled.div`
   `};
 `
 
+const FormHeader = styled.h3`
+  font-size: 1.8rem;
+  margin-bottom: 3rem;
+  color: ${props => props.theme.colors.grey};
+`
+
+const FormSection = styled.fieldset``
+
 const ArrowRight = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -160,77 +169,157 @@ const ArrowRight = () => (
 )
 
 class IndexPage extends Component {
-  state = { animation: '' }
+  state = { animation: '', view: 'home' }
 
   componentDidMount() {
     setTimeout(() => {
       this.setState({ animation: 'start' })
     }, 300)
+
+    // Required as a workaround for Safari video
+    this.video.muted = true
+    this.video.controls = false
+    this.video.play()
+  }
+
+  goToView = view => {
+    this.setState({ view })
   }
 
   render() {
-    const { animation } = this.state
+    const { animation, view } = this.state
 
     return (
-      <Container background="dark">
-        <GridContainer>
-          <LeftContainer>
-            <LogoContainer animation={animation}>
-              <Logo />
-            </LogoContainer>
-            <div>
-              <WelcomeHeader animation={animation} transitionDelay={600}>
-                Some things are worth the wait.
-              </WelcomeHeader>
-              <MainText animation={animation} transitionDelay={600}>
-                We’re Narative! Yes, that is with one R. Narative is a
-                digital-first design studio that is all about reducing the noise
-                and unnecessary details—using classical techniques with state of
-                the art technologies, we help you solve your problems, grow your
-                business and simply tell your story.
-              </MainText>
-              <ContactText animation={animation} transitionDelay={600}>
-                Our new site is on its way.{' '}
-                <ContactLink href="mailto:info@narative.co?Subject=👋%20Narative">
-                  Get in touch
-                </ContactLink>
-                .
-                <ArrowRight />
-              </ContactText>
-            </div>
-            <CopyRightContainer animation={animation} transitionDelay={800}>
-              © {new Date().getFullYear()} Narative Studio Inc.
-            </CopyRightContainer>
-          </LeftContainer>
-          <RightContainer>
-            <NarativeVideoContainer>
-              <NarativeVideo
-                autoPlay="autoplay"
-                controls="false"
-                muted
-                poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
-                animation={animation}
-              >
-                <source
-                  src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
-                  type="video/webm"
-                />
-                <source
-                  src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
-                  type="video/mp4"
-                />
-                <source
-                  src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.ogv"
-                  type="video/ogg"
-                />
-              </NarativeVideo>
-            </NarativeVideoContainer>
-            <CopyRightContainerMobile>
-              © {new Date().getFullYear()} Narative Studio Inc.
-            </CopyRightContainerMobile>
-          </RightContainer>
-        </GridContainer>
-      </Container>
+      <div
+        style={{
+          transition: 'all 400ms cubic-bezier(0.5, 0.0, 0.515, 1)',
+          transform: view === 'home' ? 'translateX(0)' : 'translateX(-100vw)',
+          minHeight: '100vh',
+        }}
+      >
+        <Container background="dark">
+          <GridContainer>
+            <LeftContainer>
+              <LogoContainer animation={animation}>
+                <Logo />
+              </LogoContainer>
+              <TextContainer animation={animation} transitionDelay={600}>
+                <WelcomeHeader>Some things are worth the wait.</WelcomeHeader>
+                <MainText>
+                  We’re Narative! Yes, that is with one R. Narative is a
+                  digital-first design studio that is all about reducing the
+                  noise and unnecessary details—using classical techniques with
+                  state of the art technologies, we help you solve your
+                  problems, grow your business and simply tell your story.
+                </MainText>
+                <ContactText>
+                  Our new site is on its way.{' '}
+                  <ContactLink href="mailto:info@narative.co?Subject=👋%20Narative">
+                    Get in touch
+                  </ContactLink>
+                  .
+                  <div onClick={() => this.goToView('contact')}>Switch</div>
+                  <ArrowRight />
+                </ContactText>
+              </TextContainer>
+              <CopyRightContainer animation={animation} transitionDelay={800}>
+                © {new Date().getFullYear()} Narative Studio Inc.
+              </CopyRightContainer>
+            </LeftContainer>
+            <RightContainer>
+              <NarativeVideoContainer>
+                <NarativeVideo
+                  controls="false"
+                  poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
+                  animation={animation}
+                  innerRef={video => (this.video = video)}
+                >
+                  <source
+                    src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
+                    type="video/webm"
+                  />
+                  <source
+                    src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
+                    type="video/mp4"
+                  />
+                  <source
+                    src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.ogv"
+                    type="video/ogg"
+                  />
+                </NarativeVideo>
+              </NarativeVideoContainer>
+              <CopyRightContainerMobile>
+                © {new Date().getFullYear()} Narative Studio Inc.
+              </CopyRightContainerMobile>
+            </RightContainer>
+          </GridContainer>
+        </Container>
+        <div
+          style={{
+            position: 'fixed',
+            top: '0',
+            right: '-200vw',
+            left: '0',
+            zIndex: '-1',
+            background: '#111216',
+          }}
+        >
+          <div
+            style={{
+              background: '#fff',
+              width: '50%',
+              height: '100%',
+              position: 'fixed',
+              top: '0',
+              right: '-100vw',
+              boxShadow: 'rgba(0, 0, 0, 0.4) 40px 0px 40px -40px inset',
+              zIndex: '-1',
+            }}
+          />
+          <Container>
+            <GridContainer>
+              <LeftContainer>
+                <LogoContainer animation={animation}>
+                  <Logo />
+                </LogoContainer>
+                <TextContainer animation={animation} transitionDelay={600}>
+                  <WelcomeHeader>How can we help?</WelcomeHeader>
+                  <MainText>
+                    Tell us a bit more about your project. The more detailed is
+                    the description, the more accurate our quote will be.
+                  </MainText>
+                  <MainText>
+                    In a rush? Leave us your phone number below and our business
+                    development team will contact you within 24 working hours.
+                  </MainText>
+                </TextContainer>
+                <CopyRightContainer animation={animation} transitionDelay={800}>
+                  © {new Date().getFullYear()} Narative Studio Inc.
+                </CopyRightContainer>
+                <div onClick={() => this.goToView('home')}> Back</div>
+              </LeftContainer>
+              <RightContainer>
+                <form style={{ width: '400px', alignSelf: 'flex-end' }}>
+                  <FormSection>
+                    <FormHeader>About you</FormHeader>
+                    <Form.Input label="Full name" />
+                    <Form.Input label="Email" />
+                    <Form.Select label="Size of company" />
+                  </FormSection>
+                  <FormSection>
+                    <FormHeader>About your project</FormHeader>
+                  </FormSection>
+                  <Form.Radio />
+                  <FormSection>
+                    <FormHeader>Give us the details</FormHeader>
+                    <Form.Input label="Tells us a bit more" />
+                  </FormSection>
+                </form>
+              </RightContainer>
+            </GridContainer>
+          </Container>
+        </div>
+      </div>
     )
   }
 }

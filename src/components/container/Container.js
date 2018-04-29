@@ -5,7 +5,7 @@ import { media } from '@styles'
 const Container = styled.div`
   max-width: 1100px;
   margin: 0 auto;
-  padding: 3rem 2rem;
+  padding: 2rem;
   background: ${props =>
     props.background === 'dark' ? props.theme.colors.bg : 'transparent'};
 `
