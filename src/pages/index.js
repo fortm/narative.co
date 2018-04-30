@@ -2,7 +2,15 @@ import React, { Component } from 'react'
 import Link from 'gatsby-link'
 import styled from 'styled-components'
 import { media, transitions } from '@styles'
-import { Container, Form, Logo } from '@components'
+import { Container, Logo } from '@components'
+import { Forms } from '@modules'
+
+const SwitchContainer = styled.div`
+  transition: all 400ms cubic-bezier(0.5, 0, 0.515, 1);
+  transform: ${props =>
+    props.view === 'home' ? 'translateX;(0)' : 'translateX(-100vw)'};
+  min-height: 100vh;
+`
 
 const GridContainer = styled.div`
   display: grid;
@@ -145,14 +153,6 @@ const CopyRightContainerMobile = styled.div`
   `};
 `
 
-const FormHeader = styled.h3`
-  font-size: 1.8rem;
-  margin-bottom: 3rem;
-  color: ${props => props.theme.colors.grey};
-`
-
-const FormSection = styled.fieldset``
-
 const ArrowRight = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -186,17 +186,15 @@ class IndexPage extends Component {
     this.setState({ view })
   }
 
+  handleSubmit(event) {
+    console.log(event)
+  }
+
   render() {
     const { animation, view } = this.state
 
     return (
-      <div
-        style={{
-          transition: 'all 400ms cubic-bezier(0.5, 0.0, 0.515, 1)',
-          transform: view === 'home' ? 'translateX(0)' : 'translateX(-100vw)',
-          minHeight: '100vh',
-        }}
-      >
+      <SwitchContainer view={view}>
         <Container background="dark">
           <GridContainer>
             <LeftContainer>
@@ -299,27 +297,12 @@ class IndexPage extends Component {
                 <div onClick={() => this.goToView('home')}> Back</div>
               </LeftContainer>
               <RightContainer>
-                <form style={{ width: '400px', alignSelf: 'flex-end' }}>
-                  <FormSection>
-                    <FormHeader>About you</FormHeader>
-                    <Form.Input label="Full name" />
-                    <Form.Input label="Email" />
-                    <Form.Select label="Size of company" />
-                  </FormSection>
-                  <FormSection>
-                    <FormHeader>About your project</FormHeader>
-                  </FormSection>
-                  <Form.Radio />
-                  <FormSection>
-                    <FormHeader>Give us the details</FormHeader>
-                    <Form.Input label="Tells us a bit more" />
-                  </FormSection>
-                </form>
+                <Forms.ContactForm />
               </RightContainer>
             </GridContainer>
           </Container>
         </div>
-      </div>
+      </SwitchContainer>
     )
   }
 }

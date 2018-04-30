@@ -205,6 +205,10 @@ export const globalStyles = () => injectGlobal`
     'Segoe UI',
     'Arial',
     sans-serif;
+
+    &:-webkit-autofill {
+      box-shadow: 0 0 0 1000px white inset !important;
+    }
   }
 
   .underline {

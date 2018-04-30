@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { media } from '@styles'
 
 const Container = styled.div`
-  max-width: 1100px;
+  max-width: 1180px;
   margin: 0 auto;
   padding: 2rem;
   background: ${props =>

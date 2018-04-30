@@ -8,8 +8,8 @@ import { keyframes } from 'styled-components'
 
 const black = '#262626'
 const bg = '#111216'
-const greyBg = '#f9f9f9'
 const grey = '#7a8085'
+const red = '#f44336'
 
 const flicker = keyframes`
   0% { opacity: 0.3; }
@@ -33,6 +33,7 @@ export const theme = {
     black,
     bg,
     grey,
+    red,
   },
   animations: {
     flicker,
@@ -41,5 +42,8 @@ export const theme = {
   placeholder: {
     dark: 'rgba(#E7EEF5, 0.65)',
     light: 'rgba(#ebeef0, 0.65)',
+  },
+  input: {
+    border: '#b9bbbe',
   },
 }
