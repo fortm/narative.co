@@ -4,6 +4,7 @@ import Form from './form'
 import Header from './header/Header'
 import Logo from './logo/Logo'
 import Navigation from './navigation/Navigation'
+import * as Transitions from './transitions'
 
 export default {
   Button,
@@ -12,4 +13,5 @@ export default {
   Header,
   Logo,
   Navigation,
+  Transitions,
 }

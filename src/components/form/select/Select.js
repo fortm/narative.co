@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { FadeIn } from '../../transitions'
 
 const InputContainer = styled.div`
   position: relative;
@@ -26,7 +27,7 @@ const SelectBorder = styled.div`
 const StyledLabel = styled.label`
   display: block;
   font-size: 1.6rem;
-  color: ${props => props.theme.colors.grey};
+  color: ${props => (props.selectedValue ? '#000' : props.theme.colors.grey)};
   border: none;
 `
 
@@ -40,8 +41,7 @@ const LabelAnimation = styled.span`
   padding-top: 0.55rem;
 `
 
-const StyledSelect = styled.select`
-  pointer-events: none;
+const StyledSelect = styled.div`
   display: block;
   width: 100%;
   font-size: 1.6rem;
@@ -78,28 +78,62 @@ const StyledSelectArrow = styled(SelectArrow)`
 class Select extends Component {
   state = {
     showOptions: false,
+    selectedValue: '',
   }
 
-  handleClick = () => {
-    this.setState({ showOptions: true })
-    console.log('clicked')
+  handleClick = event => {
+    console.log(event)
+    event.stopPropagation()
+    this.setState({ showOptions: !this.state.showOptions })
+  }
+  handleSelectClick = selectedValue => {
+    console.log('hello')
+    this.setState({ selectedValue })
   }
 
   render() {
     const { field, label, options } = this.props
+    const { showOptions, selectedValue } = this.state
 
     return (
       <InputContainer>
         <SelectBorder onClick={this.handleClick}>
-          <StyledSelect {...field} {...this.props}>
-            {options.map(option => {
-              return <option>{option.name}</option>
-            })}
-          </StyledSelect>
           <LabelAnimation>
-            <StyledLabel>{label}</StyledLabel>
+            <StyledLabel selectedValue={selectedValue}>
+              {selectedValue || label}
+            </StyledLabel>
           </LabelAnimation>
           <SelectArrow />
+          <StyledSelect {...field} {...this.props} value={selectedValue}>
+            <FadeIn in={showOptions}>
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '0',
+                  right: '0',
+                  background: '#fff',
+                  width: '100%',
+                  borderRadius: '3px',
+                  padding: '1rem 1.4rem',
+                  boxShadow:
+                    '0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.2)',
+                }}
+              >
+                {options.map(option => {
+                  return (
+                    <option
+                      style={{
+                        pointerEvents: showOptions ? 'initial' : 'none',
+                      }}
+                      onClick={() => this.handleSelectClick(option.name)}
+                    >
+                      {option.name}
+                    </option>
+                  )
+                })}
+              </div>
+            </FadeIn>
+          </StyledSelect>
         </SelectBorder>
       </InputContainer>
     )
@@ -107,7 +141,20 @@ class Select extends Component {
 }
 
 Select.defaultProps = {
-  options: [],
+  options: [
+    {
+      name: 'Thiago Costa',
+    },
+    {
+      name: 'Dennis Brotzky',
+    },
+    {
+      name: 'Mack Attack',
+    },
+    {
+      name: 'Nicolas Wells',
+    },
+  ],
 }
 
 Select.propTypes = {
