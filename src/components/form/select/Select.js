@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import enhanceWithClickOutside from 'react-click-outside'
 import { FadeIn } from '../../transitions'
 
 const InputContainer = styled.div`
   position: relative;
   padding-top: 1.4rem;
   margin-bottom: 2rem;
+  z-index: 100;
 
   svg {
     position: absolute;
@@ -51,6 +53,16 @@ const StyledSelect = styled.div`
   outline: none;
 `
 
+const SelectOption = styled.option`
+  pointer-events: ${props => (props.isOpen ? 'initial' : 'none')};
+  padding: 0.8rem 1.2rem;
+  transition: all 200ms ${props => props.theme.transitions.easeOut};
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.06);
+  }
+`
+
 const SelectArrow = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -58,11 +70,11 @@ const SelectArrow = () => (
     height="6"
     viewBox="0 0 10 5"
   >
-    <g fill="none" fill-rule="evenodd">
+    <g fill="none" fillRule="evenodd">
       <path
         stroke="#000"
-        stroke-opacity=".008"
-        stroke-width="0"
+        strokeOpacity=".008"
+        strokeWidth="0"
         d="M-7-10h24v24H-7z"
       />
       <path fill="#000" d="M0 0l5 5 5-5z" />
@@ -77,27 +89,31 @@ const StyledSelectArrow = styled(SelectArrow)`
 
 class Select extends Component {
   state = {
-    showOptions: false,
+    isOpen: false,
     selectedValue: '',
   }
 
-  handleClick = event => {
+  handleClickOutside(event) {
     console.log(event)
-    event.stopPropagation()
-    this.setState({ showOptions: !this.state.showOptions })
+    this.toggleSelectDropdown()
   }
+
+  toggleSelectDropdown = event => {
+    console.log(event)
+    this.setState({ isOpen: !this.state.isOpen })
+  }
+
   handleSelectClick = selectedValue => {
-    console.log('hello')
     this.setState({ selectedValue })
   }
 
   render() {
     const { field, label, options } = this.props
-    const { showOptions, selectedValue } = this.state
+    const { isOpen, selectedValue } = this.state
 
     return (
-      <InputContainer>
-        <SelectBorder onClick={this.handleClick}>
+      <InputContainer onClick={() => this.toggleSelectDropdown()}>
+        <SelectBorder>
           <LabelAnimation>
             <StyledLabel selectedValue={selectedValue}>
               {selectedValue || label}
@@ -105,7 +121,7 @@ class Select extends Component {
           </LabelAnimation>
           <SelectArrow />
           <StyledSelect {...field} {...this.props} value={selectedValue}>
-            <FadeIn in={showOptions}>
+            <FadeIn in={isOpen}>
               <div
                 style={{
                   position: 'absolute',
@@ -114,21 +130,22 @@ class Select extends Component {
                   background: '#fff',
                   width: '100%',
                   borderRadius: '3px',
-                  padding: '1rem 1.4rem',
+                  padding: '0.6rem 0',
                   boxShadow:
                     '0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.2)',
+                  boxShadow:
+                    '0 0 0 1px rgba(99,114,130,0.12), 0 8px 16px rgba(27,39,51,0.16)',
                 }}
               >
                 {options.map(option => {
                   return (
-                    <option
-                      style={{
-                        pointerEvents: showOptions ? 'initial' : 'none',
-                      }}
+                    <SelectOption
+                      key={option.name}
+                      isOpen={isOpen}
                       onClick={() => this.handleSelectClick(option.name)}
                     >
                       {option.name}
-                    </option>
+                    </SelectOption>
                   )
                 })}
               </div>
@@ -161,4 +178,4 @@ Select.propTypes = {
   label: PropTypes.string.isRequired,
 }
 
-export default Select
+export default enhanceWithClickOutside(Select)

@@ -79,9 +79,6 @@ export const globalStyles = () => injectGlobal`
     font-style:italic;font-weight:600;
   }
 
-  .tk-meta { font-family: "meta",serif; }
-  .tk-futura-pt { font-family: "futura-pt",sans-serif; }
-
   @font-face {
     font-family: '-apple-system',
     'BlinkMacSystemFont',

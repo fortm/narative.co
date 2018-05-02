@@ -63,7 +63,7 @@ const Radio = ({ field, label, options, name, ...props }) => {
     <React.Fragment>
       <RadioContainer>
         {options.map(option => (
-          <div style={{ position: 'relative' }}>
+          <div key={option.value} style={{ position: 'relative' }}>
             <StyledRadioInput
               type="radio"
               id={option.id}
@@ -79,7 +79,7 @@ const Radio = ({ field, label, options, name, ...props }) => {
 }
 
 Radio.propTypes = {
-  label: PropTypes.string.isRequired,
+  // label: PropTypes.string.isRequired,
 }
 
 export default Radio
