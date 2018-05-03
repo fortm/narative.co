@@ -156,10 +156,10 @@ class Select extends Component {
                 {options.map(option => {
                   return (
                     <SelectOption
-                      key={option.name}
-                      onClick={() => this.handleSelectClick(option.name)}
+                      key={option.id}
+                      onClick={() => this.handleSelectClick(option.value)}
                     >
-                      {option.name}
+                      {option.value}
                     </SelectOption>
                   )
                 })}
@@ -173,24 +173,11 @@ class Select extends Component {
 }
 
 Select.defaultProps = {
-  options: [
-    {
-      name: 'Thiago Costa',
-    },
-    {
-      name: 'Dennis Brotzky',
-    },
-    {
-      name: 'Mack Attack',
-    },
-    {
-      name: 'Nicolas Wells',
-    },
-  ],
+  options: [],
 }
 
 Select.propTypes = {
-  label: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
 export default enhanceWithClickOutside(Select)

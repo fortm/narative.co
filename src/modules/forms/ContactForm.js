@@ -22,6 +22,24 @@ const StyledFormikForm = styled(FormikForm)`
   padding-bottom: 10rem;
 `
 
+const selectOptions = [
+  {
+    label: 'Startup',
+    id: 'startup',
+    value: 'Startup',
+  },
+  {
+    label: 'Growing business',
+    id: 'growingBusiness',
+    value: 'Growing business',
+  },
+  {
+    label: 'Enterprise',
+    id: 'enterprise',
+    value: 'Enterprise',
+  },
+]
+
 const radioOptions = [
   {
     label: 'Branding',
@@ -93,6 +111,7 @@ class ContactForm extends Component {
                 component={Form.Select}
                 label="Size of company"
                 name="companySize"
+                options={selectOptions}
               />
             </FormSection>
             <FormSection spacing="large">

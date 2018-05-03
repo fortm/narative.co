@@ -14,15 +14,22 @@ const animateButtonLine = keyframes`
   }
   100% {
       width: 70%;
-      left: 90%;
+      left: 100%;
   }
 `
 
-const SwitchContainer = styled.div`
-  transition: all 400ms cubic-bezier(0.5, 0, 0.515, 1);
-  transform: ${props =>
-    props.view === 'home' ? 'translateX;(0)' : 'translateX(-100vw)'};
-  min-height: 100vh;
+const fadeInOut = keyframes`
+  0% {
+      opacity: 0;
+      width: 0;
+  }
+  50% { opacity: 1; width: 40%}
+  60% { opacity: 1; width: 70%}
+  80% {
+    opacity: 0;
+    width: 50%;
+    left: 100%;
+  }
 `
 
 const GridContainer = styled.div`
@@ -96,27 +103,14 @@ const MainText = styled.p`
 `
 
 const ContactText = styled(Link)`
+  display: flex;
   font-size: 1.6rem;
-  font-weight: 500;
+  font-weight: 600;
   color: ${props => props.theme.colors.grey};
 
   svg {
     margin-left: 1rem;
     transition: transform 300ms ${props => props.theme.transitions.in};
-  }
-`
-
-const BasicText = styled.p`
-  font-size: 1.6rem;
-  font-weight: 400;
-`
-
-const ContactLink = styled.a`
-  color: #fff;
-  text-decoration: underline;
-
-  &:hover ~ svg {
-    transform: translateX(0.3rem);
   }
 `
 
@@ -168,62 +162,62 @@ const CopyRightContainerMobile = styled.div`
   `};
 `
 
-const HighlightText = styled.span`
-  color: #fff;
-  ${props => props.underline && `text-decoration: underline`};
-`
-
-const Ex = () => (
-  <svg width="14" height="14" viewBox="0 0 14 14" version="1.1">
+const ArrowRight = () => (
+  <svg width="35" height="7" viewBox="0 0 35 7" version="1.1">
     <g id="Canvas" fill="none">
-      <path
-        id="x"
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M 13.8599 0.842085C 13.944 0.926255 14 1.05257 14 1.16489C 14 1.27713 13.944 1.40345 13.8599 1.48762L 8.34983 7L 13.8596 12.5124C 13.944 12.5965 14 12.7229 14 12.8351C 14 12.9474 13.944 13.0737 13.8596 13.1579L 13.1584 13.8597C 13.074 13.9438 12.962 14 12.8357 14C 12.7234 14 12.5971 13.9438 12.513 13.8597L 6.99987 8.3441L 1.48677 13.8597C 1.40263 13.9438 1.27656 14 1.1643 14C 1.05204 14 0.925713 13.9438 0.84158 13.8597L 0.140136 13.1579C 0.0560031 13.0737 0 12.9474 0 12.8351C 0 12.7229 0.0560031 12.5965 0.140136 12.5124L 5.65017 7L 0.140391 1.48762C 0.0560031 1.40345 0 1.27713 0 1.16489C 0 1.05257 0.0560031 0.926255 0.140391 0.842085L 0.84158 0.140326C 0.925969 0.0561561 1.03797 0 1.1643 0C 1.27656 0 1.40289 0.0561561 1.48702 0.140326L 7.00013 5.6559L 12.5132 0.140326C 12.5974 0.0561561 12.7234 0 12.8357 0C 12.948 0 13.0743 0.0561561 13.1584 0.140326L 13.8599 0.842085Z"
-        fill="black"
-      />
+      <g id="arrow-left-icon">
+        <path
+          id="triangle"
+          d="M 3.5 0L 6.53109 5.25L 0.468911 5.25L 3.5 0Z"
+          transform="matrix(0 1 -1 0 35 0)"
+          fill="white"
+        />
+        <line
+          id="Line"
+          y1="-0.5"
+          x2="30"
+          y2="-0.5"
+          transform="translate(0 4)"
+          stroke="white"
+        />
+      </g>
     </g>
   </svg>
 )
 
-const CloseContainer = styled.div`
-  position: absolute;
-  right: -6rem;
-  top: 5rem;
-  cursor: pointer;
-`
+const HighlightText = styled.span`
+  color: #fff;
 
-const ArrowRight = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="30"
-    height="10"
-    viewBox="0 0 30 10"
-  >
-    <path
-      fill="#FFF"
-      fillRule="evenodd"
-      d="M24.697 0l-.934.881 3.698 3.494H0v1.25h27.461l-3.698 3.494.934.881L30 5z"
-    />
-  </svg>
-)
+  &:after {
+    content: '';
+    position: absolute;
+    top: 11px;
+    background: #111216;
+    width: 55%;
+    height: 3px;
+    left: 0;
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+`
 
 const ArrowAnimation = styled.div`
   position: relative;
   display: inline-block;
-  padding-left: 0.5rem;
+  padding: 0 3rem 0 0.5rem;
+  overflow-x: hidden;
 
   &::after {
     content: '';
     display: block;
     position: absolute;
     left: 0;
-    top: 12.5px;
+    top: 12px;
     height: 1px;
     width: 0;
     background: #fff;
-    opacity: 1;
+    opacity: 0;
+    z-index: 100;
   }
 
   svg {
@@ -234,15 +228,18 @@ const ArrowAnimation = styled.div`
     transform: translateX(3rem);
   }
 
+  &:hover span::after {
+    animation: ${fadeInOut} 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  }
+
   &:hover::after {
     opacity: 1;
-    animation: ${animateButtonLine} 300ms cubic-bezier(0.77, 0, 0.175, 1)
-      forwards;
+    animation: ${animateButtonLine} 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
   }
 `
 
 class IndexPage extends Component {
-  state = { animation: '', view: 'home' }
+  state = { animation: '' }
 
   componentDidMount() {
     setTimeout(() => {
@@ -255,131 +252,66 @@ class IndexPage extends Component {
     this.video.play()
   }
 
-  goToView = view => {
-    this.setState({ view })
-  }
-
-  handleSubmit(event) {
-    console.log(event)
-  }
-
   render() {
     const { animation, view } = this.state
 
     return (
-      <SwitchContainer view={view}>
-        <Container background="dark">
-          <GridContainer>
-            <LeftContainer>
-              <LogoContainer animation={animation}>
-                <Logo />
-              </LogoContainer>
-              <TextContainer animation={animation} transitionDelay={600}>
-                <WelcomeHeader>Some things are worth the wait.</WelcomeHeader>
-                <MainText>
-                  We’re Narative! Yes, that is with one R. Narative is a
-                  digital-first design studio that is all about reducing the
-                  noise and unnecessary details—using classical techniques with
-                  state of the art technologies, we help you solve your
-                  problems, grow your business and simply tell your story.
-                </MainText>
-                <ContactText to="/contact">
-                  Our new site is on its way.{' '}
-                  <ArrowAnimation>
-                    <HighlightText underline>Get in touch</HighlightText>
-                    .
-                    <ArrowRight />
-                  </ArrowAnimation>
-                </ContactText>
-              </TextContainer>
-              <CopyRightContainer animation={animation} transitionDelay={800}>
-                © {new Date().getFullYear()} Narative Studio Inc.
-              </CopyRightContainer>
-            </LeftContainer>
-            <RightContainer>
-              <NarativeVideoContainer>
-                <NarativeVideo
-                  controls="false"
-                  poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
-                  animation={animation}
-                  innerRef={video => (this.video = video)}
-                >
-                  <source
-                    src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
-                    type="video/webm"
-                  />
-                  <source
-                    src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
-                    type="video/mp4"
-                  />
-                  <source
-                    src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.ogv"
-                    type="video/ogg"
-                  />
-                </NarativeVideo>
-              </NarativeVideoContainer>
-              <CopyRightContainerMobile>
-                © {new Date().getFullYear()} Narative Studio Inc.
-              </CopyRightContainerMobile>
-            </RightContainer>
-          </GridContainer>
-        </Container>
-        <div
-          style={{
-            position: 'fixed',
-            top: '0',
-            right: '-200vw',
-            left: '0',
-            zIndex: '-1',
-            background: '#111216',
-          }}
-        >
-          <div
-            style={{
-              background: '#fff',
-              width: '50%',
-              height: '100%',
-              position: 'fixed',
-              top: '0',
-              right: '-100vw',
-              boxShadow: 'rgba(0, 0, 0, 0.4) 40px 0px 40px -40px inset',
-              zIndex: '-1',
-            }}
-          />
-          <Container>
-            <GridContainer>
-              <LeftContainer>
-                <LogoContainer animation={animation}>
-                  <Logo />
-                </LogoContainer>
-                <TextContainer animation={animation} transitionDelay={600}>
-                  <WelcomeHeader>How can we help?</WelcomeHeader>
-                  <MainText>
-                    <HighlightText>Tell us a bit more</HighlightText> about your
-                    project. The more detailed is the description, the more
-                    accurate our quote will be.
-                  </MainText>
-                  <MainText>
-                    <HighlightText>In a rush?</HighlightText> Leave us your
-                    phone number below and our business development team will
-                    contact you within 24 working hours.
-                  </MainText>
-                  <Forms.PhoneForm />
-                </TextContainer>
-                <CopyRightContainer animation={animation} transitionDelay={800}>
-                  © {new Date().getFullYear()} Narative Studio Inc.
-                </CopyRightContainer>
-              </LeftContainer>
-              <RightContainer>
-                <Forms.ContactForm />
-                <CloseContainer onClick={() => this.goToView('home')}>
-                  <Ex />
-                </CloseContainer>
-              </RightContainer>
-            </GridContainer>
-          </Container>
-        </div>
-      </SwitchContainer>
+      <Container background="dark">
+        <GridContainer>
+          <LeftContainer>
+            <LogoContainer animation={animation}>
+              <Logo />
+            </LogoContainer>
+            <TextContainer animation={animation} transitionDelay={600}>
+              <WelcomeHeader>Some things are worth the wait.</WelcomeHeader>
+              <MainText>
+                We’re Narative! Yes, that is with one R. Narative is a
+                digital-first design studio that is all about reducing the noise
+                and unnecessary details—using classical techniques with state of
+                the art technologies, we help you solve your problems, grow your
+                business and simply tell your story.
+              </MainText>
+              <ContactText to="/contact">
+                Our new site is on its way.{' '}
+                <ArrowAnimation>
+                  <HighlightText>Get in touch</HighlightText>
+                  .
+                  <ArrowRight />
+                </ArrowAnimation>
+              </ContactText>
+            </TextContainer>
+            <CopyRightContainer animation={animation} transitionDelay={800}>
+              © {new Date().getFullYear()} Narative Studio Inc.
+            </CopyRightContainer>
+          </LeftContainer>
+          <RightContainer>
+            <NarativeVideoContainer>
+              <NarativeVideo
+                controls="false"
+                poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
+                animation={animation}
+                innerRef={video => (this.video = video)}
+              >
+                <source
+                  src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
+                  type="video/webm"
+                />
+                <source
+                  src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
+                  type="video/mp4"
+                />
+                <source
+                  src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.ogv"
+                  type="video/ogg"
+                />
+              </NarativeVideo>
+            </NarativeVideoContainer>
+            <CopyRightContainerMobile>
+              © {new Date().getFullYear()} Narative Studio Inc.
+            </CopyRightContainerMobile>
+          </RightContainer>
+        </GridContainer>
+      </Container>
     )
   }
 }
