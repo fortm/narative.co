@@ -41,6 +41,21 @@ const LabelAnimation = styled.span`
   width: 100%;
   height: 100%;
   padding-top: 0.55rem;
+
+  transform: perspective(100px);
+  transform-origin: 0 0;
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  ${props =>
+    props.selectedValue &&
+    `
+    font-weight: 500;
+    width: 133.3333333%
+    transform: translateY(-1.28125em) scale(0.8) perspective(100px)
+      translateZ(0.001px);
+      `};
 `
 
 const StyledSelect = styled.div`
@@ -54,13 +69,25 @@ const StyledSelect = styled.div`
 `
 
 const SelectOption = styled.option`
-  pointer-events: ${props => (props.isOpened ? 'initial' : 'none')};
   padding: 0.8rem 1.2rem;
   transition: all 200ms ${props => props.theme.transitions.easeOut};
 
   &:hover {
     background: rgba(0, 0, 0, 0.06);
   }
+`
+
+const SelectOptionContainer = styled.div`
+  pointer-events: ${props => (props.isOpened ? 'initial' : 'none')};
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: rgb(255, 255, 255);
+  width: 100%;
+  border-radius: 3px;
+  padding: 0.6rem 0px;
+  box-shadow: rgba(99, 114, 130, 0.12) 0px 0px 0px 1px,
+    rgba(27, 39, 51, 0.16) 0px 8px 16px;
 `
 
 const SelectArrow = () => (
@@ -112,41 +139,31 @@ class Select extends Component {
     return (
       <InputContainer onClick={() => this.toggleSelectDropdown()}>
         <SelectBorder>
+          <LabelAnimation selectedValue={selectedValue}>
+            <StyledLabel>{label}</StyledLabel>
+          </LabelAnimation>
           <LabelAnimation>
-            <StyledLabel selectedValue={selectedValue}>
-              {selectedValue || label}
-            </StyledLabel>
+            {selectedValue && (
+              <StyledLabel selectedValue={selectedValue}>
+                {selectedValue}
+              </StyledLabel>
+            )}
           </LabelAnimation>
           <SelectArrow />
           <StyledSelect {...field} {...this.props} value={selectedValue}>
             <FadeIn in={isOpened}>
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '0',
-                  right: '0',
-                  background: '#fff',
-                  width: '100%',
-                  borderRadius: '3px',
-                  padding: '0.6rem 0',
-                  boxShadow:
-                    '0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.2)',
-                  boxShadow:
-                    '0 0 0 1px rgba(99,114,130,0.12), 0 8px 16px rgba(27,39,51,0.16)',
-                }}
-              >
+              <SelectOptionContainer isOpened={isOpened}>
                 {options.map(option => {
                   return (
                     <SelectOption
                       key={option.name}
-                      isOpened={isOpened}
                       onClick={() => this.handleSelectClick(option.name)}
                     >
                       {option.name}
                     </SelectOption>
                   )
                 })}
-              </div>
+              </SelectOptionContainer>
             </FadeIn>
           </StyledSelect>
         </SelectBorder>

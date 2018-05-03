@@ -3,6 +3,7 @@ import Link from 'gatsby-link'
 import styled from 'styled-components'
 import { Formik, Form as FormikForm, Field } from 'formik'
 import { Button, Container, Form } from '@components'
+import { apiCall } from '@utils'
 
 const FormHeader = styled.h3`
   font-size: 1.8rem;
@@ -11,7 +12,7 @@ const FormHeader = styled.h3`
 `
 
 const FormSection = styled.fieldset`
-  margin-bottom: 5rem;
+  margin-bottom: ${props => (props.spacing === 'large' ? '5rem' : '3.5rem')};
 `
 
 const StyledFormikForm = styled(FormikForm)`
@@ -21,7 +22,7 @@ const StyledFormikForm = styled(FormikForm)`
   padding-bottom: 10rem;
 `
 
-const RadioOptions = [
+const radioOptions = [
   {
     label: 'Branding',
     id: 'branding',
@@ -61,8 +62,20 @@ const validate = (values, props) => {
 }
 
 class ContactForm extends Component {
-  handleSubmit(event) {
-    console.log(event)
+  handleSubmit(values) {
+    const { name, email, companySize, project, details } = values
+
+    const method = 'post'
+    const endpoint = '/contact'
+    const data = {
+      companySize,
+      email,
+      details,
+      name,
+      project,
+    }
+
+    apiCall({ method, endpoint, data })
   }
 
   render() {
@@ -74,24 +87,24 @@ class ContactForm extends Component {
           <StyledFormikForm>
             <FormSection>
               <FormHeader>About you</FormHeader>
-              <Field component={Form.Input} label="Full name" name="name" />
-              <Field component={Form.Input} label="Email" name="email" />
+              <Field component={Form.Text} label="Full name" name="name" />
+              <Field component={Form.Text} label="Email" name="email" />
               <Field
                 component={Form.Select}
                 label="Size of company"
                 name="companySize"
               />
             </FormSection>
-            <FormSection>
+            <FormSection spacing="large">
               <FormHeader>About your project</FormHeader>
-              <Form.Radio options={RadioOptions} name="project" />
+              <Form.Radio options={radioOptions} name="project" />
             </FormSection>
             <FormSection>
               <FormHeader>Give us the details</FormHeader>
               <Field
-                component={Form.Input}
+                component={Form.Text}
                 label="Tell us a bit more"
-                name="more"
+                name="details"
               />
             </FormSection>
             <Button text="Submit" />

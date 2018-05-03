@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components'
 import { media, transitions } from '@styles'
 import { Container, Logo } from '@components'
 import { Forms } from '@modules'
-import { relative } from 'path'
+import { apiCall } from '@utils'
 
 const animateButtonLine = keyframes`
   0% {
@@ -19,11 +19,22 @@ const animateButtonLine = keyframes`
   }
 `
 
-const SwitchContainer = styled.div`
-  transition: all 400ms cubic-bezier(0.5, 0, 0.515, 1);
+const WhiteContainer = styled.div`
+  background: #fff;
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  box-shadow: rgba(0, 0, 0, 0.4) 40px 0px 40px -40px inset;
+  z-index: 0;
+  overflow-y: scroll;
   transform: ${props =>
-    props.view === 'home' ? 'translateX;(0)' : 'translateX(-100vw)'};
-  min-height: 100vh;
+    props.animation === 'start' ? 'translateX(0)' : 'translateX(100%)'};
+  transition: all 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
+  padding-left: 110px;
+  display: flex;
+  align-items: center;
 `
 
 const GridContainer = styled.div`
@@ -49,29 +60,6 @@ const LogoContainer = styled.div`
 
   ${media.large`
     margin-bottom: 0;
-  `};
-`
-
-const NarativeVideoContainer = styled.div`
-  clip-path: polygon(0 36%, 0 0, 100% 64%, 100% 100%);
-  height: auto;
-  width: 30rem;
-  margin-top: 2rem;
-  pointer-events: none;
-
-  ${media.large`
-    height: 53rem;
-    width: 49rem;
-  `};
-`
-
-const NarativeVideo = styled.video`
-  position: relative;
-  height: 30rem;
-  ${transitions.blurIn};
-
-  ${media.large`
-    height: 53rem;  
   `};
 `
 
@@ -161,7 +149,7 @@ const CopyRightContainer = styled.div`
 const FormContainer = styled.div`
   width: 46rem;
   position: relative;
-  height: 53rem;
+  height: 58rem;
   ${transitions.fadeUp};
 `
 
@@ -175,8 +163,8 @@ const Ex = () => (
     <g id="Canvas" fill="none">
       <path
         id="x"
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M 13.8599 0.842085C 13.944 0.926255 14 1.05257 14 1.16489C 14 1.27713 13.944 1.40345 13.8599 1.48762L 8.34983 7L 13.8596 12.5124C 13.944 12.5965 14 12.7229 14 12.8351C 14 12.9474 13.944 13.0737 13.8596 13.1579L 13.1584 13.8597C 13.074 13.9438 12.962 14 12.8357 14C 12.7234 14 12.5971 13.9438 12.513 13.8597L 6.99987 8.3441L 1.48677 13.8597C 1.40263 13.9438 1.27656 14 1.1643 14C 1.05204 14 0.925713 13.9438 0.84158 13.8597L 0.140136 13.1579C 0.0560031 13.0737 0 12.9474 0 12.8351C 0 12.7229 0.0560031 12.5965 0.140136 12.5124L 5.65017 7L 0.140391 1.48762C 0.0560031 1.40345 0 1.27713 0 1.16489C 0 1.05257 0.0560031 0.926255 0.140391 0.842085L 0.84158 0.140326C 0.925969 0.0561561 1.03797 0 1.1643 0C 1.27656 0 1.40289 0.0561561 1.48702 0.140326L 7.00013 5.6559L 12.5132 0.140326C 12.5974 0.0561561 12.7234 0 12.8357 0C 12.948 0 13.0743 0.0561561 13.1584 0.140326L 13.8599 0.842085Z"
         fill="black"
       />
@@ -185,14 +173,34 @@ const Ex = () => (
 )
 
 const CloseContainer = styled(Link)`
-  position: absolute;
-  right: -6rem;
-  top: -5rem;
+  position: fixed;
+  left: calc(50% + 13rem + 46rem + 6rem);
+  top: 5rem;
   cursor: pointer;
 `
 
+const ScrollContainer = styled.div`
+  position: absolute;
+  right: -25.3rem;
+  bottom: 2.2rem;
+  width: 33rem;
+  height: 1px;
+  background: #eff0f0;
+  transform: rotate(-90deg);
+`
+
+const ScrollTextContainer = styled.div`
+  position: fixed;
+  left: calc(50% + 13rem + 46rem + 2rem);
+  top: calc(50% - 18px / 2 + 56px);
+  transform: rotate(-90deg);
+  color: rgba(0, 0, 0, 0.18);
+  padding: 0 1rem;
+  background: #fff;
+`
+
 class ContactPage extends Component {
-  state = { animation: '', view: 'home' }
+  state = { animation: '' }
 
   componentDidMount() {
     setTimeout(() => {
@@ -200,46 +208,24 @@ class ContactPage extends Component {
     })
   }
 
-  goToView = view => {
-    this.setState({ view })
-  }
-
-  handleSubmit(event) {
-    console.log(event)
-  }
-
   render() {
-    const { animation, view } = this.state
+    const { animation } = this.state
 
     return (
       <div>
-        <div
-          style={{
-            background: '#fff',
-            width: '50%',
-            height: '100%',
-            position: 'absolute',
-            top: '0',
-            right: '0',
-            boxShadow: 'rgba(0, 0, 0, 0.4) 40px 0px 40px -40px inset',
-            zIndex: '0',
-            overflowY: 'scroll',
-            transform:
-              animation === 'start' ? 'translateX(0)' : 'translateX(100%)',
-            transition: 'all 600ms cubic-bezier(0.39, 0.575, 0.565, 1)',
-            paddingLeft: '110px',
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-          <div style={{ position: 'relative' }}>
-            <FormContainer animation={animation} delay={1200}>
-              <Forms.ContactForm />
-            </FormContainer>
-            <CloseContainer to="/">
-              <Ex />
-            </CloseContainer>
-          </div>
+        <div>
+          <WhiteContainer animation={animation}>
+            <div style={{ position: 'relative' }}>
+              <FormContainer animation={animation} delay={1200}>
+                <Forms.ContactForm />
+              </FormContainer>
+              <ScrollContainer />
+            </div>
+          </WhiteContainer>
+          <CloseContainer to="/">
+            <Ex />
+          </CloseContainer>
+          <ScrollTextContainer>Scroll down</ScrollTextContainer>
         </div>
         <Container>
           <GridContainer>

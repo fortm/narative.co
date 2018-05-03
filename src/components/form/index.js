@@ -1,9 +1,11 @@
-import Input from './input/Input'
+import Text from './text/Text'
+import Phone from './phone/Phone'
 import Radio from './radio/Radio'
 import Select from './select/Select'
 
 export default {
-  Input,
+  Text,
+  Phone,
   Radio,
   Select,
 }
