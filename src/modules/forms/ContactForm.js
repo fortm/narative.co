@@ -80,7 +80,7 @@ const validate = (values, props) => {
 }
 
 class ContactForm extends Component {
-  handleSubmit(values) {
+  handleSubmit = async values => {
     const { name, email, companySize, project, details } = values
 
     const method = 'post'
@@ -93,7 +93,8 @@ class ContactForm extends Component {
       project,
     }
 
-    apiCall({ method, endpoint, data })
+    const response = await apiCall({ method, endpoint, data })
+    console.log(response)
   }
 
   render() {
