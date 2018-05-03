@@ -153,6 +153,11 @@ const CopyRightContainerMobile = styled.div`
   `};
 `
 
+const HighlightText = styled.span`
+  color: #fff;
+  ${props => props.underline && `text-decoration: underline`};
+`
+
 const ArrowRight = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -168,6 +173,27 @@ const ArrowRight = () => (
   </svg>
 )
 
+const ArrowAnimation = styled.div`
+  position: relative;
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 23px;
+    height: 1px;
+    width: 100px;
+    background: #fff;
+
+    opacity: 0;
+    transition: all 0.25s cubic-bezier(0.77, 0, 0.175, 1);
+  }
+
+  &:hover &::after {
+    opacity: 1;
+  }
+`
 class IndexPage extends Component {
   state = { animation: '', view: 'home' }
 
@@ -210,14 +236,13 @@ class IndexPage extends Component {
                   state of the art technologies, we help you solve your
                   problems, grow your business and simply tell your story.
                 </MainText>
-                <ContactText>
+                <ContactText onClick={() => this.goToView('contact')}>
                   Our new site is on its way.{' '}
-                  <ContactLink href="mailto:info@narative.co?Subject=👋%20Narative">
-                    Get in touch
-                  </ContactLink>
-                  .
-                  <div onClick={() => this.goToView('contact')}>Switch</div>
-                  <ArrowRight />
+                  <ArrowAnimation>
+                    <HighlightText underline>Get in touch</HighlightText>
+                    .
+                    <ArrowRight />
+                  </ArrowAnimation>
                 </ContactText>
               </TextContainer>
               <CopyRightContainer animation={animation} transitionDelay={800}>
@@ -283,13 +308,16 @@ class IndexPage extends Component {
                 <TextContainer animation={animation} transitionDelay={600}>
                   <WelcomeHeader>How can we help?</WelcomeHeader>
                   <MainText>
-                    Tell us a bit more about your project. The more detailed is
-                    the description, the more accurate our quote will be.
+                    <HighlightText>Tell us a bit more</HighlightText> about your
+                    project. The more detailed is the description, the more
+                    accurate our quote will be.
                   </MainText>
                   <MainText>
-                    In a rush? Leave us your phone number below and our business
-                    development team will contact you within 24 working hours.
+                    <HighlightText>In a rush?</HighlightText> Leave us your
+                    phone number below and our business development team will
+                    contact you within 24 working hours.
                   </MainText>
+                  <Forms.PhoneForm />
                 </TextContainer>
                 <CopyRightContainer animation={animation} transitionDelay={800}>
                   © {new Date().getFullYear()} Narative Studio Inc.

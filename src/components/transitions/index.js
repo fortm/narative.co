@@ -1,13 +1,13 @@
 import React from 'react'
 import Transition from 'react-transition-group/Transition'
 
-const fadeInDuration = 200
+const fadeInDuration = 180
 
 const fadeInDefaultStyle = {
-  transition: `all ${fadeInDuration}ms cubic-bezier(0.175, 0.885, 0.32, 1.275)`,
+  transition: `all ${fadeInDuration}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`,
   opacity: 0,
-  transformOrigin: 'top left',
-  transform: 'translateY(-2rem) scale(0.96)',
+  transformOrigin: 'top',
+  transform: 'translateY(-3rem) ',
 }
 
 const fadeInTransitionStyles = {
