@@ -11,26 +11,23 @@ const fadeInDefaultStyle = {
 }
 
 const fadeInTransitionStyles = {
-  entered: { opacity: 1, transform: 'translateY(0rem) scale(1)' },
-  exiting: { opacity: 0 },
+  entered: { opacity: 1, transform: 'translateY(0rem)' },
+  exiting: { opacity: 0, transform: 'translateY(2rem)' },
 }
 
 export const FadeIn = ({ in: inProp, children }) => {
   return (
     <Transition in={inProp} timeout={fadeInDuration}>
-      {state => {
-        console.log({ state })
-        return (
-          <div
-            style={{
-              ...fadeInDefaultStyle,
-              ...fadeInTransitionStyles[state],
-            }}
-          >
-            {children}
-          </div>
-        )
-      }}
+      {state => (
+        <div
+          style={{
+            ...fadeInDefaultStyle,
+            ...fadeInTransitionStyles[state],
+          }}
+        >
+          {children}
+        </div>
+      )}
     </Transition>
   )
 }

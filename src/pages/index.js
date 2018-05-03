@@ -1,9 +1,22 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { media, transitions } from '@styles'
 import { Container, Logo } from '@components'
 import { Forms } from '@modules'
+
+const animateButtonLine = keyframes`
+  0% {
+      width: 0;
+  }
+  50% {
+      width: 70%;
+  }
+  100% {
+      width: 70%;
+      left: 90%;
+  }
+`
 
 const SwitchContainer = styled.div`
   transition: all 400ms cubic-bezier(0.5, 0, 0.515, 1);
@@ -30,6 +43,7 @@ const GridContainer = styled.div`
 const LogoContainer = styled.div`
   max-width: 16rem;
   margin-bottom: 2rem;
+
   ${transitions.fadeUp};
 
   ${media.large`
@@ -81,7 +95,7 @@ const MainText = styled.p`
   margin-bottom: 2rem;
 `
 
-const ContactText = styled.p`
+const ContactText = styled(Link)`
   font-size: 1.6rem;
   font-weight: 500;
   color: ${props => props.theme.colors.grey};
@@ -120,6 +134,7 @@ const LeftContainer = styled.div`
 `
 
 const RightContainer = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -158,6 +173,27 @@ const HighlightText = styled.span`
   ${props => props.underline && `text-decoration: underline`};
 `
 
+const Ex = () => (
+  <svg width="14" height="14" viewBox="0 0 14 14" version="1.1">
+    <g id="Canvas" fill="none">
+      <path
+        id="x"
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M 13.8599 0.842085C 13.944 0.926255 14 1.05257 14 1.16489C 14 1.27713 13.944 1.40345 13.8599 1.48762L 8.34983 7L 13.8596 12.5124C 13.944 12.5965 14 12.7229 14 12.8351C 14 12.9474 13.944 13.0737 13.8596 13.1579L 13.1584 13.8597C 13.074 13.9438 12.962 14 12.8357 14C 12.7234 14 12.5971 13.9438 12.513 13.8597L 6.99987 8.3441L 1.48677 13.8597C 1.40263 13.9438 1.27656 14 1.1643 14C 1.05204 14 0.925713 13.9438 0.84158 13.8597L 0.140136 13.1579C 0.0560031 13.0737 0 12.9474 0 12.8351C 0 12.7229 0.0560031 12.5965 0.140136 12.5124L 5.65017 7L 0.140391 1.48762C 0.0560031 1.40345 0 1.27713 0 1.16489C 0 1.05257 0.0560031 0.926255 0.140391 0.842085L 0.84158 0.140326C 0.925969 0.0561561 1.03797 0 1.1643 0C 1.27656 0 1.40289 0.0561561 1.48702 0.140326L 7.00013 5.6559L 12.5132 0.140326C 12.5974 0.0561561 12.7234 0 12.8357 0C 12.948 0 13.0743 0.0561561 13.1584 0.140326L 13.8599 0.842085Z"
+        fill="black"
+      />
+    </g>
+  </svg>
+)
+
+const CloseContainer = styled.div`
+  position: absolute;
+  right: -6rem;
+  top: 5rem;
+  cursor: pointer;
+`
+
 const ArrowRight = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -175,32 +211,43 @@ const ArrowRight = () => (
 
 const ArrowAnimation = styled.div`
   position: relative;
+  display: inline-block;
+  padding-left: 0.5rem;
 
   &::after {
     content: '';
     display: block;
     position: absolute;
     left: 0;
-    top: 23px;
+    top: 12.5px;
     height: 1px;
-    width: 100px;
+    width: 0;
     background: #fff;
-
-    opacity: 0;
-    transition: all 0.25s cubic-bezier(0.77, 0, 0.175, 1);
-  }
-
-  &:hover &::after {
     opacity: 1;
   }
+
+  svg {
+    transition: all 300ms cubic-bezier(0.77, 0, 0.175, 1);
+  }
+
+  &:hover svg {
+    transform: translateX(3rem);
+  }
+
+  &:hover::after {
+    opacity: 1;
+    animation: ${animateButtonLine} 300ms cubic-bezier(0.77, 0, 0.175, 1)
+      forwards;
+  }
 `
+
 class IndexPage extends Component {
   state = { animation: '', view: 'home' }
 
   componentDidMount() {
     setTimeout(() => {
       this.setState({ animation: 'start' })
-    }, 300)
+    })
 
     // Required as a workaround for Safari video
     this.video.muted = true
@@ -236,7 +283,7 @@ class IndexPage extends Component {
                   state of the art technologies, we help you solve your
                   problems, grow your business and simply tell your story.
                 </MainText>
-                <ContactText onClick={() => this.goToView('contact')}>
+                <ContactText to="/contact">
                   Our new site is on its way.{' '}
                   <ArrowAnimation>
                     <HighlightText underline>Get in touch</HighlightText>
@@ -322,10 +369,12 @@ class IndexPage extends Component {
                 <CopyRightContainer animation={animation} transitionDelay={800}>
                   © {new Date().getFullYear()} Narative Studio Inc.
                 </CopyRightContainer>
-                <div onClick={() => this.goToView('home')}> Back</div>
               </LeftContainer>
               <RightContainer>
                 <Forms.ContactForm />
+                <CloseContainer onClick={() => this.goToView('home')}>
+                  <Ex />
+                </CloseContainer>
               </RightContainer>
             </GridContainer>
           </Container>

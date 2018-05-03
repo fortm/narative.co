@@ -1,8 +1,30 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { media, transitions } from '@styles'
 import { Container, Logo } from '@components'
+import { Forms } from '@modules'
+import { relative } from 'path'
+
+const animateButtonLine = keyframes`
+  0% {
+      width: 0;
+  }
+  50% {
+      width: 70%;
+  }
+  100% {
+      width: 70%;
+      left: 90%;
+  }
+`
+
+const SwitchContainer = styled.div`
+  transition: all 400ms cubic-bezier(0.5, 0, 0.515, 1);
+  transform: ${props =>
+    props.view === 'home' ? 'translateX;(0)' : 'translateX(-100vw)'};
+  min-height: 100vh;
+`
 
 const GridContainer = styled.div`
   display: grid;
@@ -22,6 +44,7 @@ const GridContainer = styled.div`
 const LogoContainer = styled.div`
   max-width: 16rem;
   margin-bottom: 2rem;
+
   ${transitions.fadeUp};
 
   ${media.large`
@@ -52,6 +75,10 @@ const NarativeVideo = styled.video`
   `};
 `
 
+const TextContainer = styled.div`
+  ${transitions.fadeUp};
+`
+
 const WelcomeHeader = styled.h1`
   color: ${props => props.theme.colors.grey};
   font-size: 1.8rem;
@@ -67,10 +94,6 @@ const MainText = styled.p`
   font-weight: 400;
   color: ${props => props.theme.colors.grey};
   margin-bottom: 2rem;
-`
-
-const TextContainer = styled.div`
-  ${transitions.fadeUp};
 `
 
 const ContactText = styled.p`
@@ -112,6 +135,7 @@ const LeftContainer = styled.div`
 `
 
 const RightContainer = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -134,73 +158,119 @@ const CopyRightContainer = styled.div`
   `};
 `
 
-const CopyRightContainerMobile = styled.div`
-  font-size: 1.6rem;
-  font-weight: 500;
-  color: ${props => props.theme.colors.grey};
-  align-self: flex-start;
-
-  ${media.large`
-    display: none;
-  `};
+const FormContainer = styled.div`
+  width: 46rem;
+  position: relative;
+  height: 53rem;
+  ${transitions.fadeUp};
 `
 
-const ArrowRight = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="30"
-    height="10"
-    viewBox="0 0 30 10"
-  >
-    <path
-      fill="#FFF"
-      fillRule="evenodd"
-      d="M24.697 0l-.934.881 3.698 3.494H0v1.25h27.461l-3.698 3.494.934.881L30 5z"
-    />
+const HighlightText = styled.span`
+  color: #fff;
+  ${props => props.underline && `text-decoration: underline`};
+`
+
+const Ex = () => (
+  <svg width="14" height="14" viewBox="0 0 14 14" version="1.1">
+    <g id="Canvas" fill="none">
+      <path
+        id="x"
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M 13.8599 0.842085C 13.944 0.926255 14 1.05257 14 1.16489C 14 1.27713 13.944 1.40345 13.8599 1.48762L 8.34983 7L 13.8596 12.5124C 13.944 12.5965 14 12.7229 14 12.8351C 14 12.9474 13.944 13.0737 13.8596 13.1579L 13.1584 13.8597C 13.074 13.9438 12.962 14 12.8357 14C 12.7234 14 12.5971 13.9438 12.513 13.8597L 6.99987 8.3441L 1.48677 13.8597C 1.40263 13.9438 1.27656 14 1.1643 14C 1.05204 14 0.925713 13.9438 0.84158 13.8597L 0.140136 13.1579C 0.0560031 13.0737 0 12.9474 0 12.8351C 0 12.7229 0.0560031 12.5965 0.140136 12.5124L 5.65017 7L 0.140391 1.48762C 0.0560031 1.40345 0 1.27713 0 1.16489C 0 1.05257 0.0560031 0.926255 0.140391 0.842085L 0.84158 0.140326C 0.925969 0.0561561 1.03797 0 1.1643 0C 1.27656 0 1.40289 0.0561561 1.48702 0.140326L 7.00013 5.6559L 12.5132 0.140326C 12.5974 0.0561561 12.7234 0 12.8357 0C 12.948 0 13.0743 0.0561561 13.1584 0.140326L 13.8599 0.842085Z"
+        fill="black"
+      />
+    </g>
   </svg>
 )
 
-class IndexPage extends Component {
-  state = { animation: '' }
+const CloseContainer = styled(Link)`
+  position: absolute;
+  right: -6rem;
+  top: -5rem;
+  cursor: pointer;
+`
+
+class ContactPage extends Component {
+  state = { animation: '', view: 'home' }
 
   componentDidMount() {
     setTimeout(() => {
       this.setState({ animation: 'start' })
-    }, 300)
+    })
+  }
+
+  goToView = view => {
+    this.setState({ view })
+  }
+
+  handleSubmit(event) {
+    console.log(event)
   }
 
   render() {
-    const { animation } = this.state
+    const { animation, view } = this.state
 
     return (
-      <Container background="dark">
-        <GridContainer>
-          <LeftContainer>
-            <LogoContainer animation={animation}>
-              <Logo />
-            </LogoContainer>
-            <TextContainer animation={animation} transitionDelay={600}>
-              <WelcomeHeader>How can we help?</WelcomeHeader>
-              <MainText>
-                Tell us a bit more about your project. The more detailed is the
-                description, the more accurate our quote will be.
-              </MainText>
-              <MainText>
-                In a rush? Leave us your phone number below and our business
-                development team will contact you within 24 working hours.
-              </MainText>
-            </TextContainer>
-            <CopyRightContainer animation={animation} transitionDelay={800}>
-              © {new Date().getFullYear()} Narative Studio Inc.
-            </CopyRightContainer>
-          </LeftContainer>
-          <RightContainer>
-            <div>Hello</div>
-          </RightContainer>
-        </GridContainer>
-      </Container>
+      <div>
+        <div
+          style={{
+            background: '#fff',
+            width: '50%',
+            height: '100%',
+            position: 'absolute',
+            top: '0',
+            right: '0',
+            boxShadow: 'rgba(0, 0, 0, 0.4) 40px 0px 40px -40px inset',
+            zIndex: '0',
+            overflowY: 'scroll',
+            transform:
+              animation === 'start' ? 'translateX(0)' : 'translateX(100%)',
+            transition: 'all 600ms cubic-bezier(0.39, 0.575, 0.565, 1)',
+            paddingLeft: '110px',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <div style={{ position: 'relative' }}>
+            <FormContainer animation={animation} delay={1200}>
+              <Forms.ContactForm />
+            </FormContainer>
+            <CloseContainer to="/">
+              <Ex />
+            </CloseContainer>
+          </div>
+        </div>
+        <Container>
+          <GridContainer>
+            <LeftContainer>
+              <LogoContainer animation={animation}>
+                <Logo />
+              </LogoContainer>
+              <TextContainer animation={animation}>
+                <WelcomeHeader>How can we help?</WelcomeHeader>
+                <MainText>
+                  <HighlightText>Tell us a bit more</HighlightText> about your
+                  project. The more detailed is the description, the more
+                  accurate our quote will be.
+                </MainText>
+                <MainText>
+                  <HighlightText>In a rush?</HighlightText> Leave us your phone
+                  number below and our business development team will contact
+                  you within 24 working hours.
+                </MainText>
+                <Forms.PhoneForm />
+              </TextContainer>
+              <CopyRightContainer animation={animation}>
+                © {new Date().getFullYear()} Narative Studio Inc.
+              </CopyRightContainer>
+            </LeftContainer>
+            <RightContainer />
+          </GridContainer>
+        </Container>
+      </div>
     )
   }
 }
 
-export default IndexPage
+export default ContactPage

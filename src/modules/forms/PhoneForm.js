@@ -18,7 +18,6 @@ const StyledFormikForm = styled(FormikForm)`
   width: 46rem;
   align-self: flex-end;
   position: relative;
-  top: 13%;
 `
 
 const RadioOptions = [

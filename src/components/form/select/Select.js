@@ -54,7 +54,7 @@ const StyledSelect = styled.div`
 `
 
 const SelectOption = styled.option`
-  pointer-events: ${props => (props.isOpen ? 'initial' : 'none')};
+  pointer-events: ${props => (props.isOpened ? 'initial' : 'none')};
   padding: 0.8rem 1.2rem;
   transition: all 200ms ${props => props.theme.transitions.easeOut};
 
@@ -89,18 +89,16 @@ const StyledSelectArrow = styled(SelectArrow)`
 
 class Select extends Component {
   state = {
-    isOpen: false,
+    isOpened: false,
     selectedValue: '',
   }
 
   handleClickOutside(event) {
-    console.log(event)
-    this.toggleSelectDropdown()
+    this.setState({ isOpened: false })
   }
 
   toggleSelectDropdown = event => {
-    console.log(event)
-    this.setState({ isOpen: !this.state.isOpen })
+    this.setState({ isOpened: !this.state.isOpened })
   }
 
   handleSelectClick = selectedValue => {
@@ -109,7 +107,7 @@ class Select extends Component {
 
   render() {
     const { field, label, options } = this.props
-    const { isOpen, selectedValue } = this.state
+    const { isOpened, selectedValue } = this.state
 
     return (
       <InputContainer onClick={() => this.toggleSelectDropdown()}>
@@ -121,7 +119,7 @@ class Select extends Component {
           </LabelAnimation>
           <SelectArrow />
           <StyledSelect {...field} {...this.props} value={selectedValue}>
-            <FadeIn in={isOpen}>
+            <FadeIn in={isOpened}>
               <div
                 style={{
                   position: 'absolute',
@@ -141,7 +139,7 @@ class Select extends Component {
                   return (
                     <SelectOption
                       key={option.name}
-                      isOpen={isOpen}
+                      isOpened={isOpened}
                       onClick={() => this.handleSelectClick(option.name)}
                     >
                       {option.name}
