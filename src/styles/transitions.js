@@ -10,12 +10,10 @@ import { css } from 'styled-components'
 const blurIn = css`
   filter: blur(0);
   transform: scale(1);
-  opacity: 1;
 
   ${props =>
     props.animation !== 'start' &&
     `
-    opacity: 0;
     filter: blur(0.5rem);
     transform: scale(1.15);
   `};
