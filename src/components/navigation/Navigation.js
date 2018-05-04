@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'gatsby-link'
 
+// Placeholder nav
 const Navigation = ({ siteTitle }) => (
   <navigation>
     <ul>

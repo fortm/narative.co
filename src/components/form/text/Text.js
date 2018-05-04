@@ -75,7 +75,6 @@ const StyledInput = styled.input`
 `
 
 const Input = ({ field, label, ...props }) => {
-  // console.log(props.form)
   const hasError =
     props.form.touched[field.name] && props.form.errors[field.name]
 
