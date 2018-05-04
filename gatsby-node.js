@@ -7,6 +7,11 @@
 // You can delete this file if you're not using it
 const path = require('path')
 
+const modifyBabelrc = ({ babelrc }) => ({
+  ...babelrc,
+  plugins: babelrc.plugins.concat(['transform-regenerator']),
+})
+
 const modifyWebpackConfig = ({ config, stage }) => {
   config.merge({
     resolve: {
@@ -24,5 +29,6 @@ const modifyWebpackConfig = ({ config, stage }) => {
 }
 
 module.exports = {
+  modifyBabelrc,
   modifyWebpackConfig,
 }
