@@ -1,4 +1,13 @@
-const baseUrl = '/api'
+/**
+ * In production we're pointing directly at heroku because I've had
+ * enough of trying to setup AWS Route 53 with some Heroku DNS and
+ * ACM systems. So this will have to due for now :)
+ */
+
+const baseUrl =
+  process.env.NODE_ENV === 'production'
+    ? 'https://narative-pastoral.herokuapp.com/api'
+    : 'http://localhost:8080/api'
 
 export function buildUrl(url) {
   return baseUrl + url

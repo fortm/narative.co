@@ -82,9 +82,10 @@ const validate = (values, props) => {
 class ContactForm extends Component {
   handleSubmit = async values => {
     const { name, email, companySize, project, details } = values
+    console.log({ values })
 
     const method = 'post'
-    const endpoint = '/contact'
+    const endpoint = '/contact/proposal'
     const data = {
       companySize,
       email,
@@ -94,7 +95,6 @@ class ContactForm extends Component {
     }
 
     const response = await apiCall({ method, endpoint, data })
-    console.log(response)
   }
 
   render() {

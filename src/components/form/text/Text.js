@@ -74,7 +74,7 @@ const StyledInput = styled.input`
   }
 `
 
-const Input = ({ field, label, ...props }) => {
+const Text = ({ field, label, ...props }) => {
   const hasError =
     props.form.touched[field.name] && props.form.errors[field.name]
 
@@ -93,8 +93,8 @@ const Input = ({ field, label, ...props }) => {
   )
 }
 
-Input.propTypes = {
+Text.propTypes = {
   label: PropTypes.string.isRequired,
 }
 
-export default Input
+export default Text

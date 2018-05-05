@@ -35,11 +35,9 @@ const transitionStyles = {
 }
 
 const SlideIn = ({ in: inProp, children }) => {
-  console.log(inProp)
   return (
     <Transition in={inProp} timeout={duration}>
       {state => {
-        console.log(state)
         return (
           <div
             style={{
@@ -219,6 +217,7 @@ const ScrollContainer = styled.div`
 
 const ScrollTextContainer = styled.div`
   position: fixed;
+  width: 10rem;
   left: calc(50% + 13rem + 46rem + 2rem);
   top: calc(50% - 18px / 2 + 56px);
   transform: rotate(-90deg);

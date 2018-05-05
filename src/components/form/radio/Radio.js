@@ -33,8 +33,12 @@ const StyledLabel = styled.label`
     left: 0;
     top: 0;
     opacity: 0;
-    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.16);
     transition: opacity 200ms ${props => props.theme.transitions.easeIn};
+  }
+
+  &:hover::after {
+    opacity: 1;
   }
 `
 
@@ -47,10 +51,6 @@ const StyledRadioInput = styled.input`
   &:checked + ${StyledLabel} {
     border-color: #000;
     color: #000;
-  }
-
-  &:checked + ${StyledLabel}::after {
-    opacity: 1;
   }
 
   &:checked + ${StyledLabel}::after {
@@ -69,6 +69,8 @@ const Radio = ({ field, label, options, name, ...props }) => {
               id={option.id}
               value={option.value}
               name={name}
+              {...field}
+              {...props}
             />
             <StyledLabel htmlFor={option.id}>{option.label}</StyledLabel>
           </div>
