@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -58,28 +58,39 @@ const StyledRadioInput = styled.input`
   }
 `
 
-const Radio = ({ field, label, options, name, ...props }) => {
-  return (
-    <React.Fragment>
-      <RadioContainer>
-        {options.map(option => (
-          <div key={option.value} style={{ position: 'relative' }}>
-            <StyledRadioInput
-              type="radio"
-              id={option.id}
-              value={option.value}
-              name={name}
-              {...field}
-              {...props}
-            />
-            <StyledLabel htmlFor={option.id}>{option.label}</StyledLabel>
-          </div>
-        ))}
-      </RadioContainer>
-    </React.Fragment>
-  )
-}
+class Radio extends Component {
+  state = {
+    selectedValue: '',
+  }
 
+  handleClick = selectedValue => {
+    this.setState({ selectedValue })
+    this.props.form.setFieldValue(this.props.field.name, selectedValue)
+  }
+
+  render() {
+    const { field, form, label, options } = this.props
+
+    return (
+      <React.Fragment>
+        <RadioContainer>
+          {options.map(option => (
+            <div key={option.value} style={{ position: 'relative' }}>
+              <StyledRadioInput
+                type="radio"
+                id={option.id}
+                value={option.value}
+                checked={this.state.selectedValue === option.value}
+                onClick={() => this.handleClick(option.value)}
+              />
+              <StyledLabel htmlFor={option.id}>{option.label}</StyledLabel>
+            </div>
+          ))}
+        </RadioContainer>
+      </React.Fragment>
+    )
+  }
+}
 Radio.propTypes = {
   // label: PropTypes.string.isRequired,
 }

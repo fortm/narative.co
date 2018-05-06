@@ -177,23 +177,21 @@ const HighlightText = styled.span`
 const Ex = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" version="1.1">
     <g id="Canvas" fill="none">
-      <g id="close-icon">
-        <path
-          id="Stroke 1"
-          d="M 0 0L 24 0L 24 24L 0 24L 0 0Z"
-          stroke-width="0"
-          stroke="black"
-          stroke-opacity="0.01"
-        />
-        <path
-          id="Shape"
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M 14 1.4L 12.6 0L 7 5.6L 1.4 0L 0 1.4L 5.6 7L 0 12.6L 1.4 14L 7 8.4L 12.6 14L 14 12.6L 8.4 7L 14 1.4Z"
-          transform="translate(5 5)"
-          fill="black"
-        />
-      </g>
+      <path
+        id="Stroke 1"
+        d="M 0 0L 24 0L 24 24L 0 24L 0 0Z"
+        strokeWidth="0"
+        stroke="black"
+        strokeOpacity="0.01"
+      />
+      <path
+        id="Shape"
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M 14 1.4L 12.6 0L 7 5.6L 1.4 0L 0 1.4L 5.6 7L 0 12.6L 1.4 14L 7 8.4L 12.6 14L 14 12.6L 8.4 7L 14 1.4Z"
+        transform="translate(5 5)"
+        fill="black"
+      />
     </g>
   </svg>
 )
@@ -213,12 +211,23 @@ const ScrollContainer = styled.div`
   height: 1px;
   background: #eff0f0;
   transform: rotate(-90deg);
+
+  &::after {
+    content: '';
+    position: absolute;
+    background: #eff0f0;
+    left: 0;
+    top: -2px;
+    height: 5px;
+    width: 5px;
+    borderradius: 50%;
+  }
 `
 
 const ScrollTextContainer = styled.div`
   position: fixed;
   width: 10rem;
-  left: calc(50% + 13rem + 46rem + 2rem);
+  left: calc(50% + 13rem + 46rem + 1.7rem);
   top: calc(50% - 18px / 2 + 56px);
   transform: rotate(-90deg);
   color: rgba(0, 0, 0, 0.18);

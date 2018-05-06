@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { Formik, Form as FormikForm, Field } from 'formik'
-import { Button, Container, Form } from '@components'
+import { Button, Container, Form, Transitions } from '@components'
 import { apiCall } from '@utils'
+
+const fadeIn = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`
 
 const FormHeader = styled.h3`
   font-size: 1.8rem;
@@ -21,6 +26,71 @@ const StyledFormikForm = styled(FormikForm)`
   position: relative;
   padding-bottom: 10rem;
 `
+
+const SubmittedScreen = styled.div`
+  width: 46rem;
+  position: relative;
+  height: 53rem;
+  align-self: flex-end;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  opacity: 0;
+  animation: ${fadeIn} 200ms 600ms ${props => props.theme.transitions.in}
+    forwards;
+
+  svg {
+    margin-bottom: 3rem;
+  }
+`
+
+const SubmittedHeader = styled.h2`
+  font-size: 3.2rem;
+  line-height: 1;
+  margin-bottom: 3rem;
+`
+
+const SubmittedText = styled.p`
+  color: ${props => props.theme.colors.grey};
+  font-size: 1.6rem;
+  max-width: 220px;
+  margin-bottom: 3rem;
+`
+
+const SubmittedBackButton = styled(Link)`
+  text-decoration: underline;
+  font-size: 1.6rem;
+  font-weight: 500;
+`
+
+const SubmittedCheckIcon = () => (
+  <svg width="90" height="90" viewBox="0 0 90 90" version="1.1">
+    <g id="Canvas" fill="none">
+      <g id="confirmation-icon">
+        <rect
+          id="Rectangle"
+          x="0.75"
+          y="0.75"
+          width="88.5"
+          height="88.5"
+          rx="2.25"
+          stroke="black"
+          stroke-width="1.5"
+        />
+        <path
+          id="Vector"
+          d="M 0 17.8971L 14.7165 30.8571L 39.8571 0"
+          transform="translate(25.0715 29.5715)"
+          stroke="black"
+          stroke-width="1.5"
+        />
+      </g>
+    </g>
+  </svg>
+)
 
 const selectOptions = [
   {
@@ -80,9 +150,13 @@ const validate = (values, props) => {
 }
 
 class ContactForm extends Component {
-  handleSubmit = async values => {
+  state = {
+    submitted: false,
+    firstName: '',
+  }
+
+  handleSubmit = async (values, { setSubmitting }) => {
     const { name, email, companySize, project, details } = values
-    console.log({ values })
 
     const method = 'post'
     const endpoint = '/contact/proposal'
@@ -94,43 +168,73 @@ class ContactForm extends Component {
       project,
     }
 
-    const response = await apiCall({ method, endpoint, data })
+    try {
+      const response = await apiCall({ method, endpoint, data })
+
+      setSubmitting(false)
+      this.setState({ submitted: true, firstName: name.split(' ')[0] })
+    } catch (err) {
+      console.warn(err)
+    }
   }
 
   render() {
     return (
-      <Formik
-        onSubmit={this.handleSubmit}
-        validate={validate}
-        render={props => (
-          <StyledFormikForm>
-            <FormSection>
-              <FormHeader>About you</FormHeader>
-              <Field component={Form.Text} label="Full name" name="name" />
-              <Field component={Form.Text} label="Email" name="email" />
-              <Field
-                component={Form.Select}
-                label="Size of company"
-                name="companySize"
-                options={selectOptions}
-              />
-            </FormSection>
-            <FormSection spacing="large">
-              <FormHeader>About your project</FormHeader>
-              <Form.Radio options={radioOptions} name="project" />
-            </FormSection>
-            <FormSection>
-              <FormHeader>Give us the details</FormHeader>
-              <Field
-                component={Form.Text}
-                label="Tell us a bit more"
-                name="details"
-              />
-            </FormSection>
-            <Button text="Submit" />
-          </StyledFormikForm>
+      <div>
+        {this.state.submitted ? (
+          <SubmittedScreen>
+            <SubmittedCheckIcon />
+            <SubmittedHeader>Thank you, {this.state.firstName}</SubmittedHeader>
+            <SubmittedText>
+              Our business development team will get back to you shortly.
+            </SubmittedText>
+            <SubmittedBackButton to="/">Go back</SubmittedBackButton>
+          </SubmittedScreen>
+        ) : (
+          <Formik
+            onSubmit={this.handleSubmit}
+            validate={validate}
+            render={props => {
+              return (
+                <StyledFormikForm>
+                  <FormSection>
+                    <FormHeader>About you</FormHeader>
+                    <Field
+                      component={Form.Text}
+                      label="Full name"
+                      name="name"
+                    />
+                    <Field component={Form.Text} label="Email" name="email" />
+                    <Field
+                      component={Form.Select}
+                      label="Size of company"
+                      name="companySize"
+                      options={selectOptions}
+                    />
+                  </FormSection>
+                  <FormSection spacing="large">
+                    <FormHeader>About your project</FormHeader>
+                    <Field
+                      component={Form.Radio}
+                      options={radioOptions}
+                      name="project"
+                    />
+                  </FormSection>
+                  <FormSection>
+                    <FormHeader>Give us the details</FormHeader>
+                    <Field
+                      component={Form.Text}
+                      label="Tell us a bit more"
+                      name="details"
+                    />
+                  </FormSection>
+                  <Button isSubmitting={props.isSubmitting} text="Submit" />
+                </StyledFormikForm>
+              )
+            }}
+          />
         )}
-      />
+      </div>
     )
   }
 }

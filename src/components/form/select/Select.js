@@ -12,9 +12,8 @@ const InputContainer = styled.div`
 
   svg {
     position: absolute;
-    right: 0.4rem;
-    bottom: 1rem;
-    pointer-events: none;
+    right: 0.6rem;
+    bottom: 0.8rem;
   }
 `
 
@@ -90,6 +89,26 @@ const SelectOptionContainer = styled.div`
     rgba(27, 39, 51, 0.16) 0px 8px 16px;
 `
 
+const SelectArrowButton = styled.button`
+  background: transparent;
+  border: none;
+  position: absolute;
+  right: 0;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  bottom: 0rem;
+  background: transparent;
+  transform: scale(0.6);
+  transition: all 300ms ${props => props.theme.transitions.out};
+
+  &:focus,
+  &:active {
+    transform: scale(1.6);
+    background: rgba(0, 0, 0, 0.06);
+  }
+`
+
 const SelectArrow = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -125,11 +144,28 @@ class Select extends Component {
   }
 
   toggleSelectDropdown = event => {
+    event.preventDefault()
     this.setState({ isOpened: !this.state.isOpened })
+
+    if (event.keyCode === 40 || event.keyCode === 32) {
+      this.setState({ isOpened: true })
+    }
+    if (event.keyCode === 27) {
+      this.setState({ isOpened: false })
+    }
   }
 
   handleSelectClick = selectedValue => {
     this.setState({ selectedValue })
+    this.props.form.setFieldValue(this.props.field.name, selectedValue, true)
+  }
+
+  handleFocus = () => {
+    document.addEventListener('keydown', this.toggleSelectDropdown)
+  }
+
+  handleBlur = () => {
+    document.removeEventListener('keydown', this.toggleSelectDropdown)
   }
 
   render() {
@@ -137,7 +173,7 @@ class Select extends Component {
     const { isOpened, selectedValue } = this.state
 
     return (
-      <InputContainer onClick={() => this.toggleSelectDropdown()}>
+      <InputContainer onClick={event => this.toggleSelectDropdown(event)}>
         <SelectBorder>
           <LabelAnimation selectedValue={selectedValue}>
             <StyledLabel>{label}</StyledLabel>
@@ -149,6 +185,13 @@ class Select extends Component {
               </StyledLabel>
             )}
           </LabelAnimation>
+          <SelectArrowButton
+            type="button"
+            tabIndex="0"
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+            innerRef={elem => (this.btn = elem)}
+          />
           <SelectArrow />
           <StyledSelect {...field} {...this.props} value={selectedValue}>
             <FadeIn in={isOpened}>

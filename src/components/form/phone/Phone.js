@@ -87,7 +87,7 @@ const StyledInput = styled(MaskedInput)`
   }
 
   &:active ~ ${LabelAnimation}, &:focus ~ ${LabelAnimation} {
-    opacity: 0;
+    opacity: 0.4;
   }
 `
 
@@ -146,6 +146,23 @@ const Phone = ({ field, label, ...props }) => {
           type="tel"
           {...field}
           {...props}
+          onKeyDown={e => {
+            // A temporary workaround
+            let cursorPos = Number(e.target.selectionStart)
+            let keyCode = Number(e.keyCode)
+
+            if ((cursorPos === 6 || cursorPos === 10) && keyCode === 8) {
+              e.preventDefault()
+
+              e.target.value = e.target.value || ''
+              e.target.value = e.target.value.replace(/\D+/g, ' ')
+              // Simulate backspace delete
+              e.target.value = e.target.value.substring(
+                0,
+                e.target.value.length - 1
+              )
+            }
+          }}
         />
         <PhoneIcon hasError={hasError} />
         <PlusOne hasError={hasError}>+1</PlusOne>
