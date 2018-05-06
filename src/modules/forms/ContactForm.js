@@ -39,7 +39,7 @@ const SubmittedScreen = styled.div`
   text-align: center;
   flex-direction: column;
   opacity: 0;
-  animation: ${fadeIn} 200ms 600ms ${props => props.theme.transitions.in}
+  animation: ${fadeIn} 50ms 500ms ${props => props.theme.transitions.in}
     forwards;
 
   svg {
