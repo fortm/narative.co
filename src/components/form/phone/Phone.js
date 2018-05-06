@@ -23,6 +23,7 @@ const phoneNumberMasker = [
 const InputContainer = styled.div`
   position: relative;
   padding: 1.4rem 0 2.5rem;
+  overflow-x: hidden;
 `
 
 const InputBorder = styled.div`

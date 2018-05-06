@@ -3,6 +3,7 @@ import Link from 'gatsby-link'
 import styled from 'styled-components'
 import { Formik, Form as FormikForm, Field } from 'formik'
 import { Button, Container, Form } from '@components'
+import { media } from '@styles'
 
 const FormHeader = styled.h3`
   font-size: 1.8rem;
@@ -15,9 +16,14 @@ const FormSection = styled.fieldset`
 `
 
 const StyledFormikForm = styled(FormikForm)`
-  width: 46rem;
   align-self: flex-end;
   position: relative;
+
+  width: 100%;
+
+  ${media.medium`
+    width: 46rem;
+  `};
 `
 
 const PhoneIcon = () => (

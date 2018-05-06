@@ -11,19 +11,7 @@ import Transition from 'react-transition-group/Transition'
 const duration = 600
 
 const defaultStyle = {
-  background: '#fff',
-  width: '50%',
-  height: '100%',
-  position: 'absolute',
-  top: '0px',
-  right: '0px',
-  boxShadow: 'rgba(0, 0, 0, 0.4) 40px 0px 40px -40px inset',
-  zIndex: '0',
-  overflowY: 'scroll',
   transition: `all ${duration}ms cubic-bezier(0.39, 0.575, 0.565, 1)`,
-  paddingLeft: '110px',
-  display: 'flex',
-  alignItems: 'center',
   opacity: 0,
 }
 
@@ -34,19 +22,43 @@ const transitionStyles = {
   exited: { opacity: 0, transform: 'translateX(100%)' },
 }
 
+const SlideInContainer = styled.div`
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 0px;
+  right: 0px;
+  z-index: 0;
+  transition: all 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transform: translateX(100%);
+  padding: 7rem 4rem 0;
+
+  ${media.xlarge`
+    width: 50%;
+    position: absolute;
+    padding-left: 110px;
+    overflow-y: scroll;
+    box-shadow: rgba(0, 0, 0, 0.4) 40px 0px 40px -40px inset;
+  `};
+`
+
 const SlideIn = ({ in: inProp, children }) => {
   return (
     <Transition in={inProp} timeout={duration}>
       {state => {
         return (
-          <div
+          <SlideInContainer
             style={{
               ...defaultStyle,
               ...transitionStyles[state],
             }}
           >
             {children}
-          </div>
+          </SlideInContainer>
         )
       }}
     </Transition>
@@ -58,23 +70,27 @@ const GridContainer = styled.div`
   grid-template-columns: 1fr;
   align-items: center;
   justify-content: center;
-  height: 91vh;
-  width: 30rem;
+  width: 100%;
   margin: 0 auto;
+
+  ${media.medium`
+    width: 30rem;
+`};
 
   ${media.large`
     grid-template-columns: repeat(2, 1fr [col-start]);
     width: 100%;
+    height: 91vh;
   `};
 `
 
 const LogoContainer = styled.div`
   max-width: 16rem;
-  margin-bottom: 2rem;
-
+  margin-bottom: 4rem;
   ${transitions.fadeUp};
 
   ${media.large`
+    margin-bottom: 2rem;
     margin-bottom: 0;
   `};
 `
@@ -163,10 +179,21 @@ const CopyRightContainer = styled.div`
 `
 
 const FormContainer = styled.div`
-  width: 46rem;
+  width: 100%;
   position: relative;
   height: 58rem;
   ${transitions.fadeUp};
+  margin: 0 auto;
+  width: 100%;
+
+  ${media.medium`
+    padding: 2rem;
+    width: 40rem;
+  `};
+
+  ${media.xlarge`
+    width: 46rem;
+  `};
 `
 
 const HighlightText = styled.span`
@@ -198,19 +225,51 @@ const Ex = () => (
 
 const CloseContainer = styled(Link)`
   position: fixed;
-  left: calc(50% + 13rem + 46rem + 6rem);
+  left: calc(50% + 13rem + 46rem + 14.2rem);
   top: 5rem;
   cursor: pointer;
+  border-radius: 50%;
+  height: 3.4rem;
+  width: 3.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::after {
+    content: '';
+    position: absolute;
+    height: 3.4rem;
+    width: 3.4rem;
+    top: 0;
+    border-radius: 50%;
+    transform: scale(0.8);
+    transition: all 200ms ${props => props.theme.transitions.in};
+  }
+
+  &:hover::after {
+    background: rgba(0, 0, 0, 0.06);
+    transform: scale(1);
+  }
+
+  &:active::after {
+    background: rgba(0, 0, 0, 0.12);
+    transform: scale(1.2);
+  }
 `
 
 const ScrollContainer = styled.div`
+  display: none;
   position: absolute;
-  right: -24.5rem;
+  right: -6.5rem;
   bottom: 2.2rem;
   width: 31.4rem;
   height: 1px;
   background: #eff0f0;
   transform: rotate(-90deg);
+
+  ${media.large`
+    display: block;
+  `};
 
   &::after {
     content: '';
@@ -225,9 +284,10 @@ const ScrollContainer = styled.div`
 `
 
 const ScrollTextContainer = styled.div`
+  display: none;
   position: fixed;
   width: 10rem;
-  left: calc(50% + 13rem + 46rem + 1.7rem);
+  left: calc(50% + 13rem + 46rem + 10.7rem);
   top: calc(50% - 18px / 2 + 56px);
   transform: rotate(-90deg);
   color: rgba(0, 0, 0, 0.18);
@@ -235,6 +295,10 @@ const ScrollTextContainer = styled.div`
   background: #fff;
   ${transitions.fadeUp};
   transition-property: opacity;
+
+  ${media.large`
+    display: block;
+  `};
 `
 
 class ContactPage extends Component {
@@ -251,20 +315,6 @@ class ContactPage extends Component {
 
     return (
       <div>
-        <SlideIn in={animation === 'start'}>
-          <div style={{ position: 'relative' }}>
-            <FormContainer animation={animation} transitionDelay={1000}>
-              <Forms.ContactForm />
-            </FormContainer>
-            <ScrollContainer />
-          </div>
-        </SlideIn>
-        <CloseContainer to="/">
-          <Ex />
-        </CloseContainer>
-        <ScrollTextContainer animation={animation} transitionDelay={1000}>
-          Scroll down
-        </ScrollTextContainer>
         <Container>
           <GridContainer>
             <LeftContainer>
@@ -292,6 +342,20 @@ class ContactPage extends Component {
             <RightContainer />
           </GridContainer>
         </Container>
+        <SlideIn in={animation === 'start'}>
+          <div style={{ position: 'relative', width: '100%' }}>
+            <FormContainer animation={animation} transitionDelay={1000}>
+              <Forms.ContactForm />
+            </FormContainer>
+            <ScrollContainer />
+          </div>
+        </SlideIn>
+        <CloseContainer to="/">
+          <Ex />
+        </CloseContainer>
+        <ScrollTextContainer animation={animation} transitionDelay={1000}>
+          Scroll down
+        </ScrollTextContainer>
       </div>
     )
   }

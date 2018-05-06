@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { media } from '@styles'
 
 const RadioContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 1.5rem;
+  display: block;
+
+  ${media.medium`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1.5rem;
+  `};
 `
 
 const StyledLabel = styled.label`
@@ -23,6 +28,11 @@ const StyledLabel = styled.label`
   justify-content: center;
   cursor: pointer;
   transition: all 200ms ${props => props.theme.transitions.easeIn};
+  margin-bottom: 1.5rem;
+
+  ${media.medium`
+    margin: 0;
+  `};
 
   &::after {
     position: absolute;

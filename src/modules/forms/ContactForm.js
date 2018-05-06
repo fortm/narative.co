@@ -4,6 +4,7 @@ import styled, { keyframes } from 'styled-components'
 import { Formik, Form as FormikForm, Field } from 'formik'
 import { Button, Container, Form, Transitions } from '@components'
 import { apiCall } from '@utils'
+import { media } from '@styles'
 
 const fadeIn = keyframes`
   from { opacity: 0; }
@@ -21,10 +22,14 @@ const FormSection = styled.fieldset`
 `
 
 const StyledFormikForm = styled(FormikForm)`
-  width: 46rem;
+  width: 100%;
   align-self: flex-end;
   position: relative;
   padding-bottom: 10rem;
+
+  ${media.xlarge`
+    width: 46rem;
+  `};
 `
 
 const SubmittedScreen = styled.div`
