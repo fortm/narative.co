@@ -30,11 +30,9 @@ const SlideInContainer = styled.div`
   top: 0px;
   right: 0px;
   z-index: 0;
-  transition: all 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
   display: flex;
   align-items: center;
-  opacity: 0;
-  transform: translateX(100%);
+  transform: translateX(0);
   padding: 7rem 4rem 0;
 
   ${media.xlarge`
@@ -43,6 +41,10 @@ const SlideInContainer = styled.div`
     padding-left: 110px;
     overflow-y: scroll;
     box-shadow: rgba(0, 0, 0, 0.4) 40px 0px 40px -40px inset;
+    transition: all 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
+    transform: translateX(100%);
+    opacity: 0;
+    padding: 0;
   `};
 `
 
@@ -85,11 +87,12 @@ const GridContainer = styled.div`
 `
 
 const LogoContainer = styled.div`
-  max-width: 16rem;
+  max-width: 10rem;
   margin-bottom: 4rem;
   ${transitions.fadeUp};
 
   ${media.large`
+    max-width: 16rem;
     margin-bottom: 2rem;
     margin-bottom: 0;
   `};
@@ -142,6 +145,7 @@ const ContactLink = styled.a`
 `
 
 const LeftContainer = styled.div`
+  position: relative;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
@@ -182,17 +186,17 @@ const FormContainer = styled.div`
   width: 100%;
   position: relative;
   height: 58rem;
-  ${transitions.fadeUp};
   margin: 0 auto;
   width: 100%;
+  ${transitions.fadeUp};
 
   ${media.medium`
     padding: 2rem;
-    width: 40rem;
+    width: 46rem;
   `};
 
   ${media.xlarge`
-    width: 46rem;
+    padding: 0;
   `};
 `
 
@@ -201,7 +205,7 @@ const HighlightText = styled.span`
   ${props => props.underline && `text-decoration: underline`};
 `
 
-const Ex = () => (
+const Ex = ({ fill = 'black' }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" version="1.1">
     <g id="Canvas" fill="none">
       <path
@@ -217,11 +221,49 @@ const Ex = () => (
         clipRule="evenodd"
         d="M 14 1.4L 12.6 0L 7 5.6L 1.4 0L 0 1.4L 5.6 7L 0 12.6L 1.4 14L 7 8.4L 12.6 14L 14 12.6L 8.4 7L 14 1.4Z"
         transform="translate(5 5)"
-        fill="black"
+        fill={fill}
       />
     </g>
   </svg>
 )
+
+const ChevronDown = () => (
+  <svg width="24" height="25" viewBox="0 0 24 25" version="1.1">
+    <g id="Canvas" fill="none">
+      <g id="chevron-down-icon">
+        <path
+          id="Stroke 1"
+          d="M 0 0L 24 0L 24 24L 0 24L 0 0Z"
+          transform="translate(0 1)"
+          stroke="black"
+          stroke-opacity="0.01"
+          stroke-width="0"
+        />
+        <path
+          id="&#239;&#132;&#135;"
+          d="M 12.0034 0.998282C 12.0034 0.902062 11.9553 0.793814 11.8832 0.72165L 11.2818 0.120276C 11.2096 0.0481109 11.1014 0 11.0052 0C 10.9089 0 10.8007 0.0481109 10.7285 0.120276L 6.00172 4.84708L 1.27491 0.120276C 1.20275 0.0481109 1.0945 0 0.998282 0C 0.890034 0 0.793814 0.0481109 0.721649 0.120276L 0.120275 0.72165C 0.0481099 0.793814 0 0.902062 0 0.998282C 0 1.0945 0.0481099 1.20275 0.120275 1.27491L 5.72509 6.87973C 5.79725 6.95189 5.9055 7 6.00172 7C 6.09794 7 6.20619 6.95189 6.27835 6.87973L 11.8832 1.27491C 11.9553 1.20275 12.0034 1.0945 12.0034 0.998282Z"
+          transform="translate(6 9)"
+          fill="black"
+        />
+      </g>
+    </g>
+  </svg>
+)
+
+const CloseContainerMobile = styled(Link)`
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ${media.large`
+    display: none;;
+  `};
+`
 
 const CloseContainer = styled(Link)`
   position: fixed;
@@ -301,6 +343,29 @@ const ScrollTextContainer = styled.div`
   `};
 `
 
+const MobileArrowContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3.2rem;
+  height: 4.4rem;
+  width: 4.4rem;
+  margin: 0 auto;
+  border: 1.33333e-11px solid rgba(0, 0, 0, 0.00784314);
+  box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.146711);
+  background: #fff;
+  z-index: 1;
+  border-radius: 50%;
+  ${transitions.fadeUp};
+
+  ${media.large`
+    display: none;;
+  `};
+`
+
 class ContactPage extends Component {
   state = { animation: '' }
 
@@ -318,26 +383,32 @@ class ContactPage extends Component {
         <Container>
           <GridContainer>
             <LeftContainer>
+              <CloseContainerMobile to="/" animation={animation}>
+                <Ex fill="white" />
+              </CloseContainerMobile>
               <LogoContainer animation={animation} transitionDelay={300}>
                 <Logo />
               </LogoContainer>
               <TextContainer animation={animation} transitionDelay={300}>
                 <WelcomeHeader>How can we help?</WelcomeHeader>
                 <MainText>
-                  <HighlightText>Tell us a bit more</HighlightText> about your
-                  project. The more detailed is the description, the more
-                  accurate our quote will be.
+                  <HighlightText>Tell us a bit</HighlightText> about your
+                  project or idea.
                 </MainText>
                 <MainText>
-                  <HighlightText>In a rush?</HighlightText> Leave us your phone
-                  number below and our business development team will contact
-                  you within 24 working hours.
+                  <HighlightText>No time to fill a form?</HighlightText> No
+                  problem, leave us your phone number and our account management
+                  team will contact you within one business day.
                 </MainText>
                 <Forms.PhoneForm />
               </TextContainer>
-              <CopyRightContainer animation={animation} transitionDelay={300}>
+              <CopyRightContainer transitionDelay={300}>
                 © {new Date().getFullYear()} Narative Studio Inc.
               </CopyRightContainer>
+
+              <MobileArrowContainer animation={animation} transitionDelay={500}>
+                <ChevronDown />
+              </MobileArrowContainer>
             </LeftContainer>
             <RightContainer />
           </GridContainer>

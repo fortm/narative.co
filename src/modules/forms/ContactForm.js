@@ -18,17 +18,22 @@ const FormHeader = styled.h3`
 `
 
 const FormSection = styled.fieldset`
-  margin-bottom: ${props => (props.spacing === 'large' ? '5rem' : '3.5rem')};
+  margin-bottom: ${props => (props.spacing === 'large' ? '4rem' : '3rem')};
+
+  ${media.xlarge`
+   margin-bottom: ${props => (props.spacing === 'large' ? '5rem' : '3.5rem')};
+  `};
 `
 
 const StyledFormikForm = styled(FormikForm)`
   width: 100%;
   align-self: flex-end;
   position: relative;
-  padding-bottom: 10rem;
+  padding-bottom: 5rem;
 
   ${media.xlarge`
     width: 46rem;
+    padding-bottom: 10rem;
   `};
 `
 
