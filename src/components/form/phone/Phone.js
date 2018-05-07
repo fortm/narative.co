@@ -170,7 +170,7 @@ const Phone = ({ field, label, ...props }) => {
         <LabelAnimation>
           <StyledLabel hasError={hasError}>{label}</StyledLabel>
         </LabelAnimation>
-        <StyledButton>Submit</StyledButton>
+        <StyledButton type="submit">Submit</StyledButton>
       </InputBorder>
       <InputError hasError={hasError}>
         {hasError && props.form.errors[field.name]}

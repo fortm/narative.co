@@ -73,13 +73,13 @@ const GridContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin: 0 auto;
 
   ${media.medium`
     width: 30rem;
-`};
+    margin: 0 auto;
+  `};
 
-  ${media.large`
+  ${media.xlarge`
     grid-template-columns: repeat(2, 1fr [col-start]);
     width: 100%;
     height: 91vh;

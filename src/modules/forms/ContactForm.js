@@ -3,8 +3,8 @@ import Link from 'gatsby-link'
 import styled, { keyframes } from 'styled-components'
 import { Formik, Form as FormikForm, Field } from 'formik'
 import { Button, Container, Form, Transitions } from '@components'
-import { apiCall } from '@utils'
 import { media } from '@styles'
+import { apiCall } from '@utils'
 
 const fadeIn = keyframes`
   from { opacity: 0; }

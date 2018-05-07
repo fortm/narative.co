@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { Formik, Form as FormikForm, Field } from 'formik'
 import { Button, Container, Form } from '@components'
 import { media } from '@styles'
+import { apiCall } from '@utils'
 
 const FormHeader = styled.h3`
   font-size: 1.8rem;
@@ -40,6 +41,47 @@ const PhoneIcon = () => (
   </svg>
 )
 
+const CheckIcon = () => (
+  <svg width="18" height="14" viewBox="0 0 18 14" version="1.1">
+    <g id="Canvas" fill="none">
+      <g id="check">
+        <path
+          id="Shape"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M 5.6 10.6L 1.4 6.4L 0 7.8L 5.6 13.4L 17.6 1.4L 16.2 0L 5.6 10.6Z"
+          transform="translate(0.399902 0.600098)"
+          fill="white"
+        />
+      </g>
+    </g>
+  </svg>
+)
+
+const fadeIn = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`
+
+const SubmittedTextContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.8rem;
+  padding: 2rem 0 4rem;
+  animation: 200ms ${fadeIn} ${props => props.theme.transitions.in};
+
+  ${media.large`
+    padding: 2rem 0 0 0;
+    margin-bottom: 7.8rem;
+  `};
+`
+
+const SubmittedText = styled.p`
+  font-size: 1.8rem;
+  color: #fff;
+`
+
 const validate = (values, props) => {
   let errors = {}
 
@@ -51,23 +93,55 @@ const validate = (values, props) => {
 }
 
 class ContactForm extends Component {
-  handleSubmit(event) {
-    console.log(event)
+  state = {
+    submitted: false,
+  }
+
+  handleSubmit = async (values, { setSubmitting }) => {
+    const { phone } = values
+
+    const method = 'post'
+    const endpoint = '/contact/phone'
+    const data = {
+      phone,
+    }
+
+    try {
+      const response = await apiCall({ method, endpoint, data })
+
+      setSubmitting(false)
+      this.setState({ submitted: true })
+    } catch (err) {
+      console.warn(err)
+    }
   }
 
   render() {
     return (
-      <Formik
-        onSubmit={this.handleSubmit}
-        validate={validate}
-        render={props => (
-          <StyledFormikForm>
-            <FormSection>
-              <Field component={Form.Phone} label="123 456-7890" name="phone" />
-            </FormSection>
-          </StyledFormikForm>
+      <div>
+        {this.state.submitted ? (
+          <SubmittedTextContainer>
+            <SubmittedText>Thank you! We'll call you shortly.</SubmittedText>{' '}
+            <CheckIcon />
+          </SubmittedTextContainer>
+        ) : (
+          <Formik
+            onSubmit={this.handleSubmit}
+            validate={validate}
+            render={props => (
+              <StyledFormikForm>
+                <FormSection>
+                  <Field
+                    component={Form.Phone}
+                    label="123 456-7890"
+                    name="phone"
+                  />
+                </FormSection>
+              </StyledFormikForm>
+            )}
+          />
         )}
-      />
+      </div>
     )
   }
 }
