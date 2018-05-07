@@ -11,7 +11,6 @@ import Transition from 'react-transition-group/Transition'
 const duration = 600
 
 const defaultStyle = {
-  transition: `all ${duration}ms cubic-bezier(0.39, 0.575, 0.565, 1)`,
   opacity: 0,
 }
 
@@ -33,9 +32,10 @@ const SlideInContainer = styled.div`
   display: flex;
   align-items: center;
   transform: translateX(0);
+  transition: opacity 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
   padding: 7rem 4rem 0;
 
-  ${media.xlarge`
+  ${media.large`
     width: 50%;
     position: absolute;
     padding-left: 110px;
@@ -79,7 +79,7 @@ const GridContainer = styled.div`
     margin: 0 auto;
   `};
 
-  ${media.xlarge`
+  ${media.large`
     grid-template-columns: repeat(2, 1fr [col-start]);
     width: 100%;
     height: 91vh;
@@ -266,16 +266,20 @@ const CloseContainerMobile = styled(Link)`
 `
 
 const CloseContainer = styled(Link)`
-  position: fixed;
-  left: calc(50% + 13rem + 46rem + 14.2rem);
-  top: 5rem;
+  display: none;
+  position: absolute;
+  right: 4rem;
+  top: -1rem;
   cursor: pointer;
   border-radius: 50%;
   height: 3.4rem;
   width: 3.4rem;
-  display: flex;
   align-items: center;
   justify-content: center;
+
+  ${media.large`
+    display: flex;
+  `};
 
   &::after {
     content: '';
@@ -302,14 +306,14 @@ const CloseContainer = styled(Link)`
 const ScrollContainer = styled.div`
   display: none;
   position: absolute;
-  right: -6.5rem;
+  right: -10rem;
   bottom: 2.2rem;
   width: 31.4rem;
   height: 1px;
   background: #eff0f0;
   transform: rotate(-90deg);
 
-  ${media.large`
+  ${media.largest`
     display: block;
   `};
 
@@ -321,24 +325,23 @@ const ScrollContainer = styled.div`
     top: -2px;
     height: 5px;
     width: 5px;
-    borderradius: 50%;
   }
 `
 
 const ScrollTextContainer = styled.div`
   display: none;
-  position: fixed;
+  position: absolute;
   width: 10rem;
-  left: calc(50% + 13rem + 46rem + 10.7rem);
+  right: 0.8rem;
   top: calc(50% - 18px / 2 + 56px);
   transform: rotate(-90deg);
   color: rgba(0, 0, 0, 0.18);
   padding: 0 1rem;
   background: #fff;
-  ${transitions.fadeUp};
   transition-property: opacity;
+  ${transitions.fadeUp};
 
-  ${media.large`
+  ${media.largest`
     display: block;
   `};
 `
@@ -418,15 +421,15 @@ class ContactPage extends Component {
             <FormContainer animation={animation} transitionDelay={1000}>
               <Forms.ContactForm />
             </FormContainer>
+            <CloseContainer to="/">
+              <Ex />
+            </CloseContainer>
+            <ScrollTextContainer animation={animation} transitionDelay={1000}>
+              Scroll down
+            </ScrollTextContainer>
             <ScrollContainer />
           </div>
         </SlideIn>
-        <CloseContainer to="/">
-          <Ex />
-        </CloseContainer>
-        <ScrollTextContainer animation={animation} transitionDelay={1000}>
-          Scroll down
-        </ScrollTextContainer>
       </div>
     )
   }

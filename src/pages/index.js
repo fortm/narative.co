@@ -37,23 +37,24 @@ const GridContainer = styled.div`
   grid-template-columns: 1fr;
   align-items: center;
   justify-content: center;
-  height: 91vh;
   width: 30rem;
   margin: 0 auto;
 
   ${media.large`
+    height: 91vh;
     grid-template-columns: repeat(2, 1fr [col-start]);
     width: 100%;
   `};
 `
 
 const LogoContainer = styled.div`
-  max-width: 16rem;
-  margin-bottom: 2rem;
+  max-width: 10rem;
+  margin-bottom: 4rem;
 
   ${transitions.fadeUp};
 
   ${media.large`
+    max-width: 16rem;
     margin-bottom: 0;
   `};
 `
@@ -64,6 +65,7 @@ const NarativeVideoContainer = styled.div`
   width: 30rem;
   margin-top: 2rem;
   pointer-events: none;
+  overflow: hidden;
 
   ${media.large`
     height: 53rem;
@@ -104,9 +106,14 @@ const MainText = styled.p`
 
 const ContactText = styled(Link)`
   display: flex;
+  flex-direction: column;
   font-size: 1.6rem;
   font-weight: 600;
   color: ${props => props.theme.colors.grey};
+
+  ${media.medium`
+    flex-direction: row;
+  `};
 
   svg {
     margin-left: 1rem;
@@ -114,6 +121,13 @@ const ContactText = styled(Link)`
   }
 `
 
+const HideOnMobile = styled.span`
+  display: none;
+
+  ${media.medium`
+    display: block;
+  `};
+`
 const LeftContainer = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -132,6 +146,7 @@ const RightContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  padding-top: 4rem;
 
   ${media.large`
     align-items: center;
@@ -155,7 +170,8 @@ const CopyRightContainerMobile = styled.div`
   font-size: 1.6rem;
   font-weight: 500;
   color: ${props => props.theme.colors.grey};
-  align-self: flex-start;
+  align-self: center;
+  margin-top: 2rem;
 
   ${media.large`
     display: none;
@@ -187,25 +203,17 @@ const ArrowRight = () => (
 
 const HighlightText = styled.span`
   color: #fff;
-
-  &:after {
-    content: '';
-    position: absolute;
-    top: 11px;
-    background: #111216;
-    width: 55%;
-    height: 3px;
-    left: 0;
-    opacity: 0;
-    transition: opacity 300ms ease;
-  }
 `
 
 const ArrowAnimation = styled.div`
   position: relative;
   display: inline-block;
-  padding: 0 3rem 0 0.5rem;
+  padding: 0rem 3rem 0 0rem;
   overflow-x: hidden;
+
+  ${media.medium`
+    padding: 0 3rem 0 0.5rem;   
+  `};
 
   &::after {
     content: '';
@@ -272,7 +280,7 @@ class IndexPage extends Component {
                 business and simply tell your story.
               </MainText>
               <ContactText to="/contact">
-                Our new site is on its way.{' '}
+                <HideOnMobile>Our new site is on its way. </HideOnMobile>
                 <ArrowAnimation>
                   <HighlightText>Get in touch</HighlightText>
                   .
@@ -287,10 +295,11 @@ class IndexPage extends Component {
           <RightContainer>
             <NarativeVideoContainer>
               <NarativeVideo
-                controls="false"
+                controls={false}
                 poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
                 animation={animation}
                 innerRef={video => (this.video = video)}
+                muted="true"
               >
                 <source
                   src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
