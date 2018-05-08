@@ -14,6 +14,19 @@ const InputBorder = styled.div`
   padding: 0.45em 0;
 `
 
+const InputBorderActive = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 1px;
+  border-bottom: 2px solid #000;
+  transform-origin: left;
+  transform: scale(0);
+  transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+`
+
 const StyledLabel = styled.label`
   display: block;
   font-size: 1.6rem;
@@ -72,6 +85,9 @@ const StyledInput = styled.input`
     transform: translateY(-1.28125em) scale(0.8) perspective(100px)
       translateZ(0.001px);
   }
+  &:active ~ ${InputBorderActive}, &:focus ~ ${InputBorderActive} {
+    transform: scale(1);
+  }
 `
 
 const Text = ({ field, label, ...props }) => {
@@ -85,6 +101,7 @@ const Text = ({ field, label, ...props }) => {
         <LabelAnimation>
           <StyledLabel hasError={hasError}>{label}</StyledLabel>
         </LabelAnimation>
+        <InputBorderActive />
       </InputBorder>
       <InputError hasError={hasError}>
         {hasError && props.form.errors[field.name]}

@@ -25,6 +25,19 @@ const SelectBorder = styled.div`
   cursor: pointer;
 `
 
+const SelectBorderActive = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 1px;
+  border-bottom: 2px solid #000;
+  transform-origin: left;
+  transform: scale(0);
+  transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+`
+
 const StyledLabel = styled.label`
   display: block;
   font-size: 1.6rem;
@@ -106,6 +119,9 @@ const SelectArrowButton = styled.button`
   &:active {
     transform: scale(1.6);
     background: rgba(0, 0, 0, 0.06);
+  }
+  &:focus ~ ${SelectBorderActive}, &:active ~ ${SelectBorderActive} {
+    transform: scale(1);
   }
 `
 
@@ -209,6 +225,7 @@ class Select extends Component {
               </SelectOptionContainer>
             </FadeIn>
           </StyledSelect>
+          <SelectBorderActive />
         </SelectBorder>
       </InputContainer>
     )
