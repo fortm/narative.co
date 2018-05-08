@@ -242,7 +242,10 @@ const ArrowAnimation = styled.div`
 
   &:hover::after {
     opacity: 1;
-    animation: ${animateButtonLine} 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+
+    ${media.medium`
+      animation: ${animateButtonLine} 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    `};
   }
 `
 
