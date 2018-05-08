@@ -257,6 +257,8 @@ class IndexPage extends Component {
     // Required as a workaround for Safari video
     this.video.muted = true
     this.video.controls = false
+    this.video.volume = 0
+    this.video.canplay = false
     this.video.play()
   }
 
@@ -299,19 +301,19 @@ class IndexPage extends Component {
                 poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
                 animation={animation}
                 innerRef={video => (this.video = video)}
-                muted="true"
+                muted="muted"
+                role="img"
+                volume="0"
+                canplay="false"
+                autoPlay="autoplay"
               >
                 <source
-                  src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
+                  src="http://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
                   type="video/webm"
                 />
                 <source
-                  src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
+                  src="http://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
                   type="video/mp4"
-                />
-                <source
-                  src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.ogv"
-                  type="video/ogg"
                 />
               </NarativeVideo>
             </NarativeVideoContainer>

@@ -266,21 +266,16 @@ const CloseContainerMobile = styled(Link)`
 `
 
 const CloseContainer = styled(Link)`
-  display: none;
-  position: absolute;
-  right: 4rem;
-  top: -1rem;
+  position: fixed;
+  right: 3.5rem;
+  top: 5rem;
   cursor: pointer;
   border-radius: 50%;
   height: 3.4rem;
   width: 3.4rem;
+  display: flex;
   align-items: center;
   justify-content: center;
-
-  ${media.large`
-    display: flex;
-  `};
-
   &::after {
     content: '';
     position: absolute;
@@ -291,12 +286,10 @@ const CloseContainer = styled(Link)`
     transform: scale(0.8);
     transition: all 200ms ${props => props.theme.transitions.in};
   }
-
   &:hover::after {
     background: rgba(0, 0, 0, 0.06);
     transform: scale(1);
   }
-
   &:active::after {
     background: rgba(0, 0, 0, 0.12);
     transform: scale(1.2);
@@ -306,14 +299,16 @@ const CloseContainer = styled(Link)`
 const ScrollContainer = styled.div`
   display: none;
   position: absolute;
-  right: -10rem;
-  bottom: 2.2rem;
+  right: -10.5rem;
+  bottom: 19.5rem;
   width: 31.4rem;
   height: 1px;
   background: #eff0f0;
   transform: rotate(-90deg);
+  ${transitions.fadeUp};
+  transition-property: opacity;
 
-  ${media.largest`
+  ${media.xlarge`
     display: block;
   `};
 
@@ -325,23 +320,24 @@ const ScrollContainer = styled.div`
     top: -2px;
     height: 5px;
     width: 5px;
+    border-radius: 50%;
   }
 `
 
 const ScrollTextContainer = styled.div`
   display: none;
-  position: absolute;
+  position: fixed;
   width: 10rem;
-  right: 0.8rem;
+  right: 0.4rem;
   top: calc(50% - 18px / 2 + 56px);
   transform: rotate(-90deg);
   color: rgba(0, 0, 0, 0.18);
   padding: 0 1rem;
   background: #fff;
-  transition-property: opacity;
   ${transitions.fadeUp};
+  transition-property: opacity;
 
-  ${media.largest`
+  ${media.xlarge`
     display: block;
   `};
 `
@@ -421,15 +417,15 @@ class ContactPage extends Component {
             <FormContainer animation={animation} transitionDelay={1000}>
               <Forms.ContactForm />
             </FormContainer>
-            <CloseContainer to="/">
-              <Ex />
-            </CloseContainer>
-            <ScrollTextContainer animation={animation} transitionDelay={1000}>
-              Scroll down
-            </ScrollTextContainer>
-            <ScrollContainer />
           </div>
         </SlideIn>
+        <CloseContainer to="/">
+          <Ex />
+        </CloseContainer>
+        <ScrollContainer animation={animation} transitionDelay={1000} />
+        <ScrollTextContainer animation={animation} transitionDelay={1000}>
+          Scroll down
+        </ScrollTextContainer>
       </div>
     )
   }
