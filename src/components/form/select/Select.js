@@ -208,6 +208,7 @@ class Select extends Component {
             onBlur={this.handleBlur}
             innerRef={elem => (this.btn = elem)}
           />
+          <SelectBorderActive />
           <SelectArrow />
           <StyledSelect {...field} {...this.props} value={selectedValue}>
             <FadeIn in={isOpened}>
@@ -225,7 +226,6 @@ class Select extends Component {
               </SelectOptionContainer>
             </FadeIn>
           </StyledSelect>
-          <SelectBorderActive />
         </SelectBorder>
       </InputContainer>
     )

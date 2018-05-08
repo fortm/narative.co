@@ -9,8 +9,10 @@ const InputContainer = styled.div`
 
 const InputBorder = styled.div`
   position: relative;
-  border-bottom: 1px solid
-    ${props => (props.hasError ? props.theme.colors.red : '#b9bbbe')};
+  ${props =>
+    props.hasError
+      ? `border-bottom: 2px solid ${props.theme.colors.red}`
+      : `border-bottom: 1px solid #b9bbbe`};
   padding: 0.45em 0;
 `
 
@@ -25,6 +27,8 @@ const InputBorderActive = styled.div`
   transform-origin: left;
   transform: scale(0);
   transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+
+  ${props => props.hasError && `display: none;`};
 `
 
 const StyledLabel = styled.label`
@@ -101,7 +105,7 @@ const Text = ({ field, label, ...props }) => {
         <LabelAnimation>
           <StyledLabel hasError={hasError}>{label}</StyledLabel>
         </LabelAnimation>
-        <InputBorderActive />
+        <InputBorderActive hasError={hasError} />
       </InputBorder>
       <InputError hasError={hasError}>
         {hasError && props.form.errors[field.name]}
