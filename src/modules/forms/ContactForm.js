@@ -38,7 +38,7 @@ const StyledFormikForm = styled(FormikForm)`
 `
 
 const SubmittedScreen = styled.div`
-  width: 46rem;
+  width: 100%;
   position: relative;
   height: 53rem;
   align-self: flex-end;
@@ -52,15 +52,24 @@ const SubmittedScreen = styled.div`
   animation: ${fadeIn} 50ms 500ms ${props => props.theme.transitions.in}
     forwards;
 
+  ${media.xlarge`
+    width: 46rem;
+    padding-bottom: 10rem;
+  `};
+
   svg {
     margin-bottom: 3rem;
   }
 `
 
 const SubmittedHeader = styled.h2`
-  font-size: 3.2rem;
+  font-size: 2.8rem;
   line-height: 1;
   margin-bottom: 3rem;
+
+  ${media.xlarge`
+    font-size: 3.2rem;
+  `};
 `
 
 const SubmittedText = styled.p`
