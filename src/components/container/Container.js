@@ -12,10 +12,6 @@ const Container = styled.div`
   ${media.large`
     padding: 2rem;
   `};
-
-  ${media.largest`
-    max-width: 1440px;
-  `};
 `
 
 export default Container
