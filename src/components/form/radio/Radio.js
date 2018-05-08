@@ -27,7 +27,7 @@ const StyledLabel = styled.label`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 200ms ${props => props.theme.transitions.easeIn};
+  transition: opacity 200ms ${props => props.theme.transitions.easeIn};
   margin-bottom: 1.5rem;
 
   ${media.medium`
@@ -59,7 +59,7 @@ const StyledRadioInput = styled.input`
   position: absolute;
 
   &:checked + ${StyledLabel} {
-    border-color: #000;
+    border: 1.5px solid #000;
     color: #000;
   }
 
