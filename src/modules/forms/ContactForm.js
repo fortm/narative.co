@@ -32,7 +32,7 @@ const StyledFormikForm = styled(FormikForm)`
   padding-bottom: 5rem;
 
   ${media.xlarge`
-    width: 36rem;
+    width: 46rem;
     padding-bottom: 10rem;
   `};
 `
@@ -53,7 +53,7 @@ const SubmittedScreen = styled.div`
     forwards;
 
   ${media.xlarge`
-    width: 36rem;
+    width: 46rem;
     padding-bottom: 10rem;
   `};
 
