@@ -59,12 +59,12 @@ export const media = {
     }
   `,
   xlarge: (...args) => css`
-    @media (min-width: 1400px) {
+    @media (min-width: 1200px) {
       ${css(...args)};
     }
   `,
   largest: (...args) => css`
-    @media (min-width: 1500px) {
+    @media (min-width: 1440px) {
       ${css(...args)};
     }
   `,

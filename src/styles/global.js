@@ -79,9 +79,6 @@ export const globalStyles = () => injectGlobal`
     font-style:italic;font-weight:600;
   }
 
-  .tk-meta { font-family: "meta",serif; }
-  .tk-futura-pt { font-family: "futura-pt",sans-serif; }
-
   @font-face {
     font-family: '-apple-system',
     'BlinkMacSystemFont',
@@ -205,6 +202,10 @@ export const globalStyles = () => injectGlobal`
     'Segoe UI',
     'Arial',
     sans-serif;
+
+    &:-webkit-autofill {
+      box-shadow: 0 0 0 1000px white inset !important;
+    }
   }
 
   .underline {

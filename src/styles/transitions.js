@@ -19,6 +19,7 @@ const blurIn = css`
   `};
 
   transition: filter 500ms 200ms cubic-bezier(0.694, 0, 0.335, 1),
+    opacity 500ms 300ms cubic-bezier(0.694, 0, 0.335, 1),
     transform 10s 3000ms cubic-bezier(0.694, 0, 0.335, 1);
 `
 

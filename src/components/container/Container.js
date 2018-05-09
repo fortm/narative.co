@@ -3,11 +3,15 @@ import styled from 'styled-components'
 import { media } from '@styles'
 
 const Container = styled.div`
-  max-width: 1100px;
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 5rem 4rem 1rem;
   background: ${props =>
     props.background === 'dark' ? props.theme.colors.bg : 'transparent'};
+
+  ${media.large`
+    padding: 2rem;
+  `};
 `
 
 export default Container
