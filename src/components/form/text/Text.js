@@ -9,13 +9,11 @@ const InputContainer = styled.div`
 
 const InputBorder = styled.div`
   position: relative;
+  padding: 0.45em 0;
   ${props =>
     props.hasError
-      ? `border-bottom: 2px solid ${props.theme.colors.red}`
+      ? `border-bottom: 1px solid ${props.theme.colors.red}`
       : `border-bottom: 1px solid #b9bbbe`};
-
-  ${props =>
-    props.hasError ? `padding: 0.45em 0;` : `padding: 0.45em 0 0.55em;`};
 `
 
 const InputBorderActive = styled.div`
@@ -25,7 +23,7 @@ const InputBorderActive = styled.div`
   bottom: -1px;
   width: 100%;
   height: 1px;
-  border-bottom: 2px solid #000;
+  border-bottom: 1px solid #000;
   transform-origin: left;
   transform: scale(0);
   transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;

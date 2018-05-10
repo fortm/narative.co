@@ -32,7 +32,7 @@ const SelectBorderActive = styled.div`
   bottom: -1px;
   width: 100%;
   height: 1px;
-  border-bottom: 2px solid #000;
+  border-bottom: 1px solid #000;
   transform-origin: left;
   transform: scale(0);
   transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
@@ -66,8 +66,8 @@ const LabelAnimation = styled.span`
     font-weight: 500;
     width: 133.3333333%
     transform: translateY(-1.28125em) scale(0.8) perspective(100px)
-      translateZ(0.001px);
-      `};
+    translateZ(0.001px);
+  `};
 `
 
 const StyledSelect = styled.div`

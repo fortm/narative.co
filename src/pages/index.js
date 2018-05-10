@@ -4,6 +4,7 @@ import styled, { keyframes } from 'styled-components'
 import { media, transitions } from '@styles'
 import { Container, Logo } from '@components'
 import { Forms, Section } from '@modules'
+import * as SocialIcons from '../icons/social'
 
 const animateButtonLine = keyframes`
   0% {
@@ -41,7 +42,7 @@ const GridContainer = styled.div`
   margin: 0 auto;
 
   ${media.large`
-    height: 91vh;
+    height: 88vh;
     grid-template-columns: repeat(2, 1fr [col-start]);
     width: 100%;
   `};
@@ -410,6 +411,7 @@ const ContactContainer = styled(Link)`
     box-shadow: inset 0 0 0 3px #fff;
     transition: all 300ms cubic-bezier(0.39, 0.575, 0.565, 1);
     animation: pulsingLarge 3s infinite;
+    pointer-events: none;
   }
 
   &::before {
@@ -423,6 +425,35 @@ const ContactContainer = styled(Link)`
     box-shadow: inset 0 0 0 3px #fff;
     transition: all 300ms cubic-bezier(0.39, 0.575, 0.565, 1);
     animation: pulsingMedium 3s infinite 0.4s;
+    pointer-events: none;
+  }
+`
+
+const ScrollIndicator = styled.div`
+  pointer-events: none;
+  position: relative;
+  font-weight: 700;
+  color: ${props => props.theme.colors.grey};
+  height: 24rem;
+  border-left: 1px solid ${props => props.theme.colors.grey};
+  margin-bottom: 7rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: -3px;
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    background: ${props => props.theme.colors.grey};
+  }
+
+  span {
+    position: relative;
+    background: ${props => props.theme.colors.bg};
+    left: -2px;
+    padding-bottom: 16px;
   }
 `
 
@@ -453,6 +484,69 @@ const ContactContainerCircle = styled.div`
   animation: pulsingSmall 3s infinite 0.8s;
 `
 
+const Footer = styled.footer`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5rem;
+  color: ${props => props.theme.colors.grey};
+`
+
+const SocialIconContainer = styled.a`
+  margin-left: 3rem;
+  text-decoration: none;
+`
+
+const SocialIconsFooter = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const HorizontalRule = styled.div`
+  background: #707173;
+  height: 1px;
+  width: 100%;
+  max-width: 68rem;
+`
+
+const ContactUsContainer = styled(Link)`
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: white;
+  top: 3rem;
+  color: ${props => props.theme.colors.grey};
+  font-weight: 500;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    transform: scale(0);
+    height: 2px;
+    background: ${props => props.theme.colors.grey};
+    transform-origin: left;
+    transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    transition: all 300ms ease;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 12px;
+    height: 2px;
+    background: ${props => props.theme.colors.grey};
+  }
+
+  &:hover::before {
+    transform: scale(1);
+  }
+`
+
 class IndexPage extends Component {
   state = { animation: '' }
 
@@ -481,16 +575,14 @@ class IndexPage extends Component {
                 <Logo />
               </LogoContainer>
               <TextContainer animation={animation} transitionDelay={600}>
-                <WelcomeHeader>Some things are worth the wait.</WelcomeHeader>
+                <WelcomeHeader>Hi there</WelcomeHeader>
                 <MainText>
-                  We’re Narative! Yes, that is with one R. Narative is a
-                  digital-first design studio that is all about reducing the
-                  noise and unnecessary details—using classical techniques with
-                  state of the art technologies, we help you solve your
-                  problems, grow your business and simply tell your story.
+                  We’re Narative! Yes, with one R. We're is all about telling
+                  the world your story on its simpler form—using classical
+                  techniques with state of the art technologies, we help you
+                  solve your problems and empower your business.
                 </MainText>
                 <ContactText to="/contact">
-                  <HideOnMobile>Our new site is on its way. </HideOnMobile>
                   <ArrowAnimation>
                     <HighlightText>Get in touch</HighlightText>
                     .
@@ -498,11 +590,10 @@ class IndexPage extends Component {
                   </ArrowAnimation>
                 </ContactText>
               </TextContainer>
-              <CopyRightContainer animation={animation} transitionDelay={800}>
-                © {new Date().getFullYear()} Narative Studio Inc.
-              </CopyRightContainer>
+              <div />
             </LeftContainer>
             <RightContainer>
+              <ContactUsContainer to="/contact">Contact us</ContactUsContainer>
               <NarativeVideoContainer>
                 <NarativeVideo
                   controls={false}
@@ -525,11 +616,13 @@ class IndexPage extends Component {
                   />
                 </NarativeVideo>
               </NarativeVideoContainer>
-              <CopyRightContainerMobile>
-                © {new Date().getFullYear()} Narative Studio Inc.
-              </CopyRightContainerMobile>
             </RightContainer>
           </GridContainer>
+        </Container>
+        <Container>
+          <ScrollIndicator>
+            <span>Scroll down</span>
+          </ScrollIndicator>
         </Container>
         <Section header="What design is to us">
           <div>
@@ -559,7 +652,42 @@ class IndexPage extends Component {
                 Empowering businesses through design and strategy. Narative is
                 all about telling the world your story.
               </SectionCopy>
-              <div style={{ color: '#fff' }}>Looks us up, we're cool</div>
+              <div style={{ color: '#fff', marginBottom: '1.6rem' }}>
+                {' '}
+                <SocialIconsFooter>
+                  <span>Look us up, we're cool:</span>
+                  <SocialIconContainer
+                    target="_blank"
+                    href="https://facebook.com"
+                  >
+                    <SocialIcons.FacebookIcon />
+                  </SocialIconContainer>
+                  <SocialIconContainer
+                    target="_blank"
+                    href="https://facebook.com"
+                  >
+                    <SocialIcons.TwitterIcon />
+                  </SocialIconContainer>
+                  <SocialIconContainer
+                    target="_blank"
+                    href="https://facebook.com"
+                  >
+                    <SocialIcons.LinkedinIcon />
+                  </SocialIconContainer>
+                  <SocialIconContainer
+                    target="_blank"
+                    href="https://facebook.com"
+                  >
+                    <SocialIcons.GithubIcon />
+                  </SocialIconContainer>
+                  <SocialIconContainer
+                    target="_blank"
+                    href="https://facebook.com"
+                  >
+                    <SocialIcons.DribbleIcon />
+                  </SocialIconContainer>
+                </SocialIconsFooter>
+              </div>
             </div>
             <WhatWeDoList>
               <WhatWeDoListItem>
@@ -605,11 +733,12 @@ class IndexPage extends Component {
                 <SectionCopyHighlight>ambitious brands</SectionCopyHighlight> to
                 create amazing experiences.
               </SectionCopy>
-              <div>
-                <img src="" />
-              </div>
+              <img
+                style={{ width: '69rem', margin: '7.5rem 0' }}
+                src="/images/testimonials/placeholder-image.png"
+              />
             </div>
-            <hr />
+            <HorizontalRule />
             <div>Testimonials</div>
           </div>
         </Section>
@@ -630,6 +759,31 @@ class IndexPage extends Component {
             </ContactContainer>
           </div>
         </Section>
+        <Container>
+          <Footer>
+            <CopyRightContainer animation={animation} transitionDelay={800}>
+              © {new Date().getFullYear()} Narative Studio Inc.
+            </CopyRightContainer>
+            <SocialIconsFooter>
+              <span>Look us up, we're cool:</span>
+              <SocialIconContainer target="_blank" href="https://facebook.com">
+                <SocialIcons.FacebookIcon />
+              </SocialIconContainer>
+              <SocialIconContainer target="_blank" href="https://facebook.com">
+                <SocialIcons.TwitterIcon />
+              </SocialIconContainer>
+              <SocialIconContainer target="_blank" href="https://facebook.com">
+                <SocialIcons.LinkedinIcon />
+              </SocialIconContainer>
+              <SocialIconContainer target="_blank" href="https://facebook.com">
+                <SocialIcons.GithubIcon />
+              </SocialIconContainer>
+              <SocialIconContainer target="_blank" href="https://facebook.com">
+                <SocialIcons.DribbleIcon />
+              </SocialIconContainer>
+            </SocialIconsFooter>
+          </Footer>
+        </Container>
       </div>
     )
   }

@@ -250,7 +250,7 @@ export const globalStyles = () => injectGlobal`
   }
 
   input {
-    color: $text-color;
+    color: ${theme.colors.black};
 
     &:focus,
     &:active {

@@ -273,9 +273,14 @@ const CloseContainer = styled(Link)`
   border-radius: 50%;
   height: 3.4rem;
   width: 3.4rem;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
+
+  ${media.large`
+    display: flex;
+  `};
+
   &::after {
     content: '';
     position: absolute;
@@ -286,10 +291,12 @@ const CloseContainer = styled(Link)`
     transform: scale(0.8);
     transition: all 200ms ${props => props.theme.transitions.in};
   }
+
   &:hover::after {
     background: rgba(0, 0, 0, 0.06);
     transform: scale(1);
   }
+
   &:active::after {
     background: rgba(0, 0, 0, 0.12);
     transform: scale(1.2);
