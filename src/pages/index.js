@@ -3,7 +3,7 @@ import Link from 'gatsby-link'
 import styled, { keyframes } from 'styled-components'
 import { media, transitions } from '@styles'
 import { Container, Logo } from '@components'
-import { Forms } from '@modules'
+import { Forms, Section } from '@modules'
 
 const animateButtonLine = keyframes`
   0% {
@@ -66,6 +66,7 @@ const NarativeVideoContainer = styled.div`
   margin-top: 2rem;
   pointer-events: none;
   overflow: hidden;
+  align-self: flex-end;
 
   ${media.large`
     height: 53rem;
@@ -248,6 +249,209 @@ const ArrowAnimation = styled.div`
     `};
   }
 `
+const SectionCopy = styled.p`
+  color: #fff;
+  font-size: 3.6rem;
+  line-height: 1.2;
+  max-width: ${props => (props.maxWidth ? props.maxWidth : '100%')};
+`
+const SectionCopyHighlight = styled.span`
+  position: relative;
+  background: #e9daac;
+  display: inline-block;
+  padding: 0px 1px;
+  color: #000;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -5px
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    width: 5px
+    background: #e9daac;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    right: -5px
+    width: 5px
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    background: #e9daac;
+  }
+`
+
+const FunctionArrowContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 7rem;
+`
+
+const FunctionArrowWord = styled.div`
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 2.4rem;
+  color: #7a8085;
+  ${props =>
+    props.paddingLeft ? `padding-left: 2.6rem` : `padding-right: 2.6rem`};
+`
+
+const FunctionArrow = styled.div`
+  position: relative;
+  height: 2px;
+  width: 100%;
+  background: #7a8085;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    right: -2px;
+    transform: rotate(45deg);
+    height: 2px;
+    border-radius: 4px;
+    width: 10px;
+    background: #7a8085;
+    top: -3px;
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+    top: initial;
+    bottom: -3px;
+  }
+`
+
+const WhatWeDoList = styled.ul`
+  min-width: 400px;
+  width: 400px;
+  list-style: none;
+`
+
+const WhatWeDoListItem = styled.li`
+  display: flex;
+  align-items: center;
+  height: 50px;
+
+  color: #7a8085;
+  & > span {
+    color: #fff;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #707173;
+  }
+`
+
+const ContactIcon = () => (
+  <svg width="17" height="17" viewBox="0 0 17 17">
+    <g id="Canvas" fill="none">
+      <path
+        id="Vector"
+        d="M 16.7 4C 17.1 3.6 17.1 3 16.7 2.6L 14.4 0.3C 14 -0.1 13.4 -0.1 13 0.3L 11 2.3L 14.7 6L 16.7 4ZM 13.7 7L 10 3.3L 0 13.3L 0 17L 3.7 17L 13.7 7Z"
+        fill="black"
+      />
+    </g>
+  </svg>
+)
+
+const ContactContainer = styled(Link)`
+  position: relative;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 6rem;
+  width: 6rem;
+  border-radius: 50%;
+
+  @keyframes pulsingLarge {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(2.2);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+
+  @keyframes pulsingMedium {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.9);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 3px #fff;
+    transition: all 300ms cubic-bezier(0.39, 0.575, 0.565, 1);
+    animation: pulsingLarge 3s infinite;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 3px #fff;
+    transition: all 300ms cubic-bezier(0.39, 0.575, 0.565, 1);
+    animation: pulsingMedium 3s infinite 0.4s;
+  }
+`
+
+const ContactContainerCircle = styled.div`
+  @keyframes pulsingSmall {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.6);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 3px #fff;
+  transition: all 300ms cubic-bezier(0.39, 0.575, 0.565, 1);
+  animation: pulsingSmall 3s infinite 0.8s;
+`
 
 class IndexPage extends Component {
   state = { animation: '' }
@@ -269,63 +473,164 @@ class IndexPage extends Component {
     const { animation, view } = this.state
 
     return (
-      <Container background="dark">
-        <GridContainer>
-          <LeftContainer>
-            <LogoContainer animation={animation}>
-              <Logo />
-            </LogoContainer>
-            <TextContainer animation={animation} transitionDelay={600}>
-              <WelcomeHeader>Some things are worth the wait.</WelcomeHeader>
-              <MainText>
-                We’re Narative! Yes, that is with one R. Narative is a
-                digital-first design studio that is all about reducing the noise
-                and unnecessary details—using classical techniques with state of
-                the art technologies, we help you solve your problems, grow your
-                business and simply tell your story.
-              </MainText>
-              <ContactText to="/contact">
-                <HideOnMobile>Our new site is on its way. </HideOnMobile>
-                <ArrowAnimation>
-                  <HighlightText>Get in touch</HighlightText>
-                  .
-                  <ArrowRight />
-                </ArrowAnimation>
-              </ContactText>
-            </TextContainer>
-            <CopyRightContainer animation={animation} transitionDelay={800}>
-              © {new Date().getFullYear()} Narative Studio Inc.
-            </CopyRightContainer>
-          </LeftContainer>
-          <RightContainer>
-            <NarativeVideoContainer>
-              <NarativeVideo
-                controls={false}
-                poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
-                animation={animation}
-                innerRef={video => (this.video = video)}
-                muted="muted"
-                role="img"
-                volume="0"
-                canplay="false"
-                autoPlay="autoplay"
-              >
-                <source
-                  src="http://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
-                  type="video/webm"
-                />
-                <source
-                  src="http://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
-                  type="video/mp4"
-                />
-              </NarativeVideo>
-            </NarativeVideoContainer>
-            <CopyRightContainerMobile>
-              © {new Date().getFullYear()} Narative Studio Inc.
-            </CopyRightContainerMobile>
-          </RightContainer>
-        </GridContainer>
-      </Container>
+      <div>
+        <Container background="dark">
+          <GridContainer>
+            <LeftContainer>
+              <LogoContainer animation={animation}>
+                <Logo />
+              </LogoContainer>
+              <TextContainer animation={animation} transitionDelay={600}>
+                <WelcomeHeader>Some things are worth the wait.</WelcomeHeader>
+                <MainText>
+                  We’re Narative! Yes, that is with one R. Narative is a
+                  digital-first design studio that is all about reducing the
+                  noise and unnecessary details—using classical techniques with
+                  state of the art technologies, we help you solve your
+                  problems, grow your business and simply tell your story.
+                </MainText>
+                <ContactText to="/contact">
+                  <HideOnMobile>Our new site is on its way. </HideOnMobile>
+                  <ArrowAnimation>
+                    <HighlightText>Get in touch</HighlightText>
+                    .
+                    <ArrowRight />
+                  </ArrowAnimation>
+                </ContactText>
+              </TextContainer>
+              <CopyRightContainer animation={animation} transitionDelay={800}>
+                © {new Date().getFullYear()} Narative Studio Inc.
+              </CopyRightContainer>
+            </LeftContainer>
+            <RightContainer>
+              <NarativeVideoContainer>
+                <NarativeVideo
+                  controls={false}
+                  poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
+                  animation={animation}
+                  innerRef={video => (this.video = video)}
+                  muted="muted"
+                  role="img"
+                  volume="0"
+                  canplay="false"
+                  autoPlay="autoplay"
+                >
+                  <source
+                    src="http://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
+                    type="video/webm"
+                  />
+                  <source
+                    src="http://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
+                    type="video/mp4"
+                  />
+                </NarativeVideo>
+              </NarativeVideoContainer>
+              <CopyRightContainerMobile>
+                © {new Date().getFullYear()} Narative Studio Inc.
+              </CopyRightContainerMobile>
+            </RightContainer>
+          </GridContainer>
+        </Container>
+        <Section header="What design is to us">
+          <div>
+            <SectionCopy maxWidth="65rem">
+              Design for us is the core of lorem ipsum dolor sit amet,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+              labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+              nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+              consequat.
+            </SectionCopy>
+            <FunctionArrowContainer>
+              <FunctionArrowWord>Function</FunctionArrowWord> <FunctionArrow />{' '}
+              <FunctionArrowWord paddingLeft>Form</FunctionArrowWord>
+            </FunctionArrowContainer>
+          </div>
+        </Section>
+        <Section header="What we do">
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}
+            >
+              <SectionCopy maxWidth="36rem">
+                Empowering businesses through design and strategy. Narative is
+                all about telling the world your story.
+              </SectionCopy>
+              <div style={{ color: '#fff' }}>Looks us up, we're cool</div>
+            </div>
+            <WhatWeDoList>
+              <WhatWeDoListItem>
+                <span>Branding ·&nbsp;</span> logotype design, guidelines,
+                typefaces and marks
+              </WhatWeDoListItem>
+              <WhatWeDoListItem>
+                <span>Marketing ·&nbsp;</span> strategy, business development,
+                growth
+              </WhatWeDoListItem>
+              <WhatWeDoListItem>
+                <span>Editorial ·&nbsp;</span> whitepapers, books and magazine
+                designs
+              </WhatWeDoListItem>
+              <WhatWeDoListItem>
+                <span> Development ·&nbsp;</span> dennis will write anything he
+                wants here
+              </WhatWeDoListItem>
+              <WhatWeDoListItem>
+                <span> Product design ·&nbsp;</span> mobile and web apps
+              </WhatWeDoListItem>
+              <WhatWeDoListItem>
+                <span>Experience ·&nbsp;</span> optimize the usability of your
+                digital product
+              </WhatWeDoListItem>
+              <WhatWeDoListItem>
+                <span>CRM ·&nbsp;</span> email design, strategy and platform
+                setup
+              </WhatWeDoListItem>
+              <WhatWeDoListItem>
+                <span>CRO ·&nbsp;</span> conversion rate optimization and lead
+                generation
+              </WhatWeDoListItem>
+            </WhatWeDoList>
+          </div>
+        </Section>
+        <Section header="Why we do it">
+          <div>
+            <div>
+              <SectionCopy maxWidth="69rem">
+                Focusing on design and digital storytelling, we had the pleasure
+                to work with the world's most{' '}
+                <SectionCopyHighlight>ambitious brands</SectionCopyHighlight> to
+                create amazing experiences.
+              </SectionCopy>
+              <div>
+                <img src="" />
+              </div>
+            </div>
+            <hr />
+            <div>Testimonials</div>
+          </div>
+        </Section>
+        <Section header="Say hello">
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <SectionCopy maxWidth="50rem">
+              We love new projects, meeting people and build amazing things.
+            </SectionCopy>
+            <ContactContainer to="/contact">
+              <ContactContainerCircle />
+              <ContactIcon />
+            </ContactContainer>
+          </div>
+        </Section>
+      </div>
     )
   }
 }

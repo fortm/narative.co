@@ -23,7 +23,7 @@ const StyledFormikForm = styled(FormikForm)`
   width: 100%;
 
   ${media.medium`
-    width: 46rem;
+    width: 36rem;
   `};
 `
 
