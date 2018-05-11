@@ -228,11 +228,13 @@ class Testimonials extends Component {
           </TestimonialCopy>
           <TestimonialBottom>
             <TestimonialName>
-              <FadeIn in={animate} customStyles={{ transitionDelay: '300ms' }}>
-                {testimonial.name}, {testimonial.title} –{' '}
-                <span style={{ textDecoration: 'underline' }}>
-                  {testimonial.company}
-                </span>
+              <FadeIn in={animate}>
+                <React.Fragment>
+                  {testimonial.name}, {testimonial.title} –{' '}
+                  <span style={{ textDecoration: 'underline' }}>
+                    {testimonial.company}
+                  </span>
+                </React.Fragment>
               </FadeIn>
             </TestimonialName>
             <TestimonialBottomActions>
