@@ -3,7 +3,7 @@ import Link from 'gatsby-link'
 import styled, { keyframes } from 'styled-components'
 import { media, transitions } from '@styles'
 import { Container, Logo } from '@components'
-import { Forms, Section } from '@modules'
+import { Forms, Section, Testimonials } from '@modules'
 import * as SocialIcons from '../icons/social'
 
 const animateButtonLine = keyframes`
@@ -507,6 +507,7 @@ const HorizontalRule = styled.div`
   height: 1px;
   width: 100%;
   max-width: 68rem;
+  margin-bottom: 7rem;
 `
 
 const ContactUsContainer = styled(Link)`
@@ -547,6 +548,30 @@ const ContactUsContainer = styled(Link)`
   }
 `
 
+const ShadowContainer = styled.div`
+  &::before {
+    position: fixed;
+    top: -100px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100px;
+    content: '';
+    box-shadow: 0px 40px 100px rgba(17, 18, 22, 1);
+  }
+
+  &::after {
+    position: fixed;
+    bottom: -100px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100px;
+    content: '';
+    box-shadow: 0px -40px 100px rgba(17, 18, 22, 1);
+  }
+`
+
 class IndexPage extends Component {
   state = { animation: '' }
 
@@ -567,7 +592,7 @@ class IndexPage extends Component {
     const { animation, view } = this.state
 
     return (
-      <div>
+      <ShadowContainer>
         <Container background="dark">
           <GridContainer>
             <LeftContainer>
@@ -739,7 +764,7 @@ class IndexPage extends Component {
               />
             </div>
             <HorizontalRule />
-            <div>Testimonials</div>
+            <Testimonials />
           </div>
         </Section>
         <Section header="Say hello">
@@ -784,7 +809,7 @@ class IndexPage extends Component {
             </SocialIconsFooter>
           </Footer>
         </Container>
-      </div>
+      </ShadowContainer>
     )
   }
 }
