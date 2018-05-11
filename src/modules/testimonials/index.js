@@ -203,9 +203,8 @@ class Testimonials extends Component {
     setTimeout(() => {
       const { active } = this.state
       const totalTestimonials = testimonials.length - 1
-      const nextActiveTestimonial = goToTestimonial
-        ? goToTestimonial
-        : active + 1
+      const nextActiveTestimonial =
+        typeof goToTestimonial === 'number' ? goToTestimonial : active + 1
 
       if (!goToTestimonial && active === totalTestimonials) {
         this.setState({ active: 0 })
