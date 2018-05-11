@@ -290,6 +290,7 @@ const FunctionArrowContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 7rem;
+  max-width: 68rem;
 `
 
 const FunctionArrowWord = styled.div`
@@ -602,10 +603,11 @@ class IndexPage extends Component {
               <TextContainer animation={animation} transitionDelay={600}>
                 <WelcomeHeader>Hi there</WelcomeHeader>
                 <MainText>
-                  We’re Narative! Yes, with one R. We're is all about telling
-                  the world your story on its simpler form—using classical
-                  techniques with state of the art technologies, we help you
-                  solve your problems and empower your business.
+                  Narative is a digital studio co-founded by designers,
+                  engineers and strategists with decades of experience at
+                  Canada’s most successful startups. We merge best practices in
+                  design and growth marketing to create narratives that empowers
+                  your brand and product.
                 </MainText>
                 <ContactText to="/contact">
                   <ArrowAnimation>
