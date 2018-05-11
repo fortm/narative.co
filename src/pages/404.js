@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
-import styled, { keyframes } from 'styled-components'
-import { media, transitions } from '@styles'
+import styled, { keyframes, ThemeProvider } from 'styled-components'
+import { media, transitions, theme } from '@styles'
 import { Container, Logo } from '@components'
-import { Forms, Section, Testimonials } from '@modules'
-import * as SocialIcons from '../icons/social'
 
 const animateButtonLine = keyframes`
   0% {
@@ -16,20 +14,6 @@ const animateButtonLine = keyframes`
   100% {
       width: 70%;
       left: 100%;
-  }
-`
-
-const fadeInOut = keyframes`
-  0% {
-      opacity: 0;
-      width: 0;
-  }
-  50% { opacity: 1; width: 40%}
-  60% { opacity: 1; width: 70%}
-  80% {
-    opacity: 0;
-    width: 50%;
-    left: 100%;
   }
 `
 
@@ -332,46 +316,48 @@ class NotFound extends Component {
     const { animation, view } = this.state
 
     return (
-      <Container background="light">
-        <GridContainer>
-          <LeftContainer>
-            <LogoContainer animation={animation}>
-              <Logo color="dark" />
-            </LogoContainer>
-            <TextContainer animation={animation} transitionDelay={600}>
-              <WelcomeHeader>Oh, nooo!</WelcomeHeader>
-              <MainText>
-                This page is like those old school "404" when something goes
-                wrong, but dont worry, we're still live and well.
-              </MainText>
-              <MainText>
-                If you have any questions or a billion dollar idea for a
-                project, just contact us. We love ideas.
-              </MainText>
-              <ContactActionsContainer>
-                <ContactButton>Contact us</ContactButton>
-                <ContactText to="/">
-                  <ArrowAnimation>
-                    Go back home .
-                    <ArrowRight />
-                  </ArrowAnimation>
-                </ContactText>
-              </ContactActionsContainer>
-            </TextContainer>
-            <CopyRightContainer animation={animation} transitionDelay={800}>
-              © {new Date().getFullYear()} Narative Studio Inc.
-            </CopyRightContainer>
-            <div />
-          </LeftContainer>
-          <RightContainer>
-            <ContactUsContainer to="/contact">Contact us</ContactUsContainer>
-            <NotFoudImage
-              src="http://res.cloudinary.com/narative/image/upload/v1526049042/4042x.jpg"
-              alt="404, Page Not Found"
-            />
-          </RightContainer>
-        </GridContainer>
-      </Container>
+      <ThemeProvider theme={theme}>
+        <Container background="light">
+          <GridContainer>
+            <LeftContainer>
+              <LogoContainer animation={animation}>
+                <Logo color="dark" />
+              </LogoContainer>
+              <TextContainer animation={animation} transitionDelay={600}>
+                <WelcomeHeader>Oh, nooo!</WelcomeHeader>
+                <MainText>
+                  This page is like those old school "404" when something goes
+                  wrong, but dont worry, we're still live and well.
+                </MainText>
+                <MainText>
+                  If you have any questions or a billion dollar idea for a
+                  project, just contact us. We love ideas.
+                </MainText>
+                <ContactActionsContainer>
+                  <ContactButton>Contact us</ContactButton>
+                  <ContactText to="/">
+                    <ArrowAnimation>
+                      Go back home .
+                      <ArrowRight />
+                    </ArrowAnimation>
+                  </ContactText>
+                </ContactActionsContainer>
+              </TextContainer>
+              <CopyRightContainer animation={animation} transitionDelay={800}>
+                © {new Date().getFullYear()} Narative Studio Inc.
+              </CopyRightContainer>
+              <div />
+            </LeftContainer>
+            <RightContainer>
+              <ContactUsContainer to="/contact">Contact us</ContactUsContainer>
+              <NotFoudImage
+                src="http://res.cloudinary.com/narative/image/upload/v1526049042/4042x.jpg"
+                alt="404, Page Not Found"
+              />
+            </RightContainer>
+          </GridContainer>
+        </Container>
+      </ThemeProvider>
     )
   }
 }
