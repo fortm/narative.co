@@ -17,6 +17,20 @@ const animateButtonLine = keyframes`
   }
 `
 
+const fadeInOut = keyframes`
+  0% {
+      opacity: 0;
+      width: 0;
+  }
+  50% { opacity: 1; width: 40%}
+  60% { opacity: 1; width: 70%}
+  80% {
+    opacity: 0;
+    width: 50%;
+    left: 100%;
+  }
+`
+
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr;
