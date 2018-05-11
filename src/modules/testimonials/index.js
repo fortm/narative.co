@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import Transition from 'react-transition-group/Transition'
 
-const fadeInDuration = 300
+const fadeInDuration = 500
 
 const fadeInDefaultStyle = {
   transition: `all ${fadeInDuration}ms ease-out`,
@@ -18,13 +18,14 @@ const fadeInTransitionStyles = {
   },
   exiting: {
     opacity: 0,
+    transition: `all ${fadeInDuration / 2}ms ease-out`,
     transform: 'translateY(0rem)',
   },
 }
 
 export const FadeIn = ({ in: inProp, children }) => {
   return (
-    <Transition in={inProp} timeout={fadeInDuration}>
+    <Transition in={inProp} timeout={fadeInDuration / 300}>
       {state => (
         <div
           style={{
@@ -190,44 +191,47 @@ const TestimonialDot = styled.div`
 class Testimonials extends Component {
   state = {
     active: 0,
-    animate: false,
+    animateTop: false,
+    animateBottom: false,
   }
 
   componentDidMount() {
-    this.setState({ animate: true })
+    this.setState({ animateTop: true, animateBottom: true })
   }
 
   nextTestimonial = goToTestimonial => {
-    this.setState({ animate: false })
+    this.setState({ animateTop: false, animateBottom: false })
+    const { active } = this.state
+    const totalTestimonials = testimonials.length - 1
+    const nextActiveTestimonial =
+      typeof goToTestimonial === 'number' ? goToTestimonial : active + 1
+
+    if (!goToTestimonial && active === totalTestimonials) {
+      this.setState({ active: 0 })
+    } else {
+      this.setState({ active: nextActiveTestimonial })
+    }
 
     setTimeout(() => {
-      const { active } = this.state
-      const totalTestimonials = testimonials.length - 1
-      const nextActiveTestimonial =
-        typeof goToTestimonial === 'number' ? goToTestimonial : active + 1
+      this.setState({ animateTop: true })
+    }, 500)
 
-      if (!goToTestimonial && active === totalTestimonials) {
-        this.setState({ active: 0 })
-      } else {
-        this.setState({ active: nextActiveTestimonial })
-      }
-      this.setState({ animate: true })
-    }, 300)
+    setTimeout(() => {
+      this.setState({ animateBottom: true })
+    }, 700)
   }
   render() {
-    const { active, animate } = this.state
+    const { active, animateTop, animateBottom } = this.state
     const testimonial = testimonials[active]
 
     return (
       <TestimonialContainer>
         <TestimonialContent>
-          <TestimonialCopy>
-            {/* <FadeIn in={animate}> */}
-            {testimonial.copy}
-            {/* </FadeIn> */}
-          </TestimonialCopy>
+          <FadeIn in={animateTop}>
+            <TestimonialCopy>{testimonial.copy}</TestimonialCopy>
+          </FadeIn>
           <TestimonialBottom>
-            <FadeIn in={animate}>
+            <FadeIn in={animateBottom}>
               <TestimonialName>
                 {testimonial.name}, {testimonial.title} –{' '}
                 <span style={{ textDecoration: 'underline' }}>
