@@ -219,7 +219,6 @@ class Testimonials extends Component {
     const { active, animate } = this.state
     const testimonial = testimonials[active]
 
-    console.log(animate)
     return (
       <TestimonialContainer>
         <TestimonialContent>
@@ -227,16 +226,14 @@ class Testimonials extends Component {
             <FadeIn in={animate}>{testimonial.copy}</FadeIn>
           </TestimonialCopy>
           <TestimonialBottom>
-            <TestimonialName>
-              <FadeIn in={animate}>
-                <React.Fragment>
-                  {testimonial.name}, {testimonial.title} –{' '}
-                  <span style={{ textDecoration: 'underline' }}>
-                    {testimonial.company}
-                  </span>
-                </React.Fragment>
-              </FadeIn>
-            </TestimonialName>
+            <FadeIn in={animate}>
+              <TestimonialName>
+                {testimonial.name}, {testimonial.title} –{' '}
+                <span style={{ textDecoration: 'underline' }}>
+                  {testimonial.company}
+                </span>
+              </TestimonialName>
+            </FadeIn>
             <TestimonialBottomActions>
               <TestimonialDotContainer>
                 {testimonials.map((test, index) => (
