@@ -27,7 +27,7 @@ const handlePageBackgroundColor = () => {
 }
 
 const WebContainer = styled.div`
-  background: ${handlePageBackgroundColor ? theme.colors.bg : '#fff'};
+  background: ${handlePageBackgroundColor() ? theme.colors.bg : '#fff'};
   min-height: 100vh;
   width: 100vw;
 `
