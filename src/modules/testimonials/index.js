@@ -225,14 +225,12 @@ class Testimonials extends Component {
             <FadeIn in={animate}>{testimonial.copy}</FadeIn>
           </TestimonialCopy>
           <TestimonialBottom>
-            <FadeIn in={animate}>
-              <TestimonialName>
-                {testimonial.name}, {testimonial.title} –{' '}
-                <span style={{ textDecoration: 'underline' }}>
-                  {testimonial.company}
-                </span>
-              </TestimonialName>
-            </FadeIn>
+            <TestimonialName>
+              {testimonial.name}, {testimonial.title} –{' '}
+              <span style={{ textDecoration: 'underline' }}>
+                {testimonial.company}
+              </span>
+            </TestimonialName>
             <TestimonialBottomActions>
               <TestimonialDotContainer>
                 {testimonials.map((test, index) => (
