@@ -236,8 +236,8 @@ const ChevronDown = () => (
           d="M 0 0L 24 0L 24 24L 0 24L 0 0Z"
           transform="translate(0 1)"
           stroke="black"
-          stroke-opacity="0.01"
-          stroke-width="0"
+          strokeOpacity="0.01"
+          strokeWidth="0"
         />
         <path
           id="&#239;&#132;&#135;"

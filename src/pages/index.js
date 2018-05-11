@@ -550,6 +550,8 @@ const ContactUsContainer = styled(Link)`
 `
 
 const ShadowContainer = styled.div`
+  background: ${props => props.theme.colors.bg};
+
   &::before {
     position: fixed;
     top: -100px;

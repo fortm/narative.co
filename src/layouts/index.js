@@ -19,8 +19,15 @@ const meta = [
   },
 ]
 
+const handlePageBackgroundColor = () => {
+  const darkPages = ['/contact']
+  const { pathname } = window.location
+
+  return darkPages.some(page => pathname === page)
+}
+
 const WebContainer = styled.div`
-  background: ${theme.colors.bg};
+  background: ${handlePageBackgroundColor ? theme.colors.bg : '#fff'};
   min-height: 100vh;
   width: 100vw;
 `
