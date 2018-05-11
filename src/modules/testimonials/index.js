@@ -1,43 +1,43 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-// import Transition from 'react-transition-group/Transition'
+import Transition from 'react-transition-group/Transition'
 
-// const fadeInDuration = 300
+const fadeInDuration = 300
 
-// const fadeInDefaultStyle = {
-//   transition: `all ${fadeInDuration}ms ease-out`,
-//   opacity: 0,
-//   transformOrigin: 'top',
-//   transform: 'translateY(1rem)',
-// }
+const fadeInDefaultStyle = {
+  transition: `all ${fadeInDuration}ms ease-out`,
+  opacity: 0,
+  transformOrigin: 'top',
+  transform: 'translateY(1rem)',
+}
 
-// const fadeInTransitionStyles = {
-//   entered: {
-//     opacity: 1,
-//     transform: 'translateY(0rem)',
-//   },
-//   exiting: {
-//     opacity: 0,
-//     transform: 'translateY(0rem)',
-//   },
-// }
+const fadeInTransitionStyles = {
+  entered: {
+    opacity: 1,
+    transform: 'translateY(0rem)',
+  },
+  exiting: {
+    opacity: 0,
+    transform: 'translateY(0rem)',
+  },
+}
 
-// export const FadeIn = ({ in: inProp, children }) => {
-//   return (
-//     <Transition in={inProp} timeout={fadeInDuration}>
-//       {state => (
-//         <div
-//           style={{
-//             ...fadeInDefaultStyle,
-//             ...fadeInTransitionStyles[state],
-//           }}
-//         >
-//           {children}
-//         </div>
-//       )}
-//     </Transition>
-//   )
-// }
+export const FadeIn = ({ in: inProp, children }) => {
+  return (
+    <Transition in={inProp} timeout={fadeInDuration}>
+      {state => (
+        <div
+          style={{
+            ...fadeInDefaultStyle,
+            ...fadeInTransitionStyles[state],
+          }}
+        >
+          {children}
+        </div>
+      )}
+    </Transition>
+  )
+}
 
 const testimonials = [
   {
@@ -227,12 +227,14 @@ class Testimonials extends Component {
             {/* </FadeIn> */}
           </TestimonialCopy>
           <TestimonialBottom>
-            <TestimonialName>
-              {testimonial.name}, {testimonial.title} –{' '}
-              <span style={{ textDecoration: 'underline' }}>
-                {testimonial.company}
-              </span>
-            </TestimonialName>
+            <FadeIn in={animate}>
+              <TestimonialName>
+                {testimonial.name}, {testimonial.title} –{' '}
+                <span style={{ textDecoration: 'underline' }}>
+                  {testimonial.company}
+                </span>
+              </TestimonialName>
+            </FadeIn>
             <TestimonialBottomActions>
               <TestimonialDotContainer>
                 {testimonials.map((test, index) => (
