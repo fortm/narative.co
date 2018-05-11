@@ -25,7 +25,7 @@ const fadeInTransitionStyles = {
 
 export const FadeIn = ({ in: inProp, children }) => {
   return (
-    <Transition in={inProp} timeout={fadeInDuration / 300}>
+    <Transition in={inProp} timeout={fadeInDuration / 500}>
       {state => (
         <div
           style={{
@@ -201,16 +201,6 @@ class Testimonials extends Component {
 
   nextTestimonial = goToTestimonial => {
     this.setState({ animateTop: false, animateBottom: false })
-    const { active } = this.state
-    const totalTestimonials = testimonials.length - 1
-    const nextActiveTestimonial =
-      typeof goToTestimonial === 'number' ? goToTestimonial : active + 1
-
-    if (!goToTestimonial && active === totalTestimonials) {
-      this.setState({ active: 0 })
-    } else {
-      this.setState({ active: nextActiveTestimonial })
-    }
 
     setTimeout(() => {
       this.setState({ animateTop: true })
@@ -218,7 +208,17 @@ class Testimonials extends Component {
 
     setTimeout(() => {
       this.setState({ animateBottom: true })
-    }, 700)
+      const { active } = this.state
+      const totalTestimonials = testimonials.length - 1
+      const nextActiveTestimonial =
+        typeof goToTestimonial === 'number' ? goToTestimonial : active + 1
+
+      if (!goToTestimonial && active === totalTestimonials) {
+        this.setState({ active: 0 })
+      } else {
+        this.setState({ active: nextActiveTestimonial })
+      }
+    }, 800)
   }
   render() {
     const { active, animateTop, animateBottom } = this.state
