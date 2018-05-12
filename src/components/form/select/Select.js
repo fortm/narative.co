@@ -80,7 +80,7 @@ const StyledSelect = styled.div`
   outline: none;
 `
 
-const SelectOption = styled.option`
+const SelectOption = styled.div`
   padding: 0.8rem 1.2rem;
   transition: all 200ms ${props => props.theme.transitions.easeOut};
 
@@ -212,11 +212,12 @@ class Select extends Component {
           <SelectArrow />
           <StyledSelect {...field} {...this.props} value={selectedValue}>
             <FadeIn in={isOpened}>
-              <SelectOptionContainer isOpened={isOpened}>
+              <SelectOptionContainer isOpened={isOpened} role="menu">
                 {options.map(option => {
                   return (
                     <SelectOption
                       key={option.id}
+                      role="menuitem"
                       onClick={() => this.handleSelectClick(option.value)}
                     >
                       {option.value}

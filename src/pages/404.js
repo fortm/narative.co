@@ -3,6 +3,7 @@ import Link from 'gatsby-link'
 import styled, { keyframes, ThemeProvider } from 'styled-components'
 import { media, transitions, theme } from '@styles'
 import { Container, Logo } from '@components'
+import { ArrowRightIcon } from '../icons/ui'
 
 const animateButtonLine = keyframes`
   0% {
@@ -33,53 +34,55 @@ const fadeInOut = keyframes`
 
 const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
   align-items: center;
   justify-content: center;
-  width: 30rem;
   margin: 0 auto;
 
-  ${media.large`
-    height: 88vh;
-    grid-template-columns: repeat(2, 1fr [col-start]);
-    width: 100%;
+  height: 88vh;
+  grid-template-columns: repeat(2, 1fr [col-start]);
+  width: 100%;
+
+  ${media.desktop`
+    grid-template-columns: 1fr;
+    width: 30rem;
   `};
 `
 
 const LogoContainer = styled.div`
-  max-width: 10rem;
-  margin-bottom: 4rem;
+  max-width: 16rem;
+  margin-bottom: 0;
 
   ${transitions.fadeUp};
 
-  ${media.large`
-    max-width: 16rem;
-    margin-bottom: 0;
+  ${media.desktop`
+    max-width: 10rem;
+    margin-bottom: 4rem;
   `};
 `
 
 const NarativeVideoContainer = styled.div`
   clip-path: polygon(0 36%, 0 0, 100% 64%, 100% 100%);
-  height: auto;
-  width: 30rem;
+
+  height: 53rem;
+  width: 49rem;
   margin-top: 2rem;
   pointer-events: none;
   overflow: hidden;
   align-self: flex-end;
 
-  ${media.large`
-    height: 53rem;
-    width: 49rem;
+  ${media.desktop`
+  height: auto;
+  width: 30rem;
   `};
 `
 
 const NarativeVideo = styled.video`
   position: relative;
-  height: 30rem;
+  height: 53rem;
   ${transitions.blurIn};
 
-  ${media.large`
-    height: 53rem;  
+  ${media.desktop`
+    height: 30rem;  
   `};
 `
 
@@ -89,11 +92,11 @@ const TextContainer = styled.div`
 
 const WelcomeHeader = styled.h1`
   color: ${props => props.theme.colors.grey};
-  font-size: 1.8rem;
+  font-size: 3.6rem;
   margin-bottom: 2rem;
 
-  ${media.large`
-    font-size: 3.6rem;
+  ${media.desktop`
+    font-size: 1.8rem;
   `};
 `
 
@@ -146,13 +149,13 @@ const ContactButton = styled(Link)`
 
 const ContactText = styled(Link)`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   font-size: 1.6rem;
   font-weight: 600;
   color: #000;
 
-  ${media.medium`
-    flex-direction: row;
+  ${media.tablet`
+    flex-direction: column;
   `};
 
   svg {
@@ -162,22 +165,22 @@ const ContactText = styled(Link)`
 `
 
 const HideOnMobile = styled.span`
-  display: none;
+  display: block;
 
-  ${media.medium`
-    display: block;
+  ${media.tablet`
+    display: none;
   `};
 `
 const LeftContainer = styled.div`
   display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
-  width: 100%;
+  justify-content: space-between;
+  max-width: 36rem;
+  height: 53rem;
 
-  ${media.large`
-    justify-content: space-between;
-    max-width: 36rem;
-    height: 53rem;
+  ${media.desktop`
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
   `};
 `
 
@@ -186,12 +189,14 @@ const RightContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding-top: 4rem;
+  align-items: center;
+  justify-content: flex-end;
+  height: 53rem;
 
-  ${media.large`
-    align-items: center;
-    justify-content: flex-end;
-    height: 53rem;
+  ${media.desktop`
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 4rem;
   `};
 `
 
@@ -201,37 +206,14 @@ const NotFoudImage = styled.img`
   right: 0;
 `
 
-const ArrowRight = () => (
-  <svg width="35" height="7" viewBox="0 0 35 7" version="1.1">
-    <g id="Canvas" fill="none">
-      <g id="arrow-left-icon">
-        <path
-          id="triangle"
-          d="M 3.5 0L 6.53109 5.25L 0.468911 5.25L 3.5 0Z"
-          transform="matrix(0 1 -1 0 35 0)"
-          fill="black"
-        />
-        <line
-          id="Line"
-          y1="-0.5"
-          x2="30"
-          y2="-0.5"
-          transform="translate(0 4)"
-          stroke="black"
-        />
-      </g>
-    </g>
-  </svg>
-)
-
 const ArrowAnimation = styled.div`
   position: relative;
   display: inline-block;
-  padding: 0rem 3rem 0 0rem;
+  padding: 0 3rem 0 0.5rem;
   overflow-x: hidden;
 
-  ${media.medium`
-    padding: 0 3rem 0 0.5rem;   
+  ${media.tablet`
+    padding: 0rem 3rem 0 0rem;
   `};
 
   &::after {
@@ -261,9 +243,10 @@ const ArrowAnimation = styled.div`
 
   &:hover::after {
     opacity: 1;
+    animation: ${animateButtonLine} 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
 
-    ${media.medium`
-      animation: ${animateButtonLine} 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    ${media.tablet`
+      animation: none;
     `};
   }
 `
@@ -306,14 +289,14 @@ const ContactUsContainer = styled(Link)`
 `
 
 const CopyRightContainer = styled.div`
-  display: none;
+  display: block;
   font-size: 1.6rem;
   font-weight: 500;
   color: ${props => props.theme.colors.grey};
   ${transitions.fadeUp};
 
-  ${media.large`
-    display: block;
+  ${media.desktop`
+    display: none;
   `};
 `
 
@@ -359,7 +342,7 @@ class NotFound extends Component {
                     <ContactText to="/">
                       <ArrowAnimation>
                         Go back home .
-                        <ArrowRight />
+                        <ArrowRightIcon />
                       </ArrowAnimation>
                     </ContactText>
                   </ContactActionsContainer>

@@ -5,6 +5,7 @@ import { media, transitions } from '@styles'
 import { Container, Logo } from '@components'
 import { Forms, Section, Testimonials } from '@modules'
 import * as SocialIcons from '../icons/social'
+import { ArrowRightIcon, PencilIcon } from '../icons/ui'
 
 const animateButtonLine = keyframes`
   0% {
@@ -35,53 +36,54 @@ const fadeInOut = keyframes`
 
 const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(2, 1fr [col-start]);
   align-items: center;
   justify-content: center;
-  width: 30rem;
   margin: 0 auto;
+  height: 88vh;
+  width: 100%;
 
-  ${media.large`
-    height: 88vh;
-    grid-template-columns: repeat(2, 1fr [col-start]);
-    width: 100%;
+  ${media.desktop`
+    height: initial
+    grid-template-columns: 1fr;
+    width: 30rem;
   `};
 `
 
 const LogoContainer = styled.div`
-  max-width: 10rem;
-  margin-bottom: 4rem;
-
+  max-width: 16rem;
+  margin-bottom: 0;
   ${transitions.fadeUp};
 
-  ${media.large`
-    max-width: 16rem;
-    margin-bottom: 0;
+  ${media.desktop`
+    max-width: 10rem;
+    margin-bottom: 4rem;
   `};
 `
 
 const NarativeVideoContainer = styled.div`
   clip-path: polygon(0 36%, 0 0, 100% 64%, 100% 100%);
-  height: auto;
-  width: 30rem;
+  height: 53rem;
+  width: 49rem;
   margin-top: 2rem;
   pointer-events: none;
   overflow: hidden;
   align-self: flex-end;
 
-  ${media.large`
-    height: 53rem;
-    width: 49rem;
+  ${media.desktop`
+    height: auto;
+    width: 30rem;
   `};
 `
 
 const NarativeVideo = styled.video`
   position: relative;
-  height: 30rem;
+  height: 53rem;
+
   ${transitions.blurIn};
 
-  ${media.large`
-    height: 53rem;  
+  ${media.desktop`
+    height: 30rem;
   `};
 `
 
@@ -91,11 +93,11 @@ const TextContainer = styled.div`
 
 const WelcomeHeader = styled.h1`
   color: ${props => props.theme.colors.grey};
-  font-size: 1.8rem;
+  font-size: 3.6rem;
   margin-bottom: 2rem;
 
-  ${media.large`
-    font-size: 3.6rem;
+  ${media.desktop`
+    font-size: 1.8rem;
   `};
 `
 
@@ -108,13 +110,13 @@ const MainText = styled.p`
 
 const ContactText = styled(Link)`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   font-size: 1.6rem;
   font-weight: 600;
   color: ${props => props.theme.colors.grey};
 
-  ${media.medium`
-    flex-direction: row;
+  ${media.tablet`
+    flex-direction: column;
   `};
 
   svg {
@@ -124,84 +126,64 @@ const ContactText = styled(Link)`
 `
 
 const HideOnMobile = styled.span`
-  display: none;
+  display: block;
 
-  ${media.medium`
-    display: block;
+  ${media.tablet`
+    display: none;
   `};
 `
 const LeftContainer = styled.div`
   display: flex;
-  justify-content: flex-start;
   flex-direction: column;
-  width: 100%;
+  justify-content: space-between;
+  max-width: 36rem;
+  height: 53rem;
 
-  ${media.large`
-    justify-content: space-between;
-    max-width: 36rem;
-    height: 53rem;
+  ${media.desktop`
+    justify-content: flex-start;
+    width: 100%;
+    height: initial;
   `};
 `
 
 const RightContainer = styled.div`
   position: relative;
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
   padding-top: 4rem;
 
-  ${media.large`
-    align-items: center;
-    justify-content: flex-end;
+  ${media.desktop`
+    justify-content: center;
   `};
 `
 
 const CopyRightContainer = styled.div`
-  display: none;
+  display: block;
+
   font-size: 1.6rem;
   font-weight: 500;
   color: ${props => props.theme.colors.grey};
   ${transitions.fadeUp};
 
-  ${media.large`
-    display: block;
+  ${media.desktop`
+    display: none;
   `};
 `
 
 const CopyRightContainerMobile = styled.div`
+  display: none;
   font-size: 1.6rem;
   font-weight: 500;
   color: ${props => props.theme.colors.grey};
   align-self: center;
   margin-top: 2rem;
 
-  ${media.large`
+  ${media.desktop`
     display: none;
   `};
 `
-
-const ArrowRight = () => (
-  <svg width="35" height="7" viewBox="0 0 35 7" version="1.1">
-    <g id="Canvas" fill="none">
-      <g id="arrow-left-icon">
-        <path
-          id="triangle"
-          d="M 3.5 0L 6.53109 5.25L 0.468911 5.25L 3.5 0Z"
-          transform="matrix(0 1 -1 0 35 0)"
-          fill="white"
-        />
-        <line
-          id="Line"
-          y1="-0.5"
-          x2="30"
-          y2="-0.5"
-          transform="translate(0 4)"
-          stroke="white"
-        />
-      </g>
-    </g>
-  </svg>
-)
 
 const HighlightText = styled.span`
   color: #fff;
@@ -210,11 +192,11 @@ const HighlightText = styled.span`
 const ArrowAnimation = styled.div`
   position: relative;
   display: inline-block;
-  padding: 0rem 3rem 0 0rem;
   overflow-x: hidden;
+  padding: 0 3rem 0 0.5rem;
 
-  ${media.medium`
-    padding: 0 3rem 0 0.5rem;   
+  ${media.tablet`
+    padding: 0rem 3rem 0 0rem;
   `};
 
   &::after {
@@ -244,9 +226,10 @@ const ArrowAnimation = styled.div`
 
   &:hover::after {
     opacity: 1;
+    animation: ${animateButtonLine} 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
 
-    ${media.medium`
-      animation: ${animateButtonLine} 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    ${media.tablet`
+      animation: none;
     `};
   }
 `
@@ -297,7 +280,7 @@ const FunctionArrowWord = styled.div`
   font-weight: 900;
   text-transform: uppercase;
   font-size: 2.4rem;
-  color: #7a8085;
+  color: ${props => props.theme.colors.grey};
   ${props =>
     props.paddingLeft ? `padding-left: 2.6rem` : `padding-right: 2.6rem`};
 `
@@ -306,7 +289,7 @@ const FunctionArrow = styled.div`
   position: relative;
   height: 2px;
   width: 100%;
-  background: #7a8085;
+  background: ${props => props.theme.colors.grey};
 
   &::before,
   &::after {
@@ -317,7 +300,7 @@ const FunctionArrow = styled.div`
     height: 2px;
     border-radius: 4px;
     width: 10px;
-    background: #7a8085;
+    background: ${props => props.theme.colors.grey};
     top: -3px;
   }
 
@@ -338,8 +321,7 @@ const WhatWeDoListItem = styled.li`
   display: flex;
   align-items: center;
   height: 50px;
-
-  color: #7a8085;
+  color: ${props => props.theme.colors.grey};
   & > span {
     color: #fff;
   }
@@ -348,18 +330,6 @@ const WhatWeDoListItem = styled.li`
     border-bottom: 1px solid #707173;
   }
 `
-
-const ContactIcon = () => (
-  <svg width="17" height="17" viewBox="0 0 17 17">
-    <g id="Canvas" fill="none">
-      <path
-        id="Vector"
-        d="M 16.7 4C 17.1 3.6 17.1 3 16.7 2.6L 14.4 0.3C 14 -0.1 13.4 -0.1 13 0.3L 11 2.3L 14.7 6L 16.7 4ZM 13.7 7L 10 3.3L 0 13.3L 0 17L 3.7 17L 13.7 7Z"
-        fill="black"
-      />
-    </g>
-  </svg>
-)
 
 const ContactContainer = styled(Link)`
   position: relative;
@@ -615,7 +585,7 @@ class IndexPage extends Component {
                   <ArrowAnimation>
                     <HighlightText>Get in touch</HighlightText>
                     .
-                    <ArrowRight />
+                    <ArrowRightIcon color="white" />
                   </ArrowAnimation>
                 </ContactText>
               </TextContainer>
@@ -784,7 +754,7 @@ class IndexPage extends Component {
             </SectionCopy>
             <ContactContainer to="/contact">
               <ContactContainerCircle />
-              <ContactIcon />
+              <PencilIcon />
             </ContactContainer>
           </div>
         </Section>

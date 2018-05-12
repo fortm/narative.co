@@ -5,6 +5,7 @@ import { Formik, Form as FormikForm, Field } from 'formik'
 import { Button, Container, Form, Transitions } from '@components'
 import { media } from '@styles'
 import { apiCall } from '@utils'
+import { SubmittedCheckIcon } from '../../icons/ui'
 
 const fadeIn = keyframes`
   from { opacity: 0; }
@@ -18,29 +19,30 @@ const FormHeader = styled.h3`
 `
 
 const FormSection = styled.fieldset`
-  margin-bottom: ${props => (props.spacing === 'large' ? '4rem' : '3rem')};
+  margin-bottom: ${props => (props.spacing === 'large' ? '5rem' : '3.5rem')};
 
-  ${media.xlarge`
-   margin-bottom: ${props => (props.spacing === 'large' ? '5rem' : '3.5rem')};
+  ${media.hdpi`
+  margin-bottom: ${props => (props.spacing === 'large' ? '4rem' : '3rem')};
+  
   `};
 `
 
 const StyledFormikForm = styled(FormikForm)`
-  width: 100%;
   align-self: flex-end;
   position: relative;
-  padding-bottom: 5rem;
+  width: 46rem;
+  padding-bottom: 10rem;
 
-  ${media.xlarge`
-    width: 46rem;
-    padding-bottom: 10rem;
+  ${media.mdpi`
+    width: 100%;
+    padding-bottom: 5rem;
   `};
 `
 
 const SubmittedScreen = styled.div`
-  width: 100%;
-  position: relative;
+  width: 46rem;
   height: 53rem;
+  padding-bottom: 10rem;
   align-self: flex-end;
   position: relative;
   display: flex;
@@ -52,9 +54,9 @@ const SubmittedScreen = styled.div`
   animation: ${fadeIn} 50ms 500ms ${props => props.theme.transitions.in}
     forwards;
 
-  ${media.xlarge`
-    width: 46rem;
-    padding-bottom: 10rem;
+  ${media.mdpi`
+    width: 100%;
+    padding-bottom: 0;
   `};
 
   svg {
@@ -63,12 +65,12 @@ const SubmittedScreen = styled.div`
 `
 
 const SubmittedHeader = styled.h2`
-  font-size: 2.8rem;
+  font-size: 3.2rem;
   line-height: 1;
   margin-bottom: 3rem;
 
-  ${media.xlarge`
-    font-size: 3.2rem;
+  ${media.mdpi`
+    font-size: 2.8rem;
   `};
 `
 
@@ -84,32 +86,6 @@ const SubmittedBackButton = styled(Link)`
   font-size: 1.6rem;
   font-weight: 500;
 `
-
-const SubmittedCheckIcon = () => (
-  <svg width="90" height="90" viewBox="0 0 90 90" version="1.1">
-    <g id="Canvas" fill="none">
-      <g id="confirmation-icon">
-        <rect
-          id="Rectangle"
-          x="0.75"
-          y="0.75"
-          width="88.5"
-          height="88.5"
-          rx="2.25"
-          stroke="black"
-          stroke-width="1.5"
-        />
-        <path
-          id="Vector"
-          d="M 0 17.8971L 14.7165 30.8571L 39.8571 0"
-          transform="translate(25.0715 29.5715)"
-          stroke="black"
-          stroke-width="1.5"
-        />
-      </g>
-    </g>
-  </svg>
-)
 
 const selectOptions = [
   {

@@ -4,12 +4,12 @@ import styled from 'styled-components'
 import { media } from '@styles'
 
 const RadioContainer = styled.div`
-  display: block;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1.5rem;
 
-  ${media.medium`
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 1.5rem;
+  ${media.tablet`
+    display: block;
   `};
 `
 
@@ -27,11 +27,12 @@ const StyledLabel = styled.label`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: opacity 200ms ${props => props.theme.transitions.easeIn};
-  margin-bottom: 1.5rem;
+  margin: 0;
 
-  ${media.medium`
-    margin: 0;
+  transition: opacity 200ms ${props => props.theme.transitions.easeIn};
+
+  ${media.tablet`
+  margin-bottom: 1.5rem;
   `};
 
   &::after {
