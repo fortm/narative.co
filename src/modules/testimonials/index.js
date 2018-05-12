@@ -244,7 +244,7 @@ class Testimonials extends Component {
       } else {
         this.setState({ active: nextActiveTestimonial })
       }
-    }, 800)
+    }, 700)
   }
   render() {
     const { active, animateTop, animateBottom } = this.state

@@ -224,7 +224,7 @@ const CloseContainerMobile = styled(Link)`
   justify-content: center;
   opacity: ${props => (props.animation ? '1' : '0')};
   transform: rotate(${props => (props.animation ? '0' : '-60deg')});
-  transition: all 1s 1s ease;
+  transition: all 1s 1s ease-out;
 
   ${media.desktop`
     display: flex;
@@ -336,6 +336,11 @@ const MobileArrowContainer = styled.div`
 
   ${media.desktop`
     display: flex;
+    bottom: -4.2rem;
+  `};
+
+  ${media.phablet`
+    bottom: -2.2rem;
   `};
 `
 

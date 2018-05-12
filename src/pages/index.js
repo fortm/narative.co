@@ -80,6 +80,7 @@ const NarativeVideoContainer = styled.div`
   ${media.phablet`
     height: auto;
     width: 30rem;
+    margin: 0 auto;
   `};
 `
 
@@ -139,6 +140,14 @@ const HideOnMobile = styled.span`
     display: none;
   `};
 `
+const HideOnDesktop = styled.span`
+  display: none;
+
+  ${media.tablet`
+    display: block;
+  `};
+`
+
 const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -809,14 +818,22 @@ class IndexPage extends Component {
           <div>
             <div>
               <SectionCopy maxWidth="69rem">
-                Focusing on design and digital storytelling, we had the pleasure
-                to work with the world's most{' '}
-                <SectionCopyHighlight>ambitious brands</SectionCopyHighlight> to
-                create{' '}
-                <SectionCopyHighlight mobile>
-                  amazing experiences
-                </SectionCopyHighlight>.
+                <HideOnMobile>
+                  Focusing on design and digital storytelling, we had the
+                  pleasure to work with the world's most{' '}
+                  <SectionCopyHighlight>ambitious brands</SectionCopyHighlight>{' '}
+                  to create amazing experiences.
+                </HideOnMobile>
+                <HideOnDesktop>
+                  Focusing on design and digital storytelling, we had the
+                  pleasure to work with the world's most ambitious brands to
+                  create{' '}
+                  <SectionCopyHighlight>
+                    amazing experiences.
+                  </SectionCopyHighlight>
+                </HideOnDesktop>
               </SectionCopy>
+              <SectionCopy maxWidth="69rem" />
               <TestimonialsImage src="/images/testimonials/placeholder-image.png" />
             </div>
             <HorizontalRule />

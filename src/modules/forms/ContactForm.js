@@ -36,7 +36,16 @@ const StyledFormikForm = styled(FormikForm)`
 
   ${media.mdpi`
     width: 100%;
-    padding-bottom: 5rem;
+    padding: 0 4rem 5rem;
+  `};
+
+  ${media.desktop`
+    width: 50rem;
+    padding: 0 0 5rem;
+  `};
+
+  ${media.phablet`
+    width: 100%;
   `};
 `
 
@@ -57,10 +66,6 @@ const SubmittedScreen = styled.div`
 
   ${media.mdpi`
     padding-bottom: 0;
-  `};
-
-  ${media.desktop`
-    width: 100%;
   `};
 
   svg {
