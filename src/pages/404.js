@@ -44,7 +44,8 @@ const GridContainer = styled.div`
 
   ${media.desktop`
     grid-template-columns: 1fr;
-    width: 30rem;
+    width: 100%;
+    height: 100%;
   `};
 `
 
@@ -57,32 +58,6 @@ const LogoContainer = styled.div`
   ${media.desktop`
     max-width: 10rem;
     margin-bottom: 4rem;
-  `};
-`
-
-const NarativeVideoContainer = styled.div`
-  clip-path: polygon(0 36%, 0 0, 100% 64%, 100% 100%);
-
-  height: 53rem;
-  width: 49rem;
-  margin-top: 2rem;
-  pointer-events: none;
-  overflow: hidden;
-  align-self: flex-end;
-
-  ${media.desktop`
-  height: auto;
-  width: 30rem;
-  `};
-`
-
-const NarativeVideo = styled.video`
-  position: relative;
-  height: 53rem;
-  ${transitions.blurIn};
-
-  ${media.desktop`
-    height: 30rem;  
   `};
 `
 
@@ -111,7 +86,12 @@ const ContactActionsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-width: 40rem;
+  width: 40rem;
+
+  ${media.phablet`
+    width: 100%;
+    flex-direction: column;
+  `};
 `
 
 const ContactButton = styled(Link)`
@@ -126,6 +106,11 @@ const ContactButton = styled(Link)`
   border: none;
   border-radius: 3px;
   font-weight: 500;
+
+  ${media.phablet`
+    width: 100%;
+    margin-bottom: 2.5rem;
+  `};
 
   &::after {
     content: '';
@@ -171,16 +156,19 @@ const HideOnMobile = styled.span`
     display: none;
   `};
 `
+
 const LeftContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
   max-width: 36rem;
   height: 53rem;
 
   ${media.desktop`
+    padding-top: 5rem;
     justify-content: flex-start;
-    flex-direction: column;
     width: 100%;
+    height: initial;
   `};
 `
 
@@ -196,7 +184,8 @@ const RightContainer = styled.div`
   ${media.desktop`
     justify-content: center;
     flex-direction: column;
-    padding-top: 4rem;
+    padding: 6rem 0;
+    height: 100%;
   `};
 `
 
@@ -204,6 +193,17 @@ const NotFoudImage = styled.img`
   width: 800px;
   position: fixed;
   right: 0;
+
+  ${media.mdpi`
+    width: 600px;
+  `};
+
+  ${media.desktop`
+    width: 140%;
+    position: relative;
+    left: -6%;
+    margin-bottom: 5rem;
+  `};
 `
 
 const ArrowAnimation = styled.div`
@@ -212,8 +212,9 @@ const ArrowAnimation = styled.div`
   padding: 0 3rem 0 0.5rem;
   overflow-x: hidden;
 
-  ${media.tablet`
-    padding: 0rem 3rem 0 0rem;
+  ${media.phablet`
+    padding: 0;
+    text-decoration: underline;
   `};
 
   &::after {
@@ -231,6 +232,10 @@ const ArrowAnimation = styled.div`
 
   svg {
     transition: all 300ms cubic-bezier(0.77, 0, 0.175, 1);
+
+    ${media.phablet`
+      display: none;
+    `};
   }
 
   &:hover svg {
@@ -258,6 +263,10 @@ const ContactUsContainer = styled(Link)`
   color: white;
   color: ${props => props.theme.colors.grey};
   font-weight: 500;
+
+  ${media.desktop`
+    display: none;
+  `};
 
   &::before {
     content: '';
@@ -300,6 +309,18 @@ const CopyRightContainer = styled.div`
   `};
 `
 
+const CopyRightContainerMobile = styled.div`
+  display: none;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: ${props => props.theme.colors.grey};
+  ${transitions.fadeUp};
+
+  ${media.desktop`
+    display: block;
+  `};
+`
+
 class NotFound extends Component {
   state = { animation: '' }
 
@@ -321,7 +342,7 @@ class NotFound extends Component {
             width: '100vw',
           }}
         >
-          <Container background="light">
+          <Container background="light" hideOverflow>
             <GridContainer>
               <LeftContainer>
                 <LogoContainer animation={animation}>
@@ -341,7 +362,7 @@ class NotFound extends Component {
                     <ContactButton>Contact us</ContactButton>
                     <ContactText to="/">
                       <ArrowAnimation>
-                        Go back home .
+                        Go back home
                         <ArrowRightIcon />
                       </ArrowAnimation>
                     </ContactText>
@@ -360,6 +381,12 @@ class NotFound extends Component {
                   src="http://res.cloudinary.com/narative/image/upload/v1526049042/4042x.jpg"
                   alt="404, Page Not Found"
                 />
+                <CopyRightContainerMobile
+                  animation={animation}
+                  transitionDelay={800}
+                >
+                  © {new Date().getFullYear()} Narative Studio Inc.
+                </CopyRightContainerMobile>
               </RightContainer>
             </GridContainer>
           </Container>

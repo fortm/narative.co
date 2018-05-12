@@ -15,6 +15,7 @@ const Container = styled.div`
 
   ${media.phablet`
     max-width: 100%;
+    ${props => props.hideOverflow && `overflow: hidden`};
   `};
 
   ${media.phablet`

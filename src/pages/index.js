@@ -164,6 +164,7 @@ const RightContainer = styled.div`
 
   ${media.desktop`
     justify-content: center;
+    margin-bottom: 5rem;
   `};
 `
 
@@ -253,6 +254,7 @@ const SectionCopy = styled.p`
     max-width: 100%;
   `};
 `
+
 const SectionCopyHighlight = styled.span`
   position: relative;
   background: #e9daac;
@@ -263,18 +265,19 @@ const SectionCopyHighlight = styled.span`
   &::before {
     content: '';
     position: absolute;
-    left: -5px
+    left: -5px;
     height: 100%;
     top: 0;
     bottom: 0;
-    width: 5px
+    width: 5px;
     background: #e9daac;
   }
+
   &::after {
     content: '';
     position: absolute;
-    right: -5px
-    width: 5px
+    right: -5px;
+    width: 5px;
     height: 100%;
     top: 0;
     bottom: 0;
@@ -330,7 +333,6 @@ const FunctionArrow = styled.div`
 `
 
 const WhatWeDoList = styled.ul`
-  min-width: 40rem;
   width: 40rem;
   list-style: none;
 
@@ -342,7 +344,7 @@ const WhatWeDoList = styled.ul`
 const WhatWeDoListItem = styled.li`
   display: flex;
   align-items: center;
-  height: 50px;
+  height: 5rem;
   color: ${props => props.theme.colors.grey};
   & > span {
     color: #fff;
@@ -351,6 +353,10 @@ const WhatWeDoListItem = styled.li`
   &:not(:last-child) {
     border-bottom: 1px solid #707173;
   }
+
+  ${media.tablet`
+    font-size: 1.2rem;
+  `};
 `
 
 const ContactContainer = styled(Link)`
@@ -359,9 +365,14 @@ const ContactContainer = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
+  align-self: center;
   height: 6rem;
   width: 6rem;
   border-radius: 50%;
+
+  ${media.desktop`
+    margin-top: 10rem;
+  `};
 
   @keyframes pulsingLarge {
     0% {
@@ -415,7 +426,7 @@ const ContactContainer = styled(Link)`
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    box-shadow: inset 0 0 0 3px #fff;
+    box-shadow: inset 0 0 0 2px #fff;
     transition: all 300ms cubic-bezier(0.39, 0.575, 0.565, 1);
     animation: pulsingMedium 3s infinite 0.4s;
     pointer-events: none;
@@ -476,7 +487,7 @@ const ContactContainerCircle = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  box-shadow: inset 0 0 0 3px #fff;
+  box-shadow: inset 0 0 0 1px #fff;
   transition: all 300ms cubic-bezier(0.39, 0.575, 0.565, 1);
   animation: pulsingSmall 3s infinite 0.8s;
 `
@@ -497,6 +508,12 @@ const SocialIconContainer = styled.a`
 const SocialIconsFooter = styled.div`
   display: flex;
   align-items: center;
+
+  ${props =>
+    props.hideOnMobile &&
+    media.desktop`
+    display: none;
+  `};
 `
 
 const HorizontalRule = styled.div`
@@ -505,6 +522,10 @@ const HorizontalRule = styled.div`
   width: 100%;
   max-width: 68rem;
   margin-bottom: 7rem;
+
+  ${media.desktop`
+    margin-bottom: 3.5rem;
+  `};
 `
 
 const ContactUsContainer = styled(Link)`
@@ -559,6 +580,12 @@ const ShadowContainer = styled.div`
     height: 100px;
     content: '';
     box-shadow: 0px 40px 100px rgba(17, 18, 22, 1);
+
+    ${media.tablet`
+      top: -80px;
+      height: 80px;
+      box-shadow: 0px 30px 80px rgba(17, 18, 22, 1);
+    `};
   }
 
   &::after {
@@ -570,6 +597,12 @@ const ShadowContainer = styled.div`
     height: 100px;
     content: '';
     box-shadow: 0px -40px 100px rgba(17, 18, 22, 1);
+
+    ${media.tablet`
+      bottom: -80px
+      height: 80px;
+      box-shadow: 0px -30px 80px rgba(17, 18, 22, 1);
+    `};
   }
 `
 
@@ -579,6 +612,16 @@ const FlexColumn = styled.div`
 
   ${media.desktop`
     flex-direction: column;
+  `};
+`
+
+const TestimonialsImage = styled.img`
+  width: 69rem;
+  margin: 7rem auto;
+
+  ${media.desktop`
+    width: 100%;
+    margin: 3.5rem auto;
   `};
 `
 
@@ -692,8 +735,7 @@ class IndexPage extends Component {
                 all about telling the world your story.
               </SectionCopy>
               <div style={{ color: '#fff', marginBottom: '1.6rem' }}>
-                {' '}
-                <SocialIconsFooter>
+                <SocialIconsFooter hideOnMobile>
                   <span>Look us up, we're cool:</span>
                   <SocialIconContainer
                     target="_blank"
@@ -763,32 +805,26 @@ class IndexPage extends Component {
             </WhatWeDoList>
           </FlexColumn>
         </Section>
-        <Section header="Why we do it">
+        <Section header="Why we do it" hideOverflow>
           <div>
             <div>
               <SectionCopy maxWidth="69rem">
                 Focusing on design and digital storytelling, we had the pleasure
                 to work with the world's most{' '}
                 <SectionCopyHighlight>ambitious brands</SectionCopyHighlight> to
-                create amazing experiences.
+                create{' '}
+                <SectionCopyHighlight mobile>
+                  amazing experiences
+                </SectionCopyHighlight>.
               </SectionCopy>
-              <img
-                style={{ width: '69rem', margin: '7.5rem 0' }}
-                src="/images/testimonials/placeholder-image.png"
-              />
+              <TestimonialsImage src="/images/testimonials/placeholder-image.png" />
             </div>
             <HorizontalRule />
             <Testimonials />
           </div>
         </Section>
         <Section header="Say hello">
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
-          >
+          <FlexColumn>
             <SectionCopy maxWidth="50rem">
               We love new projects, meeting people and build amazing things.
             </SectionCopy>
@@ -796,7 +832,7 @@ class IndexPage extends Component {
               <ContactContainerCircle />
               <PencilIcon />
             </ContactContainer>
-          </div>
+          </FlexColumn>
         </Section>
         <Container>
           <Footer>

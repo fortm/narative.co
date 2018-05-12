@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import Transition from 'react-transition-group/Transition'
+import { media } from '@styles'
 
 const fadeInDuration = 500
 
@@ -103,9 +104,12 @@ const ArrowRight = () => (
 )
 
 const TestimonialContainer = styled.div`
+  position: relative;
   display: flex;
   justify-content: flex-start;
+  overflow-x: visible;
 `
+
 const TestimonialContent = styled.div`
   max-width: 49rem;
   display: flex;
@@ -119,6 +123,12 @@ const TestimonialBottom = styled.div`
   align-items: center;
   width: 100%;
   color: #fff;
+
+  ${media.desktop`
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  `};
 `
 
 const TestimonialBottomActions = styled.div`
@@ -141,12 +151,21 @@ const TestimonialCopy = styled.p`
   font-style: italic;
   font-family: 'meta';
   margin-bottom: 3.5rem;
+
+  ${media.desktop`
+    line-height: 1.2;
+    font-size: 2.4rem;
+  `};
 `
 
 const TestimonialName = styled.p`
   color: #fff;
   font-size: 1.8rem;
   font-weight: 500;
+
+  ${media.desktop`
+    margin-bottom: 3.5rem;
+  `};
 `
 
 const TestimonialDotContainer = styled.div`
@@ -185,6 +204,13 @@ const TestimonialDot = styled.div`
       transform: scale(2);
       opacity: 1;
     }
+    `};
+`
+
+const TestimonialPortrait = styled.img`
+  ${media.desktop`
+      position: absolute;
+      right: -180px;
     `};
 `
 
@@ -255,9 +281,10 @@ class Testimonials extends Component {
             </TestimonialBottomActions>
           </TestimonialBottom>
         </TestimonialContent>
-        <div>
-          <img src={testimonial.portrait} alt={testimonial.portraitAltText} />
-        </div>
+        <TestimonialPortrait
+          src={testimonial.portrait}
+          alt={testimonial.portraitAltText}
+        />
       </TestimonialContainer>
     )
   }

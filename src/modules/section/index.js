@@ -44,10 +44,10 @@ const SectionContent = styled.div`
   flex: 1;
 `
 
-const Section = ({ children, header }) => {
+const Section = ({ children, header, hideOverflow }) => {
   return (
     <SectionSpacer>
-      <Container>
+      <Container hideOverflow={hideOverflow}>
         <SectionContainer>
           <SectionHeader>{header}</SectionHeader>
           <SectionContent>{children}</SectionContent>

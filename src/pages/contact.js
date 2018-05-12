@@ -43,6 +43,7 @@ const SlideInContainer = styled.div`
     position: relative;
     transform: translateX(0);
     transition: opacity 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
+    box-shadow: none;
     padding: 7rem 4rem 0;
     overflow: initial;
   `};
@@ -162,7 +163,7 @@ const LeftContainer = styled.div`
   `};
 
   ${media.phablet`
-    padding: 5rem 2rem 1rem;
+    padding: 5rem 0 1rem;
   `};
 `
 
@@ -221,6 +222,9 @@ const CloseContainerMobile = styled(Link)`
   border-radius: 50%;
   align-items: center;
   justify-content: center;
+  opacity: ${props => (props.animation ? '1' : '0')};
+  transform: rotate(${props => (props.animation ? '0' : '-60deg')});
+  transition: all 1s 1s ease;
 
   ${media.desktop`
     display: flex;
@@ -332,7 +336,6 @@ const MobileArrowContainer = styled.div`
 
   ${media.desktop`
     display: flex;
-    bottom: -4.4rem;
   `};
 `
 

@@ -13,6 +13,7 @@ const modifyBabelrc = ({ babelrc }) => ({
     plugins: babelrc.plugins.concat([
       'transform-regenerator',
       'transform-runtime',
+      'babel-plugin-styled-components',
     ]),
   }),
 })
