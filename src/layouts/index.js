@@ -19,15 +19,8 @@ const meta = [
   },
 ]
 
-const handlePageBackgroundColor = () => {
-  const darkPages = ['/contact']
-  const { pathname } = window.location
-
-  return darkPages.some(page => pathname === page)
-}
-
 const WebContainer = styled.div`
-  background: ${handlePageBackgroundColor() ? theme.colors.bg : '#fff'};
+  background: ${theme.colors.bg};
   min-height: 100vh;
   width: 100vw;
 `
@@ -36,7 +29,7 @@ const Layout = ({ children, data }) => (
   <ThemeProvider theme={theme}>
     <WebContainer>
       <Helmet title={data.site.siteMetadata.title} meta={meta} />
-      <div>{children()}</div>
+      {children()}
     </WebContainer>
   </ThemeProvider>
 )
