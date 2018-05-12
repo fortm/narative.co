@@ -46,6 +46,9 @@ const GridContainer = styled.div`
   ${media.desktop`
     height: initial
     grid-template-columns: 1fr;
+  `};
+
+  ${media.phone`
     width: 30rem;
   `};
 `
@@ -71,6 +74,10 @@ const NarativeVideoContainer = styled.div`
   align-self: flex-end;
 
   ${media.desktop`
+    width: 46rem;
+  `};
+
+  ${media.phablet`
     height: auto;
     width: 30rem;
   `};
@@ -82,7 +89,7 @@ const NarativeVideo = styled.video`
 
   ${transitions.blurIn};
 
-  ${media.desktop`
+  ${media.tablet`
     height: 30rem;
   `};
 `
@@ -136,10 +143,11 @@ const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-width: 36rem;
+  width: 36rem;
   height: 53rem;
 
   ${media.desktop`
+    padding-top: 5rem;
     justify-content: flex-start;
     width: 100%;
     height: initial;
@@ -238,6 +246,12 @@ const SectionCopy = styled.p`
   font-size: 3.6rem;
   line-height: 1.2;
   max-width: ${props => (props.maxWidth ? props.maxWidth : '100%')};
+
+  ${media.desktop`
+    font-size: 2.2rem;
+    line-height: 1.4;
+    max-width: 100%;
+  `};
 `
 const SectionCopyHighlight = styled.span`
   position: relative;
@@ -274,6 +288,10 @@ const FunctionArrowContainer = styled.div`
   justify-content: space-between;
   margin-top: 7rem;
   max-width: 68rem;
+
+  ${media.desktop`
+    margin-top: 3.5rem;
+  `};
 `
 
 const FunctionArrowWord = styled.div`
@@ -312,9 +330,13 @@ const FunctionArrow = styled.div`
 `
 
 const WhatWeDoList = styled.ul`
-  min-width: 400px;
-  width: 400px;
+  min-width: 40rem;
+  width: 40rem;
   list-style: none;
+
+  ${media.desktop`
+    width: 100%;
+  `};
 `
 
 const WhatWeDoListItem = styled.li`
@@ -409,6 +431,10 @@ const ScrollIndicator = styled.div`
   border-left: 1px solid ${props => props.theme.colors.grey};
   margin-bottom: 7rem;
 
+  ${media.desktop`
+    display: none;
+  `};
+
   &::after {
     content: '';
     position: absolute;
@@ -459,7 +485,7 @@ const Footer = styled.footer`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 5rem;
+  padding-bottom: 5rem;
   color: ${props => props.theme.colors.grey};
 `
 
@@ -490,7 +516,9 @@ const ContactUsContainer = styled(Link)`
   color: ${props => props.theme.colors.grey};
   font-weight: 500;
 
-  &::before {
+  ${media.desktop`
+    display: none;
+  `} &::before {
     content: '';
     position: absolute;
     left: 0;
@@ -545,6 +573,24 @@ const ShadowContainer = styled.div`
   }
 `
 
+const FlexColumn = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  ${media.desktop`
+    flex-direction: column;
+  `};
+`
+
+const WhatWeDoContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  ${media.desktop`
+    margin-bottom: 2.5rem;
+  `};
+`
 class IndexPage extends Component {
   state = { animation: '' }
 
@@ -639,14 +685,8 @@ class IndexPage extends Component {
           </div>
         </Section>
         <Section header="What we do">
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
-            >
+          <FlexColumn>
+            <WhatWeDoContent>
               <SectionCopy maxWidth="36rem">
                 Empowering businesses through design and strategy. Narative is
                 all about telling the world your story.
@@ -687,7 +727,7 @@ class IndexPage extends Component {
                   </SocialIconContainer>
                 </SocialIconsFooter>
               </div>
-            </div>
+            </WhatWeDoContent>
             <WhatWeDoList>
               <WhatWeDoListItem>
                 <span>Branding ·&nbsp;</span> logotype design, guidelines,
@@ -721,7 +761,7 @@ class IndexPage extends Component {
                 generation
               </WhatWeDoListItem>
             </WhatWeDoList>
-          </div>
+          </FlexColumn>
         </Section>
         <Section header="Why we do it">
           <div>

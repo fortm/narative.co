@@ -18,6 +18,7 @@ const sizes = {
   mdpi: 1280,
   desktop: 1024,
   tablet: 768,
+  phablet: 540,
   phone: 376,
 }
 

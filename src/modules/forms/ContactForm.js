@@ -32,6 +32,7 @@ const StyledFormikForm = styled(FormikForm)`
   position: relative;
   width: 46rem;
   padding-bottom: 10rem;
+  margin: 0 auto;
 
   ${media.mdpi`
     width: 100%;
@@ -55,8 +56,11 @@ const SubmittedScreen = styled.div`
     forwards;
 
   ${media.mdpi`
-    width: 100%;
     padding-bottom: 0;
+  `};
+
+  ${media.desktop`
+    width: 100%;
   `};
 
   svg {

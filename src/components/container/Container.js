@@ -10,7 +10,15 @@ const Container = styled.div`
     props.background === 'dark' ? props.theme.colors.bg : 'transparent'};
 
   ${media.desktop`
-    padding: 5rem 4rem 1rem;
+    max-width: 54rem;
+  `};
+
+  ${media.phablet`
+    max-width: 100%;
+  `};
+
+  ${media.phablet`
+    padding: 0 4rem;
   `};
 `
 

@@ -32,12 +32,10 @@ const SlideInContainer = styled.div`
   padding: 0;
   z-index: 0;
   position: absolute;
-  padding-left: 110px;
   overflow-y: scroll;
   box-shadow: rgba(0, 0, 0, 0.4) 40px 0px 40px -40px inset;
   transition: all 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
   transform: translateX(100%);
-
   background: #fff;
 
   ${media.desktop`
@@ -46,6 +44,7 @@ const SlideInContainer = styled.div`
     transform: translateX(0);
     transition: opacity 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
     padding: 7rem 4rem 0;
+    overflow: initial;
   `};
 `
 
@@ -78,8 +77,12 @@ const GridContainer = styled.div`
 
   ${media.desktop`
     grid-template-columns: 1fr;
-    width: 30rem;
     margin: 0 auto;
+    height: auto;
+  `};
+
+  ${media.phone`
+    width: 30rem;
   `};
 `
 
@@ -145,12 +148,21 @@ const LeftContainer = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  max-width: 36rem;
+  width: 36rem;
   height: 53rem;
 
+  ${media.hdpi`
+    margin: 0 auto;
+  `};
+
   ${media.desktop`
-    justify-content: flex-start;
+    padding: 5rem 0 1rem;
     width: 100%;
+    height: auto;
+  `};
+
+  ${media.phablet`
+    padding: 5rem 2rem 1rem;
   `};
 `
 
@@ -186,13 +198,12 @@ const FormContainer = styled.div`
   width: 100%;
   ${transitions.fadeUp};
 
-  ${media.tablet`
-    padding: 2rem;
-    width: 46rem;
+  ${media.hdpi`
+    width: 54rem;
   `};
 
-  ${media.hdpi`
-    padding: 0;
+  ${media.tablet`
+    width: 100%;
   `};
 `
 
@@ -204,7 +215,7 @@ const HighlightText = styled.span`
 const CloseContainerMobile = styled(Link)`
   display: none;
   position: absolute;
-  top: 0rem;
+  top: 0;
   right: 0rem;
   cursor: pointer;
   border-radius: 50%;
@@ -213,6 +224,7 @@ const CloseContainerMobile = styled(Link)`
 
   ${media.desktop`
     display: flex;
+    top: 5rem;
   `};
 `
 
@@ -307,7 +319,7 @@ const MobileArrowContainer = styled.div`
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -3.2rem;
+  bottom: -2.2rem;
   height: 4.4rem;
   width: 4.4rem;
   margin: 0 auto;
@@ -320,6 +332,7 @@ const MobileArrowContainer = styled.div`
 
   ${media.desktop`
     display: flex;
+    bottom: -4.4rem;
   `};
 `
 

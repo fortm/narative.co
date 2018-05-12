@@ -22,8 +22,12 @@ const StyledFormikForm = styled(FormikForm)`
   position: relative;
   width: 36rem;
 
-  ${media.tablet`
+  ${media.desktop`
     width: 100%;
+  `};
+
+  ${media.phone`
+    max-width: 30rem;
   `};
 `
 

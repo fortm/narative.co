@@ -1,13 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Container } from '@components/'
+import { Container } from '@components'
+import { media } from '@styles'
 
 const SectionSpacer = styled.div`
   padding-bottom: 25rem;
+
+  ${media.hdpi`
+    padding-bottom: 18rem;
+  `};
+
+  ${media.desktop`
+    padding-bottom: 10rem;
+  `};
 `
 
 const SectionContainer = styled.div`
   display: flex;
+
+  ${media.desktop`
+    flex-direction: column;
+  `};
 `
 
 const SectionHeader = styled.h2`
@@ -20,6 +33,11 @@ const SectionHeader = styled.h2`
   line-height: 1.4;
   padding-bottom: 1rem;
   margin-right: 9.3rem;
+
+  ${media.desktop`
+    flex-direction: column;
+    margin: 0 0 3.5rem 0;
+  `};
 `
 
 const SectionContent = styled.div`
