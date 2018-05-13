@@ -279,10 +279,9 @@ class IndexPage extends Component {
               <WelcomeHeader>What's your story?</WelcomeHeader>
               <MainText>
                 Narative is a digital studio co-founded by designers, engineers
-                and strategists with decades of experience  at Canada’s most
+                and strategists with decades of experience at Canada’s most
                 successful startups. We merge best practices in design and
-                growth marketing to create narratives that empowers your brand
-                and product.
+                growth marketing to create narratives that empowers your brand.
               </MainText>
               <ContactText to="/contact">
                 <HideOnMobile>Our new site is on its way. </HideOnMobile>
