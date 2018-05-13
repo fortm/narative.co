@@ -276,13 +276,13 @@ class IndexPage extends Component {
               <Logo />
             </LogoContainer>
             <TextContainer animation={animation} transitionDelay={600}>
-              <WelcomeHeader>Some things are worth the wait.</WelcomeHeader>
+              <WelcomeHeader>What's your story?</WelcomeHeader>
               <MainText>
-                We’re Narative! Yes, that is with one R. Narative is a
-                digital-first design studio that is all about reducing the noise
-                and unnecessary details—using classical techniques with state of
-                the art technologies, we help you solve your problems, grow your
-                business and simply tell your story.
+                Narative is a digital studio co-founded by designers, engineers
+                and strategists with decades of experience  at Canada’s most
+                successful startups. We merge best practices in design and
+                growth marketing to create narratives that empowers your brand
+                and product.
               </MainText>
               <ContactText to="/contact">
                 <HideOnMobile>Our new site is on its way. </HideOnMobile>

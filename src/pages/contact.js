@@ -261,11 +261,14 @@ const CloseContainerMobile = styled(Link)`
   justify-content: center;
 
   ${media.large`
-    display: none;;
+    display: none;
   `};
 `
 
 const CloseContainer = styled(Link)`
+  display: none;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   right: 3.5rem;
   top: 5rem;
@@ -273,9 +276,11 @@ const CloseContainer = styled(Link)`
   border-radius: 50%;
   height: 3.4rem;
   width: 3.4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+  ${media.large`
+    display: flex;
+  `};
+
   &::after {
     content: '';
     position: absolute;
