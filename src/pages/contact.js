@@ -195,12 +195,10 @@ const FormContainer = styled.div`
   ${media.medium`
     padding: 2rem;
     width: 46rem;
-    margin: 0 auto;
   `};
 
   ${media.xlarge`
     padding: 0;
-    margin: 0 auto 0 11rem; 
   `};
 `
 
