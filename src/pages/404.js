@@ -49,9 +49,11 @@ const GridContainer = styled.div`
   `};
 `
 
-const LogoContainer = styled.div`
+const LogoContainer = styled(Link)`
   max-width: 16rem;
+  max-height: 2.3rem;
   margin-bottom: 0;
+  text-decoration: none;
 
   ${transitions.fadeUp};
 
@@ -345,7 +347,7 @@ class NotFound extends Component {
           <Container background="light" hideOverflow>
             <GridContainer>
               <LeftContainer>
-                <LogoContainer animation={animation}>
+                <LogoContainer to="/" animation={animation}>
                   <Logo color="dark" />
                 </LogoContainer>
                 <TextContainer animation={animation} transitionDelay={600}>
