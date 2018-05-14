@@ -362,7 +362,7 @@ class ContactPage extends Component {
                 </MainText>
                 <Forms.PhoneForm />
               </TextContainer>
-              <CopyRightContainer transitionDelay={300}>
+              <CopyRightContainer animation={animation} transitionDelay={300}>
                 © {new Date().getFullYear()} Narative Studio Inc.
               </CopyRightContainer>
 
