@@ -47,13 +47,15 @@ const GridContainer = styled.div`
   `};
 `
 
-const LogoContainer = styled.div`
+const LogoContainer = styled(Link)`
   max-width: 10rem;
   margin-bottom: 4rem;
+  text-decoration: none;
 
   ${transitions.fadeUp};
 
   ${media.large`
+    max-height: 2.3rem;
     max-width: 16rem;
     margin-bottom: 0;
   `};
@@ -272,7 +274,7 @@ class IndexPage extends Component {
       <Container background="dark">
         <GridContainer>
           <LeftContainer>
-            <LogoContainer animation={animation}>
+            <LogoContainer to="/" animation={animation}>
               <Logo />
             </LogoContainer>
             <TextContainer animation={animation} transitionDelay={600}>

@@ -80,14 +80,14 @@ const StyledInput = styled.input`
 
   &[value]:not([value='']) ~ ${LabelAnimation} {
     font-weight: 500;
-    width: 133.3333333%
+    width: 133.3333333%;
     transform: translateY(-1.28125em) scale(0.8) perspective(100px)
       translateZ(0.001px);
   }
 
   &:active ~ ${LabelAnimation}, &:focus ~ ${LabelAnimation} {
     font-weight: 500;
-    width: 133.3333333%
+    width: 133.3333333%;
     transform: translateY(-1.28125em) scale(0.8) perspective(100px)
       translateZ(0.001px);
   }

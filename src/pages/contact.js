@@ -86,13 +86,15 @@ const GridContainer = styled.div`
   `};
 `
 
-const LogoContainer = styled.div`
+const LogoContainer = styled(Link)`
   max-width: 10rem;
   margin-bottom: 4rem;
+  text-decoration: none;
   ${transitions.fadeUp};
 
   ${media.large`
     max-width: 16rem;
+    max-height: 2.3rem;
     margin-bottom: 2rem;
     margin-bottom: 0;
   `};
@@ -301,52 +303,6 @@ const CloseContainer = styled(Link)`
   }
 `
 
-const ScrollContainer = styled.div`
-  display: none;
-  position: absolute;
-  right: -10.5rem;
-  bottom: 19.5rem;
-  width: 31.4rem;
-  height: 1px;
-  background: #eff0f0;
-  transform: rotate(-90deg);
-  ${transitions.fadeUp};
-  transition-property: opacity;
-
-  ${media.xlarge`
-    display: block;
-  `};
-
-  &::after {
-    content: '';
-    position: absolute;
-    background: #eff0f0;
-    left: 0;
-    top: -2px;
-    height: 5px;
-    width: 5px;
-    border-radius: 50%;
-  }
-`
-
-const ScrollTextContainer = styled.div`
-  display: none;
-  position: fixed;
-  width: 10rem;
-  right: 0.4rem;
-  top: calc(50% - 18px / 2 + 56px);
-  transform: rotate(-90deg);
-  color: rgba(0, 0, 0, 0.18);
-  padding: 0 1rem;
-  background: #fff;
-  ${transitions.fadeUp};
-  transition-property: opacity;
-
-  ${media.xlarge`
-    display: block;
-  `};
-`
-
 const MobileArrowContainer = styled.div`
   display: flex;
   align-items: center;
@@ -390,7 +346,7 @@ class ContactPage extends Component {
               <CloseContainerMobile to="/" animation={animation}>
                 <Ex fill="white" />
               </CloseContainerMobile>
-              <LogoContainer animation={animation} transitionDelay={300}>
+              <LogoContainer to="/" animation={animation} transitionDelay={300}>
                 <Logo />
               </LogoContainer>
               <TextContainer animation={animation} transitionDelay={300}>
@@ -427,10 +383,6 @@ class ContactPage extends Component {
         <CloseContainer to="/">
           <Ex />
         </CloseContainer>
-        <ScrollContainer animation={animation} transitionDelay={1000} />
-        <ScrollTextContainer animation={animation} transitionDelay={1000}>
-          Scroll down
-        </ScrollTextContainer>
       </div>
     )
   }

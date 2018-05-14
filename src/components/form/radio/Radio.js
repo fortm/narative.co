@@ -59,8 +59,9 @@ const StyledRadioInput = styled.input`
   position: absolute;
 
   &:checked + ${StyledLabel} {
-    border: 1.5px solid #000;
+    border: 1px solid #000;
     color: #000;
+    font-weight: 500;
   }
 
   &:checked + ${StyledLabel}::after {
