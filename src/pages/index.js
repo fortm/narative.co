@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Link from 'gatsby-link'
 import styled, { keyframes } from 'styled-components'
 import { media, transitions } from '@styles'
-import { Container, Logo } from '@components'
+import { Container, Logo, Video } from '@components'
 import { Forms } from '@modules'
 
 const animateButtonLine = keyframes`
@@ -300,14 +300,14 @@ class IndexPage extends Component {
           <RightContainer>
             <NarativeVideoContainer>
               <NarativeVideo
-                controls={false}
                 poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
                 animation={animation}
                 innerRef={video => (this.video = video)}
+                controls="false"
                 muted="muted"
                 role="img"
                 volume="0"
-                canplay="false"
+                canPlay="false"
                 autoPlay="autoplay"
               >
                 <source
