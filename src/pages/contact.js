@@ -93,7 +93,7 @@ const LogoContainer = styled(Link)`
   ${transitions.fadeUp};
 
   ${media.large`
-    max-width: 16rem;
+    max-width: 13.059rem;
     max-height: 2.3rem;
     margin-bottom: 2rem;
     margin-bottom: 0;

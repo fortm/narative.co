@@ -25,6 +25,16 @@ const plugins = [
     },
   },
   {
+    resolve: 'gatsby-plugin-manifest',
+    options: {
+      name: 'Narative',
+      short_name: 'Narative',
+      start_url: '/',
+      background_color: '#111216',
+      theme_color: '#111216',
+    },
+  },
+  {
     resolve: `gatsby-plugin-google-analytics`,
     options: {
       trackingId: 'UA-118232427-1',

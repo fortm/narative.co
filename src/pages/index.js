@@ -51,12 +51,11 @@ const LogoContainer = styled(Link)`
   max-width: 10rem;
   margin-bottom: 4rem;
   text-decoration: none;
-
   ${transitions.fadeUp};
 
   ${media.large`
     max-height: 2.3rem;
-    max-width: 16rem;
+    max-width: 13.059rem;
     margin-bottom: 0;
   `};
 `
