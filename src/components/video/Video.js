@@ -43,10 +43,11 @@ class Video extends Component {
         muted="muted"
         role="img"
         volume="0"
+        controls="false"
         innerRef={video => (this.video = video)}
       >
-        <source type="video/webm" ref={webm => (this.webm = webm)} />
-        <source type="video/mp4" ref={mp4 => (this.mp4 = mp4)} />
+        <source type="video/webm" src="" ref={webm => (this.webm = webm)} />
+        <source type="video/mp4" src="" ref={mp4 => (this.mp4 = mp4)} />
       </StyledVideo>
     )
   }
