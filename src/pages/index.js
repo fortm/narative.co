@@ -60,7 +60,7 @@ const LogoContainer = styled(Link)`
   `};
 `
 
-const NarativeVideoContainer = styled.div`
+const NarativeVideoClip = styled.div`
   clip-path: polygon(0 36%, 0 0, 100% 64%, 100% 100%);
   height: auto;
   width: 30rem;
@@ -74,7 +74,7 @@ const NarativeVideoContainer = styled.div`
   `};
 `
 
-const NarativeVideo = styled.video`
+const NarativeVideoContainer = styled.div`
   position: relative;
   height: 30rem;
   ${transitions.blurIn};
@@ -257,13 +257,6 @@ class IndexPage extends Component {
     setTimeout(() => {
       this.setState({ animation: 'start' })
     })
-
-    // Required as a workaround for Safari video
-    this.video.muted = true
-    this.video.controls = false
-    this.video.volume = 0
-    this.video.canplay = false
-    this.video.play()
   }
 
   render() {
@@ -298,28 +291,16 @@ class IndexPage extends Component {
             </CopyRightContainer>
           </LeftContainer>
           <RightContainer>
-            <NarativeVideoContainer>
-              <NarativeVideo
-                poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
-                animation={animation}
-                innerRef={video => (this.video = video)}
-                controls="false"
-                muted="muted"
-                role="img"
-                volume="0"
-                canPlay="false"
-                autoPlay="autoplay"
-              >
-                <source
-                  src="http://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
-                  type="video/webm"
+            <NarativeVideoClip>
+              <NarativeVideoContainer animation={animation}>
+                <Video
+                  poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
+                  webm="http://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
+                  mp4="http://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
+                  label="Narative water mark"
                 />
-                <source
-                  src="http://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
-                  type="video/mp4"
-                />
-              </NarativeVideo>
-            </NarativeVideoContainer>
+              </NarativeVideoContainer>
+            </NarativeVideoClip>
             <CopyRightContainerMobile>
               © {new Date().getFullYear()} Narative Studio Inc.
             </CopyRightContainerMobile>
