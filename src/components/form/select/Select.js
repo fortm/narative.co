@@ -80,7 +80,7 @@ const StyledSelect = styled.div`
   outline: none;
 `
 
-const SelectOption = styled.option`
+const SelectOption = styled.div`
   padding: 0.8rem 1.2rem;
   transition: all 200ms ${props => props.theme.transitions.easeOut};
 
