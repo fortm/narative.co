@@ -26,7 +26,8 @@ class Video extends Component {
       this.mp4.src = dataset.mp4Src
     }
 
-    this.video.play()
+    // Once it's complete, load the video!
+    this.video.load()
   }
 
   render() {
@@ -45,8 +46,8 @@ class Video extends Component {
         volume="0"
         innerRef={video => (this.video = video)}
       >
-        <source type="video/webm" src="" ref={webm => (this.webm = webm)} />
-        <source type="video/mp4" src="" ref={mp4 => (this.mp4 = mp4)} />
+        <source type="video/webm" ref={webm => (this.webm = webm)} />
+        <source type="video/mp4" ref={mp4 => (this.mp4 = mp4)} />
       </StyledVideo>
     )
   }
