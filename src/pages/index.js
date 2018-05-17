@@ -295,8 +295,8 @@ class IndexPage extends Component {
               <NarativeVideoContainer animation={animation}>
                 <Video
                   poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
-                  webm="http://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
-                  mp4="http://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
+                  webm="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
+                  mp4="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
                   label="Narative water mark"
                 />
               </NarativeVideoContainer>
