@@ -25,6 +25,8 @@ class Video extends Component {
       this.webm.src = dataset.webmSrc
       this.mp4.src = dataset.mp4Src
     }
+
+    this.video.play()
   }
 
   render() {
