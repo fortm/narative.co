@@ -228,7 +228,7 @@ class ContactForm extends Component {
                   <FormSection>
                     <FormHeader>Give us the details</FormHeader>
                     <Field
-                      component={Form.Text}
+                      component={Form.Textarea}
                       label="Tell us a bit more"
                       name="details"
                     />
