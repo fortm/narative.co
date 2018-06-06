@@ -23,6 +23,7 @@ const WebContainer = styled.div`
   background: ${theme.colors.bg};
   min-height: 100vh;
   width: 100vw;
+  overflow-x: hidden;
 `
 
 const Layout = ({ children, data }) => (

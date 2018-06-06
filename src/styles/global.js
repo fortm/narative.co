@@ -129,9 +129,10 @@ export const globalStyles = () => injectGlobal`
     'Arial',
     sans-serif;
     font-size: 1.6rem;
+    font-weight: 400;
     margin: 0;
     color: ${theme.colors.black};
-    font-weight: 400;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
