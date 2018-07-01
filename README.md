@@ -39,7 +39,19 @@ Deployments are done using [Netlify](https://app.netlify.com/). You must be adde
 git push
 ```
 
-Deployments are done automatically on every push to `master`
+### Branching
+
+#### `[your-branch]`
+
+Working on your feature branch can be previewed after every push.
+
+#### `dev`
+
+Before deploying to narative.co, double check your code on `dev` branch.
+
+#### `master`
+
+To deploy to narative.co merge your code into master.
 
 ## License
 
