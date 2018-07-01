@@ -99,15 +99,15 @@ const GridContainer = styled.div`
 `
 
 const LogoContainer = styled(Link)`
-  max-width: 16rem;
   max-height: 2.3rem;
+  max-width: 13.059rem;
   margin-bottom: 0;
   text-decoration: none;
   ${transitions.fadeUp};
 
   ${media.desktop`
-    max-width: 10rem;
-    margin-bottom: 4rem;
+  max-width: 10rem;
+  margin-bottom: 4rem;
   `};
 `
 
@@ -165,11 +165,8 @@ const LeftContainer = styled.div`
   width: 36rem;
   height: 53rem;
 
-  ${media.hdpi`
-    margin: 0 auto;
-  `};
-
   ${media.desktop`
+    margin: 0 auto;
     padding: 5rem 0 1rem;
     width: 100%;
     height: auto;
