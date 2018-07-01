@@ -47,6 +47,17 @@ const SlideInContainer = styled.div`
     padding: 7rem 4rem 0;
     overflow: initial;
   `};
+
+  // Adding in white buffer just in case
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -250px;
+    left: 0;
+    height: 250px;
+    width: 100%;
+    background: #fff;
+  }
 `
 
 const SlideIn = ({ in: inProp, children }) => {

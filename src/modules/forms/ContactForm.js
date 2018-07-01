@@ -34,14 +34,15 @@ const StyledFormikForm = styled(FormikForm)`
   padding-bottom: 10rem;
   margin-left: 11rem;
 
-  ${media.mdpi`
+  ${media.hdpi`
+    margin-left: 0;
     width: 100%;
-    margin: 0 auto;
     padding: 0 4rem 5rem;
   `};
 
   ${media.desktop`
     width: 50rem;
+    margin: 0 auto;
     padding: 0 0 5rem;
   `};
 
@@ -54,6 +55,7 @@ const SubmittedScreen = styled.div`
   width: 46rem;
   height: 53rem;
   padding-bottom: 10rem;
+  margin-left: 11rem;
   align-self: flex-end;
   position: relative;
   display: flex;
@@ -67,6 +69,7 @@ const SubmittedScreen = styled.div`
 
   ${media.mdpi`
     padding-bottom: 0;
+    margin: 0 auto;
   `};
 
   svg {

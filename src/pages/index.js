@@ -750,31 +750,31 @@ class IndexPage extends Component {
                   <span>Look us up, we're cool:</span>
                   <SocialIconContainer
                     target="_blank"
-                    href="https://facebook.com"
+                    href="https://www.facebook.com/narative.co/"
                   >
                     <SocialIcons.FacebookIcon />
                   </SocialIconContainer>
                   <SocialIconContainer
                     target="_blank"
-                    href="https://facebook.com"
+                    href="https://twitter.com/narative_co"
                   >
                     <SocialIcons.TwitterIcon />
                   </SocialIconContainer>
                   <SocialIconContainer
                     target="_blank"
-                    href="https://facebook.com"
+                    href="https://www.linkedin.com/company/narative/"
                   >
                     <SocialIcons.LinkedinIcon />
                   </SocialIconContainer>
                   <SocialIconContainer
                     target="_blank"
-                    href="https://facebook.com"
+                    href="https://github.com/narative"
                   >
                     <SocialIcons.GithubIcon />
                   </SocialIconContainer>
                   <SocialIconContainer
                     target="_blank"
-                    href="https://facebook.com"
+                    href="https://www.instagram.com/narative.co/"
                   >
                     <SocialIcons.DribbleIcon />
                   </SocialIconContainer>
@@ -860,19 +860,34 @@ class IndexPage extends Component {
             </CopyRightContainer>
             <SocialIconsFooter>
               <span>Look us up, we're cool:</span>
-              <SocialIconContainer target="_blank" href="https://facebook.com">
+              <SocialIconContainer
+                target="_blank"
+                href="https://www.facebook.com/narative.co/"
+              >
                 <SocialIcons.FacebookIcon />
               </SocialIconContainer>
-              <SocialIconContainer target="_blank" href="https://facebook.com">
+              <SocialIconContainer
+                target="_blank"
+                href="https://twitter.com/narative_co"
+              >
                 <SocialIcons.TwitterIcon />
               </SocialIconContainer>
-              <SocialIconContainer target="_blank" href="https://facebook.com">
+              <SocialIconContainer
+                target="_blank"
+                href="https://www.linkedin.com/company/narative/"
+              >
                 <SocialIcons.LinkedinIcon />
               </SocialIconContainer>
-              <SocialIconContainer target="_blank" href="https://facebook.com">
+              <SocialIconContainer
+                target="_blank"
+                href="https://github.com/narative"
+              >
                 <SocialIcons.GithubIcon />
               </SocialIconContainer>
-              <SocialIconContainer target="_blank" href="https://facebook.com">
+              <SocialIconContainer
+                target="_blank"
+                href="https://www.instagram.com/narative.co/"
+              >
                 <SocialIcons.DribbleIcon />
               </SocialIconContainer>
             </SocialIconsFooter>
