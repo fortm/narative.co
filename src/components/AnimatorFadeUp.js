@@ -4,15 +4,16 @@ import Observer from './Observer'
 class AnimatorFadeUp extends Component {
   calculateStyleCurves = ({ intersectionRatio }) => {
     if (!intersectionRatio) {
-      return
+      return {}
     }
 
     const opacityCurve = Math.pow(intersectionRatio, 3)
     const transformCurve = Math.pow(intersectionRatio - 1, 2) * 150
 
+    console.log({ opacityCurve, transformCurve })
     return {
       opacity: opacityCurve,
-      transform: `translateY(${transformCurve}px)`,
+      transform: ` matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, ${transformCurve}, 0, 1)`,
     }
   }
 
