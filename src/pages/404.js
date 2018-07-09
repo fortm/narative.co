@@ -360,7 +360,7 @@ class NotFound extends Component {
                     project, just contact us. We love ideas.
                   </MainText>
                   <ContactActionsContainer>
-                    <ContactButton>Contact us</ContactButton>
+                    <ContactButton to="/contact">Contact us</ContactButton>
                     <ContactText to="/">
                       <ArrowAnimation>
                         Go back home

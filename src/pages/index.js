@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Link from 'gatsby-link'
 import styled, { keyframes } from 'styled-components'
 import { media, transitions } from '@styles'
-import { Container, Logo } from '@components'
+import { Container, IntersectionObserver, Logo } from '@components'
 import { Forms, Section, Testimonials } from '@modules'
 import * as SocialIcons from '../icons/social'
 import { ArrowRightIcon, PencilIcon } from '../icons/ui'
@@ -724,19 +724,28 @@ class IndexPage extends Component {
           </ScrollIndicator>
         </Container>
         <Section header="What design is to us">
-          <div>
-            <SectionCopy maxWidth="65rem">
-              Design for us is the core of lorem ipsum dolor sit amet,
-              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-              nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat.
-            </SectionCopy>
-            <FunctionArrowContainer>
-              <FunctionArrowWord>Function</FunctionArrowWord> <FunctionArrow />{' '}
-              <FunctionArrowWord paddingLeft>Form</FunctionArrowWord>
-            </FunctionArrowContainer>
-          </div>
+          <IntersectionObserver
+            render={data => {
+              console.log(data)
+
+              return (
+                <div>
+                  <SectionCopy maxWidth="65rem">
+                    Design for us is the core of lorem ipsum dolor sit amet,
+                    consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. Ut enim ad
+                    minim veniam, quis nostrud exercitation ullamco laboris nisi
+                    ut aliquip ex ea commodo consequat.
+                  </SectionCopy>
+                  <FunctionArrowContainer>
+                    <FunctionArrowWord>Function</FunctionArrowWord>{' '}
+                    <FunctionArrow />{' '}
+                    <FunctionArrowWord paddingLeft>Form</FunctionArrowWord>
+                  </FunctionArrowContainer>
+                </div>
+              )
+            }}
+          />
         </Section>
         <Section header="What we do">
           <FlexColumn>

@@ -1,9 +1,10 @@
-import Button from './button/Button'
-import Container from './container/Container'
+import Button from './Button'
+import Container from './Container'
 import Form from './form'
-import Header from './header/Header'
-import Logo from './logo/Logo'
-import Navigation from './navigation/Navigation'
+import Header from './Header'
+import IntersectionObserver from './IntersectionObserver'
+import Logo from './Logo'
+import Navigation from './Navigation'
 import * as Transitions from './transitions'
 
 export default {
@@ -11,6 +12,7 @@ export default {
   Container,
   Form,
   Header,
+  IntersectionObserver,
   Logo,
   Navigation,
   Transitions,

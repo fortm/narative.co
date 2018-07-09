@@ -10,7 +10,7 @@ Tell a different story, a better one.
 
 ```sh
 # Go to your favourite directory and clone
-git clone git@github.com:narative/narative.com.git && cd narative.com
+git clone git@github.com:narative/narative.co.git && cd narative.co
 
 # Install all depedencies
 yarn

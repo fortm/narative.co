@@ -20,11 +20,9 @@
     "react-transition-group": "^2.3.1",
     "styled-components": "^3.2.6"
   },
-  "keywords": [
-    "narative"
-  ],
+  "keywords": ["narative"],
   "scripts": {
-    "build": "./node_modules/.bin/gatsby build",
+    "build": "./node_modules/.bin/gatsby build --prefix-paths",
     "dev": "./node_modules/.bin/gatsby develop",
     "format": "prettier --write 'src/**/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1"
