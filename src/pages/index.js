@@ -579,44 +579,6 @@ const ContactUsContainer = styled(Link)`
   }
 `
 
-const ShadowContainer = styled.div`
-  background: ${props => props.theme.colors.bg};
-
-  &::before {
-    position: fixed;
-    top: -100px;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 100px;
-    content: '';
-    box-shadow: 0px 40px 100px rgba(17, 18, 22, 1);
-
-    ${media.tablet`
-      top: -80px;
-      height: 80px;
-      box-shadow: 0px 30px 80px rgba(17, 18, 22, 1);
-    `};
-  }
-
-  &::after {
-    position: fixed;
-    bottom: -100px;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 100px;
-    content: '';
-    box-shadow: 0px -40px 100px rgba(17, 18, 22, 1);
-
-    ${media.tablet`
-      bottom: -80px
-      height: 80px;
-      box-shadow: 0px -30px 80px rgba(17, 18, 22, 1);
-    `};
-  }
-`
-
 const FlexColumn = styled.div`
   display: flex;
   justify-content: space-between;
@@ -645,6 +607,11 @@ const WhatWeDoContent = styled.div`
     margin-bottom: 2.5rem;
   `};
 `
+
+const AnimationScrollIn = styled.div`
+  opacity: ${props => props.visiblePercentage / 100};
+`
+
 class IndexPage extends Component {
   state = { animation: '' }
 
@@ -665,7 +632,7 @@ class IndexPage extends Component {
     const { animation, view } = this.state
 
     return (
-      <ShadowContainer>
+      <React.Fragment>
         <Container background="dark">
           <GridContainer>
             <LeftContainer>
@@ -729,7 +696,7 @@ class IndexPage extends Component {
               console.log(data)
 
               return (
-                <div>
+                <AnimationScrollIn visiblePercentage={data.visiblePercentage}>
                   <SectionCopy maxWidth="65rem">
                     Design for us is the core of lorem ipsum dolor sit amet,
                     consectetur adipiscing elit, sed do eiusmod tempor
@@ -742,7 +709,7 @@ class IndexPage extends Component {
                     <FunctionArrow />{' '}
                     <FunctionArrowWord paddingLeft>Form</FunctionArrowWord>
                   </FunctionArrowContainer>
-                </div>
+                </AnimationScrollIn>
               )
             }}
           />
@@ -902,7 +869,7 @@ class IndexPage extends Component {
             </SocialIconsFooter>
           </Footer>
         </Container>
-      </ShadowContainer>
+      </React.Fragment>
     )
   }
 }
