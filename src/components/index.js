@@ -3,7 +3,7 @@ import Button from './Button'
 import Container from './Container'
 import Form from './form'
 import Header from './Header'
-import IntersectionObserver from './IntersectionObserver'
+import Observer from './Observer'
 import Logo from './Logo'
 import Navigation from './Navigation'
 import * as Transitions from './transitions'
@@ -14,7 +14,7 @@ export default {
   Container,
   Form,
   Header,
-  IntersectionObserver,
+  Observer,
   Logo,
   Navigation,
   Transitions,

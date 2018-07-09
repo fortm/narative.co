@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
-import IntersectionObserver from './IntersectionObserver'
+import Observer from './Observer'
 
 class AnimatorFadeUp extends Component {
   calculateStyleCurves = ({ intersectionRatio }) => {
+    if (!intersectionRatio) {
+      return
+    }
+
     const opacityCurve = Math.pow(intersectionRatio, 3)
     const transformCurve = Math.pow(intersectionRatio - 1, 2) * 150
 
@@ -14,7 +18,7 @@ class AnimatorFadeUp extends Component {
 
   render() {
     return (
-      <IntersectionObserver
+      <Observer
         render={data => (
           <div
             style={this.calculateStyleCurves(data)}

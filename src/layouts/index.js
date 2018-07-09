@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import styled, { ThemeProvider } from 'styled-components'
 import { globalStyles, media, theme } from '@styles'
+import '../polyfills/intersection-observer'
 
 // Injecting global styles and reset
 globalStyles()

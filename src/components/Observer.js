@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class IntersectionObserver extends Component {
+class Observer extends Component {
   state = {
     visiblePercentage: 0,
     visible: false,
@@ -9,7 +9,6 @@ class IntersectionObserver extends Component {
   }
 
   componentDidMount() {
-    console.log(this.generateObserverOptions())
     this.observer = new window.IntersectionObserver(entries => {
       const element = entries[0]
       this.handleObservation(element)
@@ -69,4 +68,4 @@ class IntersectionObserver extends Component {
   }
 }
 
-export default IntersectionObserver
+export default Observer
