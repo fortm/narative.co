@@ -17,7 +17,7 @@ class AnimateScrollFadeUp extends Component {
           const transformCurve = `translateY(${Math.pow(
             intersectionRatio - 1,
             2
-          ) * 250}px)`
+          ) * 150}px)`
 
           console.log({ opacityCurve, transformCurve })
 
