@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { AnimateScrollFadeUp, Container } from '@components'
+import { AnimatorFadeUp, Container } from '@components'
 import { media } from '@styles'
 
 const SectionSpacer = styled.div`
@@ -47,14 +47,14 @@ const SectionContent = styled.div`
 const Section = ({ children, header, hideOverflow }) => {
   return (
     <SectionSpacer>
-      <AnimateScrollFadeUp>
+      <AnimatorFadeUp>
         <Container hideOverflow={hideOverflow}>
           <SectionContainer>
             <SectionHeader>{header}</SectionHeader>
             <SectionContent>{children}</SectionContent>
           </SectionContainer>
         </Container>
-      </AnimateScrollFadeUp>
+      </AnimatorFadeUp>
     </SectionSpacer>
   )
 }

@@ -1,4 +1,4 @@
-import AnimateScrollFadeUp from './AnimateScrollFadeUp'
+import AnimatorFadeUp from './AnimatorFadeUp'
 import Button from './Button'
 import Container from './Container'
 import Form from './form'
@@ -9,7 +9,7 @@ import Navigation from './Navigation'
 import * as Transitions from './transitions'
 
 export default {
-  AnimateScrollFadeUp,
+  AnimatorFadeUp,
   Button,
   Container,
   Form,
