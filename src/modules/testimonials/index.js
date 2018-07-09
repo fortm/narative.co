@@ -44,39 +44,23 @@ export const FadeIn = ({ in: inProp, children }) => {
 const testimonials = [
   {
     copy:
-      '”Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore laudantium, totam rem aperiam.”',
-    name: 'Dennis Brotzky',
-    title: 'CEO',
-    company: 'Jobeir',
-    portrait: 'http://via.placeholder.com/180x220',
-    portraitAltText: 'Portrait of Dennis Brotzky, CEO of Jobeir',
+      "“Working with this team was a privilege. Their fearless vision on authentic, scalable design is unparalleled in the industry. It's rare to find individuals that approach challenges with no compromise.”",
+    name: 'Dave  Llastovskiy',
+    title: 'Head of Marketing',
+    company: 'Bus.com',
+    portrait: '/images/testimonials/dave-from-bus.com.png',
+    portraitAltText:
+      'Portrait of Dave  Llastovskiy, Head of Marketing at Bus.com',
   },
   {
     copy:
-      '”Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore laudantium, totam rem aperiam.”',
-    name: 'Thiago Costa',
-    title: 'CEO',
-    company: 'Jobeir',
-    portrait: 'http://via.placeholder.com/180x220',
-    portraitAltText: 'Portrait of Dennis Brotzky, CEO of Jobeir',
-  },
-  {
-    copy:
-      '”Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore laudantium, totam rem aperiam.”',
-    name: 'Mack Attack',
-    title: 'CEO',
-    company: 'Jobeir',
-    portrait: 'http://via.placeholder.com/180x220',
-    portraitAltText: 'Portrait of Dennis Brotzky, CEO of Jobeir',
-  },
-  {
-    copy:
-      '”Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore laudantium, totam rem aperiam.”',
-    name: 'Thomas Russell',
-    title: 'CEO',
-    company: 'Jobeir',
-    portrait: 'http://via.placeholder.com/180x220',
-    portraitAltText: 'Portrait of Dennis Brotzky, CEO of Jobeir',
+      "“Working with this team was a privilege. Their fearless vision on authentic, scalable design is unparalleled in the industry. It's rare to find individuals that approach challenges with no compromise.”",
+    name: 'Dave  Llastovskiy',
+    title: 'Head of Marketing',
+    company: 'Bus.com',
+    portrait: '/images/testimonials/dave-from-bus.com.png',
+    portraitAltText:
+      'Portrait of Dave  Llastovskiy, Head of Marketing at Bus.com',
   },
 ]
 
@@ -147,7 +131,7 @@ const TestimonialBottomActions = styled.div`
 
 const TestimonialCopy = styled.p`
   color: ${props => props.theme.colors.grey};
-  font-size: 2.8rem;
+  font-size: 2.2rem;
   font-style: italic;
   font-family: 'meta';
   margin-bottom: 3.5rem;
@@ -208,6 +192,9 @@ const TestimonialDot = styled.div`
 `
 
 const TestimonialPortrait = styled.img`
+  position: absolute;
+  right: 80px;
+
   ${media.desktop`
       position: absolute;
       right: -180px;

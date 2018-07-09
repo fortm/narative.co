@@ -688,11 +688,11 @@ class IndexPage extends Component {
         </Container>
         <Section header="What design is to us">
           <SectionCopy maxWidth="65rem">
-            Design for us is the core of lorem ipsum dolor sit amet, consectetur
-            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat.
+            Our value proposition is unique, with clientele provided primarily
+            through referral, this being a true statement of our reputation. We
+            commit ourselves to a single client at a time so that 100% of our
+            attention is dedicated to one project, as seamless extension of an
+            in-house team.
           </SectionCopy>
           <FunctionArrowContainer>
             <FunctionArrowWord>Function</FunctionArrowWord> <FunctionArrow />{' '}
@@ -708,7 +708,7 @@ class IndexPage extends Component {
               </SectionCopy>
               <div style={{ color: '#fff', marginBottom: '1.6rem' }}>
                 <SocialIconsFooter hideOnMobile>
-                  <span>Look us up, we're cool:</span>
+                  <span>Find us :</span>
                   <SocialIconContainer
                     target="_blank"
                     href="https://www.facebook.com/narative.co/"
