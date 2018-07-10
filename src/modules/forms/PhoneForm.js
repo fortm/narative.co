@@ -27,7 +27,7 @@ const StyledFormikForm = styled(FormikForm)`
   `};
 
   ${media.phone`
-    max-width: 30rem;
+    max-width: 100%;
   `};
 `
 

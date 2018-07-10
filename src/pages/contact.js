@@ -48,7 +48,6 @@ const SlideInContainer = styled.div`
     overflow: initial;
   `};
 
-  // Adding in white buffer just in case
   &::before {
     content: '';
     position: absolute;
@@ -94,7 +93,7 @@ const GridContainer = styled.div`
   `};
 
   ${media.phone`
-    width: 30rem;
+    width: 100%;
   `};
 `
 

@@ -49,7 +49,7 @@ const GridContainer = styled.div`
   `};
 
   ${media.phone`
-    width: 30rem;
+    width: 100%;
   `};
 `
 
@@ -76,13 +76,18 @@ const NarativeVideoContainer = styled.div`
   align-self: flex-end;
 
   ${media.desktop`
-    width: 46rem;
+    width: 50rem;
   `};
 
   ${media.phablet`
     height: auto;
     width: 30rem;
+    height: 24rem;
     margin: 0 auto;
+  `};
+
+  ${media.phone`
+    width: 24rem;
   `};
 `
 
@@ -92,7 +97,7 @@ const NarativeVideo = styled.video`
 
   ${transitions.blurIn};
 
-  ${media.tablet`
+  ${media.phone`
     height: 30rem;
   `};
 `
@@ -138,10 +143,24 @@ const ContactText = styled(Link)`
 const HideOnMobile = styled.span`
   display: block;
 
-  ${media.tablet`
+  ${props =>
+    props.smallest
+      ? media.tablet`
     display: none;
-  `};
+  `
+      : `@media (max-width: 32rem) {
+    display: none;
+    }`};
 `
+
+const HideOnSmallMobile = styled.span`
+  display: block;
+
+  @media (max-width: 32rem) {
+    display: none;
+  }
+`
+
 const HideOnDesktop = styled.span`
   display: none;
 
@@ -315,6 +334,11 @@ const FunctionArrowWord = styled.div`
   color: ${props => props.theme.colors.grey};
   ${props =>
     props.paddingLeft ? `padding-left: 2.6rem` : `padding-right: 2.6rem`};
+
+  ${media.phone`
+      ${props =>
+        props.paddingLeft ? `padding-left: 0.6rem` : `padding-right: 0.6rem`};
+  `};
 `
 
 const FunctionArrow = styled.div`
@@ -357,6 +381,7 @@ const WhatWeDoListItem = styled.li`
   align-items: center;
   height: 5rem;
   color: ${props => props.theme.colors.grey};
+
   & > span {
     color: #fff;
   }
@@ -368,6 +393,10 @@ const WhatWeDoListItem = styled.li`
   ${media.tablet`
     font-size: 1.2rem;
   `};
+
+  @media (max-width: 32rem) {
+    font-size: 1.4rem;
+  }
 `
 
 const ContactContainer = styled(Link)`
@@ -509,11 +538,19 @@ const Footer = styled.footer`
   align-items: center;
   padding-bottom: 5rem;
   color: ${props => props.theme.colors.grey};
+
+  ${media.tablet`
+    justify-content: center;
+  `};
 `
 
 const SocialIconContainer = styled.a`
   margin-left: 3rem;
   text-decoration: none;
+
+  ${media.tablet`
+    margin: 0 1.6rem;
+  `};
 `
 
 const SocialIconsFooter = styled.div`
@@ -708,7 +745,7 @@ class IndexPage extends Component {
               </SectionCopy>
               <div style={{ color: '#fff', marginBottom: '1.6rem' }}>
                 <SocialIconsFooter hideOnMobile>
-                  <span>Find us :</span>
+                  <HideOnMobile>Find us :</HideOnMobile>
                   <SocialIconContainer
                     target="_blank"
                     href="https://www.facebook.com/narative.co/"
@@ -744,35 +781,68 @@ class IndexPage extends Component {
             </WhatWeDoContent>
             <WhatWeDoList>
               <WhatWeDoListItem>
-                <span>Branding ·&nbsp;</span> logotype design, guidelines,
-                typefaces and marks
+                <span>
+                  Branding <HideOnMobile smallest>·&nbsp;</HideOnMobile>
+                </span>{' '}
+                <HideOnMobile smallest>
+                  logotype design, guidelines, typefaces and marks
+                </HideOnMobile>
               </WhatWeDoListItem>
               <WhatWeDoListItem>
-                <span>Marketing ·&nbsp;</span> strategy, business development,
-                growth
+                <span>
+                  Marketing <HideOnMobile smallest>·&nbsp;</HideOnMobile>
+                </span>{' '}
+                <HideOnMobile smallest>
+                  strategy, business development, growth
+                </HideOnMobile>
               </WhatWeDoListItem>
               <WhatWeDoListItem>
-                <span>Editorial ·&nbsp;</span> whitepapers, books and magazine
-                designs
+                <span>
+                  Editorial <HideOnMobile smallest>·&nbsp;</HideOnMobile>
+                </span>{' '}
+                <HideOnMobile smallest>
+                  whitepapers, books and magazine designs
+                </HideOnMobile>
               </WhatWeDoListItem>
               <WhatWeDoListItem>
-                <span> Development ·&nbsp;</span> dennis will write anything he
-                wants here
+                <span>
+                  {' '}
+                  Development <HideOnMobile smallest>·&nbsp;</HideOnMobile>
+                </span>{' '}
+                <HideOnMobile smallest>
+                  dennis will write anything he wants here
+                </HideOnMobile>
               </WhatWeDoListItem>
               <WhatWeDoListItem>
-                <span> Product design ·&nbsp;</span> mobile and web apps
+                <span>
+                  {' '}
+                  Product design <HideOnMobile smallest>·&nbsp;</HideOnMobile>
+                </span>{' '}
+                <HideOnMobile smallest>mobile and web apps</HideOnMobile>
               </WhatWeDoListItem>
               <WhatWeDoListItem>
-                <span>Experience ·&nbsp;</span> optimize the usability of your
-                digital product
+                <span>
+                  Experience <HideOnMobile smallest>·&nbsp;</HideOnMobile>
+                </span>{' '}
+                <HideOnMobile smallest>
+                  optimize the usability of your digital product
+                </HideOnMobile>
               </WhatWeDoListItem>
               <WhatWeDoListItem>
-                <span>CRM ·&nbsp;</span> email design, strategy and platform
-                setup
+                <span>
+                  CRM <HideOnMobile smallest>·&nbsp;</HideOnMobile>
+                </span>{' '}
+                <HideOnMobile smallest>
+                  email design, strategy and platform setup
+                </HideOnMobile>
               </WhatWeDoListItem>
               <WhatWeDoListItem>
-                <span>CRO ·&nbsp;</span> conversion rate optimization and lead
-                generation
+                <span>
+                  CRO <HideOnMobile smallest>·&nbsp;</HideOnMobile>
+                </span>{' '}
+                <HideOnMobile smallest>
+                  conversion rate optimization and lead generation
+                </HideOnMobile>
               </WhatWeDoListItem>
             </WhatWeDoList>
           </FlexColumn>
@@ -820,7 +890,7 @@ class IndexPage extends Component {
               © {new Date().getFullYear()} Narative Studio Inc.
             </CopyRightContainer>
             <SocialIconsFooter>
-              <span>Look us up, we're cool:</span>
+              <HideOnMobile>Look us up, we're cool:</HideOnMobile>
               <SocialIconContainer
                 target="_blank"
                 href="https://www.facebook.com/narative.co/"
