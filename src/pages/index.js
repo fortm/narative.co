@@ -81,13 +81,14 @@ const NarativeVideoContainer = styled.div`
 
   ${media.phablet`
     height: auto;
-    width: 30rem;
-    height: 24rem;
+    width: 33rem;
+    height: 36rem;
     margin: 0 auto;
   `};
 
   ${media.phone`
     width: 24rem;
+    height: 24rem;
   `};
 `
 
@@ -140,7 +141,7 @@ const ContactText = styled(Link)`
   }
 `
 
-const HideOnMobile = styled.span`
+const HideOnMobile = styled.div`
   display: block;
 
   ${props =>
@@ -151,14 +152,6 @@ const HideOnMobile = styled.span`
       : `@media (max-width: 32rem) {
     display: none;
     }`};
-`
-
-const HideOnSmallMobile = styled.span`
-  display: block;
-
-  @media (max-width: 32rem) {
-    display: none;
-  }
 `
 
 const HideOnDesktop = styled.span`
@@ -384,6 +377,7 @@ const WhatWeDoListItem = styled.li`
 
   & > span {
     color: #fff;
+    display: flex;
   }
 
   &:not(:last-child) {
@@ -782,7 +776,7 @@ class IndexPage extends Component {
             <WhatWeDoList>
               <WhatWeDoListItem>
                 <span>
-                  Branding <HideOnMobile smallest>·&nbsp;</HideOnMobile>
+                  Branding <HideOnMobile smallest>&nbsp;·&nbsp;</HideOnMobile>
                 </span>{' '}
                 <HideOnMobile smallest>
                   logotype design, guidelines, typefaces and marks
@@ -790,7 +784,7 @@ class IndexPage extends Component {
               </WhatWeDoListItem>
               <WhatWeDoListItem>
                 <span>
-                  Marketing <HideOnMobile smallest>·&nbsp;</HideOnMobile>
+                  Marketing <HideOnMobile smallest>&nbsp;·&nbsp;</HideOnMobile>
                 </span>{' '}
                 <HideOnMobile smallest>
                   strategy, business development, growth
@@ -798,7 +792,7 @@ class IndexPage extends Component {
               </WhatWeDoListItem>
               <WhatWeDoListItem>
                 <span>
-                  Editorial <HideOnMobile smallest>·&nbsp;</HideOnMobile>
+                  Editorial <HideOnMobile smallest>&nbsp;·&nbsp;</HideOnMobile>
                 </span>{' '}
                 <HideOnMobile smallest>
                   whitepapers, books and magazine designs
@@ -807,7 +801,8 @@ class IndexPage extends Component {
               <WhatWeDoListItem>
                 <span>
                   {' '}
-                  Development <HideOnMobile smallest>·&nbsp;</HideOnMobile>
+                  Development{' '}
+                  <HideOnMobile smallest>&nbsp;·&nbsp;</HideOnMobile>
                 </span>{' '}
                 <HideOnMobile smallest>
                   dennis will write anything he wants here
@@ -816,13 +811,14 @@ class IndexPage extends Component {
               <WhatWeDoListItem>
                 <span>
                   {' '}
-                  Product design <HideOnMobile smallest>·&nbsp;</HideOnMobile>
+                  Product design{' '}
+                  <HideOnMobile smallest>&nbsp;·&nbsp;</HideOnMobile>
                 </span>{' '}
                 <HideOnMobile smallest>mobile and web apps</HideOnMobile>
               </WhatWeDoListItem>
               <WhatWeDoListItem>
                 <span>
-                  Experience <HideOnMobile smallest>·&nbsp;</HideOnMobile>
+                  Experience <HideOnMobile smallest>&nbsp;·&nbsp;</HideOnMobile>
                 </span>{' '}
                 <HideOnMobile smallest>
                   optimize the usability of your digital product
@@ -830,7 +826,7 @@ class IndexPage extends Component {
               </WhatWeDoListItem>
               <WhatWeDoListItem>
                 <span>
-                  CRM <HideOnMobile smallest>·&nbsp;</HideOnMobile>
+                  CRM <HideOnMobile smallest>&nbsp;·&nbsp;</HideOnMobile>
                 </span>{' '}
                 <HideOnMobile smallest>
                   email design, strategy and platform setup
@@ -838,7 +834,7 @@ class IndexPage extends Component {
               </WhatWeDoListItem>
               <WhatWeDoListItem>
                 <span>
-                  CRO <HideOnMobile smallest>·&nbsp;</HideOnMobile>
+                  CRO <HideOnMobile smallest>&nbsp;·&nbsp;</HideOnMobile>
                 </span>{' '}
                 <HideOnMobile smallest>
                   conversion rate optimization and lead generation
