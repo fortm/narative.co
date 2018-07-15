@@ -270,7 +270,7 @@ class IndexPage extends Component {
               <Logo />
             </LogoContainer>
             <TextContainer animation={animation} transitionDelay={600}>
-              <WelcomeHeader>What's your story?</WelcomeHeader>
+              <WelcomeHeader>We develop startups</WelcomeHeader>
               <MainText>
                 Narative is a digital studio co-founded by designers, engineers
                 and strategists with decades of experience at Canada’s most
