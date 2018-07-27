@@ -131,14 +131,14 @@ const selectOptions = [
 
 const radioOptions = [
   {
-    label: 'Branding',
-    id: 'branding',
-    value: 'Branding',
-  },
-  {
     label: 'Product and Web',
     id: 'productAndWeb',
     value: 'Product and Web',
+  },
+  {
+    label: 'Branding',
+    id: 'branding',
+    value: 'Branding',
   },
   {
     label: 'Editorial',
