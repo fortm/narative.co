@@ -28,11 +28,13 @@ const WebContainer = styled.div`
 
 class Layout extends Component {
   componentDidMount() {
-    WebFont.load({
-      typekit: {
-        id: 'huf6cwu',
-      },
-    })
+    if (typeof window !== 'undefined') {
+      WebFont.load({
+        typekit: {
+          id: 'huf6cwu',
+        },
+      })
+    }
   }
 
   render() {
