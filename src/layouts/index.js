@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import styled, { ThemeProvider } from 'styled-components'
 import { globalStyles, theme } from '@styles'
+import WebFont from 'webfontloader'
 
 // Injecting global styles and reset
 globalStyles()
@@ -25,14 +26,27 @@ const WebContainer = styled.div`
   width: 100vw;
 `
 
-const Layout = ({ children, data }) => (
-  <ThemeProvider theme={theme}>
-    <WebContainer>
-      <Helmet title={data.site.siteMetadata.title} meta={meta} />
-      <div>{children()}</div>
-    </WebContainer>
-  </ThemeProvider>
-)
+class Layout extends Component {
+  componentDidMount() {
+    WebFont.load({
+      typekit: {
+        id: 'huf6cwu',
+      },
+    })
+  }
+
+  render() {
+    const { children, data } = this.props
+    return (
+      <ThemeProvider theme={theme}>
+        <WebContainer>
+          <Helmet title={data.site.siteMetadata.title} meta={meta} />
+          <div>{children()}</div>
+        </WebContainer>
+      </ThemeProvider>
+    )
+  }
+}
 
 Layout.propTypes = {
   children: PropTypes.func,
