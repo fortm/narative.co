@@ -570,6 +570,11 @@ const HorizontalRule = styled.div`
   `};
 `
 
+const fadeIn = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`
+
 const CareersCotnainer = styled(Link)`
   position: absolute;
   right: 0;
@@ -583,6 +588,9 @@ const CareersCotnainer = styled(Link)`
   border-radius: 3px;
   display: flex;
   align-items: center;
+  opacity: 0;
+  animation: 500ms forwards ease ${fadeIn};
+  animation-delay: 1.2s;
 
   svg {
     margin-left: 1rem;

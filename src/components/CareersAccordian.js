@@ -122,7 +122,7 @@ export default CareersAccordian
 const AccordianContainer = styled.div`
   color: #fff;
   max-width: 65rem;
-  margin: 0 0 5rem 29.3rem;
+  margin: 0 0 15rem 29.3rem;
   position: relative;
   top: -9rem;
 `
@@ -168,6 +168,18 @@ const AccordianListDescription = styled.p`
     width: 2.5rem;
     height: 1px;
     background: #c4c4c4;
+    animation: 325ms forwards scale ease;
+    transform-origin: 0% 50%;
+  }
+
+  @keyframes scale {
+    from {
+      transform: scale(0);
+    }
+
+    to {
+      transform: scale(1);
+    }
   }
 `
 

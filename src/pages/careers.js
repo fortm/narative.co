@@ -78,6 +78,8 @@ const HiringPill = styled.div`
   margin-bottom: 1.5rem;
   display: inline-block;
   font-weight: 600;
+
+  @keyframes;
 `
 
 const WelcomeHeader = styled.h1`

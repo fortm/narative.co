@@ -10,7 +10,7 @@ class AnimatorFadeUp extends Component {
   calculateStyleCurves = ({ intersectionRatio, exiting }) => {
     // To avoid NaN errors, return out if there's no intersectionRatio
     if (!intersectionRatio) {
-      return {}
+      return { opacity: 0 }
     }
 
     const opacityCurve = Math.pow(intersectionRatio, 2.5)
