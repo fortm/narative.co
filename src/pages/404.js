@@ -150,14 +150,6 @@ const ContactText = styled(Link)`
   }
 `
 
-const HideOnMobile = styled.span`
-  display: block;
-
-  ${media.tablet`
-    display: none;
-  `};
-`
-
 const LeftContainer = styled.div`
   display: flex;
   justify-content: space-between;

@@ -100,23 +100,6 @@ const MainText = styled.p`
   max-width: 42rem;
 `
 
-const ContactText = styled(Link)`
-  display: flex;
-  flex-direction: row;
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: ${props => props.theme.colors.grey};
-
-  ${media.tablet`
-    flex-direction: column;
-  `};
-
-  svg {
-    margin-left: 1rem;
-    transition: transform 300ms ${props => props.theme.transitions.in};
-  }
-`
-
 const HideOnMobile = styled.div`
   display: block;
 
@@ -169,15 +152,79 @@ const RightContainer = styled.div`
 
 const CopyRightContainer = styled.div`
   display: block;
-
   font-size: 1.6rem;
   font-weight: 500;
-  color: ${props => props.theme.colors.grey};
-  ${transitions.fadeUp};
 
   ${media.desktop`
     display: none;
   `};
+`
+
+const ContactActionsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 40rem;
+
+  ${media.phablet`
+    width: 100%;
+    flex-direction: column;
+  `};
+`
+
+const ContactButton = styled(Link)`
+  position: relative;
+  height: 45px;
+  width: 195px;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 3px;
+  font-weight: 500;
+
+  ${media.phablet`
+    width: 100%;
+    margin-bottom: 2.5rem;
+  `};
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0px 3px 18px rgba(0, 0, 0, 0.28);
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8);
+    transition: all 300ms ease-out;
+  }
+
+  &:hover::after {
+    transform: scale(1);
+    opacity: 1;
+  }
+`
+
+const ContactText = styled(Link)`
+  display: flex;
+  flex-direction: row;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: ${p => (p.color ? p.color : '#000')};
+
+  ${media.tablet`
+    flex-direction: column;
+  `};
+
+  svg {
+    margin-left: 1rem;
+    transition: transform 300ms ${props => props.theme.transitions.in};
+  }
 `
 
 const CopyRightContainerMobile = styled.div`
@@ -660,8 +707,16 @@ class CareersPage extends Component {
             </Container>
             <Container>
               <Footer>
-                <CopyRightContainer animation={animation} transitionDelay={800}>
-                  © {new Date().getFullYear()} Narative Studio Inc.
+                <CopyRightContainer>
+                  <ContactActionsContainer>
+                    <ContactButton to="/contact">Contact us</ContactButton>
+                    <ContactText to="/" color="#fff">
+                      <ArrowAnimation>
+                        Go back home
+                        <ArrowRightIcon color="#fff" />
+                      </ArrowAnimation>
+                    </ContactText>
+                  </ContactActionsContainer>
                 </CopyRightContainer>
                 <SocialIconsFooter>
                   <SocialIconContainer
