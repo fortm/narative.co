@@ -125,6 +125,11 @@ const AccordianContainer = styled.div`
   margin: 0 0 15rem 29.3rem;
   position: relative;
   top: -9rem;
+
+  ${media.desktop`
+    margin:  0 auto 15rem;
+    top: -4rem;
+  `};
 `
 
 const AccordianList = styled.ul`
