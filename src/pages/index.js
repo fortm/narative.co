@@ -589,8 +589,8 @@ const CareersCotnainer = styled(Link)`
   display: flex;
   align-items: center;
   opacity: 0;
-  animation: 500ms forwards ease ${fadeIn};
-  animation-delay: 1.2s;
+  animation: 0.5s forwards ease ${fadeIn};
+  animation-delay: 0.8s;
 
   svg {
     margin-left: 1rem;
@@ -641,6 +641,7 @@ const Content = styled.div`
 
 const GradientContainer = styled.div`
   position: relative;
+  min-height: 100vh;
 
   &::before {
     content: '';
@@ -649,11 +650,7 @@ const GradientContainer = styled.div`
     left: 0;
     height: 100%;
     width: 100%;
-    background: linear-gradient(
-      rgb(9, 10, 12),
-      rgb(17, 18, 22) 60%,
-      rgb(13, 18, 27) 100%
-    );
+    background: rgb(9, 10, 12);
     pointer-events: none;
     transition: all 1.5s ease;
     z-index: 0;
@@ -678,7 +675,7 @@ class IndexPage extends Component {
   }
 
   render() {
-    const { animation, view } = this.state
+    const { animation } = this.state
 
     return (
       <React.Fragment>
