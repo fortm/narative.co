@@ -15,6 +15,7 @@
     "gatsby-plugin-styled-components": "^2.0.11",
     "prop-types": "^15.6.1",
     "react-click-outside": "^3.0.1",
+    "react-device-detect": "^1.5.9",
     "react-helmet": "^5.2.0",
     "react-text-mask": "^5.4.0",
     "react-transition-group": "^2.3.1",
@@ -25,7 +26,7 @@
     "narative"
   ],
   "scripts": {
-    "build": "./node_modules/.bin/gatsby build",
+    "build": "./node_modules/.bin/gatsby build --prefix-paths",
     "dev": "./node_modules/.bin/gatsby develop",
     "format": "prettier --write 'src/**/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1"

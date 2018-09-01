@@ -9,14 +9,17 @@ import { css } from 'styled-components'
  */
 const blurIn = css`
   filter: blur(0);
+  opacity: 1;
 
   ${props =>
     props.animation !== 'start' &&
     `
+    opacity: 0;
     filter: blur(0.5rem);
   `};
 
-  transition: filter 500ms 200ms cubic-bezier(0.694, 0, 0.335, 1);
+  transition: filter 600ms 200ms cubic-bezier(0.694, 0, 0.335, 1),
+    opacity 300ms 300ms cubic-bezier(0.694, 0, 0.335, 1);
 `
 
 /**

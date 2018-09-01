@@ -5,7 +5,7 @@ import { media, transitions } from '@styles'
 import { Container, Logo } from '@components'
 import { Forms } from '@modules'
 import { apiCall } from '@utils'
-
+import { ChevronDownIcon, ExIcon } from '../icons/ui'
 import Transition from 'react-transition-group/Transition'
 
 const duration = 600
@@ -22,30 +22,41 @@ const transitionStyles = {
 }
 
 const SlideInContainer = styled.div`
-  background: #fff;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  top: 0px;
-  right: 0px;
-  z-index: 0;
   display: flex;
   align-items: center;
-  transform: translateX(0);
-  transition: opacity 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
-  padding: 7rem 4rem 0;
+  width: 50%;
+  height: 100%;
+  top: 0px;
+  right: 0px;
+  opacity: 0;
+  padding: 0;
+  z-index: 0;
+  position: absolute;
+  overflow-y: scroll;
+  box-shadow: rgba(0, 0, 0, 0.4) 40px 0px 40px -40px inset;
+  transition: all 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
+  transform: translateX(100%);
+  background: #fff;
 
-  ${media.large`
-    width: 50%;
-    position: absolute;
-    padding-left: 110px;
-    overflow-y: scroll;
-    box-shadow: rgba(0, 0, 0, 0.4) 40px 0px 40px -40px inset;
-    transition: all 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
-    transform: translateX(100%);
-    opacity: 0;
-    padding: 0;
+  ${media.desktop`
+    width: 100%;
+    position: relative;
+    transform: translateX(0);
+    transition: opacity 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
+    box-shadow: none;
+    padding: 7rem 4rem 0;
+    overflow: initial;
   `};
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -250px;
+    left: 0;
+    height: 250px;
+    width: 100%;
+    background: #fff;
+  }
 `
 
 const SlideIn = ({ in: inProp, children }) => {
@@ -69,34 +80,33 @@ const SlideIn = ({ in: inProp, children }) => {
 
 const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(2, 1fr [col-start]);
   align-items: center;
   justify-content: center;
   width: 100%;
+  height: 91vh;
 
-  ${media.medium`
-    width: 30rem;
+  ${media.desktop`
+    grid-template-columns: 1fr;
     margin: 0 auto;
+    height: auto;
   `};
 
-  ${media.large`
-    grid-template-columns: repeat(2, 1fr [col-start]);
+  ${media.phone`
     width: 100%;
-    height: 91vh;
   `};
 `
 
 const LogoContainer = styled(Link)`
-  max-width: 10rem;
-  margin-bottom: 4rem;
+  max-height: 2.3rem;
+  max-width: 13.059rem;
+  margin-bottom: 0;
   text-decoration: none;
   ${transitions.fadeUp};
 
-  ${media.large`
-    max-width: 13.059rem;
-    max-height: 2.3rem;
-    margin-bottom: 2rem;
-    margin-bottom: 0;
+  ${media.desktop`
+  max-width: 10rem;
+  margin-bottom: 4rem;
   `};
 `
 
@@ -106,11 +116,11 @@ const TextContainer = styled.div`
 
 const WelcomeHeader = styled.h1`
   color: ${props => props.theme.colors.grey};
-  font-size: 1.8rem;
+  font-size: 3.6rem;
   margin-bottom: 2rem;
 
-  ${media.large`
-    font-size: 3.6rem;
+  ${media.desktop`
+    font-size: 1.8rem;
   `};
 `
 
@@ -149,38 +159,44 @@ const ContactLink = styled.a`
 const LeftContainer = styled.div`
   position: relative;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   flex-direction: column;
-  width: 100%;
+  width: 36rem;
+  height: 53rem;
 
-  ${media.large`
-    justify-content: space-between;
-    max-width: 36rem;
-    height: 53rem;
+  ${media.desktop`
+    margin: 0 auto;
+    padding: 5rem 0 1rem;
+    width: 100%;
+    height: auto;
+  `};
+
+  ${media.phablet`
+    padding: 5rem 0 1rem;
   `};
 `
 
 const RightContainer = styled.div`
   position: relative;
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
 
-  ${media.large`
-    align-items: center;
-    justify-content: flex-end;
+  ${media.desktop`
+    justify-content: center;
   `};
 `
 
 const CopyRightContainer = styled.div`
-  display: none;
+  display: block;
   font-size: 1.6rem;
   font-weight: 500;
   color: ${props => props.theme.colors.grey};
   ${transitions.fadeUp};
 
-  ${media.large`
-    display: block;
+  ${media.desktop`
+    display: none;
   `};
 `
 
@@ -192,13 +208,12 @@ const FormContainer = styled.div`
   width: 100%;
   ${transitions.fadeUp};
 
-  ${media.medium`
-    padding: 2rem;
-    width: 46rem;
+  ${media.hdpi`
+    width: 54rem;
   `};
 
-  ${media.xlarge`
-    padding: 0;
+  ${media.tablet`
+    width: 100%;
   `};
 `
 
@@ -207,70 +222,26 @@ const HighlightText = styled.span`
   ${props => props.underline && `text-decoration: underline`};
 `
 
-const Ex = ({ fill = 'black' }) => (
-  <svg width="24" height="24" viewBox="0 0 24 24" version="1.1">
-    <g id="Canvas" fill="none">
-      <path
-        id="Stroke 1"
-        d="M 0 0L 24 0L 24 24L 0 24L 0 0Z"
-        strokeWidth="0"
-        stroke="black"
-        strokeOpacity="0.01"
-      />
-      <path
-        id="Shape"
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M 14 1.4L 12.6 0L 7 5.6L 1.4 0L 0 1.4L 5.6 7L 0 12.6L 1.4 14L 7 8.4L 12.6 14L 14 12.6L 8.4 7L 14 1.4Z"
-        transform="translate(5 5)"
-        fill={fill}
-      />
-    </g>
-  </svg>
-)
-
-const ChevronDown = () => (
-  <svg width="24" height="25" viewBox="0 0 24 25" version="1.1">
-    <g id="Canvas" fill="none">
-      <g id="chevron-down-icon">
-        <path
-          id="Stroke 1"
-          d="M 0 0L 24 0L 24 24L 0 24L 0 0Z"
-          transform="translate(0 1)"
-          stroke="black"
-          stroke-opacity="0.01"
-          stroke-width="0"
-        />
-        <path
-          id="&#239;&#132;&#135;"
-          d="M 12.0034 0.998282C 12.0034 0.902062 11.9553 0.793814 11.8832 0.72165L 11.2818 0.120276C 11.2096 0.0481109 11.1014 0 11.0052 0C 10.9089 0 10.8007 0.0481109 10.7285 0.120276L 6.00172 4.84708L 1.27491 0.120276C 1.20275 0.0481109 1.0945 0 0.998282 0C 0.890034 0 0.793814 0.0481109 0.721649 0.120276L 0.120275 0.72165C 0.0481099 0.793814 0 0.902062 0 0.998282C 0 1.0945 0.0481099 1.20275 0.120275 1.27491L 5.72509 6.87973C 5.79725 6.95189 5.9055 7 6.00172 7C 6.09794 7 6.20619 6.95189 6.27835 6.87973L 11.8832 1.27491C 11.9553 1.20275 12.0034 1.0945 12.0034 0.998282Z"
-          transform="translate(6 9)"
-          fill="black"
-        />
-      </g>
-    </g>
-  </svg>
-)
-
 const CloseContainerMobile = styled(Link)`
+  display: none;
   position: absolute;
-  top: 0rem;
+  top: 0;
   right: 0rem;
   cursor: pointer;
   border-radius: 50%;
-  display: flex;
   align-items: center;
   justify-content: center;
+  opacity: ${props => (props.animation ? '1' : '0')};
+  transform: rotate(${props => (props.animation ? '0' : '-60deg')});
+  transition: all 1s 1s ease-out;
 
-  ${media.large`
-    display: none;
+  ${media.desktop`
+    display: flex;
+    top: 5rem;
   `};
 `
 
 const CloseContainer = styled(Link)`
-  display: none;
-  align-items: center;
-  justify-content: center;
   position: fixed;
   right: 3.5rem;
   top: 5rem;
@@ -278,9 +249,12 @@ const CloseContainer = styled(Link)`
   border-radius: 50%;
   height: 3.4rem;
   width: 3.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  ${media.large`
-    display: flex;
+  ${media.desktop`
+    display: none;
   `};
 
   &::after {
@@ -293,10 +267,12 @@ const CloseContainer = styled(Link)`
     transform: scale(0.8);
     transition: all 200ms ${props => props.theme.transitions.in};
   }
+
   &:hover::after {
     background: rgba(0, 0, 0, 0.06);
     transform: scale(1);
   }
+
   &:active::after {
     background: rgba(0, 0, 0, 0.12);
     transform: scale(1.2);
@@ -304,13 +280,13 @@ const CloseContainer = styled(Link)`
 `
 
 const MobileArrowContainer = styled.div`
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -3.2rem;
+  bottom: -2.2rem;
   height: 4.4rem;
   width: 4.4rem;
   margin: 0 auto;
@@ -321,8 +297,13 @@ const MobileArrowContainer = styled.div`
   border-radius: 50%;
   ${transitions.fadeUp};
 
-  ${media.large`
-    display: none;;
+  ${media.desktop`
+    display: flex;
+    bottom: -4.2rem;
+  `};
+
+  ${media.phablet`
+    bottom: -2.2rem;
   `};
 `
 
@@ -344,7 +325,7 @@ class ContactPage extends Component {
           <GridContainer>
             <LeftContainer>
               <CloseContainerMobile to="/" animation={animation}>
-                <Ex fill="white" />
+                <ExIcon color="white" />
               </CloseContainerMobile>
               <LogoContainer to="/" animation={animation} transitionDelay={300}>
                 <Logo />
@@ -362,12 +343,12 @@ class ContactPage extends Component {
                 </MainText>
                 <Forms.PhoneForm />
               </TextContainer>
-              <CopyRightContainer animation={animation} transitionDelay={300}>
+              <CopyRightContainer transitionDelay={300}>
                 © {new Date().getFullYear()} Narative Studio Inc.
               </CopyRightContainer>
 
               <MobileArrowContainer animation={animation} transitionDelay={500}>
-                <ChevronDown />
+                <ChevronDownIcon />
               </MobileArrowContainer>
             </LeftContainer>
             <RightContainer />
@@ -381,7 +362,7 @@ class ContactPage extends Component {
           </div>
         </SlideIn>
         <CloseContainer to="/">
-          <Ex />
+          <ExIcon />
         </CloseContainer>
       </div>
     )

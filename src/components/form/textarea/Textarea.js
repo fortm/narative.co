@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -61,20 +61,31 @@ const LabelAnimation = styled.span`
   transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
     color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
     width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  ${props =>
+    props.hasValue &&
+    `
+    ${LabelAnimation} {
+      font-weight: 500;
+      width: 133.3333333%;
+      transform: translateY(-1.28125em) scale(0.8) perspective(100px)
+        translateZ(0.001px);
+    }
+  `};
 `
 
-const StyledInput = styled.input`
+const StyledInput = styled.textarea`
   display: block;
   width: 100%;
   font-size: 1.6rem;
-  height: 1.8rem;
   border: none;
   background: transparent;
+  resize: none;
 
-  /* &:active,
+  &:active,
   &:focus {
     outline: none;
-  } */
+  }
 
   &[value]:not([value='']) ~ ${LabelAnimation} {
     font-weight: 500;
@@ -94,28 +105,48 @@ const StyledInput = styled.input`
   }
 `
 
-const Text = ({ field, label, ...props }) => {
-  const hasError =
-    props.form.touched[field.name] && props.form.errors[field.name]
+class Textarea extends Component {
+  state = {
+    value: '',
+  }
 
-  return (
-    <InputContainer>
-      <InputBorder hasError={hasError}>
-        <StyledInput type="text" {...field} {...props} />
-        <LabelAnimation>
-          <StyledLabel hasError={hasError}>{label}</StyledLabel>
-        </LabelAnimation>
-        <InputBorderActive hasError={hasError} />
-      </InputBorder>
-      <InputError hasError={hasError}>
-        {hasError && props.form.errors[field.name]}
-      </InputError>
-    </InputContainer>
-  )
+  handleTyping = value => {
+    this.setState({ value: this.textarea.value })
+    this.textarea.style.height = 'auto'
+    this.textarea.style.height = this.textarea.scrollHeight + 'px'
+  }
+
+  render() {
+    const { field, label, ...props } = this.props
+    const hasError =
+      props.form.touched[field.name] && props.form.errors[field.name]
+
+    return (
+      <InputContainer>
+        <InputBorder hasError={hasError}>
+          <StyledInput
+            onInput={this.handleTyping}
+            rows="1"
+            type="text"
+            {...field}
+            {...props}
+            innerRef={elem => (this.textarea = elem)}
+          />
+          <LabelAnimation hasValue={this.state.value}>
+            <StyledLabel hasError={hasError}>{label}</StyledLabel>
+          </LabelAnimation>
+          <InputBorderActive hasError={hasError} />
+        </InputBorder>
+        <InputError hasError={hasError}>
+          {hasError && props.form.errors[field.name]}
+        </InputError>
+      </InputContainer>
+    )
+  }
 }
 
-Text.propTypes = {
+Textarea.propTypes = {
   label: PropTypes.string.isRequired,
 }
 
-export default Text
+export default Textarea

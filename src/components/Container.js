@@ -5,12 +5,21 @@ import { media } from '@styles'
 const Container = styled.div`
   max-width: 1180px;
   margin: 0 auto;
-  padding: 5rem 4rem 1rem;
+  padding: 2rem;
   background: ${props =>
     props.background === 'dark' ? props.theme.colors.bg : 'transparent'};
 
-  ${media.large`
-    padding: 2rem;
+  ${media.desktop`
+    max-width: 54rem;
+  `};
+
+  ${media.phablet`
+    max-width: 100%;
+    ${props => props.hideOverflow && `overflow: hidden`};
+  `};
+
+  ${media.phablet`
+    padding: 0 4rem;
   `};
 `
 

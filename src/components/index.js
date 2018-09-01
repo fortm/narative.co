@@ -1,17 +1,23 @@
-import Button from './button/Button'
-import Container from './container/Container'
+import AnimatorFadeUp from './AnimatorFadeUp'
+import Button from './Button'
+import CareersAccordian from './CareersAccordian'
+import Container from './Container'
 import Form from './form'
-import Header from './header/Header'
-import Logo from './logo/Logo'
-import Navigation from './navigation/Navigation'
+import Header from './Header'
+import Observer from './Observer'
+import Logo from './Logo'
+import Navigation from './Navigation'
 import * as Transitions from './transitions'
 import Video from './video/Video'
 
 export default {
+  AnimatorFadeUp,
   Button,
+  CareersAccordian,
   Container,
   Form,
   Header,
+  Observer,
   Logo,
   Navigation,
   Transitions,
