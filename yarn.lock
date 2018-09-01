@@ -6798,9 +6798,9 @@ react-dev-utils@^4.2.1:
     strip-ansi "3.0.1"
     text-table "0.2.0"
 
-react-device-detect@^1.5.8:
-  version "1.5.8"
-  resolved "https://registry.yarnpkg.com/react-device-detect/-/react-device-detect-1.5.8.tgz#a26434195145e9b23f19ade031376656e1a8e135"
+react-device-detect@^1.5.9:
+  version "1.5.9"
+  resolved "https://registry.yarnpkg.com/react-device-detect/-/react-device-detect-1.5.9.tgz#e2e6438d5a5b9e97134fa9da6829369742c997d9"
 
 react-dom@^15.6.0:
   version "15.6.2"
