@@ -3,7 +3,7 @@ import { isMobile } from 'react-device-detect'
 import Observer from './Observer'
 
 class AnimatorFadeUp extends Component {
-  defaultProps = {
+  static defaultProps = {
     enabledOnMobile: false,
   }
 

@@ -105,6 +105,7 @@ class CareersAccordian extends Component {
         <AccordianList>
           {careers.map((career, index) => (
             <CareersAccordianItem
+              key={career.title}
               handleIndexOpen={this.handleIndexOpen}
               career={career}
               index={index}

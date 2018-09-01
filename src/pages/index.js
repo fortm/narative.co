@@ -634,6 +634,33 @@ const WhatWeDoContent = styled.div`
   `};
 `
 
+const Content = styled.div`
+  position: relative;
+  z-index: 1;
+`
+
+const GradientContainer = styled.div`
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(
+      rgb(9, 10, 12),
+      rgb(17, 18, 22) 60%,
+      rgb(13, 18, 27) 100%
+    );
+    pointer-events: none;
+    transition: all 1.5s ease;
+    z-index: 0;
+    opacity: ${p => (p.animation ? 0 : 1)};
+  }
+`
+
 class IndexPage extends Component {
   state = { animation: '' }
 
@@ -655,61 +682,63 @@ class IndexPage extends Component {
 
     return (
       <React.Fragment>
-        <Container background="dark">
-          <GridContainer>
-            <LeftContainer>
-              <LogoContainer to="/" animation={animation}>
-                <Logo />
-              </LogoContainer>
-              <TextContainer animation={animation} transitionDelay={600}>
-                <WelcomeHeader>What's your story?</WelcomeHeader>
-                <MainText>
-                  Narative is a digital studio co-founded by designers,
-                  engineers and strategists with decades of experience  at
-                  Canada’s most successful startups. We merge best practices in
-                  design and growth marketing to create narratives that empowers
-                  your brand and product.
-                </MainText>
-                <ContactText to="/contact">
-                  <ArrowAnimation>
-                    <HighlightText>Get in touch</HighlightText>
-                    .
-                    <ArrowRightIcon color="white" />
-                  </ArrowAnimation>
-                </ContactText>
-              </TextContainer>
-              <div />
-            </LeftContainer>
-            <RightContainer>
-              <CareersCotnainer to="/careers">
-                We're hiring <ArrowRightIcon color="black" />
-              </CareersCotnainer>
-              <NarativeVideoContainer>
-                <NarativeVideo
-                  controls={false}
-                  poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
-                  animation={animation}
-                  innerRef={video => (this.video = video)}
-                  muted="muted"
-                  role="img"
-                  volume="0"
-                  canplay="false"
-                  autoPlay="autoplay"
-                >
-                  <source
-                    src="http://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
-                    type="video/webm"
-                  />
-                  <source
-                    src="http://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
-                    type="video/mp4"
-                  />
-                </NarativeVideo>
-              </NarativeVideoContainer>
-            </RightContainer>
-          </GridContainer>
-        </Container>
-        {/* <Container>
+        <GradientContainer animation={animation}>
+          <Content>
+            <Container>
+              <GridContainer>
+                <LeftContainer>
+                  <LogoContainer to="/" animation={animation}>
+                    <Logo />
+                  </LogoContainer>
+                  <TextContainer animation={animation} transitionDelay={600}>
+                    <WelcomeHeader>What's your story?</WelcomeHeader>
+                    <MainText>
+                      Narative is a digital studio co-founded by designers,
+                      engineers and strategists with decades of experience  at
+                      Canada’s most successful startups. We merge best practices
+                      in design and growth marketing to create narratives that
+                      empowers your brand and product.
+                    </MainText>
+                    <ContactText to="/contact">
+                      <ArrowAnimation>
+                        <HighlightText>Get in touch</HighlightText>
+                        .
+                        <ArrowRightIcon color="white" />
+                      </ArrowAnimation>
+                    </ContactText>
+                  </TextContainer>
+                  <div />
+                </LeftContainer>
+                <RightContainer>
+                  <CareersCotnainer to="/careers">
+                    We're hiring <ArrowRightIcon color="black" />
+                  </CareersCotnainer>
+                  <NarativeVideoContainer>
+                    <NarativeVideo
+                      controls={false}
+                      poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
+                      animation={animation}
+                      innerRef={video => (this.video = video)}
+                      muted="muted"
+                      role="img"
+                      volume="0"
+                      canplay="false"
+                      autoPlay="autoplay"
+                    >
+                      <source
+                        src="http://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
+                        type="video/webm"
+                      />
+                      <source
+                        src="http://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
+                        type="video/mp4"
+                      />
+                    </NarativeVideo>
+                  </NarativeVideoContainer>
+                </RightContainer>
+              </GridContainer>
+            </Container>
+            {/* <Container>
           <ScrollIndicator>
             <span>Scroll down</span>
           </ScrollIndicator>
@@ -917,6 +946,8 @@ class IndexPage extends Component {
             </SocialIconsFooter>
           </Footer>
         </Container> */}
+          </Content>
+        </GradientContainer>
       </React.Fragment>
     )
   }

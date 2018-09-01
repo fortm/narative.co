@@ -468,6 +468,7 @@ const GradientContainer = styled.div`
     opacity: ${p => (p.animation ? 1 : 0)};
   }
 `
+
 class CareersPage extends Component {
   state = { animation: '' }
 
