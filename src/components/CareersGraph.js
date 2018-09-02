@@ -32,12 +32,12 @@ class CareersGraph extends Component {
               <CareersGraphGrid>
                 {rows.map((item, index) => (
                   <CareersGraphGridRow
-                    visible={visible}
+                    animate={animate}
                     index={rows.length - index + 1}
                     style={{ top: `${index * 36.1}px` }}
                   />
                 ))}
-                <CareersGraphGridColumnContainer visible={visible}>
+                <CareersGraphGridColumnContainer animate={animate}>
                   {columns.map((item, index) => (
                     <CareersGraphGridColumn
                       style={{ left: `${index * 135.333}px` }}
@@ -138,7 +138,7 @@ const CareersGraphGridRow = styled.div`
     rgba(255, 255, 255, 0.35) 0%,
     rgba(255, 255, 255, 0) 100%
   );
-  opacity: ${p => (p.visible ? 1 : 0)};
+  opacity: ${p => (p.animate ? 1 : 0)};
   transition: opacity 500ms ease-out ${p => p.index * 200}ms;
 `
 
@@ -150,7 +150,7 @@ const CareersGraphGridColumnContainer = styled.div`
   right: 0;
   top: 0;
   height: 100%;
-  opacity: ${p => (p.visible ? 1 : 0)};
+  opacity: ${p => (p.animate ? 1 : 0)};
   transition: opacity 0.5s ease-out 3000ms;
 `
 
@@ -248,12 +248,12 @@ const CareersGraphSVG = () => (
     <path
       d="M837.5 8L703 188L567.5 295.5H433.5L298 314.5L162.5 330.5H26H0"
       stroke="white"
-      stroke-width="2"
+      strokeWidth="2"
     />
     <path
       d="M838 152H703H567.5L433.5 241L297 223L162.5 259.5L27 368H0"
       stroke="#E9DAAC"
-      stroke-width="2"
+      strokeWidth="2"
     />
     <circle
       cx="26.5"
@@ -261,7 +261,7 @@ const CareersGraphSVG = () => (
       r="6.5"
       fill="#080a0e"
       stroke="white"
-      stroke-width="2"
+      strokeWidth="2"
       className="one"
     />
     <circle
@@ -270,7 +270,7 @@ const CareersGraphSVG = () => (
       r="6.5"
       fill="#080a0e"
       stroke="white"
-      stroke-width="2"
+      strokeWidth="2"
       className="two"
     />
     <circle
@@ -279,7 +279,7 @@ const CareersGraphSVG = () => (
       r="6.5"
       fill="#080a0e"
       stroke="white"
-      stroke-width="2"
+      strokeWidth="2"
       className="three"
     />
     <circle
@@ -288,7 +288,7 @@ const CareersGraphSVG = () => (
       r="6.5"
       fill="#080a0e"
       stroke="white"
-      stroke-width="2"
+      strokeWidth="2"
       className="four"
     />
     <circle
@@ -297,7 +297,7 @@ const CareersGraphSVG = () => (
       r="6.5"
       fill="#080a0e"
       stroke="white"
-      stroke-width="2"
+      strokeWidth="2"
       className="five"
     />
 
@@ -307,7 +307,7 @@ const CareersGraphSVG = () => (
       r="6.5"
       fill="#080a0e"
       stroke="white"
-      stroke-width="2"
+      strokeWidth="2"
       className="six"
     />
     <circle
@@ -316,7 +316,7 @@ const CareersGraphSVG = () => (
       r="6.5"
       fill="#080a0e"
       stroke="white"
-      stroke-width="2"
+      strokeWidth="2"
       className="seven"
     />
     <circle
@@ -325,7 +325,7 @@ const CareersGraphSVG = () => (
       r="6.5"
       fill="#080a0e"
       stroke="#E9DAAC"
-      stroke-width="2"
+      strokeWidth="2"
       className="one"
     />
     <circle
@@ -334,7 +334,7 @@ const CareersGraphSVG = () => (
       r="6.5"
       fill="#080a0e"
       stroke="#E9DAAC"
-      stroke-width="2"
+      strokeWidth="2"
       className="two"
     />
     <circle
@@ -343,7 +343,7 @@ const CareersGraphSVG = () => (
       r="6.5"
       fill="#080a0e"
       stroke="#E9DAAC"
-      stroke-width="2"
+      strokeWidth="2"
       className="three"
     />
     <circle
@@ -352,7 +352,7 @@ const CareersGraphSVG = () => (
       r="6.5"
       fill="#080a0e"
       stroke="#E9DAAC"
-      stroke-width="2"
+      strokeWidth="2"
       className="four"
     />
     <circle
@@ -361,7 +361,7 @@ const CareersGraphSVG = () => (
       r="6.5"
       fill="#080a0e"
       stroke="#E9DAAC"
-      stroke-width="2"
+      strokeWidth="2"
       className="five"
     />
     <circle
@@ -370,7 +370,7 @@ const CareersGraphSVG = () => (
       r="6.5"
       fill="#080a0e"
       stroke="#E9DAAC"
-      stroke-width="2"
+      strokeWidth="2"
       className="six"
     />
 
@@ -380,7 +380,7 @@ const CareersGraphSVG = () => (
       r="6.5"
       fill="#080a0e"
       stroke="#E9DAAC"
-      stroke-width="2"
+      strokeWidth="2"
       className="seven"
     />
   </svg>

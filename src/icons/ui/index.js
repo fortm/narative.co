@@ -29,8 +29,8 @@ const CheckIcon = ({ color = 'white' }) => (
       <g id="check">
         <path
           id="Shape"
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M 5.6 10.6L 1.4 6.4L 0 7.8L 5.6 13.4L 17.6 1.4L 16.2 0L 5.6 10.6Z"
           transform="translate(0.399902 0.600098)"
           fill={color}
@@ -123,14 +123,14 @@ export const SubmittedCheckIcon = () => (
           height="88.5"
           rx="2.25"
           stroke="black"
-          stroke-width="1.5"
+          strokeWidth="1.5"
         />
         <path
           id="Vector"
           d="M 0 17.8971L 14.7165 30.8571L 39.8571 0"
           transform="translate(25.0715 29.5715)"
           stroke="black"
-          stroke-width="1.5"
+          strokeWidth="1.5"
         />
       </g>
     </g>

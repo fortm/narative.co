@@ -370,7 +370,7 @@ const SectionCopyHighlight = styled.span`
 `
 
 const WhatWeDoList = styled.ul`
-  width: 42rem;
+  width: 38rem;
   list-style: none;
 
   ${media.desktop`
@@ -490,7 +490,6 @@ class CareersPage extends Component {
   render() {
     const { animation } = this.state
 
-    console.log(this.props)
     return (
       <React.Fragment>
         <GradientContainer animation={animation}>
@@ -521,7 +520,7 @@ class CareersPage extends Component {
                   <ImageContainer>
                     <Img sizes={this.props.data.file.childImageSharp.sizes} />
                     <ImageTraceContainer>
-                      <Yolo />
+                      <NarativeHeroOutline />
                     </ImageTraceContainer>
                   </ImageContainer>
                 </RightContainer>
@@ -538,12 +537,12 @@ class CareersPage extends Component {
                 day, with growth based on trust and relationships.
               </SectionCopy>
             </Section>
-            <Section header="How we work">
+            <Section header="Working at Narative">
               <FlexColumn>
                 <WhatWeDoContent>
-                  <SectionCopy maxWidth="41rem">
-                    We don't just mindfully select our clients, you get to
-                    choose how and when you work, to ensure you're at your best.
+                  <SectionCopy maxWidth="46rem">
+                    Not only are we mindful of the projects we select, we get to
+                    choose how and when we work, to ensure we're at our best.
                   </SectionCopy>
                   <div style={{ color: '#fff', marginBottom: '1.6rem' }}>
                     <SocialIconsFooter hideOnMobile>
@@ -583,62 +582,6 @@ class CareersPage extends Component {
                 </WhatWeDoContent>
                 <WhatWeDoList>
                   <Perks />
-                  {/* <WhatWeDoListItem>
-                    <span>
-                      100% remote{' '}
-                      <HideOnMobile smallest>&nbsp;-&nbsp;</HideOnMobile>
-                    </span>{' '}
-                    <HideOnMobile smallest>
-                      work from your couch, or from a beach
-                    </HideOnMobile>
-                  </WhatWeDoListItem>
-                  <WhatWeDoListItem>
-                    <span>
-                      Autonomy{' '}
-                      <HideOnMobile smallest>&nbsp;-&nbsp;</HideOnMobile>
-                    </span>{' '}
-                    <HideOnMobile smallest>
-                      build your own hours, work at your own pace
-                    </HideOnMobile>
-                  </WhatWeDoListItem>
-                  <WhatWeDoListItem>
-                    <span>
-                      Respect{' '}
-                      <HideOnMobile smallest>&nbsp;-&nbsp;</HideOnMobile>
-                    </span>{' '}
-                    <HideOnMobile smallest>
-                      companies trust us for what we build
-                    </HideOnMobile>
-                  </WhatWeDoListItem>
-                  <WhatWeDoListItem>
-                    <span>
-                      {' '}
-                      Vacation{' '}
-                      <HideOnMobile smallest>&nbsp;-&nbsp;</HideOnMobile>
-                    </span>{' '}
-                    <HideOnMobile smallest>
-                      well, you make your own schedule. really
-                    </HideOnMobile>
-                  </WhatWeDoListItem>
-                  <WhatWeDoListItem>
-                    <span>
-                      {' '}
-                      Competitive salaries{' '}
-                      <HideOnMobile smallest>&nbsp;-&nbsp;</HideOnMobile>
-                    </span>{' '}
-                    <HideOnMobile smallest>
-                      we pay what you deserve
-                    </HideOnMobile>
-                  </WhatWeDoListItem>
-                  <WhatWeDoListItem>
-                    <span>
-                      Executive decisions{' '}
-                      <HideOnMobile smallest>&nbsp;-&nbsp;</HideOnMobile>
-                    </span>{' '}
-                    <HideOnMobile smallest>
-                      we listen to you, at all times
-                    </HideOnMobile>
-                  </WhatWeDoListItem> */}
                 </WhatWeDoList>
               </FlexColumn>
             </Section>
@@ -758,23 +701,22 @@ export const pageQuery = graphql`
   }
 `
 
-const Yolo = () => (
+const NarativeHeroOutline = () => (
   <svg
-    width="467"
-    height="492"
+    width="101.5%"
     viewBox="0 0 467 492"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M460.787 322.591L449 314.331V290H448V313.63L24.5001 16.8574V2H23.5001V16.1567L1.28687 0.590576L0.713013 1.40942L23.5001 17.3777V178.623L9.78534 169.089L9.21454 169.911L23.5001 179.841V267H24.5001V180.536L448 474.92V485H449V475.615L460.215 483.411L460.785 482.589L449 474.397V315.552L460.213 323.409L460.787 322.591ZM24.5001 179.318L448 473.702V314.851L24.5001 18.0784V179.318Z"
       fill="url(#paint0_linear)"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M450.989 222.5H359.096L359.028 222.598L359.001 222.579V313.995C409.403 313.464 450.193 272.838 450.989 222.5ZM359.201 221.5L359.001 221.36V158.55L360.012 159.254L360.583 158.433L359.001 157.332V128.005C409.903 128.542 451.001 169.971 451.001 221C451.001 221.13 451.001 221.26 451 221.39L449.177 220.121L448.606 220.942L449.408 221.5H359.201ZM357.453 221.5H265.002C265.001 221.333 265.001 221.167 265.001 221C265.001 181.557 289.556 147.848 324.214 134.328L326.262 135.754L326.833 134.933L325.343 133.896C335.504 130.084 346.509 128 358.001 128V156.635L356.365 155.496L355.793 156.317L358.001 157.854V220.663L355.474 218.902L354.903 219.723L357.453 221.5ZM358.001 222.5H265.013C265.814 273.171 307.139 314 358.001 314V222.5ZM264.001 221C264.001 272.915 306.086 315 358.001 315H359.001V314.995C410.455 314.458 452.001 272.581 452.001 221C452.001 169.085 409.916 127 358.001 127C346.143 127 334.797 129.196 324.349 133.203L322.615 131.996L322.043 132.817L323.228 133.641C288.526 147.466 264.001 181.369 264.001 221ZM317.825 129.879L315.715 128.41L316.287 127.59L318.396 129.058L317.825 129.879ZM334.7 141.629L330.481 138.692L331.052 137.871L335.271 140.808L334.7 141.629ZM343.137 147.504L338.918 144.567L339.49 143.746L343.708 146.683L343.137 147.504ZM351.575 153.379L347.356 150.442L347.927 149.621L352.146 152.558L351.575 153.379ZM368.45 165.129L364.231 162.192L364.802 161.371L369.021 164.308L368.45 165.129ZM376.887 171.004L372.668 168.067L373.24 167.246L377.458 170.183L376.887 171.004ZM385.325 176.879L381.106 173.942L381.677 173.121L385.896 176.058L385.325 176.879ZM393.762 182.754L389.543 179.817L390.115 178.996L394.333 181.933L393.762 182.754ZM402.2 188.629L397.981 185.692L398.552 184.871L402.771 187.808L402.2 188.629ZM410.637 194.504L406.418 191.567L406.99 190.746L411.208 193.683L410.637 194.504ZM419.075 200.379L414.856 197.442L415.427 196.621L419.646 199.558L419.075 200.379ZM427.512 206.254L423.293 203.317L423.865 202.496L428.083 205.433L427.512 206.254ZM435.95 212.129L431.731 209.192L432.302 208.371L436.521 211.308L435.95 212.129ZM444.387 218.004L440.168 215.067L440.74 214.246L444.958 217.183L444.387 218.004ZM315.715 192.41L317.778 193.848L318.349 193.027L316.287 191.59L315.715 192.41ZM321.903 196.723L326.028 199.598L326.599 198.777L322.474 195.902L321.903 196.723ZM330.153 202.473L334.278 205.348L334.849 204.527L330.724 201.652L330.153 202.473ZM338.403 208.223L342.528 211.098L343.099 210.277L338.974 207.402L338.403 208.223ZM346.653 213.973L350.778 216.848L351.349 216.027L347.224 213.152L346.653 213.973ZM363.153 225.473L367.278 228.348L367.849 227.527L363.724 224.652L363.153 225.473ZM371.403 231.223L375.528 234.098L376.099 233.277L371.974 230.402L371.403 231.223ZM379.653 236.973L383.778 239.848L384.349 239.027L380.224 236.152L379.653 236.973ZM387.903 242.723L392.028 245.598L392.599 244.777L388.474 241.902L387.903 242.723ZM396.153 248.473L400.278 251.348L400.849 250.527L396.724 247.652L396.153 248.473ZM404.403 254.223L408.528 257.098L409.099 256.277L404.974 253.402L404.403 254.223ZM412.653 259.973L416.778 262.848L417.349 262.027L413.224 259.152L412.653 259.973ZM420.903 265.723L425.027 268.598L425.599 267.777L421.474 264.902L420.903 265.723ZM429.152 271.473L433.277 274.348L433.849 273.527L429.724 270.652L429.152 271.473ZM437.402 277.223L441.527 280.098L442.099 279.277L437.974 276.402L437.402 277.223ZM445.652 282.973L447.715 284.41L448.287 283.59L446.224 282.152L445.652 282.973Z"
       fill="url(#paint1_linear)"
     />

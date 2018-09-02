@@ -62,12 +62,12 @@ const careers = [
 ]
 
 const CareersAccordianItem = ({ career, handleIndexOpen, index, isOpen }) => (
-  <AccordianListItem onClick={() => handleIndexOpen(index)}>
+  <AccordianListItem isOpen={isOpen} onClick={() => handleIndexOpen(index)}>
     <AccordianListTop>
-      <div>
+      <AccordianListText>
         <AccordianListTitle>{career.title}</AccordianListTitle>
         <AccordianListLocation>{career.location}</AccordianListLocation>
-      </div>
+      </AccordianListText>
       <IconContainer isOpen={isOpen} />
     </AccordianListTop>
 
@@ -172,10 +172,18 @@ const IconContainer = styled.div`
   }
 `
 
+const AccordianListText = styled.span`
+  transition: transform 200ms ease-in-out;
+`
+
 const AccordianListItem = styled.li`
   border-bottom: 1px solid #707173;
   padding: 2.5rem 0;
   cursor: pointer;
+
+  &:hover ${AccordianListText} {
+    transform: translateX(${p => (p.isOpen ? 0 : 5)}px);
+  }
 `
 
 const AccordianListTop = styled.div`

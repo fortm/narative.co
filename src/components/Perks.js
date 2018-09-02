@@ -60,7 +60,6 @@ class Perks extends Component {
     return (
       <Observer
         render={({ visible }) => {
-          console.log(visible)
           if (visible && !animate) {
             this.setState({ animate: true })
           }
