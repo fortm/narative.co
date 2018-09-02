@@ -75,7 +75,7 @@ const CareersGraphContainer = styled.div`
   position: relative;
   margin: 0 auto;
   max-width: 1140px;
-  top: -15rem;
+  top: -12rem;
   margin-bottom: 10rem;
 `
 

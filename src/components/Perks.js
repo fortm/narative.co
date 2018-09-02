@@ -96,6 +96,8 @@ export default Perks
 
 const PerksContainer = styled.div`
   width: 100%;
+  position: relative;
+  top: -0.25rem;
 `
 
 const PerksList = styled.ul`
@@ -114,7 +116,7 @@ const PerksItem = styled.div`
 
   transform: ${p => (p.animate ? `translateY(0)` : `translateY(5rem)`)};
   opacity: ${p => (p.animate ? 1 : 0)};
-  transition: all 1.5s cubic-bezier(0.77, 0, 0.175, 1) ${p => p.index * 300}ms;
+  transition: all 1.5s cubic-bezier(0.77, 0, 0.175, 1) ${p => p.index * 50}ms;
 `
 
 const PerksItemHighlight = styled.span`
@@ -145,5 +147,5 @@ const PerksItemLine = styled.div`
   transform: ${p => (p.animate ? `translateX(0)` : `translateX(-100%)`)};
 
   transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)
-    ${p => p.index * 300 + 1200}ms;
+    ${p => p.index * 70 + 1200}ms;
 `
