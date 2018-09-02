@@ -33,15 +33,15 @@ class CareersGraph extends Component {
                 {rows.map((item, index) => (
                   <CareersGraphGridRow
                     visible={visible}
-                    index={index}
+                    index={rows.length - index}
                     style={{ top: `${index * 36.1}px` }}
                   />
                 ))}
-                <CareersGraphGridColumnContainer
-                  visible={visiblePercentage > 75}
-                >
+                <CareersGraphGridColumnContainer>
                   {columns.map((item, index) => (
                     <CareersGraphGridColumn
+                      index={index}
+                      visible={visible}
                       style={{ left: `${index * 135.333}px` }}
                     />
                   ))}
@@ -88,7 +88,7 @@ const CareersGraphGrid = styled.div`
 
 const LabelsContainer = styled.div`
   opacity: ${p => (p.animate ? 1 : 0)};
-  transition: opacity 0.5s ease-out 4600ms;
+  transition: opacity 0.5s ease-out 4000ms;
 `
 
 const XLabelsContainer = styled.div`
@@ -136,12 +136,12 @@ const CareersGraphGridRow = styled.div`
   max-width: 1440px;
   height: 1px;
   background: radial-gradient(
-    50% 50%,
+    50% 60%,
     rgba(255, 255, 255, 0.35) 0%,
     rgba(255, 255, 255, 0) 100%
   );
   opacity: ${p => (p.visible ? 1 : 0)};
-  transition: opacity 500ms ease-out ${p => p.index * 150}ms;
+  transition: opacity 500ms ease-out ${p => p.index * 300}ms;
 `
 
 const CareersGraphGridColumnContainer = styled.div`
@@ -152,8 +152,6 @@ const CareersGraphGridColumnContainer = styled.div`
   right: 0;
   top: 0;
   height: 100%;
-  opacity: ${p => (p.visible ? 1 : 0)};
-  transition: opacity 500ms ease-out 1s;
 `
 
 const CareersGraphGridColumn = styled.div`
@@ -161,6 +159,9 @@ const CareersGraphGridColumn = styled.div`
   width: 1px;
   height: 100%;
   background: rgba(255, 255, 255, 0.04);
+  transition: opacity 500ms ease-out 1s;
+  opacity: ${p => (p.visible ? 1 : 0)};
+  transition: opacity 500ms ease-out ${p => p.index * 500}ms;
 `
 
 const CareersGraphSVGContainer = styled.div`
@@ -177,7 +178,7 @@ const CareersGraphSVGContainer = styled.div`
     ${p =>
       p.animate &&
       `
-      animation: dash 4s cubic-bezier(0.5, 0, 0.415, 0.955) forwards 0.9s;
+      animation: dash 4s cubic-bezier(0.5, 0, 0.415, 0.955) forwards;
     `};
   }
 
@@ -210,31 +211,31 @@ const CareersGraphSVGContainer = styled.div`
     p.animate &&
     `
     .one {
-      animation: fadein 0.4s ease-out 1400ms forwards;
+      animation: fadein 0.4s ease-out 400ms forwards;
     }
 
     .two {
-      animation: fadein 0.4s ease-out 2100ms forwards;
+      animation: fadein 0.4s ease-out 1100ms forwards;
     }
 
     .three {
-      animation: fadein 0.4s ease-out 2400ms forwards;
+      animation: fadein 0.4s ease-out 1400ms forwards;
     }
 
     .four {
-      animation: fadein 0.4s ease-out 2700ms forwards;
+      animation: fadein 0.4s ease-out 1700ms forwards;
     }
 
     .five {
-      animation: fadein 0.4s ease-out 2900ms forwards;
+      animation: fadein 0.4s ease-out 1900ms forwards;
     }
 
     .six {
-      animation: fadein 0.4s ease-out 3100ms forwards;
+      animation: fadein 0.4s ease-out 2100ms forwards;
     }
 
     .seven {
-      animation: fadein 0.4s ease-out 4500ms forwards;
+      animation: fadein 0.4s ease-out 3500ms forwards;
     }
   `};
 `

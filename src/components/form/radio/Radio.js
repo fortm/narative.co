@@ -31,7 +31,7 @@ const StyledLabel = styled.label`
   transition: all 200ms ${props => props.theme.transitions.easeIn};
 
   ${media.tablet`
-  margin-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
   `};
 
   &::after {

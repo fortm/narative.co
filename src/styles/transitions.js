@@ -18,8 +18,8 @@ const blurIn = css`
     filter: blur(0.5rem);
   `};
 
-  transition: filter 600ms 200ms cubic-bezier(0.694, 0, 0.335, 1),
-    opacity 300ms 300ms cubic-bezier(0.694, 0, 0.335, 1);
+  transition: filter 600ms 1200ms cubic-bezier(0.694, 0, 0.335, 1),
+    opacity 1s 1300ms cubic-bezier(0.694, 0, 0.335, 1);
 `
 
 /**
