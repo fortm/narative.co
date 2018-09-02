@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import Link from 'gatsby-link'
 import styled, { keyframes } from 'styled-components'
 import { media, transitions } from '@styles'
-import { CareersAccordian, Container, Logo } from '@components'
-import { Section, Testimonials } from '@modules'
+import { CareersAccordian, CareersGraph, Container, Logo } from '@components'
+import { Section } from '@modules'
 import * as SocialIcons from '../icons/social'
-import { ArrowRightIcon, PencilIcon } from '../icons/ui'
+import { ArrowRightIcon } from '../icons/ui'
 
 const animateButtonLine = keyframes`
   0% {
@@ -78,8 +78,6 @@ const HiringPill = styled.div`
   margin-bottom: 1.5rem;
   display: inline-block;
   font-weight: 600;
-
-  @keyframes;
 `
 
 const WelcomeHeader = styled.h1`
@@ -227,19 +225,6 @@ const ContactText = styled(Link)`
   }
 `
 
-const CopyRightContainerMobile = styled.div`
-  display: none;
-  font-size: 1.6rem;
-  font-weight: 500;
-  color: ${props => props.theme.colors.grey};
-  align-self: center;
-  margin-top: 2rem;
-
-  ${media.desktop`
-    display: none;
-  `};
-`
-
 const HighlightText = styled.span`
   color: #fff;
 `
@@ -288,6 +273,7 @@ const ArrowAnimation = styled.div`
     `};
   }
 `
+
 const SectionCopy = styled.p`
   color: #fff;
   font-size: 3.6rem;
@@ -328,58 +314,6 @@ const SectionCopyHighlight = styled.span`
     top: 0;
     bottom: 0;
     background: #e9daac;
-  }
-`
-
-const FunctionArrowContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 7rem;
-  max-width: 68rem;
-
-  ${media.desktop`
-    margin-top: 3.5rem;
-  `};
-`
-
-const FunctionArrowWord = styled.div`
-  font-weight: 900;
-  text-transform: uppercase;
-  font-size: 2.4rem;
-  color: ${props => props.theme.colors.grey};
-  ${props =>
-    props.paddingLeft ? `padding-left: 2.6rem` : `padding-right: 2.6rem`};
-
-  ${media.phone`
-      ${props =>
-        props.paddingLeft ? `padding-left: 0.6rem` : `padding-right: 0.6rem`};
-  `};
-`
-
-const FunctionArrow = styled.div`
-  position: relative;
-  height: 2px;
-  width: 100%;
-  background: ${props => props.theme.colors.grey};
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    right: -2px;
-    transform: rotate(45deg);
-    height: 2px;
-    border-radius: 4px;
-    width: 10px;
-    background: ${props => props.theme.colors.grey};
-    top: -3px;
-  }
-
-  &::after {
-    transform: rotate(-45deg);
-    top: initial;
-    bottom: -3px;
   }
 `
 
@@ -559,24 +493,19 @@ class CareersPage extends Component {
             </Container>
 
             <Section header="Why Narative">
-              <SectionCopy maxWidth="66rem">
-                Nobody at Narative has a "boss". Instead we have a common goal,
-                where everyone has executive decision, regardless of your
-                position. We teach and learn from each other every day and we
-                grow based on trust and relationships.
+              <SectionCopy maxWidth="69rem">
+                At Narative, nobody has a "boss". Instead, we hold a common
+                goal, one where everyone has executive level decision,
+                regardless of position. We teach and learn from each other every
+                day, with growth based on trust and relationships.
               </SectionCopy>
-              <FunctionArrowContainer>
-                <FunctionArrowWord>Function</FunctionArrowWord>{' '}
-                <FunctionArrow />{' '}
-                <FunctionArrowWord paddingLeft>Form</FunctionArrowWord>
-              </FunctionArrowContainer>
             </Section>
             <Section header="Our perks">
               <FlexColumn>
                 <WhatWeDoContent>
-                  <SectionCopy maxWidth="36rem">
-                    We not only get to choose our clients, but you also get to
-                    choose how you work and even when you work.
+                  <SectionCopy maxWidth="41rem">
+                    We don't just mindfully select our clients, you get to
+                    choose how and when you work, to ensure you're at your best.
                   </SectionCopy>
                   <div style={{ color: '#fff', marginBottom: '1.6rem' }}>
                     <SocialIconsFooter hideOnMobile>
@@ -617,56 +546,58 @@ class CareersPage extends Component {
                 <WhatWeDoList>
                   <WhatWeDoListItem>
                     <span>
-                      Branding{' '}
+                      100% remote{' '}
                       <HideOnMobile smallest>&nbsp;-&nbsp;</HideOnMobile>
                     </span>{' '}
                     <HideOnMobile smallest>
-                      logotype design, guidelines, typefaces and marks
+                      work from your couch, or from a beach
                     </HideOnMobile>
                   </WhatWeDoListItem>
                   <WhatWeDoListItem>
                     <span>
-                      Marketing{' '}
+                      Autonomy{' '}
                       <HideOnMobile smallest>&nbsp;-&nbsp;</HideOnMobile>
                     </span>{' '}
                     <HideOnMobile smallest>
-                      strategy, business development, growth
+                      build your own hours, work at your own pace
                     </HideOnMobile>
                   </WhatWeDoListItem>
                   <WhatWeDoListItem>
                     <span>
-                      Editorial{' '}
+                      Respect{' '}
                       <HideOnMobile smallest>&nbsp;-&nbsp;</HideOnMobile>
                     </span>{' '}
                     <HideOnMobile smallest>
-                      whitepapers, books and magazine designs
-                    </HideOnMobile>
-                  </WhatWeDoListItem>
-                  <WhatWeDoListItem>
-                    <span>
-                      {' '}
-                      Development{' '}
-                      <HideOnMobile smallest>&nbsp;-&nbsp;</HideOnMobile>
-                    </span>{' '}
-                    <HideOnMobile smallest>
-                      dennis will write anything he wants here
+                      companies trust us for what we build
                     </HideOnMobile>
                   </WhatWeDoListItem>
                   <WhatWeDoListItem>
                     <span>
                       {' '}
-                      Product design{' '}
-                      <HideOnMobile smallest>&nbsp;-&nbsp;</HideOnMobile>
-                    </span>{' '}
-                    <HideOnMobile smallest>mobile and web apps</HideOnMobile>
-                  </WhatWeDoListItem>
-                  <WhatWeDoListItem>
-                    <span>
-                      Experience{' '}
+                      Vacation{' '}
                       <HideOnMobile smallest>&nbsp;-&nbsp;</HideOnMobile>
                     </span>{' '}
                     <HideOnMobile smallest>
-                      optimize the usability of your digital product
+                      well, you make your own schedule. really
+                    </HideOnMobile>
+                  </WhatWeDoListItem>
+                  <WhatWeDoListItem>
+                    <span>
+                      {' '}
+                      Competitive salaries{' '}
+                      <HideOnMobile smallest>&nbsp;-&nbsp;</HideOnMobile>
+                    </span>{' '}
+                    <HideOnMobile smallest>
+                      we pay what you deserve
+                    </HideOnMobile>
+                  </WhatWeDoListItem>
+                  <WhatWeDoListItem>
+                    <span>
+                      Executive decisions{' '}
+                      <HideOnMobile smallest>&nbsp;-&nbsp;</HideOnMobile>
+                    </span>{' '}
+                    <HideOnMobile smallest>
+                      we listen to you, at all times
                     </HideOnMobile>
                   </WhatWeDoListItem>
                 </WhatWeDoList>
@@ -696,6 +627,21 @@ class CareersPage extends Component {
                 <TestimonialsImage src="/images/testimonials/placeholder-image.png" />
               </div>
             </Section>
+            <Section
+              header={
+                <div style={{ paddingRight: '2.5rem' }}>
+                  Building our future
+                </div>
+              }
+            >
+              <SectionCopy maxWidth="67rem">
+                We engage with exceptional clients to fund our own ideas.
+                Manifesting our core beliefs through the development of our own
+                products. We call this Narative Labs.
+              </SectionCopy>
+            </Section>
+            <CareersGraph />
+
             <Section header="Say hello">
               <SectionCopy maxWidth="67rem">
                 If you have the devotion, the curiosity and the desire to build

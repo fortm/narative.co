@@ -17,6 +17,11 @@ const animateButtonLine = keyframes`
   }
 `
 
+const fadein = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`
+
 const fadeInOut = keyframes`
   0% {
       opacity: 0;
@@ -123,9 +128,11 @@ export default CareersAccordian
 const AccordianContainer = styled.div`
   color: #fff;
   max-width: 65rem;
-  margin: 0 0 15rem 29.3rem;
+  height: 47rem;
+  margin: 0 0 10rem 29.3rem;
   position: relative;
   top: -9rem;
+  transition: height 0.5s ease;
 
   ${media.desktop`
     margin:  0 auto 15rem;
@@ -135,6 +142,34 @@ const AccordianContainer = styled.div`
 
 const AccordianList = styled.ul`
   list-style: none;
+`
+
+const IconContainer = styled.div`
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    right: 4px;
+    top: 12px;
+    height: 2px;
+    width: 8px;
+    background: #fff;
+    transform: rotate(${p => (p.isOpen ? -45 : 45)}deg);
+    transition: transform 300ms ease;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0px;
+    top: 12px;
+    height: 2px;
+    width: 8px;
+    background: #fff;
+    transform: rotate(${p => (p.isOpen ? 45 : -45)}deg);
+    transition: transform 300ms ease;
+  }
 `
 
 const AccordianListItem = styled.li`
@@ -165,6 +200,8 @@ const AccordianListDescription = styled.p`
   margin-top: 5rem;
   color: ${p => p.theme.colors.grey};
   margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: 1s ease-out ${fadein} forwards;
 
   &::before {
     content: '';
@@ -196,6 +233,8 @@ const AccordianMailTo = styled.a`
   font-weight: 600;
   margin-bottom: 2.5rem;
   color: #fff;
+  opacity: 0;
+  animation: 1.4s ease-out ${fadein} forwards;
 `
 
 const ArrowAnimation = styled.div`
@@ -246,33 +285,5 @@ const ArrowAnimation = styled.div`
     ${media.tablet`
       animation: none;
     `};
-  }
-`
-
-const IconContainer = styled.div`
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    right: 4px;
-    top: 12px;
-    height: 2px;
-    width: 8px;
-    background: #fff;
-    transform: rotate(${p => (p.isOpen ? -45 : 45)}deg);
-    transition: transform 300ms ease;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    right: 0px;
-    top: 12px;
-    height: 2px;
-    width: 8px;
-    background: #fff;
-    transform: rotate(${p => (p.isOpen ? 45 : -45)}deg);
-    transition: transform 300ms ease;
   }
 `

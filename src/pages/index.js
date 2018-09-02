@@ -577,14 +577,12 @@ const fadeIn = keyframes`
 
 const CareersCotnainer = styled(Link)`
   position: absolute;
-  right: 0;
-  top: 0;
+  right: -4.3rem;
   color: white;
-  top: 3rem;
+  top: 2.5rem;
   padding: 0.2rem 1.2rem;
-  color: ${props => props.theme.colors.black};
+  color: #fff;
   font-weight: 500;
-  background: #fff;
   border-radius: 3px;
   display: flex;
   align-items: center;
@@ -688,13 +686,13 @@ class IndexPage extends Component {
                     <Logo />
                   </LogoContainer>
                   <TextContainer animation={animation} transitionDelay={600}>
-                    <WelcomeHeader>What's your story?</WelcomeHeader>
+                    <WelcomeHeader>We develop startups</WelcomeHeader>
                     <MainText>
-                      Narative is a digital studio co-founded by designers,
-                      engineers and strategists with decades of experience  at
-                      Canada’s most successful startups. We merge best practices
-                      in design and growth marketing to create narratives that
-                      empowers your brand and product.
+                      Narative was founded by product designers, software
+                      engineers and entrepreneurs with decades of experience at
+                      the world's most successful startups. We merge best
+                      practices in design, development and strategy to create
+                      narratives that empower your brand.
                     </MainText>
                     <ContactText to="/contact">
                       <ArrowAnimation>
@@ -704,11 +702,19 @@ class IndexPage extends Component {
                       </ArrowAnimation>
                     </ContactText>
                   </TextContainer>
-                  <div />
+                  <CopyRightContainer
+                    animation={animation}
+                    transitionDelay={800}
+                  >
+                    © {new Date().getFullYear()} Narative Studio Inc.
+                  </CopyRightContainer>
                 </LeftContainer>
                 <RightContainer>
                   <CareersCotnainer to="/careers">
-                    We're hiring <ArrowRightIcon color="black" />
+                    <ArrowAnimation>
+                      <HighlightText>We're hiring</HighlightText>
+                      <ArrowRightIcon color="white" />
+                    </ArrowAnimation>
                   </CareersCotnainer>
                   <NarativeVideoContainer>
                     <NarativeVideo

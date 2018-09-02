@@ -4,10 +4,10 @@ import { AnimatorFadeUp, Container } from '@components'
 import { media } from '@styles'
 
 const SectionSpacer = styled.div`
-  padding-bottom: 25rem;
+  padding-bottom: 20rem;
 
   ${media.hdpi`
-    padding-bottom: 18rem;
+    padding-bottom: 15rem;
   `};
 
   ${media.desktop`
@@ -26,13 +26,12 @@ const SectionContainer = styled.div`
 const SectionHeader = styled.h2`
   align-self: flex-start;
   font-size: 3.2rem;
-  border-bottom: 4px solid ${props => props.theme.colors.grey};
   color: ${props => props.theme.colors.grey};
   width: 20rem;
   min-width: 20rem;
   line-height: 1.4;
   padding-bottom: 1rem;
-  margin-right: 9.3rem;
+  margin-right: 6.3rem;
 
   ${media.desktop`
     flex-direction: column;

@@ -1,6 +1,7 @@
 import AnimatorFadeUp from './AnimatorFadeUp'
 import Button from './Button'
 import CareersAccordian from './CareersAccordian'
+import CareersGraph from './CareersGraph'
 import Container from './Container'
 import Form from './form'
 import Header from './Header'
@@ -14,6 +15,7 @@ export default {
   AnimatorFadeUp,
   Button,
   CareersAccordian,
+  CareersGraph,
   Container,
   Form,
   Header,
