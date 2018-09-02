@@ -8,7 +8,6 @@ const plugins = [
   `gatsby-image`,
   `gatsby-plugin-sharp`,
   `gatsby-transformer-sharp`,
-  `gatsby-plugin-sitemap`,
   'gatsby-plugin-netlify-cache',
   {
     resolve: `gatsby-plugin-styled-components`,
