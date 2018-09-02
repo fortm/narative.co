@@ -33,15 +33,13 @@ class CareersGraph extends Component {
                 {rows.map((item, index) => (
                   <CareersGraphGridRow
                     visible={visible}
-                    index={rows.length - index}
+                    index={rows.length - index + 1}
                     style={{ top: `${index * 36.1}px` }}
                   />
                 ))}
-                <CareersGraphGridColumnContainer>
+                <CareersGraphGridColumnContainer visible={visible}>
                   {columns.map((item, index) => (
                     <CareersGraphGridColumn
-                      index={index}
-                      visible={visible}
                       style={{ left: `${index * 135.333}px` }}
                     />
                   ))}
@@ -88,7 +86,7 @@ const CareersGraphGrid = styled.div`
 
 const LabelsContainer = styled.div`
   opacity: ${p => (p.animate ? 1 : 0)};
-  transition: opacity 0.5s ease-out 4000ms;
+  transition: opacity 0.3s ease-out 3550ms;
 `
 
 const XLabelsContainer = styled.div`
@@ -141,7 +139,7 @@ const CareersGraphGridRow = styled.div`
     rgba(255, 255, 255, 0) 100%
   );
   opacity: ${p => (p.visible ? 1 : 0)};
-  transition: opacity 500ms ease-out ${p => p.index * 300}ms;
+  transition: opacity 500ms ease-out ${p => p.index * 200}ms;
 `
 
 const CareersGraphGridColumnContainer = styled.div`
@@ -152,6 +150,8 @@ const CareersGraphGridColumnContainer = styled.div`
   right: 0;
   top: 0;
   height: 100%;
+  opacity: ${p => (p.visible ? 1 : 0)};
+  transition: opacity 0.5s ease-out 3000ms;
 `
 
 const CareersGraphGridColumn = styled.div`
@@ -159,9 +159,6 @@ const CareersGraphGridColumn = styled.div`
   width: 1px;
   height: 100%;
   background: rgba(255, 255, 255, 0.04);
-  transition: opacity 500ms ease-out 1s;
-  opacity: ${p => (p.visible ? 1 : 0)};
-  transition: opacity 500ms ease-out ${p => p.index * 500}ms;
 `
 
 const CareersGraphSVGContainer = styled.div`
