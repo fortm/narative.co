@@ -4,6 +4,7 @@ import Observer from './Observer'
 
 const rows = Array.apply(null, { length: 11 }).map(Number.call, Number)
 const columns = Array.apply(null, { length: 7 }).map(Number.call, Number)
+const months = ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct']
 
 class CareersGraph extends Component {
   state = {
@@ -21,7 +22,7 @@ class CareersGraph extends Component {
 
     return (
       <Observer
-        render={({ visiblePercentage }) => {
+        render={({ visiblePercentage, visible }) => {
           if (!animate) {
             this.handlePercentage(visiblePercentage)
           }
@@ -30,14 +31,10 @@ class CareersGraph extends Component {
             <CareersGraphContainer>
               <CareersGraphGrid>
                 {rows.map((item, index) => (
-                  <Observer
-                    render={({ visible }) => (
-                      <CareersGraphGridRow
-                        visible={visible}
-                        index={index}
-                        style={{ top: `${index * 36.1}px` }}
-                      />
-                    )}
+                  <CareersGraphGridRow
+                    visible={visible}
+                    index={index}
+                    style={{ top: `${index * 36.1}px` }}
                   />
                 ))}
                 <CareersGraphGridColumnContainer
@@ -52,6 +49,19 @@ class CareersGraph extends Component {
                 <CareersGraphSVGContainer animate={animate}>
                   <CareersGraphSVG />
                 </CareersGraphSVGContainer>
+                <LabelsContainer animate={animate}>
+                  <YLabels>
+                    <YLabs>Labs</YLabs>
+                    <YStudio>Studio</YStudio>
+                  </YLabels>
+                  <XLabelsContainer>
+                    {months.map((month, index) => (
+                      <XLabels style={{ left: `${index * 135.333}px` }}>
+                        {month}
+                      </XLabels>
+                    ))}
+                  </XLabelsContainer>
+                </LabelsContainer>
               </CareersGraphGrid>
             </CareersGraphContainer>
           )
@@ -74,6 +84,50 @@ const CareersGraphContainer = styled.div`
 const CareersGraphGrid = styled.div`
   position: relative;
   height: 361px;
+`
+
+const LabelsContainer = styled.div`
+  opacity: ${p => (p.animate ? 1 : 0)};
+  transition: opacity 0.5s ease-out 4600ms;
+`
+
+const XLabelsContainer = styled.div`
+  position: absolute;
+  width: 812px;
+  margin: 0 auto;
+  left: -1rem;
+  right: 0;
+  top: 0;
+  height: 100%;
+`
+
+const XLabels = styled.div`
+  position: absolute;
+  margin: 0 auto;
+  left: 2rem;
+  bottom: -4rem;
+  text-align: center;
+  width: 3.5rem;
+  color: ${p => p.theme.colors.grey};
+`
+
+const YLabels = styled.div`
+  position: absolute;
+  left: 8rem;
+  bottom: 0;
+`
+
+const YLabs = styled.div`
+  position: relative;
+  top: -0.5rem;
+  left: 1.1rem;
+  color: #fff;
+`
+
+const YStudio = styled.div`
+  position: relative;
+  top: 1rem;
+  color: #e9daac;
 `
 
 const CareersGraphGridRow = styled.div`
@@ -156,31 +210,31 @@ const CareersGraphSVGContainer = styled.div`
     p.animate &&
     `
     .one {
-      animation: fadein 0.3s ease-out 1400ms forwards;
+      animation: fadein 0.4s ease-out 1400ms forwards;
     }
 
     .two {
-      animation: fadein 0.3s ease-out 2100ms forwards;
+      animation: fadein 0.4s ease-out 2100ms forwards;
     }
 
     .three {
-      animation: fadein 0.3s ease-out 2400ms forwards;
+      animation: fadein 0.4s ease-out 2400ms forwards;
     }
 
     .four {
-      animation: fadein 0.3s ease-out 2700ms forwards;
+      animation: fadein 0.4s ease-out 2700ms forwards;
     }
 
     .five {
-      animation: fadein 0.3s ease-out 2900ms forwards;
+      animation: fadein 0.4s ease-out 2900ms forwards;
     }
 
     .six {
-      animation: fadein 0.3s ease-out 3100ms forwards;
+      animation: fadein 0.4s ease-out 3100ms forwards;
     }
 
     .seven {
-      animation: fadein 0.3s ease-out 4500ms forwards;
+      animation: fadein 0.4s ease-out 4500ms forwards;
     }
   `};
 `
