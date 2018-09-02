@@ -8,6 +8,7 @@ import Header from './Header'
 import Observer from './Observer'
 import Logo from './Logo'
 import Navigation from './Navigation'
+import Perks from './Perks'
 import * as Transitions from './transitions'
 import Video from './video/Video'
 
@@ -22,6 +23,7 @@ export default {
   Observer,
   Logo,
   Navigation,
+  Perks,
   Transitions,
   Video,
 }

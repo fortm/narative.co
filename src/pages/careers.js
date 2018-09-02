@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
+import Img from 'gatsby-image'
 import styled, { keyframes } from 'styled-components'
 import { media, transitions } from '@styles'
-import { CareersAccordian, CareersGraph, Container, Logo } from '@components'
+import {
+  CareersAccordian,
+  CareersGraph,
+  Container,
+  Logo,
+  Perks,
+} from '@components'
 import { Section } from '@modules'
 import * as SocialIcons from '../icons/social'
 import { ArrowRightIcon } from '../icons/ui'
@@ -134,6 +141,10 @@ const LeftContainer = styled.div`
   `};
 `
 
+const ImageContainer = styled.div`
+  width: 100%;
+  max-width: 45rem;
+`
 const RightContainer = styled.div`
   position: relative;
   display: flex;
@@ -162,7 +173,7 @@ const ContactActionsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 40rem;
+  width: 42rem;
 
   ${media.phablet`
     width: 100%;
@@ -318,7 +329,7 @@ const SectionCopyHighlight = styled.span`
 `
 
 const WhatWeDoList = styled.ul`
-  width: 40rem;
+  width: 42rem;
   list-style: none;
 
   ${media.desktop`
@@ -327,18 +338,28 @@ const WhatWeDoList = styled.ul`
 `
 
 const WhatWeDoListItem = styled.li`
+  position: relative;
   display: flex;
   align-items: center;
   height: 5rem;
   color: ${props => props.theme.colors.grey};
 
-  & > span {
+  transition: all 1.5s cubic-bezier(0.77, 0, 0.175, 1) & > span {
     color: #fff;
     display: flex;
   }
 
   &:not(:last-child) {
-    border-bottom: 1px solid #707173;
+    &::after {
+      content: '';
+      position: absolute;
+      width: 38%;
+      height: 1px;
+      left: 0;
+      bottom: 0;
+      background: ${props => props.theme.colors.grey};
+      transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
   }
 
   ${media.tablet`
@@ -460,8 +481,9 @@ class CareersPage extends Component {
   }
 
   render() {
-    const { animation, view } = this.state
+    const { animation } = this.state
 
+    console.log(this.props)
     return (
       <React.Fragment>
         <GradientContainer animation={animation}>
@@ -488,7 +510,11 @@ class CareersPage extends Component {
                   </TextContainer>
                   <div />
                 </LeftContainer>
-                <RightContainer>.</RightContainer>
+                <RightContainer>
+                  <ImageContainer>
+                    <Img sizes={this.props.data.file.childImageSharp.sizes} />
+                  </ImageContainer>
+                </RightContainer>
               </GridContainer>
             </Container>
 
@@ -544,7 +570,8 @@ class CareersPage extends Component {
                   </div>
                 </WhatWeDoContent>
                 <WhatWeDoList>
-                  <WhatWeDoListItem>
+                  <Perks />
+                  {/* <WhatWeDoListItem>
                     <span>
                       100% remote{' '}
                       <HideOnMobile smallest>&nbsp;-&nbsp;</HideOnMobile>
@@ -599,7 +626,7 @@ class CareersPage extends Component {
                     <HideOnMobile smallest>
                       we listen to you, at all times
                     </HideOnMobile>
-                  </WhatWeDoListItem>
+                  </WhatWeDoListItem> */}
                 </WhatWeDoList>
               </FlexColumn>
             </Section>
@@ -706,3 +733,15 @@ class CareersPage extends Component {
 }
 
 export default CareersPage
+
+export const pageQuery = graphql`
+  query CareersPageQuery {
+    file(name: { regex: "/narative-careers-hero/" }) {
+      childImageSharp {
+        sizes(maxWidth: 458, quality: 100) {
+          ...GatsbyImageSharpSizes_noBase64
+        }
+      }
+    }
+  }
+`

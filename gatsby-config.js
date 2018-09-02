@@ -4,8 +4,25 @@ const siteMetadata = {
 
 const plugins = [
   'gatsby-plugin-react-helmet',
-  'gatsby-plugin-styled-components',
   'gatsby-plugin-react-next',
+  `gatsby-image`,
+  `gatsby-plugin-sharp`,
+  `gatsby-transformer-sharp`,
+  `gatsby-plugin-sitemap`,
+  'gatsby-plugin-netlify-cache',
+  {
+    resolve: `gatsby-plugin-styled-components`,
+    options: {
+      displayName: process.env.NODE_ENV === 'development',
+    },
+  },
+  {
+    resolve: `gatsby-source-filesystem`,
+    options: {
+      name: `assets`,
+      path: `${__dirname}/src/assets/`,
+    },
+  },
   {
     resolve: `gatsby-plugin-favicon`,
     options: {
