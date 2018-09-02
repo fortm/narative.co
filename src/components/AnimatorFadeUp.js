@@ -13,7 +13,7 @@ class AnimatorFadeUp extends Component {
       return { opacity: 0 }
     }
 
-    const opacityCurve = Math.pow(intersectionRatio, 2.5)
+    const opacityCurve = Math.pow(intersectionRatio, 2)
     const transformCurve = Math.pow(intersectionRatio - 1, 2) * 60
 
     // Only change opacity when scrolling back up

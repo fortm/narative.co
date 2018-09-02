@@ -115,7 +115,7 @@ const TextContainer = styled.div`
 `
 
 const WelcomeHeader = styled.h1`
-  color: ${props => props.theme.colors.grey};
+  color: white;
   font-size: 3.6rem;
   margin-bottom: 2rem;
 

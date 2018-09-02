@@ -30,9 +30,19 @@ class CareersGraph extends Component {
             <CareersGraphContainer>
               <CareersGraphGrid>
                 {rows.map((item, index) => (
-                  <CareersGraphGridRow style={{ top: `${index * 36.1}px` }} />
+                  <Observer
+                    render={({ visible }) => (
+                      <CareersGraphGridRow
+                        visible={visible}
+                        index={index}
+                        style={{ top: `${index * 36.1}px` }}
+                      />
+                    )}
+                  />
                 ))}
-                <CareersGraphGridColumnContainer>
+                <CareersGraphGridColumnContainer
+                  visible={visiblePercentage > 75}
+                >
                   {columns.map((item, index) => (
                     <CareersGraphGridColumn
                       style={{ left: `${index * 135.333}px` }}
@@ -76,6 +86,8 @@ const CareersGraphGridRow = styled.div`
     rgba(255, 255, 255, 0.35) 0%,
     rgba(255, 255, 255, 0) 100%
   );
+  opacity: ${p => (p.visible ? 1 : 0)};
+  transition: opacity 500ms ease-out ${p => p.index * 150}ms;
 `
 
 const CareersGraphGridColumnContainer = styled.div`
@@ -86,6 +98,8 @@ const CareersGraphGridColumnContainer = styled.div`
   right: 0;
   top: 0;
   height: 100%;
+  opacity: ${p => (p.visible ? 1 : 0)};
+  transition: opacity 500ms ease-out 1s;
 `
 
 const CareersGraphGridColumn = styled.div`
@@ -109,7 +123,7 @@ const CareersGraphSVGContainer = styled.div`
     ${p =>
       p.animate &&
       `
-      animation: dash 4s cubic-bezier(0.5, 0, 0.415, 0.955) forwards;
+      animation: dash 4s cubic-bezier(0.5, 0, 0.415, 0.955) forwards 0.9s;
     `};
   }
 
@@ -142,31 +156,31 @@ const CareersGraphSVGContainer = styled.div`
     p.animate &&
     `
     .one {
-      animation: fadein 0.3s ease-out 500ms forwards;
+      animation: fadein 0.3s ease-out 1400ms forwards;
     }
 
     .two {
-      animation: fadein 0.3s ease-out 1200ms forwards;
+      animation: fadein 0.3s ease-out 2100ms forwards;
     }
 
     .three {
-      animation: fadein 0.3s ease-out 1500ms forwards;
-    }
-
-    .four {
-      animation: fadein 0.3s ease-out 2000ms forwards;
-    }
-
-    .five {
-      animation: fadein 0.3s ease-out 2200ms forwards;
-    }
-
-    .six {
       animation: fadein 0.3s ease-out 2400ms forwards;
     }
 
+    .four {
+      animation: fadein 0.3s ease-out 2700ms forwards;
+    }
+
+    .five {
+      animation: fadein 0.3s ease-out 2900ms forwards;
+    }
+
+    .six {
+      animation: fadein 0.3s ease-out 3100ms forwards;
+    }
+
     .seven {
-      animation: fadein 0.3s ease-out 3600ms forwards;
+      animation: fadein 0.3s ease-out 4500ms forwards;
     }
   `};
 `

@@ -127,9 +127,9 @@ export default CareersAccordian
 
 const AccordianContainer = styled.div`
   color: #fff;
-  max-width: 65rem;
+  max-width: 69rem;
   height: 47rem;
-  margin: 0 0 10rem 29.3rem;
+  margin: 0 0 10rem 26.3rem;
   position: relative;
   top: -9rem;
   transition: height 0.5s ease;
