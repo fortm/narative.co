@@ -98,7 +98,7 @@ const WelcomeHeader = styled.h1`
 `
 
 const MainText = styled.p`
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 400;
   color: ${props => props.theme.colors.grey};
   margin-bottom: 2rem;
@@ -145,6 +145,7 @@ const ImageContainer = styled.div`
   position: relative;
   width: 100%;
   max-width: 460px;
+  right: -8rem;
 `
 
 const ImageTraceContainer = styled.div`
@@ -202,7 +203,7 @@ const RightContainer = styled.div`
 
 const CopyRightContainer = styled.div`
   display: block;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 500;
 
   ${media.desktop`
@@ -263,7 +264,7 @@ const ContactButton = styled(Link)`
 const ContactText = styled(Link)`
   display: flex;
   flex-direction: row;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 600;
   color: ${p => (p.color ? p.color : '#000')};
 
@@ -283,7 +284,8 @@ const HighlightText = styled.span`
 
 const ArrowAnimation = styled.div`
   position: relative;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   overflow-x: hidden;
   padding: 0 3rem 0 0.5rem;
 
@@ -503,16 +505,13 @@ class CareersPage extends Component {
                   <TextContainer animation={animation} transitionDelay={600}>
                     <HiringPill>We're hiring</HiringPill>
                     <WelcomeHeader>
-                      We help the world's best startups build their products
+                      Help us build products for the world's best startups
                     </WelcomeHeader>
                     <MainText>
                       Imagine a place where we get to choose, together, the
                       brands we believe in. Where trust and contribution is at
                       the core of our values.
                     </MainText>
-                    <ContactText to="/contact">
-                      <HighlightText>Learn more</HighlightText>
-                    </ContactText>
                   </TextContainer>
                   <div />
                 </LeftContainer>
@@ -561,21 +560,21 @@ class CareersPage extends Component {
                       </SocialIconContainer>
                       <SocialIconContainer
                         target="_blank"
+                        href="https://www.instagram.com/narative.co/"
+                      >
+                        <SocialIcons.InstagramIcon />
+                      </SocialIconContainer>
+                      <SocialIconContainer
+                        target="_blank"
                         href="https://www.linkedin.com/company/narative/"
                       >
                         <SocialIcons.LinkedinIcon />
                       </SocialIconContainer>
                       <SocialIconContainer
                         target="_blank"
-                        href="https://github.com/narative"
+                        href="https://medium.com/narative"
                       >
-                        <SocialIcons.GithubIcon />
-                      </SocialIconContainer>
-                      <SocialIconContainer
-                        target="_blank"
-                        href="https://www.instagram.com/narative.co/"
-                      >
-                        <SocialIcons.DribbleIcon />
+                        <SocialIcons.MediumIcon />
                       </SocialIconContainer>
                     </SocialIconsFooter>
                   </div>
@@ -584,30 +583,6 @@ class CareersPage extends Component {
                   <Perks />
                 </WhatWeDoList>
               </FlexColumn>
-            </Section>
-            <Section header="Big products" hideOverflow>
-              <div>
-                <SectionCopy maxWidth="69rem">
-                  <HideOnMobile>
-                    Focusing on design and digital storytelling, we had the
-                    pleasure to work with the world's most{' '}
-                    <SectionCopyHighlight>
-                      ambitious brands
-                    </SectionCopyHighlight>{' '}
-                    to create amazing experiences.
-                  </HideOnMobile>
-                  <HideOnDesktop>
-                    Focusing on design and digital storytelling, we had the
-                    pleasure to work with the world's most ambitious brands to
-                    create{' '}
-                    <SectionCopyHighlight>
-                      amazing experiences.
-                    </SectionCopyHighlight>
-                  </HideOnDesktop>
-                </SectionCopy>
-                <SectionCopy maxWidth="69rem" />
-                <TestimonialsImage src="/images/testimonials/placeholder-image.png" />
-              </div>
             </Section>
             <Section
               header={
@@ -661,21 +636,21 @@ class CareersPage extends Component {
                   </SocialIconContainer>
                   <SocialIconContainer
                     target="_blank"
+                    href="https://www.instagram.com/narative.co/"
+                  >
+                    <SocialIcons.InstagramIcon />
+                  </SocialIconContainer>
+                  <SocialIconContainer
+                    target="_blank"
                     href="https://www.linkedin.com/company/narative/"
                   >
                     <SocialIcons.LinkedinIcon />
                   </SocialIconContainer>
                   <SocialIconContainer
                     target="_blank"
-                    href="https://github.com/narative"
+                    href="https://medium.com/narative"
                   >
-                    <SocialIcons.GithubIcon />
-                  </SocialIconContainer>
-                  <SocialIconContainer
-                    target="_blank"
-                    href="https://www.instagram.com/narative.co/"
-                  >
-                    <SocialIcons.DribbleIcon />
+                    <SocialIcons.MediumIcon />
                   </SocialIconContainer>
                 </SocialIconsFooter>
               </Footer>

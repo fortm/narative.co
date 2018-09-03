@@ -50,6 +50,7 @@ const StyledButton = styled.button`
   background: #000;
   color: #fff;
   font-weight: 500;
+  font-size: 1.8rem;
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.1);
 `
 const Button = ({ text, type, isSubmitting }) => {

@@ -77,7 +77,7 @@ const WelcomeHeader = styled.h1`
 `
 
 const MainText = styled.p`
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 400;
   color: ${props => props.theme.colors.grey};
   margin-bottom: 2rem;
@@ -107,6 +107,7 @@ const ContactButton = styled(Link)`
   border: none;
   border-radius: 3px;
   font-weight: 500;
+  font-size: 1.8rem;
 
   ${media.phablet`
     width: 100%;
@@ -136,7 +137,7 @@ const ContactButton = styled(Link)`
 const ContactText = styled(Link)`
   display: flex;
   flex-direction: row;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 600;
   color: #000;
 
@@ -154,7 +155,7 @@ const LeftContainer = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  max-width: 36rem;
+  max-width: 39rem;
   height: 53rem;
 
   ${media.desktop`
@@ -201,7 +202,8 @@ const NotFoudImage = styled.img`
 
 const ArrowAnimation = styled.div`
   position: relative;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   padding: 0 3rem 0 0.5rem;
   overflow-x: hidden;
 
@@ -292,7 +294,7 @@ const ContactUsContainer = styled(Link)`
 
 const CopyRightContainer = styled.div`
   display: block;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 500;
   color: ${props => props.theme.colors.grey};
   ${transitions.fadeUp};
@@ -304,7 +306,7 @@ const CopyRightContainer = styled.div`
 
 const CopyRightContainerMobile = styled.div`
   display: none;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 500;
   color: ${props => props.theme.colors.grey};
   ${transitions.fadeUp};

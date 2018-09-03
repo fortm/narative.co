@@ -3,25 +3,6 @@ import styled from 'styled-components'
 
 import Observer from './Observer'
 
-// 100% remote
-//  -
-// work from your couch, or from a beach
-// Autonomy
-//  -
-// build your own hours, work at your own pace
-// Respect
-//  -
-// companies trust us for what we build
-// Vacation
-//  -
-// well, you make your own schedule. really
-// Competitive salaries
-//  -
-// we pay what you deserve
-// Executive decisions
-//  -
-// we listen to you, at all times
-
 const perks = [
   {
     heading: '100% remote',
@@ -59,8 +40,8 @@ class Perks extends Component {
 
     return (
       <Observer
-        render={({ visible }) => {
-          if (visible && !animate) {
+        render={({ visiblePercentage }) => {
+          if (visiblePercentage > 90 && !animate) {
             this.setState({ animate: true })
           }
 

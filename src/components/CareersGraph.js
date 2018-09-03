@@ -30,17 +30,19 @@ class CareersGraph extends Component {
           return (
             <CareersGraphContainer>
               <CareersGraphGrid>
-                {rows.map((item, index) => (
-                  <CareersGraphGridRow
-                    animate={animate}
-                    index={rows.length - index + 1}
-                    style={{ top: `${index * 36.1}px` }}
-                  />
-                ))}
+                <CareersGraphGridRowContainer>
+                  {rows.map((item, index) => (
+                    <CareersGraphGridRow
+                      animate={animate}
+                      index={rows.length - index + 1}
+                      style={{ top: `${index * 10}%` }}
+                    />
+                  ))}
+                </CareersGraphGridRowContainer>
                 <CareersGraphGridColumnContainer animate={animate}>
                   {columns.map((item, index) => (
                     <CareersGraphGridColumn
-                      style={{ left: `${index * 135.333}px` }}
+                      style={{ left: `${index * 16.67}%` }}
                     />
                   ))}
                 </CareersGraphGridColumnContainer>
@@ -86,7 +88,7 @@ const CareersGraphGrid = styled.div`
 
 const LabelsContainer = styled.div`
   opacity: ${p => (p.animate ? 1 : 0)};
-  transition: opacity 0.3s ease-out 3550ms;
+  transition: opacity 1s ease-in 3400ms;
 `
 
 const XLabelsContainer = styled.div`
@@ -127,6 +129,8 @@ const YStudio = styled.div`
   top: 1rem;
   color: #e9daac;
 `
+
+const CareersGraphGridRowContainer = styled.div``
 
 const CareersGraphGridRow = styled.div`
   position: absolute;

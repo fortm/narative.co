@@ -125,14 +125,14 @@ const WelcomeHeader = styled.h1`
 `
 
 const MainText = styled.p`
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 400;
   color: ${props => props.theme.colors.grey};
   margin-bottom: 2rem;
 `
 
 const ContactText = styled.p`
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 500;
   color: ${props => props.theme.colors.grey};
 
@@ -143,7 +143,7 @@ const ContactText = styled.p`
 `
 
 const BasicText = styled.p`
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 400;
 `
 
@@ -190,7 +190,7 @@ const RightContainer = styled.div`
 
 const CopyRightContainer = styled.div`
   display: block;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 500;
   color: ${props => props.theme.colors.grey};
   ${transitions.fadeUp};

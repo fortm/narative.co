@@ -46,7 +46,7 @@ const careers = [
       'mailto:info@narative.co?subject=Full Stack or Frontend Engineer @ Narative',
   },
   {
-    title: 'UX Copywriter',
+    title: 'Communication Designer',
     location: 'Remote, Vancouver, Montreal, Toronto',
     description:
       "Narative is founded by designers, engineers and entrepreneurs with decades of experience at the world's most successful startups. We merge best practices in design, development and strategy to create narratives that empower your brand and product.",
@@ -64,10 +64,10 @@ const careers = [
 const CareersAccordianItem = ({ career, handleIndexOpen, index, isOpen }) => (
   <AccordianListItem isOpen={isOpen} onClick={() => handleIndexOpen(index)}>
     <AccordianListTop>
-      <AccordianListText>
+      <span>
         <AccordianListTitle>{career.title}</AccordianListTitle>
         <AccordianListLocation>{career.location}</AccordianListLocation>
-      </AccordianListText>
+      </span>
       <IconContainer isOpen={isOpen} />
     </AccordianListTop>
 
@@ -172,18 +172,10 @@ const IconContainer = styled.div`
   }
 `
 
-const AccordianListText = styled.span`
-  transition: transform 200ms ease-in-out;
-`
-
 const AccordianListItem = styled.li`
   border-bottom: 1px solid #707173;
   padding: 2.5rem 0;
   cursor: pointer;
-
-  &:hover ${AccordianListText} {
-    transform: translateX(${p => (p.isOpen ? 0 : 5)}px);
-  }
 `
 
 const AccordianListTop = styled.div`
@@ -194,7 +186,7 @@ const AccordianListTop = styled.div`
 
 const AccordianListTitle = styled.h4`
   font-family: 'futura-pt';
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 600;
   color: #fff;
 `
@@ -237,7 +229,7 @@ const AccordianListDescription = styled.p`
 const AccordianMailTo = styled.a`
   display: flex;
   align-items: center;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 600;
   margin-bottom: 2.5rem;
   color: #fff;
@@ -247,7 +239,8 @@ const AccordianMailTo = styled.a`
 
 const ArrowAnimation = styled.div`
   position: relative;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   padding: 0 3rem 0 0.5rem;
   overflow-x: hidden;
 

@@ -82,7 +82,9 @@ export const globalStyles = () => injectGlobal`
 
   p {
     color: ${theme.colors.black};
+    font-size: 1.8rem;
   }
+  
   [hidden] {
     display: none;
   }
