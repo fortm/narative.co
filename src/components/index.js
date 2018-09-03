@@ -9,6 +9,7 @@ import Observer from './Observer'
 import Logo from './Logo'
 import Navigation from './Navigation'
 import Perks from './Perks'
+import SocialLinks from './SocialLinks'
 import * as Transitions from './transitions'
 import Video from './video/Video'
 
@@ -24,6 +25,7 @@ export default {
   Logo,
   Navigation,
   Perks,
+  SocialLinks,
   Transitions,
   Video,
 }

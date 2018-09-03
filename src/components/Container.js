@@ -8,9 +8,15 @@ const Container = styled.div`
   padding: 2rem;
   background: ${props =>
     props.background === 'dark' ? props.theme.colors.bg : 'transparent'};
+  display: ${p => (p.hideOnDesktop ? 'none' : 'block')};
 
   ${media.desktop`
     max-width: 54rem;
+    display: ${p => (p.hideOnDesktop ? 'none' : 'block')};
+  `};
+
+  ${media.tablet`
+    display: block;
   `};
 
   ${media.phablet`

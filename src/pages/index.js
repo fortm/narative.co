@@ -2,10 +2,8 @@ import React, { Component } from 'react'
 import Link from 'gatsby-link'
 import styled, { keyframes } from 'styled-components'
 import { media, transitions } from '@styles'
-import { Container, Logo } from '@components'
-import { Section, Testimonials } from '@modules'
-import * as SocialIcons from '../icons/social'
-import { ArrowRightIcon, PencilIcon } from '../icons/ui'
+import { Container, Logo, SocialLinks } from '@components'
+import { ArrowRightIcon } from '../icons/ui'
 
 const animateButtonLine = keyframes`
   0% {
@@ -141,27 +139,6 @@ const ContactText = styled(Link)`
   }
 `
 
-const HideOnMobile = styled.div`
-  display: block;
-
-  ${props =>
-    props.smallest
-      ? media.tablet`
-    display: none;
-  `
-      : `@media (max-width: 32rem) {
-    display: none;
-    }`};
-`
-
-const HideOnDesktop = styled.span`
-  display: none;
-
-  ${media.tablet`
-    display: block;
-  `};
-`
-
 const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -202,23 +179,6 @@ const CopyRightContainer = styled.div`
   ${media.desktop`
     display: none;
   `};
-`
-
-const CopyRightContainerMobile = styled.div`
-  display: none;
-  font-size: 1.8rem;
-  font-weight: 500;
-  color: ${props => props.theme.colors.grey};
-  align-self: center;
-  margin-top: 2rem;
-
-  ${media.desktop`
-    display: none;
-  `};
-`
-
-const HighlightText = styled.span`
-  color: #fff;
 `
 
 const ArrowAnimation = styled.div`
@@ -280,6 +240,11 @@ const SectionCopy = styled.p`
   `};
 `
 
+const HighlightText = styled.span`
+  color: #fff;
+  ${props => props.underline && `text-decoration: underline`};
+`
+
 const SectionCopyHighlight = styled.span`
   position: relative;
   background: #e9daac;
@@ -328,15 +293,6 @@ const Footer = styled.footer`
 
   ${media.tablet`
     justify-content: center;
-  `};
-`
-
-const SocialIconContainer = styled.a`
-  margin-left: 3rem;
-  text-decoration: none;
-
-  ${media.tablet`
-    margin: 0 1.6rem;
   `};
 `
 
@@ -458,7 +414,7 @@ class IndexPage extends Component {
                     animation={animation}
                     transitionDelay={800}
                   >
-                    © {new Date().getFullYear()} Narative Studio Inc.
+                    <SocialLinks fill="#7a8085" />
                   </CopyRightContainer>
                 </LeftContainer>
                 <RightContainer>

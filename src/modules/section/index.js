@@ -13,6 +13,10 @@ const SectionSpacer = styled.div`
   ${media.desktop`
     padding-bottom: 10rem;
   `};
+
+  ${media.tablet`
+    padding-bottom: 5rem;
+  `};
 `
 
 const SectionContainer = styled.div`
@@ -36,6 +40,13 @@ const SectionHeader = styled.h2`
   ${media.desktop`
     flex-direction: column;
     margin: 0 0 3.5rem 0;
+  `};
+
+  ${media.tablet`
+    padding-bottom: 0;
+    margin-bottom: 1rem;
+    width: 100%;
+    font-size: 2.4rem;
   `};
 `
 

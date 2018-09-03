@@ -26,11 +26,12 @@ class Observer extends Component {
   }
 
   handleObservation = element => {
-    const eventType =
-      element.boundingClientRect.top > 0 ? 'entering' : 'exiting'
+    const boundingClientRect = element.boundingClientRect
+    const eventType = boundingClientRect.top > 0 ? 'entering' : 'exiting'
     const visiblePercentage = Math.floor(element.intersectionRatio * 100)
 
     this.setState({
+      boundingClientRect,
       entering: eventType === 'entering',
       exiting: eventType === 'exiting',
       visible: visiblePercentage > 0,

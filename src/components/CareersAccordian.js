@@ -118,6 +118,10 @@ class CareersAccordian extends Component {
             />
           ))}
         </AccordianList>
+        <AccordianCareersEmail>
+          Don't see a position you're looking for?{' '}
+          <a href="mailto:careers@narative.co">careers@narative.co</a>
+        </AccordianCareersEmail>
       </AccordianContainer>
     )
   }
@@ -129,12 +133,23 @@ const AccordianContainer = styled.div`
   color: #fff;
   max-width: 69rem;
   height: 47rem;
-  margin: 0 0 10rem 26.3rem;
+  margin: 0 0 5rem 26.3rem;
   position: relative;
-  top: -9rem;
+  top: -14rem;
   transition: height 0.5s ease;
 
   ${media.desktop`
+    margin:  0 auto 15rem;
+    top: -4rem;
+  `};
+
+  ${media.tablet`
+    margin:  0 auto 10rem;
+    top: -4rem;
+  `};
+
+  ${media.phone`
+  height: auto;
     margin:  0 auto 15rem;
     top: -4rem;
   `};
@@ -286,5 +301,15 @@ const ArrowAnimation = styled.div`
     ${media.tablet`
       animation: none;
     `};
+  }
+`
+
+const AccordianCareersEmail = styled.p`
+  margin-top: 3rem;
+  color: ${p => p.theme.colors.grey};
+  font-weight: 400;
+
+  a {
+    color: #fff;
   }
 `

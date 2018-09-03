@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-
+import { media } from '@styles'
 import Observer from './Observer'
 
 const perks = [
@@ -41,7 +41,7 @@ class Perks extends Component {
     return (
       <Observer
         render={({ visiblePercentage }) => {
-          if (visiblePercentage > 90 && !animate) {
+          if (visiblePercentage > 75 && !animate) {
             this.setState({ animate: true })
           }
 
@@ -49,10 +49,11 @@ class Perks extends Component {
             <PerksContainer>
               <PerksList>
                 {perks.map((perk, index) => (
-                  <PerksItemContainer>
+                  <PerksItemContainer key={perk.heading}>
                     <PerksItem animate={animate} index={index}>
                       <PerksItemHighlight>
-                        {perk.heading} &nbsp;-&nbsp;
+                        {perk.heading}{' '}
+                        <PerksItemDash>&nbsp;-&nbsp;</PerksItemDash>
                       </PerksItemHighlight>
                       {perk.text}
                     </PerksItem>
@@ -96,22 +97,41 @@ const PerksItem = styled.div`
 
   transform: ${p => (p.animate ? `translateY(0)` : `translateY(5rem)`)};
   opacity: ${p => (p.animate ? 1 : 0)};
-  transition: all 1.5s cubic-bezier(0.77, 0, 0.175, 1) ${p => p.index * 50}ms;
+  transition: all 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) ${p => p.index * 75}ms;
+
+  ${media.tablet`
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    padding: 1.8rem 0;
+  `};
+`
+
+const PerksItemDash = styled.div`
+  ${media.tablet`
+    display: none;
+  `};
 `
 
 const PerksItemHighlight = styled.span`
   color: #fff;
   font-weight: 600;
+  display: flex;
+  align-items: center;
 `
 
 const PerksItemLineContainer = styled.div`
   overflow: hidden;
-  width: 40%;
+  width: 44%;
   height: 1px;
 
   position: absolute;
   left: 0;
   bottom: 0;
+
+  ${media.tablet`
+    width: 100%;
+  `};
 `
 
 const PerksItemLine = styled.div`
@@ -120,7 +140,7 @@ const PerksItemLine = styled.div`
   transform: translateX(-100%);
   background: linear-gradient(
     to right,
-    ${p => p.theme.colors.grey},
+    ${p => p.theme.colors.grey} 80%,
     transparent
   );
 
@@ -128,4 +148,10 @@ const PerksItemLine = styled.div`
 
   transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)
     ${p => p.index * 70 + 1200}ms;
+
+  ${media.tablet`
+    background: ${p => p.theme.colors.grey};
+    transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1)
+    ${p => p.index * 120 + 1200}ms;
+  `};
 `

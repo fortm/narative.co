@@ -20,6 +20,7 @@ const sizes = {
   tablet: 768,
   phablet: 540,
   phone: 376,
+  se: 320,
 }
 
 // iterate through the sizes and create a media template

@@ -1,14 +1,35 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import Observer from './Observer'
+import { media } from '@styles'
 
-const rows = Array.apply(null, { length: 11 }).map(Number.call, Number)
-const columns = Array.apply(null, { length: 7 }).map(Number.call, Number)
+const createArrayWithLegth = length =>
+  Array.apply(null, { length }).map(Number.call, Number)
+
+const rows = createArrayWithLegth(11)
+const columns = createArrayWithLegth(7)
 const months = ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct']
 
 class CareersGraph extends Component {
   state = {
     animate: false,
+  }
+
+  componentDidMount() {
+    this.handleResize()
+    window.addEventListener('resize', this.handleResize)
+  }
+
+  componentDidWillunmount() {
+    window.addEventListener('resize', this.handleResize)
+  }
+
+  handleResize = () => {
+    if (!this.graph || !this.container) return
+
+    const subractor = this.graph.offsetHeight > 250 ? 13 : 9
+
+    this.container.style.height = `${this.graph.offsetHeight - subractor}px`
   }
 
   handlePercentage = visiblePercentage => {
@@ -22,17 +43,18 @@ class CareersGraph extends Component {
 
     return (
       <Observer
-        render={({ visiblePercentage, visible }) => {
+        render={({ visiblePercentage }) => {
           if (!animate) {
             this.handlePercentage(visiblePercentage)
           }
 
           return (
             <CareersGraphContainer>
-              <CareersGraphGrid>
+              <CareersGraphGrid innerRef={svg => (this.container = svg)}>
                 <CareersGraphGridRowContainer>
                   {rows.map((item, index) => (
                     <CareersGraphGridRow
+                      key={index}
                       animate={animate}
                       index={rows.length - index + 1}
                       style={{ top: `${index * 10}%` }}
@@ -42,11 +64,15 @@ class CareersGraph extends Component {
                 <CareersGraphGridColumnContainer animate={animate}>
                   {columns.map((item, index) => (
                     <CareersGraphGridColumn
-                      style={{ left: `${index * 16.67}%` }}
+                      key={index}
+                      style={{ left: `${index * 14.028}%` }}
                     />
                   ))}
                 </CareersGraphGridColumnContainer>
-                <CareersGraphSVGContainer animate={animate}>
+                <CareersGraphSVGContainer
+                  innerRef={svg => (this.graph = svg)}
+                  animate={animate}
+                >
                   <CareersGraphSVG />
                 </CareersGraphSVGContainer>
                 <LabelsContainer animate={animate}>
@@ -56,7 +82,10 @@ class CareersGraph extends Component {
                   </YLabels>
                   <XLabelsContainer>
                     {months.map((month, index) => (
-                      <XLabels style={{ left: `${index * 135.333}px` }}>
+                      <XLabels
+                        key={index}
+                        style={{ left: `${index * 100 / 8.38}%` }}
+                      >
                         {month}
                       </XLabels>
                     ))}
@@ -79,11 +108,30 @@ const CareersGraphContainer = styled.div`
   max-width: 1140px;
   top: -12rem;
   margin-bottom: 10rem;
+
+  ${media.desktop`
+    top: -4rem;
+    margin-bottom: 14rem;
+  `};
+
+  ${media.tablet`
+    top: 0rem;
+  `};
+
+  ${media.phablet`
+    margin-bottom: 11rem;
+  `};
+
+  ${media.phone`
+    top: -1rem;
+    margin-bottom: 10rem;
+  `};
 `
 
 const CareersGraphGrid = styled.div`
   position: relative;
   height: 361px;
+  width: 100%;
 `
 
 const LabelsContainer = styled.div`
@@ -93,12 +141,12 @@ const LabelsContainer = styled.div`
 
 const XLabelsContainer = styled.div`
   position: absolute;
-  width: 812px;
-  margin: 0 auto;
-  left: -1rem;
+  max-width: 1140px;
   right: 0;
   top: 0;
   height: 100%;
+  margin-left: 16.67%;
+  left: -3rem;
 `
 
 const XLabels = styled.div`
@@ -109,12 +157,37 @@ const XLabels = styled.div`
   text-align: center;
   width: 3.5rem;
   color: ${p => p.theme.colors.grey};
+
+  ${media.desktop`
+    font-size: 1.4rem;
+    bottom: -5rem;
+  `};
+
+  ${media.phablet`
+    font-size: 0.8rem;
+    bottom: -3rem;
+  `};
 `
 
 const YLabels = styled.div`
   position: absolute;
   left: 8rem;
   bottom: 0;
+
+  ${media.desktop`
+    font-size: 1.4rem;
+    left: 2rem;
+    bottom: -0.4rem;
+  `};
+
+  ${media.tablet`
+    font-size: 1.4rem;
+    left: 1rem;
+  `};
+
+  ${media.phablet`
+    font-size: 0.8rem;
+  `};
 `
 
 const YLabs = styled.div`
@@ -122,12 +195,21 @@ const YLabs = styled.div`
   top: -0.5rem;
   left: 1.1rem;
   color: #fff;
+
+  ${media.tablet`
+    top: 0.4rem;
+  `};
 `
 
 const YStudio = styled.div`
   position: relative;
   top: 1rem;
   color: #e9daac;
+
+  ${media.tablet`
+    top: 0.5rem;
+    left: 0.5rem;
+  `};
 `
 
 const CareersGraphGridRowContainer = styled.div``
@@ -148,14 +230,21 @@ const CareersGraphGridRow = styled.div`
 
 const CareersGraphGridColumnContainer = styled.div`
   position: absolute;
-  width: 812px;
-  margin: 0 auto;
-  left: 2rem;
+  max-width: 1140px;
+  margin-left: 16.67%;
+  left: -1.8rem;
   right: 0;
   top: 0;
   height: 100%;
   opacity: ${p => (p.animate ? 1 : 0)};
   transition: opacity 0.5s ease-out 3000ms;
+
+  ${media.tablet`
+    left: -1rem;
+  `};
+  ${media.phone`
+    left: -0.5rem;
+  `};
 `
 
 const CareersGraphGridColumn = styled.div`
@@ -170,8 +259,14 @@ const CareersGraphSVGContainer = styled.div`
   bottom: -7px;
   left: 0;
   right: 0;
+  padding: 0px 12.8%;
   margin: 0 auto;
-  width: 845px;
+  width: 100%;
+  max-width: 1140px;
+
+  svg {
+    width: 100%;
+  }
 
   svg path {
     stroke-dasharray: 1000;
@@ -242,13 +337,7 @@ const CareersGraphSVGContainer = styled.div`
 `
 
 const CareersGraphSVG = () => (
-  <svg
-    width="845"
-    height="376"
-    viewBox="0 0 845 376"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg viewBox="0 0 845 376" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M837.5 8L703 188L567.5 295.5H433.5L298 314.5L162.5 330.5H26H0"
       stroke="white"

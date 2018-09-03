@@ -9,6 +9,7 @@ import {
   Container,
   Logo,
   Perks,
+  SocialLinks,
 } from '@components'
 import { Section } from '@modules'
 import * as SocialIcons from '../icons/social'
@@ -146,6 +147,15 @@ const ImageContainer = styled.div`
   width: 100%;
   max-width: 460px;
   right: -8rem;
+  margin: 0 auto;
+
+  ${media.mdpi`
+    right: 0;
+  `};
+
+  ${media.tablet`
+    margin-bottom: 10rem;
+  `};
 `
 
 const ImageTraceContainer = styled.div`
@@ -166,6 +176,26 @@ const ImageTraceContainer = styled.div`
       stroke-dashoffset: 0;
     }
   }
+
+  ${media.tablet`
+    left: -21px;
+    top: -13px;
+  `};
+
+  ${media.phablet`
+    left: -16px;
+    top: -13px;
+  `};
+
+  ${media.phone`
+    left: -15px;
+    top: -10px;
+  `};
+
+  ${media.se`
+    left: -12px;
+    top: -9px;
+  `};
 `
 
 const ScrollLine = styled.div`
@@ -185,6 +215,10 @@ const ScrollLine = styled.div`
     border-radius: 50%;
     background: ${p => p.theme.colors.grey};
   }
+
+  ${media.tablet`
+    display: none;
+  `};
 `
 
 const RightContainer = styled.div`
@@ -198,6 +232,11 @@ const RightContainer = styled.div`
   ${media.desktop`
     justify-content: center;
     margin-bottom: 5rem;
+  `};
+
+  ${media.tablet`
+    justify-content: center;
+    top: 100vh;
   `};
 `
 
@@ -278,10 +317,6 @@ const ContactText = styled(Link)`
   }
 `
 
-const HighlightText = styled.span`
-  color: #fff;
-`
-
 const ArrowAnimation = styled.div`
   position: relative;
   display: flex;
@@ -339,36 +374,10 @@ const SectionCopy = styled.p`
     line-height: 1.4;
     max-width: 100%;
   `};
-`
 
-const SectionCopyHighlight = styled.span`
-  position: relative;
-  background: #e9daac;
-  display: inline-block;
-  padding: 0px 1px;
-  color: #000;
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: -5px;
-    height: 100%;
-    top: 0;
-    bottom: 0;
-    width: 5px;
-    background: #e9daac;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    right: -5px;
-    width: 5px;
-    height: 100%;
-    top: 0;
-    bottom: 0;
-    background: #e9daac;
-  }
+  ${media.tablet`
+    font-size: 1.8rem;
+  `};
 `
 
 const WhatWeDoList = styled.ul`
@@ -458,6 +467,63 @@ const Content = styled.div`
   z-index: 1;
 `
 
+const MobileHero = styled.div`
+  ${media.tablet`
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    width: 100%;
+  `};
+`
+
+const MobileBody = styled.div`
+  ${media.tablet`
+    transform: translateY(40vh);
+    padding-top: 5rem;
+    height: 100%;
+    position: relative;
+    background: #111216;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+      z-index: -1;
+      background: linear-gradient(180deg, #111216 29.86%, rgba(66, 81, 98, 0.36) 272.57%);
+    }
+  `};
+
+  ${media.phablet`
+    transform: translateY(46vh);
+  `};
+
+  ${media.phone`
+    padding-top: 6rem;
+    transform: translateY(56vh);
+  `};
+`
+
+const MobilePuller = styled.div`
+  ${media.tablet`
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 1.5rem;
+    width: 4.2rem;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 100px;
+`};
+`
+
 const GradientContainer = styled.div`
   position: relative;
 
@@ -477,6 +543,10 @@ const GradientContainer = styled.div`
     transition: all 1.5s ease;
     z-index: 0;
     opacity: ${p => (p.animation ? 1 : 0)};
+
+    ${media.tablet`
+      background: #0D0E10;
+    `};
   }
 `
 
@@ -493,9 +563,9 @@ class CareersPage extends Component {
     const { animation } = this.state
 
     return (
-      <React.Fragment>
-        <GradientContainer animation={animation}>
-          <Content>
+      <GradientContainer animation={animation}>
+        <Content>
+          <MobileHero>
             <Container>
               <GridContainer>
                 <LeftContainer>
@@ -525,8 +595,19 @@ class CareersPage extends Component {
                 </RightContainer>
               </GridContainer>
             </Container>
+          </MobileHero>
+          <MobileBody>
+            <MobilePuller />
             <Container>
               <ScrollLine />
+            </Container>
+            <Container hideOnDesktop>
+              <ImageContainer>
+                <Img sizes={this.props.data.file.childImageSharp.sizes} />
+                <ImageTraceContainer>
+                  <NarativeHeroOutline />
+                </ImageTraceContainer>
+              </ImageContainer>
             </Container>
             <Section header="Why Narative">
               <SectionCopy maxWidth="69rem">
@@ -543,41 +624,6 @@ class CareersPage extends Component {
                     Not only are we mindful of the projects we select, we get to
                     choose how and when we work, to ensure we're at our best.
                   </SectionCopy>
-                  <div style={{ color: '#fff', marginBottom: '1.6rem' }}>
-                    <SocialIconsFooter hideOnMobile>
-                      <HideOnMobile>Find us on the web:</HideOnMobile>
-                      <SocialIconContainer
-                        target="_blank"
-                        href="https://www.facebook.com/narative.co/"
-                      >
-                        <SocialIcons.FacebookIcon />
-                      </SocialIconContainer>
-                      <SocialIconContainer
-                        target="_blank"
-                        href="https://twitter.com/narative_co"
-                      >
-                        <SocialIcons.TwitterIcon />
-                      </SocialIconContainer>
-                      <SocialIconContainer
-                        target="_blank"
-                        href="https://www.instagram.com/narative.co/"
-                      >
-                        <SocialIcons.InstagramIcon />
-                      </SocialIconContainer>
-                      <SocialIconContainer
-                        target="_blank"
-                        href="https://www.linkedin.com/company/narative/"
-                      >
-                        <SocialIcons.LinkedinIcon />
-                      </SocialIconContainer>
-                      <SocialIconContainer
-                        target="_blank"
-                        href="https://medium.com/narative"
-                      >
-                        <SocialIcons.MediumIcon />
-                      </SocialIconContainer>
-                    </SocialIconsFooter>
-                  </div>
                 </WhatWeDoContent>
                 <WhatWeDoList>
                   <Perks />
@@ -622,42 +668,13 @@ class CareersPage extends Component {
                   </ContactActionsContainer>
                 </CopyRightContainer>
                 <SocialIconsFooter>
-                  <SocialIconContainer
-                    target="_blank"
-                    href="https://www.facebook.com/narative.co/"
-                  >
-                    <SocialIcons.FacebookIcon />
-                  </SocialIconContainer>
-                  <SocialIconContainer
-                    target="_blank"
-                    href="https://twitter.com/narative_co"
-                  >
-                    <SocialIcons.TwitterIcon />
-                  </SocialIconContainer>
-                  <SocialIconContainer
-                    target="_blank"
-                    href="https://www.instagram.com/narative.co/"
-                  >
-                    <SocialIcons.InstagramIcon />
-                  </SocialIconContainer>
-                  <SocialIconContainer
-                    target="_blank"
-                    href="https://www.linkedin.com/company/narative/"
-                  >
-                    <SocialIcons.LinkedinIcon />
-                  </SocialIconContainer>
-                  <SocialIconContainer
-                    target="_blank"
-                    href="https://medium.com/narative"
-                  >
-                    <SocialIcons.MediumIcon />
-                  </SocialIconContainer>
+                  <SocialLinks />
                 </SocialIconsFooter>
               </Footer>
             </Container>
-          </Content>
-        </GradientContainer>
-      </React.Fragment>
+          </MobileBody>
+        </Content>
+      </GradientContainer>
     )
   }
 }
@@ -726,8 +743,8 @@ const NarativeHeroOutline = () => (
         y2="536.72"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#E9DAAC" />
-        <stop offset="1" stop-color="#E9DAAC" stop-opacity="0" />
+        <stop stopColor="#E9DAAC" />
+        <stop offset="1" stopColor="#E9DAAC" stopOpacity="0" />
       </linearGradient>
       <linearGradient
         id="paint1_linear"
@@ -737,8 +754,8 @@ const NarativeHeroOutline = () => (
         y2="241.849"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#E9DAAC" />
-        <stop offset="1" stop-color="#E9DAAC" stop-opacity="0" />
+        <stop stopColor="#E9DAAC" />
+        <stop offset="1" stopColor="#E9DAAC" stopOpacity="0" />
       </linearGradient>
     </defs>
   </svg>
