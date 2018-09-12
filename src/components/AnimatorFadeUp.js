@@ -3,6 +3,10 @@ import { isMobile } from 'react-device-detect'
 import Observer from './Observer'
 
 class AnimatorFadeUp extends Component {
+  static defaultProps = {
+    enabledOnMobile: false,
+  }
+
   calculateStyleCurves = ({ intersectionRatio, exiting }) => {
     // To avoid NaN errors, return out if there's no intersectionRatio
     if (!intersectionRatio) {
@@ -28,10 +32,12 @@ class AnimatorFadeUp extends Component {
   render() {
     const { children } = this.props
 
+    if (isMobile) return children
+
     return (
       <Observer
         render={data => {
-          return children
+          return <div style={this.calculateStyleCurves(data)}>{children}</div>
         }}
       />
     )
