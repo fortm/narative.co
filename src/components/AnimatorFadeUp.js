@@ -39,7 +39,11 @@ class AnimatorFadeUp extends Component {
     return (
       <Observer
         render={data => {
-          return <div style={this.calculateStyleCurves(data)}>{children}</div>
+          return (
+            <div style={isMobile ? {} : this.calculateStyleCurves(data)}>
+              {children}
+            </div>
+          )
         }}
       />
     )
