@@ -67,7 +67,7 @@ const LogoContainer = styled(Link)`
   max-width: 13.059rem;
   margin-bottom: 0;
   text-decoration: none;
-  ${transitions.fadeUpLong};
+  ${transitions.fadeUp};
 
   ${media.desktop`
   max-width: 10rem;
@@ -76,7 +76,7 @@ const LogoContainer = styled(Link)`
 `
 
 const TextContainer = styled.div`
-  ${transitions.fadeUpLong};
+  ${transitions.fadeUp};
 `
 
 const HiringPill = styled.div`
@@ -563,6 +563,7 @@ class CareersPage extends Component {
   render() {
     const { animation } = this.state
 
+    console.log(this.props)
     return (
       <GradientContainer animation={animation}>
         <Content>
@@ -638,7 +639,7 @@ class CareersPage extends Component {
                 Since we're all remote, it's always a party when the team gets
                 together. And we like food... a lot.
               </SectionCopy>
-              <CareersImages />
+              <CareersImages images={this.props.data.allFile.edges} />
             </Section>
             <Section
               header={
@@ -697,6 +698,17 @@ export const pageQuery = graphql`
       childImageSharp {
         sizes(maxWidth: 467, quality: 100) {
           ...GatsbyImageSharpSizes_noBase64
+        }
+      }
+    }
+    allFile(filter: { name: { regex: "/careers-gallery-placeholder/" } }) {
+      edges {
+        node {
+          childImageSharp {
+            sizes(maxWidth: 960, quality: 100) {
+              ...GatsbyImageSharpSizes_withWebp_tracedSVG
+            }
+          }
         }
       }
     }

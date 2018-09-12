@@ -53,15 +53,15 @@ const fadeUpLong = css`
     p.animation !== 'start' &&
     `
     opacity: 0;
-    transform: translate3d(0, 3rem, 0);
+    transform: translate3d(0, 2rem, 0);
   `};
 
-  transition: opacity ${p => (p.duration ? `${p.duration}ms` : '800ms')}
+  transition: opacity ${p => (p.duration ? `${p.duration}ms` : '70ms')}
       cubic-bezier(0.215, 0.61, 0.355, 1)
-      ${p => (p.transitionDelay ? `${p.transitionDelay}ms` : '400ms')},
-    transform ${p => (p.duration ? `${p.duration + 200}ms` : '1000ms')}
+      ${p => (p.transitionDelay ? `${p.transitionDelay}ms` : '200ms')},
+    transform ${p => (p.duration ? `${p.duration + 200}ms` : '900ms')}
       cubic-bezier(0.25, 0.46, 0.45, 0.94)
-      ${p => (p.transitionDelay ? `${p.transitionDelay}ms` : '400ms')};
+      ${p => (p.transitionDelay ? `${p.transitionDelay}ms` : '200ms')};
 `
 
 export const transitions = {

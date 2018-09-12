@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import Img from 'gatsby-image'
+
+import Observer from './Observer'
+import { media } from '@styles'
 
 const images = [{}, {}, {}, {}, {}, {}, {}, {}]
 
@@ -7,6 +11,7 @@ class CareersImages extends Component {
   state = {
     activeIndex: 0,
     disabled: false,
+    inView: false,
   }
 
   componentDidMount() {
@@ -66,15 +71,36 @@ class CareersImages extends Component {
     const { activeIndex } = this.state
     const offset = activeIndex * 72 * -1
 
+    console.log(this.props.images)
     return (
       <CareersImagesContainer>
-        <GalleryContainer style={{ transform: `translateX(${offset}rem)` }}>
-          {images.map((image, index) => (
-            <ImageContainer style={{ left: `${index * 36}rem` }}>
-              {index}
-            </ImageContainer>
-          ))}
-        </GalleryContainer>
+        <Observer
+          render={({ visiblePercentage }) => {
+            if (visiblePercentage > 60 && !this.state.inView) {
+              this.setState({ inView: true })
+            }
+
+            return (
+              <GalleryContainer
+                style={{ transform: `translateX(${offset}rem)` }}
+              >
+                {images.map((image, index) => (
+                  <ImageContainer
+                    index={index}
+                    inView={this.state.inView}
+                    style={{ left: `${index * 36}rem` }}
+                  >
+                    <Img
+                      sizes={
+                        this.props.images[index].node.childImageSharp.sizes
+                      }
+                    />
+                  </ImageContainer>
+                ))}
+              </GalleryContainer>
+            )
+          }}
+        />
         <GalleryControl
           disabled={activeIndex === 0}
           onClick={this.handlePrevClick}
@@ -119,8 +145,26 @@ const ImageContainer = styled.div`
   left: 0;
   width: 34rem;
   height: 100%;
-  background: #fff;
   border-radius: 3px;
+  overflow: hidden;
+  filter: grayscale(100);
+
+  opacity: ${p => (p.inView ? 1 : 0)};
+  transition: opacity 0.8s cubic-bezier(0.55, 0.085, 0.68, 0.53)
+      ${p => p.index * 200}ms,
+    filter 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+
+  .gatsby-image-outer-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  &:hover {
+    filter: grayscale(0);
+  }
 `
 
 const GalleryControl = styled.div`
@@ -131,7 +175,6 @@ const GalleryControl = styled.div`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-
   ${p => {
     if (p.left) {
       return `left: -9rem;`
@@ -140,7 +183,8 @@ const GalleryControl = styled.div`
     if (p.right) {
       return `right: -9rem;`
     }
-  }} height: 5rem;
+  }};
+  height: 5rem;
   width: 5rem;
   border-radius: 50%;
   background: #090a0c;
