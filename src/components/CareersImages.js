@@ -201,7 +201,7 @@ const ImageContainerMobile = styled.div`
   width: 34rem;
 
   ${media.phone`
-    width: 32rem;
+    width: 30rem;
   `};
 
   ${media.se`
