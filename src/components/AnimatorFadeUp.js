@@ -8,9 +8,16 @@ class AnimatorFadeUp extends Component {
   }
 
   calculateStyleCurves = ({ intersectionRatio, exiting }) => {
+    if (isMobile) {
+      return {
+        opacity: 1,
+        transform: 0,
+      }
+    }
+
     // To avoid NaN errors, return out if there's no intersectionRatio
     if (!intersectionRatio) {
-      return { opacity: 0 }
+      return { opacity: 0, transform: 0 }
     }
 
     const opacityCurve = Math.pow(intersectionRatio, 2)
@@ -35,13 +42,6 @@ class AnimatorFadeUp extends Component {
     return (
       <Observer
         render={data => {
-          // On mobile devices the animation is off by default
-          if (enabledOnMobile && isMobile) {
-            return <div style={this.calculateStyleCurves(data)}>{children}</div>
-          } else if (isMobile) {
-            return children
-          }
-
           return <div style={this.calculateStyleCurves(data)}>{children}</div>
         }}
       />
