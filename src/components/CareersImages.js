@@ -118,13 +118,11 @@ class CareersImages extends Component {
           <HorizontalScroll
             list={this.props.images}
             name="image"
-            render={({ image }) =>
-              console.log(image) || (
-                <ImageContainerMobile>
-                  <Img sizes={image.node.childImageSharp.sizes} />
-                </ImageContainerMobile>
-              )
-            }
+            render={({ image }) => (
+              <ImageContainerMobile>
+                <Img sizes={image.node.childImageSharp.sizes} />
+              </ImageContainerMobile>
+            )}
           />
         </CareersImagesContainerMobile>
       </Fragment>
