@@ -19,7 +19,9 @@ class CareersImages extends Component {
   }
 
   componentWillMount() {
-    window.removeEventListener('keydown', this.handleKeyPress)
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('keydown', this.handleKeyPress)
+    }
   }
 
   handleKeyPress = ({ keyCode }) => {
