@@ -8,6 +8,26 @@ class CareersImages extends Component {
     activeIndex: 0,
   }
 
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeyPress)
+  }
+
+  componentWillMount() {
+    window.removeEventListener('keydown', this.handleKeyPress)
+  }
+
+  handleKeyPress = ({ keyCode }) => {
+    const leftKeyCode = 37
+    const rightKeyCode = 39
+
+    if (keyCode === leftKeyCode) {
+      this.handlePrevClick()
+    }
+    if (keyCode === rightKeyCode) {
+      this.handleNextClick()
+    }
+  }
+
   handleNextClick = () => {
     if (this.state.activeIndex === images.length / 2 - 1) {
       return
