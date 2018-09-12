@@ -437,11 +437,11 @@ class IndexPage extends Component {
                       autoPlay="autoplay"
                     >
                       <source
-                        src="http://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
+                        src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
                         type="video/webm"
                       />
                       <source
-                        src="http://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
+                        src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
                         type="video/mp4"
                       />
                     </NarativeVideo>

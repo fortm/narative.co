@@ -373,7 +373,7 @@ class NotFound extends Component {
                   Contact us
                 </ContactUsContainer>
                 <NotFoudImage
-                  src="http://res.cloudinary.com/narative/image/upload/v1526049042/4042x.jpg"
+                  src="https://res.cloudinary.com/narative/image/upload/v1526049042/4042x.jpg"
                   alt="404, Page Not Found"
                 />
                 <CopyRightContainerMobile
