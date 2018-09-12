@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import styled from 'styled-components'
 import Img from 'gatsby-image'
 
 import Observer from './Observer'
+import HorizontalScroll from './HorizontalScroll'
 import { media } from '@styles'
-
-const images = [{}, {}, {}, {}, {}, {}, {}, {}]
 
 class CareersImages extends Component {
   state = {
@@ -38,7 +37,7 @@ class CareersImages extends Component {
 
   handleNextClick = () => {
     if (
-      this.state.activeIndex === images.length / 2 - 1 ||
+      this.state.activeIndex === this.props.images.length / 2 - 1 ||
       this.state.disabled
     ) {
       return
@@ -73,51 +72,62 @@ class CareersImages extends Component {
     const { activeIndex } = this.state
     const offset = activeIndex * 72 * -1
 
-    console.log(this.props.images)
     return (
-      <CareersImagesContainer>
-        <Observer
-          render={({ visiblePercentage }) => {
-            if (visiblePercentage > 60 && !this.state.inView) {
-              this.setState({ inView: true })
-            }
+      <Fragment>
+        <CareersImagesContainer>
+          <Observer
+            render={({ visiblePercentage }) => {
+              if (visiblePercentage > 60 && !this.state.inView) {
+                this.setState({ inView: true })
+              }
 
-            return (
-              <GalleryContainer
-                style={{ transform: `translateX(${offset}rem)` }}
-              >
-                {images.map((image, index) => (
-                  <ImageContainer
-                    index={index}
-                    inView={this.state.inView}
-                    style={{ left: `${index * 36}rem` }}
-                  >
-                    <Img
-                      sizes={
-                        this.props.images[index].node.childImageSharp.sizes
-                      }
-                    />
-                  </ImageContainer>
-                ))}
-              </GalleryContainer>
-            )
-          }}
-        />
-        <GalleryControl
-          disabled={activeIndex === 0}
-          onClick={this.handlePrevClick}
-          left
-        >
-          <ChevronLeft />
-        </GalleryControl>
-        <GalleryControl
-          disabled={activeIndex === images.length / 2 - 1}
-          onClick={this.handleNextClick}
-          right
-        >
-          <ChevronRight />
-        </GalleryControl>
-      </CareersImagesContainer>
+              return (
+                <GalleryContainer
+                  style={{ transform: `translateX(${offset}rem)` }}
+                >
+                  {this.props.images.map((image, index) => (
+                    <ImageContainer
+                      key={image.node.childImageSharp.sizes.src}
+                      index={index}
+                      inView={this.state.inView}
+                      style={{ left: `${index * 36}rem` }}
+                    >
+                      <Img sizes={image.node.childImageSharp.sizes} />
+                    </ImageContainer>
+                  ))}
+                </GalleryContainer>
+              )
+            }}
+          />
+          <GalleryControl
+            disabled={activeIndex === 0}
+            onClick={this.handlePrevClick}
+            left
+          >
+            <ChevronLeft />
+          </GalleryControl>
+          <GalleryControl
+            disabled={activeIndex === this.props.images.length / 2 - 1}
+            onClick={this.handleNextClick}
+            right
+          >
+            <ChevronRight />
+          </GalleryControl>
+        </CareersImagesContainer>
+        <CareersImagesContainerMobile>
+          <HorizontalScroll
+            list={this.props.images}
+            name="image"
+            render={({ image }) =>
+              console.log(image) || (
+                <ImageContainerMobile>
+                  <Img sizes={image.node.childImageSharp.sizes} />
+                </ImageContainerMobile>
+              )
+            }
+          />
+        </CareersImagesContainerMobile>
+      </Fragment>
     )
   }
 }
@@ -129,6 +139,20 @@ const CareersImagesContainer = styled.div`
   width: 100%;
   max-width: 70rem;
   margin-top: 7rem;
+
+  ${media.phablet`
+    display: none;
+  `};
+`
+
+const CareersImagesContainerMobile = styled.div`
+  display: none;
+
+  ${media.phablet`
+    display: block;
+    width: 100%;
+    margin: 3rem 0;
+  `};
 `
 
 const GalleryContainer = styled.div`
@@ -167,6 +191,20 @@ const ImageContainer = styled.div`
   &:hover {
     filter: grayscale(0);
   }
+
+  ${media.phablet`
+    width: 28rem;
+  `};
+`
+
+const ImageContainerMobile = styled.div`
+  border-radius: 3px;
+  overflow: hidden;
+  width: 32rem;
+
+  ${media.phone`
+    width: 24rem;
+  `};
 `
 
 const GalleryControl = styled.div`

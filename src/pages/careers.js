@@ -563,7 +563,6 @@ class CareersPage extends Component {
   render() {
     const { animation } = this.state
 
-    console.log(this.props)
     return (
       <GradientContainer animation={animation}>
         <Content>
@@ -582,7 +581,7 @@ class CareersPage extends Component {
                     </WelcomeHeader>
                     <MainText>
                       Imagine a place where we get to choose the brands we
-                      believe in, working alongside their team to stablish a
+                      believe in, working alongside their team to etablish a
                       seamless integration. Where trust, contribution and
                       quality are at the core of our values.
                     </MainText>
