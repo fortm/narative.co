@@ -56,7 +56,7 @@ const LogoContainer = styled(Link)`
   max-width: 13.059rem;
   margin-bottom: 0;
   text-decoration: none;
-  ${transitions.fadeUp};
+  ${transitions.fadeUpLong};
 
   ${media.desktop`
   max-width: 10rem;
@@ -102,7 +102,7 @@ const NarativeVideo = styled.video`
 `
 
 const TextContainer = styled.div`
-  ${transitions.fadeUp};
+  ${transitions.fadeUpLong};
 `
 
 const WelcomeHeader = styled.h1`
@@ -174,7 +174,7 @@ const CopyRightContainer = styled.div`
   font-size: 1.8rem;
   font-weight: 500;
   color: ${props => props.theme.colors.grey};
-  ${transitions.fadeUp};
+  ${transitions.fadeUpLong};
 
   ${media.desktop`
     display: none;

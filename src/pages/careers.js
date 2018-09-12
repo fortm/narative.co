@@ -6,6 +6,7 @@ import { media, transitions } from '@styles'
 import {
   CareersAccordian,
   CareersGraph,
+  CareersImages,
   Container,
   Logo,
   Perks,
@@ -66,7 +67,7 @@ const LogoContainer = styled(Link)`
   max-width: 13.059rem;
   margin-bottom: 0;
   text-decoration: none;
-  ${transitions.fadeUp};
+  ${transitions.fadeUpLong};
 
   ${media.desktop`
   max-width: 10rem;
@@ -75,7 +76,7 @@ const LogoContainer = styled(Link)`
 `
 
 const TextContainer = styled.div`
-  ${transitions.fadeUp};
+  ${transitions.fadeUpLong};
 `
 
 const HiringPill = styled.div`
@@ -103,7 +104,7 @@ const MainText = styled.p`
   font-weight: 400;
   color: ${props => props.theme.colors.grey};
   margin-bottom: 2rem;
-  max-width: 42rem;
+  max-width: 46rem;
 `
 
 const HideOnMobile = styled.div`
@@ -131,7 +132,7 @@ const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-width: 49.5rem;
+  max-width: 50.5rem;
   height: 53rem;
 
   ${media.desktop`
@@ -496,7 +497,7 @@ const MobileBody = styled.div`
       left: 0;
       bottom: 0;
       z-index: -1;
-      background: linear-gradient(180deg, #111216 29.86%, rgba(66, 81, 98, 0.36) 272.57%);
+      background: linear-gradient(180deg, #0B0B0E 0%, #111216 41.44%, #111216 69.06%, #1A1E24 90.61%);
     }
   `};
 
@@ -575,12 +576,14 @@ class CareersPage extends Component {
                   <TextContainer animation={animation} transitionDelay={600}>
                     <HiringPill>We're hiring</HiringPill>
                     <WelcomeHeader>
-                      Help us build products for the world's best startups
+                      Let's build products, together, with the world's best
+                      startups
                     </WelcomeHeader>
                     <MainText>
-                      Imagine a place where we get to choose, together, the
-                      brands we believe in. Where trust and contribution is at
-                      the core of our values.
+                      Imagine a place where we get to choose the brands we
+                      believe in, working alongside their team to stablish a
+                      seamless integration. Where trust, contribution and
+                      quality are at the core of our values.
                     </MainText>
                   </TextContainer>
                   <div />
@@ -629,6 +632,13 @@ class CareersPage extends Component {
                   <Perks />
                 </WhatWeDoList>
               </FlexColumn>
+            </Section>
+            <Section header="We have fun">
+              <SectionCopy maxWidth="67rem">
+                Since we're all remote, it's always a party when the team gets
+                together. And we like food... a lot.
+              </SectionCopy>
+              <CareersImages />
             </Section>
             <Section
               header={

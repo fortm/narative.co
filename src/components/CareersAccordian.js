@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled, { keyframes } from 'styled-components'
 
+import CopyToClipboard from './CopyToClipboard'
 import { media } from '@styles'
 import { ArrowRightIcon } from '../icons/ui'
 
@@ -90,6 +91,7 @@ const CareersAccordianItem = ({ career, handleIndexOpen, index, isOpen }) => (
 class CareersAccordian extends Component {
   state = {
     openRowIndex: null,
+    copied: false,
   }
 
   handleIndexOpen = index => {
@@ -118,9 +120,17 @@ class CareersAccordian extends Component {
             />
           ))}
         </AccordianList>
-        <AccordianCareersEmail>
-          Don't see a position you're looking for?{' '}
-          <a href="mailto:careers@narative.co">careers@narative.co</a>
+        <AccordianCareersEmail copied={this.state.copied}>
+          <span style={{ display: this.state.copied ? 'none' : 'inline' }}>
+            Don't see a position you're looking for? Send us a message to{' '}
+            <a href="mailto:careers@narative.co">careers@narative.co</a>
+          </span>
+          <div
+            onClick={() => this.setState({ copied: true })}
+            style={{ justifySelf: 'flex-end' }}
+          >
+            <CopyToClipboard text="careers@narative.co" />
+          </div>
         </AccordianCareersEmail>
       </AccordianContainer>
     )
@@ -216,7 +226,7 @@ const AccordianListDescription = styled.p`
   color: ${p => p.theme.colors.grey};
   margin-bottom: 2.5rem;
   opacity: 0;
-  animation: 1s ease-out ${fadein} forwards;
+  animation: 0.6s ease-out ${fadein} forwards;
 
   &::before {
     content: '';
@@ -305,6 +315,8 @@ const ArrowAnimation = styled.div`
 `
 
 const AccordianCareersEmail = styled.p`
+  display: flex;
+  justify-content: ${p => (p.copied ? 'flex-end' : 'space-between')};
   margin-top: 3rem;
   color: ${p => p.theme.colors.grey};
   font-weight: 400;
