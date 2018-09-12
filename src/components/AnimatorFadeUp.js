@@ -31,7 +31,7 @@ class AnimatorFadeUp extends Component {
     return (
       <Observer
         render={data => {
-          return { children }
+          return children
         }}
       />
     )
