@@ -198,9 +198,13 @@ const ImageContainer = styled.div`
 const ImageContainerMobile = styled.div`
   border-radius: 3px;
   overflow: hidden;
-  width: 32rem;
+  width: 34rem;
 
   ${media.phone`
+    width: 32rem;
+  `};
+
+  ${media.se`
     width: 24rem;
   `};
 `
