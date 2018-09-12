@@ -6,6 +6,7 @@ const images = [{}, {}, {}, {}, {}, {}, {}, {}]
 class CareersImages extends Component {
   state = {
     activeIndex: 0,
+    disabled: false,
   }
 
   componentDidMount() {
@@ -29,23 +30,36 @@ class CareersImages extends Component {
   }
 
   handleNextClick = () => {
-    if (this.state.activeIndex === images.length / 2 - 1) {
+    if (
+      this.state.activeIndex === images.length / 2 - 1 ||
+      this.state.disabled
+    ) {
       return
     }
 
     this.setState({
       activeIndex: this.state.activeIndex + 1,
+      disabled: true,
     })
+
+    setTimeout(() => {
+      this.setState({ disabled: false })
+    }, 600)
   }
 
   handlePrevClick = () => {
-    if (this.state.activeIndex === 0) {
+    if (this.state.activeIndex === 0 || this.state.disabled) {
       return
     }
 
     this.setState({
       activeIndex: this.state.activeIndex - 1,
+      disabled: true,
     })
+
+    setTimeout(() => {
+      this.setState({ disabled: false })
+    }, 600)
   }
 
   render() {
@@ -133,7 +147,7 @@ const GalleryControl = styled.div`
   cursor: ${p => (p.disabled ? 'initial' : 'pointer')};
 
   opacity: ${p => (p.disabled ? 0 : 1)};
-  transition: opacity 0.6s cubic-bezier(0.7, 0, 0.2, 1);
+  transition: opacity 600ms cubic-bezier(0.7, 0, 0.2, 1);
 `
 
 const ChevronRight = ({ fill = 'white' }) => (
