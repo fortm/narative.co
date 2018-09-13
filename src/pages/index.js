@@ -192,7 +192,7 @@ const ArrowAnimation = styled.div`
   display: flex;
   align-items: center;
   overflow-x: hidden;
-  padding: 0 3rem 0 0.5rem;
+  padding: 0 3rem 0 0;
   font-size: 1.8rem;
 
   ${media.tablet`
