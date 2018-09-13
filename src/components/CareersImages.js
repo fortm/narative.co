@@ -141,6 +141,37 @@ const CareersImagesContainer = styled.div`
   ${media.phablet`
     display: none;
   `};
+
+  &::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    left: 31rem;
+    top: 0;
+    width: 50vw;
+    pointer-events: none;
+    z-index: 1;
+    background: linear-gradient(270deg, #111216 5%, rgba(17, 18, 22, 0) 80%);
+
+      ${media.mdpi`
+      left: 41rem;
+    `}
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    right: 42rem;
+    top: 0;
+    width: 50vw;
+    pointer-events: none;
+    z-index: 1;
+    background: linear-gradient(90deg, #111216 5%, rgba(17, 18, 22, 0) 80%);
+
+    ${media.mdpi`
+      right: 50rem;
+    `}
 `
 
 const CareersImagesContainerMobile = styled.div`
@@ -219,28 +250,53 @@ const GalleryControl = styled.div`
   transform: translateY(-50%);
   ${p => {
     if (p.left) {
-      return `left: -9rem;`
+      return `left: -26.3rem;`
     }
 
     if (p.right) {
-      return `right: -9rem;`
+      return `right: -17.6rem;`
     }
   }};
-  height: 5rem;
-  width: 5rem;
+  height: 4rem;
+  width: 4rem;
   border-radius: 50%;
-  background: #090a0c;
+  z-index: 10;
+  background: #fff;
   cursor: ${p => (p.disabled ? 'initial' : 'pointer')};
 
-  opacity: ${p => (p.disabled ? 0 : 1)};
+  opacity: ${p => (p.disabled ? 0.3 : 1)};
   transition: opacity 600ms cubic-bezier(0.7, 0, 0.2, 1);
+
+  ${media.mdpi`
+    ${p => {
+      if (p.left) {
+        return `left: -26.3rem;`
+      }
+
+      if (p.right) {
+        return `right: -5rem;`
+      }
+    }};
+  `};
+
+  ${media.desktop`
+    ${p => {
+      if (p.left) {
+        return `left: -5rem;`
+      }
+
+      if (p.right) {
+        return `right: -5rem;`
+      }
+    }};
+  `};
 `
 
-const ChevronRight = ({ fill = 'white' }) => (
+const ChevronRight = ({ fill = '#090a0c' }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="32"
-    height="32"
+    width="24"
+    height="24"
     viewBox="0 0 24 24"
   >
     <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill={fill} />
@@ -248,11 +304,11 @@ const ChevronRight = ({ fill = 'white' }) => (
   </svg>
 )
 
-const ChevronLeft = ({ fill = 'white' }) => (
+const ChevronLeft = ({ fill = '#090a0c' }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="32"
-    height="32"
+    width="24"
+    height="24"
     viewBox="0 0 24 24"
   >
     <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill={fill} />

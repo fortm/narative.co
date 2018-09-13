@@ -41,7 +41,7 @@ class Perks extends Component {
     return (
       <Observer
         render={({ visiblePercentage }) => {
-          if (visiblePercentage > 75 && !animate) {
+          if (visiblePercentage > 25 && !animate) {
             this.setState({ animate: true })
           }
 
@@ -103,7 +103,7 @@ const PerksItem = styled.div`
     flex-direction: column;
     align-items: flex-start;
     height: auto;
-    padding: 1.8rem 0;
+    padding: 1.5rem 0;
   `};
 `
 
@@ -138,14 +138,8 @@ const PerksItemLine = styled.div`
   width: 100%;
   height: 1px;
   transform: translateX(-100%);
-  background: linear-gradient(
-    to right,
-    ${p => p.theme.colors.grey} 80%,
-    transparent
-  );
-
+  background: ${p => p.theme.colors.grey};
   transform: ${p => (p.animate ? `translateX(0)` : `translateX(-100%)`)};
-
   transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)
     ${p => p.index * 70 + 1200}ms;
 

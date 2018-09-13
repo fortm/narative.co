@@ -23,15 +23,15 @@ class CopyToClipboard extends Component {
     return (
       <CopyIconContainer
         copied={this.state.copied}
-        onClick={() => this.copyToClipboardOnClick(this.props.text)}
+        onClick={() => this.copyToClipboardOnClick(this.props.textToCopy)}
       >
         {this.state.copied ? (
           <CopyIconText>
-            <strong>{this.props.text}</strong> copied to clipboard{' '}
-            <CopiedIcon />
+            <strong>{this.props.successText || this.props.textToCopy}</strong>{' '}
+            copied to clipboard <CopiedIcon />
           </CopyIconText>
         ) : (
-          <CopyIcon />
+          this.props.children || <CopyIcon />
         )}
       </CopyIconContainer>
     )

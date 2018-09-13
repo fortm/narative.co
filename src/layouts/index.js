@@ -4,7 +4,6 @@ import Helmet from 'react-helmet'
 import styled, { ThemeProvider } from 'styled-components'
 import { globalStyles, media, theme } from '@styles'
 
-import WebFont from 'webfontloader'
 import '../polyfills/intersection-observer'
 
 // Injecting global styles and reset
@@ -34,16 +33,6 @@ const WebContainer = styled.div`
 `
 
 class Layout extends Component {
-  componentDidMount() {
-    if (typeof window !== 'undefined') {
-      WebFont.load({
-        typekit: {
-          id: 'huf6cwu',
-        },
-      })
-    }
-  }
-
   render() {
     const { children, data } = this.props
     return (

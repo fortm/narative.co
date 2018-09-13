@@ -129,7 +129,7 @@ class CareersAccordian extends Component {
             onClick={() => this.setState({ copied: true })}
             style={{ justifySelf: 'flex-end' }}
           >
-            <CopyToClipboard text="careers@narative.co" />
+            <CopyToClipboard textToCopy="careers@narative.co" />
           </div>
         </AccordianCareersEmail>
       </AccordianContainer>
@@ -324,4 +324,12 @@ const AccordianCareersEmail = styled.p`
   a {
     color: #fff;
   }
+
+  ${media.tablet`
+    display: block;
+
+    & > div {
+      margin-top: 1rem;
+    }
+  `};
 `

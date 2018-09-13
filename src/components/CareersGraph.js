@@ -33,7 +33,7 @@ class CareersGraph extends Component {
   }
 
   handlePercentage = visiblePercentage => {
-    if (visiblePercentage > 50) {
+    if (visiblePercentage > 33) {
       this.setState({ animate: true })
     }
   }

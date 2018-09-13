@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import Link from 'gatsby-link'
 import Img from 'gatsby-image'
 import styled, { keyframes } from 'styled-components'
@@ -8,12 +8,12 @@ import {
   CareersGraph,
   CareersImages,
   Container,
+  CopyToClipboard,
   Logo,
   Perks,
   SocialLinks,
 } from '@components'
 import { Section } from '@modules'
-import * as SocialIcons from '../icons/social'
 import { ArrowRightIcon } from '../icons/ui'
 
 const animateButtonLine = keyframes`
@@ -502,12 +502,12 @@ const MobileBody = styled.div`
   `};
 
   ${media.phablet`
-    transform: translateY(46vh);
+    transform: translateY(54vh);
   `};
 
   ${media.phone`
     padding-top: 6rem;
-    transform: translateY(56vh);
+    transform: translateY(61vh);
   `};
 `
 
@@ -550,6 +550,36 @@ const GradientContainer = styled.div`
     `};
   }
 `
+
+const ShareIconContainer = styled.div`
+  position: absolute;
+  top: -5.5rem;
+  right: 0;
+  color: ${p => p.theme.colors.grey};
+
+  ${media.desktop`
+    display: none;
+  `};
+
+  svg {
+    margin-left: 0.9rem;
+  }
+`
+
+const ShareIcon = () => (
+  <svg
+    width="14"
+    height="15"
+    viewBox="0 0 14 15"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M11.2952 10.6024C10.7229 10.6024 10.2108 10.8283 9.81928 11.1822L4.4503 8.05723C4.48795 7.88404 4.51807 7.71084 4.51807 7.53012C4.51807 7.3494 4.48795 7.17621 4.4503 7.00301L9.75904 3.90813C10.1657 4.28464 10.7003 4.51807 11.2952 4.51807C12.5452 4.51807 13.5542 3.50904 13.5542 2.25904C13.5542 1.00904 12.5452 0 11.2952 0C10.0452 0 9.03614 1.00904 9.03614 2.25904C9.03614 2.43976 9.06626 2.61295 9.10392 2.78614L3.79518 5.88102C3.38855 5.50452 2.85392 5.27108 2.25904 5.27108C1.00904 5.27108 0 6.28012 0 7.53012C0 8.78012 1.00904 9.78916 2.25904 9.78916C2.85392 9.78916 3.38855 9.55572 3.79518 9.17922L9.15663 12.3117C9.11898 12.4699 9.09639 12.6355 9.09639 12.8012C9.09639 14.0136 10.0828 15 11.2952 15C12.5075 15 13.494 14.0136 13.494 12.8012C13.494 11.5889 12.5075 10.6024 11.2952 10.6024Z"
+      fill="white"
+    />
+  </svg>
+)
 
 class CareersPage extends Component {
   state = { animation: '' }
@@ -595,6 +625,16 @@ class CareersPage extends Component {
                       <NarativeHeroOutline />
                     </ImageTraceContainer>
                   </ImageContainer>
+                  <ShareIconContainer>
+                    <CopyToClipboard
+                      textToCopy="https://narative.co/careers"
+                      successText="narative.co/careers"
+                    >
+                      <Fragment>
+                        Share this page <ShareIcon />
+                      </Fragment>
+                    </CopyToClipboard>
+                  </ShareIconContainer>
                 </RightContainer>
               </GridContainer>
             </Container>

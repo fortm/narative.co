@@ -59,8 +59,12 @@ const LogoContainer = styled(Link)`
   ${transitions.fadeUp};
 
   ${media.desktop`
-  max-width: 10rem;
-  margin-bottom: 4rem;
+    max-width: 10rem;
+    margin-bottom: 4rem;
+  `};
+
+  ${media.tablet`
+    margin-bottom: 7rem;
   `};
 `
 
@@ -85,8 +89,8 @@ const NarativeVideoContainer = styled.div`
   `};
 
   ${media.phone`
-    width: 24rem;
-    height: 24rem;
+    width: 30rem;
+    height: 30rem;
   `};
 `
 
@@ -140,6 +144,7 @@ const ContactText = styled(Link)`
 `
 
 const LeftContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -164,6 +169,7 @@ const RightContainer = styled.div`
 
   ${media.desktop`
     justify-content: center;
+    padding-top: 7rem;
     margin-bottom: 5rem;
   `};
 `
@@ -284,26 +290,14 @@ const WhatWeDoList = styled.ul`
   `};
 `
 
-const Footer = styled.footer`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 5rem;
-  color: ${props => props.theme.colors.grey};
-
-  ${media.tablet`
-    justify-content: center;
-  `};
-`
-
 const SocialIconsFooter = styled.div`
-  display: flex;
-  align-items: center;
+  display: none;
 
-  ${props =>
-    props.hideOnMobile &&
-    media.desktop`
-    display: none;
+  ${media.desktop`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0 10rem;
   `};
 `
 
@@ -338,6 +332,18 @@ const CareersCotnainer = styled(Link)`
   &:hover::before {
     transform: scale(1);
   }
+`
+
+const CareersCotnainerMobile = styled(Link)`
+  display: none;
+
+  ${media.desktop`
+    display: block;
+    position: absolute;
+    right: 0;
+    font-weight: 600;
+    color: #fff;
+  `};
 `
 
 const Content = styled.div`
@@ -393,6 +399,9 @@ class IndexPage extends Component {
                   <LogoContainer to="/" animation={animation}>
                     <Logo />
                   </LogoContainer>
+                  <CareersCotnainerMobile to="/careers">
+                    We're hiring
+                  </CareersCotnainerMobile>
                   <TextContainer animation={animation} transitionDelay={600}>
                     <WelcomeHeader>We develop startups</WelcomeHeader>
                     <MainText>
@@ -424,6 +433,7 @@ class IndexPage extends Component {
                       <ArrowRightIcon color="white" />
                     </ArrowAnimation>
                   </CareersCotnainer>
+
                   <NarativeVideoContainer>
                     <NarativeVideo
                       controls={false}
@@ -448,6 +458,9 @@ class IndexPage extends Component {
                   </NarativeVideoContainer>
                 </RightContainer>
               </GridContainer>
+              <SocialIconsFooter>
+                <SocialLinks />
+              </SocialIconsFooter>
             </Container>
           </Content>
         </GradientContainer>
