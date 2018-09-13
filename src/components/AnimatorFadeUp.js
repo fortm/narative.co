@@ -32,7 +32,7 @@ class AnimatorFadeUp extends Component {
   render() {
     const { children } = this.props
 
-    if (isMobile || !this.props.enabledOnMobile) return children
+    if (isMobile) return children
 
     return (
       <Observer

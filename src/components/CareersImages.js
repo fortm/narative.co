@@ -50,7 +50,7 @@ class CareersImages extends Component {
 
     setTimeout(() => {
       this.setState({ disabled: false })
-    }, 600)
+    }, 800)
   }
 
   handlePrevClick = () => {
@@ -65,7 +65,7 @@ class CareersImages extends Component {
 
     setTimeout(() => {
       this.setState({ disabled: false })
-    }, 600)
+    }, 800)
   }
 
   render() {
@@ -161,7 +161,7 @@ const CareersImagesContainerMobile = styled.div`
 const GalleryContainer = styled.div`
   position: relative;
   height: 24rem;
-  transition: transform 0.6s cubic-bezier(0.7, 0, 0.2, 1);
+  transition: transform 0.8s cubic-bezier(0.7, 0, 0.2, 1);
 `
 
 /**
@@ -194,7 +194,7 @@ const ImageContainer = styled.div`
 
   ${p => {
     if (p.viewed) {
-      return `transition: opacity 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53),
+      return `transition: opacity 0.6s cubic-bezier(0.55, 0.085, 0.68, 0.53),
     filter 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);`
     }
 

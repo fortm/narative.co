@@ -41,7 +41,7 @@ class Perks extends Component {
     return (
       <Observer
         render={({ visiblePercentage }) => {
-          if (visiblePercentage > 25 && !animate) {
+          if (visiblePercentage > 66 && !animate) {
             this.setState({ animate: true })
           }
 

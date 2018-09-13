@@ -208,12 +208,13 @@ const FormContainer = styled.div`
   width: 100%;
   ${transitions.fadeUp};
 
-  ${media.hdpi`
-    width: 54rem;
+  ${media.tablet`
+    padding: 2rem;
+    width: 46rem;
   `};
 
-  ${media.tablet`
-    width: 100%;
+  ${media.desktop`
+    padding: 0;
   `};
 `
 
