@@ -79,6 +79,9 @@ class CareersImages extends Component {
             render={({ visiblePercentage }) => {
               if (visiblePercentage > 60 && !this.state.inView) {
                 this.setState({ inView: true })
+                setTimeout(() => {
+                  this.setState({ viewed: true })
+                }, 1000)
               }
 
               return (
@@ -89,7 +92,9 @@ class CareersImages extends Component {
                     <ImageContainer
                       key={image.node.childImageSharp.sizes.src}
                       index={index}
+                      activeIndex={activeIndex}
                       inView={this.state.inView}
+                      viewed={this.state.viewed}
                       style={{ left: `${index * 36}rem` }}
                     >
                       <Img sizes={image.node.childImageSharp.sizes} />
@@ -141,37 +146,6 @@ const CareersImagesContainer = styled.div`
   ${media.phablet`
     display: none;
   `};
-
-  &::after {
-    content: '';
-    position: absolute;
-    height: 100%;
-    left: 31rem;
-    top: 0;
-    width: 50vw;
-    pointer-events: none;
-    z-index: 1;
-    background: linear-gradient(270deg, #111216 5%, rgba(17, 18, 22, 0) 80%);
-
-      ${media.mdpi`
-      left: 41rem;
-    `}
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    height: 100%;
-    right: 42rem;
-    top: 0;
-    width: 50vw;
-    pointer-events: none;
-    z-index: 1;
-    background: linear-gradient(90deg, #111216 5%, rgba(17, 18, 22, 0) 80%);
-
-    ${media.mdpi`
-      right: 50rem;
-    `}
 `
 
 const CareersImagesContainerMobile = styled.div`
@@ -190,6 +164,13 @@ const GalleryContainer = styled.div`
   transition: transform 0.6s cubic-bezier(0.7, 0, 0.2, 1);
 `
 
+/**
+ * 0 ==> 0 1
+ * 1 ==> 2 3
+ * 2 ==> 4 5
+ * 3 ==> 6 7
+ *
+ */
 const ImageContainer = styled.div`
   display: flex;
   align-items: center;
@@ -204,10 +185,24 @@ const ImageContainer = styled.div`
   overflow: hidden;
   filter: grayscale(100);
 
-  opacity: ${p => (p.inView ? 1 : 0)};
-  transition: opacity 0.8s cubic-bezier(0.55, 0.085, 0.68, 0.53)
-      ${p => p.index * 200}ms,
-    filter 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  opacity: ${p =>
+    p.inView
+      ? p.activeIndex * 2 === p.index || p.index === p.activeIndex * 2 + 1
+        ? 1
+        : 0.2
+      : 0};
+
+  ${p => {
+    if (p.viewed) {
+      return `transition: opacity 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53),
+    filter 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);`
+    }
+
+    if (p.inView) {
+      return `transition: opacity 0.6s cubic-bezier(0.55, 0.085, 0.68, 0.53)
+      ${p.index * 180}ms;`
+    }
+  }};
 
   .gatsby-image-outer-wrapper {
     position: absolute;
@@ -218,7 +213,12 @@ const ImageContainer = styled.div`
   }
 
   &:hover {
-    filter: grayscale(0);
+    ${p =>
+      p.inView
+        ? p.activeIndex * 2 === p.index || p.index === p.activeIndex * 2 + 1
+          ? `filter: grayscale(0);`
+          : ``
+        : ``};
   }
 
   ${media.phablet`
@@ -264,7 +264,7 @@ const GalleryControl = styled.div`
   background: #fff;
   cursor: ${p => (p.disabled ? 'initial' : 'pointer')};
 
-  opacity: ${p => (p.disabled ? 0.3 : 1)};
+  opacity: ${p => (p.disabled ? 0.25 : 1)};
   transition: opacity 600ms cubic-bezier(0.7, 0, 0.2, 1);
 
   ${media.mdpi`

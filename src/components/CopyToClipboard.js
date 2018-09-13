@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const blink = keyframes`
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+`
 
 class CopyToClipboard extends Component {
   state = {
