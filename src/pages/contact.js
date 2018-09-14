@@ -215,6 +215,7 @@ const FormContainer = styled.div`
 
   ${media.desktop`
     padding: 0;
+    width: 100%;
   `};
 `
 

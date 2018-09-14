@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import styled, { keyframes } from 'styled-components'
 
 import CopyToClipboard from './CopyToClipboard'
@@ -39,12 +39,32 @@ const fadeInOut = keyframes`
 
 const careers = [
   {
-    title: 'Full Stack or Frontend Engineer',
+    title: 'Frontend Engineer',
     location: 'Remote, Vancouver, Montreal, Toronto',
-    description:
-      "Narative is founded by designers, engineers and entrepreneurs with decades of experience at the world's most successful startups. We merge best practices in design, development and strategy to create narratives that empower your brand and product.",
-    mailTo:
-      'mailto:info@narative.co?subject=Full Stack or Frontend Engineer @ Narative',
+    description: (
+      <Fragment>
+        <div>
+          At Narartive, we focus on building the best products for ourselves and
+          the world's best startups. A Frontend Engineer is an important piece
+          to pushing our work forward and delivering experiences that our team
+          would be proud of. Above all, we value excellence in design,
+          engineering, strategy, and communication.
+        </div>
+        <div>
+          As a Frontend Engineer at Narative you will be working on a wide range
+          of problems that require expertise with building user interfaces. Our
+          goal is to build a cohesive team that collaborates, supports, and
+          encourages the highest standards from each other. Our Frontend works
+          within the React ecosystem and aims to work in the open when possible.
+        </div>
+        <div>
+          If you take pride in working projects that are user focused and
+          deliver outstanding experiences in every detail, you might fit right
+          in.
+        </div>
+      </Fragment>
+    ),
+    mailTo: 'mailto:info@narative.co?subject=Frontend Engineer @ Narative',
   },
   {
     title: 'Communication Designer',
@@ -142,7 +162,7 @@ export default CareersAccordian
 const AccordianContainer = styled.div`
   color: #fff;
   max-width: 69rem;
-  height: 47rem;
+  min-height: 55rem;
   margin: 0 0 5rem 26.3rem;
   position: relative;
   top: -14rem;
@@ -151,17 +171,17 @@ const AccordianContainer = styled.div`
   ${media.desktop`
     margin:  0 auto 15rem;
     top: -4rem;
+    min-height: auto;
   `};
 
   ${media.tablet`
     margin:  0 auto 10rem;
     top: -4rem;
+    height: auto;
   `};
 
   ${media.phone`
-  height: auto;
-    margin:  0 auto 15rem;
-    top: -4rem;
+    top: -2rem;
   `};
 `
 
@@ -227,6 +247,10 @@ const AccordianListDescription = styled.p`
   margin-bottom: 2.5rem;
   opacity: 0;
   animation: 0.6s ease-out ${fadein} forwards;
+
+  div {
+    margin-bottom: 2rem;
+  }
 
   &::before {
     content: '';
@@ -326,7 +350,11 @@ const AccordianCareersEmail = styled.p`
   }
 
   ${media.tablet`
-    display: block;
+    font-size: 1.4rem;
+
+    span {
+      width: 80%;
+    }
 
     & > div {
       margin-top: 1rem;

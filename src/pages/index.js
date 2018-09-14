@@ -92,6 +92,11 @@ const NarativeVideoContainer = styled.div`
     width: 30rem;
     height: 30rem;
   `};
+
+  ${media.se`
+    width: 24rem;
+    height: 24rem;
+  `};
 `
 
 const NarativeVideo = styled.video`
@@ -297,7 +302,7 @@ const SocialIconsFooter = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 2rem 0 10rem;
+    padding: 2rem 0 10rem;
   `};
 `
 
@@ -336,6 +341,7 @@ const CareersCotnainer = styled(Link)`
 
 const CareersCotnainerMobile = styled(Link)`
   display: none;
+  opacity: 0;
 
   ${media.desktop`
     display: block;
@@ -343,6 +349,7 @@ const CareersCotnainerMobile = styled(Link)`
     right: 0;
     font-weight: 600;
     color: #fff;
+    animation: 0.5s forwards ease ${fadeIn} 1.2s;
   `};
 `
 

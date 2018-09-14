@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 
-const blink = keyframes`
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-`
+import { media } from '@styles'
 
 class CopyToClipboard extends Component {
   state = {
@@ -61,6 +58,10 @@ const CopyIconText = styled.p`
   svg {
     margin-left: 0.9rem;
   }
+
+  ${media.tablet`
+    font-size: 1.4rem;
+  `};
 `
 
 const CopyIcon = ({ fill = 'white' }) => (

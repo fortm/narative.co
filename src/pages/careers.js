@@ -79,13 +79,20 @@ const LogoContainer = styled(Link)`
   ${transitions.fadeUpLong};
 
   ${media.desktop`
-  max-width: 10rem;
-  margin-bottom: 4rem;
+    max-width: 10rem;
+    margin-bottom: 4rem;
+    transition-delay: 0ms !important;
+    transition-duration: 500ms !important;
   `};
 `
 
 const TextContainer = styled.div`
   ${transitions.fadeUpLong};
+
+  ${media.desktop`
+    transition-delay: 0ms !important;
+    transition-duration: 500ms !important;
+  `};
 `
 
 const HiringPill = styled.div`
@@ -267,7 +274,11 @@ const CopyRightContainer = styled.div`
   font-weight: 500;
 
   ${media.desktop`
-    display: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 9rem;
+    width: 100%;
   `};
 `
 
@@ -298,7 +309,7 @@ const ContactButton = styled(Link)`
 
   ${media.phablet`
     width: 100%;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
   `};
 
   &::after {
@@ -346,7 +357,8 @@ const ArrowAnimation = styled.div`
   padding: 0 3rem 0 0.5rem;
 
   ${media.tablet`
-    padding: 0rem 3rem 0 0rem;
+    padding: 0rem
+    text-decoration: underline;
   `};
 
   &::after {
@@ -360,10 +372,18 @@ const ArrowAnimation = styled.div`
     background: #fff;
     opacity: 0;
     z-index: 100;
+
+    ${media.tablet`
+    display: none;
+    `};
   }
 
   svg {
     transition: all 300ms cubic-bezier(0.77, 0, 0.175, 1);
+
+    ${media.tablet`
+    display: none;
+    `};
   }
 
   &:hover svg {
@@ -428,6 +448,7 @@ const Footer = styled.footer`
 
   ${media.tablet`
     justify-content: center;
+    flex-direction: column;
   `};
 `
 
@@ -504,17 +525,21 @@ const MobileBody = styled.div`
       left: 0;
       bottom: 0;
       z-index: -1;
-      background: linear-gradient(180deg, #0B0B0E 0%, #111216 41.44%, #111216 69.06%, #1A1E24 90.61%);
+      background: linear-gradient(180deg, #000 0%, #111216 41.44%, #111216 69.06%, #1A1E24 90.61%);
     }
   `};
 
   ${media.phablet`
-    transform: translateY(54vh);
+    transform: translateY(58vh);
   `};
 
   ${media.phone`
     padding-top: 6rem;
     transform: translateY(61vh);
+  `};
+
+  ${media.se`
+    transform: translateY(91vh);
   `};
 `
 
@@ -564,7 +589,7 @@ const ShareIconContainer = styled.div`
   right: 0;
   opacity: 0;
   color: ${p => p.theme.colors.grey};
-  animation: ${fadeIn} 1s cubic-bezier(0.77, 0, 0.175, 1) forwards 2.6s;
+  animation: ${fadeIn} 2s cubic-bezier(0.77, 0, 0.175, 1) forwards 2.4s;
 
   ${media.desktop`
     display: none;
@@ -659,6 +684,16 @@ class CareersPage extends Component {
             <Container>
               <ScrollLine />
             </Container>
+            <Container hideOnDesktop>
+              <ImageContainer>
+                <NarativeHeroImg
+                  sizes={this.props.data.file.childImageSharp.sizes}
+                />
+                <ImageTraceContainer>
+                  <NarativeHeroOutline />
+                </ImageTraceContainer>
+              </ImageContainer>
+            </Container>
             <Section header="Why Narative">
               <SectionCopy maxWidth="69rem">
                 At Narative, nobody has a "boss". Instead, we hold a common
@@ -708,7 +743,7 @@ class CareersPage extends Component {
             <Section header="Say hello">
               <SectionCopy maxWidth="67rem">
                 If you have the devotion, the curiosity and the desire to build
-                great things, you might fit right in
+                great things, you might fit right in.
               </SectionCopy>
             </Section>
             <Container>
