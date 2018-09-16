@@ -270,7 +270,8 @@ const CareersGraphSVGContainer = styled.div`
 
   svg path {
     stroke-dasharray: 1000;
-    stroke-dashoffset: -1000;
+    stroke-dashoffset: 1000;
+
     ${p =>
       p.animate &&
       `
@@ -279,8 +280,11 @@ const CareersGraphSVGContainer = styled.div`
   }
 
   @keyframes dash {
+    from {
+      stroke-dashoffset: 1000;
+    }
     to {
-      stroke-dashoffset: 0;
+      stroke-dashoffset: 2000;
     }
   }
 
