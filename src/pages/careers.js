@@ -129,7 +129,7 @@ class CareersPage extends Component {
                 Since we're all remote, it's always a party when the team gets
                 together. And we like food... a lot.
               </SectionCopy>
-              <CareersImages images={this.props.data.placeholders.edges} />
+              <CareersImages images={this.props.data.gallery.edges.reverse()} />
             </Section>
             <Section
               header={
@@ -201,9 +201,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    placeholders: allFile(
-      filter: { name: { regex: "/careers-gallery-placeholder/" } }
-    ) {
+    gallery: allFile(filter: { name: { regex: "/careers-gallery/" } }) {
       edges {
         node {
           childImageSharp {
