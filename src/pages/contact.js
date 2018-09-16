@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
 import styled, { keyframes } from 'styled-components'
+import Transition from 'react-transition-group/Transition'
+
 import { media, transitions } from '@styles'
-import { Container, Logo } from '@components'
+import { Container, Logo, Helmet } from '@components'
 import { Forms } from '@modules'
 import { apiCall } from '@utils'
 import { ChevronDownIcon, ExIcon } from '../icons/ui'
-import Transition from 'react-transition-group/Transition'
 
 const duration = 600
 
@@ -102,6 +103,7 @@ const LogoContainer = styled(Link)`
   max-width: 13.059rem;
   margin-bottom: 0;
   text-decoration: none;
+  opacity: 0.2;
   ${transitions.fadeUp};
 
   ${media.desktop`
@@ -139,20 +141,6 @@ const ContactText = styled.p`
   svg {
     margin-left: 1rem;
     transition: transform 300ms ${props => props.theme.transitions.in};
-  }
-`
-
-const BasicText = styled.p`
-  font-size: 1.8rem;
-  font-weight: 400;
-`
-
-const ContactLink = styled.a`
-  color: #fff;
-  text-decoration: underline;
-
-  &:hover ~ svg {
-    transform: translateX(0.3rem);
   }
 `
 
@@ -323,6 +311,11 @@ class ContactPage extends Component {
 
     return (
       <div>
+        <Helmet
+          title="Contact"
+          pathname={this.props.location.pathname}
+          image={this.props.data.contactMeta.childImageSharp.sizes.src}
+        />
         <Container>
           <GridContainer>
             <LeftContainer>
@@ -345,7 +338,7 @@ class ContactPage extends Component {
                 </MainText>
                 <Forms.PhoneForm />
               </TextContainer>
-              <CopyRightContainer transitionDelay={300}>
+              <CopyRightContainer animation={animation} transitionDelay={300}>
                 © {new Date().getFullYear()} Narative Studio Inc.
               </CopyRightContainer>
 
@@ -372,3 +365,15 @@ class ContactPage extends Component {
 }
 
 export default ContactPage
+
+export const pageQuery = graphql`
+  query ContactPageQuery {
+    contactMeta: file(name: { regex: "/narative-meta/" }) {
+      childImageSharp {
+        sizes(maxWidth: 1200, quality: 100) {
+          ...GatsbyImageSharpSizes_noBase64
+        }
+      }
+    }
+  }
+`

@@ -7,6 +7,7 @@ import Container from './Container'
 import CopyToClipboard from './CopyToClipboard'
 import Form from './form'
 import Header from './Header'
+import Helmet from './Helmet'
 import Observer from './Observer'
 import Logo from './Logo'
 import Navigation from './Navigation'
@@ -25,6 +26,7 @@ export default {
   CopyToClipboard,
   Form,
   Header,
+  Helmet,
   Observer,
   Logo,
   Navigation,

@@ -1,9 +1,128 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
 import styled, { keyframes } from 'styled-components'
+
 import { media, transitions } from '@styles'
-import { Container, Logo, SocialLinks } from '@components'
+import { Container, Helmet, Logo, SocialLinks } from '@components'
 import { ArrowRightIcon } from '../icons/ui'
+
+class IndexPage extends Component {
+  state = { animation: '' }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ animation: 'start' })
+    })
+
+    // Required as a workaround for Safari video
+    this.video.muted = true
+    this.video.controls = false
+    this.video.volume = 0
+    this.video.canplay = false
+    this.video.play()
+  }
+
+  render() {
+    const { animation } = this.state
+
+    return (
+      <React.Fragment>
+        <Helmet
+          title="Narative"
+          pathname={this.props.location.pathname}
+          image={this.props.data.homeMeta.childImageSharp.sizes.src}
+        />
+        <GradientContainer animation={animation}>
+          <Content>
+            <Container>
+              <GridContainer>
+                <LeftContainer>
+                  <LogoContainer to="/" animation={animation}>
+                    <Logo />
+                  </LogoContainer>
+                  <CareersCotnainerMobile to="/careers">
+                    We're hiring
+                  </CareersCotnainerMobile>
+                  <TextContainer animation={animation} transitionDelay={600}>
+                    <WelcomeHeader>We develop startups</WelcomeHeader>
+                    <MainText>
+                      Narative was founded by product designers, software
+                      engineers and entrepreneurs with decades of experience at
+                      the world's most successful startups. We merge best
+                      practices in design, engineering and strategy to create
+                      narratives that empower your brand.
+                    </MainText>
+                    <ContactText to="/contact">
+                      <ArrowAnimation>
+                        <HighlightText>Get in touch</HighlightText>
+                        .
+                        <ArrowRightIcon color="white" />
+                      </ArrowAnimation>
+                    </ContactText>
+                  </TextContainer>
+                  <CopyRightContainer
+                    animation={animation}
+                    transitionDelay={800}
+                  >
+                    <SocialLinks fill="#7a8085" />
+                  </CopyRightContainer>
+                </LeftContainer>
+                <RightContainer>
+                  <CareersCotnainer to="/careers">
+                    <ArrowAnimation>
+                      <HighlightText>We're hiring</HighlightText>
+                      <ArrowRightIcon color="white" />
+                    </ArrowAnimation>
+                  </CareersCotnainer>
+
+                  <NarativeVideoContainer>
+                    <NarativeVideo
+                      controls={false}
+                      poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
+                      animation={animation}
+                      innerRef={video => (this.video = video)}
+                      muted="muted"
+                      role="img"
+                      volume="0"
+                      canplay="false"
+                      autoPlay="autoplay"
+                    >
+                      <source
+                        src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
+                        type="video/webm"
+                      />
+                      <source
+                        src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
+                        type="video/mp4"
+                      />
+                    </NarativeVideo>
+                  </NarativeVideoContainer>
+                </RightContainer>
+              </GridContainer>
+              <SocialIconsFooter>
+                <SocialLinks />
+              </SocialIconsFooter>
+            </Container>
+          </Content>
+        </GradientContainer>
+      </React.Fragment>
+    )
+  }
+}
+
+export default IndexPage
+
+export const pageQuery = graphql`
+  query HomePageQuery {
+    homeMeta: file(name: { regex: "/narative-meta/" }) {
+      childImageSharp {
+        sizes(maxWidth: 1200, quality: 100) {
+          ...GatsbyImageSharpSizes_noBase64
+        }
+      }
+    }
+  }
+`
 
 const animateButtonLine = keyframes`
   0% {
@@ -376,104 +495,3 @@ const GradientContainer = styled.div`
     opacity: ${p => (p.animation ? 0 : 1)};
   }
 `
-
-class IndexPage extends Component {
-  state = { animation: '' }
-
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({ animation: 'start' })
-    })
-
-    // Required as a workaround for Safari video
-    this.video.muted = true
-    this.video.controls = false
-    this.video.volume = 0
-    this.video.canplay = false
-    this.video.play()
-  }
-
-  render() {
-    const { animation } = this.state
-
-    return (
-      <React.Fragment>
-        <GradientContainer animation={animation}>
-          <Content>
-            <Container>
-              <GridContainer>
-                <LeftContainer>
-                  <LogoContainer to="/" animation={animation}>
-                    <Logo />
-                  </LogoContainer>
-                  <CareersCotnainerMobile to="/careers">
-                    We're hiring
-                  </CareersCotnainerMobile>
-                  <TextContainer animation={animation} transitionDelay={600}>
-                    <WelcomeHeader>We develop startups</WelcomeHeader>
-                    <MainText>
-                      Narative was founded by product designers, software
-                      engineers and entrepreneurs with decades of experience at
-                      the world's most successful startups. We merge best
-                      practices in design, engineering and strategy to create
-                      narratives that empower your brand.
-                    </MainText>
-                    <ContactText to="/contact">
-                      <ArrowAnimation>
-                        <HighlightText>Get in touch</HighlightText>
-                        .
-                        <ArrowRightIcon color="white" />
-                      </ArrowAnimation>
-                    </ContactText>
-                  </TextContainer>
-                  <CopyRightContainer
-                    animation={animation}
-                    transitionDelay={800}
-                  >
-                    <SocialLinks fill="#7a8085" />
-                  </CopyRightContainer>
-                </LeftContainer>
-                <RightContainer>
-                  <CareersCotnainer to="/careers">
-                    <ArrowAnimation>
-                      <HighlightText>We're hiring</HighlightText>
-                      <ArrowRightIcon color="white" />
-                    </ArrowAnimation>
-                  </CareersCotnainer>
-
-                  <NarativeVideoContainer>
-                    <NarativeVideo
-                      controls={false}
-                      poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
-                      animation={animation}
-                      innerRef={video => (this.video = video)}
-                      muted="muted"
-                      role="img"
-                      volume="0"
-                      canplay="false"
-                      autoPlay="autoplay"
-                    >
-                      <source
-                        src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
-                        type="video/webm"
-                      />
-                      <source
-                        src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
-                        type="video/mp4"
-                      />
-                    </NarativeVideo>
-                  </NarativeVideoContainer>
-                </RightContainer>
-              </GridContainer>
-              <SocialIconsFooter>
-                <SocialLinks />
-              </SocialIconsFooter>
-            </Container>
-          </Content>
-        </GradientContainer>
-      </React.Fragment>
-    )
-  }
-}
-
-export default IndexPage
