@@ -128,7 +128,7 @@ class CareersPage extends Component {
                 Since we're all remote, it's always a party when the team gets
                 together. And we like food... a lot.
               </SectionCopy>
-              <CareersImages images={this.props.data.gallery.edges.reverse()} />
+              <CareersImages images={this.props.data.gallery.edges} />
             </Section>
             <Section
               header={
