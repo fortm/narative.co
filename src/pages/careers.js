@@ -45,7 +45,7 @@ class CareersPage extends Component {
                   <LogoContainer
                     to="/"
                     animation={animation}
-                    transitionDelay={200}
+                    transitionDelay={100}
                   >
                     <Logo />
                   </LogoContainer>
@@ -274,7 +274,7 @@ const LogoContainer = styled(Link)`
   max-width: 13.059rem;
   margin-bottom: 0;
   text-decoration: none;
-  ${transitions.fadeUpLong};
+  ${transitions.fadeUp};
 
   ${media.desktop`
     max-width: 10rem;
@@ -285,7 +285,7 @@ const LogoContainer = styled(Link)`
 `
 
 const TextContainer = styled.div`
-  ${transitions.fadeUpLong};
+  ${transitions.fadeUp};
 
   ${media.desktop`
     transition-delay: 0ms !important;
@@ -354,7 +354,7 @@ const ImageContainer = styled.div`
 
 const NarativeHeroImg = styled(Img)`
   opacity: 0;
-  animation: fadein 1s cubic-bezier(0.5, 0, 0.415, 0.955) forwards 1.8s;
+  animation: fadein 1s cubic-bezier(0.5, 0, 0.415, 0.955) forwards 2s;
 
   @keyframes fadein {
     to {
@@ -874,6 +874,7 @@ const NarativeHeroOutline = () => (
           <animate
             attributeName="offset"
             values="0;1"
+            begin="0.4s"
             dur="2.2s"
             fill="freeze"
           />
@@ -888,12 +889,19 @@ const NarativeHeroOutline = () => (
         gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#E9DAAC">
-          <animate attributeName="offset" values="0" dur="2.2s" fill="freeze" />
+          <animate
+            attributeName="offset"
+            begin="0.4s"
+            values="0"
+            dur="2.2s"
+            fill="freeze"
+          />
         </stop>
         <stop offset="0" stopColor="#E9DAAC" stopOpacity="0">
           <animate
             attributeName="offset"
             values="0;1"
+            begin="0.4s"
             dur="2.2s"
             fill="freeze"
           />

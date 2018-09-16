@@ -103,8 +103,8 @@ const LogoContainer = styled(Link)`
   max-width: 13.059rem;
   margin-bottom: 0;
   text-decoration: none;
-  opacity: 0.2;
-  ${transitions.fadeUp};
+  opacity: ${p => (p.animation ? 0.2 : 1)};
+  transition: opacity 400ms ease;
 
   ${media.desktop`
   max-width: 10rem;
@@ -322,7 +322,7 @@ class ContactPage extends Component {
               <CloseContainerMobile to="/" animation={animation}>
                 <ExIcon color="white" />
               </CloseContainerMobile>
-              <LogoContainer to="/" animation={animation} transitionDelay={300}>
+              <LogoContainer to="/" animation={animation}>
                 <Logo />
               </LogoContainer>
               <TextContainer animation={animation} transitionDelay={300}>

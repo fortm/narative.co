@@ -50,6 +50,14 @@ const CopyIconText = styled.p`
   display: flex;
   align-items: center;
   color: #3f7871;
+  opacity: 0;
+  animation: fadein 300ms ease-out forwards;
+
+  @keyframes fadein {
+    to {
+      opacity: 1;
+    }
+  }
 
   strong {
     margin-right: 0.5rem;
