@@ -30,7 +30,6 @@ class CareersPage extends Component {
   render() {
     const { animation } = this.state
 
-    console.log(this.props)
     return (
       <GradientContainer animation={animation}>
         <Helmet
