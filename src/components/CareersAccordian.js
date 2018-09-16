@@ -69,8 +69,27 @@ const careers = [
   {
     title: 'Communication Designer',
     location: 'Remote, Vancouver, Montreal, Toronto',
-    description:
-      "Narative is founded by designers, engineers and entrepreneurs with decades of experience at the world's most successful startups. We merge best practices in design, development and strategy to create narratives that empower your brand and product.",
+    description: (
+      <Fragment>
+        <div>
+          At Narartive, we focus on building the best products for ourselves and
+          the world's most important startups. A Communication Designer is an
+          important piece to pushing our work forward and delivering experiences
+          that our team would be proud of. Above all, we value excellence in
+          design, engineering, strategy, and communication.
+        </div>
+        <div>
+          A Communication Designer in our team will not only convey our voice
+          and shape our product experiences by crafting copy, but also work in
+          tandem with our designers to unpack customer insights. Together, they
+          not only fashion the right tone for our products, but deeply
+          understand humans on an empathetic level, as well as having technical
+          knowledge surrounding the industry. This is achieved not just through
+          wordsmanship, but through thoughtful applications of design and
+          technologies that empower Narative.
+        </div>
+      </Fragment>
+    ),
     mailTo: 'mailto:info@narative.co?subject=UX Copywriter @ Narative',
   },
   {
