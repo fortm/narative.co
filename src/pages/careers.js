@@ -768,7 +768,7 @@ const GradientContainer = styled.div`
     background: linear-gradient(
       rgb(9, 10, 12),
       rgb(17, 18, 22) 60%,
-      rgb(13, 18, 27) 100%
+      #1a1e24 100%
     );
     pointer-events: none;
     transition: all 1.5s ease;
