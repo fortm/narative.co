@@ -45,11 +45,11 @@ class CareersPage extends Component {
                   <LogoContainer
                     to="/"
                     animation={animation}
-                    transitionDelay={1200}
+                    transitionDelay={200}
                   >
                     <Logo />
                   </LogoContainer>
-                  <TextContainer animation={animation} transitionDelay={1300}>
+                  <TextContainer animation={animation} transitionDelay={300}>
                     <HiringPill>We're hiring</HiringPill>
                     <WelcomeHeader>
                       Let's build products, together, with the world's best
