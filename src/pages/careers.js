@@ -101,9 +101,9 @@ class CareersPage extends Component {
             <Section header="Why Narative">
               <SectionCopy maxWidth="69rem">
                 At Narative, nobody has a "boss". Instead, we hold a common
-                goal, one where everyone has executive level decision,
-                regardless of position. We teach and learn from each other every
-                day, with growth based on trust and relationships.
+                goal, where everyone owns executive level decision, regardless
+                of position. We teach and learn from each other everyday, with
+                growth based on trust and relationships.
               </SectionCopy>
             </Section>
             <Section header="Working at Narative">
