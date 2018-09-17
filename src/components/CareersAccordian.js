@@ -44,7 +44,7 @@ const careers = [
     description: (
       <Fragment>
         <div>
-          At Narartive, we focus on building the best products for ourselves and
+          At Narative, we focus on building the best products for ourselves and
           the world's best startups. A Frontend Engineer is an important piece
           to pushing our work forward and delivering experiences that our team
           would be proud of. Above all, we value excellence in design,
@@ -72,7 +72,7 @@ const careers = [
     description: (
       <Fragment>
         <div>
-          At Narartive, we focus on building the best products for ourselves and
+          At Narative, we focus on building the best products for ourselves and
           the world's most important startups. A Communication Designer is an
           important piece to pushing our work forward and delivering experiences
           that our team would be proud of. Above all, we value excellence in
