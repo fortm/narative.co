@@ -82,12 +82,11 @@ const careers = [
           A Communication Designer in our team will not only convey our voice
           and shape our product experiences by crafting copy, but also work in
           tandem with our designers and engineers to unpack customer insights.
-          Together, they not only fashion the right tone for our products, but
-          deeply understand humans on an empathetic level, as well as having up
-          to date technical knowledge surrounding the industry. At Narative,
-          good communication is achieved not just through wordsmanship, but
-          through thoughtful applications of design and technologies that
-          empower our products.
+          Together, they fashion the right tone for our products, deeply
+          understand humans on an empathetic level, as well as having up to date
+          technical knowledge surrounding the industry. A good communication is
+          definitely achieved through wordsmanship, but also through thoughtful
+          applications of design and technologies that empower our products.
         </div>
       </Fragment>
     ),

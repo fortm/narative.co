@@ -42,11 +42,7 @@ class CareersPage extends Component {
             <Container>
               <GridContainer>
                 <LeftContainer>
-                  <LogoContainer
-                    to="/"
-                    animation={animation}
-                    transitionDelay={100}
-                  >
+                  <LogoContainer to="/">
                     <Logo />
                   </LogoContainer>
                   <TextContainer animation={animation} transitionDelay={300}>
@@ -274,7 +270,6 @@ const LogoContainer = styled(Link)`
   max-width: 13.059rem;
   margin-bottom: 0;
   text-decoration: none;
-  ${transitions.fadeUp};
 
   ${media.desktop`
     max-width: 10rem;

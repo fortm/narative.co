@@ -37,7 +37,7 @@ class IndexPage extends Component {
             <Container>
               <GridContainer>
                 <LeftContainer>
-                  <LogoContainer to="/" animation={animation}>
+                  <LogoContainer to="/">
                     <Logo />
                   </LogoContainer>
                   <CareersCotnainerMobile to="/careers">
@@ -175,7 +175,6 @@ const LogoContainer = styled(Link)`
   max-width: 13.059rem;
   margin-bottom: 0;
   text-decoration: none;
-  ${transitions.fadeUp};
 
   ${media.desktop`
     max-width: 10rem;

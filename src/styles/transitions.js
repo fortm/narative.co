@@ -11,8 +11,8 @@ const blurIn = css`
   filter: blur(0);
   opacity: 1;
 
-  ${props =>
-    props.animation !== 'start' &&
+  ${p =>
+    p.animation !== 'start' &&
     `
     opacity: 0;
     filter: blur(0.5rem);
@@ -36,15 +36,15 @@ const blurIn = css`
  * Will transition in that element with a delay of 1 second
  */
 const fadeUp = css`
-  ${props =>
-    props.animation !== 'start' &&
+  ${p =>
+    p.animation !== 'start' &&
     `
     opacity: 0;
     transform: translate3d(0, 1.4rem, 0);
   `};
 
   transition: all 800ms
-    ${props => (props.transitionDelay ? `${props.transitionDelay}ms` : '400ms')}
+    ${p => (p.transitionDelay ? `${p.transitionDelay}ms` : '400ms')}
     cubic-bezier(0.694, 0, 0.335, 1);
 `
 

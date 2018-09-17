@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import Transition from 'react-transition-group/Transition'
 
 import { media, transitions } from '@styles'
-import { Container, Logo, Helmet } from '@components'
+import { Container, Logo, Helmet, SocialLinks } from '@components'
 import { Forms } from '@modules'
-import { apiCall } from '@utils'
 import { ChevronDownIcon, ExIcon } from '../icons/ui'
 
 const duration = 600
@@ -104,11 +103,14 @@ const LogoContainer = styled(Link)`
   margin-bottom: 0;
   text-decoration: none;
   opacity: ${p => (p.animation ? 0.2 : 1)};
-  transition: opacity 400ms ease;
+  position: relative;
+  top: -1.4rem;
+  transition: opacity 1s ease;
 
   ${media.desktop`
-  max-width: 10rem;
-  margin-bottom: 4rem;
+    max-width: 10rem;
+    margin-bottom: 4rem;
+    top: 0;
   `};
 `
 
@@ -301,13 +303,22 @@ class ContactPage extends Component {
   state = { animation: '' }
 
   componentDidMount() {
+    const animated = localStorage.getItem('animated')
+
     setTimeout(() => {
-      this.setState({ animation: 'start' })
+      this.setState({
+        animation: 'start',
+        animated,
+      })
     })
+
+    if (!animated) {
+      localStorage.setItem('animated', true)
+    }
   }
 
   render() {
-    const { animation } = this.state
+    const { animation, animated } = this.state
 
     return (
       <div>
@@ -322,7 +333,7 @@ class ContactPage extends Component {
               <CloseContainerMobile to="/" animation={animation}>
                 <ExIcon color="white" />
               </CloseContainerMobile>
-              <LogoContainer to="/" animation={animation}>
+              <LogoContainer to="/" animated={animated} animation={animation}>
                 <Logo />
               </LogoContainer>
               <TextContainer animation={animation} transitionDelay={300}>
@@ -339,7 +350,7 @@ class ContactPage extends Component {
                 <Forms.PhoneForm />
               </TextContainer>
               <CopyRightContainer animation={animation} transitionDelay={300}>
-                © {new Date().getFullYear()} Narative Studio Inc.
+                <SocialLinks fill="#7a8085" />
               </CopyRightContainer>
 
               <MobileArrowContainer animation={animation} transitionDelay={500}>
@@ -350,7 +361,7 @@ class ContactPage extends Component {
           </GridContainer>
         </Container>
         <SlideIn in={animation === 'start'}>
-          <div style={{ position: 'relative', width: '100%' }}>
+          <div style={{ position: 'relative', width: '100%', top: '-1.4rem' }}>
             <FormContainer animation={animation} transitionDelay={1000}>
               <Forms.ContactForm />
             </FormContainer>
