@@ -44,23 +44,26 @@ const careers = [
     description: (
       <Fragment>
         <div>
-          At Narative, we focus on building the best products for ourselves and
-          the world's best startups. A Frontend Engineer is an important piece
-          to pushing our work forward and delivering experiences that our team
-          would be proud of. Above all, we value excellence in design,
-          engineering, strategy, and communication.
+          At Narative, we focus on building amazing products for ourselves and
+          the world's best startups. A Frontend Engineer is fundamental in
+          pushing our mission forward, delivering experiences that consistently
+          make our team proud.
         </div>
         <div>
-          As a Frontend Engineer at Narative you will be working on a wide range
-          of problems that require expertise with building user interfaces. Our
-          goal is to build a cohesive team that collaborates, supports, and
-          encourages the highest standards from each other. Our Frontend works
-          within the React ecosystem and aims to work in the open when possible.
+          Above all, we value excellence in design, engineering, strategy, and
+          communication.
         </div>
         <div>
-          If you take pride in working projects that are user focused and
-          deliver outstanding experiences in every detail, you might fit right
-          in.
+          As a Frontend Engineer at Narative, you'll be working on a wide range
+          of problems that require expertise in building user interfaces. Our
+          goal is to develop a cohesive team unit that collaborates, supports,
+          and encourages the highest standards from one another. Our Frontend
+          works within the React ecosystem and strives to work in the open
+          wherever possible.
+        </div>
+        <div>
+          If you take pride in working on user-focused projects, delivering
+          extraordinary experiences in every detail, you might fit right in.
         </div>
       </Fragment>
     ),
