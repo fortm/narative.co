@@ -32,7 +32,7 @@ const StyledFormikForm = styled(FormikForm)`
   position: relative;
   width: 46rem;
   padding-bottom: 10rem;
-  margin-left: 11rem;
+  margin: 0 auto;
 
   ${media.hdpi`
     margin-left: 0;
