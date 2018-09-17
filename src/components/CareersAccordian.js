@@ -75,21 +75,26 @@ const careers = [
     description: (
       <Fragment>
         <div>
-          At Narative, we focus on building the best products for ourselves and
-          the world's most important startups. A Communication Designer is an
-          important piece to pushing our work forward and delivering experiences
-          that our team would be proud of. Above all, we value excellence in
-          design, engineering, strategy, and communication.
+          At Narative, we focus on building amazing products for ourselves and
+          the world's best startups.
         </div>
         <div>
-          A Communication Designer in our team will not only convey our voice
-          and shape our product experiences by crafting copy, but also work in
-          tandem with our designers and engineers to unpack customer insights.
-          Together, they fashion the right tone for our products, deeply
-          understand humans on an empathetic level, as well as having up to date
-          technical knowledge surrounding the industry. A good communication is
-          definitely achieved through wordsmanship, but also through thoughtful
-          applications of design and technologies that empower our products.
+          A Communication Designer is fundamental in pushing our mission
+          forward, delivering experiences that consistently make our team proud.
+        </div>
+        <div>
+          Above all, we value excellence in design, engineering, strategy, and
+          communication.
+        </div>
+        <div>
+          Narative's Communication Designer will not only convey our voice,
+          crafting copy to shape our product experiences, they'll work in tandem
+          with our designers/engineers to unpack customer insights. Together,
+          they fashion the appropriate tone for our products, deeply
+          understanding humans on an empathetic level, all while holding current
+          technical-knowledge regarding the industry. Great communication is
+          achieved through a combination of wordsmanship, thoughtful application
+          of design and future-proofed technologies that empower our products.
         </div>
       </Fragment>
     ),
