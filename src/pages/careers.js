@@ -701,8 +701,8 @@ const MobileHero = styled.div`
 
 const MobileBody = styled.div`
   ${media.tablet`
-    transform: translateY(40vh);
-    padding-top: 5rem;
+    transform: translateY(44rem);
+    padding-top: 7rem;
     height: 100%;
     position: relative;
     background: #111216;
@@ -723,16 +723,16 @@ const MobileBody = styled.div`
   `};
 
   ${media.phablet`
-    transform: translateY(58vh);
+    transform: translateY(38rem);
   `};
 
   ${media.phone`
     padding-top: 6rem;
-    transform: translateY(61vh);
+    transform: translateY(42rem);
   `};
 
   ${media.se`
-    transform: translateY(91vh);
+    transform: translateY(46rem);
   `};
 `
 
