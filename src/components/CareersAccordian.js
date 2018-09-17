@@ -92,13 +92,13 @@ const careers = [
     ),
     mailTo: 'mailto:info@narative.co?subject=UX Copywriter @ Narative',
   },
-  {
-    title: 'Product Manager',
-    location: 'Remote, Vancouver, Montreal, Toronto',
-    description:
-      "Narative is founded by designers, engineers and entrepreneurs with decades of experience at the world's most successful startups. We merge best practices in design, development and strategy to create narratives that empower your brand and product.",
-    mailTo: 'mailto:info@narative.co?subject=Product Manager @ Narative',
-  },
+  // {
+  //   title: 'Product Manager',
+  //   location: 'Remote, Vancouver, Montreal, Toronto',
+  //   description:
+  //     "Narative is founded by designers, engineers and entrepreneurs with decades of experience at the world's most successful startups. We merge best practices in design, development and strategy to create narratives that empower your brand and product.",
+  //   mailTo: 'mailto:info@narative.co?subject=Product Manager @ Narative',
+  // },
 ]
 
 const CareersAccordianItem = ({ career, handleIndexOpen, index, isOpen }) => (
