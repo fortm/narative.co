@@ -109,7 +109,7 @@ const LogoContainer = styled(Link)`
 
   ${media.desktop`
     max-width: 10rem;
-    margin-bottom: 4rem;
+    margin-bottom: 7rem;
     top: 0;
   `};
 `
