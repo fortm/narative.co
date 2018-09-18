@@ -1,12 +1,109 @@
-import React, { Component } from 'react'
-import Link from 'gatsby-link'
+import React, { Component, Fragment } from 'react'
+import { Link, graphql } from 'gatsby'
 import styled from 'styled-components'
 import Transition from 'react-transition-group/Transition'
 
 import { media, transitions } from '@styles'
-import { Container, Logo, Helmet, SocialLinks } from '@components'
+import { Container, Layout, Logo, Helmet, SocialLinks } from '@components'
 import { Forms } from '@modules'
 import { ChevronDownIcon, ExIcon } from '../icons/ui'
+
+class ContactPage extends Component {
+  state = { animation: '' }
+
+  componentDidMount() {
+    const animated = localStorage.getItem('animated')
+
+    setTimeout(() => {
+      this.setState({
+        animation: 'start',
+        animated,
+      })
+    })
+
+    if (!animated) {
+      localStorage.setItem('animated', true)
+    }
+  }
+
+  render() {
+    const { animation, animated } = this.state
+
+    return (
+      <Layout>
+        <Fragment>
+          <Helmet
+            title="Contact"
+            pathname={this.props.location.pathname}
+            image={this.props.data.contactMeta.childImageSharp.fixed.src}
+          />
+          <Container>
+            <GridContainer>
+              <LeftContainer>
+                <CloseContainerMobile to="/" animation={animation}>
+                  <ExIcon color="white" />
+                </CloseContainerMobile>
+                <LogoContainer to="/" animated={animated} animation={animation}>
+                  <Logo />
+                </LogoContainer>
+                <TextContainer animation={animation} transitionDelay={300}>
+                  <WelcomeHeader>How can we help?</WelcomeHeader>
+                  <MainText>
+                    <HighlightText>Tell us a bit</HighlightText> about your
+                    project or idea.
+                  </MainText>
+                  <MainText>
+                    <HighlightText>No time to fill a form?</HighlightText> No
+                    problem, leave us your phone number and our account
+                    management team will contact you within one business day.
+                  </MainText>
+                  <Forms.PhoneForm />
+                </TextContainer>
+                <CopyRightContainer animation={animation} transitionDelay={300}>
+                  <SocialLinks fill="#7a8085" />
+                </CopyRightContainer>
+
+                <MobileArrowContainer
+                  animation={animation}
+                  transitionDelay={500}
+                >
+                  <ChevronDownIcon />
+                </MobileArrowContainer>
+              </LeftContainer>
+              <RightContainer />
+            </GridContainer>
+          </Container>
+          <SlideIn in={animation === 'start'}>
+            <div
+              style={{ position: 'relative', width: '100%', top: '-1.4rem' }}
+            >
+              <FormContainer animation={animation} transitionDelay={1000}>
+                <Forms.ContactForm />
+              </FormContainer>
+            </div>
+          </SlideIn>
+          <CloseContainer to="/">
+            <ExIcon />
+          </CloseContainer>
+        </Fragment>
+      </Layout>
+    )
+  }
+}
+
+export default ContactPage
+
+export const pageQuery = graphql`
+  query ContactPageQuery {
+    contactMeta: file(name: { regex: "/narative-meta/" }) {
+      childImageSharp {
+        fixed(width: 1200, quality: 100) {
+          ...GatsbyImageSharpFixed_noBase64
+        }
+      }
+    }
+  }
+`
 
 const duration = 600
 
@@ -46,17 +143,19 @@ const SlideInContainer = styled.div`
     box-shadow: none;
     padding: 7rem 4rem 0;
     overflow: initial;
-  `};
 
-  &::before {
-    content: '';
-    position: absolute;
-    bottom: -250px;
-    left: 0;
-    height: 250px;
-    width: 100%;
-    background: #fff;
-  }
+     &::before {
+        content: '';
+        position: absolute;
+        bottom: -250px;
+        left: 0;
+        height: 250px;
+        width: 100%;
+        z-index: 0;
+        background: #fff;
+      }
+
+  `};
 `
 
 const SlideIn = ({ in: inProp, children }) => {
@@ -133,17 +232,6 @@ const MainText = styled.p`
   font-weight: 400;
   color: ${props => props.theme.colors.grey};
   margin-bottom: 2rem;
-`
-
-const ContactText = styled.p`
-  font-size: 1.8rem;
-  font-weight: 500;
-  color: ${props => props.theme.colors.grey};
-
-  svg {
-    margin-left: 1rem;
-    transition: transform 300ms ${props => props.theme.transitions.in};
-  }
 `
 
 const LeftContainer = styled.div`
@@ -297,94 +385,4 @@ const MobileArrowContainer = styled.div`
   ${media.phablet`
     bottom: -2.2rem;
   `};
-`
-
-class ContactPage extends Component {
-  state = { animation: '' }
-
-  componentDidMount() {
-    const animated = localStorage.getItem('animated')
-
-    setTimeout(() => {
-      this.setState({
-        animation: 'start',
-        animated,
-      })
-    })
-
-    if (!animated) {
-      localStorage.setItem('animated', true)
-    }
-  }
-
-  render() {
-    const { animation, animated } = this.state
-
-    return (
-      <div>
-        <Helmet
-          title="Contact"
-          pathname={this.props.location.pathname}
-          image={this.props.data.contactMeta.childImageSharp.sizes.src}
-        />
-        <Container>
-          <GridContainer>
-            <LeftContainer>
-              <CloseContainerMobile to="/" animation={animation}>
-                <ExIcon color="white" />
-              </CloseContainerMobile>
-              <LogoContainer to="/" animated={animated} animation={animation}>
-                <Logo />
-              </LogoContainer>
-              <TextContainer animation={animation} transitionDelay={300}>
-                <WelcomeHeader>How can we help?</WelcomeHeader>
-                <MainText>
-                  <HighlightText>Tell us a bit</HighlightText> about your
-                  project or idea.
-                </MainText>
-                <MainText>
-                  <HighlightText>No time to fill a form?</HighlightText> No
-                  problem, leave us your phone number and our account management
-                  team will contact you within one business day.
-                </MainText>
-                <Forms.PhoneForm />
-              </TextContainer>
-              <CopyRightContainer animation={animation} transitionDelay={300}>
-                <SocialLinks fill="#7a8085" />
-              </CopyRightContainer>
-
-              <MobileArrowContainer animation={animation} transitionDelay={500}>
-                <ChevronDownIcon />
-              </MobileArrowContainer>
-            </LeftContainer>
-            <RightContainer />
-          </GridContainer>
-        </Container>
-        <SlideIn in={animation === 'start'}>
-          <div style={{ position: 'relative', width: '100%', top: '-1.4rem' }}>
-            <FormContainer animation={animation} transitionDelay={1000}>
-              <Forms.ContactForm />
-            </FormContainer>
-          </div>
-        </SlideIn>
-        <CloseContainer to="/">
-          <ExIcon />
-        </CloseContainer>
-      </div>
-    )
-  }
-}
-
-export default ContactPage
-
-export const pageQuery = graphql`
-  query ContactPageQuery {
-    contactMeta: file(name: { regex: "/narative-meta/" }) {
-      childImageSharp {
-        sizes(maxWidth: 1200, quality: 100) {
-          ...GatsbyImageSharpSizes_noBase64
-        }
-      }
-    }
-  }
 `

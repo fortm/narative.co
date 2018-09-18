@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import Link from 'gatsby-link'
+import React, { Component, Fragment } from 'react'
+import { Link, graphql } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
 
 import { media, transitions } from '@styles'
-import { Container, Helmet, Logo, SocialLinks } from '@components'
+import { Container, Helmet, Layout, Logo, SocialLinks } from '@components'
 import { ArrowRightIcon } from '../icons/ui'
 
 class IndexPage extends Component {
@@ -26,86 +26,88 @@ class IndexPage extends Component {
     const { animation } = this.state
 
     return (
-      <React.Fragment>
-        <Helmet
-          title="Narative"
-          pathname={this.props.location.pathname}
-          image={this.props.data.homeMeta.childImageSharp.sizes.src}
-        />
-        <GradientContainer animation={animation}>
-          <Content>
-            <Container>
-              <GridContainer>
-                <LeftContainer>
-                  <LogoContainer to="/">
-                    <Logo />
-                  </LogoContainer>
-                  <CareersCotnainerMobile to="/careers">
-                    We're hiring
-                  </CareersCotnainerMobile>
-                  <TextContainer animation={animation} transitionDelay={600}>
-                    <WelcomeHeader>We develop startups</WelcomeHeader>
-                    <MainText>
-                      Narative was founded by product designers, software
-                      engineers and entrepreneurs with decades of experience at
-                      the world's most successful startups. We merge best
-                      practices in design, engineering and strategy to create
-                      narratives that empower your brand.
-                    </MainText>
-                    <ContactText to="/contact">
+      <Layout>
+        <Fragment>
+          <Helmet
+            title="Narative"
+            pathname={this.props.location.pathname}
+            image={this.props.data.homeMeta.childImageSharp.fixed.src}
+          />
+          <GradientContainer animation={animation}>
+            <Content>
+              <Container>
+                <GridContainer>
+                  <LeftContainer>
+                    <LogoContainer to="/">
+                      <Logo />
+                    </LogoContainer>
+                    <CareersCotnainerMobile to="/careers">
+                      We're hiring
+                    </CareersCotnainerMobile>
+                    <TextContainer animation={animation} transitionDelay={600}>
+                      <WelcomeHeader>We develop startups</WelcomeHeader>
+                      <MainText>
+                        Narative was founded by product designers, software
+                        engineers and entrepreneurs with decades of experience
+                        at the world's most successful startups. We merge best
+                        practices in design, engineering and strategy to create
+                        narratives that empower your brand.
+                      </MainText>
+                      <ContactText to="/contact">
+                        <ArrowAnimation>
+                          <HighlightText>Get in touch</HighlightText>
+                          .
+                          <ArrowRightIcon color="white" />
+                        </ArrowAnimation>
+                      </ContactText>
+                    </TextContainer>
+                    <CopyRightContainer
+                      animation={animation}
+                      transitionDelay={800}
+                    >
+                      <SocialLinks fill="#7a8085" />
+                    </CopyRightContainer>
+                  </LeftContainer>
+                  <RightContainer>
+                    <CareersCotnainer to="/careers">
                       <ArrowAnimation>
-                        <HighlightText>Get in touch</HighlightText>
-                        .
+                        <HighlightText>We're hiring</HighlightText>
                         <ArrowRightIcon color="white" />
                       </ArrowAnimation>
-                    </ContactText>
-                  </TextContainer>
-                  <CopyRightContainer
-                    animation={animation}
-                    transitionDelay={800}
-                  >
-                    <SocialLinks fill="#7a8085" />
-                  </CopyRightContainer>
-                </LeftContainer>
-                <RightContainer>
-                  <CareersCotnainer to="/careers">
-                    <ArrowAnimation>
-                      <HighlightText>We're hiring</HighlightText>
-                      <ArrowRightIcon color="white" />
-                    </ArrowAnimation>
-                  </CareersCotnainer>
+                    </CareersCotnainer>
 
-                  <NarativeVideoContainer>
-                    <NarativeVideo
-                      controls={false}
-                      poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
-                      animation={animation}
-                      innerRef={video => (this.video = video)}
-                      muted="muted"
-                      role="img"
-                      volume="0"
-                      canplay="false"
-                      autoPlay="autoplay"
-                    >
-                      <source
-                        src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
-                        type="video/webm"
-                      />
-                      <source
-                        src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
-                        type="video/mp4"
-                      />
-                    </NarativeVideo>
-                  </NarativeVideoContainer>
-                </RightContainer>
-              </GridContainer>
-              <SocialIconsFooter>
-                <SocialLinks />
-              </SocialIconsFooter>
-            </Container>
-          </Content>
-        </GradientContainer>
-      </React.Fragment>
+                    <NarativeVideoContainer>
+                      <NarativeVideo
+                        controls={false}
+                        poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
+                        animation={animation}
+                        innerRef={video => (this.video = video)}
+                        muted="muted"
+                        role="img"
+                        volume="0"
+                        canplay="false"
+                        autoPlay="autoplay"
+                      >
+                        <source
+                          src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
+                          type="video/webm"
+                        />
+                        <source
+                          src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
+                          type="video/mp4"
+                        />
+                      </NarativeVideo>
+                    </NarativeVideoContainer>
+                  </RightContainer>
+                </GridContainer>
+                <SocialIconsFooter>
+                  <SocialLinks />
+                </SocialIconsFooter>
+              </Container>
+            </Content>
+          </GradientContainer>
+        </Fragment>
+      </Layout>
     )
   }
 }
@@ -116,8 +118,8 @@ export const pageQuery = graphql`
   query HomePageQuery {
     homeMeta: file(name: { regex: "/narative-meta/" }) {
       childImageSharp {
-        sizes(maxWidth: 1200, quality: 100) {
-          ...GatsbyImageSharpSizes_noBase64
+        fixed(width: 1200, quality: 100) {
+          ...GatsbyImageSharpFixed_noBase64
         }
       }
     }
@@ -356,61 +358,10 @@ const ArrowAnimation = styled.div`
     `};
   }
 `
-const SectionCopy = styled.p`
-  color: #fff;
-  font-size: 3.6rem;
-  line-height: 1.2;
-  max-width: ${props => (props.maxWidth ? props.maxWidth : '100%')};
-
-  ${media.desktop`
-    font-size: 2.2rem;
-    line-height: 1.4;
-    max-width: 100%;
-  `};
-`
 
 const HighlightText = styled.span`
   color: #fff;
   ${props => props.underline && `text-decoration: underline`};
-`
-
-const SectionCopyHighlight = styled.span`
-  position: relative;
-  background: #e9daac;
-  display: inline-block;
-  padding: 0px 1px;
-  color: #000;
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: -5px;
-    height: 100%;
-    top: 0;
-    bottom: 0;
-    width: 5px;
-    background: #e9daac;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    right: -5px;
-    width: 5px;
-    height: 100%;
-    top: 0;
-    bottom: 0;
-    background: #e9daac;
-  }
-`
-
-const WhatWeDoList = styled.ul`
-  width: 40rem;
-  list-style: none;
-
-  ${media.desktop`
-    width: 100%;
-  `};
 `
 
 const SocialIconsFooter = styled.div`

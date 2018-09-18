@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { media } from '@styles'
 
@@ -80,7 +79,7 @@ class Radio extends Component {
   }
 
   render() {
-    const { field, form, label, options } = this.props
+    const { options } = this.props
 
     return (
       <React.Fragment>

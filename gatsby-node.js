@@ -5,21 +5,24 @@
  */
 
 // You can delete this file if you're not using it
+// const path = require('path')
+
+// const modifyWebpackConfig = ({ config, stage }) => {
+//   config.merge({
+//     resolve: {
+//       alias: {
+
+//       },
+//     },
+//   })
+
+//   return config
+// }
+
 const path = require('path')
 
-const modifyBabelrc = ({ babelrc }) => ({
-  ...babelrc,
-  ...(process.env.NODE_ENV !== 'development' && {
-    plugins: babelrc.plugins.concat([
-      'transform-regenerator',
-      'transform-runtime',
-      'babel-plugin-styled-components',
-    ]),
-  }),
-})
-
-const modifyWebpackConfig = ({ config, stage }) => {
-  config.merge({
+const onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
     resolve: {
       alias: {
         '@components': path.resolve(__dirname, 'src/components/'),
@@ -31,11 +34,8 @@ const modifyWebpackConfig = ({ config, stage }) => {
       },
     },
   })
-
-  return config
 }
 
 module.exports = {
-  modifyBabelrc,
-  modifyWebpackConfig,
+  onCreateWebpackConfig,
 }

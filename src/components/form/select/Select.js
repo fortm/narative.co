@@ -144,11 +144,6 @@ const SelectArrow = () => (
   </svg>
 )
 
-const StyledSelectArrow = styled(SelectArrow)`
-  position: absolute;
-  right: 0;
-`
-
 class Select extends Component {
   state = {
     isOpened: false,

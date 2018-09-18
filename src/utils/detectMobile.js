@@ -2,6 +2,8 @@
  * Returns a boolean if the device is a mobile device or not
  */
 
+/* eslint-disable */
+
 export function detectMobile() {
   let check = false
   ;(function(a) {

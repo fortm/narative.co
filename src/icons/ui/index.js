@@ -23,7 +23,7 @@ export const ArrowRightIcon = ({ color = 'black' }) => (
   </svg>
 )
 
-const CheckIcon = ({ color = 'white' }) => (
+export const CheckIcon = ({ color = 'white' }) => (
   <svg width="18" height="14" viewBox="0 0 18 14" version="1.1">
     <g id="Canvas" fill="none">
       <g id="check">
@@ -92,20 +92,6 @@ export const PencilIcon = () => (
         id="Vector"
         d="M 16.7 4C 17.1 3.6 17.1 3 16.7 2.6L 14.4 0.3C 14 -0.1 13.4 -0.1 13 0.3L 11 2.3L 14.7 6L 16.7 4ZM 13.7 7L 10 3.3L 0 13.3L 0 17L 3.7 17L 13.7 7Z"
         fill="black"
-      />
-    </g>
-  </svg>
-)
-
-const PhoneIcon = ({ color = 'white' }) => (
-  <svg width="15" height="15" viewBox="0 0 15 15" version="1.1">
-    <g id="Canvas" fill="none">
-      <path
-        id="Fill 2"
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M 3.01667 6.49167C 4.21667 8.85 6.15 10.775 8.50833 11.9833L 10.3417 10.15C 10.5667 9.925 10.9 9.85 11.1917 9.95C 12.125 10.2583 13.1333 10.425 14.1667 10.425C 14.625 10.425 15 10.8 15 11.2583L 15 14.1667C 15 14.625 14.625 15 14.1667 15C 6.34167 15 0 8.65833 0 0.833333C 0 0.375 0.375 0 0.833333 0L 3.75 0C 4.20833 0 4.58333 0.375 4.58333 0.833333C 4.58333 1.875 4.75 2.875 5.05833 3.80833C 5.15 4.1 5.08333 4.425 4.85 4.65833L 3.01667 6.49167Z"
-        fill={color}
       />
     </g>
   </svg>

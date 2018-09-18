@@ -17,7 +17,7 @@ class CareersImages extends Component {
     window.addEventListener('keydown', this.handleKeyPress)
   }
 
-  componentWillMount() {
+  componentWillUnmount() {
     if (typeof window !== 'undefined') {
       window.removeEventListener('keydown', this.handleKeyPress)
     }
@@ -90,14 +90,14 @@ class CareersImages extends Component {
                 >
                   {this.props.images.map((image, index) => (
                     <ImageContainer
-                      key={image.node.childImageSharp.sizes.src}
+                      key={image.node.childImageSharp.fluid.src}
                       index={index}
                       activeIndex={activeIndex}
                       inView={this.state.inView}
                       viewed={this.state.viewed}
                       style={{ left: `${index * 36}rem` }}
                     >
-                      <Img sizes={image.node.childImageSharp.sizes} />
+                      <Img fluid={image.node.childImageSharp.fluid} />
                     </ImageContainer>
                   ))}
                 </GalleryContainer>
@@ -125,7 +125,7 @@ class CareersImages extends Component {
             name="image"
             render={({ image }) => (
               <ImageContainerMobile>
-                <Img sizes={image.node.childImageSharp.sizes} />
+                <Img fluid={image.node.childImageSharp.fluid} />
               </ImageContainerMobile>
             )}
           />
@@ -193,6 +193,7 @@ const ImageContainer = styled.div`
       : 0};
 
   ${p => {
+    console.log(p)
     if (p.viewed) {
       return `transition: opacity 0.6s cubic-bezier(0.55, 0.085, 0.68, 0.53),
     filter 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);`
@@ -204,7 +205,8 @@ const ImageContainer = styled.div`
     }
   }};
 
-  .gatsby-image-outer-wrapper {
+  .gatsby-image-wrapper {
+    border-radius: 2px;
     position: absolute;
     width: 100%;
     height: 100%;

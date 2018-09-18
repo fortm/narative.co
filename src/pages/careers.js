@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import Link from 'gatsby-link'
+import { Link, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled, { keyframes } from 'styled-components'
 
@@ -11,6 +11,7 @@ import {
   Container,
   CopyToClipboard,
   Helmet,
+  Layout,
   Logo,
   Perks,
   SocialLinks,
@@ -31,149 +32,154 @@ class CareersPage extends Component {
     const { animation } = this.state
 
     return (
-      <GradientContainer animation={animation}>
-        <Helmet
-          title="Careers"
-          pathname={this.props.location.pathname}
-          image={this.props.data.careersMeta.childImageSharp.sizes.src}
-        />
-        <Content>
-          <MobileHero>
-            <Container>
-              <GridContainer>
-                <LeftContainer>
-                  <LogoContainer to="/">
-                    <Logo />
-                  </LogoContainer>
-                  <TextContainer animation={animation} transitionDelay={300}>
-                    <HiringPill>We're hiring</HiringPill>
-                    <WelcomeHeader>
-                      Let's build products, together, with the world's best
-                      startups
-                    </WelcomeHeader>
-                    <MainText>
-                      Imagine a place where we get to choose the brands we
-                      believe in, working alongside their team to etablish a
-                      seamless integration. Where trust, contribution and
-                      quality are at the core of our values.
-                    </MainText>
-                  </TextContainer>
-                  <div />
-                </LeftContainer>
-                <RightContainer>
-                  <ImageContainer>
-                    <NarativeHeroImg
-                      sizes={this.props.data.careersHero.childImageSharp.sizes}
-                    />
-                    <ImageTraceContainer>
-                      <NarativeHeroOutline />
-                    </ImageTraceContainer>
-                  </ImageContainer>
-                  <ShareIconContainer>
-                    <CopyToClipboard
-                      textToCopy="https://narative.co/careers"
-                      successText="narative.co/careers"
-                    >
-                      <Fragment>
-                        Share this page <ShareIcon />
-                      </Fragment>
-                    </CopyToClipboard>
-                  </ShareIconContainer>
-                </RightContainer>
-              </GridContainer>
-            </Container>
-          </MobileHero>
-          <MobileBody>
-            <MobilePuller />
-            <Container>
-              <ScrollLine />
-            </Container>
-            <Container hideOnDesktop>
-              <ImageContainer>
-                <NarativeHeroImg
-                  sizes={this.props.data.careersHero.childImageSharp.sizes}
-                />
-                <ImageTraceContainer>
-                  <NarativeHeroOutline />
-                </ImageTraceContainer>
-              </ImageContainer>
-            </Container>
-            <Section header="Why Narative">
-              <SectionCopy maxWidth="69rem">
-                At Narative, nobody has a "boss". Instead, we hold a common
-                goal, where everyone owns executive level decision, regardless
-                of position. We teach and learn from each other everyday, with
-                growth based on trust and relationships.
-              </SectionCopy>
-            </Section>
-            <Section header="Working at Narative">
-              <FlexColumn>
-                <WhatWeDoContent>
-                  <SectionCopy maxWidth="46rem">
-                    Not only are we mindful of the projects we select, we get to
-                    choose how and when we work, to ensure we're at our best.
-                  </SectionCopy>
-                </WhatWeDoContent>
-                <WhatWeDoList>
-                  <Perks />
-                </WhatWeDoList>
-              </FlexColumn>
-            </Section>
-            <Section header="We have fun">
-              <SectionCopy maxWidth="67rem">
-                Since we're all remote, it's always a party when the team gets
-                together. And we like food... a lot.
-              </SectionCopy>
-              <CareersImages images={this.props.data.gallery.edges} />
-            </Section>
-            <Section
-              header={
-                <div style={{ paddingRight: '2.5rem' }}>
-                  Building our future
-                </div>
-              }
-            >
-              <SectionCopy maxWidth="67rem">
-                We engage with{' '}
-                <Underline>
-                  <UnderlineInner>exceptional clients</UnderlineInner>
-                </Underline>{' '}
-                to fund our own ideas. Displaying our core beliefs through the
-                development of our own products. We call this Narative Labs.
-              </SectionCopy>
-            </Section>
-            <CareersGraph />
+      <Layout>
+        <GradientContainer animation={animation}>
+          <Helmet
+            title="Careers"
+            pathname={this.props.location.pathname}
+            image={this.props.data.careersMeta.childImageSharp.fixed.src}
+          />
+          <Content>
+            <MobileHero>
+              <Container>
+                <GridContainer>
+                  <LeftContainer>
+                    <LogoContainer to="/">
+                      <Logo />
+                    </LogoContainer>
+                    <TextContainer animation={animation} transitionDelay={300}>
+                      <HiringPill>We're hiring</HiringPill>
+                      <WelcomeHeader>
+                        Let's build products, together, with the world's best
+                        startups
+                      </WelcomeHeader>
+                      <MainText>
+                        Imagine a place where we get to choose the brands we
+                        believe in, working alongside their team to etablish a
+                        seamless integration. Where trust, contribution and
+                        quality are at the core of our values.
+                      </MainText>
+                    </TextContainer>
+                    <div />
+                  </LeftContainer>
+                  <RightContainer>
+                    <ImageContainer>
+                      <NarativeHeroImg
+                        fluid={
+                          this.props.data.careersHero.childImageSharp.fluid
+                        }
+                      />
+                      <ImageTraceContainer>
+                        <NarativeHeroOutline />
+                      </ImageTraceContainer>
+                    </ImageContainer>
+                    <ShareIconContainer>
+                      <CopyToClipboard
+                        textToCopy="https://narative.co/careers"
+                        successText="narative.co/careers"
+                      >
+                        <Fragment>
+                          Share this page <ShareIcon />
+                        </Fragment>
+                      </CopyToClipboard>
+                    </ShareIconContainer>
+                  </RightContainer>
+                </GridContainer>
+              </Container>
+            </MobileHero>
+            <MobileBody>
+              <MobilePuller />
+              <Container>
+                <ScrollLine />
+              </Container>
+              <Container hideOnDesktop>
+                <ImageContainer>
+                  <NarativeHeroImg
+                    fluid={this.props.data.careersHero.childImageSharp.fluid}
+                  />
+                  <ImageTraceContainer>
+                    <NarativeHeroOutline />
+                  </ImageTraceContainer>
+                </ImageContainer>
+              </Container>
+              <Section header="Why Narative">
+                <SectionCopy maxWidth="69rem">
+                  At Narative, nobody has a "boss". Instead, we hold a common
+                  goal, where everyone owns executive level decision, regardless
+                  of position. We teach and learn from each other everyday, with
+                  growth based on trust and relationships.
+                </SectionCopy>
+              </Section>
+              <Section header="Working at Narative">
+                <FlexColumn>
+                  <WhatWeDoContent>
+                    <SectionCopy maxWidth="46rem">
+                      Not only are we mindful of the projects we select, we get
+                      to choose how and when we work, to ensure we're at our
+                      best.
+                    </SectionCopy>
+                  </WhatWeDoContent>
+                  <WhatWeDoList>
+                    <Perks />
+                  </WhatWeDoList>
+                </FlexColumn>
+              </Section>
+              <Section header="We have fun">
+                <SectionCopy maxWidth="67rem">
+                  Since we're all remote, it's always a party when the team gets
+                  together. And we like food... a lot.
+                </SectionCopy>
+                <CareersImages images={this.props.data.gallery.edges} />
+              </Section>
+              <Section
+                header={
+                  <div style={{ paddingRight: '2.5rem' }}>
+                    Building our future
+                  </div>
+                }
+              >
+                <SectionCopy maxWidth="67rem">
+                  We engage with{' '}
+                  <Underline>
+                    <UnderlineInner>exceptional clients</UnderlineInner>
+                  </Underline>{' '}
+                  to fund our own ideas. Displaying our core beliefs through the
+                  development of our own products. We call this Narative Labs.
+                </SectionCopy>
+              </Section>
+              <CareersGraph />
 
-            <Section header="Say hello">
-              <SectionCopy maxWidth="67rem">
-                If you have the devotion, the curiosity and the desire to build
-                great things, you might fit right in.
-              </SectionCopy>
-            </Section>
-            <Container>
-              <CareersAccordian />
-            </Container>
-            <Container>
-              <Footer>
-                <CopyRightContainer>
-                  <ContactActionsContainer>
-                    <ContactButton to="/contact">Contact us</ContactButton>
-                    <ContactText to="/" color="#fff">
-                      <ArrowAnimation>
-                        Go back home
-                        <ArrowRightIcon color="#fff" />
-                      </ArrowAnimation>
-                    </ContactText>
-                  </ContactActionsContainer>
-                </CopyRightContainer>
-                <SocialIconsFooter>
-                  <SocialLinks />
-                </SocialIconsFooter>
-              </Footer>
-            </Container>
-          </MobileBody>
-        </Content>
-      </GradientContainer>
+              <Section header="Say hello">
+                <SectionCopy maxWidth="67rem">
+                  If you have the devotion, the curiosity and the desire to
+                  build great things, you might fit right in.
+                </SectionCopy>
+              </Section>
+              <Container>
+                <CareersAccordian />
+              </Container>
+              <Container>
+                <Footer>
+                  <CopyRightContainer>
+                    <ContactActionsContainer>
+                      <ContactButton to="/contact">Contact us</ContactButton>
+                      <ContactText to="/" color="#fff">
+                        <ArrowAnimation>
+                          Go back home
+                          <ArrowRightIcon color="#fff" />
+                        </ArrowAnimation>
+                      </ContactText>
+                    </ContactActionsContainer>
+                  </CopyRightContainer>
+                  <SocialIconsFooter>
+                    <SocialLinks />
+                  </SocialIconsFooter>
+                </Footer>
+              </Container>
+            </MobileBody>
+          </Content>
+        </GradientContainer>
+      </Layout>
     )
   }
 }
@@ -184,15 +190,15 @@ export const pageQuery = graphql`
   query CareersPageQuery {
     careersHero: file(name: { regex: "/narative-careers-hero/" }) {
       childImageSharp {
-        sizes(maxWidth: 467, quality: 100) {
-          ...GatsbyImageSharpSizes_noBase64
+        fluid(maxWidth: 467, quality: 100) {
+          ...GatsbyImageSharpFluid_noBase64
         }
       }
     }
     careersMeta: file(name: { regex: "/careers-meta/" }) {
       childImageSharp {
-        sizes(maxWidth: 1200, quality: 100) {
-          ...GatsbyImageSharpSizes_noBase64
+        fixed(width: 1200, quality: 100) {
+          ...GatsbyImageSharpFixed_noBase64
         }
       }
     }
@@ -200,8 +206,8 @@ export const pageQuery = graphql`
       edges {
         node {
           childImageSharp {
-            sizes(maxWidth: 960, quality: 100) {
-              ...GatsbyImageSharpSizes_withWebp_tracedSVG
+            fluid(maxWidth: 960, quality: 100) {
+              ...GatsbyImageSharpFluid_withWebp_tracedSVG
             }
           }
         }
@@ -642,15 +648,6 @@ const Footer = styled.footer`
   ${media.tablet`
     justify-content: center;
     flex-direction: column;
-  `};
-`
-
-const SocialIconContainer = styled.a`
-  margin-left: 3rem;
-  text-decoration: none;
-
-  ${media.tablet`
-    margin: 0 1.6rem;
   `};
 `
 

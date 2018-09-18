@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Link from 'gatsby-link'
 import styled, { keyframes } from 'styled-components'
 import { Formik, Form as FormikForm, Field } from 'formik'
-import { Button, Container, Form, Transitions } from '@components'
+import { Button, Form } from '@components'
 import { media } from '@styles'
 import { apiCall } from '@utils'
 import { SubmittedCheckIcon } from '../../icons/ui'
@@ -177,7 +177,7 @@ class ContactForm extends Component {
     }
 
     try {
-      const response = await apiCall({ method, endpoint, data })
+      await apiCall({ method, endpoint, data })
 
       setSubmitting(false)
       this.setState({ submitted: true, firstName: name.split(' ')[0] })

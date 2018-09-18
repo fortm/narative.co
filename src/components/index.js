@@ -9,6 +9,7 @@ import Form from './form'
 import Header from './Header'
 import Helmet from './Helmet'
 import Observer from './Observer'
+import Layout from './Layout'
 import Logo from './Logo'
 import Navigation from './Navigation'
 import Perks from './Perks'
@@ -16,7 +17,7 @@ import SocialLinks from './SocialLinks'
 import * as Transitions from './transitions'
 import Video from './video/Video'
 
-export default {
+export {
   AnimatorFadeUp,
   Button,
   CareersAccordian,
@@ -29,6 +30,7 @@ export default {
   Helmet,
   Observer,
   Logo,
+  Layout,
   Navigation,
   Perks,
   SocialLinks,

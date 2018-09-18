@@ -1,17 +1,11 @@
 import React, { Component } from 'react'
-import Link from 'gatsby-link'
 import styled, { keyframes } from 'styled-components'
 import { Formik, Form as FormikForm, Field } from 'formik'
-import { Button, Container, Form } from '@components'
+
+import { Form } from '@components'
 import { media } from '@styles'
 import { apiCall } from '@utils'
-import { CheckIcon, PhoneIcon } from '../../icons/ui'
-
-const FormHeader = styled.h3`
-  font-size: 1.8rem;
-  margin-bottom: 3rem;
-  color: ${props => props.theme.colors.grey};
-`
+import { CheckIcon } from '../../icons/ui'
 
 const FormSection = styled.fieldset`
   margin-bottom: 5rem;
@@ -81,7 +75,7 @@ class ContactForm extends Component {
     }
 
     try {
-      const response = await apiCall({ method, endpoint, data })
+      await apiCall({ method, endpoint, data })
 
       setSubmitting(false)
       this.setState({ submitted: true })

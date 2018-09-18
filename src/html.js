@@ -1,25 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-let stylesStr
-if (process.env.NODE_ENV === `production`) {
-  try {
-    stylesStr = require(`!raw-loader!../public/styles.css`)
-  } catch (e) {
-    console.log(e)
-  }
-}
-
-module.exports = class HTML extends React.Component {
+class HTML extends Component {
   render() {
-    let css
-    if (process.env.NODE_ENV === `production`) {
-      css = (
-        <style
-          id="gatsby-inlined-css"
-          dangerouslySetInnerHTML={{ __html: stylesStr }}
-        />
-      )
-    }
     return (
       <html {...this.props.htmlAttributes}>
         <head>
@@ -31,7 +13,6 @@ module.exports = class HTML extends React.Component {
           />
           <link rel="stylesheet" href="https://use.typekit.net/huf6cwu.css" />
           {this.props.headComponents}
-          {css}
         </head>
         <body {...this.props.bodyAttributes}>
           {this.props.preBodyComponents}
@@ -46,3 +27,5 @@ module.exports = class HTML extends React.Component {
     )
   }
 }
+
+export default HTML
