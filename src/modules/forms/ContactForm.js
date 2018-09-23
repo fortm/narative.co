@@ -55,7 +55,7 @@ const SubmittedScreen = styled.div`
   width: 46rem;
   height: 53rem;
   padding-bottom: 10rem;
-  margin-left: 11rem;
+  margin: 0 auto;
   align-self: flex-end;
   position: relative;
   display: flex;
