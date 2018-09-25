@@ -55,7 +55,7 @@ class CareersPage extends Component {
                       </WelcomeHeader>
                       <MainText>
                         Imagine a place where we get to choose the brands we
-                        believe in, working alongside their team to etablish a
+                        believe in, working alongside their team to establish a
                         seamless integration. Where trust, contribution and
                         quality are at the core of our values.
                       </MainText>
