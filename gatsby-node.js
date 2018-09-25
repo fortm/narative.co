@@ -36,13 +36,12 @@ const onCreateWebpackConfig = ({ actions }) => {
     },
   })
 }
-
 ;('use strict')
 
 const onPostBuild = () => {
   fs.copySync(
-    path.join(__dirname, '../_redirects'),
-    path.join(__dirname, '../public/_redirects')
+    path.join(__dirname, './_redirects'),
+    path.join(__dirname, './public/_redirects')
   )
 }
 
