@@ -20,6 +20,7 @@
 // }
 
 const path = require('path')
+const fs = require('fs-extra')
 
 const onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
@@ -36,6 +37,16 @@ const onCreateWebpackConfig = ({ actions }) => {
   })
 }
 
+;('use strict')
+
+const onPostBuild = () => {
+  fs.copySync(
+    path.join(__dirname, '../_redirects'),
+    path.join(__dirname, '../public/_redirects')
+  )
+}
+
 module.exports = {
   onCreateWebpackConfig,
+  onPostBuild,
 }
