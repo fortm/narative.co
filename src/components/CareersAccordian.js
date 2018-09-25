@@ -98,7 +98,7 @@ const careers = [
         </div>
       </Fragment>
     ),
-    mailTo: 'mailto:info@narative.co?subject=UX Copywriter @ Narative',
+    mailTo: 'mailto:info@narative.co?subject=Communication Designer @ Narative',
   },
   // {
   //   title: 'Product Manager',
