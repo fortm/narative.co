@@ -67,7 +67,7 @@ const careers = [
         </div>
       </Fragment>
     ),
-    mailTo: 'mailto:info@narative.co?subject=Frontend Engineer @ Narative',
+    mailTo: 'mailto:careers@narative.co?subject=Frontend Engineer @ Narative',
   },
   {
     title: 'Communication Designer',
@@ -98,14 +98,15 @@ const careers = [
         </div>
       </Fragment>
     ),
-    mailTo: 'mailto:info@narative.co?subject=Communication Designer @ Narative',
+    mailTo:
+      'mailto:careers@narative.co?subject=Communication Designer @ Narative',
   },
   // {
   //   title: 'Product Manager',
   //   location: 'Remote, Vancouver, Montreal, Toronto',
   //   description:
   //     "Narative is founded by designers, engineers and entrepreneurs with decades of experience at the world's most successful startups. We merge best practices in design, development and strategy to create narratives that empower your brand and product.",
-  //   mailTo: 'mailto:info@narative.co?subject=Product Manager @ Narative',
+  //   mailTo: 'mailto:careers@narative.co?subject=Product Manager @ Narative',
   // },
 ]
 
