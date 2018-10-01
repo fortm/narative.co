@@ -46,6 +46,10 @@ const getMetaTags = ({
       name: 'viewport',
       content: 'width=device-width, initial-scale=1',
     },
+    {
+      name: 'theme-color',
+      content: '#000',
+    },
     { itemprop: 'name', content: title },
     { itemprop: 'description', content: description },
     { itemprop: 'image', content: seoURL(image) },
