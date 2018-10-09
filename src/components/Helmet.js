@@ -78,11 +78,9 @@ const getMetaTags = ({
 }
 
 const Helmet = ({
-  intl,
   title,
   description = seoDescription,
   pathname,
-  path,
   image,
   contentType,
   published,
