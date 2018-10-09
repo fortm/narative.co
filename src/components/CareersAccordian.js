@@ -38,7 +38,6 @@ const fadeInOut = keyframes`
 `
 
 const careers = [
-<<<<<<< HEAD
   // {
   //   title: 'Frontend Engineer',
   //   location: 'Remote, Vancouver, Montreal, Toronto',
@@ -70,70 +69,6 @@ const careers = [
   //   ),
   //   mailTo: 'mailto:info@narative.co?subject=Frontend Engineer @ Narative',
   // },
-=======
-  {
-    title: 'Frontend Engineer',
-    location: 'Remote, Vancouver, Montreal, Toronto',
-    description: (
-      <Fragment>
-        <div>
-          At Narative, we focus on building amazing products for ourselves and
-          the world's best startups. A Frontend Engineer is fundamental in
-          pushing our mission forward, delivering experiences that consistently
-          make our team proud.
-        </div>
-        <div>
-          Above all, we value excellence in design, engineering, strategy, and
-          communication.
-        </div>
-        <div>
-          As a Frontend Engineer at Narative, you'll be working on a wide range
-          of problems that require expertise in building user interfaces. Our
-          goal is to develop a cohesive team unit that collaborates, supports,
-          and encourages the highest standards from one another. Our Frontend
-          works within the React ecosystem and strives to work in the open
-          wherever possible.
-        </div>
-        <div>
-          If you take pride in working on user-focused projects, delivering
-          extraordinary experiences in every detail, you might fit right in.
-        </div>
-      </Fragment>
-    ),
-    mailTo: 'mailto:careers@narative.co?subject=Frontend Engineer @ Narative',
-  },
-  {
-    title: 'Full-Stack Engineer',
-    location: 'Remote, Vancouver, Montreal, Toronto',
-    description: (
-      <Fragment>
-        <div>
-          At Narative, we focus on building amazing products for ourselves and
-          the world's best startups. A Full-Stack Engineer is fundamental in
-          pushing our mission forward, delivering experiences that consistently
-          make our team proud.
-        </div>
-        <div>
-          Above all, we value excellence in design, engineering, strategy, and
-          communication.
-        </div>
-        <div>
-          As a Full-Stack Engineer at Narative, you'll be working on a wide
-          range of problems that require expertise in building user interfaces
-          and backend infrastructure. Our goal is to develop a cohesive team
-          unit that collaborates, supports, and encourages the highest standards
-          from one another. Our Full-Stack engineers work within the React and
-          Node ecosystem, but not are open to all options.
-        </div>
-        <div>
-          If you take pride in working on user-focused projects, delivering
-          extraordinary experiences in every detail, you might fit right in.
-        </div>
-      </Fragment>
-    ),
-    mailTo: 'mailto:careers@narative.co?subject=Full-Stack Engineer @ Narative',
-  },
->>>>>>> 62936ad4b05ab4c937ed4860f0f4000e035adb49
   {
     title: 'Communication Designer',
     location: 'Remote, Vancouver, Montreal, Toronto',
