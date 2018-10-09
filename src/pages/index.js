@@ -3,7 +3,14 @@ import { Link, graphql } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
 
 import { media, transitions } from '@styles'
-import { Container, Helmet, Layout, Logo, SocialLinks } from '@components'
+import {
+  Container,
+  Helmet,
+  Layout,
+  Logo,
+  SocialLinks,
+  Video,
+} from '@components'
 import { ArrowRightIcon } from '../icons/ui'
 
 class IndexPage extends Component {
@@ -13,13 +20,6 @@ class IndexPage extends Component {
     setTimeout(() => {
       this.setState({ animation: 'start' })
     })
-
-    // Required as a workaround for Safari video
-    this.video.muted = true
-    this.video.controls = false
-    this.video.volume = 0
-    this.video.canplay = false
-    this.video.play()
   }
 
   render() {
@@ -76,11 +76,17 @@ class IndexPage extends Component {
                       </ArrowAnimation>
                     </CareersCotnainer>
 
-                    <NarativeVideoContainer>
+                    <NarativeVideoContainer animation={animation}>
                       <NarativeVideo
-                        controls={false}
+                        label="Narative wave video"
+                        webm="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
+                        mp4="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
                         poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
-                        animation={animation}
+                      />
+                      {/* <NarativeVideo
+                        controls={false}
+                        poster=""
+                        
                         innerRef={video => (this.video = video)}
                         muted="muted"
                         role="img"
@@ -89,14 +95,14 @@ class IndexPage extends Component {
                         autoPlay="autoplay"
                       >
                         <source
-                          src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
+                          src=""
                           type="video/webm"
                         />
                         <source
-                          src="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
+                          src=
                           type="video/mp4"
                         />
-                      </NarativeVideo>
+                      </NarativeVideo> */}
                     </NarativeVideoContainer>
                   </RightContainer>
                 </GridContainer>
@@ -197,6 +203,8 @@ const NarativeVideoContainer = styled.div`
   overflow: hidden;
   align-self: flex-end;
 
+  ${transitions.blurIn};
+
   ${media.desktop`
     width: 50rem;
   `};
@@ -219,11 +227,9 @@ const NarativeVideoContainer = styled.div`
   `};
 `
 
-const NarativeVideo = styled.video`
+const NarativeVideo = styled(Video)`
   position: relative;
   height: 53rem;
-
-  ${transitions.blurIn};
 
   ${media.phone`
     height: 30rem;

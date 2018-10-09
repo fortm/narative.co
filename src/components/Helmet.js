@@ -46,6 +46,10 @@ const getMetaTags = ({
       name: 'viewport',
       content: 'width=device-width, initial-scale=1',
     },
+    {
+      name: 'theme-color',
+      content: '#000',
+    },
     { itemprop: 'name', content: title },
     { itemprop: 'description', content: description },
     { itemprop: 'image', content: seoURL(image) },
@@ -59,12 +63,12 @@ const getMetaTags = ({
       name: 'twitter:image',
       content: seoURL(image),
     },
-    { name: 'og:title', content: title },
-    { name: 'og:type', content: contentType },
-    { name: 'og:url', content: url },
-    { name: 'og:image', content: seoURL(image) },
-    { name: 'og:description', content: description },
-    { name: 'og:site_name', content: 'Narative' },
+    { property: 'og:title', content: title },
+    { property: 'og:type', content: contentType },
+    { property: 'og:url', content: url },
+    { property: 'og:image', content: seoURL(image) },
+    { property: 'og:description', content: description },
+    { property: 'og:site_name', content: 'Narative' },
   ]
 
   if (published)

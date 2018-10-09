@@ -4865,9 +4865,9 @@ gatsby-plugin-google-analytics@next:
   dependencies:
     "@babel/runtime" "^7.0.0"
 
-gatsby-plugin-manifest@next:
-  version "2.0.2-rc.1"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-2.0.2-rc.1.tgz#635cf3febe64b2d6420d6e6bbf3ade660dd5288a"
+gatsby-plugin-manifest@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-2.0.4.tgz#c53ed4181bf1f6fef621469ab2b43c67081c76df"
   dependencies:
     "@babel/runtime" "^7.0.0"
     bluebird "^3.5.0"

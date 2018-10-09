@@ -44,6 +44,7 @@ class Video extends Component {
         muted="muted"
         role="img"
         volume="0"
+        playsinline
         innerRef={video => (this.video = video)}
       >
         <source type="video/webm" ref={webm => (this.webm = webm)} />
