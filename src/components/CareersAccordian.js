@@ -159,11 +159,16 @@ class CareersAccordian extends Component {
       return (
         <AccordianContainer empty>
           <AccordianCareersEmail copied={this.state.copied}>
-            <span style={{ display: this.state.copied ? 'none' : 'inline' }}>
-              We currently don't have any available positions, but if you
-              believe you can contribute to Narative send us a message at{' '}
-              <a href="mailto:careers@narative.co">careers@narative.co</a>, we
-              love meeting new people.
+            <span
+              style={{
+                display: this.state.copied ? 'none' : 'inline',
+                maxWidth: '61rem',
+              }}
+            >
+              There are currently no available positions. But if you believe you
+              have something unique to bring to the team, get in touch at{' '}
+              <a href="mailto:careers@narative.co">careers@narative.co</a>. We
+              love meeting new people!
             </span>
             <div
               onClick={() => this.setState({ copied: true })}
@@ -224,7 +229,6 @@ const AccordianContainer = styled.div`
     border-bottom: 1px solid #707173;
     min-height: auto;
     padding-bottom: 3rem;
-    padding-right: 3rem;
   `};
 
   ${media.desktop`
@@ -400,6 +404,7 @@ const ArrowAnimation = styled.div`
 const AccordianCareersEmail = styled.p`
   display: flex;
   justify-content: ${p => (p.copied ? 'flex-end' : 'space-between')};
+  align-items: center;
   margin-top: 3rem;
   color: ${p => p.theme.colors.grey};
   font-weight: 400;
