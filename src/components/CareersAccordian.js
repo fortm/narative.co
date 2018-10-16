@@ -69,38 +69,38 @@ const careers = [
   //   ),
   //   mailTo: 'mailto:info@narative.co?subject=Frontend Engineer @ Narative',
   // },
-  {
-    title: 'Communication Designer',
-    location: 'Remote, Vancouver, Montreal, Toronto',
-    description: (
-      <Fragment>
-        <div>
-          At Narative, we focus on building amazing products for ourselves and
-          the world's best startups.
-        </div>
-        <div>
-          A Communication Designer is fundamental in pushing our mission
-          forward, delivering experiences that consistently make our team proud.
-        </div>
-        <div>
-          Above all, we value excellence in design, engineering, strategy, and
-          communication.
-        </div>
-        <div>
-          Narative's Communication Designer will not only convey our voice,
-          crafting copy to shape our product experiences, they'll work in tandem
-          with our designers/engineers to unpack customer insights. Together,
-          they fashion the appropriate tone for our products, deeply
-          understanding humans on an empathetic level, all while holding current
-          technical-knowledge regarding the industry. Great communication is
-          achieved through a combination of wordsmanship, thoughtful application
-          of design and future-proofed technologies that empower our products.
-        </div>
-      </Fragment>
-    ),
-    mailTo:
-      'mailto:careers@narative.co?subject=Communication Designer @ Narative',
-  },
+  // {
+  //   title: 'Communication Designer',
+  //   location: 'Remote, Vancouver, Montreal, Toronto',
+  //   description: (
+  //     <Fragment>
+  //       <div>
+  //         At Narative, we focus on building amazing products for ourselves and
+  //         the world's best startups.
+  //       </div>
+  //       <div>
+  //         A Communication Designer is fundamental in pushing our mission
+  //         forward, delivering experiences that consistently make our team proud.
+  //       </div>
+  //       <div>
+  //         Above all, we value excellence in design, engineering, strategy, and
+  //         communication.
+  //       </div>
+  //       <div>
+  //         Narative's Communication Designer will not only convey our voice,
+  //         crafting copy to shape our product experiences, they'll work in tandem
+  //         with our designers/engineers to unpack customer insights. Together,
+  //         they fashion the appropriate tone for our products, deeply
+  //         understanding humans on an empathetic level, all while holding current
+  //         technical-knowledge regarding the industry. Great communication is
+  //         achieved through a combination of wordsmanship, thoughtful application
+  //         of design and future-proofed technologies that empower our products.
+  //       </div>
+  //     </Fragment>
+  //   ),
+  //   mailTo:
+  //     'mailto:careers@narative.co?subject=Communication Designer @ Narative',
+  // },
   // {
   //   title: 'Product Manager',
   //   location: 'Remote, Vancouver, Montreal, Toronto',
@@ -155,6 +155,27 @@ class CareersAccordian extends Component {
   }
 
   render() {
+    if (careers.length === 0) {
+      return (
+        <AccordianContainer empty>
+          <AccordianCareersEmail copied={this.state.copied}>
+            <span style={{ display: this.state.copied ? 'none' : 'inline' }}>
+              We currently don't have any available positions, but if you
+              believe you can contribute to Narative send us a message at{' '}
+              <a href="mailto:careers@narative.co">careers@narative.co</a>, we
+              love meeting new people.
+            </span>
+            <div
+              onClick={() => this.setState({ copied: true })}
+              style={{ justifySelf: 'flex-end' }}
+            >
+              <CopyToClipboard textToCopy="careers@narative.co" />
+            </div>
+          </AccordianCareersEmail>
+        </AccordianContainer>
+      )
+    }
+
     return (
       <AccordianContainer>
         <AccordianList>
@@ -196,6 +217,16 @@ const AccordianContainer = styled.div`
   top: -14rem;
   transition: height 0.5s ease;
 
+  ${p =>
+    p.empty &&
+    `
+    border-top: 1px solid #707173;
+    border-bottom: 1px solid #707173;
+    min-height: auto;
+    padding-bottom: 3rem;
+    padding-right: 3rem;
+  `};
+
   ${media.desktop`
     margin:  0 auto 15rem;
     top: -4rem;
@@ -204,12 +235,12 @@ const AccordianContainer = styled.div`
 
   ${media.tablet`
     margin:  0 auto 10rem;
-    top: -4rem;
+    top: ${p => (p.empty ? '0rem' : '-4rem')};
     height: auto;
   `};
 
   ${media.phone`
-    top: -2rem;
+    top: ${p => (p.empty ? '0rem' : '-2rem')};
   `};
 `
 

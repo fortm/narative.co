@@ -10,7 +10,7 @@ import styled from 'styled-components'
  *
  * Usage:
  * <HorizontalScroll
- *   lsit={Array}
+ *   list={Array}
  *   name="item"
  *   render={(item, index) =>
  *    <div>{item.value}</div>
