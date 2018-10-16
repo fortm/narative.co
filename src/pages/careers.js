@@ -50,8 +50,8 @@ class CareersPage extends Component {
                     <TextContainer animation={animation} transitionDelay={300}>
                       <HiringPill>We're hiring</HiringPill>
                       <WelcomeHeader>
-                        Let's build products, together, with the world's best
-                        startups
+                        Let's build products, together, <br />with the world's
+                        best startups
                       </WelcomeHeader>
                       <MainText>
                         Imagine a place where we get to choose the brands we
