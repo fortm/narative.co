@@ -193,7 +193,6 @@ const ImageContainer = styled.div`
       : 0};
 
   ${p => {
-    console.log(p)
     if (p.viewed) {
       return `transition: opacity 0.6s cubic-bezier(0.55, 0.085, 0.68, 0.53),
     filter 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);`

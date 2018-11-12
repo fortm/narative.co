@@ -70,7 +70,7 @@ class IndexPage extends Component {
                   <RightContainer>
                     <CareersCotnainer to="/careers">
                       <ArrowAnimation>
-                        <HighlightText>We're hiring</HighlightText>
+                        <HighlightText>Careers</HighlightText>
                         <ArrowRightIcon color="white" />
                       </ArrowAnimation>
                     </CareersCotnainer>
