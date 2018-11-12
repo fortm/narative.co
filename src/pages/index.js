@@ -45,13 +45,12 @@ class IndexPage extends Component {
                       We're hiring
                     </CareersCotnainerMobile>
                     <TextContainer animation={animation} transitionDelay={600}>
-                      <WelcomeHeader>We develop startups</WelcomeHeader>
+                      <WelcomeHeader>Accelerate your story</WelcomeHeader>
                       <MainText>
-                        Narative was founded by product designers, software
-                        engineers and entrepreneurs with decades of experience
-                        at the world's most successful startups. We merge best
-                        practices in design, engineering and strategy to create
-                        narratives that empower your brand.
+                        Narative brings decades of design, engineering and
+                        marketing expertise directly to your team, so you can
+                        build the products you've always dreamed of — and the
+                        ones you're yet to dream up.
                       </MainText>
                       <ContactText to="/contact">
                         <ArrowAnimation>
