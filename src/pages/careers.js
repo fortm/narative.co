@@ -52,9 +52,7 @@ class CareersPage extends Component {
                     <TextContainer animation={animation} transitionDelay={300}>
                       <HiringPill>We're hiring</HiringPill>
                       <WelcomeHeader>{contentful.heading}</WelcomeHeader>
-                      <MainText>
-                        {contentful.text.content[0].content[0].value}
-                      </MainText>
+                      <MainText>{contentful.text.text}</MainText>
                     </TextContainer>
                     <div />
                   </LeftContainer>
@@ -198,12 +196,7 @@ export const pageQuery = graphql`
           }
           heading
           text {
-            nodeType
-            content {
-              content {
-                value
-              }
-            }
+            text
           }
         }
       }
@@ -212,13 +205,6 @@ export const pageQuery = graphql`
       childImageSharp {
         fluid(maxWidth: 467, quality: 100) {
           ...GatsbyImageSharpFluid_noBase64
-        }
-      }
-    }
-    careersMeta: file(name: { regex: "/careers-meta/" }) {
-      childImageSharp {
-        fixed(width: 1200, quality: 100) {
-          ...GatsbyImageSharpFixed_noBase64
         }
       }
     }

@@ -48,9 +48,7 @@ class IndexPage extends Component {
                     </CareersCotnainerMobile>
                     <TextContainer animation={animation} transitionDelay={600}>
                       <WelcomeHeader>{contentful.heading}</WelcomeHeader>
-                      <MainText>
-                        {contentful.text.content[0].content[0].value}
-                      </MainText>
+                      <MainText>{contentful.text.text}</MainText>
                       <ContactText to="/contact">
                         <ArrowAnimation>
                           <HighlightText>Get in touch</HighlightText>
@@ -134,19 +132,8 @@ export const pageQuery = graphql`
           }
           heading
           text {
-            content {
-              content {
-                value
-              }
-            }
+            text
           }
-        }
-      }
-    }
-    homeMeta: file(name: { regex: "/narative-meta/" }) {
-      childImageSharp {
-        fixed(width: 1200, quality: 100) {
-          ...GatsbyImageSharpFixed_noBase64
         }
       }
     }
