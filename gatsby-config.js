@@ -1,14 +1,15 @@
+require('dotenv').config()
+
 const siteMetadata = {
   title: 'Narative',
 }
 
 const plugins = [
   'gatsby-plugin-react-helmet',
-  'gatsby-plugin-react-next',
   `gatsby-image`,
   `gatsby-plugin-sharp`,
   `gatsby-transformer-sharp`,
-  'gatsby-plugin-netlify-cache',
+  `gatsby-transformer-remark`,
   {
     resolve: `gatsby-plugin-styled-components`,
     options: {
@@ -20,6 +21,21 @@ const plugins = [
     options: {
       name: `assets`,
       path: `${__dirname}/src/assets/`,
+    },
+  },
+  {
+    resolve: `gatsby-source-contentful`,
+    options: {
+      spaceId: process.env.CONTENTFUL_SPACE_ID,
+      accessToken: process.env.CONTENTFUL_PREVIEW_API_KEY,
+      host: `preview.contentful.com`,
+    },
+  },
+  {
+    resolve: `gatsby-source-contentful`,
+    options: {
+      spaceId: process.env.CONTENTFUL_SPACE_ID,
+      accessToken: process.env.CONTENTFUL_DELIVERY_API_KEY,
     },
   },
   {
@@ -48,6 +64,13 @@ const plugins = [
       start_url: '/',
       background_color: '#111216',
       theme_color: '#111216',
+    },
+  },
+  {
+    resolve: 'gatsby-plugin-robots-txt',
+    options: {
+      host: 'https://narative.co',
+      sitemap: 'https://narative.co/sitemap.xml',
     },
   },
   {

@@ -36,7 +36,6 @@ const onCreateWebpackConfig = ({ actions }) => {
     },
   })
 }
-;('use strict')
 
 const onPostBuild = () => {
   fs.copySync(

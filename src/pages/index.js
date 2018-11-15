@@ -24,14 +24,16 @@ class IndexPage extends Component {
 
   render() {
     const { animation } = this.state
+    const contentful = this.props.data.allContentfulHomePage.edges[0].node
 
     return (
       <Layout>
         <Fragment>
           <Helmet
-            title="Narative"
+            title={contentful.seo.title}
+            description={contentful.seo.description}
+            image={contentful.seo.image.file.url}
             pathname={this.props.location.pathname}
-            image={this.props.data.homeMeta.childImageSharp.fixed.src}
           />
           <GradientContainer animation={animation}>
             <Content>
@@ -45,12 +47,9 @@ class IndexPage extends Component {
                       We're hiring
                     </CareersCotnainerMobile>
                     <TextContainer animation={animation} transitionDelay={600}>
-                      <WelcomeHeader>Accelerate your story</WelcomeHeader>
+                      <WelcomeHeader>{contentful.heading}</WelcomeHeader>
                       <MainText>
-                        Narative brings decades of design, engineering and
-                        marketing expertise directly to your team, so you can
-                        build the products you've always dreamed of — and the
-                        ones you're yet to dream up.
+                        {contentful.text.content[0].content[0].value}
                       </MainText>
                       <ContactText to="/contact">
                         <ArrowAnimation>
@@ -121,6 +120,29 @@ export default IndexPage
 
 export const pageQuery = graphql`
   query HomePageQuery {
+    allContentfulHomePage {
+      edges {
+        node {
+          seo {
+            title
+            description
+            image {
+              file {
+                url
+              }
+            }
+          }
+          heading
+          text {
+            content {
+              content {
+                value
+              }
+            }
+          }
+        }
+      }
+    }
     homeMeta: file(name: { regex: "/narative-meta/" }) {
       childImageSharp {
         fixed(width: 1200, quality: 100) {

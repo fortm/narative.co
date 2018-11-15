@@ -30,14 +30,16 @@ class CareersPage extends Component {
 
   render() {
     const { animation } = this.state
+    const contentful = this.props.data.allContentfulCareersPage.edges[0].node
 
     return (
       <Layout>
         <GradientContainer animation={animation}>
           <Helmet
-            title="Careers"
+            title={contentful.seo.title}
+            description={contentful.seo.description}
+            image={contentful.seo.image.file.url}
             pathname={this.props.location.pathname}
-            image={this.props.data.careersMeta.childImageSharp.fixed.src}
           />
           <Content>
             <MobileHero>
@@ -49,15 +51,9 @@ class CareersPage extends Component {
                     </LogoContainer>
                     <TextContainer animation={animation} transitionDelay={300}>
                       <HiringPill>We're hiring</HiringPill>
-                      <WelcomeHeader>
-                        Let's build products, together, <br />with the world's
-                        best startups
-                      </WelcomeHeader>
+                      <WelcomeHeader>{contentful.heading}</WelcomeHeader>
                       <MainText>
-                        Imagine a place where we get to choose the brands we
-                        believe in, working alongside their team to establish a
-                        seamless integration. Where trust, contribution and
-                        quality are at the core of our values.
+                        {contentful.text.content[0].content[0].value}
                       </MainText>
                     </TextContainer>
                     <div />
@@ -188,6 +184,30 @@ export default CareersPage
 
 export const pageQuery = graphql`
   query CareersPageQuery {
+    allContentfulCareersPage {
+      edges {
+        node {
+          seo {
+            title
+            description
+            image {
+              file {
+                url
+              }
+            }
+          }
+          heading
+          text {
+            nodeType
+            content {
+              content {
+                value
+              }
+            }
+          }
+        }
+      }
+    }
     careersHero: file(name: { regex: "/narative-careers-hero/" }) {
       childImageSharp {
         fluid(maxWidth: 467, quality: 100) {
@@ -311,6 +331,10 @@ const WelcomeHeader = styled.h1`
 
   ${media.desktop`
     font-size: 1.8rem;
+  `};
+
+  ${media.phablet`
+    max-width: 280px;
   `};
 `
 
