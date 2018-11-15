@@ -38,104 +38,41 @@ const fadeInOut = keyframes`
   }
 `
 
-const careers = [
-  // {
-  //   title: 'Frontend Engineer',
-  //   location: 'Remote, Vancouver, Montreal, Toronto',
-  //   description: (
-  //     <Fragment>
-  //       <div>
-  //         At Narative, we focus on building amazing products for ourselves and
-  //         the world's best startups. A Frontend Engineer is fundamental in
-  //         pushing our mission forward, delivering experiences that consistently
-  //         make our team proud.
-  //       </div>
-  //       <div>
-  //         Above all, we value excellence in design, engineering, strategy, and
-  //         communication.
-  //       </div>
-  //       <div>
-  //         As a Frontend Engineer at Narative, you'll be working on a wide range
-  //         of problems that require expertise in building user interfaces. Our
-  //         goal is to develop a cohesive team unit that collaborates, supports,
-  //         and encourages the highest standards from one another. Our Frontend
-  //         works within the React ecosystem and strives to work in the open
-  //         wherever possible.
-  //       </div>
-  //       <div>
-  //         If you take pride in working on user-focused projects, delivering
-  //         extraordinary experiences in every detail, you might fit right in.
-  //       </div>
-  //     </Fragment>
-  //   ),
-  //   mailTo: 'mailto:info@narative.co?subject=Frontend Engineer @ Narative',
-  // },
-  // {
-  //   title: 'Communication Designer',
-  //   location: 'Remote, Vancouver, Montreal, Toronto',
-  //   description: (
-  //     <Fragment>
-  //       <div>
-  //         At Narative, we focus on building amazing products for ourselves and
-  //         the world's best startups.
-  //       </div>
-  //       <div>
-  //         A Communication Designer is fundamental in pushing our mission
-  //         forward, delivering experiences that consistently make our team proud.
-  //       </div>
-  //       <div>
-  //         Above all, we value excellence in design, engineering, strategy, and
-  //         communication.
-  //       </div>
-  //       <div>
-  //         Narative's Communication Designer will not only convey our voice,
-  //         crafting copy to shape our product experiences, they'll work in tandem
-  //         with our designers/engineers to unpack customer insights. Together,
-  //         they fashion the appropriate tone for our products, deeply
-  //         understanding humans on an empathetic level, all while holding current
-  //         technical-knowledge regarding the industry. Great communication is
-  //         achieved through a combination of wordsmanship, thoughtful application
-  //         of design and future-proofed technologies that empower our products.
-  //       </div>
-  //     </Fragment>
-  //   ),
-  //   mailTo:
-  //     'mailto:careers@narative.co?subject=Communication Designer @ Narative',
-  // },
-  // {
-  //   title: 'Product Manager',
-  //   location: 'Remote, Vancouver, Montreal, Toronto',
-  //   description:
-  //     "Narative is founded by designers, engineers and entrepreneurs with decades of experience at the world's most successful startups. We merge best practices in design, development and strategy to create narratives that empower your brand and product.",
-  //   mailTo: 'mailto:careers@narative.co?subject=Product Manager @ Narative',
-  // },
-]
+const CareersAccordianItem = ({ career, handleIndexOpen, index, isOpen }) => {
+  const mailTo = `mailTo: 'mailto:info@narative.co?subject=${
+    career.title
+  } @ Narative`
 
-const CareersAccordianItem = ({ career, handleIndexOpen, index, isOpen }) => (
-  <AccordianListItem isOpen={isOpen} onClick={() => handleIndexOpen(index)}>
-    <AccordianListTop>
-      <span>
-        <AccordianListTitle>{career.title}</AccordianListTitle>
-        <AccordianListLocation>{career.location}</AccordianListLocation>
-      </span>
-      <IconContainer isOpen={isOpen} />
-    </AccordianListTop>
+  return (
+    <AccordianListItem isOpen={isOpen} onClick={() => handleIndexOpen(index)}>
+      <AccordianListTop>
+        <span>
+          <AccordianListTitle>{career.title}</AccordianListTitle>
+          <AccordianListLocation>{career.location}</AccordianListLocation>
+        </span>
+        <IconContainer isOpen={isOpen} />
+      </AccordianListTop>
 
-    {isOpen && (
-      <div>
-        <AccordianListDescription>
-          {career.description}
-        </AccordianListDescription>
-        <AccordianMailTo href={career.mailTo}>
-          <ArrowAnimation>
-            Email us about this job
-            <ArrowRightIcon color="white" />
-          </ArrowAnimation>
-        </AccordianMailTo>
-      </div>
-    )}
-  </AccordianListItem>
-)
+      {isOpen && (
+        <div>
+          <AccordianListDescription
+            dangerouslySetInnerHTML={{
+              __html:
+                career.childContentfulCareerDescriptionTextNode
+                  .childMarkdownRemark.html,
+            }}
+          />
+          <AccordianMailTo href={mailTo}>
+            <ArrowAnimation>
+              Email us about this job
+              <ArrowRightIcon color="white" />
+            </ArrowAnimation>
+          </AccordianMailTo>
+        </div>
+      )}
+    </AccordianListItem>
+  )
+}
 
 class CareersAccordian extends Component {
   state = {
@@ -160,15 +97,26 @@ class CareersAccordian extends Component {
       <StaticQuery
         query={graphql`
           query HeadingQuery {
-            site {
-              siteMetadata {
-                title
+            allContentfulCareer(filter: { active: { eq: true } }) {
+              edges {
+                node {
+                  childContentfulCareerDescriptionTextNode {
+                    childMarkdownRemark {
+                      html
+                    }
+                  }
+                  title
+                  location
+                }
               }
             }
           }
         `}
         render={data => {
-          if (careers.length === 0) {
+          const careers =
+            data.allContentfulCareer && data.allContentfulCareer.edges
+          console.log(careers)
+          if (!careers || careers.length === 0) {
             return (
               <AccordianContainer empty>
                 <AccordianCareersEmail copied={this.state.copied}>
@@ -198,11 +146,11 @@ class CareersAccordian extends Component {
           return (
             <AccordianContainer>
               <AccordianList>
-                {careers.map((career, index) => (
+                {careers.map(({ node }, index) => (
                   <CareersAccordianItem
-                    key={career.title}
+                    key={node.title}
                     handleIndexOpen={this.handleIndexOpen}
-                    career={career}
+                    career={node}
                     index={index}
                     isOpen={this.state.openRowIndex === index}
                   />
@@ -322,16 +270,16 @@ const AccordianListLocation = styled.div`
   color: ${p => p.theme.colors.grey};
 `
 
-const AccordianListDescription = styled.p`
+const AccordianListDescription = styled.div`
   position: relative;
   margin-top: 5rem;
-  color: ${p => p.theme.colors.grey};
   margin-bottom: 2.5rem;
   opacity: 0;
   animation: 0.6s ease-out ${fadein} forwards;
 
-  div {
+  p {
     margin-bottom: 2rem;
+    color: ${p => p.theme.colors.grey};
   }
 
   &::before {
