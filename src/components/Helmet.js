@@ -52,7 +52,7 @@ const getMetaTags = ({
     },
     { itemprop: 'name', content: title },
     { itemprop: 'description', content: description },
-    { itemprop: 'image', content: seoURL(image) },
+    { itemprop: 'image', content: image },
     { name: 'description', content: description },
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:site', content: 'Narative' },
@@ -61,12 +61,12 @@ const getMetaTags = ({
     { name: 'twitter:creator', content: twitter || 'Narative' },
     {
       name: 'twitter:image',
-      content: seoURL(image),
+      content: image,
     },
     { property: 'og:title', content: title },
     { property: 'og:type', content: contentType },
     { property: 'og:url', content: url },
-    { property: 'og:image', content: seoURL(image) },
+    { property: 'og:image', content: image },
     { property: 'og:description', content: description },
     { property: 'og:site_name', content: 'Narative' },
   ]
