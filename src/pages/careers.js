@@ -5,6 +5,7 @@ import styled, { keyframes } from 'styled-components'
 
 import { media, transitions } from '@styles'
 import {
+  AnimatorFadeUp,
   CareersAccordian,
   CareersGraph,
   CareersImages,
@@ -16,7 +17,6 @@ import {
   Perks,
   SocialLinks,
 } from '@components'
-import { Section } from '@modules'
 import { ArrowRightIcon } from '../icons/ui'
 
 class CareersPage extends Component {
@@ -30,7 +30,8 @@ class CareersPage extends Component {
 
   render() {
     const { animation } = this.state
-    const contentful = this.props.data.allContentfulCareersPage.edges[0].node
+    const { data, location } = this.props
+    const contentful = data.allContentfulCareersPage.edges[0].node
 
     return (
       <Layout>
@@ -39,7 +40,7 @@ class CareersPage extends Component {
             title={contentful.seo.title}
             description={contentful.seo.description}
             image={contentful.seo.image.file.url}
-            pathname={this.props.location.pathname}
+            pathname={location.pathname}
           />
           <Content>
             <MobileHero>
@@ -59,9 +60,7 @@ class CareersPage extends Component {
                   <RightContainer>
                     <ImageContainer>
                       <NarativeHeroImg
-                        fluid={
-                          this.props.data.careersHero.childImageSharp.fluid
-                        }
+                        fluid={data.careersHero.childImageSharp.fluid}
                       />
                       <ImageTraceContainer>
                         <NarativeHeroOutline />
@@ -89,22 +88,22 @@ class CareersPage extends Component {
               <Container hideOnDesktop>
                 <ImageContainer>
                   <NarativeHeroImg
-                    fluid={this.props.data.careersHero.childImageSharp.fluid}
+                    fluid={data.careersHero.childImageSharp.fluid}
                   />
                   <ImageTraceContainer>
                     <NarativeHeroOutline />
                   </ImageTraceContainer>
                 </ImageContainer>
               </Container>
-              <Section header="Why Narative">
+              <CareerRow header="Why Narative">
                 <SectionCopy maxWidth="69rem">
                   At Narative, nobody has a "boss". Instead, we hold a common
                   goal, where everyone owns executive level decision, regardless
                   of position. We teach and learn from each other everyday, with
                   growth based on trust and relationships.
                 </SectionCopy>
-              </Section>
-              <Section header="Working at Narative">
+              </CareerRow>
+              <CareerRow header="Working at Narative">
                 <FlexColumn>
                   <WhatWeDoContent>
                     <SectionCopy maxWidth="46rem">
@@ -117,15 +116,15 @@ class CareersPage extends Component {
                     <Perks />
                   </WhatWeDoList>
                 </FlexColumn>
-              </Section>
-              <Section header="We have fun">
+              </CareerRow>
+              <CareerRow header="We have fun">
                 <SectionCopy maxWidth="67rem">
                   Since we're all remote, it's always a party when the team gets
                   together. And we like food... a lot.
                 </SectionCopy>
-                <CareersImages images={this.props.data.gallery.edges} />
-              </Section>
-              <Section
+                <CareersImages images={data.gallery.edges} />
+              </CareerRow>
+              <CareerRow
                 header={
                   <div style={{ paddingRight: '2.5rem' }}>
                     Building our future
@@ -140,15 +139,15 @@ class CareersPage extends Component {
                   to fund our own ideas. Displaying our core beliefs through the
                   development of our own products. We call this Narative Labs.
                 </SectionCopy>
-              </Section>
+              </CareerRow>
               <CareersGraph />
 
-              <Section header="Say hello">
+              <CareerRow header="Say hello">
                 <SectionCopy maxWidth="67rem">
                   If you have the devotion, the curiosity and the desire to
                   build great things, you might fit right in.
                 </SectionCopy>
-              </Section>
+              </CareerRow>
               <Container>
                 <CareersAccordian />
               </Container>
@@ -258,6 +257,70 @@ const fadeInOut = keyframes`
   }
 `
 
+const CareerRow = ({ children, header, hideOverflow }) => (
+  <CareerRowSpacer>
+    <AnimatorFadeUp>
+      <Container hideOverflow={hideOverflow}>
+        <CareerRowContainer>
+          <CareerRowHeader>{header}</CareerRowHeader>
+          <CareerRowContent>{children}</CareerRowContent>
+        </CareerRowContainer>
+      </Container>
+    </AnimatorFadeUp>
+  </CareerRowSpacer>
+)
+
+const CareerRowSpacer = styled.div`
+  padding-bottom: 20rem;
+
+  ${media.hdpi`
+    padding-bottom: 15rem;
+  `};
+
+  ${media.desktop`
+    padding-bottom: 10rem;
+  `};
+
+  ${media.tablet`
+    padding-bottom: 5rem;
+  `};
+`
+
+const CareerRowContainer = styled.div`
+  display: flex;
+
+  ${media.desktop`
+    flex-direction: column;
+  `};
+`
+
+const CareerRowHeader = styled.h2`
+  align-self: flex-start;
+  font-size: 3.2rem;
+  color: ${p => p.theme.colors.grey};
+  width: 20rem;
+  min-width: 20rem;
+  line-height: 1.4;
+  padding-bottom: 1rem;
+  margin-right: 6.3rem;
+
+  ${media.desktop`
+    flex-direction: column;
+    margin: 0 0 3.5rem 0;
+  `};
+
+  ${media.tablet`
+    padding-bottom: 0;
+    margin-bottom: 1rem;
+    width: 100%;
+    font-size: 2.4rem;
+  `};
+`
+
+const CareerRowContent = styled.div`
+  flex: 1;
+`
+
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr [col-start]);
@@ -327,7 +390,7 @@ const WelcomeHeader = styled.h1`
 const MainText = styled.p`
   font-size: 1.8rem;
   font-weight: 400;
-  color: ${props => props.theme.colors.grey};
+  color: ${p => p.theme.colors.grey};
   margin-bottom: 2rem;
   max-width: 47rem;
 `
@@ -554,7 +617,7 @@ const ContactText = styled(Link)`
 
   svg {
     margin-left: 1rem;
-    transition: transform 300ms ${props => props.theme.transitions.in};
+    transition: transform 300ms ${p => p.theme.transitions.in};
   }
 `
 
@@ -653,7 +716,7 @@ const Footer = styled.footer`
   justify-content: space-between;
   align-items: center;
   padding-bottom: 5rem;
-  color: ${props => props.theme.colors.grey};
+  color: ${p => p.theme.colors.grey};
 
   ${media.tablet`
     justify-content: center;

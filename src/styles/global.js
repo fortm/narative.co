@@ -63,13 +63,6 @@ export const globalStyles = () => injectGlobal`
     font-weight: 400;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-weight: 700;
-    line-height: 1.3;
-    color ${theme.colors.black};
-    font-family: 'ff-meta-serif-web-pro';
-  }
-
   button,
   a {
     text-decoration: none;

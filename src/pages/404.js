@@ -68,7 +68,7 @@ const TextContainer = styled.div`
 `
 
 const WelcomeHeader = styled.h1`
-  color: ${props => props.theme.colors.grey};
+  color: ${p => p.theme.colors.grey};
   font-size: 3.6rem;
   margin-bottom: 2rem;
 
@@ -80,7 +80,7 @@ const WelcomeHeader = styled.h1`
 const MainText = styled.p`
   font-size: 1.8rem;
   font-weight: 400;
-  color: ${props => props.theme.colors.grey};
+  color: ${p => p.theme.colors.grey};
   margin-bottom: 2rem;
 `
 
@@ -148,7 +148,7 @@ const ContactText = styled(Link)`
 
   svg {
     margin-left: 1rem;
-    transition: transform 300ms ${props => props.theme.transitions.in};
+    transition: transform 300ms ${p => p.theme.transitions.in};
   }
 `
 
@@ -257,7 +257,7 @@ const ContactUsContainer = styled(Link)`
   right: 0;
   top: 0;
   color: white;
-  color: ${props => props.theme.colors.grey};
+  color: ${p => p.theme.colors.grey};
   font-weight: 500;
 
   ${media.desktop`
@@ -272,7 +272,7 @@ const ContactUsContainer = styled(Link)`
     width: 100%;
     transform: scale(0);
     height: 2px;
-    background: ${props => props.theme.colors.grey};
+    background: ${p => p.theme.colors.grey};
     transform-origin: left;
     transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
     transition: all 300ms ease;
@@ -285,7 +285,7 @@ const ContactUsContainer = styled(Link)`
     bottom: -2px;
     width: 12px;
     height: 2px;
-    background: ${props => props.theme.colors.grey};
+    background: ${p => p.theme.colors.grey};
   }
 
   &:hover::before {
@@ -297,7 +297,7 @@ const CopyRightContainer = styled.div`
   display: block;
   font-size: 1.8rem;
   font-weight: 500;
-  color: ${props => props.theme.colors.grey};
+  color: ${p => p.theme.colors.grey};
   ${transitions.fadeUp};
 
   ${media.desktop`
@@ -309,7 +309,7 @@ const CopyRightContainerMobile = styled.div`
   display: none;
   font-size: 1.8rem;
   font-weight: 500;
-  color: ${props => props.theme.colors.grey};
+  color: ${p => p.theme.colors.grey};
   ${transitions.fadeUp};
 
   ${media.desktop`

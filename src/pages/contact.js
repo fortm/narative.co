@@ -5,8 +5,10 @@ import Transition from 'react-transition-group/Transition'
 
 import { media, transitions } from '@styles'
 import { Container, Layout, Logo, Helmet, SocialLinks } from '@components'
-import { Forms } from '@modules'
 import { ChevronDownIcon, ExIcon } from '../icons/ui'
+
+import ContactForm from '../sections/contact/Contact.ContactForm'
+import PhoneForm from '../sections/contact/Contact.PhoneForm'
 
 class ContactPage extends Component {
   state = { animation: '' }
@@ -57,7 +59,7 @@ class ContactPage extends Component {
                     problem, leave us your phone number and our account
                     management team will contact you within one business day.
                   </MainText>
-                  <Forms.PhoneForm />
+                  <PhoneForm />
                 </TextContainer>
                 <CopyRightContainer animation={animation} transitionDelay={300}>
                   <SocialLinks fill="#7a8085" />
@@ -78,7 +80,7 @@ class ContactPage extends Component {
               style={{ position: 'relative', width: '100%', top: '-1.4rem' }}
             >
               <FormContainer animation={animation} transitionDelay={1000}>
-                <Forms.ContactForm />
+                <ContactForm />
               </FormContainer>
             </div>
           </SlideIn>
@@ -230,7 +232,7 @@ const WelcomeHeader = styled.h1`
 const MainText = styled.p`
   font-size: 1.8rem;
   font-weight: 400;
-  color: ${props => props.theme.colors.grey};
+  color: ${p => p.theme.colors.grey};
   margin-bottom: 2rem;
 `
 
@@ -270,7 +272,7 @@ const CopyRightContainer = styled.div`
   display: block;
   font-size: 1.8rem;
   font-weight: 500;
-  color: ${props => props.theme.colors.grey};
+  color: ${p => p.theme.colors.grey};
   ${transitions.fadeUp};
 
   ${media.desktop`
@@ -299,7 +301,7 @@ const FormContainer = styled.div`
 
 const HighlightText = styled.span`
   color: #fff;
-  ${props => props.underline && `text-decoration: underline`};
+  ${p => p.underline && `text-decoration: underline`};
 `
 
 const CloseContainerMobile = styled(Link)`
@@ -345,7 +347,7 @@ const CloseContainer = styled(Link)`
     top: 0;
     border-radius: 50%;
     transform: scale(0.8);
-    transition: all 200ms ${props => props.theme.transitions.in};
+    transition: all 200ms ${p => p.theme.transitions.in};
   }
 
   &:hover::after {

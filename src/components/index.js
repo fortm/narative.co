@@ -5,17 +5,18 @@ import CareersGraph from './CareersGraph'
 import CareersImages from './CareersImages'
 import Container from './Container'
 import CopyToClipboard from './CopyToClipboard'
-import Form from './form'
-import Header from './Header'
+import Form from './From'
+import Heading from './Heading'
 import Helmet from './Helmet'
-import Observer from './Observer'
+import HorizontalScroll from './HorizontalScroll'
+import IntersectionObserver from './IntersectionObserver'
 import Layout from './Layout'
 import Logo from './Logo'
 import Navigation from './Navigation'
 import Perks from './Perks'
 import SocialLinks from './SocialLinks'
-import * as Transitions from './transitions'
-import Video from './video/Video'
+import Transitions from './Transitions'
+import Video from './Video'
 
 export {
   AnimatorFadeUp,
@@ -26,9 +27,10 @@ export {
   Container,
   CopyToClipboard,
   Form,
-  Header,
+  Heading,
   Helmet,
-  Observer,
+  HorizontalScroll,
+  IntersectionObserver,
   Logo,
   Layout,
   Navigation,
