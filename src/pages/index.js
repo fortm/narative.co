@@ -79,26 +79,6 @@ class IndexPage extends Component {
                         mp4="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
                         poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
                       />
-                      {/* <NarativeVideo
-                        controls={false}
-                        poster=""
-                        
-                        innerRef={video => (this.video = video)}
-                        muted="muted"
-                        role="img"
-                        volume="0"
-                        canplay="false"
-                        autoPlay="autoplay"
-                      >
-                        <source
-                          src=""
-                          type="video/webm"
-                        />
-                        <source
-                          src=
-                          type="video/mp4"
-                        />
-                      </NarativeVideo> */}
                     </NarativeVideoContainer>
                   </RightContainer>
                 </GridContainer>
