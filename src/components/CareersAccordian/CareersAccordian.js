@@ -115,7 +115,7 @@ class CareersAccordian extends Component {
         render={data => {
           const careers =
             data.allContentfulCareer && data.allContentfulCareer.edges
-          console.log(careers)
+
           if (!careers || careers.length === 0) {
             return (
               <AccordianContainer empty>

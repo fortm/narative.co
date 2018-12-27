@@ -3,9 +3,7 @@
   "description": "Narative",
   "version": "1.0.0",
   "author": "Dennis BRotzky <dennis@narative.co>",
-  "keywords": [
-    "narative"
-  ],
+  "keywords": ["narative"],
   "scripts": {
     "build": "./node_modules/.bin/gatsby build --prefix-paths",
     "dev": "./node_modules/.bin/gatsby develop",
@@ -22,28 +20,23 @@
     "gatsby-plugin-react-helmet": "^3.0.2",
     "gatsby-plugin-robots-txt": "^1.3.0",
     "gatsby-plugin-sharp": "2.0.7",
-    "gatsby-plugin-styled-components": "^3.0.1",
+    "gatsby-plugin-styled-components": "^3.0.4",
     "gatsby-source-contentful": "^2.0.21",
     "gatsby-source-filesystem": "^2.0.8",
     "gatsby-transformer-remark": "^2.1.12",
     "gatsby-transformer-sharp": "2.1.4",
     "prop-types": "^15.6.1",
     "react": "^16.5.1",
-    "react-click-outside": "^3.0.1",
     "react-device-detect": "^1.5.9",
     "react-dom": "^16.5.1",
     "react-helmet": "^5.2.0",
+    "react-outside-click-handler": "^1.2.2",
     "react-text-mask": "^5.4.0",
     "react-transition-group": "^2.3.1",
-    "styled-components": "^3.2.6"
+    "styled-components": "^4.1.3"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-plugin-styled-components": "^1.5.1",
-    "babel-plugin-transform-regenerator": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-runtime": "^6.26.0",
+    "babel-plugin-styled-components": "^1.10.0",
     "dotenv": "^6.1.0",
     "gatsby-cli": "^1.1.50",
     "prettier": "^1.12.0"

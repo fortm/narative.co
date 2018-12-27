@@ -3,7 +3,7 @@ import { Link, graphql } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
 
 import { media, transitions } from '@styles'
-import { Container, Heading, Helmet, Layout, Logo } from '@components'
+import { Container, Heading, Helmet, Layout } from '@components'
 import { ArrowRightIcon } from '../icons/ui'
 
 class IndexPage extends Component {
@@ -28,33 +28,35 @@ class IndexPage extends Component {
             image={contentful.seo.image.file.url}
             pathname={this.props.location.pathname}
           />
-          <GradientContainer animation={animation}>
-            <Container>
-              <LeftContainer>
-                <LogoContainer to="/">
-                  <Logo onlySymbol />
-                </LogoContainer>
-                <TextContainer animation={animation} transitionDelay={600}>
-                  <Heading.h1>
-                    Narative brings decades of design, marketing and engineering
-                    expertise directly to your team.
-                  </Heading.h1>
-                  <MainText>
-                    We help you build the products you've always dreamed of —
-                    and the ones you're yet to dream up.
-                  </MainText>
-                </TextContainer>
-                <ContactText to="/contact">
-                  <ArrowAnimation>
-                    <HighlightText>Get in touch</HighlightText>
-                    .
-                    <ArrowRightIcon color="white" />
-                  </ArrowAnimation>
-                </ContactText>
-              </LeftContainer>
-              <RightContainer />
-            </Container>
-          </GradientContainer>
+          {/* <GradientContainer animation={animation}> */}
+          <Container>
+            <LeftContainer>
+              <div style={{ top: '-60px' }} />
+              <TextContainer animation={animation}>
+                <Heading.h1>
+                  Narative brings decades of design, marketing and engineering
+                  expertise directly to your team.
+                </Heading.h1>
+                <MainText>
+                  We help you build the products you've always dreamed of — and
+                  the ones you're yet to dream up.
+                </MainText>
+              </TextContainer>
+              <ContactText
+                animation={animation}
+                to="/contact"
+                transitionDelay={500}
+              >
+                <ArrowAnimation>
+                  <HighlightText>Get in touch</HighlightText>
+                  .
+                  <ArrowRightIcon color="white" />
+                </ArrowAnimation>
+              </ContactText>
+            </LeftContainer>
+            <RightContainer />
+          </Container>
+          {/* </GradientContainer> */}
         </Fragment>
       </Layout>
     )
@@ -114,23 +116,9 @@ const fadeInOut = keyframes`
   }
 `
 
-const LogoContainer = styled(Link)`
-  margin-bottom: 0;
-  text-decoration: none;
-
-  ${media.desktop`
-    max-width: 10rem;
-    margin-bottom: 4rem;
-  `};
-
-  ${media.tablet`
-    margin-bottom: 7rem;
-  `};
-`
-
 const TextContainer = styled.div`
-  ${transitions.fadeUp};
   max-width: 640px;
+  ${transitions.fadeUp};
 `
 
 const MainText = styled.p`
@@ -145,6 +133,7 @@ const ContactText = styled(Link)`
   font-size: 1.8rem;
   font-weight: 600;
   color: ${props => props.theme.colors.grey};
+  ${transitions.fadeUp};
 
   ${media.tablet`
     flex-direction: column;
@@ -157,9 +146,11 @@ const ContactText = styled(Link)`
 `
 
 const LeftContainer = styled.div`
-  height: 100vh;
-  padding: 100px 0;
-  max-height: 600px;
+  height: calc(100vh - 130px);
+  min-height: 440px;
+  max-height: 720px;
+  padding: 0 0 100px;
+
   position: relative;
   display: flex;
   flex-direction: column;
@@ -240,21 +231,21 @@ const HighlightText = styled.span`
   ${props => props.underline && `text-decoration: underline`};
 `
 
-const GradientContainer = styled.div`
-  position: relative;
-  min-height: 100vh;
+// const GradientContainer = styled.div`
+//   position: relative;
+//   min-height: 100vh;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(226.45deg, #191b21 8.28%, #111216 61.84%);
-    pointer-events: none;
-    transition: all 1.5s ease;
-    z-index: 0;
-    opacity: ${p => (p.animation ? 0 : 1)};
-  }
-`
+//   &::before {
+//     content: '';
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     height: 100%;
+//     width: 100%;
+//     background: linear-gradient(226.45deg, #191b21 8.28%, #111216 61.84%);
+//     pointer-events: none;
+//     transition: all 1.5s ease;
+//     z-index: 0;
+//     opacity: ${p => (p.animation ? 0 : 1)};
+//   }
+// `

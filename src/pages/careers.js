@@ -47,9 +47,9 @@ class CareersPage extends Component {
               <Container>
                 <GridContainer>
                   <LeftContainer>
-                    <LogoContainer to="/">
+                    {/* <LogoContainer to="/">
                       <Logo />
-                    </LogoContainer>
+                    </LogoContainer> */}
                     <TextContainer animation={animation} transitionDelay={300}>
                       <HiringPill>We're hiring</HiringPill>
                       <WelcomeHeader>{contentful.heading}</WelcomeHeader>

@@ -1,4 +1,4 @@
-import { injectGlobal } from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 import { theme } from './theme'
 
 /**
@@ -7,7 +7,7 @@ import { theme } from './theme'
  * styled-components theory. This is where we define fronts, global resets,
  * and the very base styles.
  */
-export const globalStyles = () => injectGlobal`
+export const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: '-apple-system',
     'BlinkMacSystemFont',
@@ -158,6 +158,7 @@ export const globalStyles = () => injectGlobal`
     appearance: none;
     border: none;
     outline: none;
+    background: transparent;
   }
 
   table {

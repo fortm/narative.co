@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import enhanceWithClickOutside from 'react-click-outside'
+import OutsideClickHandler from 'react-outside-click-handler'
+
 import { Transitions } from '@components'
 
 const InputContainer = styled.div`
@@ -150,9 +151,7 @@ class Select extends Component {
     selectedValue: '',
   }
 
-  handleClickOutside(event) {
-    this.setState({ isOpened: false })
-  }
+  handleClickOutside() {}
 
   toggleSelectDropdown = event => {
     event.preventDefault()
@@ -184,46 +183,50 @@ class Select extends Component {
     const { isOpened, selectedValue } = this.state
 
     return (
-      <InputContainer onClick={event => this.toggleSelectDropdown(event)}>
-        <SelectBorder>
-          <LabelAnimation selectedValue={selectedValue}>
-            <StyledLabel>{label}</StyledLabel>
-          </LabelAnimation>
-          <LabelAnimation>
-            {selectedValue && (
-              <StyledLabel selectedValue={selectedValue}>
-                {selectedValue}
-              </StyledLabel>
-            )}
-          </LabelAnimation>
-          <SelectArrowButton
-            type="button"
-            tabIndex="0"
-            onFocus={this.handleFocus}
-            onBlur={this.handleBlur}
-            innerRef={elem => (this.btn = elem)}
-          />
-          <SelectBorderActive />
-          <SelectArrow />
-          <StyledSelect {...field} {...this.props} value={selectedValue}>
-            <Transitions.FadeIn in={isOpened}>
-              <SelectOptionContainer isOpened={isOpened} role="menu">
-                {options.map(option => {
-                  return (
-                    <SelectOption
-                      key={option.id}
-                      role="menuitem"
-                      onClick={() => this.handleSelectClick(option.value)}
-                    >
-                      {option.value}
-                    </SelectOption>
-                  )
-                })}
-              </SelectOptionContainer>
-            </Transitions.FadeIn>
-          </StyledSelect>
-        </SelectBorder>
-      </InputContainer>
+      <OutsideClickHandler
+        onOutsideClick={() => this.setState({ isOpened: false })}
+      >
+        <InputContainer onClick={event => this.toggleSelectDropdown(event)}>
+          <SelectBorder>
+            <LabelAnimation selectedValue={selectedValue}>
+              <StyledLabel>{label}</StyledLabel>
+            </LabelAnimation>
+            <LabelAnimation>
+              {selectedValue && (
+                <StyledLabel selectedValue={selectedValue}>
+                  {selectedValue}
+                </StyledLabel>
+              )}
+            </LabelAnimation>
+            <SelectArrowButton
+              type="button"
+              tabIndex="0"
+              onFocus={this.handleFocus}
+              onBlur={this.handleBlur}
+              innerRef={elem => (this.btn = elem)}
+            />
+            <SelectBorderActive />
+            <SelectArrow />
+            <StyledSelect {...field} {...this.props} value={selectedValue}>
+              <Transitions.FadeIn in={isOpened}>
+                <SelectOptionContainer isOpened={isOpened} role="menu">
+                  {options.map(option => {
+                    return (
+                      <SelectOption
+                        key={option.id}
+                        role="menuitem"
+                        onClick={() => this.handleSelectClick(option.value)}
+                      >
+                        {option.value}
+                      </SelectOption>
+                    )
+                  })}
+                </SelectOptionContainer>
+              </Transitions.FadeIn>
+            </StyledSelect>
+          </SelectBorder>
+        </InputContainer>
+      </OutsideClickHandler>
     )
   }
 }
@@ -236,4 +239,4 @@ Select.propTypes = {
   options: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
-export default enhanceWithClickOutside(Select)
+export default Select
