@@ -64,7 +64,6 @@ class Navigation extends Component {
       document.documentElement.clientWidth ||
       document.body.clientWidth
 
-    console.log(this.state.active, !this.state.active)
     if (this.state.active) {
       document.body.style.overflow = 'hidden'
     } else {
@@ -209,7 +208,7 @@ const NavContainer = styled.div`
   display: flex;
   justify-content: space-between;
 
-  ${media.phablet`
+  ${media.tablet`
     padding-top: 50px;
   `};
 `

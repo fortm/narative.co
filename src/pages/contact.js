@@ -31,12 +31,14 @@ class ContactPage extends Component {
   }
 
   exitContactPage = () => {
+    const pathname = localStorage.getItem('previousPath') || '/'
+
     this.setState({
       animation: '',
     })
 
     setTimeout(() => {
-      navigate('/')
+      navigate(pathname)
     }, 550)
   }
 
@@ -140,7 +142,6 @@ const SlideInContainer = styled.div`
   z-index: 0;
   position: absolute;
   overflow-y: scroll;
-  box-shadow: rgba(0, 0, 0, 0.4) 40px 0px 40px -40px inset;
   transition: transform 0.7s cubic-bezier(0.215, 0.61, 0.355, 1);
   will-change: transform;
   transform: translateX(100%);
@@ -148,7 +149,7 @@ const SlideInContainer = styled.div`
   border-top-right-radius: 20px;
   background: #fff;
 
-  ${media.desktop`
+  ${media.tablet`
     width: 100%;
     position: relative;
     top: 300px;
@@ -194,6 +195,7 @@ const FixedElement = styled.div`
   right: 0;
   width: 100%;
 `
+
 const PhoneFormContainer = styled.div`
   position: relative;
   display: flex;
@@ -214,14 +216,9 @@ const FormContainer = styled.div`
   width: 100%;
   background: #fff;
 
-  ${media.tablet`
+  ${media.phablet`
     padding: 2rem;
     width: 46rem;
-  `};
-
-  ${media.desktop`
-    padding: 0;
-    width: 100%;
   `};
 `
 
@@ -250,7 +247,7 @@ const CloseContainer = styled.button`
   transition: transform 0.7s cubic-bezier(0.215, 0.61, 0.355, 1)
     ${p => (p.animation ? '0.7s' : '0s')};
 
-  ${media.desktop`
+  ${media.tablet`
     display: none;
   `};
 
