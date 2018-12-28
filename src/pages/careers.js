@@ -13,7 +13,6 @@ import {
   CopyToClipboard,
   Helmet,
   Layout,
-  Logo,
   Perks,
   SocialLinks,
 } from '@components'
@@ -47,9 +46,6 @@ class CareersPage extends Component {
               <Container>
                 <GridContainer>
                   <LeftContainer>
-                    {/* <LogoContainer to="/">
-                      <Logo />
-                    </LogoContainer> */}
                     <TextContainer animation={animation} transitionDelay={300}>
                       <HiringPill>We're hiring</HiringPill>
                       <WelcomeHeader>{contentful.heading}</WelcomeHeader>
@@ -337,20 +333,6 @@ const GridContainer = styled.div`
 
   ${media.phone`
     width: 100%;
-  `};
-`
-
-const LogoContainer = styled(Link)`
-  max-height: 2.3rem;
-  max-width: 13.059rem;
-  margin-bottom: 0;
-  text-decoration: none;
-
-  ${media.desktop`
-    max-width: 10rem;
-    margin-bottom: 4rem;
-    transition-delay: 0ms !important;
-    transition-duration: 500ms !important;
   `};
 `
 

@@ -10,6 +10,10 @@ import { CheckIcon } from '../../icons/ui'
 const validate = (values, props) => {
   let errors = {}
 
+  if (values.phone && values.phone.match(/\d/g).length !== 10) {
+    errors.phone = 'Full number required'
+  }
+
   if (!values.phone) {
     errors.phone = 'Required'
   }
@@ -53,7 +57,8 @@ class PhoneForm extends Component {
           <Formik
             onSubmit={this.handleSubmit}
             validate={validate}
-            render={props => (
+            initialValues={{ phone: '' }}
+            render={() => (
               <StyledFormikForm>
                 <FormSection>
                   <Field

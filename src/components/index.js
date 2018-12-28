@@ -1,5 +1,6 @@
 import AnimatorFadeUp from './AnimatorFadeUp'
 import Button from './Button'
+import ButtonArrow from './Button/Button.Arrow'
 import CareersAccordian from './CareersAccordian'
 import CareersGraph from './CareersGraph'
 import CareersImages from './CareersImages'
@@ -21,6 +22,7 @@ import Video from './Video'
 export {
   AnimatorFadeUp,
   Button,
+  ButtonArrow,
   CareersAccordian,
   CareersGraph,
   CareersImages,

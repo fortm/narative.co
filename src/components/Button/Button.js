@@ -31,7 +31,8 @@ const SpinnerDot = styled.span`
     animation-delay: 0.4s;
   }
 `
-const Spinner = () => (
+
+export const Spinner = () => (
   <SpinnerContainer>
     <SpinnerDot>.</SpinnerDot>
     <SpinnerDot>.</SpinnerDot>

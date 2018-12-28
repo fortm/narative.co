@@ -187,7 +187,7 @@ export const GlobalStyles = createGlobalStyle`
     &::-moz-placeholder,
     &:-ms-input-placeholder, 
     &::-webkit-input-placeholder {
-      color: red;
+      color: rgba(0, 0, 0, 0.25);
     }
 
     &[type="number"] {

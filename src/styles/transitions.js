@@ -44,7 +44,7 @@ const fadeUp = css`
   `};
 
   transition: all 800ms
-    ${p => (p.transitionDelay ? `${p.transitionDelay}ms` : '400ms')}
+    ${p => (p.transitionDelay ? `${p.transitionDelay}ms` : '')}
     cubic-bezier(0.694, 0, 0.335, 1);
 `
 

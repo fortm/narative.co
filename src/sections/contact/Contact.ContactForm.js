@@ -3,146 +3,19 @@ import Link from 'gatsby-link'
 import styled, { keyframes } from 'styled-components'
 import { Formik, Form as FormikForm, Field } from 'formik'
 
-import { Button, Form } from '@components'
+import {
+  Button,
+  ButtonArrow,
+  Container,
+  Heading,
+  Form,
+  SocialLinks,
+} from '@components'
 import { media } from '@styles'
 import { apiCall } from '@utils'
 import { SubmittedCheckIcon } from '../../icons/ui'
 
-const fadeIn = keyframes`
-  from { opacity: 0; }
-  to { opacity: 1; }
-`
-
-const FormHeader = styled.h3`
-  font-size: 1.8rem;
-  margin-bottom: 3rem;
-  color: ${props => props.theme.colors.grey};
-`
-
-const FormSection = styled.fieldset`
-  margin-bottom: ${props => (props.spacing === 'large' ? '5rem' : '3.5rem')};
-
-  ${media.hdpi`
-  margin-bottom: ${props => (props.spacing === 'large' ? '4rem' : '3rem')};
-  
-  `};
-`
-
-const StyledFormikForm = styled(FormikForm)`
-  align-self: flex-end;
-  position: relative;
-  width: 46rem;
-  padding-bottom: 10rem;
-  margin: 0 auto;
-
-  ${media.hdpi`
-    margin-left: 0;
-    width: 100%;
-    padding: 0 4rem 5rem;
-  `};
-
-  ${media.desktop`
-    width: 50rem;
-    margin: 0 auto;
-    padding: 0 0 5rem;
-  `};
-
-  ${media.phablet`
-    width: 100%;
-  `};
-`
-
-const SubmittedScreen = styled.div`
-  width: 46rem;
-  height: 53rem;
-  padding-bottom: 10rem;
-  margin: 0 auto;
-  align-self: flex-end;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  flex-direction: column;
-  opacity: 0;
-  animation: ${fadeIn} 50ms 500ms ${props => props.theme.transitions.in}
-    forwards;
-
-  ${media.mdpi`
-    padding-bottom: 0;
-    margin: 0 auto;
-  `};
-
-  svg {
-    margin-bottom: 3rem;
-  }
-`
-
-const SubmittedHeader = styled.h2`
-  font-size: 3.2rem;
-  line-height: 1;
-  margin-bottom: 3rem;
-
-  ${media.mdpi`
-    font-size: 2.8rem;
-  `};
-`
-
-const SubmittedText = styled.p`
-  color: ${props => props.theme.colors.grey};
-  font-size: 1.6rem;
-  max-width: 220px;
-  margin-bottom: 3rem;
-`
-
-const SubmittedBackButton = styled(Link)`
-  text-decoration: underline;
-  font-size: 1.6rem;
-  font-weight: 500;
-`
-
-const selectOptions = [
-  {
-    label: 'Startup',
-    id: 'startup',
-    value: 'Startup',
-  },
-  {
-    label: 'Growing business',
-    id: 'growingBusiness',
-    value: 'Growing business',
-  },
-  {
-    label: 'Enterprise',
-    id: 'enterprise',
-    value: 'Enterprise',
-  },
-]
-
-const radioOptions = [
-  {
-    label: 'Product and Web',
-    id: 'productAndWeb',
-    value: 'Product and Web',
-  },
-  {
-    label: 'Branding',
-    id: 'branding',
-    value: 'Branding',
-  },
-  {
-    label: 'Editorial',
-    id: 'editorial',
-    value: 'Editorial',
-  },
-  {
-    label: 'Other',
-    id: 'other',
-    value: 'Other',
-  },
-]
-
-const validate = (values, props) => {
+const validate = values => {
   let errors = {}
 
   if (!values.name) {
@@ -155,26 +28,40 @@ const validate = (values, props) => {
     errors.email = 'Invalid email address'
   }
 
+  if (!values.details) {
+    errors.details = 'Required'
+  }
+  if (values.details.length > 289) {
+    errors.details = 'Short and sweet, please!'
+  }
+
   return errors
 }
 
 class ContactForm extends Component {
   state = {
+    animation: '',
     submitted: false,
     firstName: '',
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        animation: 'start',
+      })
+    })
+  }
+
   handleSubmit = async (values, { setSubmitting }) => {
-    const { name, email, companySize, project, details } = values
+    const { name, email, details } = values
 
     const method = 'post'
     const endpoint = '/contact/proposal'
     const data = {
-      companySize,
       email,
       details,
       name,
-      project,
     }
 
     try {
@@ -188,64 +75,220 @@ class ContactForm extends Component {
   }
 
   render() {
+    const { animation, firstName, submitted } = this.state
+
     return (
-      <div>
-        {this.state.submitted ? (
+      <Container>
+        {submitted ? (
           <SubmittedScreen>
             <SubmittedCheckIcon />
-            <SubmittedHeader>Thank you, {this.state.firstName}</SubmittedHeader>
+            <SubmittedHeader>Thank you, {firstName}</SubmittedHeader>
             <SubmittedText>
               Our business development team will get back to you shortly.
             </SubmittedText>
             <SubmittedBackButton to="/">Go back</SubmittedBackButton>
+            <SocialLinksContainer>
+              <SocialLinks fill="black" />
+            </SocialLinksContainer>
+            <CopyRightContainer>
+              © {new Date().getFullYear()} Narative Studio Inc.
+            </CopyRightContainer>
           </SubmittedScreen>
         ) : (
           <Formik
             onSubmit={this.handleSubmit}
             validate={validate}
+            initialValues={{
+              name: '',
+              email: '',
+              details: '',
+            }}
             render={props => {
               return (
                 <StyledFormikForm>
-                  <FormSection>
-                    <FormHeader>About you</FormHeader>
-                    <Field
-                      component={Form.Text}
-                      label="Full name"
-                      name="name"
-                    />
-                    <Field component={Form.Text} label="Email" name="email" />
-                    <Field
-                      component={Form.Select}
-                      label="Size of company"
-                      name="companySize"
-                      options={selectOptions}
-                    />
+                  <FormSection
+                    animation={animation}
+                    delay={1100}
+                    spacing="large"
+                  >
+                    <FormHeader morePadding>Tell us about you</FormHeader>
+                    <span>
+                      <Field
+                        component={Form.Text}
+                        label="your name"
+                        name="name"
+                      />
+                      <Field component={Form.Text} label="email" name="email" />
+                    </span>
                   </FormSection>
-                  <FormSection spacing="large">
-                    <FormHeader>About your project</FormHeader>
-                    <Field
-                      component={Form.Radio}
-                      options={radioOptions}
-                      name="project"
-                    />
-                  </FormSection>
-                  <FormSection>
-                    <FormHeader>Give us the details</FormHeader>
+                  <FormSection animation={animation} delay={1200}>
+                    <FormHeader>Tell us about your idea</FormHeader>
                     <Field
                       component={Form.Textarea}
-                      label="Tell us a bit more"
+                      label="give us a short description"
                       name="details"
+                      rows={4}
                     />
                   </FormSection>
-                  <Button isSubmitting={props.isSubmitting} text="Submit" />
+                  <ButtonContainer animation={animation} delay={1300}>
+                    <ButtonArrow
+                      isSubmitting={props.isSubmitting}
+                      color="black"
+                      text="Submit"
+                      type="submit"
+                    />
+                  </ButtonContainer>
+                  <MobileButtonContainer>
+                    <Button isSubmitting={props.isSubmitting} text="Submit" />
+                    <MobileCopyRightContainer>
+                      © {new Date().getFullYear()} Narative Studio Inc.
+                    </MobileCopyRightContainer>
+                  </MobileButtonContainer>
                 </StyledFormikForm>
               )
             }}
           />
         )}
-      </div>
+      </Container>
     )
   }
 }
 
 export default ContactForm
+
+const fadeIn = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`
+
+const FormHeader = styled(Heading.h2)`
+  color: #000;
+  width: 265px;
+  padding-right: ${p => (p.morePadding ? '100px' : '76px')};
+
+  ${media.tablet`
+    width: 100%;
+    padding: 0;
+    margin-bottom: 10px;
+    color: ${p => p.theme.colors.grey};
+  `};
+`
+
+const FormSection = styled.div`
+  display: flex;
+  margin-bottom: ${p => (p.spacing === 'large' ? '6rem' : '2.5rem')};
+
+  ${media.tablet`
+    margin-bottom: ${p => (p.spacing === 'large' ? '2rem' : '1rem')};
+    flex-direction: column;
+  `};
+
+  transition: opacity 0.5s linear ${p => p.delay}ms,
+    transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.9) ${p => p.delay}ms;
+  opacity: ${p => (p.animation ? 1 : 0)};
+  transform: ${p => (p.animation ? 'translateY(0)' : 'translateY(20px)')};
+`
+
+const StyledFormikForm = styled(FormikForm)`
+  align-self: flex-end;
+  position: relative;
+  padding-bottom: 10rem;
+  margin: 0 auto;
+
+  ${media.hdpi`
+    margin-left: 0;
+    width: 100%;
+    padding: 0 4rem 5rem;
+  `};
+
+  ${media.desktop`
+    margin: 0 auto;
+    padding: 0 0 5rem;
+  `};
+
+  ${media.phablet`
+    width: 100%;
+  `};
+`
+
+const SubmittedScreen = styled.div`
+  width: 46rem;
+  padding-bottom: 10rem;
+  margin: 0 auto;
+  align-self: flex-end;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  opacity: 0;
+  animation: ${fadeIn} 50ms 500ms ${p => p.theme.transitions.in} forwards;
+
+  ${media.mdpi`
+    padding-bottom: 0;
+    margin: 0 auto;
+  `};
+
+  svg {
+    margin-bottom: 3rem;
+  }
+`
+
+const SubmittedHeader = styled(Heading.h2)`
+  margin-bottom: 3rem;
+  color: #000;
+`
+
+const SubmittedText = styled.p`
+  color: ${p => p.theme.colors.grey};
+  font-size: 2.2rem;
+  max-width: 275px;
+  margin-bottom: 3rem;
+`
+
+const SubmittedBackButton = styled(Link)`
+  font-size: 18px;
+  font-weight: 600;
+`
+
+const SocialLinksContainer = styled.div`
+  width: 100%;
+  max-width: 240px;
+  display: flex;
+  margin: 100px auto 50px;
+  justify-content: space-between;
+`
+
+const CopyRightContainer = styled.div`
+  font-size: 16px;
+  color: ${p => p.theme.colors.grey};
+`
+
+const MobileCopyRightContainer = styled.div`
+  font-size: 16px;
+  color: ${p => p.theme.colors.grey};
+  text-align: center;
+  margin: 45px auto 25px;
+`
+
+const ButtonContainer = styled.div`
+  margin-left: 265px;
+  padding-bottom: 50px;
+  transition: opacity 0.5s linear ${p => p.delay}ms,
+    transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.9) ${p => p.delay}ms;
+  opacity: ${p => (p.animation ? 1 : 0)};
+  transform: ${p => (p.animation ? 'translateY(0)' : 'translateY(20px)')};
+
+  ${media.tablet`
+    display: none;
+  `};
+`
+
+const MobileButtonContainer = styled.div`
+  display: none;
+
+  ${media.tablet`
+    display: block;
+  `};
+`

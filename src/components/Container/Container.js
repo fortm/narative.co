@@ -10,7 +10,7 @@ const Container = styled.div`
   display: ${p => (p.hideOnDesktop ? 'none' : 'block')};
 
   ${media.desktop`
-    max-width: 54rem;
+    max-width: 100%;
     display: ${p => (p.hideOnDesktop ? 'none' : 'block')};
   `};
 

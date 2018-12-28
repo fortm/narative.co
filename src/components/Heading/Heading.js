@@ -40,16 +40,18 @@ const constants = {
     fontsize: '3.2rem',
     fontsizeMobile: '2.2rem',
     lineheight: 1.1,
+    lineheightMobile: 1.4,
   },
   h2: {
-    fontsize: '2.4rem',
-    fontFamily: "'ff-meta-serif-web-pro', serif",
+    fontsize: '3.2rem',
     fontsizeMobile: '1.8rem',
-    lineheight: 1.1,
+    fontFamily: "'ff-meta-serif-web-pro', serif",
+    lineheight: 1.2,
   },
   h3: {
-    fontsize: '1.8rem',
-    fontsizeMobile: '1.4rem',
+    fontsize: '2.4rem',
+    fontFamily: "'ff-meta-serif-web-pro', serif",
+    fontsizeMobile: '2.4rem',
     lineheight: 1.45,
   },
   h4: {
@@ -82,13 +84,15 @@ const styles = {
     font-size: ${constants.h1.fontsize};
     line-height: ${constants.h1.lineheight};
 
-    ${commonStyles(2, 400)} ${media.phablet` font-size: ${
-      constants.h1.fontsizeMobile
-    }; `};
+    ${commonStyles(2, 400)} ${media.phablet`
+      font-size: ${constants.h1.fontsizeMobile};
+      line-height: ${constants.h1.lineheightMobile};
+    `};
   `,
   h2: css`
     font-size: ${constants.h2.fontsize};
     line-height: ${constants.h2.lineheight};
+    font-family: ${constants.h2.fontFamily};
 
     ${commonStyles(2)} ${media.phablet` font-size: ${
       constants.h2.fontsizeMobile
@@ -97,6 +101,7 @@ const styles = {
   h3: css`
     font-size: ${constants.h3.fontsize};
     line-height: ${constants.h3.lineheight};
+    font-family: ${constants.h2.fontFamily};
 
     ${commonStyles(0.5)} ${media.phablet` font-size: ${
       constants.h3.fontsizeMobile

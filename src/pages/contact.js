@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react'
-import { Link, graphql } from 'gatsby'
+import { graphql, navigate } from 'gatsby'
 import styled from 'styled-components'
 import Transition from 'react-transition-group/Transition'
 
 import { media, transitions } from '@styles'
-import { Container, Layout, Logo, Helmet, SocialLinks } from '@components'
-import { ChevronDownIcon, ExIcon } from '../icons/ui'
+import { Container, Layout, Heading, Helmet } from '@components'
+import { ExIcon } from '../icons/ui'
 
 import ContactForm from '../sections/contact/Contact.ContactForm'
 import PhoneForm from '../sections/contact/Contact.PhoneForm'
@@ -14,22 +14,39 @@ class ContactPage extends Component {
   state = { animation: '' }
 
   componentDidMount() {
-    const animated = localStorage.getItem('animated')
-
     setTimeout(() => {
       this.setState({
         animation: 'start',
-        animated,
       })
     })
 
-    if (!animated) {
-      localStorage.setItem('animated', true)
+    window.addEventListener('keydown', this.handleEscKeyPress)
+  }
+
+  componentWillUnmount() {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('keydown', this.handleEscKeyPress)
+    }
+  }
+
+  exitContactPage = () => {
+    this.setState({
+      animation: '',
+    })
+
+    setTimeout(() => {
+      navigate('/')
+    }, 550)
+  }
+
+  handleEscKeyPress = ({ key }) => {
+    if (key === 'Escape') {
+      this.exitContactPage()
     }
   }
 
   render() {
-    const { animation, animated } = this.state
+    const { animation } = this.state
 
     return (
       <Layout>
@@ -40,51 +57,24 @@ class ContactPage extends Component {
             image={this.props.data.contactMeta.childImageSharp.fixed.src}
           />
           <Container>
-            <GridContainer>
-              <LeftContainer>
-                <CloseContainerMobile to="/" animation={animation}>
-                  <ExIcon color="white" />
-                </CloseContainerMobile>
-                <LogoContainer to="/" animated={animated} animation={animation}>
-                  <Logo />
-                </LogoContainer>
-                <TextContainer animation={animation} transitionDelay={300}>
-                  <WelcomeHeader>How can we help?</WelcomeHeader>
-                  <MainText>
-                    <HighlightText>Tell us a bit</HighlightText> about your
-                    project or idea.
-                  </MainText>
-                  <MainText>
-                    <HighlightText>No time to fill a form?</HighlightText> No
-                    problem, leave us your phone number and our account
-                    management team will contact you within one business day.
-                  </MainText>
-                  <PhoneForm />
-                </TextContainer>
-                <CopyRightContainer animation={animation} transitionDelay={300}>
-                  <SocialLinks fill="#7a8085" />
-                </CopyRightContainer>
-
-                <MobileArrowContainer
-                  animation={animation}
-                  transitionDelay={500}
-                >
-                  <ChevronDownIcon />
-                </MobileArrowContainer>
-              </LeftContainer>
-              <RightContainer />
-            </GridContainer>
+            <PhoneFormContainer>
+              <TextContainer animation={animation} transitionDelay={300}>
+                <WelcomeHeader>How can we help?</WelcomeHeader>
+                <MainText>
+                  <HighlightText>No time to fill a form?</HighlightText> No
+                  problem, leave us your phone number and we'll call you back
+                  within 24 hours.
+                </MainText>
+                <PhoneForm />
+              </TextContainer>
+            </PhoneFormContainer>
           </Container>
           <SlideIn in={animation === 'start'}>
-            <div
-              style={{ position: 'relative', width: '100%', top: '-1.4rem' }}
-            >
-              <FormContainer animation={animation} transitionDelay={1000}>
-                <ContactForm />
-              </FormContainer>
-            </div>
+            <FormContainer animation={animation} transitionDelay={1000}>
+              <ContactForm />
+            </FormContainer>
           </SlideIn>
-          <CloseContainer to="/">
+          <CloseContainer onClick={this.exitContactPage} animation={animation}>
             <ExIcon />
           </CloseContainer>
         </Fragment>
@@ -110,108 +100,73 @@ export const pageQuery = graphql`
 const duration = 600
 
 const defaultStyle = {
-  opacity: 0,
+  opacity: 1,
+  transform: 'translateY(100%)',
 }
 
 const transitionStyles = {
-  entering: { opacity: 0, transform: 'translateX(100%)' },
-  entered: { opacity: 1, transform: 'translateX(0)' },
-  exiting: { opacity: 1, transform: 'translateX(0)' },
-  exited: { opacity: 0, transform: 'translateX(100%)' },
+  entering: { transform: 'translateY(100vh)' },
+  entered: { transform: 'translateY(40px)' },
+  exiting: { transform: 'translateY(100vh)' },
+  exited: { transform: 'translateY(100vh)' },
+}
+
+const SlideIn = ({ in: inProp, children }) => {
+  return (
+    <Transition in={inProp} timeout={duration}>
+      {state => (
+        <SlideInContainer
+          style={{
+            ...defaultStyle,
+            ...transitionStyles[state],
+          }}
+        >
+          {children}
+        </SlideInContainer>
+      )}
+    </Transition>
+  )
 }
 
 const SlideInContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 50%;
-  height: 100%;
+  width: 100%;
+  height: calc(100vh - 40px);
   top: 0px;
   right: 0px;
-  opacity: 0;
   padding: 0;
   z-index: 0;
   position: absolute;
   overflow-y: scroll;
   box-shadow: rgba(0, 0, 0, 0.4) 40px 0px 40px -40px inset;
-  transition: all 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
+  transition: transform 0.7s cubic-bezier(0.215, 0.61, 0.355, 1);
+  will-change: transform;
   transform: translateX(100%);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
   background: #fff;
 
   ${media.desktop`
     width: 100%;
     position: relative;
-    transform: translateX(0);
-    transition: opacity 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
+    top: -40px;
     box-shadow: none;
-    padding: 7rem 4rem 0;
+    padding-top: 7rem;
     overflow: initial;
 
-     &::before {
-        content: '';
-        position: absolute;
-        bottom: -250px;
-        left: 0;
-        height: 250px;
-        width: 100%;
-        z-index: 0;
-        background: #fff;
-      }
-
-  `};
-`
-
-const SlideIn = ({ in: inProp, children }) => {
-  return (
-    <Transition in={inProp} timeout={duration}>
-      {state => {
-        return (
-          <SlideInContainer
-            style={{
-              ...defaultStyle,
-              ...transitionStyles[state],
-            }}
-          >
-            {children}
-          </SlideInContainer>
-        )
-      }}
-    </Transition>
-  )
-}
-
-const GridContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr [col-start]);
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 91vh;
-
-  ${media.desktop`
-    grid-template-columns: 1fr;
-    margin: 0 auto;
-    height: auto;
-  `};
-
-  ${media.phone`
-    width: 100%;
-  `};
-`
-
-const LogoContainer = styled(Link)`
-  max-height: 2.3rem;
-  max-width: 13.059rem;
-  margin-bottom: 0;
-  text-decoration: none;
-  opacity: ${p => (p.animation ? 0.2 : 1)};
-  position: relative;
-  top: -1.4rem;
-  transition: opacity 1s ease;
-
-  ${media.desktop`
-    max-width: 10rem;
-    margin-bottom: 7rem;
-    top: 0;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      width: 42px;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 100px;
+    }
   `};
 `
 
@@ -219,14 +174,9 @@ const TextContainer = styled.div`
   ${transitions.fadeUp};
 `
 
-const WelcomeHeader = styled.h1`
+const WelcomeHeader = styled(Heading.h3)`
   color: white;
-  font-size: 3.6rem;
   margin-bottom: 2rem;
-
-  ${media.desktop`
-    font-size: 1.8rem;
-  `};
 `
 
 const MainText = styled.p`
@@ -236,57 +186,24 @@ const MainText = styled.p`
   margin-bottom: 2rem;
 `
 
-const LeftContainer = styled.div`
+const PhoneFormContainer = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  width: 36rem;
-  height: 53rem;
+  display: none;
 
-  ${media.desktop`
-    margin: 0 auto;
-    padding: 5rem 0 1rem;
-    width: 100%;
-    height: auto;
-  `};
-
-  ${media.phablet`
-    padding: 5rem 0 1rem;
-  `};
-`
-
-const RightContainer = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-
-  ${media.desktop`
-    justify-content: center;
-  `};
-`
-
-const CopyRightContainer = styled.div`
+  ${media.tablet`
   display: block;
-  font-size: 1.8rem;
-  font-weight: 500;
-  color: ${p => p.theme.colors.grey};
-  ${transitions.fadeUp};
-
-  ${media.desktop`
-    display: none;
+    padding: 5rem 0 1rem;
   `};
 `
 
 const FormContainer = styled.div`
   width: 100%;
   position: relative;
-  height: 58rem;
   margin: 0 auto;
   width: 100%;
-  ${transitions.fadeUp};
 
   ${media.tablet`
     padding: 2rem;
@@ -304,36 +221,25 @@ const HighlightText = styled.span`
   ${p => p.underline && `text-decoration: underline`};
 `
 
-const CloseContainerMobile = styled(Link)`
-  display: none;
-  position: absolute;
-  top: 0;
-  right: 0rem;
-  cursor: pointer;
-  border-radius: 50%;
-  align-items: center;
-  justify-content: center;
-  opacity: ${props => (props.animation ? '1' : '0')};
-  transform: rotate(${props => (props.animation ? '0' : '-60deg')});
-  transition: all 1s 1s ease-out;
-
-  ${media.desktop`
-    display: flex;
-    top: 5rem;
-  `};
-`
-
-const CloseContainer = styled(Link)`
+const CloseContainer = styled.button`
   position: fixed;
-  right: 3.5rem;
-  top: 5rem;
+  z-index: 1000;
+  right: 0;
+  left: 0;
+  margin: 0 auto;
+  top: 24px;
   cursor: pointer;
   border-radius: 50%;
-  height: 3.4rem;
-  width: 3.4rem;
+  height: 40px;
+  width: 40px;
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  transform: translateY(${p => (p.animation ? '0' : '-80px')});
+  transition: transform 0.7s cubic-bezier(0.215, 0.61, 0.355, 1)
+    ${p => (p.animation ? '0.7s' : '0s')};
 
   ${media.desktop`
     display: none;
@@ -342,8 +248,8 @@ const CloseContainer = styled(Link)`
   &::after {
     content: '';
     position: absolute;
-    height: 3.4rem;
-    width: 3.4rem;
+    height: 40px;
+    width: 40px;
     top: 0;
     border-radius: 50%;
     transform: scale(0.8);
@@ -351,40 +257,7 @@ const CloseContainer = styled(Link)`
   }
 
   &:hover::after {
-    background: rgba(0, 0, 0, 0.06);
+    background: rgba(0, 0, 0, 0.03);
     transform: scale(1);
   }
-
-  &:active::after {
-    background: rgba(0, 0, 0, 0.12);
-    transform: scale(1.2);
-  }
-`
-
-const MobileArrowContainer = styled.div`
-  display: none;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -2.2rem;
-  height: 4.4rem;
-  width: 4.4rem;
-  margin: 0 auto;
-  border: 1.33333e-11px solid rgba(0, 0, 0, 0.00784314);
-  box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.146711);
-  background: #fff;
-  z-index: 1;
-  border-radius: 50%;
-  ${transitions.fadeUp};
-
-  ${media.desktop`
-    display: flex;
-    bottom: -4.2rem;
-  `};
-
-  ${media.phablet`
-    bottom: -2.2rem;
-  `};
 `

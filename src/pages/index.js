@@ -45,7 +45,7 @@ class IndexPage extends Component {
               <ContactText
                 animation={animation}
                 to="/contact"
-                transitionDelay={500}
+                transitionDelay={100}
               >
                 <ArrowAnimation>
                   <HighlightText>Get in touch</HighlightText>
@@ -54,7 +54,7 @@ class IndexPage extends Component {
                 </ArrowAnimation>
               </ContactText>
             </LeftContainer>
-            <RightContainer />
+            <div />
           </Container>
           {/* </GradientContainer> */}
         </Fragment>
@@ -125,6 +125,10 @@ const MainText = styled.p`
   font-size: 3.2rem;
   font-weight: 400;
   color: ${props => props.theme.colors.grey};
+
+  ${media.phablet`
+    font-size: 2.2rem;
+  `};
 `
 
 const ContactText = styled(Link)`
@@ -156,26 +160,10 @@ const LeftContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
 
-  ${media.desktop`
-    padding-top: 5rem;
-    justify-content: flex-start;
-    width: 100%;
-    height: initial;
-  `};
-`
-
-const RightContainer = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  padding-top: 4rem;
-
-  ${media.desktop`
-    justify-content: center;
-    padding-top: 7rem;
-    margin-bottom: 5rem;
+  ${media.phablet`
+    min-height: 400px;
+    max-height: 540px;
+    padding: 150px 0 100px;
   `};
 `
 
