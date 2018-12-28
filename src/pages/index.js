@@ -29,7 +29,6 @@ class IndexPage extends Component {
             image={contentful.seo.image.file.url}
             pathname={this.props.location.pathname}
           />
-          {/* <GradientContainer animation={animation}> */}
           <Container>
             <LeftContainer>
               <div style={{ top: '-60px' }} />
@@ -39,7 +38,7 @@ class IndexPage extends Component {
                   expertise directly to your team.
                 </Heading.h1>
                 <MainText>
-                  We help you build the products you've always dreamed of — and
+                  We help you build the products you've always dreamed of, and
                   the ones you're yet to dream up.
                 </MainText>
               </TextContainer>
@@ -57,7 +56,6 @@ class IndexPage extends Component {
             </LeftContainer>
             <div />
           </Container>
-          {/* </GradientContainer> */}
         </Fragment>
       </Layout>
     )
@@ -164,7 +162,7 @@ const LeftContainer = styled.div`
   ${media.phablet`
     min-height: 420px;
     max-height: 540px;
-    padding: 50% 0 100px;
+    padding: 44% 0 100px;
   `};
 
   ${media.phone`
