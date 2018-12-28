@@ -133,6 +133,10 @@ const CareersGraphGrid = styled.div`
   position: relative;
   height: 361px;
   width: 100%;
+
+  ${media.phablet`
+    height: 120px;
+  `};
 `
 
 const LabelsContainer = styled.div`

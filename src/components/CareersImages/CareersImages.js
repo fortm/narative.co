@@ -230,6 +230,7 @@ const ImageContainerMobile = styled.div`
   border-radius: 3px;
   overflow: hidden;
   width: 34rem;
+  filter: grayscale(100);
 
   ${media.phone`
     width: 30rem;

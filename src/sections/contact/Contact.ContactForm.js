@@ -12,7 +12,7 @@ import {
   SocialLinks,
 } from '@components'
 import { media } from '@styles'
-import { apiCall } from '@utils'
+import { apiCall, startAnimation } from '@utils'
 import { SubmittedCheckIcon } from '../../icons/ui'
 
 const validate = values => {
@@ -46,7 +46,7 @@ class ContactForm extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
+    startAnimation(() => {
       this.setState({
         animation: 'start',
       })
@@ -108,7 +108,7 @@ class ContactForm extends Component {
                 <StyledFormikForm>
                   <FormSection
                     animation={animation}
-                    delay={1100}
+                    delay={1350}
                     spacing="large"
                   >
                     <FormHeader morePadding>Tell us about you</FormHeader>
@@ -121,7 +121,7 @@ class ContactForm extends Component {
                       <Field component={Form.Text} label="email" name="email" />
                     </span>
                   </FormSection>
-                  <FormSection animation={animation} delay={1200}>
+                  <FormSection animation={animation} delay={1450}>
                     <FormHeader>Tell us about your idea</FormHeader>
                     <Field
                       component={Form.Textarea}
@@ -130,7 +130,7 @@ class ContactForm extends Component {
                       rows={4}
                     />
                   </FormSection>
-                  <ButtonContainer animation={animation} delay={1300}>
+                  <ButtonContainer animation={animation} delay={1550}>
                     <ButtonArrow
                       isSubmitting={props.isSubmitting}
                       color="black"

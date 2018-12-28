@@ -4,13 +4,14 @@ import styled, { keyframes } from 'styled-components'
 
 import { media, transitions } from '@styles'
 import { Container, Heading, Helmet, Layout } from '@components'
+import { startAnimation } from '@utils'
 import { ArrowRightIcon } from '../icons/ui'
 
 class IndexPage extends Component {
   state = { animation: '' }
 
   componentDidMount() {
-    setTimeout(() => {
+    startAnimation(() => {
       this.setState({ animation: 'start' })
     })
   }
@@ -161,9 +162,18 @@ const LeftContainer = styled.div`
   justify-content: space-between;
 
   ${media.phablet`
-    min-height: 400px;
+    min-height: 420px;
     max-height: 540px;
-    padding: 150px 0 100px;
+    padding: 50% 0 100px;
+  `};
+
+  ${media.phone`
+    min-height: 470px;
+    padding: 30% 0 100px;
+  `};
+
+  ${media.se`
+    padding: 12% 0 100px;
   `};
 `
 

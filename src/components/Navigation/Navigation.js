@@ -64,6 +64,13 @@ class Navigation extends Component {
       document.documentElement.clientWidth ||
       document.body.clientWidth
 
+    console.log(this.state.active, !this.state.active)
+    if (this.state.active) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+
     if (this.state.canToggle) {
       this.setState({ active: !this.state.active, canToggle: false })
 
@@ -110,40 +117,44 @@ class Navigation extends Component {
     const { active } = this.state
 
     return (
-      <Container>
-        <NavContainer>
-          <LogoContainer to="/">
-            <Logo onlySymbol />
-          </LogoContainer>
-          <OutsideClickHandler onOutsideClick={this.handleOutsideClick}>
-            <Nav>
-              <DesktopNavList>
-                <NavItems active={active} />
-              </DesktopNavList>
-              <MobileNavListContainer active={active}>
-                <MobileNavControlsContainer active={active}>
-                  <LogoContainer to="/">
-                    <Logo onlySymbol fill="black" />
-                  </LogoContainer>
-                  <span onClick={this.handleToggleClick}>
-                    <CloseIcon />
-                  </span>
-                </MobileNavControlsContainer>
-                <MobileNavList active={active}>
-                  <NavItems active={active} />
-                </MobileNavList>
-                <SocialLinksContainer active={active}>
-                  <SocialLinks fill="black" />
-                </SocialLinksContainer>
-              </MobileNavListContainer>
-              <ToggleContainer onClick={this.handleToggleClick}>
-                <LeftToggle active={active} ref={this.leftToggle} />
-                <RightToggle active={active} />
-              </ToggleContainer>
-            </Nav>
-          </OutsideClickHandler>
-        </NavContainer>
-      </Container>
+      <>
+        <NavFixedContainer>
+          <Container>
+            <NavContainer>
+              <LogoContainer to="/">
+                <Logo onlySymbol />
+              </LogoContainer>
+              <OutsideClickHandler onOutsideClick={this.handleOutsideClick}>
+                <Nav>
+                  <DesktopNavList>
+                    <NavItems active={active} />
+                  </DesktopNavList>
+                  <ToggleContainer onClick={this.handleToggleClick}>
+                    <LeftToggle active={active} ref={this.leftToggle} />
+                    <RightToggle active={active} />
+                  </ToggleContainer>
+                </Nav>
+              </OutsideClickHandler>
+            </NavContainer>
+          </Container>
+        </NavFixedContainer>
+        <MobileNavListContainer active={active}>
+          <MobileNavControlsContainer active={active}>
+            <LogoContainer to="/">
+              <Logo onlySymbol fill="black" />
+            </LogoContainer>
+            <span onClick={this.handleToggleClick}>
+              <CloseIcon />
+            </span>
+          </MobileNavControlsContainer>
+          <MobileNavList active={active}>
+            <NavItems active={active} />
+          </MobileNavList>
+          <SocialLinksContainer active={active}>
+            <SocialLinks fill="black" />
+          </SocialLinksContainer>
+        </MobileNavListContainer>
+      </>
     )
   }
 }
@@ -152,7 +163,7 @@ export default Navigation
 
 const NavItems = ({ active }) =>
   navOptions.map((nav, index) => {
-    const delay = active ? 36 * (navOptions.length - index) : 36 * index
+    const delay = active ? 30 * (navOptions.length - index) : 30 * index
 
     return (
       <NavItem key={nav.to}>
@@ -179,6 +190,17 @@ const NavItems = ({ active }) =>
       </NavItem>
     )
   })
+
+const NavFixedContainer = styled.div`
+  ${media.tablet`
+    position: fixed;
+    height: 90px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+  `};
+`
 
 const NavContainer = styled.div`
   position: relative;
@@ -234,7 +256,7 @@ const RightToggle = styled(Toggle)`
     p.active ? 'translate3d(3px, 4px, 0) rotate(90deg)' : 'initial'};
 
   ${media.phablet`
-  top: 9px;
+    top: 9px;
     transform: initial;
   `};
 `
@@ -248,7 +270,8 @@ const DesktopNavList = styled.ul`
   list-style: none;
 
   ${media.phablet`
-    display: none;
+  display: none;
+
   `};
 `
 
@@ -256,9 +279,33 @@ const NavItem = styled.li`
   display: inline-block;
   margin-right: 60px;
 
+  &:last-child {
+    margin-right: 40px;
+  }
+
+  ${media.tablet`
+    margin-right: 40px;
+
+    &:first-child {
+      display: none;
+    }
+
+    &:last-child {
+      margin-right: 30px;
+    }
+  `};
+
   ${media.phablet`
     display: block;
     margin: 0 auto;
+
+    &:first-child {
+      display: block;
+    }
+
+    &:last-child {
+      margin: 0 auto;
+    }
   `};
 `
 
@@ -289,11 +336,11 @@ const NavAnchor = styled.a`
     margin-bottom: 10px;
 
   transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.9) ${p =>
-    p.delay + 200}ms,
+    p.delay + 250}ms,
     transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.9) ${p =>
-      p.delay * 2 + 200}ms;
+      p.delay * 2 + 250}ms;
       opacity: ${p => (p.active ? (p.disabled ? 0.15 : 1) : 0)};
-  transform: ${p => (p.active ? 'translateX(0)' : 'translateY(20px)')};
+  transform: ${p => (p.active ? 'translateX(0)' : 'translateY(30px)')};
   `};
 `
 
@@ -317,14 +364,27 @@ const MobileNavList = styled.ul`
     height: 1px;
     bottom: 0;
     background: #cdcdcd;
-    transition: transform 0.4s cubic-bezier(0.25, 0.4, 0.4, 1) 0.65s;
+    transition: transform 0.6s cubic-bezier(0.25, 0.4, 0.4, 1) 0.5s;
     transform: ${p => (p.active ? 'scale(1)' : 'scale(0)')};
   }
+
+  ${media.phablet`
+    padding-top: 67%;
+  `};
+
+  ${media.phone`
+    padding-top: 60%;
+  `};
+
+  ${media.se`
+  padding-top: 45%;
+
+  `};
 `
 
 const MobileNavListContainer = styled.div`
   overflow: hidden;
-  z-index: 1;
+  z-index: 10000;
   list-style: none;
   display: none;
   position: fixed;
@@ -357,7 +417,7 @@ const SocialLinksContainer = styled.div`
   transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.9) 0.5s,
     transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.9) 0.5s;
   opacity: ${p => (p.active ? 1 : 0)};
-  transform: ${p => (p.active ? 'translateX(0)' : 'translateY(20px)')};
+  transform: ${p => (p.active ? 'translateX(0)' : 'translateY(30px)')};
 `
 
 const MobileNavControlsContainer = styled.div`

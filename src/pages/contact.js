@@ -5,6 +5,7 @@ import Transition from 'react-transition-group/Transition'
 
 import { media, transitions } from '@styles'
 import { Container, Layout, Heading, Helmet } from '@components'
+import { startAnimation } from '@utils'
 import { ExIcon } from '../icons/ui'
 
 import ContactForm from '../sections/contact/Contact.ContactForm'
@@ -14,7 +15,7 @@ class ContactPage extends Component {
   state = { animation: '' }
 
   componentDidMount() {
-    setTimeout(() => {
+    startAnimation(() => {
       this.setState({
         animation: 'start',
       })
@@ -56,19 +57,21 @@ class ContactPage extends Component {
             pathname={this.props.location.pathname}
             image={this.props.data.contactMeta.childImageSharp.fixed.src}
           />
-          <Container>
-            <PhoneFormContainer>
-              <TextContainer animation={animation} transitionDelay={300}>
-                <WelcomeHeader>How can we help?</WelcomeHeader>
-                <MainText>
-                  <HighlightText>No time to fill a form?</HighlightText> No
-                  problem, leave us your phone number and we'll call you back
-                  within 24 hours.
-                </MainText>
-                <PhoneForm />
-              </TextContainer>
-            </PhoneFormContainer>
-          </Container>
+          <FixedElement>
+            <Container>
+              <PhoneFormContainer>
+                <TextContainer animation={animation} transitionDelay={300}>
+                  <WelcomeHeader>How can we help?</WelcomeHeader>
+                  <MainText>
+                    <HighlightText>No time to fill a form?</HighlightText> No
+                    problem, leave us your phone number and we'll call you back
+                    within 24 hours.
+                  </MainText>
+                  <PhoneForm />
+                </TextContainer>
+              </PhoneFormContainer>
+            </Container>
+          </FixedElement>
           <SlideIn in={animation === 'start'}>
             <FormContainer animation={animation} transitionDelay={1000}>
               <ContactForm />
@@ -101,7 +104,7 @@ const duration = 600
 
 const defaultStyle = {
   opacity: 1,
-  transform: 'translateY(100%)',
+  transform: 'translateY(100vh)',
 }
 
 const transitionStyles = {
@@ -141,14 +144,15 @@ const SlideInContainer = styled.div`
   transition: transform 0.7s cubic-bezier(0.215, 0.61, 0.355, 1);
   will-change: transform;
   transform: translateX(100%);
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
   background: #fff;
 
   ${media.desktop`
     width: 100%;
     position: relative;
-    top: -40px;
+    top: 300px;
+    height: calc(100vh - 340px);
     box-shadow: none;
     padding-top: 7rem;
     overflow: initial;
@@ -184,6 +188,12 @@ const MainText = styled.p`
   margin-bottom: 2rem;
 `
 
+const FixedElement = styled.div`
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+`
 const PhoneFormContainer = styled.div`
   position: relative;
   display: flex;
@@ -192,7 +202,7 @@ const PhoneFormContainer = styled.div`
   display: none;
 
   ${media.tablet`
-  display: block;
+    display: block;
     padding: 5rem 0 1rem;
   `};
 `
@@ -202,6 +212,7 @@ const FormContainer = styled.div`
   position: relative;
   margin: 0 auto;
   width: 100%;
+  background: #fff;
 
   ${media.tablet`
     padding: 2rem;

@@ -4,6 +4,7 @@ import styled, { keyframes, ThemeProvider } from 'styled-components'
 
 import { Container, Layout, Logo } from '@components'
 import { media, transitions, theme } from '@styles'
+import { startAnimation } from '@utils'
 import { ArrowRightIcon } from '../icons/ui'
 
 const animateButtonLine = keyframes`
@@ -321,7 +322,7 @@ class NotFound extends Component {
   state = { animation: '' }
 
   componentDidMount() {
-    setTimeout(() => {
+    startAnimation(() => {
       this.setState({ animation: 'start' })
     })
   }
