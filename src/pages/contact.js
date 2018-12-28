@@ -129,13 +129,11 @@ const SlideIn = ({ in: inProp, children }) => {
 }
 
 const SlideInContainer = styled.div`
-  display: flex;
-  align-items: center;
   width: 100%;
   height: calc(100vh - 40px);
   top: 0px;
   right: 0px;
-  padding: 0;
+  padding-top: 125px;
   z-index: 0;
   position: absolute;
   overflow-y: scroll;
