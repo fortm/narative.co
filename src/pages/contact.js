@@ -215,11 +215,6 @@ const FormContainer = styled.div`
   margin: 0 auto;
   width: 100%;
   background: #fff;
-
-  ${media.phablet`
-    padding: 2rem;
-    width: 46rem;
-  `};
 `
 
 const HighlightText = styled.span`

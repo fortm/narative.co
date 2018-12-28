@@ -98,27 +98,26 @@ export const PencilIcon = () => (
 )
 
 export const SubmittedCheckIcon = () => (
-  <svg width="90" height="90" viewBox="0 0 90 90" version="1.1">
-    <g id="Canvas" fill="none">
-      <g id="confirmation-icon">
-        <rect
-          id="Rectangle"
-          x="0.75"
-          y="0.75"
-          width="88.5"
-          height="88.5"
-          rx="2.25"
-          stroke="black"
-          strokeWidth="1.5"
-        />
-        <path
-          id="Vector"
-          d="M 0 17.8971L 14.7165 30.8571L 39.8571 0"
-          transform="translate(25.0715 29.5715)"
-          stroke="black"
-          strokeWidth="1.5"
-        />
-      </g>
-    </g>
+  <svg
+    width="90"
+    height="90"
+    viewBox="0 0 90 90"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect
+      x="0.75"
+      y="0.75"
+      width="88.5"
+      height="88.5"
+      rx="14.25"
+      stroke="black"
+      stroke-width="1.5"
+    />
+    <path
+      d="M25.0713 47.4684L39.7878 60.4284L64.9284 29.5713"
+      stroke="black"
+      stroke-width="1.5"
+    />
   </svg>
 )

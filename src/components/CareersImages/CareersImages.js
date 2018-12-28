@@ -232,7 +232,7 @@ const ImageContainerMobile = styled.div`
   width: 34rem;
   filter: grayscale(100);
 
-  ${media.phone`
+  ${media.tablet`
     width: 30rem;
   `};
 

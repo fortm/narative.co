@@ -118,7 +118,11 @@ class ContactForm extends Component {
                         label="your name"
                         name="name"
                       />
-                      <Field component={Form.Text} label="email" name="email" />
+                      <Field
+                        component={Form.Text}
+                        label="email address"
+                        name="email"
+                      />
                     </span>
                   </FormSection>
                   <FormSection animation={animation} delay={1450}>

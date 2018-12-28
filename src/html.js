@@ -12,6 +12,7 @@ class HTML extends Component {
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
           <link rel="stylesheet" href="https://use.typekit.net/huf6cwu.css" />
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.1/web-animations-next.min.js" />
           {this.props.headComponents}
         </head>
         <body {...this.props.bodyAttributes}>
