@@ -14,14 +14,16 @@ class Textarea extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    const screenWidth =
-      window.innerWidth ||
-      document.documentElement.clientWidth ||
-      document.body.clientWidth
+    if (typeof window !== 'undefined') {
+      const screenWidth =
+        window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.body.clientWidth
 
-    const rows = screenWidth < 540 ? 1 : props.rows || 1
+      const rows = screenWidth < 540 ? 1 : props.rows || 1
 
-    return { rows }
+      return { rows }
+    }
   }
 
   handleTyping = () => {
