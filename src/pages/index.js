@@ -174,7 +174,7 @@ const MobileContactText = styled(ContactText)`
 `
 
 const ContentContainer = styled.div`
-  height: calc(100vh - 130px);
+  height: calc(100vh - 140px);
   min-height: 440px;
   padding: 0 0 100px;
 
