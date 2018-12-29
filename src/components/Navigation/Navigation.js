@@ -121,7 +121,10 @@ class Navigation extends Component {
             </NavContainer>
           </Container>
         </NavFixedContainer>
-        <Swipeable onSwipedUp={this.handleOutsideClick}>
+        <Swipeable
+          onSwipedUp={this.handleOutsideClick}
+          onSwipedDown={this.handleOutsideClick}
+        >
           <MobileNavListContainer active={active}>
             <MobileNavControlsContainer active={active}>
               <LogoContainer to="/">
@@ -131,22 +134,14 @@ class Navigation extends Component {
                 <CloseIcon />
               </button>
             </MobileNavControlsContainer>
-            <div
-              style={{
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
+            <MobileNavCenter>
               <MobileNavList active={active}>
                 <NavItems active={active} />
               </MobileNavList>
               <SocialLinksContainer active={active}>
                 <SocialLinks fill="black" />
               </SocialLinksContainer>
-            </div>
+            </MobileNavCenter>
           </MobileNavListContainer>
         </Swipeable>
       </OutsideClickHandler>
@@ -402,6 +397,13 @@ const SocialLinksContainer = styled.div`
   transform: ${p => (p.active ? 'translateX(0)' : 'translateY(30px)')};
 `
 
+const MobileNavCenter = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
 const MobileNavControlsContainer = styled.div`
   position: fixed;
   z-index: 1;
