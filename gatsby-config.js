@@ -28,6 +28,7 @@ const plugins = [
     options: {
       spaceId: process.env.CONTENTFUL_SPACE_ID,
       accessToken: process.env.CONTENTFUL_PREVIEW_API_KEY,
+      environment: process.env.CONTENTFUL_ENVIRONMENT,
       host: `preview.contentful.com`,
     },
   },
@@ -36,6 +37,7 @@ const plugins = [
     options: {
       spaceId: process.env.CONTENTFUL_SPACE_ID,
       accessToken: process.env.CONTENTFUL_DELIVERY_API_KEY,
+      environment: process.env.CONTENTFUL_ENVIRONMENT,
     },
   },
   {

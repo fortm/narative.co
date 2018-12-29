@@ -1,22 +1,21 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { Link, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled, { keyframes } from 'styled-components'
 
 import { media, transitions } from '@styles'
 import {
+  AnimatorFadeUp,
   CareersAccordian,
   CareersGraph,
   CareersImages,
   Container,
-  CopyToClipboard,
+  Heading,
   Helmet,
   Layout,
-  Logo,
   Perks,
   SocialLinks,
 } from '@components'
-import { Section } from '@modules'
 import { ArrowRightIcon } from '../icons/ui'
 
 class CareersPage extends Component {
@@ -30,149 +29,138 @@ class CareersPage extends Component {
 
   render() {
     const { animation } = this.state
-    const contentful = this.props.data.allContentfulCareersPage.edges[0].node
+    const { data, location } = this.props
+    const contentful = data.allContentfulCareersPage.edges[0].node
 
     return (
-      <Layout>
-        <GradientContainer animation={animation}>
-          <Helmet
-            title={contentful.seo.title}
-            description={contentful.seo.description}
-            image={contentful.seo.image.file.url}
-            pathname={this.props.location.pathname}
-          />
-          <Content>
-            <MobileHero>
-              <Container>
-                <GridContainer>
-                  <LeftContainer>
-                    <LogoContainer to="/">
-                      <Logo />
-                    </LogoContainer>
-                    <TextContainer animation={animation} transitionDelay={300}>
-                      <HiringPill>We're hiring</HiringPill>
-                      <WelcomeHeader>{contentful.heading}</WelcomeHeader>
-                      <MainText>{contentful.text.text}</MainText>
-                    </TextContainer>
-                    <div />
-                  </LeftContainer>
-                  <RightContainer>
-                    <ImageContainer>
-                      <NarativeHeroImg
-                        fluid={
-                          this.props.data.careersHero.childImageSharp.fluid
-                        }
-                      />
-                      <ImageTraceContainer>
-                        <NarativeHeroOutline />
-                      </ImageTraceContainer>
-                    </ImageContainer>
-                    <ShareIconContainer>
-                      <CopyToClipboard
-                        textToCopy="https://narative.co/careers"
-                        successText="narative.co/careers"
-                      >
-                        <Fragment>
-                          Share this page <ShareIcon />
-                        </Fragment>
-                      </CopyToClipboard>
-                    </ShareIconContainer>
-                  </RightContainer>
-                </GridContainer>
-              </Container>
-            </MobileHero>
-            <MobileBody>
-              <MobilePuller />
-              <Container>
-                <ScrollLine />
-              </Container>
-              <Container hideOnDesktop>
-                <ImageContainer>
-                  <NarativeHeroImg
-                    fluid={this.props.data.careersHero.childImageSharp.fluid}
-                  />
-                  <ImageTraceContainer>
-                    <NarativeHeroOutline />
-                  </ImageTraceContainer>
-                </ImageContainer>
-              </Container>
-              <Section header="Why Narative">
-                <SectionCopy maxWidth="69rem">
-                  At Narative, nobody has a "boss". Instead, we hold a common
-                  goal, where everyone owns executive level decision, regardless
-                  of position. We teach and learn from each other everyday, with
-                  growth based on trust and relationships.
-                </SectionCopy>
-              </Section>
-              <Section header="Working at Narative">
-                <FlexColumn>
-                  <WhatWeDoContent>
-                    <SectionCopy maxWidth="46rem">
-                      Not only are we mindful of the projects we select, we get
-                      to choose how and when we work, to ensure we're at our
-                      best.
-                    </SectionCopy>
-                  </WhatWeDoContent>
-                  <WhatWeDoList>
-                    <Perks />
-                  </WhatWeDoList>
-                </FlexColumn>
-              </Section>
-              <Section header="We have fun">
-                <SectionCopy maxWidth="67rem">
-                  Since we're all remote, it's always a party when the team gets
-                  together. And we like food... a lot.
-                </SectionCopy>
-                <CareersImages images={this.props.data.gallery.edges} />
-              </Section>
-              <Section
-                header={
-                  <div style={{ paddingRight: '2.5rem' }}>
-                    Building our future
-                  </div>
-                }
-              >
-                <SectionCopy maxWidth="67rem">
-                  We engage with{' '}
-                  <Underline>
-                    <UnderlineInner>exceptional clients</UnderlineInner>
-                  </Underline>{' '}
-                  to fund our own ideas. Displaying our core beliefs through the
-                  development of our own products. We call this Narative Labs.
-                </SectionCopy>
-              </Section>
-              <CareersGraph />
+      <Layout
+        background="linear-gradient(
+        rgb(9, 10, 12),
+        rgb(17, 18, 22) 60%,
+        #1a1e24 100%
+      )"
+      >
+        <Helmet
+          title={contentful.seo.title}
+          description={contentful.seo.description}
+          image={contentful.seo.image.file.url}
+          pathname={location.pathname}
+        />
+        <Content>
+          <MobileHero>
+            <Container>
+              <GridContainer>
+                <LeftContainer>
+                  <TextContainer animation={animation} transitionDelay={300}>
+                    <HiringPill>We're hiring</HiringPill>
+                    <WelcomeHeader>{contentful.heading}</WelcomeHeader>
+                    <MainText>{contentful.text.text}</MainText>
+                  </TextContainer>
+                  <div />
+                </LeftContainer>
+                <RightContainer>
+                  <ImageContainer>
+                    <NarativeHeroImg
+                      fluid={data.careersHero.childImageSharp.fluid}
+                    />
+                    <ImageTraceContainer>
+                      <NarativeHeroOutline />
+                    </ImageTraceContainer>
+                  </ImageContainer>
+                </RightContainer>
+              </GridContainer>
+            </Container>
+          </MobileHero>
+          <MobileBody>
+            <MobilePuller />
+            <Container>
+              <ScrollLine />
+            </Container>
+            <Container hideOnDesktop>
+              <ImageContainer>
+                <NarativeHeroImg
+                  fluid={data.careersHero.childImageSharp.fluid}
+                />
+                <ImageTraceContainer>
+                  <NarativeHeroOutline />
+                </ImageTraceContainer>
+              </ImageContainer>
+            </Container>
+            <CareerRow header="Why Narative">
+              <SectionCopy maxWidth="69rem">
+                At Narative, nobody has a "boss". Instead, we hold a common
+                goal, where everyone owns executive level decision, regardless
+                of position. We teach and learn from each other everyday, with
+                growth based on trust and relationships.
+              </SectionCopy>
+            </CareerRow>
+            <CareerRow header="Working at Narative">
+              <FlexColumn>
+                <WhatWeDoContent>
+                  <SectionCopy maxWidth="46rem">
+                    Not only are we mindful of the projects we select, we get to
+                    choose how and when we work, to ensure we're at our best.
+                  </SectionCopy>
+                </WhatWeDoContent>
+                <WhatWeDoList>
+                  <Perks />
+                </WhatWeDoList>
+              </FlexColumn>
+            </CareerRow>
+            <CareerRow header="We have fun">
+              <SectionCopy maxWidth="67rem">
+                Since we're all remote, it's always a party when the team gets
+                together. And we like food... a lot.
+              </SectionCopy>
+              <CareersImages images={data.gallery.edges} />
+            </CareerRow>
+            <CareerRow
+              header={
+                <div style={{ paddingRight: '2.5rem' }}>
+                  Building our future
+                </div>
+              }
+            >
+              <SectionCopy maxWidth="67rem">
+                We engage with{' '}
+                <Underline>
+                  <UnderlineInner>exceptional clients</UnderlineInner>
+                </Underline>{' '}
+                to fund our own ideas. Displaying our core beliefs through the
+                development of our own products. We call this Narative Labs.
+              </SectionCopy>
+            </CareerRow>
+            <CareersGraph />
 
-              <Section header="Say hello">
-                <SectionCopy maxWidth="67rem">
-                  If you have the devotion, the curiosity and the desire to
-                  build great things, you might fit right in.
-                </SectionCopy>
-              </Section>
-              <Container>
-                <CareersAccordian />
-              </Container>
-              <Container>
-                <Footer>
-                  <CopyRightContainer>
-                    <ContactActionsContainer>
-                      <ContactButton to="/contact">Contact us</ContactButton>
-                      <ContactText to="/" color="#fff">
-                        <ArrowAnimation>
-                          Go back home
-                          <ArrowRightIcon color="#fff" />
-                        </ArrowAnimation>
-                      </ContactText>
-                    </ContactActionsContainer>
-                  </CopyRightContainer>
-                  <SocialIconsFooter>
-                    <SocialLinks />
-                  </SocialIconsFooter>
-                </Footer>
-              </Container>
-            </MobileBody>
-          </Content>
-        </GradientContainer>
+            <CareerRow header="Say hello">
+              <SectionCopy maxWidth="67rem">
+                If you have the devotion, the curiosity and the desire to build
+                great things, you might fit right in.
+              </SectionCopy>
+            </CareerRow>
+            <Container>
+              <CareersAccordian />
+            </Container>
+            <Container>
+              <Footer>
+                <CopyRightContainer>
+                  <ContactActionsContainer>
+                    <ContactButton to="/contact">Contact us</ContactButton>
+                    <ContactText to="/" color="#fff">
+                      <ArrowAnimation>
+                        Go back home
+                        <ArrowRightIcon color="#fff" />
+                      </ArrowAnimation>
+                    </ContactText>
+                  </ContactActionsContainer>
+                </CopyRightContainer>
+                <SocialIconsFooter>
+                  <SocialLinks />
+                </SocialIconsFooter>
+              </Footer>
+            </Container>
+          </MobileBody>
+        </Content>
       </Layout>
     )
   }
@@ -235,15 +223,6 @@ const animateButtonLine = keyframes`
   }
 `
 
-const fadeIn = keyframes`
-  0% {
-      opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-`
-
 const fadeInOut = keyframes`
   0% {
       opacity: 0;
@@ -258,13 +237,77 @@ const fadeInOut = keyframes`
   }
 `
 
+const CareerRow = ({ children, header, hideOverflow }) => (
+  <CareerRowSpacer>
+    <AnimatorFadeUp>
+      <Container hideOverflow={hideOverflow}>
+        <CareerRowContainer>
+          <CareerRowHeader>{header}</CareerRowHeader>
+          <CareerRowContent>{children}</CareerRowContent>
+        </CareerRowContainer>
+      </Container>
+    </AnimatorFadeUp>
+  </CareerRowSpacer>
+)
+
+const CareerRowSpacer = styled.div`
+  padding-bottom: 20rem;
+
+  ${media.hdpi`
+    padding-bottom: 15rem;
+  `};
+
+  ${media.desktop`
+    padding-bottom: 10rem;
+  `};
+
+  ${media.tablet`
+    padding-bottom: 6rem;
+  `};
+`
+
+const CareerRowContainer = styled.div`
+  display: flex;
+
+  ${media.desktop`
+    flex-direction: column;
+  `};
+`
+
+const CareerRowHeader = styled(Heading.h2)`
+  align-self: flex-start;
+  font-size: 3.2rem;
+  color: ${p => p.theme.colors.grey};
+  width: 20rem;
+  min-width: 20rem;
+  line-height: 1.4;
+  padding-bottom: 1rem;
+  margin-right: 6.3rem;
+
+  ${media.desktop`
+    flex-direction: column;
+    margin: 0 0 3.5rem 0;
+  `};
+
+  ${media.tablet`
+    padding-bottom: 0;
+    margin-bottom: 1rem;
+    width: 100%;
+    font-size: 2.4rem;
+  `};
+`
+
+const CareerRowContent = styled.div`
+  flex: 1;
+`
+
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr [col-start]);
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  height: 88vh;
+  height: calc(88vh - 130px);
   width: 100%;
 
   ${media.desktop`
@@ -274,20 +317,6 @@ const GridContainer = styled.div`
 
   ${media.phone`
     width: 100%;
-  `};
-`
-
-const LogoContainer = styled(Link)`
-  max-height: 2.3rem;
-  max-width: 13.059rem;
-  margin-bottom: 0;
-  text-decoration: none;
-
-  ${media.desktop`
-    max-width: 10rem;
-    margin-bottom: 4rem;
-    transition-delay: 0ms !important;
-    transition-duration: 500ms !important;
   `};
 `
 
@@ -310,13 +339,15 @@ const HiringPill = styled.div`
   font-weight: 600;
 `
 
-const WelcomeHeader = styled.h1`
+const WelcomeHeader = styled(Heading.h1)`
   color: white;
-  font-size: 3.6rem;
+  font-family: 'ff-meta-serif-web-pro', serif;
+  font-size: 3.2rem;
+  font-weight: 600;
   margin-bottom: 2rem;
 
   ${media.desktop`
-    font-size: 1.8rem;
+    font-size: 20px;
   `};
 
   ${media.phablet`
@@ -327,7 +358,7 @@ const WelcomeHeader = styled.h1`
 const MainText = styled.p`
   font-size: 1.8rem;
   font-weight: 400;
-  color: ${props => props.theme.colors.grey};
+  color: ${p => p.theme.colors.grey};
   margin-bottom: 2rem;
   max-width: 47rem;
 `
@@ -336,8 +367,8 @@ const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   max-width: 50.5rem;
-  height: 53rem;
 
   ${media.desktop`
     padding-top: 5rem;
@@ -554,7 +585,7 @@ const ContactText = styled(Link)`
 
   svg {
     margin-left: 1rem;
-    transition: transform 300ms ${props => props.theme.transitions.in};
+    transition: transform 300ms ${p => p.theme.transitions.in};
   }
 `
 
@@ -652,12 +683,13 @@ const Footer = styled.footer`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 5rem;
-  color: ${props => props.theme.colors.grey};
+  padding-bottom: 10rem;
+  color: ${p => p.theme.colors.grey};
 
   ${media.tablet`
     justify-content: center;
     flex-direction: column;
+    padding-bottom: 5rem;
   `};
 `
 
@@ -693,14 +725,13 @@ const WhatWeDoContent = styled.div`
 
 const Content = styled.div`
   position: relative;
-  z-index: 1;
 `
 
 const MobileHero = styled.div`
   ${media.tablet`
     position: fixed;
     left: 0;
-    top: 0;
+    top: 90px;
     right: 0;
     width: 100%;
   `};
@@ -713,9 +744,10 @@ const MobileBody = styled.div`
     height: 100%;
     position: relative;
     background: #111216;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
     overflow: hidden;
+    z-index: 10;
 
     &::before {
       content: '';
@@ -756,64 +788,6 @@ const MobilePuller = styled.div`
     border-radius: 100px;
 `};
 `
-
-const GradientContainer = styled.div`
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(
-      rgb(9, 10, 12),
-      rgb(17, 18, 22) 60%,
-      #1a1e24 100%
-    );
-    pointer-events: none;
-    transition: all 1.5s ease;
-    z-index: 0;
-    opacity: ${p => (p.animation ? 1 : 0)};
-
-    ${media.tablet`
-      background: #0D0E10;
-    `};
-  }
-`
-
-const ShareIconContainer = styled.div`
-  position: absolute;
-  top: -5.5rem;
-  right: 0;
-  opacity: 0;
-  color: ${p => p.theme.colors.grey};
-  animation: ${fadeIn} 2s cubic-bezier(0.77, 0, 0.175, 1) forwards 2.4s;
-
-  ${media.desktop`
-    display: none;
-  `};
-
-  svg {
-    margin-left: 0.9rem;
-  }
-`
-
-const ShareIcon = () => (
-  <svg
-    width="14"
-    height="15"
-    viewBox="0 0 14 15"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M11.2952 10.6024C10.7229 10.6024 10.2108 10.8283 9.81928 11.1822L4.4503 8.05723C4.48795 7.88404 4.51807 7.71084 4.51807 7.53012C4.51807 7.3494 4.48795 7.17621 4.4503 7.00301L9.75904 3.90813C10.1657 4.28464 10.7003 4.51807 11.2952 4.51807C12.5452 4.51807 13.5542 3.50904 13.5542 2.25904C13.5542 1.00904 12.5452 0 11.2952 0C10.0452 0 9.03614 1.00904 9.03614 2.25904C9.03614 2.43976 9.06626 2.61295 9.10392 2.78614L3.79518 5.88102C3.38855 5.50452 2.85392 5.27108 2.25904 5.27108C1.00904 5.27108 0 6.28012 0 7.53012C0 8.78012 1.00904 9.78916 2.25904 9.78916C2.85392 9.78916 3.38855 9.55572 3.79518 9.17922L9.15663 12.3117C9.11898 12.4699 9.09639 12.6355 9.09639 12.8012C9.09639 14.0136 10.0828 15 11.2952 15C12.5075 15 13.494 14.0136 13.494 12.8012C13.494 11.5889 12.5075 10.6024 11.2952 10.6024Z"
-      fill="white"
-    />
-  </svg>
-)
 
 const NarativeHeroOutline = () => (
   <svg

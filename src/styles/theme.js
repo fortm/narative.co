@@ -40,8 +40,8 @@ export const theme = {
   },
   transitions,
   placeholder: {
-    dark: 'rgba(#E7EEF5, 0.65)',
-    light: 'rgba(#ebeef0, 0.65)',
+    dark: 'rgba(0, 0, 0, 0.25)',
+    light: 'rgba(0, 0, 0, 0.25)',
   },
   input: {
     border: '#b9bbbe',

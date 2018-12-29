@@ -3,21 +3,15 @@ import { Link, graphql } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
 
 import { media, transitions } from '@styles'
-import {
-  Container,
-  Helmet,
-  Layout,
-  Logo,
-  SocialLinks,
-  Video,
-} from '@components'
+import { Container, Heading, Helmet, Layout } from '@components'
+import { startAnimation } from '@utils'
 import { ArrowRightIcon } from '../icons/ui'
 
 class IndexPage extends Component {
   state = { animation: '' }
 
   componentDidMount() {
-    setTimeout(() => {
+    startAnimation(() => {
       this.setState({ animation: 'start' })
     })
   }
@@ -35,59 +29,44 @@ class IndexPage extends Component {
             image={contentful.seo.image.file.url}
             pathname={this.props.location.pathname}
           />
-          <GradientContainer animation={animation}>
-            <Content>
-              <Container>
-                <GridContainer>
-                  <LeftContainer>
-                    <LogoContainer to="/">
-                      <Logo />
-                    </LogoContainer>
-                    <CareersCotnainerMobile to="/careers">
-                      We're hiring
-                    </CareersCotnainerMobile>
-                    <TextContainer animation={animation} transitionDelay={600}>
-                      <WelcomeHeader>{contentful.heading}</WelcomeHeader>
-                      <MainText>{contentful.text.text}</MainText>
-                      <ContactText to="/contact">
-                        <ArrowAnimation>
-                          <HighlightText>Get in touch</HighlightText>
-                          .
-                          <ArrowRightIcon color="white" />
-                        </ArrowAnimation>
-                      </ContactText>
-                    </TextContainer>
-                    <CopyRightContainer
-                      animation={animation}
-                      transitionDelay={800}
-                    >
-                      <SocialLinks fill="#7a8085" />
-                    </CopyRightContainer>
-                  </LeftContainer>
-                  <RightContainer>
-                    <CareersCotnainer to="/careers">
-                      <ArrowAnimation>
-                        <HighlightText>Careers</HighlightText>
-                        <ArrowRightIcon color="white" />
-                      </ArrowAnimation>
-                    </CareersCotnainer>
-
-                    <NarativeVideoContainer animation={animation}>
-                      <NarativeVideo
-                        label="Narative wave video"
-                        webm="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.webm"
-                        mp4="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.mp4"
-                        poster="https://res.cloudinary.com/narative/video/upload/v1524716897/narative-wave.jpg"
-                      />
-                    </NarativeVideoContainer>
-                  </RightContainer>
-                </GridContainer>
-                <SocialIconsFooter>
-                  <SocialLinks />
-                </SocialIconsFooter>
-              </Container>
-            </Content>
-          </GradientContainer>
+          <Container>
+            <ContentContainer>
+              <div style={{ top: '-60px' }} />
+              <TextContainer animation={animation}>
+                <Heading.h1>
+                  Narative brings decades of design, marketing and engineering
+                  expertise directly to your team.
+                </Heading.h1>
+                <MainText>
+                  We help you build the products you've always dreamed of, and
+                  the ones you're yet to dream up.
+                </MainText>
+                <MobileContactText
+                  animation={animation}
+                  to="/contact"
+                  transitionDelay={100}
+                >
+                  <ArrowAnimation>
+                    <HighlightText>Get in touch</HighlightText>
+                    .
+                    <ArrowRightIcon color="white" />
+                  </ArrowAnimation>
+                </MobileContactText>
+              </TextContainer>
+              <ContactText
+                animation={animation}
+                to="/contact"
+                transitionDelay={100}
+              >
+                <ArrowAnimation>
+                  <HighlightText>Get in touch</HighlightText>
+                  .
+                  <ArrowRightIcon color="white" />
+                </ArrowAnimation>
+              </ContactText>
+            </ContentContainer>
+            <div />
+          </Container>
         </Fragment>
       </Layout>
     )
@@ -147,102 +126,20 @@ const fadeInOut = keyframes`
   }
 `
 
-const GridContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr [col-start]);
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  height: 88vh;
-  width: 100%;
-
-  ${media.desktop`
-    height: initial
-    grid-template-columns: 1fr;
-  `};
-
-  ${media.phone`
-    width: 100%;
-  `};
-`
-
-const LogoContainer = styled(Link)`
-  max-height: 2.3rem;
-  max-width: 13.059rem;
-  margin-bottom: 0;
-  text-decoration: none;
-
-  ${media.desktop`
-    max-width: 10rem;
-    margin-bottom: 4rem;
-  `};
-
-  ${media.tablet`
-    margin-bottom: 7rem;
-  `};
-`
-
-const NarativeVideoContainer = styled.div`
-  clip-path: polygon(0 36%, 0 0, 100% 64%, 100% 100%);
-  width: 424px;
-  height: 458px;
-  margin-top: 8rem;
-  pointer-events: none;
-  overflow: hidden;
-  align-self: flex-end;
-
-  ${transitions.blurIn};
-
-  ${media.desktop`
-    width: 50rem;
-  `};
-
-  ${media.phablet`
-    height: auto;
-    width: 33rem;
-    height: 36rem;
-    margin: 0 auto;
-  `};
-
-  ${media.phone`
-    width: 30rem;
-    height: 30rem;
-  `};
-
-  ${media.se`
-    width: 24rem;
-    height: 24rem;
-  `};
-`
-
-const NarativeVideo = styled(Video)`
-  position: relative;
-  height: 53rem;
-
-  ${media.phone`
-    height: 30rem;
-  `};
-`
-
 const TextContainer = styled.div`
+  max-width: 620px;
   ${transitions.fadeUp};
 `
 
-const WelcomeHeader = styled.h1`
-  color: white;
-  font-size: 3.6rem;
-  margin-bottom: 2rem;
-
-  ${media.desktop`
-    font-size: 1.8rem;
-  `};
-`
-
 const MainText = styled.p`
-  font-size: 1.8rem;
+  font-size: 3.2rem;
   font-weight: 400;
   color: ${props => props.theme.colors.grey};
-  margin-bottom: 2rem;
+  line-height: 1.3;
+
+  ${media.phablet`
+    font-size: 2.2rem;
+  `};
 `
 
 const ContactText = styled(Link)`
@@ -251,8 +148,11 @@ const ContactText = styled(Link)`
   font-size: 1.8rem;
   font-weight: 600;
   color: ${props => props.theme.colors.grey};
+  ${transitions.fadeUp};
 
   ${media.tablet`
+    opacity: 0;
+    pointer-events: none;
     flex-direction: column;
   `};
 
@@ -262,47 +162,30 @@ const ContactText = styled(Link)`
   }
 `
 
-const LeftContainer = styled.div`
+const MobileContactText = styled(ContactText)`
+  display: none;
+
+  ${media.tablet`
+    opacity: 1;
+    pointer-events: initial;
+    margin-top: 50px;
+    display: block;
+  `};
+`
+
+const ContentContainer = styled.div`
+  height: calc(100vh - 130px);
+  min-height: 440px;
+  padding: 0 0 100px;
+
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 47rem;
-  height: 53rem;
 
-  ${media.desktop`
-    padding-top: 5rem;
-    justify-content: flex-start;
-    width: 100%;
-    height: initial;
-  `};
-`
-
-const RightContainer = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  padding-top: 4rem;
-
-  ${media.desktop`
-    justify-content: center;
-    padding-top: 7rem;
-    margin-bottom: 5rem;
-  `};
-`
-
-const CopyRightContainer = styled.div`
-  display: block;
-
-  font-size: 1.8rem;
-  font-weight: 500;
-  color: ${props => props.theme.colors.grey};
-  ${transitions.fadeUp};
-
-  ${media.desktop`
-    display: none;
+  ${media.phablet`
+    height: calc(100vh - 160px);
+    padding: 0;
   `};
 `
 
@@ -358,84 +241,21 @@ const HighlightText = styled.span`
   ${props => props.underline && `text-decoration: underline`};
 `
 
-const SocialIconsFooter = styled.div`
-  display: none;
+// const GradientContainer = styled.div`
+//   position: relative;
+//   min-height: 100vh;
 
-  ${media.desktop`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 0 10rem;
-  `};
-`
-
-const fadeIn = keyframes`
-  from { opacity: 0; }
-  to { opacity: 1; }
-`
-
-const CareersCotnainer = styled(Link)`
-  position: absolute;
-  right: -4.3rem;
-  color: white;
-  top: 2.5rem;
-  padding: 0.2rem 1.2rem;
-  color: #fff;
-  font-weight: 500;
-  border-radius: 3px;
-  display: flex;
-  align-items: center;
-  opacity: 0;
-  animation: 0.5s forwards ease ${fadeIn};
-  animation-delay: 0.8s;
-
-  svg {
-    margin-left: 1rem;
-  }
-
-  ${media.desktop`
-    display: none;
-  `};
-
-  &:hover::before {
-    transform: scale(1);
-  }
-`
-
-const CareersCotnainerMobile = styled(Link)`
-  display: none;
-  opacity: 0;
-
-  ${media.desktop`
-    display: block;
-    position: absolute;
-    right: 0;
-    font-weight: 600;
-    color: #fff;
-    animation: 0.5s forwards ease ${fadeIn} 1.2s;
-  `};
-`
-
-const Content = styled.div`
-  position: relative;
-  z-index: 1;
-`
-
-const GradientContainer = styled.div`
-  position: relative;
-  min-height: 100vh;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: rgb(9, 10, 12);
-    pointer-events: none;
-    transition: all 1.5s ease;
-    z-index: 0;
-    opacity: ${p => (p.animation ? 0 : 1)};
-  }
-`
+//   &::before {
+//     content: '';
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     height: 100%;
+//     width: 100%;
+//     background: linear-gradient(226.45deg, #191b21 8.28%, #111216 61.84%);
+//     pointer-events: none;
+//     transition: all 1.5s ease;
+//     z-index: 0;
+//     opacity: ${p => (p.animation ? 0 : 1)};
+//   }
+// `
