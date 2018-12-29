@@ -199,7 +199,7 @@ const NavFixedContainer = styled.div`
     width: 100%;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 1000000;
   `};
 `
 
@@ -385,7 +385,7 @@ const MobileNavList = styled.ul`
 
 const MobileNavListContainer = styled.div`
   overflow: hidden;
-  z-index: 10000;
+  z-index: 10000000;
   list-style: none;
   display: none;
   position: fixed;

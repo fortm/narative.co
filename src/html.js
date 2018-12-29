@@ -13,6 +13,8 @@ class HTML extends Component {
           />
           <link rel="stylesheet" href="https://use.typekit.net/huf6cwu.css" />
           <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.1/web-animations-next.min.js" />
+          <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver" />
+
           {this.props.headComponents}
         </head>
         <body {...this.props.bodyAttributes}>
