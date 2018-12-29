@@ -60,6 +60,7 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 1.6rem;
     margin: 0;
     color: ${theme.colors.black};
+    background: #000000;
     font-weight: 400;
   }
 

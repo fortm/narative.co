@@ -38,7 +38,7 @@ const InputContainer = styled.div`
 
   ${media.tablet`
     top: 0;
-    padding: 1.4rem 0 2.5rem;
+    padding: 1.4rem 0 2rem;
     width: 100%;
   `};
 `
@@ -58,7 +58,7 @@ const InputBorder = styled.div`
   position: relative;
 
   ${media.tablet`
-    padding: 0.45em 0;
+    padding: 0.35em 0;
   ${p =>
     p.hasError
       ? `border-bottom: 1px solid ${p.theme.colors.red}`

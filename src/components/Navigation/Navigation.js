@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import Link from 'gatsby-link'
 import OutsideClickHandler from 'react-outside-click-handler'
+import Swipeable from 'react-swipeable'
 
 import { Container, Logo, SocialLinks } from '@components'
 import { media } from '@styles'
@@ -40,7 +41,7 @@ const animateOut = [
 class Navigation extends Component {
   leftToggle = React.createRef()
 
-  state = { active: false, lastScrollTop: 0 }
+  state = { active: false }
 
   componentDidMount() {
     window.addEventListener('keydown', this.handleEscKeyPress)
@@ -49,15 +50,6 @@ class Navigation extends Component {
   componentWillUnmount() {
     if (typeof window !== 'undefined') {
       window.removeEventListener('keydown', this.handleEscKeyPress)
-    }
-  }
-
-  handleScroll = () => {
-    const currentPosition =
-      window.pageYOffset || document.documentElement.scrollTop
-
-    if (currentPosition - 20 > this.state.lastScrollTop) {
-      this.handleOutsideClick()
     }
   }
 
@@ -75,10 +67,7 @@ class Navigation extends Component {
 
     this.setState({
       active: !this.state.active,
-      lastScrollTop: window.pageYOffset,
     })
-
-    window.addEventListener('scroll', this.handleScroll)
 
     if (screenWidth > 768) {
       if (!this.state.active) {
@@ -105,7 +94,6 @@ class Navigation extends Component {
   }
 
   handleOutsideClick = () => {
-    window.removeEventListener('scroll', this.handleScroll)
     this.handleCloseAnimation()
     this.setState({ active: false })
   }
@@ -133,22 +121,34 @@ class Navigation extends Component {
             </NavContainer>
           </Container>
         </NavFixedContainer>
-        <MobileNavListContainer active={active}>
-          <MobileNavControlsContainer active={active}>
-            <LogoContainer to="/">
-              <Logo onlySymbol fill="black" />
-            </LogoContainer>
-            <span onClick={this.handleToggleClick}>
-              <CloseIcon />
-            </span>
-          </MobileNavControlsContainer>
-          <MobileNavList active={active}>
-            <NavItems active={active} />
-          </MobileNavList>
-          <SocialLinksContainer active={active}>
-            <SocialLinks fill="black" />
-          </SocialLinksContainer>
-        </MobileNavListContainer>
+        <Swipeable onSwipedUp={this.handleOutsideClick}>
+          <MobileNavListContainer active={active}>
+            <MobileNavControlsContainer active={active}>
+              <LogoContainer to="/">
+                <Logo onlySymbol fill="black" />
+              </LogoContainer>
+              <button onClick={this.handleToggleClick}>
+                <CloseIcon />
+              </button>
+            </MobileNavControlsContainer>
+            <div
+              style={{
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <MobileNavList active={active}>
+                <NavItems active={active} />
+              </MobileNavList>
+              <SocialLinksContainer active={active}>
+                <SocialLinks fill="black" />
+              </SocialLinksContainer>
+            </div>
+          </MobileNavListContainer>
+        </Swipeable>
       </OutsideClickHandler>
     )
   }
@@ -346,9 +346,7 @@ const MobileNavList = styled.ul`
   display: flex;
   justify-content: center;
   flex-direction: column-reverse;
-
   list-style: none;
-  padding-top: 240px;
 
   &::after {
     content: '';
@@ -364,19 +362,6 @@ const MobileNavList = styled.ul`
     transition: transform 0.6s cubic-bezier(0.25, 0.4, 0.4, 1) 0.5s;
     transform: ${p => (p.active ? 'scale(1)' : 'scale(0)')};
   }
-
-  ${media.phablet`
-    padding-top: 67%;
-  `};
-
-  ${media.phone`
-    padding-top: 60%;
-  `};
-
-  ${media.se`
-  padding-top: 45%;
-
-  `};
 `
 
 const MobileNavListContainer = styled.div`
@@ -407,7 +392,7 @@ const MobileNavListContainer = styled.div`
 const SocialLinksContainer = styled.div`
   margin: 0 auto;
   max-width: 300px;
-  padding: 25px;
+  padding: 25px 25px 0;
   display: flex;
   justify-content: space-between;
 

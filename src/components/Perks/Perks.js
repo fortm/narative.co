@@ -19,7 +19,7 @@ const perks = [
   },
   {
     heading: 'Vacation',
-    text: '4 weeks paid plus sick days and holidays.',
+    text: '4 weeks paid plus sick days and holidays',
   },
   {
     heading: 'Competitive salaries',

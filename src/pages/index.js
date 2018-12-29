@@ -30,7 +30,7 @@ class IndexPage extends Component {
             pathname={this.props.location.pathname}
           />
           <Container>
-            <LeftContainer>
+            <ContentContainer>
               <div style={{ top: '-60px' }} />
               <TextContainer animation={animation}>
                 <Heading.h1>
@@ -41,6 +41,17 @@ class IndexPage extends Component {
                   We help you build the products you've always dreamed of, and
                   the ones you're yet to dream up.
                 </MainText>
+                <MobileContactText
+                  animation={animation}
+                  to="/contact"
+                  transitionDelay={100}
+                >
+                  <ArrowAnimation>
+                    <HighlightText>Get in touch</HighlightText>
+                    .
+                    <ArrowRightIcon color="white" />
+                  </ArrowAnimation>
+                </MobileContactText>
               </TextContainer>
               <ContactText
                 animation={animation}
@@ -53,7 +64,7 @@ class IndexPage extends Component {
                   <ArrowRightIcon color="white" />
                 </ArrowAnimation>
               </ContactText>
-            </LeftContainer>
+            </ContentContainer>
             <div />
           </Container>
         </Fragment>
@@ -140,6 +151,8 @@ const ContactText = styled(Link)`
   ${transitions.fadeUp};
 
   ${media.tablet`
+    opacity: 0;
+    pointer-events: none;
     flex-direction: column;
   `};
 
@@ -149,10 +162,20 @@ const ContactText = styled(Link)`
   }
 `
 
-const LeftContainer = styled.div`
+const MobileContactText = styled(ContactText)`
+  display: none;
+
+  ${media.tablet`
+    opacity: 1;
+    pointer-events: initial;
+    margin-top: 50px;
+    display: block;
+  `};
+`
+
+const ContentContainer = styled.div`
   height: calc(100vh - 130px);
   min-height: 440px;
-  max-height: 720px;
   padding: 0 0 100px;
 
   position: relative;
@@ -161,18 +184,8 @@ const LeftContainer = styled.div`
   justify-content: space-between;
 
   ${media.phablet`
-    min-height: 420px;
-    max-height: 540px;
-    padding: 44% 0 100px;
-  `};
-
-  ${media.phone`
-    min-height: 470px;
-    padding: 30% 0 100px;
-  `};
-
-  ${media.se`
-    padding: 12% 0 100px;
+    height: calc(100vh - 160px);
+    padding: 0;
   `};
 `
 

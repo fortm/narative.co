@@ -137,7 +137,7 @@ class ContactForm extends Component {
                       component={Form.Textarea}
                       label="give us a short description"
                       name="details"
-                      rows={4}
+                      rows={5}
                     />
                   </FormSection>
                   <ButtonContainer animation={animation} delay={1550}>
@@ -179,14 +179,14 @@ const FormHeader = styled(Heading.h2)`
   ${media.tablet`
     width: 100%;
     padding: 0;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     color: ${p => p.theme.colors.grey};
   `};
 `
 
 const FormSection = styled.div`
   display: flex;
-  margin-bottom: ${p => (p.spacing === 'large' ? '6rem' : '2.5rem')};
+  margin-bottom: ${p => (p.spacing === 'large' ? '7rem' : '2.5rem')};
 
   ${media.tablet`
     margin-bottom: ${p => (p.spacing === 'large' ? '2rem' : '1rem')};

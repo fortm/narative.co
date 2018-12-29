@@ -85,7 +85,7 @@ class CareersGraph extends Component {
                     {months.map((month, index) => (
                       <XLabels
                         key={index}
-                        style={{ left: `${index * 100 / 8.38}%` }}
+                        style={{ left: `${index * 100 / 7.3}%` }}
                       >
                         {month}
                       </XLabels>

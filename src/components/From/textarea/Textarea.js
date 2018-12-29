@@ -13,6 +13,17 @@ class Textarea extends Component {
     this.handleTyping()
   }
 
+  static getDerivedStateFromProps(props, state) {
+    const screenWidth =
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth
+
+    const rows = screenWidth < 540 ? 1 : props.rows || 1
+
+    return { rows }
+  }
+
   handleTyping = () => {
     const textarea = this.textarea.current
 
@@ -32,7 +43,7 @@ class Textarea extends Component {
           <StyledInput
             onInput={this.handleTyping}
             ref={this.textarea}
-            rows={rows}
+            rows={this.state.rows}
             type="text"
             maxLength={maxLength || 290}
             {...field}
@@ -75,7 +86,7 @@ const InputContainer = styled.div`
 
   ${media.tablet`
     top: 0;
-    padding: 1.4rem 0 2.5rem;
+    padding: 1.4rem 0 2rem;
     width: 100%;
 
     &::after {
@@ -99,7 +110,7 @@ const InputBorder = styled.div`
   position: relative;
 
   ${media.tablet`
-    padding: 0.45em 0;
+    padding: 0.35em 0;
   ${p =>
     p.hasError
       ? `border-bottom: 1px solid ${p.theme.colors.red}`
@@ -187,6 +198,7 @@ const StyledInput = styled.textarea`
   background: transparent;
   color: ${p => p.theme.colors.grey};
   -webkit-text-fill-color: ${p => p.theme.colors.grey};
+  resize: none;
 
   ${media.tablet`
     font-size: 1.6rem;

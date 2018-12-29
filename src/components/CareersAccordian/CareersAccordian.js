@@ -132,12 +132,12 @@ class CareersAccordian extends Component {
                     <a href="mailto:careers@narative.co">careers@narative.co</a>.
                     We love meeting new people!
                   </span>
-                  <div
+                  <button
                     onClick={() => this.setState({ copied: true })}
                     style={{ justifySelf: 'flex-end' }}
                   >
                     <CopyToClipboard textToCopy="careers@narative.co" />
-                  </div>
+                  </button>
                 </AccordianCareersEmail>
               </AccordianContainer>
             )
@@ -387,7 +387,7 @@ const AccordianCareersEmail = styled.p`
       width: 80%;
     }
 
-    & > div {
+    & > button {
       margin-top: 1rem;
     }
   `};

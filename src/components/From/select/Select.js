@@ -21,7 +21,7 @@ const InputContainer = styled.div`
 const SelectBorder = styled.div`
   position: relative;
   border-bottom: 1px solid #b9bbbe;
-  padding: 0.45em 0;
+  padding: 0.35em 0;
   pointer-events: initial;
   cursor: pointer;
 `

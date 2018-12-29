@@ -28,9 +28,9 @@ class NotFound extends Component {
                     <TextLink to="/">back home</TextLink> or{' '}
                     <TextLink to="/contact">contact us</TextLink>.
                   </WelcomeHeader>
-                  <CopyRightContainer transitionDelay={800}>
-                    <SocialLinks />
-                  </CopyRightContainer>
+                  <SocialLinksContainer>
+                    <p>Looking for something else?</p> <SocialLinks />
+                  </SocialLinksContainer>
                 </TextContainer>
                 <ImageContainer>
                   <NotFoundIcon />
@@ -72,11 +72,11 @@ const GridContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;
-  height: calc(88vh - 150px);
   width: 100%;
 
   ${media.tablet`
     flex-direction: column;
+    height: calc(100vh - 90px);
   `};
 `
 
@@ -85,7 +85,8 @@ const WelcomeHeader = styled(Heading.h1)`
   margin-bottom: 2rem;
 
   ${media.desktop`
-    font-size: 1.8rem;
+    font-size: 2.2rem;
+    margin-bottom: 5rem;
   `};
 `
 
@@ -100,11 +101,13 @@ const TextContainer = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  height: 53rem;
+  height: calc(100vh - 130px);
+  min-height: 500px;
+  padding: 0 0 100px;
   max-width: 575px;
 
   ${media.desktop`
-    padding-top: 170px;
+    padding: 170px 0 0;
     justify-content: flex-start;
     width: 100%;
     height: initial;
@@ -114,7 +117,11 @@ const TextContainer = styled.div`
 const ImageContainer = styled.div`
   position: absolute;
   right: 0;
-  height: 53rem;
+  height: calc(100vh - 130px);
+  min-height: 500px;
+
+  display: flex;
+  align-items: center;
 
   ${media.tablet`
 
@@ -131,14 +138,24 @@ const ImageContainer = styled.div`
   `};
 `
 
-const CopyRightContainer = styled.div`
+const SocialLinksContainer = styled.div`
   display: block;
-  font-size: 1.8rem;
-  font-weight: 500;
-  color: ${p => p.theme.colors.grey};
 
-  ${media.desktop`
-    display: none;
+  p {
+    display: inline-block;
+    color: ${p => p.theme.colors.grey};
+
+    ${media.tablet`
+      display: block;
+   `};
+  }
+
+  ${media.tablet`
+    svg {
+      position: relative;
+      top: 10px;
+      left: -15px;
+    }
   `};
 `
 

@@ -22,7 +22,7 @@ const phoneNumberMasker = [
 
 const InputContainer = styled.div`
   position: relative;
-  padding: 1.4rem 0 2.5rem;
+  padding: 1.4rem 0 2rem;
   overflow-x: hidden;
 `
 
@@ -33,7 +33,7 @@ const InputBorder = styled.div`
       ? `border-bottom: 1px solid ${props.theme.colors.red}`
       : `border-bottom: 1px solid #fff`};
 
-  padding: 0.45em 0;
+  padding: 0.3em 0;
 
   svg {
     position: absolute;

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Transition from 'react-transition-group/Transition'
 
 import { media, transitions } from '@styles'
-import { Container, Layout, Heading, Helmet } from '@components'
+import { Container, Layout, Helmet } from '@components'
 import { startAnimation } from '@utils'
 import { ExIcon } from '../icons/ui'
 
@@ -63,7 +63,6 @@ class ContactPage extends Component {
             <Container>
               <PhoneFormContainer>
                 <TextContainer animation={animation} transitionDelay={300}>
-                  <WelcomeHeader>How can we help?</WelcomeHeader>
                   <MainText>
                     <HighlightText>No time to fill a form?</HighlightText> No
                     problem, leave us your phone number and we'll call you back
@@ -152,7 +151,7 @@ const SlideInContainer = styled.div`
   ${media.tablet`
     width: 100%;
     position: relative;
-    top: 300px;
+    top: 220px;
     height: calc(100vh - 340px);
     box-shadow: none;
     padding-top: 7rem;
@@ -175,11 +174,6 @@ const SlideInContainer = styled.div`
 
 const TextContainer = styled.div`
   ${transitions.fadeUp};
-`
-
-const WelcomeHeader = styled(Heading.h3)`
-  color: white;
-  margin-bottom: 2rem;
 `
 
 const MainText = styled.p`
@@ -205,7 +199,7 @@ const PhoneFormContainer = styled.div`
 
   ${media.tablet`
     display: block;
-    padding: 5rem 0 1rem;
+    padding: 4rem 0 1rem;
   `};
 `
 
@@ -218,6 +212,7 @@ const FormContainer = styled.div`
 `
 
 const HighlightText = styled.span`
+  display: block;
   color: #fff;
   ${p => p.underline && `text-decoration: underline`};
 `

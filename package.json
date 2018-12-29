@@ -3,7 +3,9 @@
   "description": "Narative",
   "version": "1.0.0",
   "author": "Dennis BRotzky <dennis@narative.co>",
-  "keywords": ["narative"],
+  "keywords": [
+    "narative"
+  ],
   "scripts": {
     "build": "./node_modules/.bin/gatsby build --prefix-paths",
     "dev": "./node_modules/.bin/gatsby develop",
@@ -31,6 +33,7 @@
     "react-dom": "^16.5.1",
     "react-helmet": "^5.2.0",
     "react-outside-click-handler": "^1.2.2",
+    "react-swipeable": "^4.3.1",
     "react-text-mask": "^5.4.0",
     "react-transition-group": "^2.3.1",
     "styled-components": "^4.1.3"
