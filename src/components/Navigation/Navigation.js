@@ -40,7 +40,7 @@ const animateOut = [
 class Navigation extends Component {
   leftToggle = React.createRef()
 
-  state = { active: false, canToggle: true }
+  state = { active: false }
 
   componentDidMount() {
     window.addEventListener('keydown', this.handleEscKeyPress)
@@ -70,23 +70,17 @@ class Navigation extends Component {
       document.body.style.overflow = ''
     }
 
-    if (this.state.canToggle) {
-      this.setState({ active: !this.state.active, canToggle: false })
+    this.setState({ active: !this.state.active })
 
-      setTimeout(() => {
-        this.setState({ canToggle: true })
-      }, 700)
-
-      if (screenWidth > 540) {
-        if (!this.state.active) {
-          this.leftToggle.current.animate(animateIn, {
-            duration: 900,
-            fill: 'both',
-            easing: 'cubic-bezier(0.075, 0.82, 0.165, 1)',
-          })
-        } else {
-          this.handleCloseAnimation()
-        }
+    if (screenWidth > 540) {
+      if (!this.state.active) {
+        this.leftToggle.current.animate(animateIn, {
+          duration: 900,
+          fill: 'both',
+          easing: 'cubic-bezier(0.075, 0.82, 0.165, 1)',
+        })
+      } else {
+        this.handleCloseAnimation()
       }
     }
   }
@@ -102,14 +96,8 @@ class Navigation extends Component {
   }
 
   handleOutsideClick = () => {
-    if (this.state.canToggle) {
-      this.handleCloseAnimation()
-      this.setState({ active: false, canToggle: false })
-
-      setTimeout(() => {
-        this.setState({ canToggle: true })
-      }, 700)
-    }
+    this.handleCloseAnimation()
+    this.setState({ active: false })
   }
 
   render() {
