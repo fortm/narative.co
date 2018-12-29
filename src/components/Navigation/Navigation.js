@@ -40,7 +40,7 @@ const animateOut = [
 class Navigation extends Component {
   leftToggle = React.createRef()
 
-  state = { active: false }
+  state = { active: false, lastScrollTop: 0 }
 
   componentDidMount() {
     window.addEventListener('keydown', this.handleEscKeyPress)
@@ -49,6 +49,15 @@ class Navigation extends Component {
   componentWillUnmount() {
     if (typeof window !== 'undefined') {
       window.removeEventListener('keydown', this.handleEscKeyPress)
+    }
+  }
+
+  handleScroll = () => {
+    const currentPosition =
+      window.pageYOffset || document.documentElement.scrollTop
+
+    if (currentPosition - 20 > this.state.lastScrollTop) {
+      this.handleOutsideClick()
     }
   }
 
@@ -64,15 +73,14 @@ class Navigation extends Component {
       document.documentElement.clientWidth ||
       document.body.clientWidth
 
-    if (this.state.active) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
+    this.setState({
+      active: !this.state.active,
+      lastScrollTop: window.pageYOffset,
+    })
 
-    this.setState({ active: !this.state.active })
+    window.addEventListener('scroll', this.handleScroll)
 
-    if (screenWidth > 540) {
+    if (screenWidth > 768) {
       if (!this.state.active) {
         this.leftToggle.current.animate(animateIn, {
           duration: 900,
@@ -82,6 +90,7 @@ class Navigation extends Component {
       } else {
         this.handleCloseAnimation()
       }
+    } else {
     }
   }
 
@@ -96,6 +105,7 @@ class Navigation extends Component {
   }
 
   handleOutsideClick = () => {
+    window.removeEventListener('scroll', this.handleScroll)
     this.handleCloseAnimation()
     this.setState({ active: false })
   }
@@ -104,24 +114,22 @@ class Navigation extends Component {
     const { active } = this.state
 
     return (
-      <>
+      <OutsideClickHandler onOutsideClick={this.handleOutsideClick}>
         <NavFixedContainer>
           <Container>
             <NavContainer>
               <LogoContainer to="/">
                 <Logo onlySymbol />
               </LogoContainer>
-              <OutsideClickHandler onOutsideClick={this.handleOutsideClick}>
-                <Nav>
-                  <DesktopNavList>
-                    <NavItems active={active} />
-                  </DesktopNavList>
-                  <ToggleContainer onClick={this.handleToggleClick}>
-                    <LeftToggle active={active} ref={this.leftToggle} />
-                    <RightToggle active={active} />
-                  </ToggleContainer>
-                </Nav>
-              </OutsideClickHandler>
+              <Nav>
+                <DesktopNavList>
+                  <NavItems active={active} />
+                </DesktopNavList>
+                <ToggleContainer onClick={this.handleToggleClick}>
+                  <LeftToggle active={active} ref={this.leftToggle} />
+                  <RightToggle active={active} />
+                </ToggleContainer>
+              </Nav>
             </NavContainer>
           </Container>
         </NavFixedContainer>
@@ -141,7 +149,7 @@ class Navigation extends Component {
             <SocialLinks fill="black" />
           </SocialLinksContainer>
         </MobileNavListContainer>
-      </>
+      </OutsideClickHandler>
     )
   }
 }
@@ -187,7 +195,7 @@ const NavFixedContainer = styled.div`
     width: 100%;
     top: 0;
     left: 0;
-    z-index: 1000000;
+    z-index: 10;
   `};
 `
 
@@ -325,9 +333,9 @@ const NavAnchor = styled.a`
     margin-bottom: 10px;
 
   transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.9) ${p =>
-    p.delay + 250}ms,
+    p.delay + 300}ms,
     transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.9) ${p =>
-      p.delay * 2 + 250}ms;
+      p.delay * 2 + 300}ms;
       opacity: ${p => (p.active ? (p.disabled ? 0.15 : 1) : 0)};
   transform: ${p => (p.active ? 'translateX(0)' : 'translateY(30px)')};
   `};
@@ -373,7 +381,7 @@ const MobileNavList = styled.ul`
 
 const MobileNavListContainer = styled.div`
   overflow: hidden;
-  z-index: 10000000;
+  z-index: 100000;
   list-style: none;
   display: none;
   position: fixed;

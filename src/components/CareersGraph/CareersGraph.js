@@ -51,7 +51,7 @@ class CareersGraph extends Component {
 
           return (
             <CareersGraphContainer>
-              <CareersGraphGrid innerRef={svg => (this.container = svg)}>
+              <CareersGraphGrid ref={svg => (this.container = svg)}>
                 <CareersGraphGridRowContainer>
                   {rows.map((item, index) => (
                     <CareersGraphGridRow
@@ -71,7 +71,7 @@ class CareersGraph extends Component {
                   ))}
                 </CareersGraphGridColumnContainer>
                 <CareersGraphSVGContainer
-                  innerRef={svg => (this.graph = svg)}
+                  ref={svg => (this.graph = svg)}
                   animate={animate}
                 >
                   <CareersGraphSVG />

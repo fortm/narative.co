@@ -203,7 +203,7 @@ class Select extends Component {
               tabIndex="0"
               onFocus={this.handleFocus}
               onBlur={this.handleBlur}
-              innerRef={elem => (this.btn = elem)}
+              ref={elem => (this.btn = elem)}
             />
             <SelectBorderActive />
             <SelectArrow />
