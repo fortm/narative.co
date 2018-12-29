@@ -2,65 +2,86 @@ import React, { Component } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
-import { Container, Heading, Layout } from '@components'
+import { Container, Heading, Helmet, Layout, SocialLinks } from '@components'
 import { media } from '@styles'
-import { startAnimation } from '@utils'
 
 class NotFound extends Component {
-  state = { animation: '' }
-
-  componentDidMount() {
-    startAnimation(() => {
-      this.setState({ animation: 'start' })
-    })
-  }
-
   render() {
+    const contentful = this.props.data.allContentfulHomePage.edges[0].node
+
     return (
-      <Layout>
-        <Container hideOverflow>
-          <GridContainer>
-            <LeftContainer>
-              <TextContainer>
-                <WelcomeHeader>
-                  Oops, there's nothing here. But don’t worry, you can just go
-                  back home or contact us.
-                </WelcomeHeader>
-              </TextContainer>
-              <CopyRightContainer transitionDelay={800}>
-                © {new Date().getFullYear()} Narative Studio Inc.
-              </CopyRightContainer>
-              <div />
-            </LeftContainer>
-            <RightContainer>
-              <NotFoundIcon />
-              <CopyRightContainerMobile transitionDelay={800}>
-                © {new Date().getFullYear()} Narative Studio Inc.
-              </CopyRightContainerMobile>
-            </RightContainer>
-          </GridContainer>
-        </Container>
-      </Layout>
+      <>
+        <Helmet
+          title={contentful.seo.title}
+          description={contentful.seo.description}
+          image={contentful.seo.image.file.url}
+          pathname={this.props.location.pathname}
+        />
+        <div style={{ overflow: 'hidden' }}>
+          <Layout>
+            <Container hideOverflow>
+              <GridContainer>
+                <TextContainer>
+                  <div />
+                  <WelcomeHeader>
+                    Oops, there's nothing here. But don’t worry, you can just go{' '}
+                    <TextLink to="/">back home</TextLink> or{' '}
+                    <TextLink to="/contact">contact us</TextLink>.
+                  </WelcomeHeader>
+                  <CopyRightContainer transitionDelay={800}>
+                    <SocialLinks />
+                  </CopyRightContainer>
+                </TextContainer>
+                <ImageContainer>
+                  <NotFoundIcon />
+                </ImageContainer>
+              </GridContainer>
+            </Container>
+          </Layout>
+        </div>
+      </>
     )
   }
 }
 
 export default NotFound
 
-const GridContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  height: 88vh;
-  width: 100%;
+export const pageQuery = graphql`
+  query NotFoundPageQuery {
+    allContentfulHomePage {
+      edges {
+        node {
+          seo {
+            title
+            description
+            image {
+              file {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 `
 
-const TextContainer = styled.div``
+const GridContainer = styled.div`
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  height: calc(88vh - 150px);
+  width: 100%;
+
+  ${media.tablet`
+    flex-direction: column;
+  `};
+`
 
 const WelcomeHeader = styled(Heading.h1)`
   color: ${p => p.theme.colors.grey};
-  font-size: 3.6rem;
   margin-bottom: 2rem;
 
   ${media.desktop`
@@ -68,34 +89,45 @@ const WelcomeHeader = styled(Heading.h1)`
   `};
 `
 
-const LeftContainer = styled.div`
+const TextLink = styled(Link)`
+  color: #fff;
+  text-decoration: underline;
+`
+
+const TextContainer = styled.div`
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   height: 53rem;
+  max-width: 575px;
 
   ${media.desktop`
-    padding-top: 5rem;
+    padding-top: 170px;
     justify-content: flex-start;
     width: 100%;
     height: initial;
   `};
 `
 
-const RightContainer = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
+const ImageContainer = styled.div`
+  position: absolute;
+  right: 0;
   height: 53rem;
 
-  ${media.desktop`
-    justify-content: center;
-    flex-direction: column;
-    padding: 6rem 0;
-    height: 100%;
+  ${media.tablet`
+
+    right: 0;
+    height: 33rem;
+    left: -320px;
+
+    svg {
+      height: 100%;
+      top: 360px;
+      position: relative;
+    }
+
   `};
 `
 
@@ -107,17 +139,6 @@ const CopyRightContainer = styled.div`
 
   ${media.desktop`
     display: none;
-  `};
-`
-
-const CopyRightContainerMobile = styled.div`
-  display: none;
-  font-size: 1.8rem;
-  font-weight: 500;
-  color: ${p => p.theme.colors.grey};
-
-  ${media.desktop`
-    display: block;
   `};
 `
 

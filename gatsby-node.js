@@ -3,26 +3,10 @@
  *
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
-
-// You can delete this file if you're not using it
-// const path = require('path')
-
-// const modifyWebpackConfig = ({ config, stage }) => {
-//   config.merge({
-//     resolve: {
-//       alias: {
-
-//       },
-//     },
-//   })
-
-//   return config
-// }
-
 const path = require('path')
 const fs = require('fs-extra')
 
-const onCreateWebpackConfig = ({ actions }) => {
+exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {
       alias: {
@@ -37,14 +21,9 @@ const onCreateWebpackConfig = ({ actions }) => {
   })
 }
 
-const onPostBuild = () => {
+exports.onPostBuild = () => {
   fs.copySync(
     path.join(__dirname, './_redirects'),
     path.join(__dirname, './public/_redirects')
   )
-}
-
-module.exports = {
-  onCreateWebpackConfig,
-  onPostBuild,
 }

@@ -54,11 +54,12 @@ class ContactForm extends Component {
   }
 
   handleSubmit = async (values, { setSubmitting }) => {
-    const { name, email, details } = values
+    const { company, details, email, name } = values
 
     const method = 'post'
     const endpoint = '/contact/proposal'
     const data = {
+      company,
       email,
       details,
       name,
@@ -122,6 +123,11 @@ class ContactForm extends Component {
                         component={Form.Text}
                         label="email address"
                         name="email"
+                      />
+                      <Field
+                        component={Form.Text}
+                        label="company"
+                        name="company"
                       />
                     </span>
                   </FormSection>
