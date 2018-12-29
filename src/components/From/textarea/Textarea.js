@@ -7,13 +7,13 @@ import { media } from '@styles'
 class Textarea extends Component {
   textarea = React.createRef()
 
-  state = { value: '' }
+  state = { value: '', rows: 1 }
 
   componentDidMount() {
     this.handleTyping()
   }
 
-  static getDerivedStateFromProps(props, state) {
+  static getDerivedStateFromProps(props) {
     if (typeof window !== 'undefined') {
       const screenWidth =
         window.innerWidth ||
