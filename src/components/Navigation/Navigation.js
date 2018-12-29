@@ -342,6 +342,7 @@ const MobileNavList = styled.ul`
   justify-content: center;
   flex-direction: column-reverse;
   list-style: none;
+  width: 200px;
 
   &::after {
     content: '';
