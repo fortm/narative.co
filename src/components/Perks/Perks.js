@@ -19,7 +19,7 @@ const perks = [
   },
   {
     heading: 'Vacation',
-    text: 'well, you make your own schedule. really',
+    text: '4 weeks paid plus sick days and holidays.',
   },
   {
     heading: 'Competitive salaries',
@@ -28,6 +28,10 @@ const perks = [
   {
     heading: 'Executive decisions',
     text: 'we listen to you, at all times',
+  },
+  {
+    heading: 'Health insurance',
+    text: 'we focus on what matters most',
   },
 ]
 

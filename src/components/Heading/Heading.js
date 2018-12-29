@@ -39,7 +39,7 @@ const constants = {
   h1: {
     fontsize: '3.2rem',
     fontsizeMobile: '2.2rem',
-    lineheight: 1.1,
+    lineheight: 1.3,
     lineheightMobile: 1.4,
   },
   h2: {

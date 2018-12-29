@@ -116,7 +116,7 @@ const fadeInOut = keyframes`
 `
 
 const TextContainer = styled.div`
-  max-width: 640px;
+  max-width: 620px;
   ${transitions.fadeUp};
 `
 
@@ -124,6 +124,7 @@ const MainText = styled.p`
   font-size: 3.2rem;
   font-weight: 400;
   color: ${props => props.theme.colors.grey};
+  line-height: 1.3;
 
   ${media.phablet`
     font-size: 2.2rem;

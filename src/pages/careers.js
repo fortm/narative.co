@@ -683,12 +683,13 @@ const Footer = styled.footer`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 5rem;
+  padding-bottom: 10rem;
   color: ${p => p.theme.colors.grey};
 
   ${media.tablet`
     justify-content: center;
     flex-direction: column;
+    padding-bottom: 5rem;
   `};
 `
 
