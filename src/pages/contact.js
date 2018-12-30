@@ -33,10 +33,9 @@ class ContactPage extends Component {
   exitContactPage = () => {
     const pathname = localStorage.getItem('previousPath') || '/'
 
-    this.setState({
-      animation: '',
-    })
+    this.setState({ animation: '' })
 
+    // Wait for the animation out to navigate to the previous page
     setTimeout(() => {
       navigate(pathname)
     }, 550)
@@ -101,8 +100,6 @@ export const pageQuery = graphql`
   }
 `
 
-const duration = 600
-
 const defaultStyle = {
   opacity: 1,
   transform: 'translateY(100vh)',
@@ -115,22 +112,20 @@ const transitionStyles = {
   exited: { transform: 'translateY(100vh)' },
 }
 
-const SlideIn = ({ in: inProp, children }) => {
-  return (
-    <Transition in={inProp} timeout={duration}>
-      {state => (
-        <SlideInContainer
-          style={{
-            ...defaultStyle,
-            ...transitionStyles[state],
-          }}
-        >
-          {children}
-        </SlideInContainer>
-      )}
-    </Transition>
-  )
-}
+const SlideIn = ({ in: inProp, children }) => (
+  <Transition in={inProp} timeout={600}>
+    {state => (
+      <SlideInContainer
+        style={{
+          ...defaultStyle,
+          ...transitionStyles[state],
+        }}
+      >
+        {children}
+      </SlideInContainer>
+    )}
+  </Transition>
+)
 
 const SlideInContainer = styled.div`
   width: 100%;
@@ -139,7 +134,7 @@ const SlideInContainer = styled.div`
   right: 0px;
   padding-top: 125px;
   z-index: 0;
-  position: absolute;
+  position: fixed;
   overflow-y: scroll;
   transition: transform 0.7s cubic-bezier(0.215, 0.61, 0.355, 1);
   will-change: transform;

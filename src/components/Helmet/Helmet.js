@@ -22,13 +22,13 @@ import { Helmet as ReactHelmt } from 'react-helmet'
 
 const seoURL = path => `https://narative.co${path}`
 const seoDescription =
-  "Narative brings decades of design, engineering and marketing expertise directly to your team, so you can build the products you've always dreamed of — and the ones you're yet to dream up."
+  "Narative brings decades of design, marketing and engineering expertise directly to your team. We help you build the products you've always dreamed of, and the ones you're yet to dream up."
 
 const getMetaTags = ({
   title,
   description,
   url,
-  image = '/public/static/imgs/brand/narative-hero-metadata.jpg',
+  image,
   contentType,
   published,
   updated,

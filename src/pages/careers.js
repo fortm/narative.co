@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { Link, graphql } from 'gatsby'
+import { Link, graphql, navigate } from 'gatsby'
 import Img from 'gatsby-image'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 
-import { media, transitions } from '@styles'
 import {
   AnimatorFadeUp,
+  ButtonArrow,
   CareersAccordian,
   CareersGraph,
   CareersImages,
@@ -16,13 +16,14 @@ import {
   Perks,
   SocialLinks,
 } from '@components'
-import { ArrowRightIcon } from '../icons/ui'
+import { media, transitions } from '@styles'
+import { startAnimation } from '@utils'
 
 class CareersPage extends Component {
   state = { animation: '' }
 
   componentDidMount() {
-    setTimeout(() => {
+    startAnimation(() => {
       this.setState({ animation: 'start' })
     })
   }
@@ -31,15 +32,11 @@ class CareersPage extends Component {
     const { animation } = this.state
     const { data, location } = this.props
     const contentful = data.allContentfulCareersPage.edges[0].node
+    const pageBackground =
+      'linear-gradient(rgb(9, 10, 12),rgb(17, 18, 22) 60%,#1a1e24 100%)'
 
     return (
-      <Layout
-        background="linear-gradient(
-        rgb(9, 10, 12),
-        rgb(17, 18, 22) 60%,
-        #1a1e24 100%
-      )"
-      >
+      <Layout background={pageBackground}>
         <Helmet
           title={contentful.seo.title}
           description={contentful.seo.description}
@@ -146,12 +143,10 @@ class CareersPage extends Component {
                 <CopyRightContainer>
                   <ContactActionsContainer>
                     <ContactButton to="/contact">Contact us</ContactButton>
-                    <ContactText to="/" color="#fff">
-                      <ArrowAnimation>
-                        Go back home
-                        <ArrowRightIcon color="#fff" />
-                      </ArrowAnimation>
-                    </ContactText>
+                    <ButtonArrow
+                      onClick={() => navigate('/')}
+                      text="Go back home"
+                    />
                   </ContactActionsContainer>
                 </CopyRightContainer>
                 <SocialIconsFooter>
@@ -207,33 +202,6 @@ export const pageQuery = graphql`
         }
       }
     }
-  }
-`
-
-const animateButtonLine = keyframes`
-  0% {
-      width: 0;
-  }
-  50% {
-      width: 70%;
-  }
-  100% {
-      width: 70%;
-      left: 100%;
-  }
-`
-
-const fadeInOut = keyframes`
-  0% {
-      opacity: 0;
-      width: 0;
-  }
-  50% { opacity: 1; width: 40%}
-  60% { opacity: 1; width: 70%}
-  80% {
-    opacity: 0;
-    width: 50%;
-    left: 100%;
   }
 `
 
@@ -531,6 +499,11 @@ const ContactActionsContainer = styled.div`
   ${media.phablet`
     width: 100%;
     flex-direction: column;
+
+    button:nth-child(2) {
+      position: relative;
+      left: 25px;
+    }
   `};
 `
 
@@ -569,78 +542,6 @@ const ContactButton = styled(Link)`
   &:hover::after {
     transform: scale(1);
     opacity: 1;
-  }
-`
-
-const ContactText = styled(Link)`
-  display: flex;
-  flex-direction: row;
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: ${p => (p.color ? p.color : '#000')};
-
-  ${media.tablet`
-    flex-direction: column;
-  `};
-
-  svg {
-    margin-left: 1rem;
-    transition: transform 300ms ${p => p.theme.transitions.in};
-  }
-`
-
-const ArrowAnimation = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  overflow-x: hidden;
-  padding: 0 3rem 0 0.5rem;
-
-  ${media.tablet`
-    padding: 0rem
-    text-decoration: underline;
-  `};
-
-  &::after {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 12px;
-    height: 1px;
-    width: 0;
-    background: #fff;
-    opacity: 0;
-    z-index: 100;
-
-    ${media.tablet`
-    display: none;
-    `};
-  }
-
-  svg {
-    transition: all 300ms cubic-bezier(0.77, 0, 0.175, 1);
-
-    ${media.tablet`
-    display: none;
-    `};
-  }
-
-  &:hover svg {
-    transform: translateX(3rem);
-  }
-
-  &:hover span::after {
-    animation: ${fadeInOut} 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
-  }
-
-  &:hover::after {
-    opacity: 1;
-    animation: ${animateButtonLine} 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
-
-    ${media.tablet`
-      animation: none;
-    `};
   }
 `
 

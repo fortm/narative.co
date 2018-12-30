@@ -2,77 +2,13 @@ import React, { Component } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { StaticQuery, graphql } from 'gatsby'
 
-import { CopyToClipboard } from '@components'
+import { ButtonArrow, CopyToClipboard } from '@components'
 import { media } from '@styles'
-import { ArrowRightIcon } from '../../icons/ui'
-
-const animateButtonLine = keyframes`
-  0% {
-      width: 0;
-  }
-  50% {
-      width: 70%;
-  }
-  100% {
-      width: 70%;
-      left: 100%;
-  }
-`
 
 const fadein = keyframes`
   from { opacity: 0; }
   to { opacity: 1; }
 `
-
-const fadeInOut = keyframes`
-  0% {
-      opacity: 0;
-      width: 0;
-  }
-  50% { opacity: 1; width: 40%}
-  60% { opacity: 1; width: 70%}
-  80% {
-    opacity: 0;
-    width: 50%;
-    left: 100%;
-  }
-`
-
-const CareersAccordianItem = ({ career, handleIndexOpen, index, isOpen }) => {
-  const mailTo = `mailTo: 'mailto:info@narative.co?subject=${
-    career.title
-  } @ Narative`
-
-  return (
-    <AccordianListItem isOpen={isOpen} onClick={() => handleIndexOpen(index)}>
-      <AccordianListTop>
-        <span>
-          <AccordianListTitle>{career.title}</AccordianListTitle>
-          <AccordianListLocation>{career.location}</AccordianListLocation>
-        </span>
-        <IconContainer isOpen={isOpen} />
-      </AccordianListTop>
-
-      {isOpen && (
-        <div>
-          <AccordianListDescription
-            dangerouslySetInnerHTML={{
-              __html:
-                career.childContentfulCareerDescriptionTextNode
-                  .childMarkdownRemark.html,
-            }}
-          />
-          <AccordianMailTo href={mailTo}>
-            <ArrowAnimation>
-              Email us about this job
-              <ArrowRightIcon color="white" />
-            </ArrowAnimation>
-          </AccordianMailTo>
-        </div>
-      )}
-    </AccordianListItem>
-  )
-}
 
 class CareersAccordian extends Component {
   state = {
@@ -112,17 +48,17 @@ class CareersAccordian extends Component {
             }
           }
         `}
-        render={data => {
-          const careers =
-            data.allContentfulCareer && data.allContentfulCareer.edges
+        render={({ allContentfulCareer }) => {
+          const careers = allContentfulCareer && allContentfulCareer.edges
+          const { copied, openRowIndex } = this.state
 
           if (!careers || careers.length === 0) {
             return (
               <AccordianContainer empty>
-                <AccordianCareersEmail copied={this.state.copied}>
+                <AccordianCareersEmail copied={copied}>
                   <span
                     style={{
-                      display: this.state.copied ? 'none' : 'inline',
+                      display: copied ? 'none' : 'inline',
                       maxWidth: '61rem',
                     }}
                   >
@@ -152,14 +88,12 @@ class CareersAccordian extends Component {
                     handleIndexOpen={this.handleIndexOpen}
                     career={node}
                     index={index}
-                    isOpen={this.state.openRowIndex === index}
+                    isOpen={openRowIndex === index}
                   />
                 ))}
               </AccordianList>
-              <AccordianCareersEmail copied={this.state.copied}>
-                <span
-                  style={{ display: this.state.copied ? 'none' : 'inline' }}
-                >
+              <AccordianCareersEmail copied={copied}>
+                <span style={{ display: copied ? 'none' : 'inline' }}>
                   Don't see a position you're looking for? Send us a message to{' '}
                   <a href="mailto:careers@narative.co">careers@narative.co</a>
                 </span>
@@ -179,6 +113,39 @@ class CareersAccordian extends Component {
 }
 
 export default CareersAccordian
+
+const CareersAccordianItem = ({ career, handleIndexOpen, index, isOpen }) => {
+  const mailTo = `mailTo: 'mailto:info@narative.co?subject=${
+    career.title
+  } @ Narative`
+
+  return (
+    <AccordianListItem isOpen={isOpen} onClick={() => handleIndexOpen(index)}>
+      <AccordianListTop>
+        <span>
+          <AccordianListTitle>{career.title}</AccordianListTitle>
+          <AccordianListLocation>{career.location}</AccordianListLocation>
+        </span>
+        <IconContainer isOpen={isOpen} />
+      </AccordianListTop>
+
+      {isOpen && (
+        <div>
+          <AccordianListDescription
+            dangerouslySetInnerHTML={{
+              __html:
+                career.childContentfulCareerDescriptionTextNode
+                  .childMarkdownRemark.html,
+            }}
+          />
+          <AccordianMailTo href={mailTo}>
+            <ButtonArrow text="email us about this job" />
+          </AccordianMailTo>
+        </div>
+      )}
+    </AccordianListItem>
+  )
+}
 
 const AccordianContainer = styled.div`
   color: #fff;
@@ -314,58 +281,6 @@ const AccordianMailTo = styled.a`
   color: #fff;
   opacity: 0;
   animation: 1.4s ease-out ${fadein} forwards;
-`
-
-const ArrowAnimation = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding: 0 3rem 0 0.5rem;
-  overflow-x: hidden;
-
-  ${media.phablet`
-    padding: 0;
-    text-decoration: underline;
-  `};
-
-  &::after {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 12px;
-    height: 1px;
-    width: 0;
-    background: #fff;
-    opacity: 0;
-    z-index: 100;
-  }
-
-  svg {
-    margin-left: 1rem;
-    transition: all 300ms cubic-bezier(0.77, 0, 0.175, 1);
-
-    ${media.phablet`
-      display: none;
-    `};
-  }
-
-  &:hover svg {
-    transform: translateX(3rem);
-  }
-
-  &:hover span::after {
-    animation: ${fadeInOut} 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
-  }
-
-  &:hover::after {
-    opacity: 1;
-    animation: ${animateButtonLine} 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
-
-    ${media.tablet`
-      animation: none;
-    `};
-  }
 `
 
 const AccordianCareersEmail = styled.p`

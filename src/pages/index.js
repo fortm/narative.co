@@ -1,11 +1,10 @@
 import React, { Component, Fragment } from 'react'
 import { Link, graphql } from 'gatsby'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 
 import { media, transitions } from '@styles'
-import { Container, Heading, Helmet, Layout } from '@components'
+import { ButtonArrow, Container, Heading, Helmet, Layout } from '@components'
 import { startAnimation } from '@utils'
-import { ArrowRightIcon } from '../icons/ui'
 
 class IndexPage extends Component {
   state = { animation: '' }
@@ -33,36 +32,28 @@ class IndexPage extends Component {
             <ContentContainer>
               <div style={{ top: '-60px' }} />
               <TextContainer animation={animation}>
-                <Heading.h1>
-                  Narative brings decades of design, marketing and engineering
-                  expertise directly to your team.
-                </Heading.h1>
-                <MainText>
-                  We help you build the products you've always dreamed of, and
-                  the ones you're yet to dream up.
-                </MainText>
+                <Heading.h1>{contentful.heading}</Heading.h1>
+                <MainText>{contentful.text.text}</MainText>
+
+                {/* With flexbox we need to have a mobile and desktop element
+                in the DOM so we can have the proper design in palce. This is
+                the Mobile only Contact button*/}
                 <MobileContactText
                   animation={animation}
                   to="/contact"
-                  transitionDelay={100}
+                  transitionDelay={150}
                 >
-                  <ArrowAnimation>
-                    <HighlightText>Get in touch</HighlightText>
-                    .
-                    <ArrowRightIcon color="white" />
-                  </ArrowAnimation>
+                  <ButtonArrow text="Get in touch" />
                 </MobileContactText>
               </TextContainer>
+
+              {/* And this is the Desktop only Contact button */}
               <ContactText
                 animation={animation}
                 to="/contact"
-                transitionDelay={100}
+                transitionDelay={150}
               >
-                <ArrowAnimation>
-                  <HighlightText>Get in touch</HighlightText>
-                  .
-                  <ArrowRightIcon color="white" />
-                </ArrowAnimation>
+                <ButtonArrow text="Get in touch" />
               </ContactText>
             </ContentContainer>
             <div />
@@ -99,33 +90,6 @@ export const pageQuery = graphql`
   }
 `
 
-const animateButtonLine = keyframes`
-  0% {
-      width: 0;
-  }
-  50% {
-      width: 70%;
-  }
-  100% {
-      width: 70%;
-      left: 100%;
-  }
-`
-
-const fadeInOut = keyframes`
-  0% {
-      opacity: 0;
-      width: 0;
-  }
-  50% { opacity: 1; width: 40%}
-  60% { opacity: 1; width: 70%}
-  80% {
-    opacity: 0;
-    width: 50%;
-    left: 100%;
-  }
-`
-
 const TextContainer = styled.div`
   max-width: 620px;
   ${transitions.fadeUp};
@@ -134,7 +98,7 @@ const TextContainer = styled.div`
 const MainText = styled.p`
   font-size: 3.2rem;
   font-weight: 400;
-  color: ${props => props.theme.colors.grey};
+  color: ${p => p.theme.colors.grey};
   line-height: 1.3;
 
   ${media.phablet`
@@ -147,7 +111,7 @@ const ContactText = styled(Link)`
   flex-direction: row;
   font-size: 1.8rem;
   font-weight: 600;
-  color: ${props => props.theme.colors.grey};
+  color: ${p => p.theme.colors.grey};
   ${transitions.fadeUp};
 
   ${media.tablet`
@@ -158,7 +122,7 @@ const ContactText = styled(Link)`
 
   svg {
     margin-left: 1rem;
-    transition: transform 300ms ${props => props.theme.transitions.in};
+    transition: transform 300ms ${p => p.theme.transitions.in};
   }
 `
 
@@ -188,74 +152,3 @@ const ContentContainer = styled.div`
     padding: 0;
   `};
 `
-
-const ArrowAnimation = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  overflow-x: hidden;
-  padding: 0 3rem 0 0;
-  font-size: 1.8rem;
-
-  ${media.tablet`
-    padding: 0rem 3rem 0 0rem;
-  `};
-
-  &::after {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 12px;
-    height: 1px;
-    width: 0;
-    background: #fff;
-    opacity: 0;
-    z-index: 100;
-  }
-
-  svg {
-    transition: all 300ms cubic-bezier(0.77, 0, 0.175, 1);
-  }
-
-  &:hover svg {
-    transform: translateX(3rem);
-  }
-
-  &:hover span::after {
-    animation: ${fadeInOut} 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
-  }
-
-  &:hover::after {
-    opacity: 1;
-    animation: ${animateButtonLine} 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
-
-    ${media.tablet`
-      animation: none;
-    `};
-  }
-`
-
-const HighlightText = styled.span`
-  color: #fff;
-  ${props => props.underline && `text-decoration: underline`};
-`
-
-// const GradientContainer = styled.div`
-//   position: relative;
-//   min-height: 100vh;
-
-//   &::before {
-//     content: '';
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     height: 100%;
-//     width: 100%;
-//     background: linear-gradient(226.45deg, #191b21 8.28%, #111216 61.84%);
-//     pointer-events: none;
-//     transition: all 1.5s ease;
-//     z-index: 0;
-//     opacity: ${p => (p.animation ? 0 : 1)};
-//   }
-// `

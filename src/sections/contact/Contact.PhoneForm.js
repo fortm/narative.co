@@ -7,7 +7,7 @@ import { media } from '@styles'
 import { apiCall } from '@utils'
 import { CheckIcon } from '../../icons/ui'
 
-const validate = (values, props) => {
+const validate = values => {
   let errors = {}
 
   if (values.phone && values.phone.match(/\d/g).length !== 10) {
@@ -31,9 +31,7 @@ class PhoneForm extends Component {
 
     const method = 'post'
     const endpoint = '/contact/phone'
-    const data = {
-      phone,
-    }
+    const data = { phone }
 
     try {
       await apiCall({ method, endpoint, data })

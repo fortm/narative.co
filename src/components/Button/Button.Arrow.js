@@ -12,7 +12,7 @@ export default ({ onClick, text, color = 'white', isSubmitting }) => (
     ) : (
       <ArrowAnimation color={color}>
         {text}
-        <ArrowRightIcon color={color} />
+        <ArrowRightIcon fill={color} />
       </ArrowAnimation>
     )}
   </ArrowButton>
@@ -120,7 +120,7 @@ const ArrowAnimation = styled.div`
   }
 `
 
-export const ArrowRightIcon = ({ color = 'black' }) => (
+export const ArrowRightIcon = ({ fill = 'white' }) => (
   <svg width="35" height="7" viewBox="0 0 35 7" version="1.1">
     <g id="Canvas" fill="none">
       <g id="arrow-left-icon">
@@ -128,7 +128,7 @@ export const ArrowRightIcon = ({ color = 'black' }) => (
           id="triangle"
           d="M 3.5 0L 6.53109 5.25L 0.468911 5.25L 3.5 0Z"
           transform="matrix(0 1 -1 0 35 0)"
-          fill={color}
+          fill={fill}
         />
         <line
           id="Line"
@@ -136,7 +136,7 @@ export const ArrowRightIcon = ({ color = 'black' }) => (
           x2="30"
           y2="-0.5"
           transform="translate(0 4)"
-          stroke={color}
+          stroke={fill}
         />
       </g>
     </g>

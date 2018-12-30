@@ -6,6 +6,7 @@ import Swipeable from 'react-swipeable'
 
 import { Container, Logo, SocialLinks } from '@components'
 import { media } from '@styles'
+import { isMobile } from '@utils'
 
 const navOptions = [
   { to: '#', text: 'Labs (coming soon)', disabled: true },
@@ -60,16 +61,11 @@ class Navigation extends Component {
   }
 
   handleToggleClick = () => {
-    const screenWidth =
-      window.innerWidth ||
-      document.documentElement.clientWidth ||
-      document.body.clientWidth
-
     this.setState({
       active: !this.state.active,
     })
 
-    if (screenWidth > 768) {
+    if (!isMobile()) {
       if (!this.state.active) {
         this.leftToggle.current.animate(animateIn, {
           duration: 900,
@@ -79,7 +75,6 @@ class Navigation extends Component {
       } else {
         this.handleCloseAnimation()
       }
-    } else {
     }
   }
 

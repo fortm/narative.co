@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 import styled from 'styled-components'
 
 import { Container, Heading, Helmet, Layout, SocialLinks } from '@components'

@@ -118,6 +118,7 @@ class ContactForm extends Component {
                         component={Form.Text}
                         label="your name"
                         name="name"
+                        autoFocus
                       />
                       <Field
                         component={Form.Text}

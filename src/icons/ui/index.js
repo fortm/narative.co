@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const ArrowRightIcon = ({ color = 'black' }) => (
+export const ArrowRightIcon = ({ fill = 'black' }) => (
   <svg width="35" height="7" viewBox="0 0 35 7" version="1.1">
     <g id="Canvas" fill="none">
       <g id="arrow-left-icon">
@@ -8,7 +8,7 @@ export const ArrowRightIcon = ({ color = 'black' }) => (
           id="triangle"
           d="M 3.5 0L 6.53109 5.25L 0.468911 5.25L 3.5 0Z"
           transform="matrix(0 1 -1 0 35 0)"
-          fill={color}
+          fill={fill}
         />
         <line
           id="Line"
@@ -16,14 +16,14 @@ export const ArrowRightIcon = ({ color = 'black' }) => (
           x2="30"
           y2="-0.5"
           transform="translate(0 4)"
-          stroke={color}
+          stroke={fill}
         />
       </g>
     </g>
   </svg>
 )
 
-export const CheckIcon = ({ color = 'white' }) => (
+export const CheckIcon = ({ fill = 'white' }) => (
   <svg width="18" height="14" viewBox="0 0 18 14" version="1.1">
     <g id="Canvas" fill="none">
       <g id="check">
@@ -33,21 +33,21 @@ export const CheckIcon = ({ color = 'white' }) => (
           clipRule="evenodd"
           d="M 5.6 10.6L 1.4 6.4L 0 7.8L 5.6 13.4L 17.6 1.4L 16.2 0L 5.6 10.6Z"
           transform="translate(0.399902 0.600098)"
-          fill={color}
+          fill={fill}
         />
       </g>
     </g>
   </svg>
 )
 
-export const ExIcon = ({ color = 'black' }) => (
+export const ExIcon = ({ fill = 'black' }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" version="1.1">
     <g id="Canvas" fill="none">
       <path
         id="Stroke 1"
         d="M 0 0L 24 0L 24 24L 0 24L 0 0Z"
         strokeWidth="0"
-        stroke={color}
+        stroke={fill}
         strokeOpacity="0.01"
       />
       <path
@@ -56,7 +56,7 @@ export const ExIcon = ({ color = 'black' }) => (
         clipRule="evenodd"
         d="M 14 1.4L 12.6 0L 7 5.6L 1.4 0L 0 1.4L 5.6 7L 0 12.6L 1.4 14L 7 8.4L 12.6 14L 14 12.6L 8.4 7L 14 1.4Z"
         transform="translate(5 5)"
-        fill={color}
+        fill={fill}
       />
     </g>
   </svg>

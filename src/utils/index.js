@@ -1,5 +1,5 @@
 import { apiCall } from './api'
-import { detectMobile } from './detectMobile'
+import { isMobile } from '@utils/isMobile'
 import { startAnimation } from './startAnimation'
 
-export { apiCall, detectMobile, startAnimation }
+export { apiCall, isMobile, startAnimation }

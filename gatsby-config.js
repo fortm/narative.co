@@ -1,10 +1,10 @@
 require('dotenv').config()
 
-const siteMetadata = {
+exports.siteMetadata = {
   title: 'Narative',
 }
 
-const plugins = [
+exports.plugins = [
   'gatsby-plugin-react-helmet',
   `gatsby-image`,
   `gatsby-plugin-sharp`,
@@ -41,24 +41,6 @@ const plugins = [
     },
   },
   {
-    resolve: `gatsby-plugin-favicon`,
-    options: {
-      logo: './static/favicon.png',
-      injectHTML: true,
-      icons: {
-        android: true,
-        appleIcon: true,
-        appleStartup: true,
-        coast: false,
-        favicons: true,
-        firefox: true,
-        twitter: false,
-        yandex: false,
-        windows: false,
-      },
-    },
-  },
-  {
     resolve: 'gatsby-plugin-manifest',
     options: {
       name: 'Narative',
@@ -66,6 +48,8 @@ const plugins = [
       start_url: '/',
       background_color: '#111216',
       theme_color: '#111216',
+      display: 'standalone',
+      icon: 'src/assets/favicon/favicon.png',
     },
   },
   {
@@ -82,8 +66,3 @@ const plugins = [
     },
   },
 ]
-
-module.exports = {
-  plugins,
-  siteMetadata,
-}

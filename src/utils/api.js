@@ -13,7 +13,7 @@ export function buildUrl(url) {
   return baseUrl + url
 }
 
-export function buildHeaders(url, cookies) {
+export function buildHeaders() {
   const headers = {}
 
   headers.Accept = 'application/json'
