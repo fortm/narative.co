@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { isMobile } from 'react-device-detect'
+import { isMobile } from '@utils'
 import { IntersectionObserver } from '@components'
 
 class AnimatorFadeUp extends Component {
@@ -32,7 +32,7 @@ class AnimatorFadeUp extends Component {
   render() {
     const { children } = this.props
 
-    if (isMobile) return children
+    if (isMobile()) return children
 
     return (
       <IntersectionObserver

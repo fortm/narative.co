@@ -1,27 +1,56 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { media } from '@styles'
+import { isMobile } from '@utils'
 
-const Text = ({ field, label, ...props }) => {
-  const hasError =
-    props.form.touched[field.name] && props.form.errors[field.name]
+class Text extends Component {
+  input = React.createRef()
 
-  return (
-    <InputContainer>
-      <InputBorder hasError={hasError}>
-        <StyledInput type="text" {...field} {...props} />
-        <LabelAnimation>
-          <StyledLabel hasError={hasError}>{label}</StyledLabel>
-        </LabelAnimation>
-        <InputBorderActive hasError={hasError} />
-      </InputBorder>
-      <InputError hasError={hasError}>
-        {hasError && props.form.errors[field.name]}
-      </InputError>
-    </InputContainer>
-  )
+  state = { focusCount: 0 }
+
+  componentDidMount() {
+    if (isMobile()) return
+
+    if (this.props.autoFocus) {
+      this.input.current.focus()
+    }
+  }
+
+  handleFocus = () => {
+    this.setState({ focusCount: this.state.focusCount + 1 })
+  }
+
+  render() {
+    const { autoFocus, field, label, ...rest } = this.props
+
+    const hasError =
+      this.props.form.touched[field.name] && this.props.form.errors[field.name]
+    const allowFocus = this.state.focusCount > 1 || !autoFocus
+
+    return (
+      <InputContainer>
+        <InputBorder hasError={hasError}>
+          <StyledInput
+            type="text"
+            allowFocus={allowFocus}
+            onFocus={this.handleFocus}
+            ref={this.input}
+            {...field}
+            {...rest}
+          />
+          <LabelAnimation hasValue={field.value}>
+            <StyledLabel hasError={hasError}>{label}</StyledLabel>
+          </LabelAnimation>
+          <InputBorderActive hasError={hasError} />
+        </InputBorder>
+        <InputError hasError={hasError}>
+          {hasError && this.props.form.errors[field.name]}
+        </InputError>
+      </InputContainer>
+    )
+  }
 }
 
 Text.propTypes = {
@@ -58,7 +87,7 @@ const InputBorder = styled.div`
   position: relative;
 
   ${media.tablet`
-    padding: 0.35em 0;
+    padding: 0.35em 0 0.4rem;
   ${p =>
     p.hasError
       ? `border-bottom: 1px solid ${p.theme.colors.red}`
@@ -113,6 +142,24 @@ const LabelAnimation = styled.span`
   ${media.tablet`
     padding-top: 0.55rem;
   `};
+
+  ${p =>
+    p.hasValue &&
+    `
+    label { color: #000; }
+    font-weight: 500;
+    width: 133.3333333%;
+    transform: translateY(-1em) scale(0.45) perspective(100px)
+      translateZ(0.001px);
+  `};
+
+  ${p =>
+    p.hasValue &&
+    media.tablet`
+      width: 133.3333333%;
+      transform: translateY(-1.28125em) scale(0.8) perspective(100px)
+        translateZ(0.001px);
+    `};
 `
 
 const StyledInput = styled.input`
@@ -129,37 +176,38 @@ const StyledInput = styled.input`
     font-size: 1.6rem;
     height: 1.8rem;
     color: #000;
-  `}
+  `};
 
-  &[value]:not([value='']) ~ ${LabelAnimation} {
-    label { color: #000; }
-    font-weight: 500;
-    width: 133.3333333%;
-    transform: translateY(-1em) scale(0.45) perspective(100px)
-      translateZ(0.001px);
-
-    ${media.tablet`
+  ${p =>
+    p.allowFocus &&
+    `
+    &:active ~ ${LabelAnimation}, &:focus ~ ${LabelAnimation} {
+      label { color: #000; }
+      font-weight: 500;
       width: 133.3333333%;
-      transform: translateY(-1.28125em) scale(0.8) perspective(100px)
+      transform: translateY(-1em) scale(0.45) perspective(100px)
         translateZ(0.001px);
-    `};
-  }
+
+      ${media.tablet`
+        width: 133.3333333%;
+        transform: translateY(-1.28125em) scale(0.8) perspective(100px)
+          translateZ(0.001px);
+      `};
+    }
+
+
+
+
+    &:active ~ ${InputBorderActive}, &:focus ~ ${InputBorderActive} {
+      transform: scale(1);
+    }
+  `};
 
   &:active ~ ${LabelAnimation}, &:focus ~ ${LabelAnimation} {
-    label { color: #000; }
-    font-weight: 500;
-    width: 133.3333333%;
-    transform: translateY(-1em) scale(0.45) perspective(100px)
-      translateZ(0.001px);
-
     ${media.tablet`
-      width: 133.3333333%;
-      transform: translateY(-1.28125em) scale(0.8) perspective(100px)
-        translateZ(0.001px);
-    `};
-  }
-  
-  &:active ~ ${InputBorderActive}, &:focus ~ ${InputBorderActive} {
-    transform: scale(1);
+          width: 133.3333333%;
+          transform: translateY(-1.28125em) scale(0.8) perspective(100px)
+            translateZ(0.001px);
+        `};
   }
 `

@@ -106,15 +106,14 @@ export const pageQuery = graphql`
 `
 
 const defaultStyle = {
-  opacity: 1,
   transform: 'translateY(100vh)',
 }
 
 const transitionStyles = {
-  entering: { transform: 'translateY(100vh)' },
-  entered: { transform: 'translateY(40px)' },
-  exiting: { transform: 'translateY(100vh)' },
-  exited: { transform: 'translateY(100vh)' },
+  entering: { opacity: 0, transform: 'translateY(100vh)' },
+  entered: { opacity: 1, transform: 'translateY(40px)' },
+  exiting: { opacity: 1, transform: 'translateY(100vh)' },
+  exited: { opacity: 0, transform: 'translateY(100vh)' },
 }
 
 const SlideIn = ({ in: inProp, children }) => (
@@ -143,10 +142,12 @@ const SlideInContainer = styled.div`
   overflow-y: scroll;
   transition: transform 0.7s cubic-bezier(0.215, 0.61, 0.355, 1);
   will-change: transform;
-  transform: translateX(100%);
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   background: #fff;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  filter: blur(0);
 
   ${media.tablet`
     width: 100%;

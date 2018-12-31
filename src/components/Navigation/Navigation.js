@@ -156,7 +156,7 @@ const NavItems = ({ active }) =>
           <NavAnchor
             target="_blank"
             rel="noopener"
-            active={active}
+            active={active ? active : undefined}
             disabled={nav.disabled}
             href={nav.to}
             delay={delay}
@@ -165,7 +165,7 @@ const NavItems = ({ active }) =>
           </NavAnchor>
         ) : (
           <NavAnchor
-            active={active}
+            active={active ? active : undefined}
             disabled={nav.disabled}
             to={nav.to}
             delay={delay}
