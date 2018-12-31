@@ -23,7 +23,7 @@ class Text extends Component {
   }
 
   render() {
-    const { autoFocus, field, label, ...rest } = this.props
+    const { field, label, ...rest } = this.props
 
     const hasError =
       this.props.form.touched[field.name] && this.props.form.errors[field.name]
@@ -39,6 +39,7 @@ class Text extends Component {
             ref={this.input}
             {...field}
             {...rest}
+            autoFocus={false}
           />
           <LabelAnimation hasValue={field.value}>
             <StyledLabel hasError={hasError}>{label}</StyledLabel>
