@@ -31,7 +31,12 @@ class ContactPage extends Component {
   }
 
   exitContactPage = () => {
-    const pathname = localStorage.getItem('previousPath') || '/'
+    const previousPath = localStorage.getItem('previousPath')
+    let pathname = previousPath || '/'
+
+    if (previousPath.includes('contact')) {
+      pathname = '/'
+    }
 
     this.setState({ animation: '' })
 
