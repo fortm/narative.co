@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { isMobile } from '@utils'
+import { isMobile } from 'react-device-detect'
 
 const StyledVideo = styled.video`
   height: 100%;
@@ -14,13 +14,13 @@ class Video extends Component {
   componentDidMount() {
     const { dataset } = this.video
 
-    this.setState({ isMobile: isMobile() })
+    this.setState({ isMobile })
 
     // Always load the poster image
     this.video.poster = dataset.poster
 
     // If it's not mobile, attach the video to the source objects
-    if (!isMobile()) {
+    if (!isMobile) {
       this.webm.src = dataset.webmSrc
       this.mp4.src = dataset.mp4Src
     }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { isMobile } from 'react-device-detect'
 
 import { media } from '@styles'
-import { isMobile } from '@utils'
 
 class Textarea extends Component {
   textarea = React.createRef()
@@ -16,7 +16,7 @@ class Textarea extends Component {
 
   static getDerivedStateFromProps(props) {
     if (typeof window !== 'undefined') {
-      const rows = isMobile() ? 1 : props.rows || 1
+      const rows = isMobile ? 1 : props.rows || 1
 
       return { rows }
     }

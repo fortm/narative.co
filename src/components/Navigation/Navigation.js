@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import Link from 'gatsby-link'
 import OutsideClickHandler from 'react-outside-click-handler'
 import Swipeable from 'react-swipeable'
+import { isMobile } from 'react-device-detect'
 
 import { Container, Logo, SocialLinks } from '@components'
 import { media } from '@styles'
-import { isMobile } from '@utils'
 
 const navOptions = [
   { to: '#', text: 'Labs (coming soon)', disabled: true },
@@ -65,7 +65,7 @@ class Navigation extends Component {
       active: !this.state.active,
     })
 
-    if (!isMobile()) {
+    if (!isMobile) {
       if (!this.state.active) {
         this.leftToggle.current.animate(animateIn, {
           duration: 900,

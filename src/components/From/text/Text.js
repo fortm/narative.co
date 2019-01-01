@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { isMobile } from 'react-device-detect'
 
 import { media } from '@styles'
-import { isMobile } from '@utils'
 
 class Text extends Component {
   input = React.createRef()
@@ -11,7 +11,7 @@ class Text extends Component {
   state = { focusCount: 0 }
 
   componentDidMount() {
-    if (isMobile()) return
+    if (isMobile) return
 
     if (this.props.autoFocus) {
       this.input.current.focus()
