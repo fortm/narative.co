@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Link from 'gatsby-link'
 import OutsideClickHandler from 'react-outside-click-handler'
 import Swipeable from 'react-swipeable'
-import { isMobile } from 'react-device-detect'
+import { isMobileOnly } from 'react-device-detect'
 
 import { Container, Logo, SocialLinks } from '@components'
 import { media } from '@styles'
@@ -65,7 +65,7 @@ class Navigation extends Component {
       active: !this.state.active,
     })
 
-    if (!isMobile) {
+    if (!isMobileOnly) {
       if (!this.state.active) {
         this.leftToggle.current.animate(animateIn, {
           duration: 900,
@@ -185,7 +185,6 @@ const NavFixedContainer = styled.div`
     width: 100%;
     top: 0;
     left: 0;
-    z-index: 10;
   `};
 `
 

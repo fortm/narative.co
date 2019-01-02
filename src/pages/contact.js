@@ -210,6 +210,7 @@ const FormContainer = styled.div`
   margin: 0 auto;
   width: 100%;
   background: #fff;
+  z-index: 99999;
 `
 
 const HighlightText = styled.span`
