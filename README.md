@@ -1,4 +1,4 @@
-![Narative Logo Header](/project/images/readme/narative-repo-header.png)
+![Narative Logo Header](https://res.cloudinary.com/narative/image/upload/v1546451163/narative-header.jpg)
 
 <br />
 
