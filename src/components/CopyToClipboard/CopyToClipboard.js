@@ -25,11 +25,11 @@ class CopyToClipboard extends Component {
     return (
       <CopyIconContainer
         copied={this.state.copied}
-        onClick={() => this.copyToClipboardOnClick(this.props.textToCopy)}
+        onClick={() => this.copyToClipboardOnClick(this.props.copyOnClick)}
       >
         {this.state.copied ? (
           <CopyIconText>
-            <strong>{this.props.successText || this.props.textToCopy}</strong>{' '}
+            <strong>{this.props.successText || this.props.copyOnClick}</strong>{' '}
             copied to clipboard <CopiedIcon />
           </CopyIconText>
         ) : (
@@ -51,7 +51,7 @@ const CopyIconText = styled.p`
   align-items: center;
   color: #3f7871;
   opacity: 0;
-  animation: fadein 300ms ease-out forwards;
+  animation: fadein 1s linear forwards;
 
   @keyframes fadein {
     to {

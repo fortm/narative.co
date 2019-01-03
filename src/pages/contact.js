@@ -205,8 +205,8 @@ const PhoneFormContainer = styled.div`
 `
 
 const FormContainer = styled.div`
-  width: 100%;
   position: relative;
+  width: 100%;
   margin: 0 auto;
   width: 100%;
   background: #fff;

@@ -116,7 +116,7 @@ const InputBorderActive = styled.div`
 const StyledLabel = styled.label`
   display: block;
   font-size: 3.2rem;
-  color: ${p => (p.hasError ? p.theme.colors.red : 'rgba(0,0,0,0.25)')};
+  color: ${p => (p.hasError ? p.theme.colors.red : 'rgba(0,0,0,0.33)')};
   border: none;
   pointer-events: none;
 
@@ -133,11 +133,13 @@ const LabelAnimation = styled.span`
   pointer-events: none;
   width: 100%;
   height: 100%;
+  font-weight: 300;
 
   transform: perspective(100px);
   transform-origin: 0 0;
   transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
     color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    font-weight 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0.1s,
     width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 
   ${media.tablet`
@@ -167,6 +169,7 @@ const StyledInput = styled.input`
   display: block;
   width: 100%;
   font-size: 3.2rem;
+  font-weight: 300;
   height: 4.8rem;
   border: none;
   background: transparent;

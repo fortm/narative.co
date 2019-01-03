@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { navigate } from 'gatsby'
 import Link from 'gatsby-link'
 import OutsideClickHandler from 'react-outside-click-handler'
 import Swipeable from 'react-swipeable'
@@ -93,6 +94,15 @@ class Navigation extends Component {
     this.setState({ active: false })
   }
 
+  navigateOut = (event, path) => {
+    event.preventDefault()
+    this.handleOutsideClick()
+
+    setTimeout(() => {
+      navigate(path)
+    }, 250)
+  }
+
   render() {
     const { active } = this.state
 
@@ -106,7 +116,7 @@ class Navigation extends Component {
               </LogoContainer>
               <Nav>
                 <DesktopNavList>
-                  <NavItems active={active} />
+                  <NavItems active={active} handleClick={this.navigateOut} />
                 </DesktopNavList>
                 <ToggleContainer onClick={this.handleToggleClick}>
                   <LeftToggle active={active} ref={this.leftToggle} />
@@ -131,7 +141,7 @@ class Navigation extends Component {
             </MobileNavControlsContainer>
             <MobileNavCenter>
               <MobileNavList active={active}>
-                <NavItems active={active} />
+                <NavItems active={active} handleClick={this.navigateOut} />
               </MobileNavList>
               <SocialLinksContainer active={active}>
                 <SocialLinks fill="black" />
@@ -146,7 +156,7 @@ class Navigation extends Component {
 
 export default Navigation
 
-const NavItems = ({ active }) =>
+const NavItems = ({ active, handleClick }) =>
   navOptions.map((nav, index) => {
     const delay = active ? 30 * (navOptions.length - index) : 30 * index
 
@@ -160,6 +170,7 @@ const NavItems = ({ active }) =>
             disabled={nav.disabled}
             href={nav.to}
             delay={delay}
+            onClick={event => handleClick(event, nav.to)}
           >
             {nav.text}
           </NavAnchor>
@@ -170,6 +181,7 @@ const NavItems = ({ active }) =>
             to={nav.to}
             delay={delay}
             as={Link}
+            onClick={event => handleClick(event, nav.to)}
           >
             {nav.text}
           </NavAnchor>

@@ -7,6 +7,7 @@ import {
   Button,
   ButtonArrow,
   Container,
+  CopyToClipboard,
   Heading,
   Form,
   SocialLinks,
@@ -19,17 +20,17 @@ const validate = values => {
   let errors = {}
 
   if (!values.name) {
-    errors.name = 'Required'
+    errors.name = "Hi, we're Narative. What's your name?"
   }
 
   if (!values.email) {
-    errors.email = 'Required'
+    errors.email = "This one's important!"
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address'
+    errors.email = 'Forgot a character?'
   }
 
   if (!values.details) {
-    errors.details = 'Required'
+    errors.details = 'Entice us!'
   }
   if (values.details.length > 289) {
     errors.details = 'Short and sweet, please!'
@@ -132,16 +133,16 @@ class ContactForm extends Component {
                       />
                     </span>
                   </FormSection>
-                  <FormSection animation={animation} delay={1450}>
+                  <FormSection animation={animation} delay={1480}>
                     <FormHeader>Tell us about your idea</FormHeader>
                     <Field
                       component={Form.Textarea}
                       label="give us a short description"
                       name="details"
-                      rows={5}
+                      rows={1}
                     />
                   </FormSection>
-                  <ButtonContainer animation={animation} delay={1550}>
+                  <ButtonContainer animation={animation} delay={1610}>
                     <ButtonArrow
                       isSubmitting={props.isSubmitting}
                       color="black"
@@ -151,10 +152,8 @@ class ContactForm extends Component {
                   </ButtonContainer>
                   <MobileButtonContainer>
                     <Button isSubmitting={props.isSubmitting} text="Submit" />
-                    <MobileCopyRightContainer>
-                      © {new Date().getFullYear()} Narative Studio Inc.
-                    </MobileCopyRightContainer>
                   </MobileButtonContainer>
+                  <ContactByEmail animation={animation} />
                 </StyledFormikForm>
               )
             }}
@@ -166,6 +165,22 @@ class ContactForm extends Component {
 }
 
 export default ContactForm
+
+const ContactByEmail = ({ animation }) => (
+  <>
+    <ContactWithEmail animation={animation} delay={1740}>
+      <ContactWithEmailText>
+        <CopyToClipboard copyOnClick="contact@narative.co">
+          Prefer to send us an email instead?{' '}
+          <button>contact@narative.co</button>
+        </CopyToClipboard>
+      </ContactWithEmailText>
+    </ContactWithEmail>
+    <MobileContactWithEmail href="mailto:contact@narative.co">
+      Prefer to send us an email instead? <button>contact@narative.co</button>
+    </MobileContactWithEmail>
+  </>
+)
 
 const fadeIn = keyframes`
   from { opacity: 0; }
@@ -200,6 +215,68 @@ const FormSection = styled.div`
   transform: ${p => (p.animation ? 'translateY(0)' : 'translateY(20px)')};
 `
 
+const ContactWithEmailText = styled.div`
+  padding-top: 55px;
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.33);
+
+  button {
+    text-decoration: underline;
+    font-weight: 600;
+  }
+`
+
+const MobileContactWithEmail = styled.a`
+  display: none;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.33);
+  margin-top: 40px;
+
+  ${media.tablet`
+    display: block;
+  `};
+
+  button {
+    text-decoration: underline;
+    font-weight: 600;
+  }
+`
+
+const ContactWithEmail = styled.div`
+  position: relative;
+  padding-top: 55px;
+  margin-left: 265px;
+
+  transition: opacity 0.5s linear ${p => p.delay}ms,
+    transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.9) ${p => p.delay}ms;
+  opacity: ${p => (p.animation ? 1 : 0)};
+  transform: ${p => (p.animation ? 'translateY(0)' : 'translateY(20px)')};
+
+  &::after {
+    content: '';
+    height: 1px;
+    width: 295px;
+    position: absolute;
+    left: 0;
+    top: 55px;
+    background: #c6c6c6;
+  }
+
+  &::before {
+    content: '';
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 53px;
+    background: #c6c6c6;
+  }
+
+  ${media.tablet`
+    display: none;
+  `};
+`
 const StyledFormikForm = styled(FormikForm)`
   align-self: flex-end;
   position: relative;
@@ -278,16 +355,9 @@ const CopyRightContainer = styled.div`
   color: ${p => p.theme.colors.grey};
 `
 
-const MobileCopyRightContainer = styled.div`
-  font-size: 16px;
-  color: ${p => p.theme.colors.grey};
-  text-align: center;
-  margin: 45px auto 25px;
-`
-
 const ButtonContainer = styled.div`
   margin-left: 265px;
-  padding-bottom: 50px;
+  padding-top: 35px;
   transition: opacity 0.5s linear ${p => p.delay}ms,
     transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.9) ${p => p.delay}ms;
   opacity: ${p => (p.animation ? 1 : 0)};

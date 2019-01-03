@@ -11,7 +11,9 @@ class Textarea extends Component {
   state = { value: '', rows: 1 }
 
   componentDidMount() {
-    this.handleTyping()
+    if (this.state.rows > 1) {
+      this.handleTyping()
+    }
   }
 
   static getDerivedStateFromProps(props) {
@@ -72,30 +74,15 @@ const InputContainer = styled.div`
   padding: 1.4rem 0 1rem;
   width: 500px;
 
-  &::after {
-    content: '';
-    height: 1px;
-    width: 295px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.25);
-  }
-
   ${media.tablet`
     top: 0;
     padding: 1.4rem 0 2rem;
     width: 100%;
-
-    &::after {
-      content: none;
-    }
   `};
 `
 
 const InputError = styled.div`
   position: absolute;
-  bottom: 0.3rem;
   color: ${p => p.theme.colors.red};
   font-size: 1.2rem;
 
@@ -136,7 +123,7 @@ const InputBorderActive = styled.div`
 const StyledLabel = styled.label`
   display: block;
   font-size: 3.2rem;
-  color: ${p => (p.hasError ? p.theme.colors.red : 'rgba(0,0,0,0.25)')};
+  color: ${p => (p.hasError ? p.theme.colors.red : 'rgba(0,0,0,0.33)')};
   border: none;
   pointer-events: none;
 
@@ -153,11 +140,13 @@ const LabelAnimation = styled.span`
   pointer-events: none;
   width: 100%;
   height: 100%;
+  font-weight: 300;
 
   transform: perspective(100px);
   transform-origin: 0 0;
   transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
     color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    font-weight 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0.1s,
     width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 
   ${p =>
@@ -191,6 +180,7 @@ const StyledInput = styled.textarea`
   display: block;
   width: 100%;
   font-size: 3.2rem;
+  font-weight: 300;
   height: 4.8rem;
   border: none;
   background: transparent;

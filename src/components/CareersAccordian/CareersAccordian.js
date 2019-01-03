@@ -72,7 +72,7 @@ class CareersAccordian extends Component {
                     onClick={() => this.setState({ copied: true })}
                     style={{ justifySelf: 'flex-end' }}
                   >
-                    <CopyToClipboard textToCopy="careers@narative.co" />
+                    <CopyToClipboard copyOnClick="careers@narative.co" />
                   </button>
                 </AccordianCareersEmail>
               </AccordianContainer>
@@ -101,7 +101,7 @@ class CareersAccordian extends Component {
                   onClick={() => this.setState({ copied: true })}
                   style={{ justifySelf: 'flex-end' }}
                 >
-                  <CopyToClipboard textToCopy="careers@narative.co" />
+                  <CopyToClipboard copyOnClick="careers@narative.co" />
                 </div>
               </AccordianCareersEmail>
             </AccordianContainer>

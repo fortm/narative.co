@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Link, graphql } from 'gatsby'
+import { Link, graphql, navigate } from 'gatsby'
 import styled from 'styled-components'
 
 import { media, transitions } from '@styles'
@@ -13,6 +13,15 @@ class IndexPage extends Component {
     startAnimation(() => {
       this.setState({ animation: 'start' })
     })
+  }
+
+  navigateOut = (event, path) => {
+    event.preventDefault()
+    this.setState({ animation: '' })
+
+    setTimeout(() => {
+      navigate(path)
+    }, 350)
   }
 
   render() {
@@ -39,9 +48,9 @@ class IndexPage extends Component {
                 in the DOM so we can have the proper design in palce. This is
                 the Mobile only Contact button*/}
                 <MobileContactText
-                  animation={animation}
                   to="/contact"
-                  transitionDelay={150}
+                  onClick={event => this.navigateOut(event, '/contact')}
+                  animation={animation}
                 >
                   <ButtonArrow text="Get in touch" />
                 </MobileContactText>
@@ -49,9 +58,9 @@ class IndexPage extends Component {
 
               {/* And this is the Desktop only Contact button */}
               <ContactText
-                animation={animation}
                 to="/contact"
-                transitionDelay={150}
+                onClick={event => this.navigateOut(event, '/contact')}
+                animation={animation}
               >
                 <ButtonArrow text="Get in touch" />
               </ContactText>
@@ -126,7 +135,7 @@ const ContactText = styled(Link)`
   }
 `
 
-const MobileContactText = styled(ContactText)`
+const MobileContactText = styled.span`
   display: none;
 
   ${media.tablet`
