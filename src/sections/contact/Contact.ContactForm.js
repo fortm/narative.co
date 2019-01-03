@@ -177,7 +177,7 @@ const ContactByEmail = ({ animation }) => (
       </ContactWithEmailText>
     </ContactWithEmail>
     <MobileContactWithEmail href="mailto:contact@narative.co">
-      Prefer to send us an email instead? <button>contact@narative.co</button>
+      Prefer to send us an email instead? <span>contact@narative.co</span>
     </MobileContactWithEmail>
   </>
 )
@@ -236,7 +236,7 @@ const MobileContactWithEmail = styled.a`
     display: block;
   `};
 
-  button {
+  span {
     text-decoration: underline;
     font-weight: 600;
   }
