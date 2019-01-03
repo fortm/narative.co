@@ -29,7 +29,6 @@ class Text extends Component {
       this.props.form.touched[field.name] && this.props.form.errors[field.name]
     const allowFocus = this.state.focusCount > 1 || !autoFocus
 
-    console.log(this.props.form, field)
     return (
       <InputContainer>
         <InputBorder hasError={hasError}>
