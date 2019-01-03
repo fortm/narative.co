@@ -98,6 +98,8 @@ class Navigation extends Component {
     event.preventDefault()
     this.handleOutsideClick()
 
+    if (path === '#') return
+
     setTimeout(() => {
       navigate(path)
     }, 250)
@@ -170,7 +172,6 @@ const NavItems = ({ active, handleClick }) =>
             disabled={nav.disabled}
             href={nav.to}
             delay={delay}
-            onClick={event => handleClick(event, nav.to)}
           >
             {nav.text}
           </NavAnchor>
