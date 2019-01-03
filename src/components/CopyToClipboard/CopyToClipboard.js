@@ -33,7 +33,9 @@ class CopyToClipboard extends Component {
             copied to clipboard <CopiedIcon />
           </CopyIconText>
         ) : (
-          this.props.children || <CopyIcon />
+          <>
+            {this.props.children} <CopyIcon fill={this.props.iconFill} />{' '}
+          </>
         )}
       </CopyIconContainer>
     )
@@ -44,6 +46,10 @@ export default CopyToClipboard
 
 const CopyIconContainer = styled.div`
   cursor: ${p => (p.copied ? 'initial' : 'pointer')};
+
+  svg {
+    margin-left: 3px;
+  }
 `
 
 const CopyIconText = styled.p`

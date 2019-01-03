@@ -170,7 +170,10 @@ const ContactByEmail = ({ animation }) => (
   <>
     <ContactWithEmail animation={animation} delay={1740}>
       <ContactWithEmailText>
-        <CopyToClipboard copyOnClick="contact@narative.co">
+        <CopyToClipboard
+          copyOnClick="contact@narative.co"
+          iconFill="rgba(0,0,0,0.3)"
+        >
           Prefer to send us an email instead?{' '}
           <button>contact@narative.co</button>
         </CopyToClipboard>
