@@ -96,9 +96,9 @@ class Navigation extends Component {
 
   navigateOut = (event, path) => {
     event.preventDefault()
-    this.handleOutsideClick()
-
     if (path === '#') return
+
+    this.handleOutsideClick()
 
     setTimeout(() => {
       navigate(path)
