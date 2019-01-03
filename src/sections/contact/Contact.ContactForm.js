@@ -100,6 +100,7 @@ class ContactForm extends Component {
           <Formik
             onSubmit={this.handleSubmit}
             validate={validate}
+            validateOnBlur={false}
             initialValues={{
               name: '',
               email: '',

@@ -44,7 +44,7 @@ class Textarea extends Component {
             onInput={this.handleTyping}
             ref={this.textarea}
             rows={this.state.rows}
-            type="text"
+            autoComplete="Off"
             maxLength={maxLength || 290}
             {...field}
             {...props}
