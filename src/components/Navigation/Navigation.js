@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { navigate } from 'gatsby'
-import Link from 'gatsby-link'
+import { Link, navigate } from 'gatsby'
 import OutsideClickHandler from 'react-outside-click-handler'
 import Swipeable from 'react-swipeable'
 import { isMobileOnly } from 'react-device-detect'

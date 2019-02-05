@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
 import { Formik, Form as FormikForm, Field } from 'formik'
 

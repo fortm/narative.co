@@ -2,14 +2,19 @@ require('dotenv').config()
 
 exports.siteMetadata = {
   title: 'Narative',
+  siteUrl: 'https://narative.co',
 }
 
 exports.plugins = [
   'gatsby-plugin-react-helmet',
   `gatsby-image`,
+  `gatsby-plugin-typescript`,
   `gatsby-plugin-sharp`,
   `gatsby-transformer-sharp`,
   `gatsby-transformer-remark`,
+  'gatsby-transformer-enhance-contentful',
+  'gatsby-transformer-contentful-rich-text-html-renderer',
+  'gatsby-plugin-netlify-cache',
   {
     resolve: `gatsby-plugin-styled-components`,
     options: {
@@ -27,19 +32,11 @@ exports.plugins = [
     resolve: `gatsby-source-contentful`,
     options: {
       spaceId: process.env.CONTENTFUL_SPACE_ID,
-      accessToken: process.env.CONTENTFUL_PREVIEW_API_KEY,
-      environment: process.env.CONTENTFUL_ENVIRONMENT,
-      host: `preview.contentful.com`,
-    },
-  },
-  {
-    resolve: `gatsby-source-contentful`,
-    options: {
-      spaceId: process.env.CONTENTFUL_SPACE_ID,
       accessToken: process.env.CONTENTFUL_DELIVERY_API_KEY,
       environment: process.env.CONTENTFUL_ENVIRONMENT,
     },
   },
+
   {
     resolve: 'gatsby-plugin-manifest',
     options: {
@@ -57,6 +54,7 @@ exports.plugins = [
     options: {
       host: 'https://narative.co',
       sitemap: 'https://narative.co/sitemap.xml',
+      policy: [{ userAgent: '*', disallow: ['/.netlify/'] }],
     },
   },
   {

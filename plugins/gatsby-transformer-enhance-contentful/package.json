@@ -1,0 +1,8 @@
+{
+  "name": "gatsby-transformer-enhance-contentful",
+  "main": "gatsby-node.js",
+  "dependencies": {
+    "trianglify": "^1.2.0",
+    "urljoin": "^0.1.5"
+  }
+}

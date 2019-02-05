@@ -1,0 +1,13 @@
+{
+  "name": "gatsby-transformer-contentful-rich-text-html-renderer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gatsby-node.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@contentful/rich-text-html-renderer": "^10.2.0"
+  }
+}
