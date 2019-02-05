@@ -21,6 +21,13 @@ import React from 'react'
 import { Helmet as ReactHelmt } from 'react-helmet'
 
 const seoURL = path => `https://narative.co${path}`
+
+// Twitter requires https to prepend any paths.
+const addHttps = path => {
+  if (path.substring(0, 5) === 'https') return path
+  return `https:${path}`
+}
+
 const seoDescription =
   "Narative brings decades of design, marketing and engineering expertise directly to your team. We help you build the products you've always dreamed of, and the ones you're yet to dream up."
 
@@ -52,7 +59,7 @@ const getMetaTags = ({
     },
     { itemprop: 'name', content: title },
     { itemprop: 'description', content: description },
-    { itemprop: 'image', content: image },
+    { itemprop: 'image', content: addHttps(image) },
     { name: 'description', content: description },
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:site', content: 'Narative' },
@@ -61,7 +68,7 @@ const getMetaTags = ({
     { name: 'twitter:creator', content: twitter || 'Narative' },
     {
       name: 'twitter:image',
-      content: image,
+      content: addHttps(image),
     },
     { property: 'og:title', content: title },
     { property: 'og:type', content: contentType },
