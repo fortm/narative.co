@@ -21,7 +21,13 @@ import React from 'react'
 import { Helmet as ReactHelmt } from 'react-helmet'
 
 const seoURL = path => `https://narative.co${path}`
-const addHttps = path => `https:${path}`
+
+// Twitter requires https to prepend any paths.
+const addHttps = path => {
+  if (path.substring(0, 5) === 'https') return path
+  return `https:${path}`
+}
+
 const seoDescription =
   "Narative brings decades of design, marketing and engineering expertise directly to your team. We help you build the products you've always dreamed of, and the ones you're yet to dream up."
 
