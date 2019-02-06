@@ -69,6 +69,7 @@ const Content = styled(RichText).attrs<{ textHighlightColor: string }>({})`
 const Hero = styled.div`
   position: relative;
   z-index: 1;
+  min-height: 720px;
   height: 100vh;
   width: 100vw;
   background: #d9dbe0;
