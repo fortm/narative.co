@@ -58,7 +58,7 @@ export const theme = {
   },
   fontfamily: {
     sansSerif:
-      "'-apple-system', 'BlinkMacSystemFont', 'San Francisco', 'Helvetica Neue', 'Helvetica', 'Ubuntu', 'Roboto', 'Noto', 'Segoe UI', 'Arial', sans-serif",
+      "'futura-pt', '-apple-system', 'BlinkMacSystemFont', 'San Francisco', 'Helvetica Neue', 'Helvetica', 'Ubuntu', 'Roboto', 'Noto', 'Segoe UI', 'Arial', sans-serif",
     serif: "'ff-meta-serif-web-pro', serif",
   },
   breakpoints: [
