@@ -63,12 +63,7 @@ const Content = styled(RichText).attrs<{ textHighlightColor: string }>({})`
   position: relative;
   padding: 160px 0 130px;
   z-index: 2;
-  background: linear-gradient(
-    180deg,
-    #111216 0%,
-    #111216 66.67%,
-    #191d23 100%
-  ); /* gradient footer */
+  background: linear-gradient(180deg, #111216 0%, #111216 66.67%, #191d23 100%);
 `
 
 const Hero = styled.div`
@@ -119,7 +114,7 @@ const RelativeSection = styled(Section)`
 const ReadingTime = styled.div`
   position: absolute;
   left: 0;
-  bottom: 118px;
+  bottom: 116px;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.25);
   transform: rotate(90deg);
@@ -131,7 +126,7 @@ const ReadingTime = styled.div`
     top: 12px;
     width: 64px;
     right: -80px;
-    background: #000;
+    background: #111216;
   }
 `
 
