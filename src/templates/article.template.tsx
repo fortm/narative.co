@@ -37,7 +37,7 @@ class Article extends Component<IDetailPage, PostState> {
 
     console.log(article)
     return (
-      <Layout navTheme="dark">
+      <Layout navTheme="dark" navOffset={false}>
         <Hero>
           <HeroContent>
             <Header>

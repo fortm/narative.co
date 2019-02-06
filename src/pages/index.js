@@ -29,7 +29,7 @@ class IndexPage extends Component {
     const contentful = this.props.data.allContentfulHomePage.edges[0].node
 
     return (
-      <Layout>
+      <Layout navOffset>
         <Fragment>
           <Helmet
             title={contentful.seo.title}

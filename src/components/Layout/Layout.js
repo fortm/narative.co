@@ -10,6 +10,11 @@ const WebContainer = styled.div`
   background: linear-gradient(180deg, #08080b 0%, #0b0b0e 44.18%, #111216 100%);
   min-height: 100vh;
   overflow-x: hidden;
+  ${p =>
+    p.navOffset &&
+    `
+    padding-top: 140px; 
+  `};
 
   &::before {
     content: '';
@@ -45,7 +50,7 @@ class Layout extends Component {
   }
 
   render() {
-    const { background, children, navTheme } = this.props
+    const { background, children, navOffset, navTheme } = this.props
 
     return (
       <ThemeProvider theme={theme}>
@@ -54,6 +59,7 @@ class Layout extends Component {
           <WebContainer
             animation={this.state.animation}
             background={background}
+            navOffset={navOffset}
           >
             <Navigation navTheme={navTheme} />
             {children}
@@ -66,6 +72,7 @@ class Layout extends Component {
 
 Layout.defaultProps = {
   navTheme: 'light',
+  navOffset: true,
 }
 
 export default Layout
