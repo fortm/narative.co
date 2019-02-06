@@ -100,7 +100,7 @@ export const pageQuery = graphql`
 `
 
 const TextContainer = styled.div`
-  max-width: 620px;
+  max-width: 570px;
   ${transitions.fadeUp};
 `
 
