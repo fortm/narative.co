@@ -25,12 +25,11 @@ const getReadingTime = refNode => {
   // Use the Contentful HTML renderer to render this to a string
   const html = documentToHtmlString({ content, nodeType }, HTMLRendererOpts)
   const { minutes, ...rest } = readingTime(html)
-  const text = minutes > 1 ? 'minutes' : 'minute'
 
   return {
     ...rest,
     minutes: minutes,
-    text: `${Math.round(minutes)} ${text} read`,
+    text: `${Math.round(minutes)} minute read`,
   }
 }
 /**
