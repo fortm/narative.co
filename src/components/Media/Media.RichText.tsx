@@ -26,7 +26,7 @@ const articleWidth = css`
 const Content = styled.div`
   * {
     line-height: 1.5;
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     font-family: ${p => p.theme.fontfamily.sansSerif};
     color: #fff;
     margin-bottom: 2.34rem;
@@ -72,7 +72,7 @@ const Content = styled.div`
 
   h3,
   h3 * {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     line-height: 1.45;
     margin-bottom: 1.5rem;
   }
