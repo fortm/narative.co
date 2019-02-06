@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link, graphql } from 'gatsby'
 import styled from 'styled-components'
 
-import { Container, Heading, Helmet, Layout, SocialLinks } from '@components'
+import { Section, Heading, Helmet, Layout, SocialLinks } from '@components'
 import { media } from '@styles'
 
 class NotFound extends Component {
@@ -19,7 +19,7 @@ class NotFound extends Component {
         />
         <div style={{ overflow: 'hidden' }}>
           <Layout>
-            <Container hideOverflow>
+            <Section hideOverflow>
               <GridContainer>
                 <TextContainer>
                   <div />
@@ -36,7 +36,7 @@ class NotFound extends Component {
                   <NotFoundIcon />
                 </ImageContainer>
               </GridContainer>
-            </Container>
+            </Section>
           </Layout>
         </div>
       </>

@@ -101,6 +101,7 @@ const authorAvatarField = `
 const authorFields = `
   id
   name
+  title
   slug
   biography {
     childRichTextHtml {
@@ -108,6 +109,15 @@ const authorFields = `
     }
   }
   ${authorAvatarField}
+`
+
+const readingTime = `
+  readingTime {
+    text
+    minutes
+    words
+    time
+  }
 `
 
 /**
@@ -123,6 +133,7 @@ const articleNode = `
   }
   fields {
     path
+    ${readingTime}
   }
   body {
     childRichTextHtml {

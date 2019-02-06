@@ -4,7 +4,6 @@ import ButtonArrow from './Button/Button.Arrow'
 import CareersAccordian from './CareersAccordian'
 import CareersGraph from './CareersGraph'
 import CareersImages from './CareersImages'
-import Container from './Container'
 import CopyToClipboard from './CopyToClipboard'
 import Form from './From'
 import Heading from './Heading'
@@ -15,6 +14,7 @@ import Layout from './Layout'
 import Logo from './Logo'
 import Navigation from './Navigation'
 import Perks from './Perks'
+import Section from './Section'
 import SocialLinks from './SocialLinks'
 import Transitions from './Transitions'
 import Video from './Video'
@@ -26,7 +26,7 @@ export {
   CareersAccordian,
   CareersGraph,
   CareersImages,
-  Container,
+  Section,
   CopyToClipboard,
   Form,
   Heading,

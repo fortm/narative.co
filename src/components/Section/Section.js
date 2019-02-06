@@ -1,12 +1,13 @@
 import styled from 'styled-components'
-import { media } from '@styles'
 
-const Container = styled.div`
+import media from '@styles/media'
+
+const Section = styled.section`
   max-width: 1220px;
   margin: 0 auto;
   padding: 0 4rem;
-  background: ${props =>
-    props.background === 'dark' ? props.theme.colors.bg : 'transparent'};
+  background: ${p =>
+    p.background === 'dark' ? p.theme.colors.bg : 'transparent'};
   display: ${p => (p.hideOnDesktop ? 'none' : 'block')};
 
   ${media.desktop`
@@ -20,7 +21,7 @@ const Container = styled.div`
 
   ${media.phablet`
     max-width: 100%;
-    ${props => props.hideOverflow && `overflow: hidden`};
+    ${p => p.hideOverflow && `overflow: hidden`};
   `};
 
   ${media.phablet`
@@ -28,4 +29,4 @@ const Container = styled.div`
   `};
 `
 
-export default Container
+export default Section

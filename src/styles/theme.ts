@@ -46,4 +46,29 @@ export const theme = {
   input: {
     border: '#b9bbbe',
   },
+  dimensions: {
+    tap: 48,
+    navigation: '11rem',
+    navigationWithMargin: '17rem',
+    navigationWithMarginMobile: '10.5rem',
+    navigationSlideIn: '6rem',
+    narrowContainer: '78rem',
+    sectionWidth: '124rem',
+    sectionPadding: '5rem',
+  },
+  fontfamily: {
+    sansSerif:
+      "'-apple-system', 'BlinkMacSystemFont', 'San Francisco', 'Helvetica Neue', 'Helvetica', 'Ubuntu', 'Roboto', 'Noto', 'Segoe UI', 'Arial', sans-serif",
+    serif: "'ff-meta-serif-web-pro', serif",
+  },
+  breakpoints: [
+    ['phone_small', 320],
+    ['phone', 376],
+    ['phablet', 540],
+    ['tablet', 768],
+    ['desktop', 1024],
+    ['desktop_large', 1440],
+  ],
 }
+
+export default theme

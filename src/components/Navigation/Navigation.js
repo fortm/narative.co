@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import { Link, navigate } from 'gatsby'
 import OutsideClickHandler from 'react-outside-click-handler'
 import Swipeable from 'react-swipeable'
 import { isMobileOnly } from 'react-device-detect'
 
-import { Container, Logo, SocialLinks } from '@components'
+import { Section, Logo, SocialLinks } from '@components'
 import { media } from '@styles'
 
 const navOptions = [
@@ -38,6 +38,15 @@ const animateOut = [
   },
   { width: '15px', transform: 'initial' },
 ]
+
+const themes = {
+  light: {
+    color: '#fff',
+  },
+  dark: {
+    color: '#000',
+  },
+}
 
 class Navigation extends Component {
   leftToggle = React.createRef()
@@ -106,51 +115,56 @@ class Navigation extends Component {
 
   render() {
     const { active } = this.state
+    const { navTheme } = this.props
+    const fill = navTheme === 'dark' ? '#000' : '#fff'
+    const theme = themes[navTheme]
 
     return (
-      <OutsideClickHandler onOutsideClick={this.handleOutsideClick}>
-        <NavFixedContainer>
-          <Container>
-            <NavContainer>
-              <LogoContainer to="/">
-                <Logo onlySymbol />
-              </LogoContainer>
-              <Nav>
-                <DesktopNavList>
+      <ThemeProvider theme={theme}>
+        <OutsideClickHandler onOutsideClick={this.handleOutsideClick}>
+          <NavFixedContainer>
+            <Section>
+              <NavContainer>
+                <LogoContainer to="/">
+                  <Logo onlySymbol fill={fill} />
+                </LogoContainer>
+                <Nav>
+                  <DesktopNavList>
+                    <NavItems active={active} handleClick={this.navigateOut} />
+                  </DesktopNavList>
+                  <ToggleContainer onClick={this.handleToggleClick}>
+                    <LeftToggle active={active} ref={this.leftToggle} />
+                    <RightToggle active={active} />
+                  </ToggleContainer>
+                </Nav>
+              </NavContainer>
+            </Section>
+          </NavFixedContainer>
+          <Swipeable
+            onSwipedUp={this.handleOutsideClick}
+            onSwipedDown={this.handleOutsideClick}
+          >
+            <MobileNavListContainer active={active}>
+              <MobileNavControlsContainer active={active}>
+                <LogoContainer to="/">
+                  <Logo onlySymbol fill="black" />
+                </LogoContainer>
+                <button onClick={this.handleToggleClick}>
+                  <CloseIcon />
+                </button>
+              </MobileNavControlsContainer>
+              <MobileNavCenter>
+                <MobileNavList active={active}>
                   <NavItems active={active} handleClick={this.navigateOut} />
-                </DesktopNavList>
-                <ToggleContainer onClick={this.handleToggleClick}>
-                  <LeftToggle active={active} ref={this.leftToggle} />
-                  <RightToggle active={active} />
-                </ToggleContainer>
-              </Nav>
-            </NavContainer>
-          </Container>
-        </NavFixedContainer>
-        <Swipeable
-          onSwipedUp={this.handleOutsideClick}
-          onSwipedDown={this.handleOutsideClick}
-        >
-          <MobileNavListContainer active={active}>
-            <MobileNavControlsContainer active={active}>
-              <LogoContainer to="/">
-                <Logo onlySymbol fill="black" />
-              </LogoContainer>
-              <button onClick={this.handleToggleClick}>
-                <CloseIcon />
-              </button>
-            </MobileNavControlsContainer>
-            <MobileNavCenter>
-              <MobileNavList active={active}>
-                <NavItems active={active} handleClick={this.navigateOut} />
-              </MobileNavList>
-              <SocialLinksContainer active={active}>
-                <SocialLinks fill="black" />
-              </SocialLinksContainer>
-            </MobileNavCenter>
-          </MobileNavListContainer>
-        </Swipeable>
-      </OutsideClickHandler>
+                </MobileNavList>
+                <SocialLinksContainer active={active}>
+                  <SocialLinks fill="black" />
+                </SocialLinksContainer>
+              </MobileNavCenter>
+            </MobileNavListContainer>
+          </Swipeable>
+        </OutsideClickHandler>
+      </ThemeProvider>
     )
   }
 }
@@ -191,13 +205,12 @@ const NavItems = ({ active, handleClick }) =>
   })
 
 const NavFixedContainer = styled.div`
-  ${media.tablet`
-    position: fixed;
-    height: 90px;
-    width: 100%;
-    top: 0;
-    left: 0;
-  `};
+  position: absolute;
+  height: 90px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9;
 `
 
 const NavContainer = styled.div`
@@ -232,7 +245,7 @@ const Toggle = styled.span`
   position: absolute;
   right: 10px;
   height: 1px;
-  background: #fff;
+  background: ${p => p.theme.color};
   transition: transform 0.4s cubic-bezier(0.075, 0.82, 0.165, 1),
     width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 `
@@ -311,7 +324,7 @@ const NavAnchor = styled.a`
   display: flex;
   height: 40px;
   align-items: center;
-  color: #fff;
+  color: ${p => p.theme.color};
   font-weight: 600;
   font-size: 18px;
   transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.9) ${p => p.delay}ms,

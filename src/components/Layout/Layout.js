@@ -45,7 +45,7 @@ class Layout extends Component {
   }
 
   render() {
-    const { background, children } = this.props
+    const { background, children, navTheme } = this.props
 
     return (
       <ThemeProvider theme={theme}>
@@ -55,13 +55,17 @@ class Layout extends Component {
             animation={this.state.animation}
             background={background}
           >
-            <Navigation />
+            <Navigation navTheme={navTheme} />
             {children}
           </WebContainer>
         </>
       </ThemeProvider>
     )
   }
+}
+
+Layout.defaultProps = {
+  navTheme: 'light',
 }
 
 export default Layout

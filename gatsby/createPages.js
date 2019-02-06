@@ -23,8 +23,8 @@ const log = (msg, section) =>
 // Map of template paths
 const templatesDir = path.resolve(__dirname, '../src/templates')
 const templates = {
-  articles: path.resolve(templatesDir, 'pages/articles.tsx'),
-  authors: path.resolve(templatesDir, 'pages/authors.tsx'),
+  article: path.resolve(templatesDir, 'article.template.tsx'),
+  author: path.resolve(templatesDir, 'author.template.tsx'),
 }
 
 // Some useful variables
@@ -108,10 +108,10 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
    */
   log('Creating', 'authors')
 
+  // console.log(articles.data.articles.edges[0].node)
   const authors = _groupByAuthor([articles])
 
   authors.forEach(([author, nodes]) => {
-    console.log(author, nodes)
     /**
      * For some reason an author is created for each locale. So authors will contain...
      *
@@ -127,7 +127,7 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
       pathPrefix,
       createPage,
       pageLength,
-      pageTemplate: templates.authors,
+      pageTemplate: templates.author,
       // Paginate-able objects are the nodes for this author
       edges: nodes,
       buildPath: buildPaginatedPath,
@@ -158,31 +158,20 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
    */
   const pathPrefix = unfeatured[0] && unfeatured[0].pathPrefix
 
-  console.log(pathPrefix)
-  console.log(pathPrefix)
-  console.log(pathPrefix)
-  console.log(pathPrefix)
-  console.log(pathPrefix)
-  console.log(pathPrefix)
-  console.log(pathPrefix)
-  console.log(pathPrefix)
-  console.log(pathPrefix)
   // Now create the actual paginated page
-  createPaginatedPages({
-    pathPrefix: '/',
-    createPage,
-    pageLength: pageLength,
-    pageTemplate: templates.article,
-    edges: articles,
-    buildPath: buildPaginatedPath,
-    context: {
-      // Featured are additional context
-      featured,
-      originalPath: 'pathPrefix',
-      skip: pageLength,
-      limit: pageLength,
-    },
-  })
+  // createPaginatedPages({
+  //   createPage,
+  //   pageLength: pageLength,
+  //   pageTemplate: templates.article,
+  //   edges: articles,
+  //   buildPath: buildPaginatedPath,
+  //   context: {
+  //     // Featured are additional context
+  //     featured,
+  //     skip: pageLength,
+  //     limit: pageLength,
+  //   },
+  // })
 
   /**
    * #2 Now we want to create "detail pages". Detail pages display each individual post.
@@ -196,20 +185,14 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
    */
 
   // Now map over the nodes for this locale
-  articles.forEach(node => {
-    console.log(node)
-    console.log(node)
-    console.log(node)
-    console.log(node)
-    console.log(node)
-    console.log(node)
+  articles.data.articles.edges.forEach(({ node: article }) => {
     /**
      * We need to find related posts for this node.
      * A related post for this node is any post that intersects with it's categories.
      */
     let relateds = []
 
-    const categories = node.category || []
+    const categories = article.category || []
     // Not every node has a category, so don't waste time on those that don't
     if (categories.length) {
       /**
@@ -221,7 +204,7 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
        * down from an array of objects to an array of category IDs.
        */
       const categoryIds = pluck('id', categories)
-      const generator = takeRelated(node.id, categoryIds, postsInLocale)
+      const generator = takeRelated(article.id, categoryIds, postsInLocale)
 
       // Exhaust the generator in to the relateds array
       for (const related of generator) {
@@ -239,28 +222,26 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
      */
     let topups = []
     if (relateds.length < relatedLimit) {
-      const nodesInModel = postsByLocaleByModel[model][locale]
+      const nodesInModel = articles.data.articles.edges
       const required = relatedLimit - relateds.length
       topups = nodesInModel
         // Slice one more topup than you need
         .slice(0, required + 1)
         // Filter out the node itself (which might have been taken as a related)
-        .filter(related => related.id !== node.id)
+        .filter(related => related.id !== article.id)
         // Now limit the topups to what you actually need
         .slice(0, required)
     }
 
-    console.log(node)
     // Create the page for this post
     createPage({
-      path: node.path,
+      path: article.fields.path,
       component: templates.article,
       context: {
-        locale,
-        node,
-        slug: node.path,
-        id: node.id,
-        title: node.title,
+        article,
+        slug: article.fields.path,
+        id: article.id,
+        title: article.title,
         // Add it to our created page. Topups might well be empty if we found enough relateds
         relateds: [...relateds, ...topups],
       },

@@ -236,7 +236,7 @@ const ImageContainerMobile = styled.div`
     width: 30rem;
   `};
 
-  ${media.se`
+  ${media.phone_small`
     width: 24rem;
   `};
 `
@@ -268,7 +268,7 @@ const GalleryControl = styled.div`
   opacity: ${p => (p.disabled ? 0.25 : 1)};
   transition: opacity 600ms cubic-bezier(0.7, 0, 0.2, 1);
 
-  ${media.mdpi`
+  ${media.desktop`
     ${p => {
       if (p.left) {
         return `left: -26.3rem;`

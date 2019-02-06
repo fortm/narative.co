@@ -2,15 +2,12 @@ const { documentToHtmlString } = require('@contentful/rich-text-html-renderer')
 
 const { HTMLRendererOpts } = require('./htmlRenderer')
 
-async function onCreateNode(
-  {
-    node,
-    actions: { createNode, createParentChildLink },
-    createNodeId,
-    createContentDigest,
-  },
-  pluginOptions
-) {
+async function onCreateNode({
+  node,
+  actions: { createNode, createParentChildLink },
+  createNodeId,
+  createContentDigest,
+}) {
   const {
     internal: { mediaType, owner },
   } = node

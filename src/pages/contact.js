@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Transition from 'react-transition-group/Transition'
 
 import { media, transitions } from '@styles'
-import { Container, Layout, Helmet } from '@components'
+import { Section, Layout, Helmet } from '@components'
 import { startAnimation } from '@utils'
 import { ExIcon } from '../icons/ui'
 
@@ -64,7 +64,7 @@ class ContactPage extends Component {
             image={this.props.data.contactMeta.childImageSharp.fixed.src}
           />
           <FixedElement>
-            <Container>
+            <Section>
               <PhoneFormContainer>
                 <TextContainer animation={animation} transitionDelay={300}>
                   <MainText>
@@ -75,7 +75,7 @@ class ContactPage extends Component {
                   <PhoneForm />
                 </TextContainer>
               </PhoneFormContainer>
-            </Container>
+            </Section>
           </FixedElement>
           <SlideIn in={animation === 'start'}>
             <FormContainer animation={animation} transitionDelay={1000}>

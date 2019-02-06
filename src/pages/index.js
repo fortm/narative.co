@@ -3,7 +3,7 @@ import { Link, graphql, navigate } from 'gatsby'
 import styled from 'styled-components'
 
 import { media, transitions } from '@styles'
-import { ButtonArrow, Container, Heading, Helmet, Layout } from '@components'
+import { ButtonArrow, Section, Heading, Helmet, Layout } from '@components'
 import { startAnimation } from '@utils'
 
 class IndexPage extends Component {
@@ -37,7 +37,7 @@ class IndexPage extends Component {
             image={contentful.seo.image.file.url}
             pathname={this.props.location.pathname}
           />
-          <Container>
+          <Section>
             <ContentContainer>
               <div style={{ top: '-60px' }} />
               <TextContainer animation={animation}>
@@ -66,7 +66,7 @@ class IndexPage extends Component {
               </ContactText>
             </ContentContainer>
             <div />
-          </Container>
+          </Section>
         </Fragment>
       </Layout>
     )

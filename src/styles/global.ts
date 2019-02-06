@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-import { theme } from './theme'
+import { theme } from '@styles/theme'
 
 /**
  * injectGlobal is technically an escape hatch provided by styled-components

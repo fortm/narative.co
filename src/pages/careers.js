@@ -9,7 +9,7 @@ import {
   CareersAccordian,
   CareersGraph,
   CareersImages,
-  Container,
+  Section,
   Heading,
   Helmet,
   Layout,
@@ -45,7 +45,7 @@ class CareersPage extends Component {
         />
         <Content>
           <MobileHero>
-            <Container>
+            <Section>
               <GridContainer>
                 <LeftContainer>
                   <TextContainer animation={animation} transitionDelay={300}>
@@ -66,14 +66,14 @@ class CareersPage extends Component {
                   </ImageContainer>
                 </RightContainer>
               </GridContainer>
-            </Container>
+            </Section>
           </MobileHero>
           <MobileBody>
             <MobilePuller />
-            <Container>
+            <Section>
               <ScrollLine />
-            </Container>
-            <Container hideOnDesktop>
+            </Section>
+            <Section hideOnDesktop>
               <ImageContainer>
                 <NarativeHeroImg
                   fluid={data.careersHero.childImageSharp.fluid}
@@ -82,7 +82,7 @@ class CareersPage extends Component {
                   <NarativeHeroOutline />
                 </ImageTraceContainer>
               </ImageContainer>
-            </Container>
+            </Section>
             <CareerRow header="Why Narative">
               <SectionCopy maxWidth="69rem">
                 At Narative, nobody has a "boss". Instead, we hold a common
@@ -135,10 +135,10 @@ class CareersPage extends Component {
                 great things, you might fit right in.
               </SectionCopy>
             </CareerRow>
-            <Container>
+            <Section>
               <CareersAccordian />
-            </Container>
-            <Container>
+            </Section>
+            <Section>
               <Footer>
                 <CopyRightContainer>
                   <ContactActionsContainer>
@@ -153,7 +153,7 @@ class CareersPage extends Component {
                   <SocialLinks />
                 </SocialIconsFooter>
               </Footer>
-            </Container>
+            </Section>
           </MobileBody>
         </Content>
       </Layout>
@@ -208,12 +208,12 @@ export const pageQuery = graphql`
 const CareerRow = ({ children, header, hideOverflow }) => (
   <CareerRowSpacer>
     <AnimatorFadeUp>
-      <Container hideOverflow={hideOverflow}>
+      <Section hideOverflow={hideOverflow}>
         <CareerRowContainer>
           <CareerRowHeader>{header}</CareerRowHeader>
           <CareerRowContent>{children}</CareerRowContent>
         </CareerRowContainer>
-      </Container>
+      </Section>
     </AnimatorFadeUp>
   </CareerRowSpacer>
 )
@@ -221,7 +221,7 @@ const CareerRow = ({ children, header, hideOverflow }) => (
 const CareerRowSpacer = styled.div`
   padding-bottom: 20rem;
 
-  ${media.hdpi`
+  ${media.desktop_large`
     padding-bottom: 15rem;
   `};
 
@@ -353,7 +353,7 @@ const ImageContainer = styled.div`
   right: -8rem;
   margin: 0 auto;
 
-  ${media.mdpi`
+  ${media.desktop`
     right: 0;
   `};
 
@@ -417,7 +417,7 @@ const ImageTraceContainer = styled.div`
     top: -10px;
   `};
 
-  ${media.se`
+  ${media.phone_small`
     left: -12px;
     top: -9px;
   `};
@@ -671,7 +671,7 @@ const MobileBody = styled.div`
     transform: translateY(42rem);
   `};
 
-  ${media.se`
+  ${media.phone_small`
     transform: translateY(46rem);
   `};
 `

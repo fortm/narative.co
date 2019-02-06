@@ -6,7 +6,7 @@ import { Formik, Form as FormikForm, Field } from 'formik'
 import {
   Button,
   ButtonArrow,
-  Container,
+  Section,
   CopyToClipboard,
   Heading,
   Form,
@@ -80,7 +80,7 @@ class ContactForm extends Component {
     const { animation, firstName, submitted } = this.state
 
     return (
-      <Container>
+      <Section>
         {submitted ? (
           <SubmittedScreen>
             <SubmittedCheckIcon />
@@ -160,7 +160,7 @@ class ContactForm extends Component {
             }}
           />
         )}
-      </Container>
+      </Section>
     )
   }
 }
@@ -289,7 +289,7 @@ const StyledFormikForm = styled(FormikForm)`
   background: #fff;
   z-index: 99999;
 
-  ${media.hdpi`
+  ${media.desktop_large`
     margin-left: 0;
     width: 100%;
     padding: 0 4rem 5rem;
@@ -319,7 +319,7 @@ const SubmittedScreen = styled.div`
   opacity: 0;
   animation: ${fadeIn} 50ms 500ms ${p => p.theme.transitions.in} forwards;
 
-  ${media.mdpi`
+  ${media.desktop`
     padding-bottom: 0;
     margin: 0 auto;
   `};
