@@ -63,7 +63,12 @@ const Content = styled(RichText).attrs<{ textHighlightColor: string }>({})`
   position: relative;
   padding: 160px 0 130px;
   z-index: 2;
-  background: linear-gradient(180deg, #08080b 0%, #0b0b0e 44.18%, #111216 100%);
+  background: linear-gradient(
+    180deg,
+    #111216 0%,
+    #111216 66.67%,
+    #191d23 100%
+  ); /* gradient footer */
 `
 
 const Hero = styled.div`
