@@ -11,7 +11,7 @@ import { media } from '@styles'
 const navOptions = [
   { to: '#', text: 'Labs (coming soon)', disabled: true },
   { to: '/careers', text: 'Careers' },
-  { to: 'https://medium.com/narative', text: 'Articles', external: true },
+  { to: '/articles', text: 'Articles' },
   { to: '/contact', text: 'Contact' },
 ]
 
