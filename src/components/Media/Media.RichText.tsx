@@ -183,6 +183,18 @@ const Content = styled.div`
     margin: 20px auto 65px;
   }
 
+  img.Image_Regular {
+    max-width: 680px;
+  }
+
+  img.Image_Large {
+    max-width: 1140px;
+  }
+
+  img.Image_Full {
+    width: 100vw;
+  }
+
   table {
     ${articleWidth} width: 100%;
     border-collapse: collapse;

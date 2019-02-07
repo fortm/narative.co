@@ -41,7 +41,7 @@ function withDarkMode(WrappedComponent) {
 
     render() {
       const theme = themes[this.state.mode]
-      console.log(theme)
+
       return (
         <ThemeProvider theme={theme}>
           <WrappedComponent

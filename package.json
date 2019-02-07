@@ -3,18 +3,17 @@
   "description": "Narative",
   "version": "1.0.0",
   "author": "Dennis BRotzky <dennis@narative.co>",
-  "keywords": [
-    "narative"
-  ],
+  "keywords": ["narative"],
   "scripts": {
     "dev": "run-p dev:**",
-    "dev:app": "./node_modules/.bin/gatsby develop",
+    "dev:app": "yarn clean && ./node_modules/.bin/gatsby develop",
     "dev:lambda": "netlify-lambda serve src/functions",
     "build": "run-p build:**",
     "build:app": "./node_modules/.bin/gatsby build",
     "build:lambda": "netlify-lambda build src/functions",
     "format": "prettier --write 'src/**/*.js'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -rf ./cache"
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^13.0.0",
