@@ -41,8 +41,14 @@ class IndexPage extends Component {
             <ContentContainer>
               <div style={{ top: '-60px' }} />
               <TextContainer animation={animation}>
-                <Heading.h1>{contentful.heading}</Heading.h1>
-                <MainText>{contentful.text.text}</MainText>
+                <Heading.h1>
+                  <em>Narative</em> builds brands, websites and products for
+                  growth-minded companies.
+                </Heading.h1>
+                <MainText>
+                  We're a team with senior startup experience here to help your
+                  business take the next step.
+                </MainText>
 
                 {/* With flexbox we need to have a mobile and desktop element
                 in the DOM so we can have the proper design in palce. This is
@@ -89,9 +95,15 @@ export const pageQuery = graphql`
               }
             }
           }
-          heading
+          heading {
+            childMarkdownRemark {
+              html
+            }
+          }
           text {
-            text
+            childMarkdownRemark {
+              html
+            }
           }
         }
       }
@@ -100,7 +112,7 @@ export const pageQuery = graphql`
 `
 
 const TextContainer = styled.div`
-  max-width: 620px;
+  max-width: 570px;
   ${transitions.fadeUp};
 `
 
