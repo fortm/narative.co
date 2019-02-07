@@ -22,7 +22,6 @@ class HTML extends Component {
           <div
             key={`body`}
             id="___gatsby"
-            style={{ overflowX: 'hidden' }}
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
           {this.props.postBodyComponents}

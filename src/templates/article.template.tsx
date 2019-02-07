@@ -7,6 +7,7 @@ import Heading from '@components/Heading'
 import Helmet from '@components/Helmet'
 import Layout from '@components/Layout'
 import { MicrodataBreadcrumb, RichText } from '@components/Media'
+import withDarkMode from '@components/DarkMode'
 import Img from '@components/Media/Media.Img'
 import Section from '@components/Section'
 
@@ -35,7 +36,6 @@ class Article extends Component<IDetailPage, PostState> {
     const article = this.article
     const author = this.article.author
 
-    console.log(article)
     return (
       <Layout navTheme="dark" navOffset={false}>
         <Hero>
@@ -51,19 +51,30 @@ class Article extends Component<IDetailPage, PostState> {
             <ReadingTime>{article.fields.readingTime.text}</ReadingTime>
           </RelativeSection>
         </Hero>
+        <DarkModeButton onClick={this.props.toggleMode}>
+          Dark/Light
+        </DarkModeButton>
         <Content content={article.body} />
       </Layout>
     )
   }
 }
 
-export default Article
+export default withDarkMode(Article)
 
+const DarkModeButton = styled.div`
+  position: fixed;
+  top: 150px;
+  right: 150px;
+  z-index: 3;
+  color: #000;
+`
 const Content = styled(RichText).attrs<{ textHighlightColor: string }>({})`
   position: relative;
   padding: 160px 0 130px;
   z-index: 2;
-  background: linear-gradient(180deg, #111216 0%, #111216 66.67%, #191d23 100%);
+  background: ${p => p.theme.mode.gradient};
+  transition: background 0.3s ease;
 `
 
 const Hero = styled.div`

@@ -23,13 +23,18 @@ const articleWidth = css`
   margin: 0 auto;
 `
 
+const transitionColor = css`
+  transition: color 0.3s ease;
+`
+
 const Content = styled.div`
   * {
     line-height: 1.5;
     font-size: 2.2rem;
     font-family: ${p => p.theme.fontfamily.sansSerif};
-    color: #fff;
+    color: ${p => p.theme.mode.text};
     margin-bottom: 2.34rem;
+    ${transitionColor};
 
     & + h1,
     & + h2,
@@ -50,6 +55,7 @@ const Content = styled.div`
     * {
       font-family: ${p => p.theme.fontfamily.serif};
     }
+    color: ${p => p.theme.mode.text};
   }
 
   h1,
@@ -79,9 +85,11 @@ const Content = styled.div`
 
   a,
   a * {
-    color: ${p => p.theme.colors.skyblue};
+    color: ${p => p.theme.mode.links};
+    ${transitionColor};
+
     &:visited {
-      color: ${p => p.theme.colors.skyblue};
+      color: ${p => p.theme.mode.links};
       opacity: 0.85;
     }
   }
@@ -101,14 +109,17 @@ const Content = styled.div`
     text-align: left;
     font-style: normal;
     font-style: italic;
+    margin: 65px auto;
 
     p {
       font-family: ${p => p.theme.fontfamily.serif};
       font-size: 36px;
       color: #fff;
-      line-height: 1.2;
+      line-height: 1;
       max-width: 780px;
-      margin: 25px auto 65px;
+      margin: 0 auto;
+      color: ${p => p.theme.mode.text};
+      ${transitionColor};
     }
   }
 
@@ -127,6 +138,8 @@ const Content = styled.div`
   ol {
     ${articleWidth} list-style: none;
     counter-reset: list;
+    color: ${p => p.theme.mode.text};
+    ${transitionColor};
 
     li > * {
       display: inline;
@@ -155,6 +168,7 @@ const Content = styled.div`
     ${articleWidth} margin-bottom: 40px;
     line-height: 1.6;
     font-size: 22px;
+    color: ${p => p.theme.mode.text};
 
     b {
       font-weight: 800;
@@ -179,6 +193,7 @@ const Content = styled.div`
     display: table-row-group;
     vertical-align: middle;
     border-color: inherit;
+    color: ${p => p.theme.mode.text};
   }
 
   th {

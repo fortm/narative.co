@@ -25,7 +25,7 @@ class IndexPage extends Component {
   }
 
   render() {
-    const { animation } = this.state
+    // const { animation } = this.state
     const contentful = this.props.data.allContentfulHomePage.edges[0].node
     const articles = this.props.data.allContentfulArticle.edges
 
@@ -70,10 +70,6 @@ export const pageQuery = graphql`
               }
             }
           }
-          heading
-          text {
-            text
-          }
         }
       }
     }
@@ -92,7 +88,8 @@ export const pageQuery = graphql`
 const ContentContainer = styled.div`
   height: calc(100vh - 140px);
   min-height: 440px;
-  padding: 0100px 0 100px;
+  padding: 100px 0;
+
   a {
     color: #fff;
     font-size: 22px;
