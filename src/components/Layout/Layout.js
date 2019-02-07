@@ -15,7 +15,7 @@ const WebContainer = styled.div`
     padding-top: 140px; 
   `};
 
-  &::after {
+  &::before {
     content: '';
     position: absolute;
     top: 0;
