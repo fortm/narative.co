@@ -1,6 +1,6 @@
 import React, { Component, memo } from 'react'
 
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import mediaqueries from '@styles/media'
 import { clamp } from '@utils'
@@ -79,24 +79,29 @@ class Progress extends Component<
     const { value } = this.state
     const tacks = [0, 1, 2, 4]
     return (
-      <Frame>
+      <>
         <Trackline aria-hidden="true" value={value} max={100} />
-
         <Tracks>
           {tacks.map((tack, index) => (
             <Tack index={index} value={value} total={tacks.length} />
           ))}
         </Tracks>
-      </Frame>
+      </>
     )
   }
 }
 
 export default Progress
 
-const Frame = styled.div`
-  opacity: 0.5;
+const align = css`
+  position: absolute;
+  width: calc(100vh - 180px);
+  top: calc(50% + 40px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%) rotate(90deg);
 `
+
+const Frame = styled.div``
 
 const Tracks = styled.div`
   position: absolute;
@@ -104,14 +109,7 @@ const Tracks = styled.div`
   display: flex;
   justify-content: space-between;
 
-  width: calc(100vh - 120px);
-  position: absolute;
-  transform: rotate(90deg);
-  position: absolute;
-  top: calc(50% + 30px);
-  left: 50%;
-
-  transform: translateX(-50%) translateY(-50%) rotate(90deg);
+  ${align}
 `
 
 const Tack = styled.span`
@@ -129,15 +127,8 @@ const Trackline = styled.progress`
 
   &[value] {
     appearance: none;
-    width: calc(100vh - 120px);
     height: 0.1rem;
-    position: absolute;
-    transform: rotate(90deg);
-    position: absolute;
-    top: calc(50% + 30px);
-    left: 50%;
-
-    transform: translateX(-50%) translateY(-50%) rotate(90deg);
+    ${align}
   }
 
   &[value]::-webkit-progress-bar {
