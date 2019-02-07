@@ -1,5 +1,7 @@
 require('dotenv').config()
 
+const proxy = require('http-proxy-middleware')
+
 exports.siteMetadata = {
   title: 'Narative',
   siteUrl: 'https://narative.co',
@@ -14,6 +16,7 @@ exports.plugins = [
   `gatsby-transformer-remark`,
   'gatsby-transformer-enhance-contentful',
   'gatsby-transformer-contentful-rich-text-html-renderer',
+  'gatsby-plugin-netlify',
   'gatsby-plugin-netlify-cache',
   {
     resolve: `gatsby-plugin-styled-components`,
@@ -70,3 +73,16 @@ exports.plugins = [
     },
   },
 ]
+
+// For lambda functions
+exports.developMiddleware = app => {
+  app.use(
+    '/.netlify/functions/',
+    proxy({
+      target: 'http://localhost:9000',
+      pathRewrite: {
+        '/.netlify/functions/': '',
+      },
+    })
+  )
+}
