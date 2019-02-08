@@ -135,7 +135,7 @@ class HandleOverlap extends Component {
   asideRef: React.RefObject<HTMLElement> = React.createRef()
   ticking = false
 
-  state = { isOverlapping: false }
+  state = { isOverlapping: true }
 
   componentDidMount() {
     this.onScroll()
