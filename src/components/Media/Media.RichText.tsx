@@ -29,6 +29,9 @@ const transitionColor = css`
 `
 
 const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+
   * {
     line-height: 1.5;
     font-size: 2.2rem;
@@ -111,6 +114,7 @@ const Content = styled.div`
     font-style: normal;
     font-style: italic;
     margin: 65px auto;
+    width: 100%;
 
     p {
       font-family: ${p => p.theme.fontfamily.serif};
@@ -181,7 +185,7 @@ const Content = styled.div`
     position: relative;
     max-width: 100%;
     z-index: 0;
-    margin: 20px auto 65px;
+    margin: 40px auto 65px;
   }
 
   img.Image_Regular {

@@ -160,7 +160,6 @@ class HandleOverlap extends Component {
            * otherwise we run into issues with multiple images on the page.
            */
           if (!this.isVisible(image)) {
-            console.log('hello')
             return (this.ticking = false)
           }
 
@@ -197,7 +196,6 @@ class HandleOverlap extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <Frame isOverlapping={this.state.isOverlapping} ref={this.asideRef}>
         {this.props.children}
@@ -395,9 +393,7 @@ const ReadingTime = styled.div`
   }
 `
 
-const Footer = styled.div`
-  /* height: 100vh; */
-`
+const Footer = styled.div``
 
 const Microdata = ({
   article: { title, excerpt, author, hero, postDate },

@@ -210,7 +210,7 @@ const NavFixedContainer = styled.div`
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 9;
+  z-index: 10;
 `
 
 const NavContainer = styled.div`
