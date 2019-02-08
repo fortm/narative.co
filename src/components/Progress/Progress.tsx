@@ -63,10 +63,12 @@ class Progress extends Component<
       // on callback of the setState clear the thread
       window.requestAnimationFrame(() => {
         const percentComplete =
-          ((window.scrollY - this.props.offset) / this.props.height) * 100
+          ((window.scrollY - this.props.offset) /
+            (this.props.height - this.props.offset)) *
+          100
 
         this.setState(
-          { value: clamp(+percentComplete.toFixed(2), 0, 100) },
+          { value: clamp(+percentComplete.toFixed(2), -2, 105) },
           () => (this.ticking = false)
         )
       })
@@ -76,70 +78,68 @@ class Progress extends Component<
   }
 
   render = () => {
-    const { value } = this.state
-    const tacks = [0, 1, 2, 4]
+    const { showProgressIndicator, value } = this.state
+    const tacks = Array(4).fill()
+    const show = showProgressIndicator && value > -1 && value < 101
+    const progressOffset = { transform: `translateY(${value - 100}%)` }
+
     return (
-      <>
-        <Trackline aria-hidden="true" value={value} max={100} />
+      <Frame show={show}>
+        <Trackline aria-hidden="true" value={value} max={100}>
+          <ProgressLine style={progressOffset} />
+        </Trackline>
         <Tracks>
           {tacks.map((tack, index) => (
             <Tack index={index} value={value} total={tacks.length} />
           ))}
         </Tracks>
-      </>
+      </Frame>
     )
   }
 }
 
 export default Progress
 
-const align = css`
-  position: absolute;
-  width: calc(100vh - 180px);
-  top: calc(50% + 40px);
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%) rotate(90deg);
+const Frame = styled.div`
+  position: relative;
+  opacity: ${p => (p.show ? 0.5 : 0)};
+  transition: opacity 0.33s;
 `
-
-const Frame = styled.div``
 
 const Tracks = styled.div`
   position: absolute;
+  top: 0;
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-
-  ${align}
 `
 
 const Tack = styled.span`
-  height: 6px;
-  width: 1px;
   position: relative;
-  top: -3px;
+  width: 6px;
+  height: 1px;
+  right: 3px;
   background-color: ${p =>
-    p.index * (100 / (p.total - 1)) < p.value ? '#fff' : p.theme.colors.grey};
+    p.index * (99.9 / (p.total - 1)) <= p.value ? '#fff' : p.theme.colors.grey};
 `
 
-const Trackline = styled.progress`
+const Trackline = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
+  height: calc(88vh - 180px);
+  width: 1px;
+  background-color: ${p => p.theme.colors.grey};
+  overflow: hidden;
+`
 
-  &[value] {
-    appearance: none;
-    height: 0.1rem;
-    ${align}
-  }
-
-  &[value]::-webkit-progress-bar {
-    background-color: ${p => p.theme.colors.grey};
-    height: 0.1rem;
-  }
-
-  &[value]::-webkit-progress-value {
-    background-color: #fff;
-    height: 0.1rem;
-    position: relative;
-    top: 0rem;
-  }
+const ProgressLine = styled.div`
+  position: absolute;
+  height: 100%;
+  top: 0%;
+  transform: translateY(${p => p.offset - 100}%);
+  width: 1px;
+  background-color: #fff;
+  left: 0;
 `

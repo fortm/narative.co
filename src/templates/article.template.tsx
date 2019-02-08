@@ -11,6 +11,7 @@ import withDarkMode from '@components/DarkMode'
 import Img from '@components/Media/Media.Img'
 import Section from '@components/Section'
 import Progress from '@components/Progress'
+import IntersectionObserver from '@components/IntersectionObserver'
 
 import mediaqueries from '@styles/media'
 import { debounce } from '@utils'
@@ -86,42 +87,129 @@ class Article extends Component<IDetailPage, PostState> {
 
     return (
       <Layout navTheme="dark" navOffset={false}>
-        <Hero>
-          <HeroContent>
-            <Header>
-              <HeroTitle>{article.title}</HeroTitle>
-              <HeroSubtitle>
-                By {author.name} – {author.title}
-              </HeroSubtitle>
-            </Header>
-          </HeroContent>
-          <RelativeSection>
-            <ReadingTime>{article.fields.readingTime.text}</ReadingTime>
-          </RelativeSection>
-        </Hero>
+        <IntersectionObserver
+          render={({ visiblePercentage }) => (
+            <Hero>
+              <HeroContent>
+                <Header>
+                  <HeroTitle>{article.title}</HeroTitle>
+                  <HeroSubtitle>
+                    By {author.name} – {author.title}
+                  </HeroSubtitle>
+                </Header>
+              </HeroContent>
+              <RelativeSection>
+                <ReadingTime>{article.fields.readingTime.text}</ReadingTime>
+              </RelativeSection>
+            </Hero>
+          )}
+        />
         <Aside>
-          <AlignRight>
-            <Progress height={contentHeight} offset={contentOffset} />
-          </AlignRight>
+          <Align>
+            <HandleOverlap>
+              <Progress height={contentHeight} offset={contentOffset} />
+            </HandleOverlap>
+          </Align>
         </Aside>
         <Aside right>
-          <AlignRight>
-            <ShareButton mode={this.props.mode} />
-            <DarkModeSelect
-              toggleMode={this.props.toggleMode}
-              mode={this.props.mode}
-            />
-          </AlignRight>
+          <Align>
+            <HandleOverlap>
+              <ShareButton mode={this.props.mode} />
+              <DarkModeSelect
+                toggleMode={this.props.toggleMode}
+                mode={this.props.mode}
+              />
+            </HandleOverlap>
+          </Align>
         </Aside>
-        <div ref={this.contentSectionRef}>
-          <Content content={article.body} />
-        </div>
+        <Content contentRef={this.contentSectionRef} content={article.body} />
+        <Footer />
       </Layout>
     )
   }
 }
 
 export default withDarkMode(Article)
+
+class HandleOverlap extends Component {
+  asideRef: React.RefObject<HTMLElement> = React.createRef()
+  ticking = false
+
+  state = { isOverlapping: false }
+
+  componentDidMount() {
+    this.onScroll()
+
+    window.addEventListener('scroll', this.onScroll)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll)
+  }
+
+  onScroll = () => {
+    if (!this.ticking) {
+      // RAF and make our progress calculation
+      // on callback of the setState clear the thread
+      window.requestAnimationFrame(() => {
+        const images = [].slice.call(document.querySelectorAll('img'))
+
+        images.forEach(image => {
+          /**
+           * If the image is not in the viewport don't fire state events for it,
+           * otherwise we run into issues with multiple images on the page.
+           */
+          if (!this.isVisible(image)) {
+            console.log('hello')
+            return (this.ticking = false)
+          }
+
+          this.setState(
+            {
+              isOverlapping: this.collide(this.asideRef.current, image),
+            },
+            () => (this.ticking = false)
+          )
+        })
+      })
+      // Prevent further scrolls triggers
+      this.ticking = true
+    }
+  }
+
+  isVisible = element => {
+    const rect = element.getBoundingClientRect()
+
+    return rect.top < window.innerHeight && rect.bottom >= 0
+  }
+
+  collide = (fixedElement, image) => {
+    const rect1 = fixedElement.getBoundingClientRect()
+    const rect2 = image.getBoundingClientRect()
+    const buffer = 35
+
+    return !(
+      rect1.top - buffer > rect2.bottom ||
+      rect1.right < rect2.left ||
+      rect1.bottom + buffer < rect2.top ||
+      rect1.left > rect2.right
+    )
+  }
+
+  render() {
+    console.log(this.state)
+    return (
+      <Frame isOverlapping={this.state.isOverlapping} ref={this.asideRef}>
+        {this.props.children}
+      </Frame>
+    )
+  }
+}
+
+const Frame = styled.div`
+  opacity: ${p => (p.isOverlapping ? 0 : 1)};
+  transition: opacity 0.3s;
+`
 
 const Aside = styled.aside`
   display: flex;
@@ -131,13 +219,16 @@ const Aside = styled.aside`
   max-width: 1140px;
 `
 
-const AlignRight = styled.div`
+const Align = styled.div`
   position: fixed;
   visibility: visible;
   opacity: 1;
   transform: translateY(0px);
-  top: calc(50vh - 39px);
+  top: 0;
   z-index: 3;
+  display: flex;
+  align-items: center;
+  height: 100vh;
 `
 
 const DarkModeSelect = ({ toggleMode, mode }) => {
@@ -242,11 +333,11 @@ const Content = styled(RichText).attrs<{ textHighlightColor: string }>({})`
 
 const Hero = styled.div`
   position: relative;
-  z-index: 1;
+  z-index: 5;
   min-height: 720px;
   height: 100vh;
   width: 100vw;
-  background: #d9dbe0;
+  background: #fafafa;
   display: flex;
 `
 
@@ -302,6 +393,10 @@ const ReadingTime = styled.div`
     right: -80px;
     background: #111216;
   }
+`
+
+const Footer = styled.div`
+  /* height: 100vh; */
 `
 
 const Microdata = ({

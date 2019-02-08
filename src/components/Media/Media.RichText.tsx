@@ -4,9 +4,10 @@ import styled, { css } from 'styled-components'
 import mediaqueries from '@styles/media'
 import { IRichText } from '@typings'
 
-const RichText: React.SFC<IRichText> = ({ content, ...props }) => {
+const RichText: React.SFC<IRichText> = ({ content, contentRef, ...props }) => {
   return (
     <Content
+      ref={contentRef}
       dangerouslySetInnerHTML={{
         __html: content.childRichTextHtml.html,
       }}
