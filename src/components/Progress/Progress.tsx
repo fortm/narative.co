@@ -131,7 +131,8 @@ const Trackline = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  height: calc(88vh - 180px);
+  height: calc(88vh - 40px);
+  max-height: 480px;
   width: 1px;
   background-color: ${p => p.theme.colors.grey};
   overflow: hidden;
