@@ -230,4 +230,12 @@ const Content = styled.div`
     vertical-align: top;
     white-space: nowrap;
   }
+
+  hr {
+    width: 250px;
+    height: 1px;
+    background: ${p => p.theme.colors.grey};
+    margin: 35px auto;
+    opacity: 0.33;
+  }
 `
