@@ -121,7 +121,9 @@ const Tack = styled.span`
   height: 1px;
   right: 3px;
   background-color: ${p =>
-    p.index * (99.9 / (p.total - 1)) <= p.value ? '#fff' : p.theme.colors.grey};
+    p.index * (99.9 / (p.total - 1)) <= p.value
+      ? p.theme.mode.text
+      : p.theme.colors.grey};
   transition: background 0.2s;
 `
 
@@ -141,6 +143,6 @@ const ProgressLine = styled.div`
   top: 0%;
   transform: translateY(${p => p.offset - 100}%);
   width: 1px;
-  background-color: #fff;
+  background-color: ${p => p.theme.mode.text};
   left: 0;
 `
