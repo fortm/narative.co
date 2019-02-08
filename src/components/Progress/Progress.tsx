@@ -122,6 +122,7 @@ const Tack = styled.span`
   right: 3px;
   background-color: ${p =>
     p.index * (99.9 / (p.total - 1)) <= p.value ? '#fff' : p.theme.colors.grey};
+  transition: background 0.2s;
 `
 
 const Trackline = styled.div`
