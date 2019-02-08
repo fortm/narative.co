@@ -51,8 +51,7 @@ const Content = styled.div`
   h3,
   h4,
   h5,
-  h6,
-  figcaption {
+  h6 {
     ${articleWidth};
     margin-top: 4.68rem;
     font-family: ${p => p.theme.fontfamily.serif};
@@ -99,12 +98,20 @@ const Content = styled.div`
   }
 
   figure {
-    text-align: center;
+    margin-bottom: 0;
+
+    img {
+      margin-bottom: 15px;
+    }
+
     figcaption {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: ${p => p.theme.colors.grey.light};
+      ${articleWidth};
+      font-family: ${p => p.theme.fontfamily.sansSerif};
+      color: ${p => p.theme.mode.text};
+      opacity: 0.25;
+      font-size: 2.2rem;
       display: block;
+      margin-bottom: 60px;
     }
   }
 
@@ -120,39 +127,32 @@ const Content = styled.div`
       font-family: ${p => p.theme.fontfamily.serif};
       font-size: 36px;
       color: #fff;
-      line-height: 1;
+      line-height: 1.1;
       max-width: 780px;
       margin: 0 auto;
       color: ${p => p.theme.mode.text};
       ${transitionColor};
     }
   }
-
-  hr {
-    height: 1px;
-    position: relative;
-    width: 100%;
-    background-color: ${p => p.theme.colors.grey.lighter};
-    margin-top: 0;
-    margin-left: 0;
-    margin-right: 0;
-    border: 0;
-  }
-
   ul,
   ol {
     ${articleWidth} list-style: none;
     counter-reset: list;
     color: ${p => p.theme.mode.text};
     ${transitionColor};
+    position: relative;
+    padding-left: 30px;
+
+    li {
+      position: relative;
+    }
 
     li > * {
       display: inline;
     }
 
     li::before {
-      width: 2.5rem;
-      margin-left: -2.5rem;
+      width: 3rem;
       display: inline-block;
       position: absolute;
       color: ${p => p.theme.colors.grey.mid};
@@ -160,13 +160,22 @@ const Content = styled.div`
   }
 
   ul li::before {
-    content: '•';
+    content: '';
+    position: absolute;
+    left: -3rem;
+    top: 1.4rem;
+    height: 8px;
+    width: 8px;
+    background: ${p => p.theme.mode.text};
   }
 
   ol li::before {
     counter-increment: list;
     content: counter(list) '.';
     font-weight: 600;
+    position: absolute;
+    left: -3rem;
+    top: 0.1rem;
   }
 
   p {
@@ -201,7 +210,8 @@ const Content = styled.div`
   }
 
   table {
-    ${articleWidth} width: 100%;
+    ${articleWidth};
+    width: 100%;
     border-collapse: collapse;
     border-top: 1px solid #dfe3e8;
   }
@@ -234,8 +244,19 @@ const Content = styled.div`
   hr {
     width: 250px;
     height: 1px;
-    background: ${p => p.theme.colors.grey};
     margin: 35px auto;
     opacity: 0.33;
+  }
+
+  hr {
+    ${articleWidth};
+    position: relative;
+    width: 100%;
+    margin: 25px auto 60px;
+    border: 0;
+    height: 14.36px;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='10' height='15' viewBox='0 0 10 15' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3crect x='0.326172' y='14.1777' width='16' height='1' transform='rotate(-60 0.326172 14.1777)' fill='${p =>
+    p.theme.mode.text}'/%3e%3c/svg%3e ");
+    background-repeat: repeat-x;
   }
 `

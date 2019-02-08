@@ -364,8 +364,7 @@ const HeroTitle = styled(Heading.h1)`
 
 const HeroSubtitle = styled.div`
   font-size: 18px;
-  color: #000;
-  opacity: 0.25;
+  color: #7a8085;
   font-weight: 800;
 `
 
