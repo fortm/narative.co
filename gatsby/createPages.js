@@ -42,11 +42,10 @@ const pageLength = 6 // How many nodes should be displayed on each list pages
  *
  * @param {string} postId Our target post's ID
  * @param {array}  postCategories Our target post's categories as an array of IDs
- * @param {array}  postsSharingLocale Array of posts that share a locale with the target post
  */
-function* takeRelated(postId, postCategories, postsSharingLocale) {
+function* takeRelated(postId, postCategories, posts) {
   let numberTaken = 0
-  for (const { node, categories } of postsSharingLocale) {
+  for (const { node, categories } of posts) {
     // If we've hit the limit then return
     if (numberTaken === relatedLimit) return
     // Otherwise test if there is intersection between
@@ -204,7 +203,7 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
        * down from an array of objects to an array of category IDs.
        */
       const categoryIds = pluck('id', categories)
-      const generator = takeRelated(article.id, categoryIds, postsInLocale)
+      const generator = takeRelated(article.id, categoryIds, articles)
 
       // Exhaust the generator in to the relateds array
       for (const related of generator) {
@@ -243,8 +242,7 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
         id: article.id,
         title: article.title,
         // Add it to our created page. Topups might well be empty if we found enough relateds
-        // relateds: [...relateds, ...topups],
-        relateds: [...relateds],
+        relateds: [...relateds, ...topups],
       },
     })
   })

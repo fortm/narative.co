@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 class IntersectionObserver extends Component {
   state = {
+    boundingClientRect: {},
     visiblePercentage: 0,
     visible: false,
     entering: false,

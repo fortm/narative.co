@@ -158,17 +158,26 @@ const ArticlePublicationLogoQuery = graphql`
   }
 `
 
+const inlineAnimate = cond => obj => (cond ? obj : {})
+
 const ArticleHero = ({ article, author }) => {
   return (
     <IntersectionObserver
-      render={({ visiblePercentage }: { visiblePercentage: number }) => {
-        const headerOffset = {
+      render={({
+        boundingClientRect: { height },
+        visiblePercentage,
+      }: {
+        boundingClientRect: { height: number }
+        visiblePercentage: number
+      }) => {
+        const canAnimate = inlineAnimate(height > 540)
+        const headerOffset = canAnimate({
           transform: `translateY(${(100 - visiblePercentage) * 1.33}px)`,
           opacity: 1 - ((100 - visiblePercentage) / 100) * 1.66,
-        }
-        const readingOffset = {
+        })
+        const readingOffset = canAnimate({
           transform: `translateY(${visiblePercentage / 2}px)`,
-        }
+        })
 
         return (
           <Hero>
@@ -204,7 +213,7 @@ const Content = styled(RichText).attrs<{ textHighlightColor: string }>({})`
 const Hero = styled.div`
   position: relative;
   z-index: 5;
-  min-height: 720px;
+  min-height: 540px;
   height: 100vh;
   width: 100vw;
   background: #fafafa;
