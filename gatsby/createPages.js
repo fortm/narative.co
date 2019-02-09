@@ -243,7 +243,8 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
         id: article.id,
         title: article.title,
         // Add it to our created page. Topups might well be empty if we found enough relateds
-        relateds: [...relateds, ...topups],
+        // relateds: [...relateds, ...topups],
+        relateds: [...relateds],
       },
     })
   })

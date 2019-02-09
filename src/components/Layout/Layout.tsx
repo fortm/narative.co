@@ -5,6 +5,15 @@ import { Navigation } from '@components'
 import { GlobalStyles, media, theme } from '@styles'
 import { startAnimation } from '@utils'
 
+interface LayoutProps {
+  background?: string
+  nav: {
+    fixed?: boolean
+    offset?: boolean
+    theme?: string
+  }
+}
+
 const WebContainer = styled.div`
   position: relative;
   background: linear-gradient(180deg, #08080b 0%, #0b0b0e 44.18%, #111216 100%);
@@ -42,7 +51,15 @@ const WebContainer = styled.div`
   `};
 `
 
-class Layout extends Component {
+class Layout extends Component<LayoutProps, { animation: string }> {
+  static defaultProps = {
+    nav: {
+      theme: 'light',
+      offset: true,
+      fixed: true,
+    },
+  }
+
   state = { animation: '' }
 
   componentDidMount() {
@@ -50,7 +67,7 @@ class Layout extends Component {
   }
 
   render() {
-    const { background, children, navOffset, navTheme, navFixed } = this.props
+    const { background, children, nav } = this.props
 
     return (
       <ThemeProvider theme={theme}>
@@ -59,21 +76,15 @@ class Layout extends Component {
           <WebContainer
             animation={this.state.animation}
             background={background}
-            navOffset={navOffset}
+            navOffset={nav.offset}
           >
-            <Navigation navTheme={navTheme} navFixed={navFixed} />
+            <Navigation nav={nav} />
             {children}
           </WebContainer>
         </>
       </ThemeProvider>
     )
   }
-}
-
-Layout.defaultProps = {
-  navTheme: 'light',
-  navOffset: true,
-  navFixed: true,
 }
 
 export default Layout

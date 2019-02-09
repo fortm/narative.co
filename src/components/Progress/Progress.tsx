@@ -7,7 +7,6 @@ import { clamp } from '@utils'
 export interface IProgress {
   height: number
   offset: number
-  title: string
   onClose?: () => void
 }
 
@@ -50,7 +49,7 @@ class Progress extends Component<IProgress, { value: number }> {
 
   render = () => {
     const { value } = this.state
-    const tacks = Array(4).fill()
+    const tacks = Array(4).fill('')
     const progressOffset = { transform: `translateY(${value - 100}%)` }
 
     return (
@@ -59,7 +58,7 @@ class Progress extends Component<IProgress, { value: number }> {
           <ProgressLine style={progressOffset} />
         </Trackline>
         <Tracks>
-          {tacks.map((tack, index) => (
+          {tacks.map((tack: string, index: number) => (
             <Tack
               key={index}
               index={index}
@@ -75,9 +74,9 @@ class Progress extends Component<IProgress, { value: number }> {
 
 export default Progress
 
-const Frame = styled.div`
+const Frame = memo(styled.div`
   position: relative;
-`
+`)
 
 const Tracks = styled.div`
   position: absolute;

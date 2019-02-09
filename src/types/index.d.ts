@@ -109,6 +109,13 @@ interface IBasicNode {
   }
 }
 
+export interface IDetailPage extends IGatsbyMadePage {
+  pageContext: IPageContextArticle
+  data: {
+    page: IMetaQuery
+  }
+}
+
 export interface IArticleNode extends IBasicNode {
   slug: string
   author: IAuthor
@@ -123,11 +130,9 @@ export interface IArticleNode extends IBasicNode {
   }
 }
 
-export type IPressOrPostArray = IPostNode[]
-
-interface IPostNodeQuery {
+interface IArticleNodeQuery {
   edges: {
-    node: IPostNode
+    node: IArticleNode
   }[]
 }
 
@@ -142,10 +147,10 @@ export interface IPageContext extends IRouterContext {
   pathPrefix?: string
 }
 
-export interface IPageContextPosts extends IPageContext {
-  group?: IPostNode[]
+export interface IPageContextArticles extends IPageContext {
+  group?: IArticleNode[]
   additionalContext: {
-    featured?: IPostNode[]
+    featured?: IArticleNode[]
   }
 }
 
@@ -156,9 +161,9 @@ export interface IPageContextPress extends IPageContext {
   }
 }
 
-export interface IPageContextPost extends IPageContext {
-  node: IPostNode
-  relateds: IPostNode[]
+export interface IPageContextArticle extends IPageContext {
+  node: IArticleNode
+  relateds: IArticleNode[]
 }
 
 export interface IPageContextAuthorBio extends IPageContext {
@@ -201,8 +206,6 @@ export interface IRichText {
   }
   contentRef: React.RefObject<HTMLElement>
 }
-
-type IHorizontalScrollerItem = IPostNode | IPressLinkNode
 
 export interface IHorizontalScrollerProps {
   title: string

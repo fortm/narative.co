@@ -7,7 +7,7 @@ import mediaqueries from '@styles/media'
 import { clamp } from '@utils'
 
 interface AsideProps {
-  children: ReactNode[]
+  children: ReactNode[] | ReactNode
   right?: boolean
   height: number
   offset: number

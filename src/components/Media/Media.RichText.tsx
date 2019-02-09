@@ -298,7 +298,7 @@ const Content = styled.div`
 
     ${mediaqueries.tablet`
       width: calc(100vw - 80px);
-      margin: 5px auto 20px;
+      margin: 5px auto 50px;
     `};
   }
 `

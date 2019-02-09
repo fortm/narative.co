@@ -116,14 +116,14 @@ class Navigation extends Component {
 
   render() {
     const { active } = this.state
-    const { navTheme, navFixed } = this.props
-    const fill = navTheme === 'dark' ? '#000' : '#fff'
-    const theme = themes[navTheme]
+    const { nav } = this.props
+    const fill = nav.theme === 'dark' ? '#000' : '#fff'
+    const theme = themes[nav.theme]
 
     return (
       <ThemeProvider theme={theme}>
         <OutsideClickHandler onOutsideClick={this.handleOutsideClick}>
-          <NavFixedContainer navFixed={navFixed}>
+          <NavFixedContainer navFixed={nav.fixed}>
             <Section>
               <NavContainer>
                 <LogoContainer to="/">
