@@ -67,6 +67,7 @@ export const theme = {
     ['phablet', 540],
     ['tablet', 768],
     ['desktop', 1024],
+    ['desktop_medium', 1200],
     ['desktop_large', 1440],
   ],
 }

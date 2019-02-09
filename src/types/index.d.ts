@@ -194,7 +194,12 @@ export interface IImg extends React.ImgHTMLAttributes<HTMLImageElement> {
 }
 
 export interface IRichText {
-  content: string
+  content: {
+    childRichTextHtml: {
+      html: string
+    }
+  }
+  contentRef: React.RefObject<HTMLElement>
 }
 
 type IHorizontalScrollerItem = IPostNode | IPressLinkNode

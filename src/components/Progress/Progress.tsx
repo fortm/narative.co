@@ -1,8 +1,7 @@
 import React, { Component, memo } from 'react'
 
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
-import mediaqueries from '@styles/media'
 import { clamp } from '@utils'
 
 export interface IProgress {
@@ -12,49 +11,21 @@ export interface IProgress {
   onClose?: () => void
 }
 
-class Progress extends Component<
-  IProgress,
-  { value: number; showProgressIndicator: boolean }
-> {
-  hasEventListener = false
+class Progress extends Component<IProgress, { value: number }> {
   ticking = false
 
-  state = { value: 0, showProgressIndicator: true }
+  state = { value: 0 }
 
   componentDidMount() {
-    this.toggleEventListener()
-  }
-
-  componentDidUpdate(prevProps) {
-    /**
-     * If the height of the content is less than the screen height we don't
-     * want to show a progress indicator because it will be buggy and there's
-     * not point to see a progress indicator when you can see all of the content.
-     */
-    if (this.props.height !== prevProps.height) {
-      if (this.props.height < screen.height) {
-        this.setState({ showProgressIndicator: false })
-      }
-    }
+    window.addEventListener('scroll', this.onScroll)
+    window.addEventListener('onresize', this.onScroll)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll)
-  }
-
-  /**
-   * Once our article's body area enters the viewport we want
-   * to add a passive scroll event listener. Once the element
-   * leaves the viewport we'll take this event listener off
-   */
-  toggleEventListener = () => {
-    // If it's an unlisten then remove the event listener
-    if (this.hasEventListener) {
-      return window.removeEventListener('scroll', this.onScroll)
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('scroll', this.onScroll)
+      window.removeEventListener('onresize', this.onScroll)
     }
-
-    // Otherwise we want to add our event listener
-    window.addEventListener('scroll', this.onScroll)
   }
 
   onScroll = (event: Event) => {
@@ -68,7 +39,7 @@ class Progress extends Component<
           100
 
         this.setState(
-          { value: clamp(+percentComplete.toFixed(2), -2, 105) },
+          { value: clamp(+percentComplete.toFixed(2), -2, 104) },
           () => (this.ticking = false)
         )
       })
@@ -78,19 +49,23 @@ class Progress extends Component<
   }
 
   render = () => {
-    const { showProgressIndicator, value } = this.state
+    const { value } = this.state
     const tacks = Array(4).fill()
-    const show = showProgressIndicator && value > -1 && value < 101
     const progressOffset = { transform: `translateY(${value - 100}%)` }
 
     return (
-      <Frame show={show}>
+      <Frame>
         <Trackline aria-hidden="true" value={value} max={100}>
           <ProgressLine style={progressOffset} />
         </Trackline>
         <Tracks>
           {tacks.map((tack, index) => (
-            <Tack index={index} value={value} total={tacks.length} />
+            <Tack
+              key={index}
+              index={index}
+              value={value}
+              total={tacks.length}
+            />
           ))}
         </Tracks>
       </Frame>
@@ -102,8 +77,6 @@ export default Progress
 
 const Frame = styled.div`
   position: relative;
-  opacity: ${p => (p.show ? 0.5 : 0)};
-  transition: opacity 0.33s;
 `
 
 const Tracks = styled.div`

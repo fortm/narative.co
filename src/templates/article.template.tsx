@@ -13,10 +13,12 @@ import Section from '@components/Section'
 import Progress from '@components/Progress'
 import IntersectionObserver from '@components/IntersectionObserver'
 
-import mediaqueries from '@styles/media'
+import mediaqueries, { media } from '@styles/media'
 import { debounce } from '@utils'
 
 import { IDetailPage, IArticleNode } from '@typings'
+
+import Aside from '../sections/article/Article.Aside'
 
 interface PostState {
   previousPath: string
@@ -81,46 +83,49 @@ class Article extends Component<IDetailPage, PostState> {
 
   render = () => {
     const { contentHeight, contentOffset } = this.state
+    const scrollInfo = { height: contentHeight, offset: contentOffset }
     const { location, ...props } = this.props
     const article = this.article
     const author = this.article.author
 
     return (
-      <Layout navTheme="dark" navOffset={false}>
+      <Layout navTheme="dark" navOffset={false} navFixed={false}>
         <IntersectionObserver
-          render={({ visiblePercentage }) => (
-            <Hero>
-              <HeroContent>
-                <Header>
-                  <HeroTitle>{article.title}</HeroTitle>
-                  <HeroSubtitle>
-                    By {author.name} – {author.title}
-                  </HeroSubtitle>
-                </Header>
-              </HeroContent>
-              <RelativeSection>
-                <ReadingTime>{article.fields.readingTime.text}</ReadingTime>
-              </RelativeSection>
-            </Hero>
-          )}
+          render={({ visiblePercentage }: { visiblePercentage: number }) => {
+            const headerOffset = {
+              transform: `translateY(${(100 - visiblePercentage) * 1.33}px)`,
+              opacity: 1 - ((100 - visiblePercentage) / 100) * 1.66,
+            }
+            const readingOffset = {
+              transform: `translateY(${visiblePercentage / 2}px)`,
+            }
+
+            return (
+              <Hero>
+                <HeroContent>
+                  <Header style={headerOffset}>
+                    <HeroTitle>{article.title}</HeroTitle>
+                    <HeroSubtitle>
+                      By {author.name} – {author.title}
+                    </HeroSubtitle>
+                  </Header>
+                </HeroContent>
+                <RelativeSection style={readingOffset}>
+                  <ReadingTime>{article.fields.readingTime.text}</ReadingTime>
+                </RelativeSection>
+              </Hero>
+            )
+          }}
         />
-        <Aside>
-          <Align>
-            <HandleOverlap>
-              <Progress height={contentHeight} offset={contentOffset} />
-            </HandleOverlap>
-          </Align>
+        <Aside {...scrollInfo}>
+          <Progress {...scrollInfo} />
         </Aside>
-        <Aside right>
-          <Align>
-            <HandleOverlap>
-              <ShareButton mode={this.props.mode} />
-              <DarkModeSelect
-                toggleMode={this.props.toggleMode}
-                mode={this.props.mode}
-              />
-            </HandleOverlap>
-          </Align>
+        <Aside right {...scrollInfo}>
+          <ShareButton mode={this.props.mode} />
+          <DarkModeSelect
+            toggleMode={this.props.toggleMode}
+            mode={this.props.mode}
+          />
         </Aside>
         <Content contentRef={this.contentSectionRef} content={article.body} />
         <Footer />
@@ -130,104 +135,6 @@ class Article extends Component<IDetailPage, PostState> {
 }
 
 export default withDarkMode(Article)
-
-class HandleOverlap extends Component {
-  asideRef: React.RefObject<HTMLElement> = React.createRef()
-  ticking = false
-
-  state = { isOverlapping: true }
-
-  componentDidMount() {
-    this.onScroll()
-
-    window.addEventListener('scroll', this.onScroll)
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll)
-  }
-
-  onScroll = () => {
-    if (!this.ticking) {
-      // RAF and make our progress calculation
-      // on callback of the setState clear the thread
-      window.requestAnimationFrame(() => {
-        const images = [].slice.call(document.querySelectorAll('img'))
-
-        images.forEach(image => {
-          /**
-           * If the image is not in the viewport don't fire state events for it,
-           * otherwise we run into issues with multiple images on the page.
-           */
-          if (!this.isVisible(image)) {
-            return (this.ticking = false)
-          }
-
-          this.setState(
-            {
-              isOverlapping: this.collide(this.asideRef.current, image),
-            },
-            () => (this.ticking = false)
-          )
-        })
-      })
-      // Prevent further scrolls triggers
-      this.ticking = true
-    }
-  }
-
-  isVisible = element => {
-    const rect = element.getBoundingClientRect()
-
-    return rect.top < window.innerHeight && rect.bottom >= 0
-  }
-
-  collide = (fixedElement, image) => {
-    const rect1 = fixedElement.getBoundingClientRect()
-    const rect2 = image.getBoundingClientRect()
-    const buffer = 35
-
-    return !(
-      rect1.top - buffer > rect2.bottom ||
-      rect1.right < rect2.left ||
-      rect1.bottom + buffer < rect2.top ||
-      rect1.left > rect2.right
-    )
-  }
-
-  render() {
-    return (
-      <Frame isOverlapping={this.state.isOverlapping} ref={this.asideRef}>
-        {this.props.children}
-      </Frame>
-    )
-  }
-}
-
-const Frame = styled.div`
-  opacity: ${p => (p.isOverlapping ? 0 : 1)};
-  transition: opacity 0.3s;
-`
-
-const Aside = styled.aside`
-  display: flex;
-  justify-content: ${p => (p.right ? 'flex-end' : 'flex-start')};
-  visibility: visible;
-  margin: 0 auto;
-  max-width: 1140px;
-`
-
-const Align = styled.div`
-  position: fixed;
-  visibility: visible;
-  opacity: 1;
-  transform: translateY(0px);
-  top: 0;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  height: 100vh;
-`
 
 const DarkModeSelect = ({ toggleMode, mode }) => {
   const Icon = mode === 'dark' ? DarkModeOffIcon : DarkModeOnIcon
@@ -324,9 +231,12 @@ const IconWrapper = styled.button`
 const Content = styled(RichText).attrs<{ textHighlightColor: string }>({})`
   position: relative;
   padding: 160px 0 130px;
-  z-index: 2;
   background: ${p => p.theme.mode.gradient};
   transition: background 0.3s ease;
+
+  ${mediaqueries.tablet`
+    padding: 80px 0;
+  `}
 `
 
 const Hero = styled.div`
@@ -337,6 +247,7 @@ const Hero = styled.div`
   width: 100vw;
   background: #fafafa;
   display: flex;
+  overflow: hidden;
 `
 
 const HeroContent = styled.div`
@@ -353,6 +264,10 @@ const HeroContent = styled.div`
 const Header = styled.header`
   max-width: 680px;
   margin: 0 auto;
+
+  ${mediaqueries.tablet`
+    padding: 0 40px;
+  `}
 `
 
 const HeroTitle = styled(Heading.h1)`
@@ -360,6 +275,10 @@ const HeroTitle = styled(Heading.h1)`
   color: #000;
   font-family: ${p => p.theme.fontfamily.serif};
   font-weight: 700;
+
+  ${mediaqueries.tablet`
+    font-size: 32px;
+  `}
 `
 
 const HeroSubtitle = styled.div`
@@ -371,12 +290,13 @@ const HeroSubtitle = styled.div`
 const RelativeSection = styled(Section)`
   position: relative;
   width: 100%;
+  pointer-events: none;
 `
 
 const ReadingTime = styled.div`
   position: absolute;
-  left: -6px;
-  bottom: 116px;
+  left: -5px;
+  bottom: 160px;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.25);
   transform: rotate(90deg);
@@ -386,10 +306,16 @@ const ReadingTime = styled.div`
     position: absolute;
     height: 1px;
     top: 12px;
-    width: 64px;
-    right: -80px;
+    width: 110px;
+    right: -130px;
     background: #111216;
   }
+
+  ${mediaqueries.tablet`
+    left: 2px;
+    bottom: 112px;
+    font-size: 14px;
+  `}
 `
 
 const Footer = styled.div``

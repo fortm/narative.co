@@ -1,7 +1,8 @@
 import React from 'react'
 
 import styled, { css } from 'styled-components'
-import mediaqueries from '@styles/media'
+import mediaqueries, { media } from '@styles/media'
+
 import { IRichText } from '@typings'
 
 const RichText: React.SFC<IRichText> = ({ content, contentRef, ...props }) => {
@@ -22,6 +23,10 @@ const articleWidth = css`
   width: 100%;
   max-width: 680px;
   margin: 0 auto;
+
+  ${mediaqueries.tablet`
+    padding: 0 40px;
+  `};
 `
 
 const transitionColor = css`
@@ -64,12 +69,13 @@ const Content = styled.div`
   h1,
   h1 * {
     font-weight: 700;
-    font-size: 2.2rem;
+    font-size: 2.8rem;
     line-height: 1.1;
+
     ${mediaqueries.desktop_up`
-    font-size: 4.2rem;
-    margin-bottom: 2.5rem;
-  `};
+      font-size: 4.2rem;
+      margin-bottom: 2.5rem;
+    `};
   }
 
   h2,
@@ -84,6 +90,11 @@ const Content = styled.div`
     font-size: 2.2rem;
     line-height: 1.45;
     margin-bottom: 1.5rem;
+
+    ${mediaqueries.desktop`
+      margin-top: 0;
+      margin-bottom: 1rem;
+    `};
   }
 
   a,
@@ -133,6 +144,10 @@ const Content = styled.div`
       color: ${p => p.theme.mode.text};
       ${transitionColor};
     }
+
+    ${mediaqueries.tablet`
+      margin: 0 auto 35px;
+    `}
   }
   ul,
   ol {
@@ -145,6 +160,16 @@ const Content = styled.div`
 
     li {
       position: relative;
+
+        ${mediaqueries.tablet`
+          padding-left: 40px;
+        `}
+
+      p {
+        ${mediaqueries.tablet`
+          padding: 0;
+        `}
+      }
     }
 
     li > * {
@@ -167,6 +192,10 @@ const Content = styled.div`
     height: 8px;
     width: 8px;
     background: ${p => p.theme.mode.text};
+
+    ${mediaqueries.tablet`
+      left: 0;
+    `}
   }
 
   ol li::before {
@@ -176,6 +205,10 @@ const Content = styled.div`
     position: absolute;
     left: -3rem;
     top: 0.1rem;
+
+    ${mediaqueries.tablet`
+      left: 0;
+    `}
   }
 
   p {
@@ -198,14 +231,17 @@ const Content = styled.div`
   }
 
   img.Image_Regular {
+    width: 100%;
     max-width: 680px;
   }
 
   img.Image_Large {
+    width: 100%;
     max-width: 1140px;
   }
 
   img.Image_Full {
+    width: 100%;
     width: 100vw;
   }
 
@@ -255,8 +291,14 @@ const Content = styled.div`
     margin: 25px auto 60px;
     border: 0;
     height: 14.36px;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='10' height='15' viewBox='0 0 10 15' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3crect x='0.326172' y='14.1777' width='16' height='1' transform='rotate(-60 0.326172 14.1777)' fill='${p =>
-    p.theme.mode.text}'/%3e%3c/svg%3e ");
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='10' height='15' viewBox='0 0 10 15' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3crect x='0.326172' y='14.1777' width='16' height='1' transform='rotate(-60 0.326172 14.1777)' fill='${p =>
+      p.theme.mode.text}'/%3e%3c/svg%3e ");
     background-repeat: repeat-x;
+    box-sizing: border-box;
+
+    ${mediaqueries.tablet`
+      width: calc(100vw - 80px);
+      margin: 5px auto 20px;
+    `};
   }
 `

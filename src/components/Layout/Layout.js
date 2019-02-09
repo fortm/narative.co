@@ -9,10 +9,10 @@ const WebContainer = styled.div`
   position: relative;
   background: linear-gradient(180deg, #08080b 0%, #0b0b0e 44.18%, #111216 100%);
   min-height: 100vh;
+
   ${p =>
     p.navOffset &&
-    `
-    padding-top: 140px; 
+    ` padding-top: 140px; 
   `};
 
   &::before {
@@ -35,8 +35,10 @@ const WebContainer = styled.div`
     `};
   }
 
-  ${media.tablet`
-    padding-top: 90px;
+  ${p =>
+    p.navOffset &&
+    media.tablet`
+      padding-top: 90px; 
   `};
 `
 
@@ -48,7 +50,7 @@ class Layout extends Component {
   }
 
   render() {
-    const { background, children, navOffset, navTheme } = this.props
+    const { background, children, navOffset, navTheme, navFixed } = this.props
 
     return (
       <ThemeProvider theme={theme}>
@@ -59,7 +61,7 @@ class Layout extends Component {
             background={background}
             navOffset={navOffset}
           >
-            <Navigation navTheme={navTheme} />
+            <Navigation navTheme={navTheme} navFixed={navFixed} />
             {children}
           </WebContainer>
         </>
@@ -71,6 +73,7 @@ class Layout extends Component {
 Layout.defaultProps = {
   navTheme: 'light',
   navOffset: true,
+  navFixed: true,
 }
 
 export default Layout

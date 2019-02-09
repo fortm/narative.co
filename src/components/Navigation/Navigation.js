@@ -7,6 +7,7 @@ import { isMobileOnly } from 'react-device-detect'
 
 import { Section, Logo, SocialLinks } from '@components'
 import { media } from '@styles'
+import mediaqueries from '@styles/media'
 
 const navOptions = [
   { to: '#', text: 'Labs (coming soon)', disabled: true },
@@ -115,14 +116,14 @@ class Navigation extends Component {
 
   render() {
     const { active } = this.state
-    const { navTheme } = this.props
+    const { navTheme, navFixed } = this.props
     const fill = navTheme === 'dark' ? '#000' : '#fff'
     const theme = themes[navTheme]
 
     return (
       <ThemeProvider theme={theme}>
         <OutsideClickHandler onOutsideClick={this.handleOutsideClick}>
-          <NavFixedContainer>
+          <NavFixedContainer navFixed={navFixed}>
             <Section>
               <NavContainer>
                 <LogoContainer to="/">
@@ -211,6 +212,10 @@ const NavFixedContainer = styled.div`
   top: 0;
   left: 0;
   z-index: 10;
+
+  ${mediaqueries.tablet`
+    position: ${p => (p.navFixed ? 'fixed' : 'absolute')};
+  `}
 `
 
 const NavContainer = styled.div`
