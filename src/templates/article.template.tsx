@@ -94,6 +94,8 @@ class Article extends Component<IDetailPage, PostState> {
       fixed: false,
     }
 
+    console.log(props)
+
     return (
       <Layout nav={navConfig}>
         <StaticQuery

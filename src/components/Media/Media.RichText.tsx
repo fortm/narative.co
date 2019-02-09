@@ -1,7 +1,7 @@
 import React from 'react'
 
 import styled, { css } from 'styled-components'
-import mediaqueries, { media } from '@styles/media'
+import mediaqueries from '@styles/media'
 
 import { IRichText } from '@typings'
 
@@ -83,6 +83,11 @@ const Content = styled.div`
     font-size: 2.2rem;
     line-height: 1.45;
     margin-bottom: 2rem;
+
+    ${mediaqueries.desktop_up`
+      font-size: 3.2rem;
+      margin-bottom: 2.5rem;
+    `};
   }
 
   h3,
@@ -228,21 +233,34 @@ const Content = styled.div`
     max-width: 100%;
     z-index: 0;
     margin: 40px auto 65px;
+    border-radius: 5px;
   }
 
   img.Image_Regular {
     width: 100%;
     max-width: 680px;
+
+    ${mediaqueries.tablet`
+      padding: 0 40px;
+    `}
   }
 
   img.Image_Large {
     width: 100%;
     max-width: 1140px;
+
+    ${mediaqueries.tablet`
+      padding: 0 20px;
+    `}
   }
 
   img.Image_Full {
     width: 100%;
     width: 100vw;
+
+    ${mediaqueries.tablet`
+      border-radius: 0;
+    `}
   }
 
   table {
