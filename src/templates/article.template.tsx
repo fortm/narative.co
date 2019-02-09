@@ -23,7 +23,12 @@ interface PostState {
   previousPath: string
 }
 
-class Article extends Component<IDetailPage, PostState> {
+interface ArticleProps extends IDetailPage {
+  mode: string
+  toggleMode: () => void
+}
+
+class Article extends Component<ArticleProps, PostState> {
   contentSectionRef: React.RefObject<HTMLElement> = React.createRef()
   hasCalculatedHeightBefore = false
   article = this.props.pageContext.article
@@ -43,6 +48,14 @@ class Article extends Component<IDetailPage, PostState> {
 
   componentDidMount() {
     this.calculateBodySize()
+
+    window.addEventListener('onresize', this.calculateBodySize)
+  }
+
+  componentWillUnmount() {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('onresize', this.calculateBodySize)
+    }
   }
 
   /**

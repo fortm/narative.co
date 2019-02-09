@@ -136,7 +136,7 @@ const Content = styled.div`
     text-align: left;
     font-style: normal;
     font-style: italic;
-    margin: 65px auto;
+    margin: 35px auto 65px;
     width: 100%;
 
     p {
