@@ -412,9 +412,10 @@ const ToolTip = styled.div`
   color: ${p => p.theme.mode.text};
   border-radius: 5px;
   font-size: 14px;
-  top: -40px;
+  top: -35px;
   opacity: ${p => (p.hasCopied ? 1 : 0)};
-  transition: opacity 0.3s ease-in-out;
+  transform: ${p => (p.hasCopied ? 'translateY(-3px)' : 'none')};
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 
   &::after {
     content: '';
