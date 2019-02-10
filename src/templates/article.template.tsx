@@ -139,12 +139,10 @@ class Article extends Component<ArticleProps, PostState> {
               By {author.name} – {author.title}
             </div>
           </Meta>
-          <Footer>
+          <Footer to={`/articles/${next.slug}`}>
             <FooterContent>
               <FooterHeading>Next</FooterHeading>
-              <FooterLink to={`/articles/${next.slug}`}>
-                {next.title}
-              </FooterLink>
+              <FooterTitle>{next.title}</FooterTitle>
             </FooterContent>
           </Footer>
         </Gradient>
@@ -332,7 +330,8 @@ const Meta = styled.div`
   `};
 `
 
-const Footer = styled.div`
+const Footer = styled(Link)`
+  display: block;
   padding: 160px 0;
   background: #fafafa;
 `
@@ -347,7 +346,7 @@ const FooterHeading = styled.h6`
   font-weight: 400;
   color: ${p => p.theme.colors.grey};
 `
-const FooterLink = styled(Link)`
+const FooterTitle = styled.h2`
   font-size: 48px;
   color: #000;
   font-family: ${p => p.theme.fontfamily.serif};
