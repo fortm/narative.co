@@ -87,7 +87,6 @@ class Article extends Component<ArticleProps, PostState> {
       this.hasCalculatedHeightBefore = true
     }
 
-    console.log($contentSection.offsetTop)
     // Set the height and offset of the content area
     this.setState({
       contentHeight: $contentSection.getBoundingClientRect().height,
@@ -109,8 +108,6 @@ class Article extends Component<ArticleProps, PostState> {
       offset: false,
       fixed: false,
     }
-
-    console.log(contentOffset)
 
     return (
       <Layout nav={navConfig}>
@@ -335,10 +332,6 @@ const Meta = styled.div`
   `};
 `
 
-const PostDate = styled.div``
-
-const Author = styled.div``
-
 const Footer = styled.div`
   padding: 160px 0;
   background: #fafafa;
@@ -375,15 +368,69 @@ const DarkModeSelect = ({ toggleMode, mode }) => {
   )
 }
 
-const ShareButton = ({ mode }) => {
-  const Icon = mode === 'dark' ? ShareDarkModeOffIcon : ShareDarkModeOnIcon
+class ShareButton extends Component {
+  state = { hasCopied: false }
 
-  return (
-    <IconWrapper mode={mode}>
-      <Icon />
-    </IconWrapper>
-  )
+  copyToClipboardOnClick = () => {
+    if (this.state.hasCopied) return
+
+    const tempInput = document.createElement('input')
+    document.body.appendChild(tempInput)
+    tempInput.setAttribute('value', window.location.href)
+    tempInput.select()
+    document.execCommand('copy')
+    document.body.removeChild(tempInput)
+
+    this.setState({
+      hasCopied: true,
+    })
+
+    setTimeout(() => {
+      this.setState({ hasCopied: false })
+    }, 1000)
+  }
+
+  render() {
+    const { mode } = this.props
+    const Icon = mode === 'dark' ? ShareDarkModeOffIcon : ShareDarkModeOnIcon
+
+    return (
+      <IconWrapper mode={mode} onClick={this.copyToClipboardOnClick}>
+        <Icon />
+        <ToolTip mode={mode} hasCopied={this.state.hasCopied}>
+          Copied
+        </ToolTip>
+      </IconWrapper>
+    )
+  }
 }
+
+const ToolTip = styled.div`
+  position: absolute;
+  padding: 4px 13px;
+  background: ${p => (p.mode === 'dark' ? '#000' : 'rgba(0,0,0,0.1)')};
+  color: ${p => p.theme.mode.text};
+  border-radius: 5px;
+  font-size: 14px;
+  top: -40px;
+  opacity: ${p => (p.hasCopied ? 1 : 0)};
+  transition: opacity 0.3s ease-in-out;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    margin: 0 auto;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid
+      ${p => (p.mode === 'dark' ? '#000' : 'rgba(0,0,0,0.1)')};
+  }
+`
 
 const DarkModeOffIcon = () => (
   <svg

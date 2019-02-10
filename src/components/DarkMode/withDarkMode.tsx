@@ -9,6 +9,10 @@ const themes = {
       text: '#000',
       color: '#000',
       links: '#6166DC',
+      progress: {
+        complete: '#000',
+        bg: '#B5B8B9',
+      },
     },
   },
   dark: {
@@ -19,6 +23,10 @@ const themes = {
       text: '#fff',
       color: '#fff',
       links: '#E9DAAC',
+      progress: {
+        complete: '#fff',
+        bg: '#7A8085',
+      },
     },
   },
 }

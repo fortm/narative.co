@@ -94,8 +94,8 @@ const Tack = styled.span`
   right: 3px;
   background-color: ${p =>
     p.index * (99.9 / (p.total - 1)) <= p.value
-      ? p.theme.mode.text
-      : p.theme.colors.grey};
+      ? p.theme.mode.progress.complete
+      : p.theme.mode.progress.bg};
   transition: background 0.2s;
 
   &:first-child {
@@ -114,7 +114,7 @@ const Trackline = styled.div`
   height: calc(88vh - 40px);
   max-height: 480px;
   width: 1px;
-  background-color: ${p => p.theme.colors.grey};
+  background-color: ${p => p.theme.mode.progress.bg};
   overflow: hidden;
 `
 

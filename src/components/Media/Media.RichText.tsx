@@ -19,6 +19,12 @@ const RichText: React.SFC<IRichText> = ({ content, contentRef, ...props }) => {
 
 export default RichText
 
+const imageWidths = {
+  regular: '680px',
+  large: '1004px',
+  full: '100vw',
+}
+
 const articleWidth = css`
   width: 100%;
   max-width: 680px;
@@ -238,7 +244,7 @@ const Content = styled.div`
 
   img.Image_Regular {
     width: 100%;
-    max-width: 680px;
+    max-width: ${imageWidths.regular};;
 
     ${mediaqueries.tablet`
       padding: 0 40px;
@@ -247,7 +253,8 @@ const Content = styled.div`
 
   img.Image_Large {
     width: 100%;
-    max-width: 1140px;
+    max-width: ${imageWidths.large};
+    
 
     ${mediaqueries.tablet`
       padding: 0 20px;
@@ -256,7 +263,7 @@ const Content = styled.div`
 
   img.Image_Full {
     width: 100%;
-    width: 100vw;
+    width: ${imageWidths.full};;
 
     ${mediaqueries.tablet`
       border-radius: 0;

@@ -86,7 +86,6 @@ class HandleOverlap extends Component<OverlapProps, OverlapState> {
   }
 
   render() {
-    // console.log(this.state.isOverlapping)
     return (
       <Frame isOverlapping={this.state.isOverlapping} ref={this.asideRef}>
         {this.props.children}
