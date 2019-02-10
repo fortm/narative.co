@@ -91,12 +91,14 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
   const qArticles = await graphql(gql.articles, opts)
 
   // Clean the data returned by GraphQL
-  const articles = pipe(
+  const rArticles = pipe(
     _checkQueryIntegrity,
     // Clean the node in to something more palatable for our template
     // e.g. [{...cleanNode}, {...cleanNode}, {...cleanNode}, ...]
     _cleanNodes
   )(qArticles)
+
+  const articles = rArticles.data.articles.edges
 
   /**
    * /authors/<author slug>
@@ -107,7 +109,6 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
    */
   log('Creating', 'authors')
 
-  // console.log(articles.data.articles.edges[0].node)
   const authors = _groupByAuthor([articles])
 
   authors.forEach(([author, nodes]) => {
@@ -184,7 +185,7 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
    */
 
   // Now map over the nodes for this locale
-  articles.data.articles.edges.forEach(({ node: article }) => {
+  articles.forEach(({ node: article }, index) => {
     /**
      * We need to find related posts for this node.
      * A related post for this node is any post that intersects with it's categories.
@@ -221,15 +222,23 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
      */
     let topups = []
     if (relateds.length < relatedLimit) {
-      const nodesInModel = articles.data.articles.edges
       const required = relatedLimit - relateds.length
-      topups = nodesInModel
+      topups = articles
         // Slice one more topup than you need
         .slice(0, required + 1)
         // Filter out the node itself (which might have been taken as a related)
         .filter(related => related.id !== article.id)
         // Now limit the topups to what you actually need
         .slice(0, required)
+    }
+
+    let nextArticle = {}
+    // Get the next article in the list
+    if (articles[index + 1]) {
+      nextArticle = articles[index + 1]
+    } else {
+      // Or if there is no next article grab the first one
+      nextArticle = articles[0]
     }
 
     // Create the page for this post
@@ -242,7 +251,8 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
         id: article.id,
         title: article.title,
         // Add it to our created page. Topups might well be empty if we found enough relateds
-        relateds: [...relateds, ...topups],
+        // relateds: [...relateds, ...topups],
+        next: nextArticle.node,
       },
     })
   })

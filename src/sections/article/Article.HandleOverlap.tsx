@@ -31,9 +31,18 @@ class HandleOverlap extends Component<OverlapProps, OverlapState> {
       // on callback of the setState clear the thread
       window.requestAnimationFrame(() => {
         const images = [].slice.call(document.querySelectorAll('img'))
+        const noImagesAreVisible = !images.some(this.isVisible)
 
         images.forEach(
           (image: HTMLElement): void | null => {
+            if (noImagesAreVisible) {
+              return this.setState(
+                {
+                  isOverlapping: this.collide(this.asideRef.current, image),
+                },
+                () => (this.ticking = false)
+              )
+            }
             /**
              * If the image is not in the viewport don't fire state events for it,
              * otherwise we run into issues with multiple images on the page.
@@ -77,6 +86,7 @@ class HandleOverlap extends Component<OverlapProps, OverlapState> {
   }
 
   render() {
+    // console.log(this.state.isOverlapping)
     return (
       <Frame isOverlapping={this.state.isOverlapping} ref={this.asideRef}>
         {this.props.children}

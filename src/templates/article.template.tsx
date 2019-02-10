@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
-import { graphql, StaticQuery } from 'gatsby'
-import styled from 'styled-components'
+import { Link, graphql, StaticQuery } from 'gatsby'
+import styled, { css } from 'styled-components'
 
 import Heading from '@components/Heading'
 import Helmet from '@components/Helmet'
@@ -32,6 +32,7 @@ class Article extends Component<ArticleProps, PostState> {
   contentSectionRef: React.RefObject<HTMLElement> = React.createRef()
   hasCalculatedHeightBefore = false
   article = this.props.pageContext.article
+  next = this.props.pageContext.next
   relateds = this.props.pageContext.relateds
 
   state = {
@@ -86,6 +87,7 @@ class Article extends Component<ArticleProps, PostState> {
       this.hasCalculatedHeightBefore = true
     }
 
+    console.log($contentSection.offsetTop)
     // Set the height and offset of the content area
     this.setState({
       contentHeight: $contentSection.getBoundingClientRect().height,
@@ -100,6 +102,7 @@ class Article extends Component<ArticleProps, PostState> {
     const scrollInfo = { height: contentHeight, offset: contentOffset }
     const article = this.article
     const author = this.article.author
+    const next = this.next
 
     const navConfig = {
       theme: 'dark',
@@ -107,7 +110,7 @@ class Article extends Component<ArticleProps, PostState> {
       fixed: false,
     }
 
-    console.log(props)
+    console.log(contentOffset)
 
     return (
       <Layout nav={navConfig}>
@@ -132,7 +135,22 @@ class Article extends Component<ArticleProps, PostState> {
           <DarkModeSelect toggleMode={toggleMode} mode={mode} />
         </Aside>
         <Content contentRef={this.contentSectionRef} content={article.body} />
-        <Footer />
+        <Gradient>
+          <Meta>
+            <div>Posted on {article.fields.postDate}</div>
+            <div>
+              By {author.name} – {author.title}
+            </div>
+          </Meta>
+          <Footer>
+            <FooterContent>
+              <FooterHeading>Next</FooterHeading>
+              <FooterLink to={`/articles/${next.slug}`}>
+                {next.title}
+              </FooterLink>
+            </FooterContent>
+          </Footer>
+        </Gradient>
       </Layout>
     )
   }
@@ -176,7 +194,7 @@ const ArticleHero = ({ article, author }) => {
           opacity: 1 - ((100 - visiblePercentage) / 100) * 1.66,
         })
         const readingOffset = canAnimate({
-          transform: `translateY(${visiblePercentage / 2}px)`,
+          transform: `translateY(${visiblePercentage / 1.5}px)`,
         })
 
         return (
@@ -199,15 +217,30 @@ const ArticleHero = ({ article, author }) => {
   )
 }
 
+const articleWidth = css`
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+
+  ${mediaqueries.tablet`
+    padding: 0 40px;
+  `};
+`
+
 const Content = styled(RichText).attrs<{ textHighlightColor: string }>({})`
   position: relative;
-  padding: 160px 0 130px;
-  background: ${p => p.theme.mode.gradient};
-  transition: background 0.3s ease;
+  padding: 160px 0 35px;
+  background: ${p => p.theme.mode.background};
 
   ${mediaqueries.tablet`
     padding: 80px 0;
   `}
+`
+
+const Gradient = styled.div`
+  position: relative;
+  background: ${p => p.theme.mode.gradient};
+  transition: background 0.4s ease-in-out;
 `
 
 const Hero = styled.div`
@@ -267,7 +300,7 @@ const RelativeSection = styled(Section)`
 const ReadingTime = styled.div`
   position: absolute;
   left: -5px;
-  bottom: 160px;
+  bottom: 180px;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.25);
   transform: rotate(90deg);
@@ -277,8 +310,8 @@ const ReadingTime = styled.div`
     position: absolute;
     height: 1px;
     top: 12px;
-    width: 110px;
-    right: -130px;
+    width: 130px;
+    right: -150px;
     background: #111216;
   }
 
@@ -289,7 +322,48 @@ const ReadingTime = styled.div`
   `}
 `
 
-const Footer = styled.div``
+const Meta = styled.div`
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  font-size: 14px;
+  color: ${p => p.theme.mode.text};
+  margin-bottom: 160px;
+
+  ${mediaqueries.tablet`
+    padding: 0 40px;
+  `};
+`
+
+const PostDate = styled.div``
+
+const Author = styled.div``
+
+const Footer = styled.div`
+  padding: 160px 0;
+  background: #fafafa;
+`
+
+const FooterContent = styled.div`
+  ${articleWidth}
+`
+
+const FooterHeading = styled.h6`
+  margin-bottom: 45px;
+  font-size: 18px;
+  font-weight: 400;
+  color: ${p => p.theme.colors.grey};
+`
+const FooterLink = styled(Link)`
+  font-size: 48px;
+  color: #000;
+  font-family: ${p => p.theme.fontfamily.serif};
+  font-weight: 700;
+
+  ${mediaqueries.tablet`
+    font-size: 32px;
+  `}
+`
 
 const DarkModeSelect = ({ toggleMode, mode }) => {
   const Icon = mode === 'dark' ? DarkModeOffIcon : DarkModeOnIcon

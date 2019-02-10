@@ -13,30 +13,14 @@ interface AsideProps {
   offset: number
 }
 
-class Aside extends Component<
-  AsideProps,
-  { value: number; showAside: boolean }
-> {
+class Aside extends Component<AsideProps, { value: number }> {
   ticking = false
 
-  state = { value: 0, showAside: true }
+  state = { value: 0 }
 
   componentDidMount() {
     window.addEventListener('scroll', this.onScroll)
     window.addEventListener('onresize', this.onScroll)
-  }
-
-  componentDidUpdate(prevProps) {
-    /**
-     * If the height of the content is less than the screen height we don't
-     * want to show a progress indicator because it will be buggy and there's
-     * not point to see a progress indicator when you can see all of the content.
-     */
-    if (this.props.height !== prevProps.height) {
-      if (this.props.height < screen.height) {
-        this.setState({ showAside: false })
-      }
-    }
   }
 
   componentWillUnmount() {
@@ -68,8 +52,8 @@ class Aside extends Component<
 
   render() {
     const { children, right } = this.props
-    const { showAside, value } = this.state
-    const show = showAside && value > -2 && value < 101
+    const { value } = this.state
+    const show = value > 0 && value < 101
 
     return (
       <Frame right={right}>

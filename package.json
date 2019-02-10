@@ -1,9 +1,12 @@
 {
   "name": "narative.co",
-  "description": "Narative",
+  "description": "Narative's website",
   "version": "1.0.0",
-  "author": "Dennis BRotzky <dennis@narative.co>",
-  "keywords": ["narative"],
+  "author": "Narative Engineer <engineering@narative.co>",
+  "keywords": [
+    "narative",
+    "website"
+  ],
   "scripts": {
     "dev": "run-p dev:**",
     "dev:app": "yarn clean && ./node_modules/.bin/gatsby develop",
@@ -13,7 +16,7 @@
     "build:lambda": "netlify-lambda build src/functions",
     "format": "prettier --write 'src/**/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rm -rf ./cache"
+    "clean": "rm -rf .cache/"
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^13.0.0",

@@ -89,7 +89,7 @@ const Tracks = styled.div`
 
 const Tack = styled.span`
   position: relative;
-  width: 6px;
+  width: 7px;
   height: 1px;
   right: 3px;
   background-color: ${p =>
@@ -97,6 +97,14 @@ const Tack = styled.span`
       ? p.theme.mode.text
       : p.theme.colors.grey};
   transition: background 0.2s;
+
+  &:first-child {
+    top: -1px;
+  }
+
+  &:last-child {
+    top: 1px;
+  }
 `
 
 const Trackline = styled.div`
