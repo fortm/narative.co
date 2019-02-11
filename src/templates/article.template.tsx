@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Link, graphql, StaticQuery } from 'gatsby'
+import { graphql, StaticQuery } from 'gatsby'
 import styled, { css } from 'styled-components'
 
 import Heading from '@components/Heading'

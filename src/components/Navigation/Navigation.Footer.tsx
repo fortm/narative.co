@@ -5,11 +5,10 @@ import { Link, navigate } from 'gatsby'
 import ButtonArrow from '@components/Button/Button.Arrow'
 import Section from '@components/Section'
 import SocialLinks from '@components/SocialLinks'
-import withDarkMode from '@components/DarkMode'
 
 import mediaqueries from '@styles/media'
 
-const Footer = ({ mode }: { mode: string }) => {
+const Footer = ({ mode = 'dark' }: { mode: string }) => {
   const color = mode === 'dark' ? '#fff' : '#000'
 
   return (

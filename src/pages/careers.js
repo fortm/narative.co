@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { Link, graphql, navigate } from 'gatsby'
+import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import styled from 'styled-components'
 
 import {
   AnimatorFadeUp,
-  ButtonArrow,
   CareersAccordian,
   CareersGraph,
   CareersImages,
@@ -14,8 +13,8 @@ import {
   Helmet,
   Layout,
   Perks,
-  SocialLinks,
 } from '@components'
+import Footer from '@components/Navigation/Navigation.Footer'
 import { media, transitions } from '@styles'
 import { startAnimation } from '@utils'
 
@@ -138,22 +137,7 @@ class CareersPage extends Component {
             <Section>
               <CareersAccordian />
             </Section>
-            <Section>
-              <Footer>
-                <CopyRightContainer>
-                  <ContactActionsContainer>
-                    <ContactButton to="/contact">Contact us</ContactButton>
-                    <ButtonArrow
-                      onClick={() => navigate('/')}
-                      text="Go back home"
-                    />
-                  </ContactActionsContainer>
-                </CopyRightContainer>
-                <SocialIconsFooter>
-                  <SocialLinks />
-                </SocialIconsFooter>
-              </Footer>
-            </Section>
+            <Footer />
           </MobileBody>
         </Content>
       </Layout>
@@ -475,76 +459,6 @@ const RightContainer = styled.div`
     top: 100vh;
   `};
 `
-
-const CopyRightContainer = styled.div`
-  display: block;
-  font-size: 1.8rem;
-  font-weight: 500;
-
-  ${media.desktop`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-bottom: 9rem;
-    width: 100%;
-  `};
-`
-
-const ContactActionsContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 42rem;
-
-  ${media.phablet`
-    width: 100%;
-    flex-direction: column;
-
-    button:nth-child(2) {
-      position: relative;
-      left: 25px;
-    }
-  `};
-`
-
-const ContactButton = styled(Link)`
-  position: relative;
-  height: 45px;
-  width: 195px;
-  background: #000;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: 3px;
-  font-weight: 500;
-
-  ${media.phablet`
-    width: 100%;
-    margin-bottom: 3rem;
-  `};
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    box-shadow: 0px 3px 18px rgba(0, 0, 0, 0.28);
-    opacity: 0;
-    pointer-events: none;
-    transform: scale(0.8);
-    transition: all 300ms ease-out;
-  }
-
-  &:hover::after {
-    transform: scale(1);
-    opacity: 1;
-  }
-`
-
 const SectionCopy = styled.p`
   color: #fff;
   font-size: 3.6rem;
@@ -577,31 +491,6 @@ const WhatWeDoList = styled.ul`
 
   ${media.desktop`
     width: 100%;
-  `};
-`
-
-const Footer = styled.footer`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 10rem;
-  color: ${p => p.theme.colors.grey};
-
-  ${media.tablet`
-    justify-content: center;
-    flex-direction: column;
-    padding-bottom: 5rem;
-  `};
-`
-
-const SocialIconsFooter = styled.div`
-  display: flex;
-  align-items: center;
-
-  ${props =>
-    props.hideOnMobile &&
-    media.desktop`
-    display: none;
   `};
 `
 
