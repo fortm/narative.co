@@ -1,5 +1,6 @@
 const settings = require('../../../src/settings')
 
+const imageQuality = 88
 /**
  * Preface
  * N.B. Gatsby doesn't really support Graphql fragments because the
@@ -73,7 +74,7 @@ const heroImageryField = `
     ${settings.heroImageDimensions.reduce(
       (acc, [name, x, y]) => `
         ${acc}
-        ${name}: fluid(maxWidth:${x}, maxHeight: ${y}, quality: 88) {
+        ${name}: fluid(maxWidth:${x}, maxHeight: ${y}, quality: ${imageQuality}) {
           ${GatsbyContentfulFluid_withWebp}
         }
       `,
@@ -89,10 +90,10 @@ const heroImageryField = `
  */
 const authorAvatarField = `
   avatar {
-    small: fluid(maxWidth: 64, maxHeight: 64, quality: 80) {
+    small: fluid(maxWidth: 64, maxHeight: 64, quality: ${imageQuality}) {
       ${GatsbyContentfulFluid_withWebp}
     }
-    large: fluid(maxWidth: 400, maxHeight: 400, quality: 80) {
+    large: fluid(maxWidth: 400, maxHeight: 400, quality: ${imageQuality}) {
       ${GatsbyContentfulFluid_withWebp}
     }
   }
@@ -120,6 +121,20 @@ const readingTime = `
   }
 `
 
+const articlePreview = `
+  backgroundImage {
+    fluid(maxWidth: 1140, maxHeight: 380, quality: ${imageQuality}) {
+      ${GatsbyContentfulFluid_withWebp}
+    }
+  }
+  icon {
+    file {
+      url
+    }
+  }
+  backgroundColor
+`
+
 /**
  * basicNode + any field that a post like node (modern or legacy) has on it
  */
@@ -140,6 +155,7 @@ const articleNode = `
       html
     }
   }
+  ${articlePreview}
 `
 
 /**

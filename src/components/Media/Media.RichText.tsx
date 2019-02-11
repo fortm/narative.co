@@ -223,7 +223,8 @@ const Content = styled.div`
   }
 
   p {
-    ${articleWidth} margin-bottom: 40px;
+    ${articleWidth};
+    margin-bottom: 35px;
     line-height: 1.6;
     font-size: 22px;
     color: ${p => p.theme.mode.text};

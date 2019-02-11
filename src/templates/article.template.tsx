@@ -18,6 +18,7 @@ import { debounce } from '@utils'
 import { IDetailPage, IArticleNode } from '@typings'
 
 import Aside from '../sections/article/Article.Aside'
+import ArticlePreview from '../sections/article/Article.Preview'
 
 interface PostState {
   previousPath: string
@@ -139,11 +140,9 @@ class Article extends Component<ArticleProps, PostState> {
               By {author.name} – {author.title}
             </div>
           </Meta>
-          <Footer to={`/articles/${next.slug}`}>
-            <FooterContent>
-              <FooterHeading>Next</FooterHeading>
-              <FooterTitle>{next.title}</FooterTitle>
-            </FooterContent>
+          <Footer>
+            <FooterNext>Next article from Narative</FooterNext>
+            <ArticlePreview article={next} />
           </Footer>
         </Gradient>
       </Layout>
@@ -323,21 +322,36 @@ const Meta = styled.div`
   margin: 0 auto;
   font-size: 14px;
   color: ${p => p.theme.mode.text};
-  margin-bottom: 160px;
+  margin-bottom: 80px;
 
   ${mediaqueries.tablet`
     padding: 0 40px;
   `};
 `
 
-const Footer = styled(Link)`
+const Footer = styled.div`
   display: block;
-  padding: 160px 0;
-  background: #fafafa;
+  padding: 0 0 150px;
+  background: ${p => p.theme.mode.gradient};
 `
 
-const FooterContent = styled.div`
+const FooterNext = styled.div`
+  position: relative;
   ${articleWidth}
+  max-width: 1140px;
+  opacity: 0.25;
+  margin-bottom: 100px;
+  color: ${p => p.theme.mode.text};
+
+  &::after {
+    content: '';
+    position: absolute;
+    background: ${p => p.theme.mode.text};
+    width: ${(875 / 1140) * 100}%;
+    height: 1px;
+    right: 0;
+    top: 11px;
+  }
 `
 
 const FooterHeading = styled.h6`
