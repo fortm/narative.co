@@ -1,1 +1,1 @@
-export { default } from './Navigation'
+export { default } from '@components/Navigation/Navigation.Header'

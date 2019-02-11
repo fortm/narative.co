@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 
-import { Navigation } from '@components'
+import Navigation from '@components/Navigation/Navigation.Header'
 import { GlobalStyles, media, theme } from '@styles'
 import { startAnimation } from '@utils'
 

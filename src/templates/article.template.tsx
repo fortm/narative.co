@@ -11,6 +11,7 @@ import withDarkMode from '@components/DarkMode'
 import Section from '@components/Section'
 import Progress from '@components/Progress'
 import IntersectionObserver from '@components/IntersectionObserver'
+import NavigationFooter from '@components/Navigation/Navigation.Footer'
 
 import mediaqueries from '@styles/media'
 import { debounce } from '@utils'
@@ -143,6 +144,8 @@ class Article extends Component<ArticleProps, PostState> {
           <Footer>
             <FooterNext>Next article from Narative</FooterNext>
             <ArticlePreview article={next} />
+            <FooterSpacer />
+            <NavigationFooter mode={mode} />
           </Footer>
         </Gradient>
       </Layout>
@@ -354,21 +357,8 @@ const FooterNext = styled.div`
   }
 `
 
-const FooterHeading = styled.h6`
-  margin-bottom: 45px;
-  font-size: 18px;
-  font-weight: 400;
-  color: ${p => p.theme.colors.grey};
-`
-const FooterTitle = styled.h2`
-  font-size: 48px;
-  color: #000;
-  font-family: ${p => p.theme.fontfamily.serif};
-  font-weight: 700;
-
-  ${mediaqueries.tablet`
-    font-size: 32px;
-  `}
+const FooterSpacer = styled.div`
+  margin-bottom: 65px;
 `
 
 const DarkModeSelect = ({ toggleMode, mode }) => {
