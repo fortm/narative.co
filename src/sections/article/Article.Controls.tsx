@@ -97,9 +97,9 @@ const IconWrapper = styled.button`
   margin: 10px 0;
 
   ${mediaqueries.tablet`
-      display: inline-flex;
-      margin: 0 20px 0 0;
-      width: 43px;
+    display: inline-flex;
+    margin: 0 20px 0 0;
+    width: 63px;
   `}
 `
 

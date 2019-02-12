@@ -142,7 +142,7 @@ export default withDarkMode(Article)
 
 const MobileControls = styled.div`
   position: relative;
-  padding: 50px 40px 0;
+  padding: 50px 20px 0;
   background: ${p => p.theme.mode.background};
 
   ${mediaqueries.desktop_up`

@@ -32,8 +32,8 @@ const templates = {
 // Some useful variables
 const queryLimit = process.env.NODE_ENV === 'development' ? 10 : null // Limit pages for deving
 const featuredLimit = 1 // The maximum number of featured/popular articles we want to show around the site
-const relatedLimit = 1 // The maximum number of relateds for each piece of content
-const pageLength = 8 // How many nodes should be displayed on each list pages
+const relatedLimit = 3 // The maximum number of relateds for each piece of content
+const pageLength = 6 // How many nodes should be displayed on each list pages
 
 /**
  * Take as many posts as we can that share categories with our target post UP TO a maximum number of relateds
@@ -190,7 +190,6 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
    *      (e.g. ['austin-category-id'] not [{name: 'Austin', id: 'austin-category-id'}])
    */
 
-  console.log(articles)
   // Now map over the nodes for this locale
   articles.forEach((article, index) => {
     /**

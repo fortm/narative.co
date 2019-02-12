@@ -8,10 +8,15 @@ import Heading from '@components/Heading'
 import Footer from '@components/Navigation/Navigation.Footer'
 import { startAnimation } from '@utils'
 
-import ArticlesGrid from '../../sections/articles/Grid.Articles'
-import ArticlesFeatured from '../../sections/articles/Featured.Articles'
+import ArticlesGrid from '../../sections/articles/Articles.Grid'
+import ArticlesFeatured from '../../sections/articles/Articles.Featured'
+import mediaqueries from '@styles/media'
 
 class ArticlesPage extends Component {
+  contentful = this.props.data.allContentfulHomePage.edges[0].node
+  articles = this.props.pageContext.group
+  featured = this.props.pageContext.additionalContext.featured[0]
+
   state = { animation: '' }
 
   componentDidMount() {
@@ -31,17 +36,15 @@ class ArticlesPage extends Component {
 
   render() {
     const { animation } = this.state
-    const contentful = this.props.data.allContentfulHomePage.edges[0].node
-    const articles = this.props.data.allContentfulArticle.edges
+    const { seo } = this.contentful
 
-    console.log(articles)
     return (
       <Layout navOffset>
         <Fragment>
           <Helmet
-            title={contentful.seo.title}
-            description={contentful.seo.description}
-            image={contentful.seo.image.file.url}
+            title={seo.title}
+            description={seo.description}
+            image={seo.image.file.url}
             pathname={this.props.location.pathname}
           />
           <Section>
@@ -58,22 +61,17 @@ class ArticlesPage extends Component {
                 </MainText>
               </TextContainer>
               <div />
-              {/* {articles.map(({ node: article }) => (
-                <Link key={article.title} to={`/articles/${article.slug}`}>
-                  {article.title}
-                </Link>
-              ))} */}
             </ContentContainer>
             <div />
           </Section>
-          <div style={{ position: 'relative', background: '#fff' }}>
-            <Section>
-              <ArticlesFeatured />
-              <ArticlesGrid />
+          <WhiteBackground>
+            <Section narrow>
+              <ArticlesFeatured article={this.featured} />
+              <ArticlesGrid articles={this.articles} />
             </Section>
             <Spacer />
             <Footer mode="light" />
-          </div>
+          </WhiteBackground>
         </Fragment>
       </Layout>
     )
@@ -99,16 +97,12 @@ export const pageQuery = graphql`
         }
       }
     }
-
-    allContentfulArticle {
-      edges {
-        node {
-          slug
-          title
-        }
-      }
-    }
   }
+`
+
+const WhiteBackground = styled.div`
+  position: relative;
+  background: #fafafa;
 `
 
 const ContentContainer = styled.div`
@@ -150,4 +144,8 @@ const MainText = styled.p`
 
 const Spacer = styled.div`
   height: 160px;
+
+  ${mediaqueries.tablet`
+    height: 100px;
+  `}
 `

@@ -125,11 +125,6 @@ const articlePreview = `
       ${GatsbyContentfulFluid_withWebp}
     }
   }
-  icon {
-    file {
-      url
-    }
-  }
   backgroundColor
 `
 

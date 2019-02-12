@@ -25,6 +25,7 @@ const ArrowButton = styled.button`
   font-weight: 600;
   color: ${p => p.color};
   background: transparent;
+  height: 25px;
 
   ${media.tablet`
     flex-direction: column;
@@ -79,6 +80,7 @@ const ArrowAnimation = styled.div`
   align-items: center;
   overflow-x: hidden;
   padding: 0 3rem 0 0;
+  height: 25px;
   font-size: 1.8rem;
 
   ${media.tablet`
@@ -90,7 +92,7 @@ const ArrowAnimation = styled.div`
     display: block;
     position: absolute;
     left: 0;
-    top: 12px;
+    top: 13px;
     height: 1px;
     width: 0;
     background: ${p => p.color};

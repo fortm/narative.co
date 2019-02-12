@@ -65,13 +65,12 @@ const heroImageryField = `
     Home__Hero: fixed(width: 692, height: 485, quality: 88) {
       ${GatsbyContentfulFixed_withWebp}
     }
-    Article__Hero: fixed(width: 1140, height: 520, quality: 88) {
+    Article__Hero: fixed(width: 1600, height: 1100, quality: 88) {
       ${GatsbyContentfulFixed_withWebp}
     }
   }
 `
 
-// ${heroImageryField}
 /**
  * basicNode + any field that a post like node (modern or legacy) has on it
  */

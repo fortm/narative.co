@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Heading from '@components/Heading'
 import IntersectionObserver from '@components/IntersectionObserver'
 import Section from '@components/Section'
+import Media from '@components/Media/Media.Img'
 
 import mediaqueries from '@styles/media'
 
@@ -35,16 +36,21 @@ const ArticleHero = ({ article }: { article: IArticleNode }) => {
         return (
           <Hero>
             <HeroContent>
-              <Header style={headerOffset}>
-                <HeroTitle>{article.title}</HeroTitle>
-                <HeroSubtitle>
-                  By {author.name} – {author.title}
-                </HeroSubtitle>
-              </Header>
+              <Section>
+                <Header style={headerOffset}>
+                  <HeroTitle>{article.title}</HeroTitle>
+                  <HeroSubtitle>
+                    By {author.name} – {author.title}
+                  </HeroSubtitle>
+                </Header>
+              </Section>
             </HeroContent>
             <RelativeSection style={readingOffset}>
               <ReadingTime>{article.readingTime.text}</ReadingTime>
             </RelativeSection>
+            <Image>
+              <Media src={article.hero.Article__Hero} />
+            </Image>
           </Hero>
         )
       }}
@@ -73,12 +79,12 @@ const HeroContent = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   flex-direction: column;
 `
 
 const Header = styled.header`
   max-width: 680px;
-  margin: 0 auto;
 
   ${mediaqueries.tablet`
     padding: 0 40px;
@@ -130,4 +136,17 @@ const ReadingTime = styled.div`
     left: 2px;
     font-size: 14px;
   `}
+`
+
+const Image = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  right: -50%;
+
+  & > div {
+    top: 50%;
+    transform: translateY(-50%);
+  }
 `

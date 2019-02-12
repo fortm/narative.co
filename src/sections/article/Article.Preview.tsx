@@ -13,9 +13,7 @@ const ArticlePreview = ({ article }: { article: IArticleNode }) => {
   return (
     <Card background={article.backgroundColor} onClick={() => navigate(slug)}>
       <Content>
-        <Icon>
-          <Media src={article.icon.file.url} />
-        </Icon>
+        <Icon>{/* <Media src={article.icon.file.url} /> */}</Icon>
         <Title>{article.title}</Title>
         <Excerpt>{article.excerpt}</Excerpt>
         <HorizontalRule />
