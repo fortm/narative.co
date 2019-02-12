@@ -24,7 +24,7 @@ const PublicLogoQuery = graphql`
   }
 `
 
-export default ({ article }: { article: IArticleNode }) => (
+export default ({ article, location }: { article: IArticleNode }) => (
   <StaticQuery
     query={PublicLogoQuery}
     render={({ url: { edges } }) => (

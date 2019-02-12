@@ -107,7 +107,7 @@ class Article extends Component<ArticleProps, PostState> {
 
     return (
       <Layout nav={navConfig}>
-        <ArticleMicrodata article={article} />
+        <ArticleMicrodata article={article} location={location} />
         <ArticleHero article={article} />
         <Aside {...scrollInfo}>
           <Progress {...scrollInfo} />
