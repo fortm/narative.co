@@ -10,7 +10,7 @@ import { media } from '@styles'
 import mediaqueries from '@styles/media'
 
 const navOptions = [
-  { to: '#', text: 'Labs (coming soon)', disabled: true },
+  { to: '/labs', text: 'Labs' },
   { to: '/careers', text: 'Careers' },
   { to: '/articles', text: 'Articles' },
   { to: '/contact', text: 'Contact' },
@@ -385,11 +385,11 @@ const MobileNavList = styled.ul`
 `
 
 const MobileNavListContainer = styled.div`
+  position: fixed;
   overflow: hidden;
   z-index: 100000;
   list-style: none;
   display: none;
-  position: fixed;
   width: 100%;
   height: 100vh;
   background: #fff;

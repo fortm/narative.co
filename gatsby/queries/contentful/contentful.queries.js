@@ -38,7 +38,6 @@ const basicNode = `
  * https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-contentful/src/fragments.js
  */
 const GatsbyContentfulFixed_withWebp = `
-  base64
   width
   height
   src
@@ -48,7 +47,6 @@ const GatsbyContentfulFixed_withWebp = `
 `
 
 const GatsbyContentfulFluid_withWebp = `
-  base64
   aspectRatio
   src
   srcSet

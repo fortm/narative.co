@@ -28,6 +28,7 @@ interface ICategory {
 interface IAuthor {
   name: string
   slug: string
+  title: string
   avatar?: {
     small: ISharpFluidAtKey
     large: ISharpFluidAtKey
@@ -127,6 +128,10 @@ export interface IArticleNode extends IBasicNode {
     path: string
     postDate: string
     postDateAsDate?: string
+    readingTime: {
+      time: string
+      text: string
+    }
   }
 }
 

@@ -5,8 +5,8 @@ import { media } from '@styles'
 
 import { Spinner } from './Button'
 
-export default ({ onClick, text, color = 'white', isSubmitting }) => (
-  <ArrowButton onClick={onClick} color={color}>
+export default ({ as, to, onClick, text, color = 'white', isSubmitting }) => (
+  <ArrowButton as={as} to={to} onClick={onClick} color={color}>
     {isSubmitting ? (
       <Spinner />
     ) : (

@@ -6,7 +6,7 @@ import ButtonArrow from '@components/Button/Button.Arrow'
 import Section from '@components/Section'
 import SocialLinks from '@components/SocialLinks'
 
-import mediaqueries from '@styles/media'
+import mediaqueries, { media } from '@styles/media'
 
 const Footer = ({ mode = 'dark' }: { mode: string }) => {
   const color = mode === 'dark' ? '#fff' : '#000'
@@ -38,13 +38,13 @@ const Frame = styled.footer`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 10rem;
+  padding-bottom: 150px;
   color: ${p => p.theme.colors.grey};
 
   ${mediaqueries.tablet`
     justify-content: center;
     flex-direction: column;
-    padding-bottom: 5rem;
+    padding-bottom: 0;
   `};
 `
 
@@ -58,8 +58,11 @@ const CopyRightContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     margin-bottom: 9rem;
-    width: 100%;
   `};
+
+  ${mediaqueries.phablet`
+    width: 100%;
+  `}
 `
 
 const ContactActionsContainer = styled.div`
@@ -88,6 +91,10 @@ const SocialIconsFooter = styled.div`
     mediaqueries.desktop`
     display: none;
   `};
+
+  ${mediaqueries.desktop`
+        margin-bottom: 9rem;
+  `}
 `
 
 const ContactButton = styled(Link)`

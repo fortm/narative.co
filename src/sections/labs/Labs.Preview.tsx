@@ -1,28 +1,30 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Link, navigate } from 'gatsby'
+import { navigate } from 'gatsby'
 
 import Media from '@components/Media/Media.Img'
 
-import { IArticleNode } from '@typings'
 import mediaqueries from '@styles/media'
 
-const ArticlePreview = ({ article }: { article: IArticleNode }) => {
-  const slug = `/articles/${article.slug}`
+const ArticlePreview = ({ product }) => {
+  const slug = `/articles/${product.slug}`
 
   return (
-    <Card background={article.backgroundColor} onClick={() => navigate(slug)}>
+    <Card
+      background={product.backgroundColor}
+      onClick={() => navigate(product.slug)}
+    >
       <Content>
         <Icon>
-          <Media src={article.icon.file.url} />
+          <Media src={product.icon.file.url} />
         </Icon>
-        <Title>{article.title}</Title>
-        <Excerpt>{article.excerpt.excerpt}</Excerpt>
+        <Title>{product.title}</Title>
+        <Excerpt>{product.excerpt.excerpt}</Excerpt>
         <HorizontalRule />
-        <LinkToArticle to={slug}>Read more</LinkToArticle>
+        <LinkToProduct to={product.slug}>Read more</LinkToProduct>
       </Content>
       <Image>
-        <Media src={article.backgroundImage.fluid} />
+        <Media src={product.backgroundImage.fluid} />
       </Image>
     </Card>
   )
@@ -43,7 +45,6 @@ const limitToTwoLines = css`
     -webkit-line-clamp: 3;
   `}
 `
-
 const Card = styled.div`
   position: relative;
   width: 100%;
@@ -133,7 +134,7 @@ const HorizontalRule = styled.hr`
   `}
 `
 
-const LinkToArticle = styled(Link)`
+const LinkToProduct = styled.a`
   font-weight: 600;
   font-size: 16px;
   color: #fff;

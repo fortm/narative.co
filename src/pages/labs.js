@@ -3,13 +3,8 @@ import { graphql, navigate } from 'gatsby'
 import styled from 'styled-components'
 
 import { media, transitions } from '@styles'
-import { Section, Helmet, Layout } from '@components'
-import Heading from '@components/Heading'
-import Footer from '@components/Navigation/Navigation.Footer'
+import { Section, Heading, Helmet, Layout } from '@components'
 import { startAnimation } from '@utils'
-
-import ArticlesGrid from '../sections/articles/Grid.Articles'
-import ArticlesFeatured from '../sections/articles/Featured.Articles'
 
 class IndexPage extends Component {
   state = { animation: '' }
@@ -32,7 +27,6 @@ class IndexPage extends Component {
   render() {
     const { animation } = this.state
     const contentful = this.props.data.allContentfulHomePage.edges[0].node
-    const articles = this.props.data.allContentfulArticle.edges
 
     return (
       <Layout navOffset>
@@ -48,31 +42,18 @@ class IndexPage extends Component {
               <div style={{ top: '-60px' }} />
               <TextContainer animation={animation}>
                 <Heading.h1>
-                  Perspectives on technology, design and business from the team
-                  at Narative.
+                  Whether with our clients or all by ourselves, we're always
+                  busy building something new.
                 </Heading.h1>
                 <MainText>
-                  Because the only thing we love more than doing what we do is
-                  sharing what we do.
+                  Take a peek at the products we're creating in-house at
+                  Narative.
                 </MainText>
               </TextContainer>
               <div />
-              {/* {articles.map(({ node: article }) => (
-                <Link key={article.title} to={`/articles/${article.slug}`}>
-                  {article.title}
-                </Link>
-              ))} */}
             </ContentContainer>
             <div />
           </Section>
-          <div style={{ position: 'relative', background: '#fff' }}>
-            <Section>
-              <ArticlesFeatured />
-              <ArticlesGrid />
-            </Section>
-            <Spacer />
-            <Footer mode="light" />
-          </div>
         </Fragment>
       </Layout>
     )
@@ -82,7 +63,7 @@ class IndexPage extends Component {
 export default IndexPage
 
 export const pageQuery = graphql`
-  query ArticlePageQuery {
+  query LabsPageQuery {
     allContentfulHomePage {
       edges {
         node {
@@ -95,40 +76,20 @@ export const pageQuery = graphql`
               }
             }
           }
-        }
-      }
-    }
-
-    allContentfulArticle {
-      edges {
-        node {
-          slug
-          title
+          heading {
+            childMarkdownRemark {
+              html
+            }
+          }
+          text {
+            childMarkdownRemark {
+              html
+            }
+          }
         }
       }
     }
   }
-`
-
-const ContentContainer = styled.div`
-  height: calc(100vh - 140px);
-  min-height: 440px;
-  padding: 100px 0;
-
-  a {
-    color: #fff;
-    font-size: 22px;
-  }
-
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  ${media.phablet`
-    height: calc(100vh - 160px);
-    padding: 0;
-  `};
 `
 
 const TextContainer = styled.div`
@@ -147,6 +108,18 @@ const MainText = styled.p`
   `};
 `
 
-const Spacer = styled.div`
-  height: 160px;
+const ContentContainer = styled.div`
+  height: calc(100vh - 140px);
+  min-height: 440px;
+  padding: 0 0 100px;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  ${media.phablet`
+    height: calc(100vh - 160px);
+    padding: 0;
+  `};
 `
