@@ -19,10 +19,8 @@ const article = {
   title: 'Why we built a company before building a product',
   excerpt:
     'At Narative, collaboration and contribution is at our core, this is why Figma couldn’t be more suited for a company like ours.',
-  fields: {
-    readingTime: {
-      text: '6 minute read',
-    },
+  readingTime: {
+    text: '6 minute read',
   },
 }
 
@@ -66,7 +64,7 @@ const GridItem = ({ children, article, narrow }) => {
       <Excerpt narrow={narrow} hasOverflow={hasOverflow}>
         {article.excerpt}
       </Excerpt>
-      <TimeToRead>{article.fields.readingTime.text}</TimeToRead>
+      <TimeToRead>{article.readingTime.text}</TimeToRead>
       <ArticleLink to={`/articles/${article.slug}`} />
     </Item>
   )

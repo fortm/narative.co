@@ -8,10 +8,10 @@ import Heading from '@components/Heading'
 import Footer from '@components/Navigation/Navigation.Footer'
 import { startAnimation } from '@utils'
 
-import ArticlesGrid from '../sections/articles/Grid.Articles'
-import ArticlesFeatured from '../sections/articles/Featured.Articles'
+import ArticlesGrid from '../../sections/articles/Grid.Articles'
+import ArticlesFeatured from '../../sections/articles/Featured.Articles'
 
-class IndexPage extends Component {
+class ArticlesPage extends Component {
   state = { animation: '' }
 
   componentDidMount() {
@@ -34,6 +34,7 @@ class IndexPage extends Component {
     const contentful = this.props.data.allContentfulHomePage.edges[0].node
     const articles = this.props.data.allContentfulArticle.edges
 
+    console.log(articles)
     return (
       <Layout navOffset>
         <Fragment>
@@ -79,10 +80,10 @@ class IndexPage extends Component {
   }
 }
 
-export default IndexPage
+export default ArticlesPage
 
 export const pageQuery = graphql`
-  query ArticlePageQuery {
+  query ArticlesPageQuery {
     allContentfulHomePage {
       edges {
         node {

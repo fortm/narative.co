@@ -9,6 +9,7 @@ const { pipe, pluck, intersection } = require('ramda')
 const {
   _cleanNodes,
   _checkQueryIntegrity,
+  _mergeQueries,
   _partitionFeatured,
   _groupByAuthor,
 } = require('./queries/contentful/contentful.selectors')
@@ -23,15 +24,16 @@ const log = (msg, section) =>
 // Map of template paths
 const templatesDir = path.resolve(__dirname, '../src/templates')
 const templates = {
-  article: path.resolve(templatesDir, 'article.template.tsx'),
-  author: path.resolve(templatesDir, 'author.template.tsx'),
+  articles: path.resolve(templatesDir, 'pages/articles.template.tsx'),
+  article: path.resolve(templatesDir, 'posts/article.template.tsx'),
+  author: path.resolve(templatesDir, 'posts/author.template.tsx'),
 }
 
 // Some useful variables
 const queryLimit = process.env.NODE_ENV === 'development' ? 10 : null // Limit pages for deving
-const featuredLimit = 3 // The maximum number of featured/popular articles we want to show around the site
-const relatedLimit = 3 // The maximum number of relateds for each piece of content
-const pageLength = 6 // How many nodes should be displayed on each list pages
+const featuredLimit = 1 // The maximum number of featured/popular articles we want to show around the site
+const relatedLimit = 1 // The maximum number of relateds for each piece of content
+const pageLength = 8 // How many nodes should be displayed on each list pages
 
 /**
  * Take as many posts as we can that share categories with our target post UP TO a maximum number of relateds
@@ -91,14 +93,15 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
   const qArticles = await graphql(gql.articles, opts)
 
   // Clean the data returned by GraphQL
-  const rArticles = pipe(
+  const articles = pipe(
     _checkQueryIntegrity,
+    // Merge the results of our 2 queries (new and legacy) together
+    // e.g. [{...node}, {...node}, {...node}, ...]
+    _mergeQueries,
     // Clean the node in to something more palatable for our template
     // e.g. [{...cleanNode}, {...cleanNode}, {...cleanNode}, ...]
     _cleanNodes
   )(qArticles)
-
-  const articles = rArticles.data.articles.edges
 
   /**
    * /authors/<author slug>
@@ -132,7 +135,6 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
       edges: nodes,
       buildPath: buildPaginatedPath,
       context: {
-        languages,
         author,
         originalPath: pathPrefix,
         skip: pageLength,
@@ -158,21 +160,25 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
    */
   const pathPrefix = unfeatured[0] && unfeatured[0].pathPrefix
 
-  // Now create the actual paginated page
-  // createPaginatedPages({
-  //   createPage,
-  //   pageLength: pageLength,
-  //   pageTemplate: templates.article,
-  //   edges: articles,
-  //   buildPath: buildPaginatedPath,
-  //   context: {
-  //     // Featured are additional context
-  //     featured,
-  //     skip: pageLength,
-  //     limit: pageLength,
-  //   },
-  // })
-
+  /**
+   * Building out the Aritlces page
+   */
+  createPaginatedPages({
+    pathPrefix,
+    createPage,
+    pageLength,
+    pageTemplate: templates.articles,
+    // Paginate-able objects are unfeatured
+    edges: unfeatured,
+    buildPath: buildPaginatedPath,
+    context: {
+      // Featured are additional context
+      featured,
+      originalPath: pathPrefix,
+      skip: pageLength,
+      limit: pageLength,
+    },
+  })
   /**
    * #2 Now we want to create "detail pages". Detail pages display each individual post.
    *
@@ -184,8 +190,9 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
    *      (e.g. ['austin-category-id'] not [{name: 'Austin', id: 'austin-category-id'}])
    */
 
+  console.log(articles)
   // Now map over the nodes for this locale
-  articles.forEach(({ node: article }, index) => {
+  articles.forEach((article, index) => {
     /**
      * We need to find related posts for this node.
      * A related post for this node is any post that intersects with it's categories.
@@ -243,16 +250,16 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
 
     // Create the page for this post
     createPage({
-      path: article.fields.path,
+      path: article.path,
       component: templates.article,
       context: {
         article,
-        slug: article.fields.path,
+        slug: article.path,
         id: article.id,
         title: article.title,
         // Add it to our created page. Topups might well be empty if we found enough relateds
         // relateds: [...relateds, ...topups],
-        next: nextArticle.node,
+        next: nextArticle,
       },
     })
   })

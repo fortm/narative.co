@@ -7,8 +7,6 @@ import Media from '@components/Media/Media.Img'
 import mediaqueries from '@styles/media'
 
 const ArticlePreview = ({ product }) => {
-  const slug = `/articles/${product.slug}`
-
   return (
     <Card
       background={product.backgroundColor}
@@ -19,7 +17,7 @@ const ArticlePreview = ({ product }) => {
           <Media src={product.icon.file.url} />
         </Icon>
         <Title>{product.title}</Title>
-        <Excerpt>{product.excerpt.excerpt}</Excerpt>
+        <Excerpt>{product.excerpt}</Excerpt>
         <HorizontalRule />
         <LinkToProduct to={product.slug}>Read more</LinkToProduct>
       </Content>

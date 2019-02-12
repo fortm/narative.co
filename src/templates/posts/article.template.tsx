@@ -13,11 +13,11 @@ import { debounce } from '@utils'
 
 import { IDetailPage } from '@typings'
 
-import Aside from '../sections/article/Article.Aside'
-import ArticleHero from '../sections/article/Article.Hero'
-import ArticleControls from '../sections/article/Article.Controls'
-import ArticlePreview from '../sections/article/Article.Preview'
-import ArticleMicrodata from '../sections/article/Article.Microdata'
+import Aside from '../../sections/article/Article.Aside'
+import ArticleHero from '../../sections/article/Article.Hero'
+import ArticleControls from '../../sections/article/Article.Controls'
+import ArticlePreview from '../../sections/article/Article.Preview'
+import ArticleMicrodata from '../../sections/article/Article.Microdata'
 
 interface PostState {
   previousPath: string
@@ -121,12 +121,12 @@ class Article extends Component<ArticleProps, PostState> {
         <Content contentRef={this.contentSectionRef} content={article.body} />
         <Gradient>
           <Meta>
-            <div>Posted on {article.fields.postDate}</div>
+            <div>Posted on {article.postDate}</div>
             <div>
               By {author.name} – {author.title}
             </div>
           </Meta>
-          <NextArticle>
+          <NextArticle narrow>
             <FooterNext>Next article from Narative</FooterNext>
             <ArticlePreview article={next} />
             <FooterSpacer />
@@ -175,7 +175,7 @@ const Meta = styled.div`
   margin-bottom: 80px;
 
   ${mediaqueries.tablet`
-    padding: 0 40px;
+    padding: 0 20px;
     margin-bottom: 50px;
   `};
 `

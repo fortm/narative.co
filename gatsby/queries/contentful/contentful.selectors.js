@@ -64,6 +64,29 @@ const _node = prop('node')
  */
 const _data = prop('data')
 
+const _arrayQueries = pipe(
+  // Get the queries from the top level data key
+  // e.g. { legacyArticleForCategory: {...}, articleForCategory: {...} }
+  _data,
+  // Get rid of the model name keys
+  // e.g. [{edges: [...nodes]}, {edges: [...nodes]}, {edges: [...nodes]}]
+  values
+)
+
+// todo : docmentation
+const _mergeQueries = pipe(
+  _arrayQueries,
+  // Map over each query's node array and get the edges key
+  // e.g. [[{...node}, {...node}], [{...node}, {...node}]]
+  pluck('edges'),
+  // Flatten out the array
+  // e.g. [{node: {...fields}}, {node: {...fields}}, {node: {...fields}}]
+  flatten,
+  // Map over each node and then select the node key from it
+  // e.g. [{...fields}, {...fields}, {...fields}]
+  map(_node)
+)
+
 /**
  * Check if there are any errors in the query calls to Graphql
  *
@@ -160,7 +183,10 @@ const set = {
  *
  * After we use the chain to elevate the fields to root of the object, wipe the original fields
  */
-const _elevateFields = pipe(chain(merge, prop('fields')), omit(['fields']))
+const _elevateFields = pipe(
+  chain(merge, prop('fields')),
+  omit(['fields'])
+)
 
 /**
  * Clean a node and transform it from what graphql gives us to something
@@ -263,6 +289,7 @@ const _groupByAuthor = pipe(
 module.exports = {
   _checkQueryIntegrity,
   _cleanNodes,
+  _mergeQueries,
   _partitionFeatured,
   _groupByAuthor,
 }

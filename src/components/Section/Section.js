@@ -17,15 +17,12 @@ const Section = styled.section`
 
   ${media.tablet`
     display: block;
+    padding: ${p => (p.narrow ? '0 2rem' : '0 4rem')};
   `};
 
   ${media.phablet`
     max-width: 100%;
     ${p => p.hideOverflow && `overflow: hidden`};
-  `};
-
-  ${media.phablet`
-    padding: 0 4rem;
   `};
 `
 

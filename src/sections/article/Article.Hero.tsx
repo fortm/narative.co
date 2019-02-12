@@ -43,7 +43,7 @@ const ArticleHero = ({ article }: { article: IArticleNode }) => {
               </Header>
             </HeroContent>
             <RelativeSection style={readingOffset}>
-              <ReadingTime>{article.fields.readingTime.text}</ReadingTime>
+              <ReadingTime>{article.readingTime.text}</ReadingTime>
             </RelativeSection>
           </Hero>
         )

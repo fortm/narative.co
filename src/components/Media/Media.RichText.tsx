@@ -10,7 +10,7 @@ const RichText: React.SFC<IRichText> = ({ content, contentRef, ...props }) => {
     <Content
       ref={contentRef}
       dangerouslySetInnerHTML={{
-        __html: content.childRichTextHtml.html,
+        __html: content,
       }}
       {...props}
     />
@@ -31,7 +31,7 @@ const articleWidth = css`
   margin: 0 auto;
 
   ${mediaqueries.tablet`
-    padding: 0 40px;
+    padding: 0 20px;
   `};
 `
 
@@ -259,7 +259,7 @@ const Content = styled.div`
     max-width: ${imageWidths.regular};;
 
     ${mediaqueries.tablet`
-      padding: 0 40px;
+      padding: 0 20px;
     `}
   }
 
@@ -334,8 +334,8 @@ const Content = styled.div`
     box-sizing: border-box;
 
     ${mediaqueries.tablet`
-      width: calc(100vw - 80px);
-      margin: 5px auto 50px;
+      width: calc(100vw - 40px);
+      margin: 0px auto 50px;
     `};
   }
 `

@@ -17,7 +17,7 @@ const ArticlePreview = ({ article }: { article: IArticleNode }) => {
           <Media src={article.icon.file.url} />
         </Icon>
         <Title>{article.title}</Title>
-        <Excerpt>{article.excerpt.excerpt}</Excerpt>
+        <Excerpt>{article.excerpt}</Excerpt>
         <HorizontalRule />
         <LinkToArticle to={slug}>Read more</LinkToArticle>
       </Content>
