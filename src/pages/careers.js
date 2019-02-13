@@ -49,7 +49,7 @@ class CareersPage extends Component {
                 <LeftContainer>
                   <TextContainer animation={animation} transitionDelay={300}>
                     <HiringPill>We're hiring</HiringPill>
-                    <WelcomeHeader>{contentful.heading}</WelcomeHeader>
+                    <Heading.h1>{contentful.heading}</Heading.h1>
                     <MainText>{contentful.text.text}</MainText>
                   </TextContainer>
                   <div />
@@ -255,7 +255,7 @@ const CareerRowContent = styled.div`
 
 const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr [col-start]);
+  grid-template-columns: 621px 1fr;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
@@ -291,28 +291,15 @@ const HiringPill = styled.div`
   font-weight: 600;
 `
 
-const WelcomeHeader = styled(Heading.h1)`
-  color: white;
-  font-family: 'ff-meta-serif-web-pro', serif;
-  font-size: 3.2rem;
-  font-weight: 600;
-  margin-bottom: 2rem;
-
-  ${media.desktop`
-    font-size: 20px;
-  `};
-
-  ${media.phablet`
-    max-width: 280px;
-  `};
-`
-
 const MainText = styled.p`
-  font-size: 1.8rem;
+  font-size: 3.2rem;
   font-weight: 400;
   color: ${p => p.theme.colors.grey};
-  margin-bottom: 2rem;
-  max-width: 47rem;
+  line-height: 1.3;
+
+  ${media.phablet`
+    font-size: 2.2rem;
+  `};
 `
 
 const LeftContainer = styled.div`
@@ -320,7 +307,7 @@ const LeftContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  max-width: 50.5rem;
+  max-width: 62.1rem;
 
   ${media.desktop`
     padding-top: 5rem;

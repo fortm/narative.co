@@ -84,7 +84,7 @@ const styles = {
     font-size: ${constants.h1.fontsize};
     line-height: ${constants.h1.lineheight};
 
-    ${commonStyles(2, 400)} ${media.phablet`
+    ${commonStyles(1, 400)} ${media.phablet`
       font-size: ${constants.h1.fontsizeMobile};
       line-height: ${constants.h1.lineheightMobile};
     `};
