@@ -89,7 +89,6 @@ const HeroContent = styled.div`
 
 const Header = styled.header`
   max-width: 680px;
-  transition: transform 0.05s ease-in-out;
 
   ${mediaqueries.tablet`
     max-width: 480px;

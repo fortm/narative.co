@@ -165,6 +165,7 @@ const Content = styled.div`
       margin: 0 auto 35px;
     `}
   }
+
   ul,
   ol {
     ${articleWidth} list-style: none;
@@ -276,10 +277,7 @@ const Content = styled.div`
   img.Image_Full {
     width: 100%;
     width: ${imageWidths.full};;
-
-    ${mediaqueries.tablet`
-      border-radius: 0;
-    `}
+    border-radius: 0;
   }
 
   table {
