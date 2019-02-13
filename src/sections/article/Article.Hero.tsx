@@ -144,19 +144,27 @@ const ReadingTime = styled.div`
 `
 
 const Image = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  right: -40%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    right: -40%;
+    overflow: visible;
+}
 
   & > div {
     top: 50%;
     transform: translateY(-50%);
+    overflow: visible;
+    height: 100%;
+
+    img {
+      object-position: left center !important;
+    }
   }
 
   ${mediaqueries.tablet`
-    right: -360px;
+    right: -30%;
     width: 720px;
     opacity: 0.25;
   `}

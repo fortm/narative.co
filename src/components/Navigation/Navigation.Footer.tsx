@@ -22,7 +22,7 @@ const Footer = ({ mode = 'dark' }: { mode?: string }) => {
       <Frame color={color}>
         <CopyRight>© {new Date().getFullYear()} Narative Studio Inc.</CopyRight>
         <Left>
-          <LogoContainer>
+          <LogoContainer to="/">
             <Logo fill={color} onlySymbol />
           </LogoContainer>
           <SocialIconsFooter>
@@ -97,7 +97,7 @@ const Right = styled.div`
   `}
 `
 
-const LogoContainer = styled.div`
+const LogoContainer = styled(Link)`
   ${mediaqueries.tablet`
     display: none;
   `}
