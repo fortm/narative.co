@@ -129,6 +129,9 @@ const articlePreview = `
     fluid(maxWidth: 1140, maxHeight: 380, quality: ${settings.imageQuality}) {
       ${GatsbyContentfulFluid_withWebp}
     }
+    seo: fixed(width: 1200, height: 630, quality: ${settings.imageQuality}) {
+      ${GatsbyContentfulFixed_withWebp}
+    }
   }
   backgroundColor
 `

@@ -24,23 +24,24 @@ const PublicLogoQuery = graphql`
   }
 `
 
-export default ({ article, location }: { article: IArticleNode }) => (
-  <StaticQuery
-    query={PublicLogoQuery}
-    render={({ url: { edges } }) => (
-      <Microdata
-        article={article}
-        publicationLogo={edges[0].node.seo.image.file.url}
-        location={location}
-        sectionName={article.title}
-        sectionUrl={location.href}
-      />
-    )}
-  />
-)
+export default ({ article, location }: { article: IArticleNode }) =>
+  console.log(article) || (
+    <StaticQuery
+      query={PublicLogoQuery}
+      render={({ url: { edges } }) => (
+        <Microdata
+          article={article}
+          publicationLogo={edges[0].node.seo.image.file.url}
+          location={location}
+          sectionName={article.title}
+          sectionUrl={location.href}
+        />
+      )}
+    />
+  )
 
 const Microdata = ({
-  article: { title, excerpt, author, hero, postDate },
+  article: { title, excerpt, author, hero, postDate, backgroundImage },
   location,
   publicationLogo,
   sectionName,
@@ -75,7 +76,7 @@ const Microdata = ({
       <Helmet
         title={title}
         description={excerpt}
-        image={hero.Article__Hero.src}
+        image={backgroundImage.seo.src}
       >
         <script type="application/ld+json">
           {`
