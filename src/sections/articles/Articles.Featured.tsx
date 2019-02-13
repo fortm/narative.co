@@ -12,7 +12,7 @@ import { IArticleNode } from '@typings'
 
 const ArticlesFeatured = ({ article }: { article: IArticleNode }) => (
   <Frame>
-    <Left>
+    <Left to={`/articles/${article.slug}`}>
       <SuperScript>Featured article</SuperScript>
       <Heading.h2 dark>{article.title}</Heading.h2>
       <Excerpt>{article.excerpt}</Excerpt>
@@ -23,7 +23,7 @@ const ArticlesFeatured = ({ article }: { article: IArticleNode }) => (
         to={`/articles/${article.slug}`}
       />
     </Left>
-    <Right>
+    <Right to={`/articles/${article.slug}`}>
       <Media src={article.hero.Article__Featured} />
     </Right>
   </Frame>
@@ -61,14 +61,16 @@ const Frame = styled.div`
   `}
 `
 
-const Left = styled.div`
+const Left = styled(Link)`
+  display: block;
   width: 100%;
   max-width: 500px;
   position: relative;
   z-index: 1;
 `
 
-const Right = styled.div`
+const Right = styled(Link)`
+  display: block;
   position: relative;
   width: 100%;
   height: 100%;

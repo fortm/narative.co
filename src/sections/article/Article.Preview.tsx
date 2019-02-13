@@ -15,8 +15,8 @@ const ArticlesPreview = ({ articles }) => {
   return (
     <>
       <Grid>
-        <GridItem article={articles[0]} narrow />
-        <GridItem article={articles[1]} />
+        <GridItem article={articles[0]} />
+        <GridItem article={articles[1]} narrow />
       </Grid>
     </>
   )
@@ -66,7 +66,7 @@ const Grid = styled.div`
   position: relative;
   display: grid;
   grid-template-columns: ${p =>
-    p.reverse ? `${wide} ${narrow}` : `${narrow} ${wide}`};
+    p.reverse ? `${narrow} ${wide}` : `${wide} ${narrow}`};
   grid-template-rows: 2;
   column-gap: 30px;
   margin-bottom: 80px;

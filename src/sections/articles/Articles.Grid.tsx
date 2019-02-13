@@ -25,12 +25,12 @@ const ArticlesGrid = ({ articles }) => {
   return (
     <>
       <Grid>
-        <GridItem article={articles[0]} narrow />
-        <GridItem article={articles[1]} />
+        <GridItem article={articles[0]} />
+        <GridItem article={articles[1]} narrow />
       </Grid>
       <Grid reverse>
-        <GridItem article={articles[2]} />
-        <GridItem article={articles[3]} narrow />
+        <GridItem article={articles[2]} narrow />
+        <GridItem article={articles[3]} />
       </Grid>
       <HorizontalRule>
         <div>From our clients</div>
@@ -40,14 +40,14 @@ const ArticlesGrid = ({ articles }) => {
         <div>More from Narative</div>
       </HorizontalRule>
       <Grid>
-        <GridItem article={articles[4]} narrow />
-        <GridItem article={articles[5]} />
+        <GridItem article={articles[4]} />
+        <GridItem article={articles[5]} narrow />
       </Grid>
 
       {articles[6] && (
         <Grid>
-          <GridItem article={articles[6]} />
-          <GridItem article={articles[7]} narrow />
+          <GridItem article={articles[6]} narrow />
+          <GridItem article={articles[7]} />
         </Grid>
       )}
     </>
@@ -83,7 +83,7 @@ const Testimonial = () => {
     <TestimonialGrid>
       <HopperLogo />
       <div>
-        <Blockquote>
+        <Blockquote to="/articles/sample-article">
           “Working with Narative on the new Hopper.com has been an absolute
           pleasure. Not only is the team insanely smart and efficient, they’re
           incredible human beings who truly care about the work they touch.”
@@ -118,7 +118,7 @@ const Grid = styled.div`
   position: relative;
   display: grid;
   grid-template-columns: ${p =>
-    p.reverse ? `${wide} ${narrow}` : `${narrow} ${wide}`};
+    p.reverse ? `${narrow} ${wide}` : `${wide} ${narrow}`};
   grid-template-rows: 2;
   column-gap: 30px;
   margin-bottom: 80px;
@@ -149,8 +149,8 @@ const Image = styled.div`
     width: 100%;
     height: 100%;
     opacity: 0;
-    box-shadow: 0px 20px 80px rgba(0, 0, 0, 0.14);
-    transition: opacity 0.3s ease-in-out;
+    box-shadow: 0px 10px 100px rgba(0, 0, 0, 0.18);
+    transition: opacity 0.25s ease-in-out;
   }
 
   & > div {
@@ -265,7 +265,8 @@ const TestimonialGrid = styled.div`
   `}
 `
 
-const Blockquote = styled.blockquote`
+const Blockquote = styled(Link)`
+  display: block;
   font-family: ${p => p.theme.fontfamily.serif};
   font-size: 36px;
   font-weight: 500;
@@ -274,6 +275,11 @@ const Blockquote = styled.blockquote`
   line-height: 1.2;
   max-width: 852px;
   margin-bottom: 30px;
+  transition: color 0.3s ease-in-out;
+
+  &:hover {
+    color: #000;
+  }
 
   ${mediaqueries.tablet`
     font-size: 24px;
