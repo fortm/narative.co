@@ -18,7 +18,7 @@ const themes = {
   dark: {
     mode: {
       gradient:
-        'linear-gradient(180deg, #111216 0%, #111216 80%, #191d23 100%);',
+        'linear-gradient(180deg, #111216 29.86%, rgba(66, 81, 98, 0.36) 272.57%)',
       background: '#111216',
       text: '#fff',
       color: '#fff',

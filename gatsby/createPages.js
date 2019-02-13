@@ -238,14 +238,14 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
         .slice(0, required)
     }
 
-    let nextArticle = {}
-    // Get the next article in the list
-    if (articles[index + 1]) {
-      nextArticle = articles[index + 1]
-    } else {
-      // Or if there is no next article grab the first one
-      nextArticle = articles[0]
-    }
+    // Grab the two next articles in the list
+    let next = articles.slice(index + 1, index + 2)
+
+    // If it's the last item in the list, there will be no articles. So grab the first 2
+    if (next.length === 0) next = articles.slice(0, 2)
+
+    // If there's 1 item in the list, grab the first article
+    if (next.length === 1) next = [...next, articles[0]]
 
     // Create the page for this post
     createPage({
@@ -258,7 +258,7 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
         title: article.title,
         // Add it to our created page. Topups might well be empty if we found enough relateds
         // relateds: [...relateds, ...topups],
-        next: nextArticle,
+        next,
       },
     })
   })

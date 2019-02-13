@@ -89,9 +89,8 @@ interface IGraphqlSharpFluidImage {
 }
 
 interface IGraphqlContentfulImage {
-  CardStandard: ISharpFixedOrFluidAttrs
-  CardPost: ISharpFixedOrFluidAttrs
-  Home__Hero: ISharpFixedOrFluidAttrs
+  CardPreview: ISharpFixedOrFluidAttrs
+  Article__Featured: ISharpFixedOrFluidAttrs
   Article__Hero: ISharpFixedOrFluidAttrs
 }
 

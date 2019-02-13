@@ -1,32 +1,53 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Link, navigate } from 'gatsby'
+import { Link } from 'gatsby'
 
+import Heading from '@components/Heading'
 import Media from '@components/Media/Media.Img'
 
-import { IArticleNode } from '@typings'
 import mediaqueries from '@styles/media'
 
-const ArticlePreview = ({ article }: { article: IArticleNode }) => {
-  const slug = `/articles/${article.slug}`
+/**
+ *  [LONG], [SHORT]
+ */
 
+const ArticlesPreview = ({ articles }) => {
   return (
-    <Card background={article.backgroundColor} onClick={() => navigate(slug)}>
-      <Content>
-        <Icon>{/* <Media src={article.icon.file.url} /> */}</Icon>
-        <Title>{article.title}</Title>
-        <Excerpt>{article.excerpt}</Excerpt>
-        <HorizontalRule />
-        <LinkToArticle to={slug}>Read more</LinkToArticle>
-      </Content>
-      <Image>
-        <Media src={article.backgroundImage.fluid} />
-      </Image>
-    </Card>
+    <>
+      <Grid>
+        <GridItem article={articles[0]} narrow />
+        <GridItem article={articles[1]} />
+      </Grid>
+    </>
   )
 }
 
-export default ArticlePreview
+export default ArticlesPreview
+
+const GridItem = ({ article, narrow }) => {
+  if (!article) return null
+
+  const hasOverflow = narrow && article.title.length > 35
+
+  return (
+    <Item>
+      <Image background={article.backgroundColor}>
+        <Media src={article.backgroundImage.fluid} />
+      </Image>
+      <Title dark hasOverflow={hasOverflow}>
+        {article.title}
+      </Title>
+      <Excerpt narrow={narrow} hasOverflow={hasOverflow}>
+        {article.excerpt}
+      </Excerpt>
+      <TimeToRead>{article.readingTime.text}</TimeToRead>
+      <ArticleLink to={`/articles/${article.slug}`} />
+    </Item>
+  )
+}
+
+const wide = '1fr'
+const narrow = '457px'
 
 const limitToTwoLines = css`
   text-overflow: ellipsis;
@@ -41,115 +62,112 @@ const limitToTwoLines = css`
     -webkit-line-clamp: 3;
   `}
 `
-
-const Card = styled.div`
+const Grid = styled.div`
   position: relative;
-  width: 100%;
-  height: 380px;
-  padding: 65px;
-  background: ${p => p.background};
+  display: grid;
+  grid-template-columns: ${p =>
+    p.reverse ? `${wide} ${narrow}` : `${narrow} ${wide}`};
+  grid-template-rows: 2;
+  column-gap: 30px;
+  margin-bottom: 80px;
+
+  ${mediaqueries.desktop`
+    grid-template-columns: 1fr 1fr;
+  `}
+
+  ${mediaqueries.tablet`
+    grid-template-columns: 1fr;
+    margin-bottom: 60px;
+  `}
+`
+
+const Image = styled.div`
+  height: 280px;
   box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  margin: 0 auto;
-  cursor: pointer;
+  margin-bottom: 30px;
+  background-color: ${p => p.background};
 
-  &::after {
-    content: '';
-    position: absolute;
-    pointer-events: none;
-    width: 100%;
+  & > div {
     height: 100%;
     border-radius: 5px;
-    top: 0;
-    left: 0;
-    box-shadow: 0px 10px 100px rgba(0, 0, 0, 0.16);
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-  }
-
-  &:hover::after {
-    opacity: 1;
   }
 
   ${mediaqueries.tablet`
-    height: auto;
-    padding: 40px 40px 30px;
+    height: 240px;
+    margin-bottom: 0;
+    box-shadow: none;
   `}
-`
-
-const Content = styled.div`
-  max-width: 410px;
 
   ${mediaqueries.phablet`
-    text-align: center;
+    height: 200px;
   `}
 `
 
-const Icon = styled.div`
-  height: 25px;
-  margin-bottom: 35px;
+const Item = styled.div`
+  position: relative;
 
-  ${mediaqueries.phablet`
-    margin-bottom: 25px;
+  ${mediaqueries.tablet`
+    margin-bottom: 40px;
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+
+    &:last-child {
+      display:  none;
+    }
   `}
 `
 
-const Title = styled.h2`
+const Title = styled(Heading.h2)`
   font-size: 22px;
-  color: #fff;
-  font-family: ${p => p.theme.fontfamily.serif};
-  margin-bottom: 10px;
-  ${limitToTwoLines}
+  margin-bottom: ${p => (p.hasOverflow ? '45px' : '10px')};
+  ${limitToTwoLines};
+  color: ${p => p.theme.mode.text};
 
-  ${mediaqueries.phablet`
-    margin-bottom: 15px;
+  ${mediaqueries.tablet`
+    padding: 30px 20px 0;
+    margin-bottom: 10px;
+    -webkit-line-clamp: 3;
   `}
 `
 
 const Excerpt = styled.p`
+  ${limitToTwoLines};
   font-size: 18px;
-  color: #fff;
-  margin-bottom: 35px;
-  ${limitToTwoLines}
+  margin-bottom: 10px;
+  color: ${p => p.theme.colors.grey};
+  display: ${p => (p.hasOverflow ? 'none' : 'box')};
+  max-width: ${p => (p.narrow ? '415px' : '515px')};
+  color: ${p => p.theme.mode.text};
 
-  ${mediaqueries.phablet`
-    margin-bottom: 25px;
+  ${mediaqueries.desktop`
+    display: -webkit-box;
+  `}
+
+  ${mediaqueries.tablet`
+    max-width: 100%;
+    padding:  0 20px;
+    margin-bottom: 20px;
+    -webkit-line-clamp: 3;
   `}
 `
 
-const HorizontalRule = styled.hr`
-  width: 140px;
-  height: 1px;
-  border: none;
-  margin-bottom: 30px;
-  background: rgba(255, 255, 255, 0.15);
-
-  ${mediaqueries.phablet`
-    width: 100%;
-    margin: 0 auto 25px;
-    background: rgba(255, 255, 255, 0.30);
-  `}
-`
-
-const LinkToArticle = styled(Link)`
+const TimeToRead = styled.div`
   font-weight: 600;
-  font-size: 16px;
-  color: #fff;
+  font-size: 18px;
+  color: ${p => p.theme.mode.text};
+  opacity: 0.25;
+
+  ${mediaqueries.tablet`
+    max-width: 100%;
+    padding:  0 20px 30px;
+  `}
 `
 
-const Image = styled.div`
+const ArticleLink = styled(Link)`
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  pointer-events: none;
-
-  .gatsby-image-wrapper {
-    height: 100%;
-  }
-
-  ${mediaqueries.tablet`
-    display: none;
-  `}
 `

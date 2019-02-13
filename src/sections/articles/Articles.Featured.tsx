@@ -8,27 +8,26 @@ import Media from '@components/Media/Media.Img'
 
 import mediaqueries from '@styles/media'
 
-const ArticlesFeatured = ({ article }) => {
-  console.log(article)
-  return (
-    <Frame>
-      <Left>
-        <SuperScript>Featured article</SuperScript>
-        <Heading.h2 dark>{article.title}</Heading.h2>
-        <Excerpt>{article.excerpt}</Excerpt>
-        <ButtonArrow
-          text="Read more"
-          color="#000"
-          as={Link}
-          to={`/articles/${article.slug}`}
-        />
-      </Left>
-      <Right>
-        <Media src={article.hero.Article__Featured} />
-      </Right>
-    </Frame>
-  )
-}
+import { IArticleNode } from '@typings'
+
+const ArticlesFeatured = ({ article }: { article: IArticleNode }) => (
+  <Frame>
+    <Left>
+      <SuperScript>Featured article</SuperScript>
+      <Heading.h2 dark>{article.title}</Heading.h2>
+      <Excerpt>{article.excerpt}</Excerpt>
+      <ButtonArrow
+        text="Read more"
+        color="#000"
+        as={Link}
+        to={`/articles/${article.slug}`}
+      />
+    </Left>
+    <Right>
+      <Media src={article.hero.Article__Featured} />
+    </Right>
+  </Frame>
+)
 
 export default ArticlesFeatured
 
@@ -69,8 +68,10 @@ const Left = styled.div`
 `
 
 const Right = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
+  right: -8%;
 
   ${mediaqueries.tablet`
     position: absolute;

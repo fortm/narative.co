@@ -128,7 +128,7 @@ class Article extends Component<ArticleProps, PostState> {
           </Meta>
           <NextArticle narrow>
             <FooterNext>Next article from Narative</FooterNext>
-            <ArticlePreview article={next} />
+            <ArticlePreview articles={next} />
             <FooterSpacer />
           </NextArticle>
           <NavigationFooter mode={mode} />

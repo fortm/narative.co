@@ -19,7 +19,7 @@ module.exports.urls = {
  * What size do we want to cut hero images to?
  */
 module.exports.heroImageDimensions = [
-  ['CardPreview', 1200, 825],
+  ['CardPreview', 1200, 680],
   ['Article__Featured', 1200, 825],
   ['Article__Hero', 1600, 1100],
 ]

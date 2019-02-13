@@ -63,7 +63,7 @@ export default ArticleHero
 const Hero = styled.div`
   position: relative;
   z-index: 5;
-  min-height: 540px;
+  min-height: 800px;
   height: 100vh;
   width: 100vw;
   background: #fafafa;
@@ -87,7 +87,7 @@ const Header = styled.header`
   max-width: 680px;
 
   ${mediaqueries.tablet`
-    padding: 0 40px;
+    max-width: 480px;
   `}
 `
 
@@ -99,6 +99,7 @@ const HeroTitle = styled(Heading.h1)`
 
   ${mediaqueries.tablet`
     font-size: 32px;
+    line-height: 1.3;
   `}
 `
 
@@ -149,4 +150,10 @@ const Image = styled.div`
     top: 50%;
     transform: translateY(-50%);
   }
+
+  ${mediaqueries.tablet`
+    right: -360px;
+    width: 720px;
+    opacity: 0.25;
+  `}
 `
