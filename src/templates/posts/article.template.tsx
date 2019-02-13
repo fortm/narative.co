@@ -105,8 +105,6 @@ class Article extends Component<ArticleProps, PostState> {
       fixed: false,
     }
 
-    console.log(article)
-
     return (
       <Layout nav={navConfig}>
         <ArticleMicrodata article={article} location={location} />

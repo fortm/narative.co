@@ -33,13 +33,6 @@ const SocialLinks = ({ fill = 'white' }) => (
     >
       <SocialIcons.LinkedinIcon fill={fill} />
     </SocialIconContainer>
-    <SocialIconContainer
-      target="_blank"
-      rel="noopener"
-      href="https://medium.com/narative"
-    >
-      <SocialIcons.MediumIcon fill={fill} />
-    </SocialIconContainer>
   </Fragment>
 )
 

@@ -9,7 +9,7 @@ import { Section, Logo, SocialLinks } from '@components'
 import { media } from '@styles'
 import mediaqueries from '@styles/media'
 
-const navOptions = [
+const navLinks = [
   { to: '/labs', text: 'Labs' },
   { to: '/careers', text: 'Careers' },
   { to: '/articles', text: 'Articles' },
@@ -173,8 +173,8 @@ class Navigation extends Component {
 export default Navigation
 
 const NavItems = ({ active, handleClick }) =>
-  navOptions.map((nav, index) => {
-    const delay = active ? 30 * (navOptions.length - index) : 30 * index
+  navLinks.map((nav, index) => {
+    const delay = active ? 30 * (navLinks.length - index) : 30 * index
 
     return (
       <NavItem key={nav.to}>

@@ -1,40 +1,41 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link, navigate } from 'gatsby'
+import { Link } from 'gatsby'
 
-import ButtonArrow from '@components/Button/Button.Arrow'
 import Section from '@components/Section'
 import SocialLinks from '@components/SocialLinks'
-
+import Logo from '@components/Logo'
 import mediaqueries, { media } from '@styles/media'
 
-const Footer = ({
-  mode = 'dark',
-  to = '/',
-  text = 'Go home',
-}: {
-  mode?: string
-  to?: string
-  text?: string
-}) => {
+const footerLinks = [
+  { to: '/labs', text: 'Labs' },
+  { to: '/careers', text: 'Careers' },
+  { to: '/articles', text: 'Articles' },
+  { to: '/contact', text: 'Contact' },
+]
+
+const Footer = ({ mode = 'dark' }: { mode?: string }) => {
   const color = mode === 'dark' ? '#fff' : '#000'
 
   return (
     <Section>
-      <Frame>
-        <CopyRightContainer>
-          <ContactActionsContainer>
-            <ContactButton to="/contact">Contact us</ContactButton>
-            <ButtonArrow
-              color={color}
-              onClick={() => navigate(to)}
-              text={text}
-            />
-          </ContactActionsContainer>
-        </CopyRightContainer>
-        <SocialIconsFooter>
-          <SocialLinks fill={color} />
-        </SocialIconsFooter>
+      <Frame color={color}>
+        <CopyRight>© {new Date().getFullYear()} Narative Studio Inc.</CopyRight>
+        <Left>
+          <LogoContainer>
+            <Logo fill={color} onlySymbol />
+          </LogoContainer>
+          <SocialIconsFooter>
+            <SocialLinks fill={color} />
+          </SocialIconsFooter>
+        </Left>
+        <Right>
+          {footerLinks.map(link => (
+            <FooterLink color={color} to={link.to}>
+              {link.text}
+            </FooterLink>
+          ))}
+        </Right>
       </Frame>
     </Section>
   )
@@ -43,29 +44,52 @@ const Footer = ({
 export default Footer
 
 const Frame = styled.footer`
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-bottom: 150px;
-  color: ${p => p.theme.colors.grey};
 
   ${mediaqueries.tablet`
     justify-content: center;
-    flex-direction: column;
-    padding-bottom: 0;
+    flex-direction: column-reverse;
+    padding: 80px 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: ${p => p.color};
+      opacity: 0.25;
+    }
   `};
 `
 
-const CopyRightContainer = styled.div`
-  display: block;
-  font-size: 1.8rem;
-  font-weight: 500;
+const Left = styled.div`
+  display: flex;
+  opacity: 0.25;
 
-  ${mediaqueries.desktop`
+  ${mediaqueries.tablet`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-bottom: 9rem;
+    margin-bottom: 60px;
+    opacity: 1;
+  `};
+`
+
+const Right = styled.div`
+  display: flex;
+  align-items: center;
+
+  ${mediaqueries.tablet`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 60px;
   `};
 
   ${mediaqueries.phablet`
@@ -73,72 +97,55 @@ const CopyRightContainer = styled.div`
   `}
 `
 
-const ContactActionsContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 42rem;
-
-  ${mediaqueries.phablet`
-    width: 100%;
-    flex-direction: column;
-
-    button:nth-child(2) {
-      position: relative;
-      left: 25px;
-    }
-  `};
+const LogoContainer = styled.div`
+  ${mediaqueries.tablet`
+    display: none;
+  `}
 `
 
 const SocialIconsFooter = styled.div`
   display: flex;
   align-items: center;
-
-  ${p =>
-    p.hideOnMobile &&
-    mediaqueries.desktop`
-    display: none;
-  `};
+  margin-left: 50px;
 
   ${mediaqueries.desktop`
-        margin-bottom: 9rem;
+    margin-left: 35px;
+  `};
+
+  ${mediaqueries.tablet`
+    margin: 0 auto;
   `}
 `
 
-const ContactButton = styled(Link)`
-  position: relative;
-  height: 45px;
-  width: 195px;
-  background: #000;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: 3px;
+const FooterLink = styled(Link)`
   font-weight: 600;
+  font-size: 18px;
+  color: ${p => p.color};
 
-  ${mediaqueries.phablet`
-    width: 100%;
-    margin-bottom: 3rem;
+  &:not(:last-child) {
+    margin-right: 60px;
+  }
+
+  ${mediaqueries.desktop`
+    &:not(:last-child) {
+      margin-right: 35px;
+    }
   `};
 
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    box-shadow: 0px 3px 18px rgba(0, 0, 0, 0.28);
-    opacity: 0;
-    pointer-events: none;
-    transform: scale(0.8);
-    transition: all 300ms ease-out;
-  }
+  ${mediaqueries.tablet`
+    font-weight: 400;
 
-  &:hover::after {
-    transform: scale(1);
-    opacity: 1;
-  }
+    &:not(:last-child) {
+      margin: 0 auto 35px;
+    }
+  `}
+`
+
+const CopyRight = styled.div`
+  color: ${p => p.theme.colors.grey};
+  text-align: center;
+
+  ${mediaqueries.desktop_up`
+    display: none;
+  `}
 `
