@@ -54,10 +54,11 @@ const Frame = styled.div`
 
   ${mediaqueries.tablet`
     padding: 100px 0;
+    overflow: visible;
   `}
 
   ${mediaqueries.phablet`
-    padding: 60px 0;
+    padding: 60px 0 80px;
   `}
 `
 

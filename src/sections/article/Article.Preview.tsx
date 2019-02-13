@@ -30,19 +30,20 @@ const GridItem = ({ article, narrow }) => {
   const hasOverflow = narrow && article.title.length > 35
 
   return (
-    <Item>
-      <ArticleLink to={`/articles/${article.slug}`} />
-      <Image background={article.backgroundColor}>
-        <Media src={article.backgroundImage.fluid} />
-      </Image>
-      <Title dark hasOverflow={hasOverflow}>
-        {article.title}
-      </Title>
-      <Excerpt narrow={narrow} hasOverflow={hasOverflow}>
-        {article.excerpt}
-      </Excerpt>
-      <TimeToRead>{article.readingTime.text}</TimeToRead>
-    </Item>
+    <ArticleLink to={`/articles/${article.slug}`}>
+      <Item>
+        <Image background={article.backgroundColor}>
+          <Media src={article.backgroundImage.fluid} />
+        </Image>
+        <Title dark hasOverflow={hasOverflow}>
+          {article.title}
+        </Title>
+        <Excerpt narrow={narrow} hasOverflow={hasOverflow}>
+          {article.excerpt}
+        </Excerpt>
+        <TimeToRead>{article.readingTime.text}</TimeToRead>
+      </Item>
+    </ArticleLink>
   )
 }
 
@@ -110,6 +111,8 @@ const Image = styled.div`
     height: 240px;
     margin-bottom: 0;
     box-shadow: none;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
   `}
 
   ${mediaqueries.phablet`
@@ -124,10 +127,6 @@ const Item = styled.div`
     margin-bottom: 40px;
     box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
-
-    &:last-child {
-      display:  none;
-    }
   `}
 `
 
@@ -178,21 +177,42 @@ const TimeToRead = styled.div`
 `
 
 const ArticleLink = styled(Link)`
-  position: absolute;
+  display: block;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
   border-radius: 5px;
   z-index: 1;
+  transition: transform 0.33s var(--ease-out-quart);
 
-  &:hover ~ ${Image} {
+  &:hover ${Image} {
     &::after {
       opacity: 1;
     }
   }
 
-  &:hover ~ h2 {
+  &:hover h2 {
     color: ${p => p.theme.mode.hover};
   }
+
+  ${mediaqueries.tablet`
+    &:hover ${Image} {
+      &::after {
+        opacity: 0;
+      }
+    }
+
+    &:hover h2 {
+      color: ${p => p.theme.mode.text};
+    }
+
+    &:active {
+      transform: scale(0.97) translateY(3px);
+    }
+
+    &:last-child {
+      display:  none;
+    }
+  `}
 `

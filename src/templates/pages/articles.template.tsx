@@ -71,10 +71,10 @@ class ArticlesPage extends Component {
             <div />
           </Section>
           <WhiteBackground>
-            <Section narrow>
+            <NoOverflowSection narrow>
               <ArticlesFeatured article={this.featured} />
               <ArticlesGrid articles={this.articles} />
-            </Section>
+            </NoOverflowSection>
             <Spacer />
             <Footer mode="light" />
           </WhiteBackground>
@@ -106,6 +106,11 @@ export const pageQuery = graphql`
   }
 `
 
+const NoOverflowSection = styled(Section)`
+  ${mediaqueries.tablet`
+    overflow: hidden;
+  `}
+`
 const WhiteBackground = styled.div`
   position: relative;
   background: #fafafa;

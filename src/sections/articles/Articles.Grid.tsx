@@ -62,19 +62,20 @@ const GridItem = ({ article, narrow }) => {
   const hasOverflow = narrow && article.title.length > 35
 
   return (
-    <Item>
-      <ArticleLink to={`/articles/${article.slug}`} />
-      <Image background={article.backgroundColor}>
-        <Media src={article.backgroundImage.fluid} />
-      </Image>
-      <Title dark hasOverflow={hasOverflow}>
-        {article.title}
-      </Title>
-      <Excerpt narrow={narrow} hasOverflow={hasOverflow}>
-        {article.excerpt}
-      </Excerpt>
-      <TimeToRead>{article.readingTime.text}</TimeToRead>
-    </Item>
+    <ArticleLink to={`/articles/${article.slug}`}>
+      <Item>
+        <Image background={article.backgroundColor}>
+          <Media src={article.backgroundImage.fluid} />
+        </Image>
+        <Title dark hasOverflow={hasOverflow}>
+          {article.title}
+        </Title>
+        <Excerpt narrow={narrow} hasOverflow={hasOverflow}>
+          {article.excerpt}
+        </Excerpt>
+        <TimeToRead>{article.readingTime.text}</TimeToRead>
+      </Item>
+    </ArticleLink>
   )
 }
 
@@ -129,7 +130,7 @@ const Grid = styled.div`
 
   ${mediaqueries.tablet`
     grid-template-columns: 1fr;
-    margin-bottom: 60px;
+    margin-bottom: 0;
   `}
 `
 
@@ -162,6 +163,8 @@ const Image = styled.div`
     height: 240px;
     margin-bottom: 0;
     box-shadow: none;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
   `}
 
   ${mediaqueries.phablet`
@@ -225,23 +228,40 @@ const TimeToRead = styled.div`
 `
 
 const ArticleLink = styled(Link)`
-  position: absolute;
+  display: block;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
   border-radius: 5px;
   z-index: 1;
+  transition: transform 0.33s var(--ease-out-quart);
 
-  &:hover ~ ${Image} {
+  &:hover ${Image} {
     &::after {
       opacity: 1;
     }
   }
 
-  &:hover ~ h2 {
+  &:hover h2 {
     color: ${p => p.theme.colors.purple};
   }
+
+  ${mediaqueries.tablet`
+    &:hover ${Image} {
+      &::after {
+        opacity: 0;
+      }
+    }
+
+    &:hover h2 {
+      color: #000;
+    }
+
+    &:active {
+      transform: scale(0.97) translateY(3px);
+    }
+  `}
 `
 
 const TestimonialGrid = styled.div`
