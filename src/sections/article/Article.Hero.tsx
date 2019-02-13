@@ -148,7 +148,7 @@ const Image = styled.div`
   width: 100%;
   height: 100%;
   z-index: -1;
-  right: -50%;
+  right: -40%;
 
   & > div {
     top: 50%;
