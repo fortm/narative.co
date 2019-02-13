@@ -164,8 +164,8 @@ const Image = styled.div`
   }
 
   ${mediaqueries.tablet`
-    right: -30%;
+    right: -50%;
     width: 720px;
-    opacity: 0.25;
+    opacity: 0.2;
   `}
 `

@@ -65,8 +65,8 @@ class CareersAccordian extends Component {
                     There are currently no available positions. But if you
                     believe you have something unique to bring to the team, get
                     in touch at{' '}
-                    <a href="mailto:careers@narative.co">careers@narative.co</a>.
-                    We love meeting new people!
+                    <a href="mailto:careers@narative.co">careers@narative.co</a>
+                    . We love meeting new people!
                   </span>
                   <button
                     onClick={() => this.setState({ copied: true })}
@@ -162,6 +162,7 @@ const AccordianContainer = styled.div`
     border-top: 1px solid #707173;
     border-bottom: 1px solid #707173;
     min-height: auto;
+    top: -10rem;
     padding-bottom: 3rem;
   `};
 

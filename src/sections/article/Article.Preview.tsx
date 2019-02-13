@@ -70,7 +70,6 @@ const Grid = styled.div`
     p.reverse ? `${narrow} ${wide}` : `${wide} ${narrow}`};
   grid-template-rows: 2;
   column-gap: 30px;
-  margin-bottom: 80px;
 
   ${mediaqueries.desktop`
     grid-template-columns: 1fr 1fr;
@@ -78,7 +77,6 @@ const Grid = styled.div`
 
   ${mediaqueries.tablet`
     grid-template-columns: 1fr;
-    margin-bottom: 60px;
   `}
 `
 

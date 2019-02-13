@@ -75,7 +75,6 @@ class ArticlesPage extends Component {
               <ArticlesFeatured article={this.featured} />
               <ArticlesGrid articles={this.articles} />
             </NoOverflowSection>
-            <Spacer />
             <Footer mode="light" />
           </WhiteBackground>
         </Fragment>
@@ -151,8 +150,4 @@ const MainText = styled.p`
   ${media.phablet`
     font-size: 2.2rem;
   `};
-`
-
-const Spacer = styled.div`
-  height: 100px;
 `
