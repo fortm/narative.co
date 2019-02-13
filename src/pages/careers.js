@@ -93,7 +93,7 @@ class CareersPage extends Component {
             <CareerRow header="Working at Narative">
               <FlexColumn>
                 <WhatWeDoContent>
-                  <SectionCopy maxWidth="46rem">
+                  <SectionCopy maxWidth="42rem">
                     Not only are we mindful of the projects we select, we get to
                     choose how and when we work, to ensure we're at our best.
                   </SectionCopy>
@@ -448,7 +448,7 @@ const RightContainer = styled.div`
 `
 const SectionCopy = styled.p`
   color: #fff;
-  font-size: 3.6rem;
+  font-size: 3.2rem;
   line-height: 1.2;
   max-width: ${props => (props.maxWidth ? props.maxWidth : '100%')};
 
