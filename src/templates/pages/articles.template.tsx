@@ -38,8 +38,14 @@ class ArticlesPage extends Component {
     const { animation } = this.state
     const { seo } = this.contentful
 
+    const navConfig = {
+      offset: true,
+      fixed: false,
+      theme: 'light',
+    }
+
     return (
-      <Layout navOffset>
+      <Layout nav={navConfig}>
         <Fragment>
           <Helmet
             title={seo.title}

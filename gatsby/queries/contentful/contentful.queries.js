@@ -143,6 +143,7 @@ const articleNode = `
   ${basicNode}
   slug
   featured
+  publicationDate(formatString: "MMM. D, YYYY")
   ${heroImageryField}
   author {
     ${authorFields}
@@ -172,7 +173,7 @@ module.exports.articles = `
     articles: allContentfulArticle(
       limit: $limit,
       filter: { featured: {eq: $featured}, title: {ne: null} },
-      sort: {fields: [fields___postDate], order: DESC}
+      sort: {fields: [publicationDate], order: DESC}
     ) {
       edges {
         node {

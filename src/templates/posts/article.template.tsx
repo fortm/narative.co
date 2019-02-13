@@ -105,6 +105,8 @@ class Article extends Component<ArticleProps, PostState> {
       fixed: false,
     }
 
+    console.log(article)
+
     return (
       <Layout nav={navConfig}>
         <ArticleMicrodata article={article} location={location} />
@@ -121,7 +123,7 @@ class Article extends Component<ArticleProps, PostState> {
         <Content contentRef={this.contentSectionRef} content={article.body} />
         <Gradient>
           <Meta>
-            <div>Posted on {article.postDate}</div>
+            <div>Posted on {article.publicationDate}</div>
             <div>
               By {author.name} – {author.title}
             </div>
