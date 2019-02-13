@@ -131,7 +131,11 @@ class Article extends Component<ArticleProps, PostState> {
             <ArticlePreview articles={next} />
             <FooterSpacer />
           </NextArticle>
-          <NavigationFooter mode={mode} />
+          <NavigationFooter
+            mode={mode}
+            to="/articles"
+            text="Back to Articles"
+          />
         </Gradient>
       </Layout>
     )

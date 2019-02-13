@@ -31,6 +31,7 @@ const GridItem = ({ article, narrow }) => {
 
   return (
     <Item>
+      <ArticleLink to={`/articles/${article.slug}`} />
       <Image background={article.backgroundColor}>
         <Media src={article.backgroundImage.fluid} />
       </Image>
@@ -41,7 +42,6 @@ const GridItem = ({ article, narrow }) => {
         {article.excerpt}
       </Excerpt>
       <TimeToRead>{article.readingTime.text}</TimeToRead>
-      <ArticleLink to={`/articles/${article.slug}`} />
     </Item>
   )
 }
@@ -82,11 +82,24 @@ const Grid = styled.div`
 `
 
 const Image = styled.div`
+  position: relative;
   height: 280px;
   box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   margin-bottom: 30px;
   background-color: ${p => p.background};
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    box-shadow: 0px 20px 80px rgba(0, 0, 0, 0.14);
+    transition: opacity 0.3s ease-in-out;
+  }
 
   & > div {
     height: 100%;
@@ -121,8 +134,9 @@ const Item = styled.div`
 const Title = styled(Heading.h2)`
   font-size: 22px;
   margin-bottom: ${p => (p.hasOverflow ? '45px' : '10px')};
-  ${limitToTwoLines};
   color: ${p => p.theme.mode.text};
+  transition: color 0.3s ease-in-out;
+  ${limitToTwoLines};
 
   ${mediaqueries.tablet`
     padding: 30px 20px 0;
@@ -138,7 +152,6 @@ const Excerpt = styled.p`
   color: ${p => p.theme.colors.grey};
   display: ${p => (p.hasOverflow ? 'none' : 'box')};
   max-width: ${p => (p.narrow ? '415px' : '515px')};
-  color: ${p => p.theme.mode.text};
 
   ${mediaqueries.desktop`
     display: -webkit-box;
@@ -170,4 +183,16 @@ const ArticleLink = styled(Link)`
   height: 100%;
   top: 0;
   left: 0;
+  border-radius: 5px;
+  z-index: 1;
+
+  &:hover ~ ${Image} {
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &:hover ~ h2 {
+    color: ${p => p.theme.mode.hover};
+  }
 `

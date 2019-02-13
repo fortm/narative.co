@@ -15,11 +15,13 @@ module.exports.urls = {
   facebook: 'https://www.facebook.com/',
 }
 
+module.exports.imageQuality = 100
+
 /**
  * What size do we want to cut hero images to?
  */
 module.exports.heroImageDimensions = [
   ['CardPreview', 1200, 680],
   ['Article__Featured', 1200, 825],
-  ['Article__Hero', 1600, 1100],
+  ['Article__Hero', 3200, 2200],
 ]

@@ -69,6 +69,10 @@ const Hero = styled.div`
   background: #fafafa;
   display: flex;
   overflow: hidden;
+
+  ${mediaqueries.tablet`
+    min-height: 100vh;
+  `}
 `
 
 const HeroContent = styled.div`
@@ -85,6 +89,7 @@ const HeroContent = styled.div`
 
 const Header = styled.header`
   max-width: 680px;
+  transition: transform 0.05s ease-in-out;
 
   ${mediaqueries.tablet`
     max-width: 480px;

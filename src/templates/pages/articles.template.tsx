@@ -143,9 +143,5 @@ const MainText = styled.p`
 `
 
 const Spacer = styled.div`
-  height: 160px;
-
-  ${mediaqueries.tablet`
-    height: 100px;
-  `}
+  height: 100px;
 `

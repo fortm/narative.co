@@ -50,6 +50,7 @@ const Frame = styled.div`
   display: flex;
   padding: 100px 0;
   align-items: center;
+  overflow: hidden;
 
   ${mediaqueries.tablet`
     padding: 100px 0;

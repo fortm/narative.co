@@ -45,33 +45,6 @@ const GatsbyContentfulFixed_withWebp = `
 `
 
 /**
- * Imagery. I've chosen to render imagery based on component it might be needed in.
- * I've tried to be descriptive about where it will end up being used.
- *
- * Sometimes I'm using underscores for the alias. I'm trying to indicate the page and component.
- * e.g. Home__Hero is for the image in the hero of the homepage.
- *
- * I'm cranking the quality to 100 because a lot of the old legacy imagery
- * is really crappy res already. I don't want to double compress it.
- */
-const heroImageryField = `
-  hero {
-    CardStandard: fixed(width: 366, height: 203, quality: 88) {
-      ${GatsbyContentfulFixed_withWebp}
-    }
-    CardPost: fixed(width: 244, height: 140, quality: 88) {
-      ${GatsbyContentfulFixed_withWebp}
-    }
-    Home__Hero: fixed(width: 692, height: 485, quality: 88) {
-      ${GatsbyContentfulFixed_withWebp}
-    }
-    Article__Hero: fixed(width: 1600, height: 1100, quality: 88) {
-      ${GatsbyContentfulFixed_withWebp}
-    }
-  }
-`
-
-/**
  * basicNode + any field that a post like node (modern or legacy) has on it
  */
 const postNode = `

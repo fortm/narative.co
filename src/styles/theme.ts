@@ -10,6 +10,7 @@ const black = '#262626'
 const bg = '#111216'
 const grey = '#7a8085'
 const red = '#f44336'
+const purple = '#6166DC'
 
 const flicker = keyframes`
   0% { opacity: 0.3; }
@@ -34,6 +35,7 @@ export const theme = {
     bg,
     grey,
     red,
+    purple,
   },
   animations: {
     flicker,

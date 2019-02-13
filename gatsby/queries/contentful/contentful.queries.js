@@ -1,6 +1,5 @@
 const settings = require('../../../src/settings')
 
-const imageQuality = 88
 /**
  * Preface
  * N.B. Gatsby doesn't really support Graphql fragments because the
@@ -72,7 +71,9 @@ const heroImageryField = `
     ${settings.heroImageDimensions.reduce(
       (acc, [name, x, y]) => `
         ${acc}
-        ${name}: fluid(maxWidth:${x}, maxHeight: ${y}, quality: ${imageQuality}) {
+        ${name}: fluid(maxWidth:${x}, maxHeight: ${y}, quality: ${
+        settings.imageQuality
+      }) {
           ${GatsbyContentfulFluid_withWebp}
         }
       `,
@@ -88,10 +89,14 @@ const heroImageryField = `
  */
 const authorAvatarField = `
   avatar {
-    small: fluid(maxWidth: 64, maxHeight: 64, quality: ${imageQuality}) {
+    small: fluid(maxWidth: 64, maxHeight: 64, quality: ${
+      settings.imageQuality
+    }) {
       ${GatsbyContentfulFluid_withWebp}
     }
-    large: fluid(maxWidth: 400, maxHeight: 400, quality: ${imageQuality}) {
+    large: fluid(maxWidth: 400, maxHeight: 400, quality: ${
+      settings.imageQuality
+    }) {
       ${GatsbyContentfulFluid_withWebp}
     }
   }
@@ -121,7 +126,7 @@ const readingTime = `
 
 const articlePreview = `
   backgroundImage {
-    fluid(maxWidth: 1140, maxHeight: 380, quality: ${imageQuality}) {
+    fluid(maxWidth: 1140, maxHeight: 380, quality: ${settings.imageQuality}) {
       ${GatsbyContentfulFluid_withWebp}
     }
   }

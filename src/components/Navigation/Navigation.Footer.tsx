@@ -8,7 +8,15 @@ import SocialLinks from '@components/SocialLinks'
 
 import mediaqueries, { media } from '@styles/media'
 
-const Footer = ({ mode = 'dark' }: { mode: string }) => {
+const Footer = ({
+  mode = 'dark',
+  to = '/',
+  text = 'Go home',
+}: {
+  mode?: string
+  to?: string
+  text?: string
+}) => {
   const color = mode === 'dark' ? '#fff' : '#000'
 
   return (
@@ -19,8 +27,8 @@ const Footer = ({ mode = 'dark' }: { mode: string }) => {
             <ContactButton to="/contact">Contact us</ContactButton>
             <ButtonArrow
               color={color}
-              onClick={() => navigate('/')}
-              text="Go home"
+              onClick={() => navigate(to)}
+              text={text}
             />
           </ContactActionsContainer>
         </CopyRightContainer>

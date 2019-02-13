@@ -7,6 +7,7 @@ const themes = {
       gradient: 'linear-gradient(180deg, #fff 80%, #D9DBE0 100%)',
       background: '#fff',
       text: '#000',
+      hover: '#6166DC',
       color: '#000',
       links: '#6166DC',
       progress: {
@@ -21,6 +22,7 @@ const themes = {
         'linear-gradient(180deg, #111216 29.86%, rgba(66, 81, 98, 0.36) 272.57%)',
       background: '#111216',
       text: '#fff',
+      hover: '#E9DAAC',
       color: '#fff',
       links: '#E9DAAC',
       progress: {
