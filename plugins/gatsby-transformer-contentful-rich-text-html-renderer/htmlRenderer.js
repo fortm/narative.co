@@ -43,7 +43,7 @@ module.exports.HTMLRendererOpts = {
 
         console.log(caption)
         // If there is a description, then we want to render that as a <caption>
-        if (caption && !caption.en) {
+        if (caption && caption.en !== '') {
           return `
           <figure>
             ${img}
