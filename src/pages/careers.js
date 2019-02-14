@@ -516,7 +516,7 @@ const MobileHero = styled.div`
   ${media.tablet`
     position: fixed;
     left: 0;
-    top: 90px;
+    top: 120px;
     right: 0;
     width: 100%;
   `};

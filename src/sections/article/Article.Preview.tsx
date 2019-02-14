@@ -125,6 +125,7 @@ const Item = styled.div`
     margin-bottom: 40px;
     box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
+    background: ${p => p.theme.mode.preview.bg};
   `}
 `
 

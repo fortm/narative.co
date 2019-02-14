@@ -2,10 +2,12 @@ import React, { Component, Fragment } from 'react'
 import { graphql, navigate } from 'gatsby'
 import styled from 'styled-components'
 
-import { media, transitions } from '@styles'
+import { transitions } from '@styles'
 import { Section, Heading, Helmet, Layout } from '@components'
 import Footer from '@components/Navigation/Navigation.Footer'
+
 import { startAnimation } from '@utils'
+import mediaqueries from '@styles/media'
 
 import LabsPreview from '../sections/labs/Labs.Preview'
 
@@ -37,29 +39,51 @@ class IndexPage extends Component {
     const { seo } = allContentfulHomePage.edges[0].node
     const pageBackground =
       'linear-gradient(rgb(9, 10, 12),rgb(17, 18, 22) 60%,#1a1e24 100%)'
+
+    const navConfig = {
+      fixed: false,
+      theme: 'light',
+      offset: true,
+    }
+
     const products = [
       {
-        cta: '#7A8085',
-        logo: NeedlLogo,
-        background: needlBackground.childImageSharp.fluid,
-        backgroundColor: '#D6D9DE',
-        url: '',
-        excerpt:
-          "Whether you're looking to get inked or you're a tattoo artist yourself, Needl helps you get what you need. Find artists and styles, schedule appointments, book flashes and get paid.",
-      },
-      {
-        cta: '#fff',
         logo: FeyLogo,
         background: feyBackground.childImageSharp.fluid,
         backgroundColor: '#1A1A1A',
-        url: 'https://feyapp.com',
         excerpt:
           'Sick of tracking your trades across Evernote, Excel files and countless screenshots? Fey gives you the complete picture of your portfolio, with fast data entry, always-on risk analysis and more.',
+        children: (
+          <>
+            <HorizontalRule />
+            <div>
+              <LinkToProduct to="https://feyapp.com">Read more</LinkToProduct>
+              <LinkToProduct to="https://narative.co/design/open/fey">
+                View in Figma
+              </LinkToProduct>
+            </div>
+          </>
+        ),
+      },
+      {
+        logo: NeedlLogo,
+        background: needlBackground.childImageSharp.fluid,
+        backgroundColor: '#D6D9DE',
+        excerpt:
+          "Whether you're looking to get inked or you're a tattoo artist yourself, Needl helps you get what you need. Find artists and styles, schedule appointments, book flashes and get paid.",
+        children: (
+          <>
+            <HorizontalRule dark />
+            <LinkToProduct dark as="div">
+              Coming: when it’s ready
+            </LinkToProduct>
+          </>
+        ),
       },
     ]
 
     return (
-      <Layout navOffset background={pageBackground}>
+      <Layout nav={navConfig} background={pageBackground}>
         <Fragment>
           <Helmet
             title={seo.title}
@@ -87,7 +111,7 @@ class IndexPage extends Component {
           </Section>
           <Section>
             {products.map(product => (
-              <LabsPreview product={product} />
+              <LabsPreview key={product.excerpt} product={product} />
             ))}
           </Section>
           <Footer />
@@ -144,7 +168,7 @@ const MainText = styled.p`
   color: ${p => p.theme.colors.grey};
   line-height: 1.3;
 
-  ${media.phablet`
+  ${mediaqueries.phablet`
     font-size: 2.2rem;
   `};
 `
@@ -159,9 +183,10 @@ const ContentContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
 
-  ${media.phablet`
-    height: calc(100vh - 160px);
+  ${mediaqueries.phablet`
+    height: calc(100vh - 90px);
     padding: 0;
+    top: -45px;
   `};
 `
 
@@ -175,6 +200,41 @@ const HeaderPill = styled.div`
   font-weight: 500;
   min-width: 100px;
   text-align: center;
+`
+
+const HorizontalRule = styled.hr`
+  width: 140px;
+  height: 1px;
+  border: none;
+  margin-bottom: 30px;
+  background: ${p => (p.dark ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255,255,255,0.1)')};
+
+  ${mediaqueries.phablet`
+    width: 100%;
+    margin: 0 auto 25px;
+    background: ${p =>
+      p.dark ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255,255,255,0.1)'};
+  `}
+`
+
+const LinkToProduct = styled.a`
+  font-weight: 600;
+  font-size: 16px;
+  color: ${p => (p.dark ? p.theme.colors.grey : '#fff')};
+
+  &:nth-child(2) {
+    margin-right: 30px;
+  }
+
+  ${mediaqueries.tablet`
+    display: block;
+    margin: 0 auto;
+    color: ${p => (p.dark ? '#000' : '#fff')};
+
+    &:nth-child(2) {
+      margin: 15px auto 0;
+    }
+  `}
 `
 
 const NeedlLogo = () => (

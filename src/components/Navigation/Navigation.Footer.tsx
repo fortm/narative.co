@@ -56,6 +56,7 @@ const Frame = styled.footer`
     justify-content: center;
     flex-direction: column-reverse;
     padding: 80px 0;
+    margin-top: 65px;
 
     &::after {
       content: '';

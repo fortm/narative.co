@@ -267,16 +267,11 @@ const Content = styled.div`
   img.Image_Large {
     width: 100%;
     max-width: ${imageWidths.large};
-    
-
-    ${mediaqueries.tablet`
-      padding: 0 20px;
-    `}
   }
 
   img.Image_Full {
     width: 100%;
-    width: ${imageWidths.full};;
+    width: ${imageWidths.full};
     border-radius: 0;
   }
 

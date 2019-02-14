@@ -52,10 +52,30 @@ const themes = {
 class Navigation extends Component {
   leftToggle = React.createRef()
 
-  state = { active: false }
+  state = { active: false, previousPath: '', showPreviousPath: false }
 
   componentDidMount() {
+    const previousPath = localStorage.getItem('previousPath')
+    this.setState({ previousPath })
+
     window.addEventListener('keydown', this.handleEscKeyPress)
+  }
+
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    if (typeof window !== 'undefined') {
+      const previousPathFromStorage = localStorage.getItem('previousPath')
+      const urlsThatUseBackButton = ['/articles']
+
+      if (prevState.previousPath !== previousPathFromStorage) {
+        this.setState({
+          previousPath: previousPathFromStorage,
+          showPreviousPath: urlsThatUseBackButton.some(
+            pathname => window.location.pathname.indexOf(pathname) >= 0
+          ),
+        })
+      }
+    }
+    return null
   }
 
   componentWillUnmount() {
@@ -115,7 +135,7 @@ class Navigation extends Component {
   }
 
   render() {
-    const { active } = this.state
+    const { active, previousPath, showPreviousPath } = this.state
     const { nav } = this.props
     const fill = nav.theme === 'dark' ? '#000' : '#fff'
     const theme = themes[nav.theme]
@@ -126,6 +146,11 @@ class Navigation extends Component {
           <NavFixedContainer navFixed={nav.fixed}>
             <Section>
               <NavContainer>
+                {previousPath && showPreviousPath && (
+                  <LogoBack to={`/${previousPath.split('/')[1]}`}>
+                    <BackChevron />
+                  </LogoBack>
+                )}
                 <LogoContainer to="/">
                   <Logo onlySymbol fill={fill} />
                 </LogoContainer>
@@ -228,6 +253,23 @@ const NavContainer = styled.div`
   ${media.tablet`
     padding-top: 50px;
   `};
+`
+
+const LogoBack = styled(Link)`
+  position: absolute;
+  left: -44px;
+
+  svg {
+    transition: transform 0.25s var(--ease-out-quad);
+  }
+
+  &:hover svg {
+    transform: translateX(-4px);
+  }
+
+  ${mediaqueries.tablet`
+    display: none;
+  `}
 `
 
 const LogoContainer = styled(Link)``
@@ -465,6 +507,21 @@ const CloseIcon = () => (
       fillRule="evenodd"
       clipRule="evenodd"
       d="M19 6.4L17.6 5L12 10.6L6.4 5L5 6.4L10.6 12L5 17.6L6.4 19L12 13.4L17.6 19L19 17.6L13.4 12L19 6.4Z"
+      fill="black"
+    />
+  </svg>
+)
+
+const BackChevron = () => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M15.41 16.09L10.83 11.5L15.41 6.91L14 5.5L8 11.5L14 17.5L15.41 16.09Z"
       fill="black"
     />
   </svg>

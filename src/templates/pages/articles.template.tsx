@@ -133,8 +133,9 @@ const ContentContainer = styled.div`
   justify-content: space-between;
 
   ${media.phablet`
-    height: calc(100vh - 160px);
+    height: calc(100vh - 90px);
     padding: 0;
+    top: -45px;
   `};
 `
 

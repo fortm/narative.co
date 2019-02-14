@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 import Layout from '@components/Layout'
 import { RichText } from '@components/Media'
@@ -11,13 +11,13 @@ import NavigationFooter from '@components/Navigation/Navigation.Footer'
 import mediaqueries from '@styles/media'
 import { debounce } from '@utils'
 
-import { IDetailPage } from '@typings'
-
 import Aside from '../../sections/article/Article.Aside'
 import ArticleHero from '../../sections/article/Article.Hero'
 import ArticleControls from '../../sections/article/Article.Controls'
 import ArticlePreview from '../../sections/article/Article.Preview'
 import ArticleMicrodata from '../../sections/article/Article.Microdata'
+
+import { IDetailPage } from '@typings'
 
 interface PostState {
   previousPath: string

@@ -239,7 +239,7 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
     }
 
     // Grab the two next articles in the list
-    let next = articles.slice(index + 1, index + 2)
+    let next = articles.slice(index + 1, index + 3)
 
     // If it's the last item in the list, there will be no articles. So grab the first 2
     if (next.length === 0) next = articles.slice(0, 2)

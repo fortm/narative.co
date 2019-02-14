@@ -14,12 +14,14 @@ const themes = {
         complete: '#000',
         bg: '#B5B8B9',
       },
+      preview: {
+        bg: '#fff',
+      },
     },
   },
   dark: {
     mode: {
-      gradient:
-        'linear-gradient(180deg, #111216 29.86%, rgba(66, 81, 98, 0.36) 272.57%)',
+      gradient: 'linear-gradient(180deg, #111216 30%, #1c2129 100%)',
       background: '#111216',
       text: '#fff',
       hover: '#E9DAAC',
@@ -28,6 +30,9 @@ const themes = {
       progress: {
         complete: '#fff',
         bg: '#7A8085',
+      },
+      preview: {
+        bg: '#1D2128',
       },
     },
   },
