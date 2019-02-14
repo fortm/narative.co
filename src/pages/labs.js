@@ -35,7 +35,8 @@ class IndexPage extends Component {
       feyBackground,
     } = this.props.data
     const { seo } = allContentfulHomePage.edges[0].node
-
+    const pageBackground =
+      'linear-gradient(rgb(9, 10, 12),rgb(17, 18, 22) 60%,#1a1e24 100%)'
     const products = [
       {
         cta: '#7A8085',
@@ -58,7 +59,7 @@ class IndexPage extends Component {
     ]
 
     return (
-      <Layout navOffset>
+      <Layout navOffset background={pageBackground}>
         <Fragment>
           <Helmet
             title={seo.title}
