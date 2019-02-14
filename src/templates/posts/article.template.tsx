@@ -146,8 +146,9 @@ export default withDarkMode(Article)
 
 const MobileControls = styled.div`
   position: relative;
-  padding: 50px 20px 0;
+  padding-top: 65px;
   background: ${p => p.theme.mode.background};
+  text-align: center;
 
   ${mediaqueries.desktop_up`
     display: none;
@@ -160,7 +161,7 @@ const Content = styled(RichText).attrs<{ textHighlightColor: string }>({})`
   background: ${p => p.theme.mode.background};
 
   ${mediaqueries.tablet`
-    padding: 80px 0 20px;
+    padding: 60px 0 0;
   `}
 `
 

@@ -49,8 +49,14 @@ class CareersPage extends Component {
                 <LeftContainer>
                   <TextContainer animation={animation} transitionDelay={300}>
                     <HiringPill>We're hiring</HiringPill>
-                    <Heading.h1>{contentful.heading}</Heading.h1>
-                    <MainText>{contentful.text.text}</MainText>
+                    <Heading.h1>
+                      Narative is a tight-knit team from across the world
+                      building great things for our clients and ourselves.
+                    </Heading.h1>
+                    <MainText>
+                      We’re enthusiastic about partnering with and creating
+                      brands worth believing in.
+                    </MainText>
                   </TextContainer>
                   <div />
                 </LeftContainer>
