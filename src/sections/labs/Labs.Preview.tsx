@@ -33,7 +33,6 @@ const Card = styled.div`
   box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   margin: 0 auto;
-  cursor: pointer;
 
   &:not(:last-child) {
     margin-bottom: 60px;
