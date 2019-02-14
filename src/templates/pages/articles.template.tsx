@@ -53,10 +53,12 @@ class ArticlesPage extends Component {
             image={seo.image.file.url}
             pathname={this.props.location.pathname}
           />
-          <Section>
+          <Section relative>
+            <LearnMore animation={animation}>Learn more</LearnMore>
             <ContentContainer>
               <div style={{ top: '-60px' }} />
               <TextContainer animation={animation}>
+                <HeaderPill>Articles</HeaderPill>
                 <Heading.h1>
                   Perspectives on technology, design and business from the team
                   at Narative.
@@ -118,7 +120,7 @@ const WhiteBackground = styled.div`
 const ContentContainer = styled.div`
   height: calc(100vh - 140px);
   min-height: 440px;
-  padding: 100px 0;
+  padding: 0 0 100px;
 
   a {
     color: #fff;
@@ -150,4 +152,39 @@ const MainText = styled.p`
   ${media.phablet`
     font-size: 2.2rem;
   `};
+`
+
+const HeaderPill = styled.div`
+  color: ${p => p.theme.colors.grey};
+  border: 1px solid ${p => p.theme.colors.grey};
+  border-radius: 3px;
+  padding: 0.1rem 1.2rem;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  font-weight: 500;
+  min-width: 100px;
+  text-align: center;
+`
+
+const LearnMore = styled.div`
+  position: absolute;
+  bottom: 100px;
+  left: 0;
+  color: ${p => p.theme.colors.grey};
+  font-weight: 600;
+  left: 12px;
+  font-size: 12px;
+  opacity: ${p => (p.animation ? 1 : 0)};
+  transform: rotate(90deg) translateX(${p => (p.animation ? '0' : '20px')});
+  transition: all 1s ease-out 0.5s;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    right: -120px;
+    height: 1px;
+    top: 9px;
+    background: ${p => p.theme.colors.grey};
+  }
 `

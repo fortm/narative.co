@@ -48,7 +48,7 @@ class CareersPage extends Component {
               <GridContainer>
                 <LeftContainer>
                   <TextContainer animation={animation} transitionDelay={300}>
-                    <HiringPill>We're hiring</HiringPill>
+                    <HeaderPill>We're hiring</HeaderPill>
                     <Heading.h1>
                       Narative is a tight-knit team from across the world
                       building great things for our clients and ourselves.
@@ -287,14 +287,16 @@ const TextContainer = styled.div`
   `};
 `
 
-const HiringPill = styled.div`
+const HeaderPill = styled.div`
   color: ${p => p.theme.colors.grey};
   border: 1px solid ${p => p.theme.colors.grey};
   border-radius: 3px;
   padding: 0.1rem 1.2rem;
   margin-bottom: 1.5rem;
   display: inline-block;
-  font-weight: 600;
+  font-weight: 500;
+  min-width: 100px;
+  text-align: center;
 `
 
 const MainText = styled.p`

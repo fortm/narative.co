@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import media from '@styles/media'
 
 const Section = styled.section`
+  position: ${p => (p.relative ? 'relative' : 'static')};
   width: 100%;
   max-width: 1220px;
   margin: 0 auto;
