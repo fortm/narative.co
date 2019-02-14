@@ -1,7 +1,7 @@
 import React from 'react'
 
 import styled, { css } from 'styled-components'
-import mediaqueries from '@styles/media'
+import mediaqueries, { media } from '@styles/media'
 
 import { IRichText } from '@typings'
 
@@ -144,22 +144,41 @@ const Content = styled.div`
 
   blockquote {
     position: relative;
-    text-align: left;
-    font-style: normal;
+    ${articleWidth};
     font-style: italic;
-    margin: 35px auto 65px;
-    width: 100%;
+    ${transitionColor};
+
 
     p {
-      font-family: ${p => p.theme.fontfamily.serif};
-      font-size: 36px;
-      color: #fff;
-      line-height: 1.1;
-      max-width: 780px;
-      margin: 0 auto;
-      color: ${p => p.theme.mode.text};
-      ${transitionColor};
+      position: relative;
+      padding-left: 30px;
+      margin: 30px auto 65px;
+
+      &::before {
+        content: '';
+        position: absolute;
+        width: 2px;
+        left: 0;
+        top: 8px;
+        bottom: 8px;
+        background: ${p => p.theme.mode.text};
+      }
+
+      ${mediaqueries.tablet`
+        margin: 15px auto 45px;
+      `}
     }
+  }
+
+  blockquote.pull__quote {
+    margin: 35px auto 65px;
+    line-height: 1.1;
+    max-width: 780px;
+    color: ${p => p.theme.mode.text};
+    font-family: ${p => p.theme.fontfamily.serif};
+    font-size: 36px;
+    font-style: italic;
+    ${transitionColor};
 
     ${mediaqueries.tablet`
       margin: 0 auto 35px;
@@ -255,7 +274,7 @@ const Content = styled.div`
     `}
   }
 
-  img.Image_Regular {
+  img.image__regular {
     width: 100%;
     max-width: ${imageWidths.regular};;
 
@@ -264,14 +283,14 @@ const Content = styled.div`
     `}
   }
 
-  img.Image_Large {
+  img.image__large {
     width: 100%;
     max-width: ${imageWidths.large};
   }
 
-  img.Image_Full {
+  img.image__full {
     width: 100%;
-    width: ${imageWidths.full};
+    max-width: ${imageWidths.full};
     border-radius: 0;
   }
 
