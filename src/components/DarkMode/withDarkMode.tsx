@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components'
 const themes = {
   light: {
     mode: {
-      gradient: 'linear-gradient(180deg, #fff 80%, #D9DBE0 100%)',
+      gradient: 'linear-gradient(180deg, #fff 66%, #D9DBE0 100%)',
       background: '#fff',
       text: '#000',
       hover: '#6166DC',

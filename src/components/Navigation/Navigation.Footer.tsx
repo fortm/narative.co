@@ -16,17 +16,19 @@ const footerLinks = [
 
 const Footer = ({ mode = 'dark' }: { mode?: string }) => {
   const color = mode === 'dark' ? '#fff' : '#000'
+  const transparentColor =
+    mode === 'dark' ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.25)'
 
   return (
     <Section>
       <Frame color={color}>
         <CopyRight>© {new Date().getFullYear()} Narative Studio Inc.</CopyRight>
-        <Left>
+        <Left color={color}>
           <LogoContainer to="/">
             <Logo fill={color} onlySymbol />
           </LogoContainer>
           <SocialIconsFooter>
-            <SocialLinks fill={color} />
+            <SocialLinks fill={transparentColor} />
           </SocialIconsFooter>
         </Left>
         <Right>
@@ -70,7 +72,6 @@ const Frame = styled.footer`
 
 const Left = styled.div`
   display: flex;
-  opacity: 0.25;
 
   ${mediaqueries.tablet`
     display: flex;
@@ -79,6 +80,14 @@ const Left = styled.div`
     margin-bottom: 60px;
     opacity: 1;
   `};
+
+  svg path {
+    transition: fill 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.9);
+  }
+
+  a:hover svg path {
+    fill: ${p => p.color};
+  }
 `
 
 const Right = styled.div`
@@ -98,6 +107,13 @@ const Right = styled.div`
 `
 
 const LogoContainer = styled(Link)`
+  opacity: 0.25;
+  transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.9);
+
+  &:hover {
+    opacity: 1;
+  }
+
   ${mediaqueries.tablet`
     display: none;
   `}
@@ -121,6 +137,11 @@ const FooterLink = styled(Link)`
   font-weight: 600;
   font-size: 18px;
   color: ${p => p.color};
+  transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.9);
+
+  &:hover {
+    opacity: 0.6;
+  }
 
   &:not(:last-child) {
     margin-right: 60px;
