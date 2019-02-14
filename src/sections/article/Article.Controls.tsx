@@ -82,6 +82,7 @@ const ToolTip = styled.div`
 `
 
 const IconWrapper = styled.button`
+  opacity: 0.25;
   position: relative;
   border-radius: 5px;
   width: 40px;
@@ -89,6 +90,11 @@ const IconWrapper = styled.button`
   align-items: center;
   justify-content: center;
   margin: 50px 0;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 1;
+  }
 
   ${mediaqueries.tablet`
     display: inline-flex;

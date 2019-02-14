@@ -76,6 +76,7 @@ export default Progress
 
 const Frame = memo(styled.div`
   position: relative;
+  opacity: 0.5;
 `)
 
 const Tracks = styled.div`
