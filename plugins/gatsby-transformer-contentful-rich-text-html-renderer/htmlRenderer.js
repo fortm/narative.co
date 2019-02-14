@@ -6,7 +6,6 @@ module.exports.HTMLRendererOpts = {
     [BLOCKS.EMBEDDED_ENTRY]: (node, next) => {
       if (!node.data.target.fields) return null
 
-      console.log(node.data.target)
       let { align, image, text } = node.data.target.fields
 
       if (text && text.en) {
