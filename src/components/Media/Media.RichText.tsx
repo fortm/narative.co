@@ -294,6 +294,10 @@ const Content = styled.div`
   img.image__large {
     width: 100%;
     max-width: ${imageWidths.large};
+
+    ${mediaqueries.tablet`
+      border-radius: 0;
+    `}
   }
 
   img.image__full {
