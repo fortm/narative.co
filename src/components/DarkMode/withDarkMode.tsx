@@ -40,7 +40,7 @@ const themes = {
 
 function withDarkMode(WrappedComponent) {
   return class DarkAndLight extends Component {
-    state = { mode: 'dark' }
+    state = { mode: 'light' }
 
     componentDidMount() {
       const mode = localStorage.getItem('mode')
