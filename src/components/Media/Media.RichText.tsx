@@ -1,19 +1,26 @@
 import React from 'react'
-
+import ReactHtmlParser from 'react-html-parser'
+import { TwitterTweetEmbed } from 'react-twitter-embed'
 import styled, { css } from 'styled-components'
-import mediaqueries, { media } from '@styles/media'
+
+import mediaqueries from '@styles/media'
 
 import { IRichText } from '@typings'
 
+// Specifically handling Twitter embeds
+const transform = node => {
+  if (node.name === 'twitter' && node.attribs.twitterid) {
+    return <TwitterTweetEmbed tweetId={node.attribs.twitterid} />
+  }
+}
+
 const RichText: React.SFC<IRichText> = ({ content, contentRef, ...props }) => {
+  const html = ReactHtmlParser(content, { transform })
+
   return (
-    <Content
-      ref={contentRef}
-      dangerouslySetInnerHTML={{
-        __html: content,
-      }}
-      {...props}
-    />
+    <Content ref={contentRef} {...props}>
+      {html}
+    </Content>
   )
 }
 
@@ -332,6 +339,13 @@ const Content = styled.div`
     height: 1px;
     margin: 35px auto;
     opacity: 0.33;
+  }
+
+  .twitter-tweet {
+    text-align: center;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 540px !important;
   }
 
   hr {

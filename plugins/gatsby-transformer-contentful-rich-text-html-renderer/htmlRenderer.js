@@ -6,15 +6,22 @@ module.exports.HTMLRendererOpts = {
     [BLOCKS.EMBEDDED_ENTRY]: (node, next) => {
       if (!node.data.target.fields) return null
 
-      let { align, image, text } = node.data.target.fields
+      let { align, image, text, id } = node.data.target.fields
+      const contentfulId = node.data.target.sys.contentType.sys.id
 
-      if (text && text.en) {
+      if (id && id.en && contentfulId === 'embed') {
+        return `
+          <twitter twitterId="${id.en}"></twitter>
+        `
+      }
+
+      if (text && text.en && contentfulId === 'pullQuote') {
         return `
           <blockquote class="pull__quote">${text.en}</blockquote>
         `
       }
 
-      if (image && image.en) {
+      if (image && image.en && contentfulId === 'articleImage') {
         let { file, title, description } = image.en.fields
         // Sometimes the file and filename exist outside of a locale (I don't know why! Previews are an example)
         // So here we just reprogram file to either be _just_ file or the en locale version of file
