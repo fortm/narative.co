@@ -86,10 +86,11 @@ const IconWrapper = styled.button`
   position: relative;
   border-radius: 5px;
   width: 40px;
+  height: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 50px 0;
+  margin: 44px 0;
   transition: opacity 0.3s ease;
 
   &:hover {
@@ -185,7 +186,6 @@ const MoonOrSun = styled.div`
       -15px 15px 0 ${p => p.theme.mode.text},
       15px -15px 0 ${p => p.theme.mode.text},
       -15px -15px 0 ${p => p.theme.mode.text};
-    transform: scale(0.43);
     transform: scale(${p => (p.isDarkMode ? 1 : 0)});
     transition: all 0.35s ease;
 
