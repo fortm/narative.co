@@ -7,7 +7,7 @@ import mediaqueries from '@styles/media'
 
 import { IRichText } from '@typings'
 
-// Specifically handling Twitter embeds
+// Specifically handling Twitter embeds that get passed from our htmls htmlRenderer
 const transform = node => {
   if (node.name === 'twitter' && node.attribs.twitterid) {
     return <TwitterTweetEmbed tweetId={node.attribs.twitterid} />
