@@ -182,6 +182,7 @@ const Content = styled.div`
 
     ${mediaqueries.tablet`
       margin: 0 auto 35px;
+      padding: 20px;
     `}
   }
 
