@@ -48,7 +48,7 @@ class CareersPage extends Component {
               <GridContainer>
                 <LeftContainer>
                   <TextContainer animation={animation} transitionDelay={300}>
-                    <HeaderPill>We're hiring</HeaderPill>
+                    <HeaderPill>Careers</HeaderPill>
                     <Heading.h1>
                       Narative is a tight-knit team from across the world
                       building great things for our clients and ourselves.
