@@ -55,7 +55,14 @@ class Layout extends Component<LayoutProps, { animation: string }> {
   })
 
   closeMobileNav = () => {
-    this.setState({ active: false, mask: false })
+    this.setState({ active: false, mobileNavOffset: 0, mask: false })
+  }
+
+  openMobilenav = () => {
+    const { height } = getWindowDimensions()
+    const mobileNavOffset = height < 700 ? 420 : 576
+
+    this.setState({ active: true, mobileNavOffset, mask: true })
   }
 
   openMobilenav = () => {
@@ -94,8 +101,8 @@ class Layout extends Component<LayoutProps, { animation: string }> {
               onClick={active ? this.closeMobileNav : () => {}}
             >
               <ToggleContainer onClick={this.openMobilenav}>
-                <LeftToggle active={active} />
-                <RightToggle active={active} />
+                <LeftToggle active={active} theme={nav.theme} />
+                <RightToggle active={active} theme={nav.theme} />
               </ToggleContainer>
               <Navigation nav={nav} />
               <Mask mask={mask} />
@@ -184,7 +191,7 @@ const Toggle = styled.span`
   position: absolute;
   right: 10px;
   height: 1px;
-  background: #fff;
+  background: ${p => (p.theme === 'dark' ? '#000' : '#fff')};
   transition: transform 0.4s cubic-bezier(0.075, 0.82, 0.165, 1),
     width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 `
