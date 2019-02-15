@@ -61,14 +61,9 @@ class Navigation extends Component {
 
   componentDidMount() {
     const previousPath = localStorage.getItem('previousPath')
-    const autoOpen = localStorage.getItem('autoOpen')
     this.setState({ previousPath })
 
     window.addEventListener('keydown', this.handleEscKeyPress)
-
-    setTimeout(() => {
-      this.handleToggleClick()
-    }, 4000)
   }
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
@@ -130,8 +125,10 @@ class Navigation extends Component {
   }
 
   handleOutsideClick = () => {
-    this.handleCloseAnimation()
-    this.setState({ active: false })
+    if (this.state.active) {
+      this.handleCloseAnimation()
+      this.setState({ active: false })
+    }
   }
 
   navigateOut = (event, path) => {
