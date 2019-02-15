@@ -66,7 +66,7 @@ class ContactPage extends Component<{}, { animation: string }> {
           <FixedElement>
             <Section>
               <PhoneFormContainer>
-                <TextContainer animation={animation} transitionDelay={300}>
+                <TextContainer animation={animation}>
                   <MainText>
                     <HighlightText>No time to fill a form?</HighlightText> No
                     problem, leave us your phone number and we'll call you back
