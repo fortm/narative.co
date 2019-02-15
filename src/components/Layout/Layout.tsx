@@ -69,7 +69,7 @@ class Layout extends Component<LayoutProps, { animation: string }> {
     const { height } = getWindowDimensions()
     const mobileNavOffset = height < 700 ? 420 : 576
 
-    if (window.scrollY < -50) {
+    if (window.scrollY < -85) {
       this.setState({ active: true, mobileNavOffset, mask: true })
     }
   }
