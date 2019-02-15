@@ -114,7 +114,7 @@ class LabsPage extends Component<{}, { animate: string }> {
             </ContentContainer>
             <div />
           </Section>
-          <Section>
+          <Section narrow>
             {products.map(product => (
               <LabsPreview key={product.excerpt} product={product} />
             ))}

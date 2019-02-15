@@ -84,6 +84,7 @@ class Layout extends Component<LayoutProps, { animation: string }> {
   render() {
     const { background, children, nav } = this.props
     const { active, animation, mask, mobileNavOffset } = this.state
+    const navTheme = nav.theme
 
     return (
       <ThemeProvider theme={theme}>
@@ -99,13 +100,14 @@ class Layout extends Component<LayoutProps, { animation: string }> {
               navOffset={nav.offset}
               mobileNavOffset={mobileNavOffset}
               onClick={active ? this.closeMobileNav : () => {}}
+              theme={navTheme}
             >
               <ToggleContainer onClick={this.openMobilenav}>
-                <LeftToggle active={active} theme={nav.theme} />
-                <RightToggle active={active} theme={nav.theme} />
+                <LeftToggle active={active} theme={navTheme} />
+                <RightToggle active={active} theme={navTheme} />
               </ToggleContainer>
               <Navigation nav={nav} />
-              <Mask mask={mask} />
+              <Mask mask={mask} theme={navTheme} />
               {children}
             </WebContainer>
           </Swipeable>
@@ -126,6 +128,7 @@ const WebContainer = styled.div`
     transform: translateY(${p => (p.active ? p.mobileNavOffset : 0)}px);
     transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
     will-change: transform;
+    width: 100vw;
   `}
 
   ${p =>
@@ -160,7 +163,7 @@ const WebContainer = styled.div`
     left: 0;
     width: 100%;
     height: 20px;
-    background: #08080b;
+    background: ${p => (p.theme !== 'dark' ? '#08080b' : '#fff')};
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     box-shadow: 0px -20px 40px rgba(0, 0, 0, 0.2);
@@ -223,7 +226,7 @@ const Mask = styled.div`
     top: 0;
     left: 0;
     width: 100%;
-    background: #08080b;
+    background: ${p => (p.theme !== 'dark' ? '#08080b' : '#fff')};
     z-index: 9; 
   `}
 `
