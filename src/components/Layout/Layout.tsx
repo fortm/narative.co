@@ -58,18 +58,20 @@ class Layout extends Component<LayoutProps, { animation: string }> {
     this.setState({ active: false, mobileNavOffset: 0, mask: false })
   }
 
-  openMobilenav = () => {
+  openMobileNav = () => {
     const { height } = getWindowDimensions()
     const mobileNavOffset = height < 700 ? 420 : 576
 
     this.setState({ active: true, mobileNavOffset, mask: true })
   }
 
-  openMobilenav = () => {
+  openMobileNavFromSwip = () => {
     const { height } = getWindowDimensions()
     const mobileNavOffset = height < 700 ? 420 : 576
 
-    this.setState({ active: true, mobileNavOffset, mask: true })
+    if (window.scrollY < -50) {
+      this.setState({ active: true, mobileNavOffset, mask: true })
+    }
   }
 
   navigateOut = (event, path) => {
@@ -92,7 +94,10 @@ class Layout extends Component<LayoutProps, { animation: string }> {
           <GlobalStyles />
           <NavigationMobile navigateOut={this.navigateOut} />
 
-          <Swipeable onSwipedUp={this.closeMobileNav}>
+          <Swipeable
+            onSwipedUp={this.closeMobileNav}
+            onSwipedDown={this.openMobileNavFromSwip}
+          >
             <WebContainer
               active={active}
               animation={animation}
@@ -102,7 +107,7 @@ class Layout extends Component<LayoutProps, { animation: string }> {
               onClick={active ? this.closeMobileNav : () => {}}
               theme={navTheme}
             >
-              <ToggleContainer onClick={this.openMobilenav}>
+              <ToggleContainer onClick={this.openMobileNav}>
                 <LeftToggle active={active} theme={navTheme} />
                 <RightToggle active={active} theme={navTheme} />
               </ToggleContainer>
