@@ -130,7 +130,7 @@ const WebContainer = styled.div`
   min-height: 100vh;
 
   ${mediaqueries.tablet`
-    transform: translateY(${p => (p.active ? p.mobileNavOffset : 0)}px);
+    ${p => p.active && `transform: translateY(${p.mobileNavOffset})`};
     overflow: ${p => (p.active ? 'visible' : 'hidden')});
     transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
     will-change: transform;
