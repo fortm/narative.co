@@ -124,6 +124,10 @@ const Content = styled.div`
       color: ${p => p.theme.mode.links};
       opacity: 0.85;
     }
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   figure {

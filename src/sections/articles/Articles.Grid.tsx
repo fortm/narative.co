@@ -84,7 +84,7 @@ const Testimonial = () => {
     <TestimonialGrid>
       <HopperLogo />
       <div>
-        <Blockquote to="/articles/sample-article">
+        <Blockquote to="/articles/building-the-new-hopper-com">
           “Working with Narative on the new Hopper.com has been an absolute
           pleasure. Not only is the team insanely smart and efficient, they’re
           incredible human beings who truly care about the work they touch.”
@@ -93,7 +93,7 @@ const Testimonial = () => {
           text="Read more"
           color="#000"
           as={Link}
-          to="/articles/sample-article"
+          to="/articles/building-the-new-hopper-com"
         />
       </div>
     </TestimonialGrid>
