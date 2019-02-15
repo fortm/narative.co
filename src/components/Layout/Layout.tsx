@@ -96,7 +96,7 @@ class Layout extends Component<LayoutProps, { animation: string }> {
 
           <Swipeable
             onSwipedUp={this.closeMobileNav}
-            onSwippingDown={this.openMobileNavFromSwipe}
+            onSwiping={this.openMobileNavFromSwipe}
           >
             <WebContainer
               active={active}
