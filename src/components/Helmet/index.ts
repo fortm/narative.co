@@ -1,1 +1,1 @@
-export { default } from './Helmet'
+export { default } from '@components/Helmet/Helmet'

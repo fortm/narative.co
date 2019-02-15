@@ -1,1 +1,1 @@
-export { default } from './IntersectionObserver'
+export { default } from '@components/IntersectionObserver/IntersectionObserver'

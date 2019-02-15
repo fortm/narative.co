@@ -1,1 +1,1 @@
-export { default } from './HorizontalScroll'
+export { default } from '@components/HorizontalScroll/HorizontalScroll'

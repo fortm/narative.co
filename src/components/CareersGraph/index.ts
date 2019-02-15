@@ -1,1 +1,1 @@
-export { default } from './CareersGraph'
+export { default } from '@components/CareersGraph/CareersGraph'

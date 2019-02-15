@@ -1,1 +1,1 @@
-export { default } from './CareersImages'
+export { default } from '@components/CareersImages/CareersImages'

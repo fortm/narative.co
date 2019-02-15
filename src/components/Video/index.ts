@@ -1,1 +1,1 @@
-export { default } from './Video'
+export { default } from '@components/Video/Video'
