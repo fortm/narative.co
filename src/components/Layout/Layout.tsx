@@ -65,7 +65,7 @@ class Layout extends Component<LayoutProps, { animation: string }> {
     this.setState({ active: true, mobileNavOffset, mask: true })
   }
 
-  openMobileNavFromSwip = () => {
+  openMobileNavFromSwipe = () => {
     const { height } = getWindowDimensions()
     const mobileNavOffset = height < 700 ? 420 : 576
 
@@ -96,7 +96,7 @@ class Layout extends Component<LayoutProps, { animation: string }> {
 
           <Swipeable
             onSwipedUp={this.closeMobileNav}
-            onSwipedDown={this.openMobileNavFromSwip}
+            onSwippingDown={this.openMobileNavFromSwipe}
           >
             <WebContainer
               active={active}
