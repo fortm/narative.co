@@ -126,6 +126,7 @@ const WebContainer = styled.div`
 
   ${mediaqueries.tablet`
     transform: translateY(${p => (p.active ? p.mobileNavOffset : 0)}px);
+    overflow: ${p => (p.active ? 'visible' : 'hidden')});
     transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
     will-change: transform;
     width: 100vw;
@@ -163,7 +164,7 @@ const WebContainer = styled.div`
     left: 0;
     width: 100%;
     height: 20px;
-    background: ${p => (p.theme !== 'dark' ? '#08080b' : '#fff')};
+    background: ${p => (p.theme !== 'dark' ? '#08080b' : '#fafafa')};
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     box-shadow: 0px -20px 40px rgba(0, 0, 0, 0.2);
@@ -194,7 +195,7 @@ const Toggle = styled.span`
   position: absolute;
   right: 10px;
   height: 1px;
-  background: ${p => (p.theme === 'dark' ? '#000' : '#fff')};
+  background: ${p => (p.theme === 'dark' ? '#000' : '#fafafa')};
   transition: transform 0.4s cubic-bezier(0.075, 0.82, 0.165, 1),
     width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 `
