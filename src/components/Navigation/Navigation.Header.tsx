@@ -52,13 +52,23 @@ const themes = {
 class Navigation extends Component {
   leftToggle = React.createRef()
 
-  state = { active: false, previousPath: '', showPreviousPath: false }
+  state = {
+    active: false,
+    previousPath: '',
+    showPreviousPath: false,
+    autoOpen: false,
+  }
 
   componentDidMount() {
     const previousPath = localStorage.getItem('previousPath')
+    const autoOpen = localStorage.getItem('autoOpen')
     this.setState({ previousPath })
 
     window.addEventListener('keydown', this.handleEscKeyPress)
+
+    setTimeout(() => {
+      this.handleToggleClick()
+    }, 4000)
   }
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
@@ -91,31 +101,32 @@ class Navigation extends Component {
   }
 
   handleToggleClick = () => {
-    this.setState({
-      active: !this.state.active,
-    })
-
-    if (!isMobileOnly) {
-      if (!this.state.active) {
-        this.leftToggle.current.animate(animateIn, {
-          duration: 900,
-          fill: 'both',
-          easing: 'cubic-bezier(0.075, 0.82, 0.165, 1)',
-        })
-      } else {
-        this.handleCloseAnimation()
+    this.setState(
+      {
+        active: !this.state.active,
+      },
+      () => {
+        if (!isMobileOnly) {
+          if (this.state.active) {
+            this.leftToggle.current.animate(animateIn, {
+              duration: 900,
+              fill: 'both',
+              easing: 'cubic-bezier(0.075, 0.82, 0.165, 1)',
+            })
+          } else {
+            this.handleCloseAnimation()
+          }
+        }
       }
-    }
+    )
   }
 
   handleCloseAnimation = () => {
-    if (this.state.active) {
-      this.leftToggle.current.animate(animateOut, {
-        duration: 250,
-        fill: 'both',
-        easing: 'cubic-bezier(0.075, 0.82, 0.165, 1)',
-      })
-    }
+    this.leftToggle.current.animate(animateOut, {
+      duration: 250,
+      fill: 'both',
+      easing: 'cubic-bezier(0.075, 0.82, 0.165, 1)',
+    })
   }
 
   handleOutsideClick = () => {
@@ -135,10 +146,12 @@ class Navigation extends Component {
   }
 
   render() {
-    const { active, previousPath, showPreviousPath } = this.state
+    const { active, autoOpen, previousPath, showPreviousPath } = this.state
     const { nav } = this.props
     const fill = nav.theme === 'dark' ? '#000' : '#fff'
     const theme = themes[nav.theme]
+
+    const isActive = active || autoOpen
 
     return (
       <ThemeProvider theme={theme}>
@@ -156,11 +169,14 @@ class Navigation extends Component {
                 </LogoContainer>
                 <Nav>
                   <DesktopNavList>
-                    <NavItems active={active} handleClick={this.navigateOut} />
+                    <NavItems
+                      active={isActive}
+                      handleClick={this.navigateOut}
+                    />
                   </DesktopNavList>
                   <ToggleContainer onClick={this.handleToggleClick}>
-                    <LeftToggle active={active} ref={this.leftToggle} />
-                    <RightToggle active={active} />
+                    <LeftToggle active={isActive} ref={this.leftToggle} />
+                    <RightToggle active={isActive} />
                   </ToggleContainer>
                 </Nav>
               </NavContainer>
@@ -170,8 +186,8 @@ class Navigation extends Component {
             onSwipedUp={this.handleOutsideClick}
             onSwipedDown={this.handleOutsideClick}
           >
-            <MobileNavListContainer active={active}>
-              <MobileNavControlsContainer active={active}>
+            <MobileNavListContainer active={isActive}>
+              <MobileNavControlsContainer active={isActive}>
                 <LogoContainer to="/">
                   <Logo onlySymbol fill="black" />
                 </LogoContainer>
@@ -180,10 +196,10 @@ class Navigation extends Component {
                 </button>
               </MobileNavControlsContainer>
               <MobileNavCenter>
-                <MobileNavList active={active}>
-                  <NavItems active={active} handleClick={this.navigateOut} />
+                <MobileNavList active={isActive}>
+                  <NavItems active={isActive} handleClick={this.navigateOut} />
                 </MobileNavList>
-                <SocialLinksContainer active={active}>
+                <SocialLinksContainer active={isActive}>
                   <SocialLinks fill="black" />
                 </SocialLinksContainer>
               </MobileNavCenter>
