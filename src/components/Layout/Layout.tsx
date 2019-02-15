@@ -65,15 +65,6 @@ class Layout extends Component<LayoutProps, { animation: string }> {
     this.setState({ active: true, mobileNavOffset, mask: true })
   }
 
-  openMobileNavFromSwipe = () => {
-    const { height } = getWindowDimensions()
-    const mobileNavOffset = height < 700 ? 420 : 576
-
-    if (window.scrollY < -85) {
-      this.setState({ active: true, mobileNavOffset, mask: true })
-    }
-  }
-
   navigateOut = (event, path) => {
     event.preventDefault()
     this.closeMobileNav()
@@ -94,10 +85,7 @@ class Layout extends Component<LayoutProps, { animation: string }> {
           <GlobalStyles />
           <NavigationMobile navigateOut={this.navigateOut} />
 
-          <Swipeable
-            onSwipedUp={this.closeMobileNav}
-            onSwiping={this.openMobileNavFromSwipe}
-          >
+          <Swipeable onSwipedUp={this.closeMobileNav}>
             <WebContainer
               active={active}
               animation={animation}
@@ -130,7 +118,7 @@ const WebContainer = styled.div`
   min-height: 100vh;
 
   ${mediaqueries.tablet`
-    ${p => p.active && `transform: translateY(${p.mobileNavOffset})`};
+    transform: translateY(${p => (p.active ? p.mobileNavOffset : 0)}px);
     overflow: ${p => (p.active ? 'visible' : 'hidden')});
     transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
     will-change: transform;
