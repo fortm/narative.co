@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import { navigate } from 'gatsby'
-import Swipeable from 'react-swipeable'
 
 import Navigation from '@components/Navigation/Navigation.Header'
 import NavigationMobile from '@components/Navigation/Navigation.Mobile.Header'
@@ -85,25 +84,23 @@ class Layout extends Component<LayoutProps, { animation: string }> {
           <GlobalStyles />
           <NavigationMobile navigateOut={this.navigateOut} />
 
-          <Swipeable onSwipedUp={this.closeMobileNav}>
-            <WebContainer
-              active={active}
-              animation={animation}
-              background={background}
-              navOffset={nav.offset}
-              mobileNavOffset={mobileNavOffset}
-              onClick={active ? this.closeMobileNav : () => {}}
-              theme={navTheme}
-            >
-              <ToggleContainer onClick={this.openMobileNav}>
-                <LeftToggle active={active} theme={navTheme} />
-                <RightToggle active={active} theme={navTheme} />
-              </ToggleContainer>
-              <Navigation nav={nav} />
-              <Mask mask={mask} theme={navTheme} />
-              {children}
-            </WebContainer>
-          </Swipeable>
+          <WebContainer
+            active={active}
+            animation={animation}
+            background={background}
+            navOffset={nav.offset}
+            mobileNavOffset={mobileNavOffset}
+            onClick={active ? this.closeMobileNav : () => {}}
+            theme={navTheme}
+          >
+            <ToggleContainer onClick={this.openMobileNav}>
+              <LeftToggle active={active} theme={navTheme} />
+              <RightToggle active={active} theme={navTheme} />
+            </ToggleContainer>
+            <Navigation nav={nav} />
+            <Mask mask={mask} theme={navTheme} />
+            {children}
+          </WebContainer>
         </>
       </ThemeProvider>
     )
