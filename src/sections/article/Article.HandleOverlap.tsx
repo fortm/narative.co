@@ -17,12 +17,12 @@ class HandleOverlap extends Component<OverlapProps, OverlapState> {
 
   componentDidMount() {
     window.addEventListener('scroll', this.onScroll)
-    window.addEventListener('onresize', this.onScroll)
+    window.addEventListener('resize', this.onScroll)
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.onScroll)
-    window.removeEventListener('onresize', this.onScroll)
+    window.removeEventListener('resize', this.onScroll)
   }
 
   onScroll = () => {

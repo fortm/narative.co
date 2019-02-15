@@ -1,9 +1,19 @@
 import React, { Component } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
+import { navigate } from 'gatsby'
+import Swipeable from 'react-swipeable'
 
 import Navigation from '@components/Navigation/Navigation.Header'
+import NavigationMobile from '@components/Navigation/Navigation.Mobile.Header'
+
 import { GlobalStyles, media, theme } from '@styles'
-import { startAnimation } from '@utils'
+import mediaqueries from '@styles/media'
+import {
+  startAnimation,
+  debounce,
+  getBreakpointFromTheme,
+  getWindowDimensions,
+} from '@utils'
 
 interface LayoutProps {
   background?: string
@@ -14,10 +24,102 @@ interface LayoutProps {
   }
 }
 
+class Layout extends Component<LayoutProps, { animation: string }> {
+  static defaultProps = {
+    nav: {
+      theme: 'light',
+      offset: true,
+      fixed: true,
+    },
+  }
+
+  state = { animation: '', active: false, mobileNavOffset: 576, mask: false }
+
+  componentDidMount() {
+    startAnimation(() => this.setState({ animation: 'start' }))
+
+    window.addEventListener('resize', this.handleResize)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize)
+  }
+
+  handleResize = debounce(() => {
+    const { width } = getWindowDimensions()
+    const tablet = getBreakpointFromTheme('tablet')
+
+    if (width > tablet && this.state.active) {
+      this.closeMobileNav()
+    }
+  })
+
+  closeMobileNav = () => {
+    this.setState({ active: false, mask: false })
+  }
+
+  openMobilenav = () => {
+    const { height } = getWindowDimensions()
+    const mobileNavOffset = height < 700 ? 420 : 576
+
+    this.setState({ active: true, mobileNavOffset, mask: true })
+  }
+
+  navigateOut = (event, path) => {
+    event.preventDefault()
+    this.closeMobileNav()
+
+    setTimeout(() => {
+      navigate(path)
+    }, 500)
+  }
+
+  render() {
+    const { background, children, nav } = this.props
+    const { active, animation, mask, mobileNavOffset } = this.state
+
+    return (
+      <ThemeProvider theme={theme}>
+        <>
+          <GlobalStyles />
+          <NavigationMobile navigateOut={this.navigateOut} />
+
+          <Swipeable onSwipedUp={this.closeMobileNav}>
+            <WebContainer
+              active={active}
+              animation={animation}
+              background={background}
+              navOffset={nav.offset}
+              mobileNavOffset={mobileNavOffset}
+              onClick={active ? this.closeMobileNav : () => {}}
+            >
+              <ToggleContainer onClick={this.openMobilenav}>
+                <LeftToggle active={active} />
+                <RightToggle active={active} />
+              </ToggleContainer>
+              <Navigation nav={nav} />
+              <Mask mask={mask} />
+              {children}
+            </WebContainer>
+          </Swipeable>
+        </>
+      </ThemeProvider>
+    )
+  }
+}
+
+export default Layout
+
 const WebContainer = styled.div`
-  position: relative;
+  position: ${p => (p.active ? 'fixed' : 'relative')};
   background: linear-gradient(180deg, #08080b 0%, #0b0b0e 44.18%, #111216 100%);
   min-height: 100vh;
+
+  ${mediaqueries.tablet`
+    transform: translateY(${p => (p.active ? p.mobileNavOffset : 0)}px);
+    transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
+    will-change: transform;
+  `}
 
   ${p =>
     p.navOffset &&
@@ -44,6 +146,19 @@ const WebContainer = styled.div`
     `};
   }
 
+  &::after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: #08080b;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0px -20px 40px rgba(0, 0, 0, 0.2);
+  }
+
   ${p =>
     p.navOffset &&
     media.tablet`
@@ -51,40 +166,57 @@ const WebContainer = styled.div`
   `};
 `
 
-class Layout extends Component<LayoutProps, { animation: string }> {
-  static defaultProps = {
-    nav: {
-      theme: 'light',
-      offset: true,
-      fixed: true,
-    },
-  }
+const ToggleContainer = styled.button`
+  position: absolute;
+  z-index: 999;
+  width: 30px;
+  height: 30px;
+  top: 50px;
+  right: 30px;
 
-  state = { animation: '' }
+  ${mediaqueries.desktop_up`
+    display: none;
+    visibility: hidden;
+  `}
+`
 
-  componentDidMount() {
-    startAnimation(() => this.setState({ animation: 'start' }))
-  }
+const Toggle = styled.span`
+  position: absolute;
+  right: 10px;
+  height: 1px;
+  background: #fff;
+  transition: transform 0.4s cubic-bezier(0.075, 0.82, 0.165, 1),
+    width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+`
 
-  render() {
-    const { background, children, nav } = this.props
+const LeftToggle = styled(Toggle)`
+  top: 15px;
+  width: ${p => (p.active ? '20px' : '15px')};
+  transform: ${p =>
+    p.active ? 'translate3d(0px, -2px, 0) rotate(45deg)' : 'initial'};
+`
 
-    return (
-      <ThemeProvider theme={theme}>
-        <>
-          <GlobalStyles />
-          <WebContainer
-            animation={this.state.animation}
-            background={background}
-            navOffset={nav.offset}
-          >
-            <Navigation nav={nav} />
-            {children}
-          </WebContainer>
-        </>
-      </ThemeProvider>
-    )
-  }
-}
+const RightToggle = styled(Toggle)`
+  width: 20px;
+  top: 9px;
+  transform: initial;
+  transform: ${p =>
+    p.active ? 'translate3d(0px, 4px, 0) rotate(-45deg)' : 'initial'};
+`
 
-export default Layout
+const Mask = styled.div`
+  opacity: 0;
+  opacity: ${p => (p.mask ? 1 : 0)};
+  transition: opacity 0.3s linear 0.6s;
+  pointer-events: none;
+
+  ${media.tablet`
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #08080b;
+    z-index: 9; 
+  `}
+`

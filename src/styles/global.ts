@@ -91,7 +91,7 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 1.6rem;
     margin: 0;
     color: ${theme.colors.black};
-    background: linear-gradient(240.5deg, #111216 0%, #000000 82.84%);
+    background: #1D2128;
     font-weight: 400;
   }
 

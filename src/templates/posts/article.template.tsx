@@ -46,12 +46,12 @@ class Article extends Component<ArticleProps, PostState> {
   componentDidMount() {
     this.calculateBodySize()
 
-    window.addEventListener('onresize', this.calculateBodySize)
+    window.addEventListener('resize', this.calculateBodySize)
   }
 
   componentWillUnmount() {
     if (typeof window !== 'undefined') {
-      window.removeEventListener('onresize', this.calculateBodySize)
+      window.removeEventListener('resize', this.calculateBodySize)
     }
   }
 

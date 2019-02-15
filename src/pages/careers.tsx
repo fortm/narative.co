@@ -510,6 +510,7 @@ const WhatWeDoContent = styled.div`
 
 const Content = styled.div`
   position: relative;
+  width: 100vw;
 `
 
 const MobileHero = styled.div`
@@ -518,7 +519,7 @@ const MobileHero = styled.div`
     left: 0;
     top: 120px;
     right: 0;
-    width: 100%;
+    width: 100vw;
   `};
 `
 
@@ -532,7 +533,7 @@ const MobileBody = styled.div`
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     overflow: hidden;
-    z-index: 10;
+    z-index: 8;
 
     &::before {
       content: '';

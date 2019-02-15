@@ -261,7 +261,7 @@ const GalleryControl = styled.div`
   height: 4rem;
   width: 4rem;
   border-radius: 50%;
-  z-index: 10;
+  z-index: 9;
   background: #fff;
   cursor: ${p => (p.disabled ? 'initial' : 'pointer')};
 

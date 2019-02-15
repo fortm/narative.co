@@ -17,13 +17,13 @@ class Progress extends Component<IProgress, { value: number }> {
 
   componentDidMount() {
     window.addEventListener('scroll', this.onScroll)
-    window.addEventListener('onresize', this.onScroll)
+    window.addEventListener('resize', this.onScroll)
   }
 
   componentWillUnmount() {
     if (typeof window !== 'undefined') {
       window.removeEventListener('scroll', this.onScroll)
-      window.removeEventListener('onresize', this.onScroll)
+      window.removeEventListener('resize', this.onScroll)
     }
   }
 

@@ -1,5 +1,6 @@
 import { apiCall } from '@utils/api'
 import { startAnimation } from '@utils/startAnimation'
+import { theme } from '@styles'
 
 export { apiCall, startAnimation }
 
@@ -34,5 +35,41 @@ export const debounce = (fn: () => any, time = 100) => {
 
     clearTimeout(timeout)
     timeout = setTimeout(functionCall, time)
+  }
+}
+
+/**
+ * Extract from the theme a specific breakpoint size
+ *
+ * @param {string} name Name of the breakpoint we wish to retrieve
+ *                      All options can be found in styles/theme
+ *
+ * @example
+ *    getBreakpointFromTheme('tablet') 768
+ */
+export const getBreakpointFromTheme: (arg0: string) => number = name =>
+  theme.breakpoints.find(([label, _]) => label === name)![1]
+
+export const getWindowDimensions = (): { height: number; width: number } => {
+  if (typeof window !== 'undefined') {
+    const width =
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth
+
+    const height =
+      window.innerHeight ||
+      document.documentElement.clientHeight ||
+      document.body.clientHeight
+
+    return {
+      height,
+      width,
+    }
+  }
+
+  return {
+    width: 0,
+    height: 0,
   }
 }

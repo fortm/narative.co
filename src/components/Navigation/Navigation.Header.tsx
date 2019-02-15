@@ -183,7 +183,7 @@ class Navigation extends Component {
             onSwipedUp={this.handleOutsideClick}
             onSwipedDown={this.handleOutsideClick}
           >
-            <MobileNavListContainer active={isActive}>
+            {/* <MobileNavListContainer active={isActive}>
               <MobileNavControlsContainer active={isActive}>
                 <LogoContainer to="/">
                   <Logo onlySymbol fill="black" />
@@ -200,7 +200,7 @@ class Navigation extends Component {
                   <SocialLinks fill="black" />
                 </SocialLinksContainer>
               </MobileNavCenter>
-            </MobileNavListContainer>
+            </MobileNavListContainer> */}
           </Swipeable>
         </OutsideClickHandler>
       </ThemeProvider>
@@ -308,6 +308,10 @@ const Toggle = styled.span`
   background: ${p => p.theme.color};
   transition: transform 0.4s cubic-bezier(0.075, 0.82, 0.165, 1),
     width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+  ${mediaqueries.tablet`
+      display: none;
+    `}
 `
 
 const LeftToggle = styled(Toggle)`

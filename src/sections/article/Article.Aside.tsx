@@ -20,13 +20,13 @@ class Aside extends Component<AsideProps, { value: number }> {
 
   componentDidMount() {
     window.addEventListener('scroll', this.onScroll)
-    window.addEventListener('onresize', this.onScroll)
+    window.addEventListener('resize', this.onScroll)
   }
 
   componentWillUnmount() {
     if (typeof window !== 'undefined') {
       window.removeEventListener('scroll', this.onScroll)
-      window.removeEventListener('onresize', this.onScroll)
+      window.removeEventListener('resize', this.onScroll)
     }
   }
 
@@ -55,6 +55,7 @@ class Aside extends Component<AsideProps, { value: number }> {
     const { value } = this.state
     const show = value > 0 && value < 101
 
+    console.log(show)
     return (
       <Frame right={right}>
         <Align show={show}>
