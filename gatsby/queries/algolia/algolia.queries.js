@@ -84,15 +84,6 @@ const publicationField = `
   }
 `
 
-// todo : documentation
-const pressNode = `
-  ${basicNode}
-  ${publicationField}
-  linkToPress
-  publicationDate
-  featured
-`
-
 /**
  * Get articles
  *
@@ -103,146 +94,11 @@ const pressNode = `
 module.exports.articles = locale => `
   articlesPosts: allContentfulArticle(
     filter: { node_locale: {eq: "${locale}"}, title: {ne: null} },
-    sort: {fields: [fields___postDate], order: DESC}
+    sort: {fields: [fields___publicationDate], order: DESC}
   ) {
     edges {
       node {
         ${modernPostNode}
-      }
-    }
-  }
-  
-  articlesLegacy: allContentfulLegacyArticle(
-    filter: { type: {eq: "Article"}, node_locale: {eq: "${locale}"}, title: {ne: null} },
-    sort: {fields: [fields___postDate], order: DESC}
-  ) {
-    edges {
-      node {
-        ${postNode}
-      }
-    }
-  }
-`
-
-/**
- * Get announcements
- *
- * @param {string} locale 2 letter locale code
- *
- * @returns {object} Gatsby style GraphQL query with a key of posts {data: { posts: {edges: [ ... ]}}}
- */
-module.exports.announcements = locale => `
-  announcementsPosts: allContentfulNews(
-    filter: { node_locale: {eq: "${locale}"}, title: {ne: null} },
-    sort: {fields: [fields___postDate], order: DESC}
-  ) {
-    edges {
-      node {
-        ${modernPostNode}
-      }
-    }
-  }
-
-  announcementsLegacy: allContentfulLegacyArticle(
-    filter: { type: {eq: "Announcement"}, node_locale: {eq: "${locale}"}, title: {ne: null} },
-    sort: {fields: [fields___postDate], order: DESC}
-  ) {
-    edges {
-      node {
-        ${postNode}
-      }
-    }
-  }
-`
-
-/**
- * Get research
- *
- * @param {string} locale 2 letter locale code
- *
- * @returns {object} Gatsby style GraphQL query with a key of posts {data: { posts: {edges: [ ... ]}}}
- */
-module.exports.research = locale => `
-  researchPosts: allContentfulResearch(
-    filter: { node_locale: {eq: "${locale}"}, title: {ne: null} },
-    sort: {fields: [fields___postDate], order: DESC}
-  ) {
-    edges {
-      node {
-        ${modernPostNode}
-      }
-    }
-  }
-
-  researchLegacy: allContentfulLegacyArticle(
-    filter: { type: {eq: "Research"}, node_locale: {eq: "${locale}"}, title: {ne: null} },
-    sort: {fields: [fields___postDate], order: DESC}
-  ) {
-    edges {
-      node {
-        ${postNode}
-      }
-    }
-  }
-`
-
-/**
- * Get press links for the press section
- *
- * @param {string} locale 2 letter locale code
- *
- * @returns {object} Gatsby style GraphQL query with a key of posts {data: { posts: {edges: [ ... ]}}}
- */
-module.exports.pressLinks = locale => `
-  pressLinksPosts: allContentfulPressLink(
-    filter: { node_locale: {eq: "${locale}"}, title: {ne: null} },
-    sort: {fields: [fields___postDate], order: DESC}
-  ) {
-    edges {
-      node {
-        ${pressNode}
-      }
-    }
-  }
-`
-
-/**
- * Get files for the press-kit searchbar
- *
- * @param {string} locale 2 letter locale code
- *
- * @returns {object} Gatsby style GraphQL query with a key of posts {data: { posts: {edges: [ ... ]}}}
- */
-module.exports.files = locale => `
-  folders: allContentfulFolder(filter:{node_locale:{eq:"${locale}"}}) {
-    edges {
-      node {
-        title
-        files {
-          id
-          title
-          description
-          file {
-            url
-            details {
-              size
-              image {
-                width
-                height
-              }
-            }
-            fileName
-            contentType
-          }
-          fluid(maxWidth: 130, quality: 88) {
-            aspectRatio
-            src
-            srcSet
-            srcWebp
-            srcSetWebp
-            sizes
-          }
-        }
       }
     }
   }

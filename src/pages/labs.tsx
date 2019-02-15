@@ -11,7 +11,7 @@ import mediaqueries from '@styles/media'
 
 import LabsPreview from '../sections/labs/Labs.Preview'
 
-class IndexPage extends Component {
+class LabsPage extends Component<{}, { animate: string }> {
   state = { animation: '' }
 
   componentDidMount() {
@@ -46,6 +46,11 @@ class IndexPage extends Component {
       offset: true,
     }
 
+    /**
+     * This labs page is a bit of limbo in terms of pulling data from Contentful
+     * and locally. Therefore, we're constructing the products array within the component
+     * itself in a ...not so clean way :). It works for now!
+     */
     const products = [
       {
         logo: FeyLogo,
@@ -121,7 +126,7 @@ class IndexPage extends Component {
   }
 }
 
-export default IndexPage
+export default LabsPage
 
 export const pageQuery = graphql`
   query LabsPageQuery {

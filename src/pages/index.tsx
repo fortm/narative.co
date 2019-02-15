@@ -6,7 +6,7 @@ import { media, transitions } from '@styles'
 import { ButtonArrow, Section, Heading, Helmet, Layout } from '@components'
 import { startAnimation } from '@utils'
 
-class IndexPage extends Component {
+class IndexPage extends Component<{}, { animation: string }> {
   state = { animation: '' }
 
   componentDidMount() {

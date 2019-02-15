@@ -1,6 +1,22 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
+interface ButtonProps {
+  text: string
+  type?: string
+  isSubmitting?: boolean
+}
+
+const Button = ({ text, type, isSubmitting }: ButtonProps) => {
+  return (
+    <StyledButton type={type || 'submit'}>
+      {isSubmitting ? <Spinner /> : text}
+    </StyledButton>
+  )
+}
+
+export default Button
+
 const blink = keyframes`
   0% { opacity: .2; }
   20% { opacity: 1; }
@@ -54,12 +70,3 @@ const StyledButton = styled.button`
   font-size: 1.8rem;
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.1);
 `
-const Button = ({ text, type, isSubmitting }) => {
-  return (
-    <StyledButton type={type || 'submit'}>
-      {isSubmitting ? <Spinner /> : text}
-    </StyledButton>
-  )
-}
-
-export default Button

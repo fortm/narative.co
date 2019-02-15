@@ -10,13 +10,16 @@ const fadein = keyframes`
   to { opacity: 1; }
 `
 
-class CareersAccordian extends Component {
+class CareersAccordian extends Component<
+  {},
+  { copied: boolean; openRowIndex: string | null }
+> {
   state = {
     openRowIndex: null,
     copied: false,
   }
 
-  handleIndexOpen = index => {
+  handleIndexOpen = (index: number) => {
     if (index === this.state.openRowIndex) {
       return this.setState({
         openRowIndex: null,
@@ -114,7 +117,17 @@ class CareersAccordian extends Component {
 
 export default CareersAccordian
 
-const CareersAccordianItem = ({ career, handleIndexOpen, index, isOpen }) => {
+const CareersAccordianItem = ({
+  career,
+  handleIndexOpen,
+  index,
+  isOpen,
+}: {
+  career: { title: string; location: string }
+  handleIndexOpen: () => {}
+  index: number
+  isOpen: boolean
+}) => {
   const mailTo = `mailTo: 'mailto:info@narative.co?subject=${
     career.title
   } @ Narative`

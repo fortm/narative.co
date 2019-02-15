@@ -18,7 +18,7 @@ import Footer from '@components/Navigation/Navigation.Footer'
 import { media, transitions } from '@styles'
 import { startAnimation } from '@utils'
 
-class CareersPage extends Component {
+class CareersPage extends Component<{}, { animation: string }> {
   state = { animation: '' }
 
   componentDidMount() {

@@ -1,3 +1,14 @@
+/**
+ * After using this for a few instances we've slowly come to the
+ * conclusion that renderProp IO is not that great. But it's still here :)
+ *
+ * Use as you wish!
+ *
+ * <IntersectionObserver
+ *   render={data => <div>Your code</div>}
+ * />
+ */
+
 import React, { Component } from 'react'
 
 class IntersectionObserver extends Component {

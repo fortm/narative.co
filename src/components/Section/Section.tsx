@@ -2,7 +2,11 @@ import styled from 'styled-components'
 
 import media from '@styles/media'
 
-const Section = styled.section`
+const Section = styled.section<{
+  relative: string
+  hideOnDesktop: boolean
+  hideOverflow: boolean
+}>`
   position: ${p => (p.relative ? 'relative' : 'static')};
   width: 100%;
   max-width: 1220px;

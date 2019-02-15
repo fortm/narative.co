@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import Transition from 'react-transition-group/Transition'
 
 const fadeInDuration = 180
@@ -15,7 +15,13 @@ const fadeInTransitionStyles = {
   exiting: { opacity: 0, transform: 'translateY(2rem)' },
 }
 
-export const FadeIn = ({ in: inProp, children }) => {
+export const FadeIn = ({
+  in: inProp,
+  children,
+}: {
+  in: boolean
+  children: ReactNode
+}) => {
   return (
     <Transition in={inProp} timeout={fadeInDuration}>
       {state => (

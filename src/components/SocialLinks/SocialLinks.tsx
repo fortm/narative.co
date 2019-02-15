@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import * as SocialIcons from '../../icons/social'
-import { media } from '@styles'
 
-const SocialLinks = ({ fill = 'white' }) => (
+import * as SocialIcons from '../../icons/social'
+import mediaqueries from '@styles/media'
+
+const SocialLinks = ({ fill = 'white' }: { fill: string }) => (
   <Fragment>
     <SocialIconContainer
       target="_blank"
@@ -50,7 +51,7 @@ const SocialIconContainer = styled.a`
     margin-right: 0;
   }
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     margin: 0 1.6rem;
   `};
 `

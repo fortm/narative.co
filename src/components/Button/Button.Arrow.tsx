@@ -1,11 +1,27 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import styled, { keyframes } from 'styled-components'
+
+import { Spinner } from '@components/Button/Button'
 
 import { media } from '@styles'
 
-import { Spinner } from './Button'
+interface ButtonArrowProps {
+  as?: string | ReactNode
+  to?: string
+  onClick?: () => void
+  text: string
+  color?: string
+  isSubmitting?: boolean
+}
 
-export default ({ as, to, onClick, text, color = 'white', isSubmitting }) => (
+export default ({
+  as,
+  to,
+  onClick,
+  text,
+  color = 'white',
+  isSubmitting,
+}: ButtonArrowProps) => (
   <ArrowButton as={as} to={to} onClick={onClick} color={color}>
     {isSubmitting ? (
       <Spinner />

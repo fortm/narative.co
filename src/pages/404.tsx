@@ -7,14 +7,14 @@ import { media } from '@styles'
 
 class NotFound extends Component {
   render() {
-    const contentful = this.props.data.allContentfulHomePage.edges[0].node
+    const { seo } = this.props.data.allContentfulHomePage.edges[0].node
 
     return (
       <>
         <Helmet
-          title={contentful.seo.title}
-          description={contentful.seo.description}
-          image={contentful.seo.image.file.url}
+          title={seo.title}
+          description={seo.description}
+          image={seo.image.file.url}
           pathname={this.props.location.pathname}
         />
         <div style={{ overflow: 'hidden' }}>

@@ -8,11 +8,10 @@ module.exports.urls = {
   netlify: {
     previewContent: '/.netlify/functions/preview-content',
   },
-  medium: 'https://medium.com/',
-  linkedin: 'https://www.linkedin.com/company/',
-  instagram: 'https://www.instagram.com/',
-  twitter: 'https://twitter.com/',
-  facebook: 'https://www.facebook.com/',
+  linkedin: 'https://www.linkedin.com/company/narative',
+  instagram: 'http://instagram.com/narative.co',
+  twitter: 'https://twitter.com/narative_co',
+  facebook: 'https://www.facebook.com/narative.co',
 }
 
 module.exports.imageQuality = 100

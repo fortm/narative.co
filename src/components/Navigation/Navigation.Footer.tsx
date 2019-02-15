@@ -5,7 +5,7 @@ import { Link } from 'gatsby'
 import Section from '@components/Section'
 import SocialLinks from '@components/SocialLinks'
 import Logo from '@components/Logo'
-import mediaqueries, { media } from '@styles/media'
+import mediaqueries from '@styles/media'
 
 const footerLinks = [
   { to: '/labs', text: 'Labs' },
@@ -33,7 +33,7 @@ const Footer = ({ mode = 'dark' }: { mode?: string }) => {
         </Left>
         <Right>
           {footerLinks.map(link => (
-            <FooterLink color={color} to={link.to}>
+            <FooterLink key={link.to} color={color} to={link.to}>
               {link.text}
             </FooterLink>
           ))}

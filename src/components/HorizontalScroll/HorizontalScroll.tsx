@@ -21,7 +21,13 @@ import styled from 'styled-components'
  * such as images, locations, cards, etc.
  */
 
-const HorizontalScroll = ({ list, name, render }) => (
+interface HorizontalScrollProps {
+  list: []
+  name: string
+  render: () => void
+}
+
+const HorizontalScroll = ({ list, name, render }: HorizontalScrollProps) => (
   <HorizontalScrollContainer>
     <HorizontalScrollInner>
       <HorizontalScroller>

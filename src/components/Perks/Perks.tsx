@@ -35,7 +35,7 @@ const perks = [
   },
 ]
 
-class Perks extends Component {
+class Perks extends Component<{}, { animate: boolean }> {
   state = {
     animate: false,
   }

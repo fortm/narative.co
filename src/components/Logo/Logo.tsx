@@ -17,7 +17,13 @@ const LogoSymbolContainer = styled.div`
  *
  * @param {String} fill dark or light
  */
-const Logo = ({ fill = '#fff', onlySymbol = false }) => {
+const Logo = ({
+  fill = '#fff',
+  onlySymbol = false,
+}: {
+  fill?: string
+  onlySymbol?: boolean
+}) => {
   if (onlySymbol) {
     return (
       <LogoSymbolContainer>

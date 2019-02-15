@@ -11,7 +11,7 @@ import { ExIcon } from '../icons/ui'
 import ContactForm from '../sections/contact/Contact.ContactForm'
 import PhoneForm from '../sections/contact/Contact.PhoneForm'
 
-class ContactPage extends Component {
+class ContactPage extends Component<{}, { animation: string }> {
   state = { animation: '' }
 
   componentDidMount() {

@@ -3,12 +3,22 @@ import styled from 'styled-components'
 
 import { media } from '@styles'
 
-class CopyToClipboard extends Component {
+interface CopyToClipboardProps {
+  copyOnClick: string
+  successText?: string
+  iconFill?: string
+  children: React.ReactNodeArray | React.ReactNode
+}
+
+class CopyToClipboard extends Component<
+  CopyToClipboardProps,
+  { copied: false }
+> {
   state = {
     copied: false,
   }
 
-  copyToClipboardOnClick = text => {
+  copyToClipboardOnClick = (text: string) => {
     const tempInput = document.createElement('input')
     document.body.appendChild(tempInput)
     tempInput.setAttribute('value', text)
@@ -22,19 +32,22 @@ class CopyToClipboard extends Component {
   }
 
   render() {
+    const { copied } = this.state
+    const { copyOnClick, iconFill, children, successText } = this.props
+
     return (
       <CopyIconContainer
-        copied={this.state.copied}
-        onClick={() => this.copyToClipboardOnClick(this.props.copyOnClick)}
+        copied={copied}
+        onClick={() => this.copyToClipboardOnClick(copyOnClick)}
       >
-        {this.state.copied ? (
+        {copied ? (
           <CopyIconText>
-            <strong>{this.props.successText || this.props.copyOnClick}</strong>{' '}
-            copied to clipboard <CopiedIcon />
+            <strong>{successText || copyOnClick}</strong> copied to clipboard{' '}
+            <CopiedIcon />
           </CopyIconText>
         ) : (
           <>
-            {this.props.children} <CopyIcon fill={this.props.iconFill} />{' '}
+            {children} <CopyIcon fill={iconFill} />
           </>
         )}
       </CopyIconContainer>

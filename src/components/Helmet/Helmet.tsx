@@ -20,6 +20,20 @@
 import React from 'react'
 import { Helmet as ReactHelmt } from 'react-helmet'
 
+interface HelmetProps {
+  title: string
+  description?: string
+  pathname: string
+  image?: string
+  url?: string
+  contentType?: string
+  published?: string
+  updated?: string
+  category?: string
+  tags?: string
+  twitter?: string
+}
+
 const seoURL = path => `https://narative.co${path}`
 
 // Twitter requires https to prepend any paths.
@@ -42,7 +56,7 @@ const getMetaTags = ({
   category,
   tags,
   twitter,
-}) => {
+}: HelmetProps) => {
   const metaTags = [
     { charset: 'utf-8' },
     {
@@ -99,7 +113,7 @@ const Helmet = ({
   category,
   tags,
   twitter,
-}) => {
+}: HelmetProps) => {
   return (
     <ReactHelmt
       htmlAttributes={{ lang: 'en' }}

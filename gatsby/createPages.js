@@ -160,6 +160,7 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
    */
   const pathPrefix = unfeatured[0] && unfeatured[0].pathPrefix
 
+  log('Creating', 'articles')
   /**
    * Building out the Aritlces page
    */
@@ -190,6 +191,7 @@ module.exports = async ({ actions: { createPage }, graphql }) => {
    *      (e.g. ['austin-category-id'] not [{name: 'Austin', id: 'austin-category-id'}])
    */
 
+  log('Creating', 'article')
   // Now map over the nodes for this locale
   articles.forEach((article, index) => {
     /**

@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import { isMobile } from 'react-device-detect'
 import { IntersectionObserver } from '@components'
 
-class AnimatorFadeUp extends Component {
+class AnimatorFadeUp extends Component<{
+  children: React.ReactNode
+  enabledOnMobile?: boolean
+}> {
   static defaultProps = {
     enabledOnMobile: false,
   }
