@@ -79,7 +79,6 @@ class Layout extends Component<LayoutProps, { animation: string }> {
       this.setState({ mask: true })
 
       setTimeout(() => {
-        this.setState({ mask: false })
         navigate(path)
       }, 500)
     }
