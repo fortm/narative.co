@@ -56,9 +56,7 @@ class Layout extends Component<LayoutProps, { animation: string }> {
     }
   })
 
-  closeMobileNav = event => {
-    event.preventDefault()
-
+  closeMobileNav = () => {
     this.setState({
       active: false,
       mobileNavOffset: 0,
@@ -105,7 +103,6 @@ class Layout extends Component<LayoutProps, { animation: string }> {
         <>
           <GlobalStyles />
           <NavigationMobile navigateOut={this.navigateOut} />
-
           <Swipeable onSwipedUp={this.closeMobileNav}>
             <WebContainer
               active={active}
