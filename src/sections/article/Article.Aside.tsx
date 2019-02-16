@@ -55,7 +55,6 @@ class Aside extends Component<AsideProps, { value: number }> {
     const { value } = this.state
     const show = value > 0 && value < 101
 
-    console.log(show)
     return (
       <Frame right={right}>
         <Align show={show}>

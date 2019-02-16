@@ -84,13 +84,15 @@ class Layout extends Component<LayoutProps, { animation: string }> {
 
   navigateOut = (event, path) => {
     event.preventDefault()
-    this.setState({ mask: true })
+
     this.closeMobileNav()
 
-    setTimeout(() => {
-      this.setState({ mask: false })
-      navigate(path)
-    }, 500)
+    if (!window.location.pathname.includes(path)) {
+      setTimeout(() => {
+        this.setState({ mask: false })
+        navigate(path)
+      }, 500)
+    }
   }
 
   render() {
@@ -98,7 +100,6 @@ class Layout extends Component<LayoutProps, { animation: string }> {
     const { active, animation, mask, mobileNavOffset } = this.state
     const navTheme = nav.theme
 
-    console.log(theme)
     return (
       <ThemeProvider theme={theme}>
         <>
