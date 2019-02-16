@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import { navigate } from 'gatsby'
+import Swipeable from 'react-swipeable'
 
 import Navigation from '@components/Navigation/Navigation.Header'
 import NavigationMobile from '@components/Navigation/Navigation.Mobile.Header'
@@ -32,16 +33,20 @@ class Layout extends Component<LayoutProps, { animation: string }> {
     },
   }
 
+  container = React.createRef()
+
   state = { animation: '', active: false, mobileNavOffset: 576, mask: false }
 
   componentDidMount() {
     startAnimation(() => this.setState({ animation: 'start' }))
 
     window.addEventListener('resize', this.handleResize)
+    window.addEventListener('scroll', this.handleScroll)
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize)
+    window.addEventListener('scroll', this.handleScroll)
   }
 
   handleResize = debounce(() => {
@@ -53,22 +58,37 @@ class Layout extends Component<LayoutProps, { animation: string }> {
     }
   })
 
+  handleScroll = () => {
+    if (!this.container.current) return
+
+    const offset = this.container.current.getBoundingClientRect().top
+
+    if (offset <= 0) {
+      this.closeMobileNav()
+    }
+  }
+
   closeMobileNav = () => {
-    this.setState({ active: false, mobileNavOffset: 0, mask: false })
+    this.setState({
+      active: false,
+      mobileNavOffset: 0,
+    })
   }
 
   openMobileNav = () => {
     const { height } = getWindowDimensions()
     const mobileNavOffset = height < 700 ? 420 : 576
 
-    this.setState({ active: true, mobileNavOffset, mask: true })
+    this.setState({ active: true, mobileNavOffset })
   }
 
   navigateOut = (event, path) => {
     event.preventDefault()
+    this.setState({ mask: true })
     this.closeMobileNav()
 
     setTimeout(() => {
+      this.setState({ mask: false })
       navigate(path)
     }, 500)
   }
@@ -78,29 +98,33 @@ class Layout extends Component<LayoutProps, { animation: string }> {
     const { active, animation, mask, mobileNavOffset } = this.state
     const navTheme = nav.theme
 
+    console.log({ mask })
     return (
       <ThemeProvider theme={theme}>
         <>
           <GlobalStyles />
           <NavigationMobile navigateOut={this.navigateOut} />
 
-          <WebContainer
-            active={active}
-            animation={animation}
-            background={background}
-            navOffset={nav.offset}
-            mobileNavOffset={mobileNavOffset}
-            onClick={active ? this.closeMobileNav : () => {}}
-            theme={navTheme}
-          >
-            <ToggleContainer onClick={this.openMobileNav}>
-              <LeftToggle active={active} theme={navTheme} />
-              <RightToggle active={active} theme={navTheme} />
-            </ToggleContainer>
-            <Navigation nav={nav} />
-            <Mask mask={mask} theme={navTheme} />
-            {children}
-          </WebContainer>
+          <Swipeable onSwipedUp={this.closeMobileNav}>
+            <WebContainer
+              active={active}
+              animation={animation}
+              background={background}
+              navOffset={nav.offset}
+              mobileNavOffset={mobileNavOffset}
+              onClick={active ? this.closeMobileNav : () => {}}
+              theme={navTheme}
+              ref={this.container}
+            >
+              <ToggleContainer onClick={this.openMobileNav}>
+                <LeftToggle active={active} theme={navTheme} />
+                <RightToggle active={active} theme={navTheme} />
+              </ToggleContainer>
+              <Navigation nav={nav} />
+              <Mask mask={mask} theme={theme} />
+              {children}
+            </WebContainer>
+          </Swipeable>
         </>
       </ThemeProvider>
     )
@@ -116,7 +140,6 @@ const WebContainer = styled.div`
 
   ${mediaqueries.tablet`
     transform: translateY(${p => (p.active ? p.mobileNavOffset : 0)}px);
-    overflow: ${p => (p.active ? 'visible' : 'hidden')});
     transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
     will-change: transform;
     width: 100vw;
@@ -208,7 +231,7 @@ const RightToggle = styled(Toggle)`
 const Mask = styled.div`
   opacity: 0;
   opacity: ${p => (p.mask ? 1 : 0)};
-  transition: opacity 0.3s linear 0.6s;
+  transition: opacity 0.35s linear;
   pointer-events: none;
 
   ${media.tablet`
