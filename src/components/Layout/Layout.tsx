@@ -131,7 +131,6 @@ const WebContainer = styled.div`
   ${mediaqueries.tablet`
     transform: translateY(${p => (p.active ? p.mobileNavOffset : 0)}px);
     transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
-    will-change: transform;
     width: 100vw;
     height: 100%;
   `}
