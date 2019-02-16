@@ -41,12 +41,10 @@ class Layout extends Component<LayoutProps, { animation: string }> {
     startAnimation(() => this.setState({ animation: 'start' }))
 
     window.addEventListener('resize', this.handleResize)
-    window.addEventListener('scroll', this.handleScroll)
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize)
-    window.addEventListener('scroll', this.handleScroll)
   }
 
   handleResize = debounce(() => {
@@ -57,16 +55,6 @@ class Layout extends Component<LayoutProps, { animation: string }> {
       this.closeMobileNav()
     }
   })
-
-  handleScroll = () => {
-    if (!this.container.current) return
-
-    const offset = this.container.current.getBoundingClientRect().top
-
-    if (offset <= 0) {
-      this.closeMobileNav()
-    }
-  }
 
   closeMobileNav = () => {
     this.setState({
@@ -84,8 +72,8 @@ class Layout extends Component<LayoutProps, { animation: string }> {
 
   handleSwipping = () => {
     const offset = this.container.current.getBoundingClientRect().top
-
-    if (offset < -85) {
+    console.log('fired', offset)
+    if (offset > 200) {
       this.openMobileNav()
     }
   }
