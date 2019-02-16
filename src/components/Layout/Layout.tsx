@@ -70,6 +70,7 @@ class Layout extends Component<LayoutProps, { animation: string }> {
     const mobileNavOffset = height < 700 ? 420 : 576
     document.body.style.overflow = 'hidden'
     document.body.style.height = '100%'
+    document.body.style.position = 'fixed'
 
     this.setState({ active: true, mobileNavOffset })
   }
@@ -80,6 +81,8 @@ class Layout extends Component<LayoutProps, { animation: string }> {
     this.closeMobileNav()
     document.body.style.overflow = ''
     document.body.style.height = ''
+    document.body.style.position = ''
+
     if (!window.location.pathname.includes(path)) {
       this.setState({ mask: true })
 
