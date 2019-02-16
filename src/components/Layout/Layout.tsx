@@ -233,7 +233,7 @@ const RightToggle = styled(Toggle)`
 const Mask = styled.div`
   opacity: 0;
   opacity: ${p => (p.mask ? 1 : 0)};
-  transition: opacity 0.56s linear;
+  transition: opacity 0.5s ease-out;
   pointer-events: none;
 
   ${media.tablet`
