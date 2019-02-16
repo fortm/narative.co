@@ -117,8 +117,8 @@ class Layout extends Component<LayoutProps, { animation: string }> {
               ref={this.container}
             >
               <ToggleContainer onClick={this.openMobileNav}>
-                <LeftToggle active={active} theme={navTheme} />
-                <RightToggle active={active} theme={navTheme} />
+                <LeftToggle theme={navTheme} />
+                <RightToggle theme={navTheme} />
               </ToggleContainer>
               <Navigation nav={nav} />
               <Mask mask={mask} theme={theme} />
