@@ -63,6 +63,10 @@ class Layout extends Component<LayoutProps, { animation: string }> {
       active: false,
       mobileNavOffset: 0,
     })
+
+    document.body.style.overflow = ''
+    document.body.style.height = ''
+    document.body.style.position = ''
   }
 
   openMobileNav = () => {
@@ -79,9 +83,6 @@ class Layout extends Component<LayoutProps, { animation: string }> {
     event.preventDefault()
 
     this.closeMobileNav()
-    document.body.style.overflow = ''
-    document.body.style.height = ''
-    document.body.style.position = ''
 
     if (!window.location.pathname.includes(path)) {
       this.setState({ mask: true })
