@@ -143,6 +143,7 @@ const WebContainer = styled.div`
     transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
     will-change: transform;
     width: 100vw;
+    -webkit-overflow-scrolling: touch;
   `}
 
   ${p =>
