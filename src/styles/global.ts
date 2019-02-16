@@ -93,6 +93,7 @@ export const GlobalStyles = createGlobalStyle`
     color: ${theme.colors.black};
     background: #08080B;
     font-weight: 400;
+    height: 100%;
   }
 
   button,
