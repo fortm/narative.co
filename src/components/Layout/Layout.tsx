@@ -64,9 +64,11 @@ class Layout extends Component<LayoutProps, { animation: string }> {
       mobileNavOffset: 0,
     })
 
-    document.body.style.overflow = ''
-    document.body.style.height = ''
-    document.body.style.position = ''
+    setTimeout(() => {
+      document.body.style.overflow = ''
+      document.body.style.height = ''
+      document.body.style.position = ''
+    }, 500)
   }
 
   openMobileNav = () => {
