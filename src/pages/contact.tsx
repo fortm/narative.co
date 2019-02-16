@@ -54,9 +54,14 @@ class ContactPage extends Component<{}, { animation: string }> {
 
   render() {
     const { animation } = this.state
+    const navConfig = {
+      offset: true,
+      fixed: false,
+      theme: 'light',
+    }
 
     return (
-      <Layout>
+      <Layout nav={navConfig}>
         <Fragment>
           <Helmet
             title="Contact"
