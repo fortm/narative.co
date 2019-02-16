@@ -82,6 +82,14 @@ class Layout extends Component<LayoutProps, { animation: string }> {
     this.setState({ active: true, mobileNavOffset })
   }
 
+  handleSwipping = () => {
+    const offset = this.container.current.getBoundingClientRect().top
+
+    if (offset < -85) {
+      this.openMobileNav()
+    }
+  }
+
   navigateOut = (event, path) => {
     event.preventDefault()
 
@@ -106,7 +114,10 @@ class Layout extends Component<LayoutProps, { animation: string }> {
           <GlobalStyles />
           <NavigationMobile navigateOut={this.navigateOut} />
 
-          <Swipeable onSwipedUp={this.closeMobileNav}>
+          <Swipeable
+            onSwipedUp={this.closeMobileNav}
+            onSwiping={this.handleSwipping}
+          >
             <WebContainer
               active={active}
               animation={animation}

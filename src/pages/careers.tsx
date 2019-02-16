@@ -33,6 +33,7 @@ class CareersPage extends Component<{}, { animation: string }> {
     const contentful = data.allContentfulCareersPage.edges[0].node
     const pageBackground =
       'linear-gradient(rgb(9, 10, 12),rgb(17, 18, 22) 60%,#1a1e24 100%)'
+
     const navConfig = {
       offset: true,
       fixed: false,
