@@ -76,6 +76,8 @@ class Layout extends Component<LayoutProps, { animation: string }> {
     this.closeMobileNav()
 
     if (!window.location.pathname.includes(path)) {
+      this.setState({ mask: true })
+
       setTimeout(() => {
         this.setState({ mask: false })
         navigate(path)
