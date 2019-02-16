@@ -132,7 +132,18 @@ const WebContainer = styled.div`
       p.active ? p.mobileNavOffset : 0}px) translateZ(0);
     transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
     width: 100vw;
+
+    ${p => !p.active && `animation: repaint 1ms`}
   `}
+
+  @keyframes repaint {
+    from {
+      height: 99.999%;
+    }
+    to {
+      height: 100%;
+    }
+  }
 
   ${p =>
     p.navOffset &&
