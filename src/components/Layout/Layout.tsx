@@ -66,8 +66,8 @@ class Layout extends Component<LayoutProps, { animation: string }> {
   openMobileNav = () => {
     const { height } = getWindowDimensions()
     const mobileNavOffset = height < 700 ? 420 : 576
-    document.body.style.overflow = 'hidden !important'
-    document.body.style.height = '100% !important'
+    document.body.style.overflow = 'hidden'
+    document.body.style.height = '100%'
 
     this.setState({ active: true, mobileNavOffset })
   }
