@@ -21,7 +21,7 @@ const themes = {
   },
   dark: {
     mode: {
-      gradient: 'linear-gradient(180deg, #111216 30%, #1c2129 100%)',
+      gradient: 'linear-gradient(180deg, #08080B 30%, #1c2129 100%)',
       background: '#111216',
       text: '#fff',
       hover: '#E9DAAC',

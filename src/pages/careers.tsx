@@ -543,7 +543,7 @@ const MobileBody = styled.div`
       left: 0;
       bottom: 0;
       z-index: -1;
-      background: linear-gradient(180deg, #000 0%, #111216 41.44%, #111216 69.06%, #1A1E24 90.61%);
+      background: linear-gradient(180deg, #08080B 0%, #111216 69.06%, #1A1E24 90.61%);
     }
   `};
 

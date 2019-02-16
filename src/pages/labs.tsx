@@ -38,7 +38,7 @@ class LabsPage extends Component<{}, { animate: string }> {
     } = this.props.data
     const { seo } = allContentfulHomePage.edges[0].node
     const pageBackground =
-      'linear-gradient(rgb(9, 10, 12),rgb(17, 18, 22) 60%,#1a1e24 100%)'
+      'linear-gradient(#08080B, rgb(17, 18, 22) 60%, #1a1e24 100%)'
 
     const navConfig = {
       fixed: false,

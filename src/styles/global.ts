@@ -91,7 +91,7 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 1.6rem;
     margin: 0;
     color: ${theme.colors.black};
-    background: #1D2128;
+    background: #08080B;
     font-weight: 400;
   }
 
