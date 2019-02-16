@@ -57,8 +57,6 @@ class Layout extends Component<LayoutProps, { animation: string }> {
   })
 
   closeMobileNav = () => {
-    document.body.style.overflow = ''
-
     this.setState({
       active: false,
       mobileNavOffset: 0,
@@ -83,6 +81,7 @@ class Layout extends Component<LayoutProps, { animation: string }> {
 
       setTimeout(() => {
         navigate(path)
+        document.body.style.overflow = ''
       }, 500)
     }
   }
