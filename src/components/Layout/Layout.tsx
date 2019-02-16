@@ -70,14 +70,6 @@ class Layout extends Component<LayoutProps, { animation: string }> {
     this.setState({ active: true, mobileNavOffset })
   }
 
-  handleSwipping = () => {
-    const offset = window.scrollY
-    console.log('fired', offset)
-    if (offset < -100) {
-      this.openMobileNav()
-    }
-  }
-
   navigateOut = (event, path) => {
     event.preventDefault()
 
@@ -102,10 +94,7 @@ class Layout extends Component<LayoutProps, { animation: string }> {
           <GlobalStyles />
           <NavigationMobile navigateOut={this.navigateOut} />
 
-          <Swipeable
-            onSwipedUp={this.closeMobileNav}
-            onSwiping={this.handleSwipping}
-          >
+          <Swipeable onSwipedUp={this.closeMobileNav}>
             <WebContainer
               active={active}
               animation={animation}
