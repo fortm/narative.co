@@ -71,9 +71,9 @@ class Layout extends Component<LayoutProps, { animation: string }> {
   }
 
   handleSwipping = () => {
-    const offset = this.container.current.getBoundingClientRect().top
+    const offset = window.scrollY
     console.log('fired', offset)
-    if (offset > 200) {
+    if (offset < -100) {
       this.openMobileNav()
     }
   }
