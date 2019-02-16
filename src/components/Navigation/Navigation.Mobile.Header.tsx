@@ -39,6 +39,8 @@ const Frame = styled.nav`
   width: 100%;
   z-index: 0;
   padding: 80px 0;
+  height: 100vh;
+  background: #1d2128;
 
   @media screen and (max-height: 700px) {
     padding: 40px 0;
