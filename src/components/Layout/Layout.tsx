@@ -56,7 +56,9 @@ class Layout extends Component<LayoutProps, { animation: string }> {
     }
   })
 
-  closeMobileNav = () => {
+  closeMobileNav = event => {
+    event.preventDefault()
+
     this.setState({
       active: false,
       mobileNavOffset: 0,
@@ -76,14 +78,13 @@ class Layout extends Component<LayoutProps, { animation: string }> {
     event.preventDefault()
 
     this.closeMobileNav()
-
+    document.body.style.overflow = ''
+    document.body.style.height = ''
     if (!window.location.pathname.includes(path)) {
       this.setState({ mask: true })
 
       setTimeout(() => {
         navigate(path)
-        document.body.style.overflow = ''
-        document.body.style.height = ''
       }, 500)
     }
   }
@@ -136,6 +137,7 @@ const WebContainer = styled.div`
       p.active ? p.mobileNavOffset : 0}px) translateZ(0);
     transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
     width: 100vw;
+    touch-action: ${p => (p.active ? 'none' : 'initial')};
   `}
 
   ${p =>
