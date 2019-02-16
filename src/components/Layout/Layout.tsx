@@ -128,7 +128,7 @@ class Layout extends Component<LayoutProps, { animation: string }> {
 export default Layout
 
 const WebContainer = styled.div`
-  position: ${p => (p.active ? 'fixed' : 'relative')};
+  position: ${p => (p.active || p.mask ? 'fixed' : 'relative')};
   background: linear-gradient(180deg, #08080b 0%, #0b0b0e 44.18%, #111216 100%);
 
   ${mediaqueries.tablet`
