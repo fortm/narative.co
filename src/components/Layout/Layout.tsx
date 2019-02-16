@@ -98,7 +98,7 @@ class Layout extends Component<LayoutProps, { animation: string }> {
     const { active, animation, mask, mobileNavOffset } = this.state
     const navTheme = nav.theme
 
-    console.log({ mask })
+    console.log(theme)
     return (
       <ThemeProvider theme={theme}>
         <>
@@ -121,7 +121,7 @@ class Layout extends Component<LayoutProps, { animation: string }> {
                 <RightToggle theme={navTheme} />
               </ToggleContainer>
               <Navigation nav={nav} />
-              <Mask mask={mask} theme={theme} />
+              <Mask mask={mask} theme={navTheme} />
               {children}
             </WebContainer>
           </Swipeable>
