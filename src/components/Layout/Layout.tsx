@@ -134,12 +134,13 @@ export default Layout
 const WebContainer = styled.div`
   position: ${p => (p.active || p.mask ? 'fixed' : 'relative')};
   background: linear-gradient(180deg, #08080b 0%, #0b0b0e 44.18%, #111216 100%);
-
+  min-height: 100vh;
   ${mediaqueries.tablet`
     transform: translateY(${p =>
       p.active ? p.mobileNavOffset : 0}px) translateZ(0);
     transition: transform 0.56s cubic-bezier(0.52, 0.16, 0.24, 1);
     width: 100vw;
+    height: 100vh;
     touch-action: ${p => (p.active ? 'none' : 'initial')};
   `}
 
@@ -164,7 +165,7 @@ const WebContainer = styled.div`
     opacity: ${p => (p.animation ? 1 : 0)};
 
     ${media.tablet`
-      background: #0D0E10;
+      background: #08080b;
     `};
   }
 

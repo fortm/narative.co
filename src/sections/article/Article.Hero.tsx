@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { isMobile } from 'react-device-detect'
 
 import Heading from '@components/Heading'
 import IntersectionObserver from '@components/IntersectionObserver'
@@ -24,7 +25,7 @@ const ArticleHero = ({ article }: { article: IArticleNode }) => {
         boundingClientRect: { height: number }
         visiblePercentage: number
       }) => {
-        const canAnimate = inlineAnimate(height > 540)
+        const canAnimate = inlineAnimate(height > 540 && !isMobile)
         const headerOffset = canAnimate({
           transform: `translateY(${(100 - visiblePercentage) * 1.33}px)`,
           opacity: 1 - ((100 - visiblePercentage) / 100) * 1.66,

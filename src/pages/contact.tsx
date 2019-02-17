@@ -61,7 +61,7 @@ class ContactPage extends Component<{}, { animation: string }> {
     }
 
     return (
-      <Layout nav={navConfig}>
+      <Layout nav={navConfig} background="#08080b">
         <Fragment>
           <Helmet
             title="Contact"
@@ -83,7 +83,11 @@ class ContactPage extends Component<{}, { animation: string }> {
             </Section>
           </FixedElement>
           <SlideIn in={animation === 'start'}>
-            <FormContainer animation={animation} transitionDelay={1000}>
+            <FormContainer
+              animation={animation}
+              transitionDelay={1000}
+              transitionDelayMobile={300}
+            >
               <ContactForm />
             </FormContainer>
           </SlideIn>

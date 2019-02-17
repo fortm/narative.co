@@ -19,13 +19,16 @@ const NavigationMobile = ({ navigateOut }) => (
     </SocialIconsFooter>
     <HorizontalRule />
     {footerLinks.map(link => (
-      <FooterLink
+      <StyledLink
         key={link.to}
-        onClick={event => navigateOut(event, link.to)}
         to={link.to}
+        onClick={event => navigateOut(event, link.to)}
+        getProps={({ isPartiallyCurrent }) =>
+          isPartiallyCurrent ? { ['data-active']: 'true' } : null
+        }
       >
         {link.text}
-      </FooterLink>
+      </StyledLink>
     ))}
   </Frame>
 )
@@ -74,11 +77,15 @@ const SocialIconsFooter = styled.div`
   }
 `
 
-const FooterLink = styled(Link)`
+const StyledLink = styled(Link)`
   font-size: 22px;
   color: #fff;
   display: block;
   text-align: center;
+
+  &[data-active='true'] {
+    color: #7a8085;
+  }
 
   &:not(:last-child) {
     margin-bottom: 35px;

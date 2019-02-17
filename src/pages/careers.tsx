@@ -80,7 +80,6 @@ class CareersPage extends Component<{}, { animation: string }> {
             </Section>
           </MobileHero>
           <MobileBody>
-            <MobilePuller />
             <Section>
               <ScrollLine />
             </Section>
@@ -277,6 +276,10 @@ const GridContainer = styled.div`
   ${media.desktop`
     height: initial
     grid-template-columns: 1fr;
+
+        height: calc(100vh - 140px);
+    padding: 0;
+    top: -45px;
   `};
 
   ${media.phone`
@@ -324,7 +327,6 @@ const LeftContainer = styled.div`
   max-width: 62.1rem;
 
   ${media.desktop`
-    padding-top: 5rem;
     justify-content: flex-start;
     width: 100%;
     height: initial;
@@ -343,7 +345,7 @@ const ImageContainer = styled.div`
   `};
 
   ${media.tablet`
-    margin-bottom: 10rem;
+    margin-bottom: 12rem;
   `};
 `
 
@@ -417,14 +419,7 @@ const ScrollLine = styled.div`
 
   transform: translateY(9rem);
   opacity: 0;
-  animation: sample 1s ease-out forwards 3s;
-
-  @keyframes sample {
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
+  animation: slideUp 1s ease-out forwards 3s;
 
   &::after {
     content: '';
@@ -438,8 +433,22 @@ const ScrollLine = styled.div`
   }
 
   ${media.tablet`
-    display: none;
+    animation: slideUpMore 1.4s var(--ease-out-cubic) forwards;
   `};
+
+  @keyframes slideUp {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUpMore {
+    to {
+      transform: translateY(-14rem);
+      opacity: 1;
+    }
+  }
 `
 
 const RightContainer = styled.div`
@@ -456,8 +465,7 @@ const RightContainer = styled.div`
   `};
 
   ${media.tablet`
-    justify-content: center;
-    top: 100vh;
+    display: none;
   `};
 `
 const SectionCopy = styled.p`
@@ -521,9 +529,7 @@ const Content = styled.div`
 
 const MobileHero = styled.div`
   ${media.tablet`
-    position: fixed;
     left: 0;
-    top: 120px;
     right: 0;
     width: 100vw;
   `};
@@ -531,54 +537,11 @@ const MobileHero = styled.div`
 
 const MobileBody = styled.div`
   ${media.tablet`
-    transform: translateY(44rem);
     padding-top: 7rem;
-    height: 100%;
-    position: relative;
-    background: #111216;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    overflow: hidden;
     z-index: 8;
-
-    &::before {
-      content: '';
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      left: 0;
-      bottom: 0;
-      z-index: -1;
-      background: linear-gradient(180deg, #08080B 0%, #111216 69.06%, #1A1E24 90.61%);
-    }
+    position: relative;
+    background: linear-gradient(rgb(9, 10, 12),rgb(17, 18, 22) 60%,#242A33 100%);
   `};
-
-  ${media.phablet`
-    transform: translateY(38rem);
-  `};
-
-  ${media.phone`
-    padding-top: 6rem;
-    transform: translateY(42rem);
-  `};
-
-  ${media.phone_small`
-    transform: translateY(46rem);
-  `};
-`
-
-const MobilePuller = styled.div`
-  ${media.tablet`
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    top: 1.5rem;
-    width: 4.2rem;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 100px;
-`};
 `
 
 const NarativeHeroOutline = () => (

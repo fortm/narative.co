@@ -55,7 +55,7 @@ const Content = styled.div`
     font-size: 2.2rem;
     font-family: ${p => p.theme.fontfamily.sansSerif};
     color: ${p => p.theme.mode.text};
-    margin-bottom: 2.34rem;
+    margin-bottom: 2rem;
     ${transitionColor};
 
     & + h1,
@@ -71,7 +71,6 @@ const Content = styled.div`
   h5,
   h6 {
     ${articleWidth};
-    margin-top: 4.68rem;
     font-family: ${p => p.theme.fontfamily.serif};
     * {
       font-family: ${p => p.theme.fontfamily.serif};
@@ -96,9 +95,11 @@ const Content = styled.div`
     font-size: 2.2rem;
     line-height: 1.45;
     margin-bottom: 2rem;
+    margin-top: 45px;
 
     ${mediaqueries.desktop_up`
       font-size: 3.2rem;
+      margin-top: 65px;
       margin-bottom: 2.5rem;
     `};
   }
@@ -107,11 +108,11 @@ const Content = styled.div`
   h3 * {
     font-size: 2.2rem;
     line-height: 1.45;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 
     ${mediaqueries.desktop`
       margin-top: 0;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     `};
   }
 
@@ -205,11 +206,11 @@ const Content = styled.div`
     ${transitionColor};
     position: relative;
     padding-left: 30px;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
 
     li {
       position: relative;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
 
         ${mediaqueries.tablet`
           padding-left: 20px;
