@@ -2,8 +2,9 @@ import React, { Component, Fragment } from 'react'
 import { Link, graphql, navigate } from 'gatsby'
 import styled from 'styled-components'
 
-import { media, transitions } from '@styles'
-import { ButtonArrow, Section, Heading, Helmet, Layout } from '@components'
+import transitions from '@styles/transitions'
+import mediaqueries from '@styles/media'
+import { ButtonArrow, Section, Heading, SEO, Layout } from '@components'
 import { startAnimation } from '@utils'
 
 class IndexPage extends Component<{}, { animation: string }> {
@@ -31,7 +32,7 @@ class IndexPage extends Component<{}, { animation: string }> {
     return (
       <Layout navOffset>
         <Fragment>
-          <Helmet
+          <SEO
             title={contentful.seo.title}
             description={contentful.seo.description}
             image={contentful.seo.image.file.url}
@@ -122,7 +123,7 @@ const MainText = styled.p`
   color: ${p => p.theme.colors.grey};
   line-height: 1.3;
 
-  ${media.phablet`
+  ${mediaqueries.phablet`
     font-size: 2.2rem;
   `};
 `
@@ -135,7 +136,7 @@ const ContactText = styled(Link)`
   color: ${p => p.theme.colors.grey};
   ${transitions.fadeUp};
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     opacity: 0;
     pointer-events: none;
     flex-direction: column;
@@ -150,7 +151,7 @@ const ContactText = styled(Link)`
 const MobileContactText = styled.span`
   display: none;
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     opacity: 1;
     pointer-events: initial;
     margin-top: 50px;
@@ -168,7 +169,7 @@ const ContentContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
 
-  ${media.phablet`
+  ${mediaqueries.phablet`
     height: calc(100vh - 90px);
     padding: 0;
     top: -45px;

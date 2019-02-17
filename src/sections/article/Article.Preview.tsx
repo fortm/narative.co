@@ -7,11 +7,19 @@ import Media from '@components/Media/Media.Img'
 
 import mediaqueries from '@styles/media'
 
+import { IArticleNode } from '@typings'
+
 /**
+ * Sits at the bottom of our Article page. Shows the next 2 on desktop and the
+ * next 1 on mobile!
+ *
+ * If you haven't noticed, this is basically a stripped down copy and paste
+ * of Articles.Grid.tsx. It works well for now but eventually we may want to
+ * abstract the <Grid>...items</Grid> since there's duplicate code.
+ *
  *  [LONG], [SHORT]
  */
-
-const ArticlesPreview = ({ articles }) => {
+const ArticlesPreview = ({ articles }: { articles: IArticleNode[] }) => {
   return (
     <>
       <Grid>
@@ -24,7 +32,13 @@ const ArticlesPreview = ({ articles }) => {
 
 export default ArticlesPreview
 
-const GridItem = ({ article, narrow }) => {
+const GridItem = ({
+  article,
+  narrow,
+}: {
+  article: IArticleNode
+  narrow?: boolean
+}) => {
   if (!article) return null
 
   const hasOverflow = narrow && article.title.length > 35

@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { isMobile } from 'react-device-detect'
 
-const StyledVideo = styled.video`
-  height: 100%;
-`
-
+/**
+ * A small wrapper around the native video tag in the DOM. This is
+ * required because across different browsers like Chrome, Safari, Firefox,
+ * and iOS Safari there are different rules for playing videos.
+ */
 class Video extends Component {
   state = {
     isMobile: false,
@@ -54,3 +55,7 @@ class Video extends Component {
 }
 
 export default Video
+
+const StyledVideo = styled.video`
+  height: 100%;
+`

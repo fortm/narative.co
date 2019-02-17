@@ -15,7 +15,7 @@ const fadeInTransitionStyles = {
   exiting: { opacity: 0, transform: 'translateY(2rem)' },
 }
 
-export const FadeIn = ({
+const FadeIn = ({
   in: inProp,
   children,
 }: {
@@ -37,3 +37,5 @@ export const FadeIn = ({
     </Transition>
   )
 }
+
+export default FadeIn

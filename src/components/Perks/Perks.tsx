@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import { media } from '@styles'
+import mediaqueries from '@styles/media'
 import { IntersectionObserver } from '@components'
 
 const perks = [
@@ -104,7 +104,7 @@ const PerksItem = styled.div`
   opacity: ${p => (p.animate ? 1 : 0)};
   transition: all 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) ${p => p.index * 75}ms;
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     flex-direction: column;
     align-items: flex-start;
     height: auto;
@@ -113,7 +113,7 @@ const PerksItem = styled.div`
 `
 
 const PerksItemDash = styled.div`
-  ${media.tablet`
+  ${mediaqueries.tablet`
     display: none;
   `};
 `
@@ -134,7 +134,7 @@ const PerksItemLineContainer = styled.div`
   left: 0;
   bottom: 0;
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     width: 100%;
   `};
 `
@@ -148,7 +148,7 @@ const PerksItemLine = styled.div`
   transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)
     ${p => p.index * 70 + 1200}ms;
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     background: ${p => p.theme.colors.grey};
     transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1)
     ${p => p.index * 120 + 1200}ms;

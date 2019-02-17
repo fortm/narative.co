@@ -8,6 +8,8 @@ import Media from '@components/Media/Media.Img'
 
 import mediaqueries from '@styles/media'
 
+import { IArticleNode } from '@typings'
+
 /**
  *  [LONG], [SHORT]
  *  [SHORT], [LONG]
@@ -18,10 +20,12 @@ import mediaqueries from '@styles/media'
  */
 
 /**
- * Okay, I know, the Grid is manually setup and we're pulling manually selecting
- * and
+ * Okay, I know, the Grid is manually setup and we're manually selecting an
+ * index from the array of articles... but it's only 8 and it works perfectly fine.
+ *
+ * TODO: Figure out CSS grid for reverse grid row items and inserting a quote inside.
  */
-const ArticlesGrid = ({ articles }) => {
+const ArticlesGrid = ({ articles }: { articles: IArticleNode[] }) => {
   return (
     <>
       <Grid>

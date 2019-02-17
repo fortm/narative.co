@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Img from 'gatsby-image'
 
 import { HorizontalScroll, IntersectionObserver } from '@components'
-import { media } from '@styles'
+import mediaqueries from '@styles/media'
 
 class CareersImages extends Component {
   state = {
@@ -142,7 +142,7 @@ const CareersImagesContainer = styled.div`
   max-width: 70rem;
   margin-top: 7rem;
 
-  ${media.phablet`
+  ${mediaqueries.phablet`
     display: none;
   `};
 `
@@ -150,7 +150,7 @@ const CareersImagesContainer = styled.div`
 const CareersImagesContainerMobile = styled.div`
   display: none;
 
-  ${media.phablet`
+  ${mediaqueries.phablet`
     display: block;
     width: 100%;
     margin: 3rem 0;
@@ -221,7 +221,7 @@ const ImageContainer = styled.div`
         : ``};
   }
 
-  ${media.phablet`
+  ${mediaqueries.phablet`
     width: 28rem;
   `};
 `
@@ -232,11 +232,11 @@ const ImageContainerMobile = styled.div`
   width: 34rem;
   filter: grayscale(100);
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     width: 30rem;
   `};
 
-  ${media.phone_small`
+  ${mediaqueries.phone_small`
     width: 24rem;
   `};
 `
@@ -268,7 +268,7 @@ const GalleryControl = styled.div`
   opacity: ${p => (p.disabled ? 0.25 : 1)};
   transition: opacity 600ms cubic-bezier(0.7, 0, 0.2, 1);
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     ${p => {
       if (p.left) {
         return `left: -26.3rem;`
@@ -280,7 +280,7 @@ const GalleryControl = styled.div`
     }};
   `};
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     ${p => {
       if (p.left) {
         return `left: -5rem;`

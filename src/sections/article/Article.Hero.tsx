@@ -25,6 +25,7 @@ const ArticleHero = ({ article }: { article: IArticleNode }) => {
         boundingClientRect: { height: number }
         visiblePercentage: number
       }) => {
+        // If it's mobile don't animate since it's janky and doesn't add much value
         const canAnimate = inlineAnimate(height > 540 && !isMobile)
         const headerOffset = canAnimate({
           transform: `translateY(${(100 - visiblePercentage) * 1.33}px)`,

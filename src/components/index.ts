@@ -1,4 +1,3 @@
-import AnimatorFadeUp from '@components/AnimatorFadeUp'
 import Button from '@components/Button'
 import ButtonArrow from '@components/Button/Button.Arrow'
 import CareersAccordian from '@components/CareersAccordian'
@@ -7,7 +6,7 @@ import CareersImages from '@components/CareersImages'
 import CopyToClipboard from '@components/CopyToClipboard'
 import Form from '@components/From'
 import Heading from '@components/Heading'
-import Helmet from '@components/Helmet'
+import SEO from '@components/SEO'
 import HorizontalScroll from '@components/HorizontalScroll'
 import IntersectionObserver from '@components/IntersectionObserver'
 import Layout from '@components/Layout'
@@ -20,7 +19,6 @@ import Transitions from '@components/Transitions'
 import Video from '@components/Video'
 
 export {
-  AnimatorFadeUp,
   Button,
   ButtonArrow,
   CareersAccordian,
@@ -30,7 +28,7 @@ export {
   CopyToClipboard,
   Form,
   Heading,
-  Helmet,
+  SEO,
   HorizontalScroll,
   IntersectionObserver,
   Logo,

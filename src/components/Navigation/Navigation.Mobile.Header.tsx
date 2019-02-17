@@ -12,7 +12,18 @@ const footerLinks = [
   { to: '/contact', text: 'Contact' },
 ]
 
-const NavigationMobile = ({ navigateOut }) => (
+/**
+ * The fixed navigation sitting "behind" the mobile version of narative.co
+ * All the link functionality is taken over by the passed in navigateOut()
+ * function that delays and allows us to animate between states.
+ *
+ * @param navigateOut
+ */
+const NavigationMobile = ({
+  navigateOut,
+}: {
+  naviagteOut: (Event, string) => void
+}) => (
   <Frame>
     <SocialIconsFooter>
       <SocialLinks fill="#fff" />

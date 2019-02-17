@@ -2,8 +2,7 @@ import React, { ReactNode } from 'react'
 import styled, { keyframes } from 'styled-components'
 
 import { Spinner } from '@components/Button/Button'
-
-import { media } from '@styles'
+import mediaqueries from '@styles/media'
 
 interface ButtonArrowProps {
   as?: string | ReactNode
@@ -14,6 +13,12 @@ interface ButtonArrowProps {
   isSubmitting?: boolean
 }
 
+/**
+ * <ButtonArrow /> is responsible for the various links around the website
+ * that have the arrow animation on hover. This component is able to render
+ * as a Link, Button, or whatever you want. Best practice is to use a Button
+ * if it's an action item or a Link if you're linking to a new page.
+ */
 export default ({
   as,
   to,
@@ -43,7 +48,7 @@ const ArrowButton = styled.button`
   background: transparent;
   height: 25px;
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     flex-direction: column;
   `};
 
@@ -99,7 +104,7 @@ const ArrowAnimation = styled.div`
   height: 25px;
   font-size: 1.8rem;
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     padding: 0rem 3rem 0 0rem;
   `};
 
@@ -132,7 +137,7 @@ const ArrowAnimation = styled.div`
     opacity: 1;
     animation: ${animateButtonLine} 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
 
-    ${media.tablet`
+    ${mediaqueries.tablet`
       animation: none;
     `};
   }

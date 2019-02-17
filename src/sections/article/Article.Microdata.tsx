@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql, StaticQuery } from 'gatsby'
 
 import { MicrodataBreadcrumb } from '@components/Media'
-import Helmet from '@components/Helmet'
+import SEO from '@components/SEO'
 
 import { IArticleNode } from '@typings'
 
@@ -24,6 +24,7 @@ const PublicLogoQuery = graphql`
   }
 `
 
+// An SEO bomb we want to keep. This is another standard that's worth setting up.
 export default ({ article, location }: { article: IArticleNode }) => (
   <StaticQuery
     query={PublicLogoQuery}
@@ -72,11 +73,7 @@ const Microdata = ({
           { name: title, item: location.href },
         ]}
       />
-      <Helmet
-        title={title}
-        description={excerpt}
-        image={backgroundImage.seo.src}
-      >
+      <SEO title={title} description={excerpt} image={backgroundImage.seo.src}>
         <script type="application/ld+json">
           {`
           {
@@ -106,7 +103,7 @@ const Microdata = ({
           }
         `}
         </script>
-      </Helmet>
+      </SEO>
     </>
   )
 }

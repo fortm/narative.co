@@ -84,3 +84,9 @@ export const transitions = {
   fadeUp,
   fadeUpLong,
 }
+
+export default {
+  blurIn,
+  fadeUp,
+  fadeUpLong,
+}

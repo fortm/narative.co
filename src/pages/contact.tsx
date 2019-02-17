@@ -3,8 +3,9 @@ import { graphql, navigate } from 'gatsby'
 import styled from 'styled-components'
 import Transition from 'react-transition-group/Transition'
 
-import { media, transitions } from '@styles'
-import { Section, Layout, Helmet } from '@components'
+import transitions from '@styles/transitions'
+import mediaqueries from '@styles/media'
+import { Section, Layout, SEO } from '@components'
 import { startAnimation } from '@utils'
 import { ExIcon } from '../icons/ui'
 
@@ -63,7 +64,7 @@ class ContactPage extends Component<{}, { animation: string }> {
     return (
       <Layout nav={navConfig} background="#08080b">
         <Fragment>
-          <Helmet
+          <SEO
             title="Contact"
             pathname={this.props.location.pathname}
             image={this.props.data.contactMeta.childImageSharp.fixed.src}
@@ -158,7 +159,7 @@ const SlideInContainer = styled.div`
   backface-visibility: hidden;
   filter: blur(0);
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     width: 100%;
     position: relative;
     top: 220px;
@@ -207,7 +208,7 @@ const PhoneFormContainer = styled.div`
   flex-direction: column;
   display: none;
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     display: block;
     padding: 4rem 0 1rem;
   `};
@@ -248,7 +249,7 @@ const CloseContainer = styled.button`
   transition: transform 0.7s cubic-bezier(0.215, 0.61, 0.355, 1)
     ${p => (p.animation ? '0.7s' : '0s')};
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     display: none;
   `};
 

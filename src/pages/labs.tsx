@@ -2,12 +2,12 @@ import React, { Component, Fragment } from 'react'
 import { graphql, navigate } from 'gatsby'
 import styled from 'styled-components'
 
-import { transitions } from '@styles'
-import { Section, Heading, Helmet, Layout } from '@components'
+import { Section, Heading, SEO, Layout } from '@components'
 import Footer from '@components/Navigation/Navigation.Footer'
 
 import { startAnimation } from '@utils'
 import mediaqueries from '@styles/media'
+import transitions from '@styles/transitions'
 
 import LabsPreview from '../sections/labs/Labs.Preview'
 
@@ -90,7 +90,7 @@ class LabsPage extends Component<{}, { animate: string }> {
     return (
       <Layout nav={navConfig} background={pageBackground}>
         <Fragment>
-          <Helmet
+          <SEO
             title={seo.title}
             description={seo.description}
             image={seo.image.file.url}

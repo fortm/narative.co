@@ -10,6 +10,10 @@ import mediaqueries from '@styles/media'
 
 import { IArticleNode } from '@typings'
 
+/**
+ * The top featured item. This displays a single article that has been tagged
+ * Featured: true in Contentful. This does not fit in the Grid below.
+ */
 const ArticlesFeatured = ({ article }: { article: IArticleNode }) => (
   <Frame>
     <Left to={`/articles/${article.slug}`}>

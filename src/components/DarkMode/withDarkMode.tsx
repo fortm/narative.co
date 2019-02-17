@@ -1,6 +1,15 @@
 import React, { Component } from 'react'
 import { ThemeProvider } from 'styled-components'
 
+/**
+ * withDarkMode() HOC
+ *
+ * To be used once per page. DO NOT use this on nested children of the current
+ * HOC as you will run into state issues. Please pass down props as necessary.
+ *
+ * TODO: This is a candidate for using Context. It really shouldn't be a HOC
+ * that relies on prop drilling :).
+ */
 const themes = {
   light: {
     mode: {
@@ -40,6 +49,7 @@ const themes = {
 
 function withDarkMode(WrappedComponent) {
   return class DarkAndLight extends Component {
+    // We default to light mode!
     state = { mode: 'light' }
 
     componentDidMount() {

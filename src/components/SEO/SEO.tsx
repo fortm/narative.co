@@ -9,7 +9,7 @@
  * Use the Helmt on pages to generate SEO and meta content!
  *
  * Usage:
- * <Helmet
+ * <SEO
  *   title={title}
  *   description={description}
  *   image={image}
@@ -18,7 +18,7 @@
  */
 
 import React from 'react'
-import { Helmet as ReactHelmt } from 'react-helmet'
+import Helmet from 'react-helmet'
 
 interface HelmetProps {
   title: string
@@ -102,7 +102,7 @@ const getMetaTags = ({
   return metaTags
 }
 
-const Helmet = ({
+const SEO = ({
   title,
   description = seoDescription,
   pathname,
@@ -115,7 +115,7 @@ const Helmet = ({
   twitter,
 }: HelmetProps) => {
   return (
-    <ReactHelmt
+    <Helmet
       htmlAttributes={{ lang: 'en' }}
       title={title}
       link={[
@@ -140,4 +140,4 @@ const Helmet = ({
   )
 }
 
-export default Helmet
+export default SEO

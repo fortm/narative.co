@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components'
 import { Formik, Form as FormikForm, Field } from 'formik'
 
 import { Form } from '@components'
-import { media } from '@styles'
+import mediaqueries from '@styles/media'
 import { apiCall } from '@utils'
 import { CheckIcon } from '../../icons/ui'
 
@@ -85,11 +85,11 @@ const StyledFormikForm = styled(FormikForm)`
   position: relative;
   width: 36rem;
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     width: 100%;
   `};
 
-  ${media.phone`
+  ${mediaqueries.phone`
     max-width: 100%;
   `};
 `
@@ -108,7 +108,7 @@ const SubmittedTextContainer = styled.div`
   margin-bottom: 7.8rem;
   animation: 200ms ${fadeIn} ${props => props.theme.transitions.in};
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     padding: 2rem 0 4rem;
     margin-bottom: 0;
   `};

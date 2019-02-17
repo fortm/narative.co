@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Link, graphql } from 'gatsby'
 import styled from 'styled-components'
 
-import { Section, Heading, Helmet, Layout, SocialLinks } from '@components'
-import { media } from '@styles'
+import { Section, Heading, SEO, Layout, SocialLinks } from '@components'
+import mediaqueries from '@styles/media'
 
 class NotFound extends Component {
   render() {
@@ -11,7 +11,7 @@ class NotFound extends Component {
 
     return (
       <>
-        <Helmet
+        <SEO
           title={seo.title}
           description={seo.description}
           image={seo.image.file.url}
@@ -74,7 +74,7 @@ const GridContainer = styled.div`
   margin: 0 auto;
   width: 100%;
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     flex-direction: column;
     height: calc(100vh - 90px);
   `};
@@ -84,7 +84,7 @@ const WelcomeHeader = styled(Heading.h1)`
   color: ${p => p.theme.colors.grey};
   margin-bottom: 2rem;
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     font-size: 2.2rem;
     margin-bottom: 5rem;
   `};
@@ -106,7 +106,7 @@ const TextContainer = styled.div`
   padding: 0 0 100px;
   max-width: 575px;
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     padding: 170px 0 0;
     justify-content: flex-start;
     width: 100%;
@@ -123,7 +123,7 @@ const ImageContainer = styled.div`
   display: flex;
   align-items: center;
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
 
     right: 0;
     height: 33rem;
@@ -145,12 +145,12 @@ const SocialLinksContainer = styled.div`
     display: inline-block;
     color: ${p => p.theme.colors.grey};
 
-    ${media.tablet`
+    ${mediaqueries.tablet`
       display: block;
    `};
   }
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     svg {
       position: relative;
       top: 10px;

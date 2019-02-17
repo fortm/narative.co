@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components'
 import { StaticQuery, graphql } from 'gatsby'
 
 import { ButtonArrow, CopyToClipboard } from '@components'
-import { media } from '@styles'
+import mediaqueries from '@styles/media'
 
 const fadein = keyframes`
   from { opacity: 0; }
@@ -179,19 +179,19 @@ const AccordianContainer = styled.div`
     padding-bottom: 3rem;
   `};
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     margin:  0 auto 15rem;
     top: -4rem;
     min-height: auto;
   `};
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     margin:  0 auto 10rem;
     top: ${p => (p.empty ? '0rem' : '-4rem')};
     height: auto;
   `};
 
-  ${media.phone`
+  ${mediaqueries.phone`
     top: ${p => (p.empty ? '0rem' : '-2rem')};
   `};
 `
@@ -309,7 +309,7 @@ const AccordianCareersEmail = styled.p`
     color: #fff;
   }
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     font-size: 1.4rem;
 
     span {

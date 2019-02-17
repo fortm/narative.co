@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 import { IntersectionObserver } from '@components'
-import { media } from '@styles'
+import mediaqueries from '@styles/media'
 
 const createArrayWithLegth = length =>
   Array.apply(null, { length }).map(Number.call, Number)
@@ -85,7 +85,7 @@ class CareersGraph extends Component {
                     {months.map((month, index) => (
                       <XLabels
                         key={index}
-                        style={{ left: `${index * 100 / 7.3}%` }}
+                        style={{ left: `${(index * 100) / 7.3}%` }}
                       >
                         {month}
                       </XLabels>
@@ -110,20 +110,20 @@ const CareersGraphContainer = styled.div`
   top: -12rem;
   margin-bottom: 10rem;
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     top: -4rem;
     margin-bottom: 14rem;
   `};
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     top: 0rem;
   `};
 
-  ${media.phablet`
+  ${mediaqueries.phablet`
     margin-bottom: 11rem;
   `};
 
-  ${media.phone`
+  ${mediaqueries.phone`
     top: -1rem;
     margin-bottom: 10rem;
   `};
@@ -134,7 +134,7 @@ const CareersGraphGrid = styled.div`
   height: 361px;
   width: 100%;
 
-  ${media.phablet`
+  ${mediaqueries.phablet`
     height: 120px;
   `};
 `
@@ -163,12 +163,12 @@ const XLabels = styled.div`
   width: 3.5rem;
   color: ${p => p.theme.colors.grey};
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     font-size: 1.4rem;
     bottom: -5rem;
   `};
 
-  ${media.phablet`
+  ${mediaqueries.phablet`
     font-size: 0.8rem;
     bottom: -3rem;
   `};
@@ -179,18 +179,18 @@ const YLabels = styled.div`
   left: 8rem;
   bottom: 0;
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     font-size: 1.4rem;
     left: 2rem;
     bottom: -0.4rem;
   `};
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     font-size: 1.4rem;
     left: 1rem;
   `};
 
-  ${media.phablet`
+  ${mediaqueries.phablet`
     font-size: 0.8rem;
   `};
 `
@@ -201,7 +201,7 @@ const YLabs = styled.div`
   left: 1.1rem;
   color: #fff;
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     top: 0.4rem;
   `};
 `
@@ -211,7 +211,7 @@ const YStudio = styled.div`
   top: 1rem;
   color: #e9daac;
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     top: 0.5rem;
     left: 0.5rem;
   `};
@@ -244,10 +244,10 @@ const CareersGraphGridColumnContainer = styled.div`
   opacity: ${p => (p.animate ? 1 : 0)};
   transition: opacity 0.5s ease-out 3000ms;
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     left: -1rem;
   `};
-  ${media.phone`
+  ${mediaqueries.phone`
     left: -0.5rem;
   `};
 `

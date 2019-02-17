@@ -14,6 +14,11 @@ const footerLinks = [
   { to: '/contact', text: 'Contact' },
 ]
 
+/**
+ * The sites Footer is basic right now. But we have to account for light or
+ * dark backgrounds. Therefore, if you pass in dark or light mode it will
+ * render accordinly!
+ */
 const Footer = ({ mode = 'dark' }: { mode?: string }) => {
   const color = mode === 'dark' ? '#fff' : '#000'
   const transparentColor =

@@ -121,7 +121,9 @@ export interface IArticleNode extends IBasicNode {
   author: IAuthor
   category: ICategory[]
   hero: IGraphqlContentfulImage
+  backgroundImage: IGraphqlContentfulImage
   type?: string
+  backgroundColor: string
   path?: string
   fields: {
     path: string

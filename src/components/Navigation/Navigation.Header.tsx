@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import { Link, navigate } from 'gatsby'
 import OutsideClickHandler from 'react-outside-click-handler'
-import Swipeable from 'react-swipeable'
 import { isMobileOnly } from 'react-device-detect'
 
-import { Section, Logo, SocialLinks } from '@components'
-import { media } from '@styles'
+import { Section, Logo } from '@components'
 import mediaqueries from '@styles/media'
 
 const navLinks = [
@@ -179,29 +177,6 @@ class Navigation extends Component {
               </NavContainer>
             </Section>
           </NavFixedContainer>
-          <Swipeable
-            onSwipedUp={this.handleOutsideClick}
-            onSwipedDown={this.handleOutsideClick}
-          >
-            {/* <MobileNavListContainer active={isActive}>
-              <MobileNavControlsContainer active={isActive}>
-                <LogoContainer to="/">
-                  <Logo onlySymbol fill="black" />
-                </LogoContainer>
-                <button onClick={this.handleToggleClick}>
-                  <CloseIcon />
-                </button>
-              </MobileNavControlsContainer>
-              <MobileNavCenter>
-                <MobileNavList active={isActive}>
-                  <NavItems active={isActive} handleClick={this.navigateOut} />
-                </MobileNavList>
-                <SocialLinksContainer active={isActive}>
-                  <SocialLinks fill="black" />
-                </SocialLinksContainer>
-              </MobileNavCenter>
-            </MobileNavListContainer> */}
-          </Swipeable>
         </OutsideClickHandler>
       </ThemeProvider>
     )
@@ -263,7 +238,7 @@ const NavContainer = styled.div`
   display: flex;
   justify-content: space-between;
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     padding-top: 50px;
   `};
 `
@@ -294,7 +269,7 @@ const ToggleContainer = styled.button`
   right: -10px;
   cursor: pointer;
 
-  ${media.phablet`
+  ${mediaqueries.phablet`
     width: 30px;
     height: 30px;
     right: -10px;
@@ -318,7 +293,7 @@ const LeftToggle = styled(Toggle)`
   top: 23px;
   width: ${p => (p.active ? '20px' : '15px')};
 
-  ${media.phablet`
+  ${mediaqueries.phablet`
     top: 15px;
     width: 15px;
   `};
@@ -330,7 +305,7 @@ const RightToggle = styled(Toggle)`
   transform: ${p =>
     p.active ? 'translate3d(3px, 4px, 0) rotate(90deg)' : 'initial'};
 
-  ${media.phablet`
+  ${mediaqueries.phablet`
     top: 9px;
     transform: initial;
   `};
@@ -344,7 +319,7 @@ const Nav = styled.nav`
 const DesktopNavList = styled.ul`
   list-style: none;
 
-  ${media.phablet`
+  ${mediaqueries.phablet`
   display: none;
 
   `};
@@ -358,7 +333,7 @@ const NavItem = styled.li`
     margin-right: 40px;
   }
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     margin-right: 40px;
 
     &:first-child {
@@ -370,7 +345,7 @@ const NavItem = styled.li`
     }
   `};
 
-  ${media.phablet`
+  ${mediaqueries.phablet`
     display: block;
     margin: 0 auto;
 
@@ -402,7 +377,7 @@ const NavAnchor = styled.a`
     opacity: ${p => (p.disabled ? 0.15 : 0.6)};
   }
 
-  ${media.phablet`
+  ${mediaqueries.phablet`
     display: block;
     margin: 0 auto;
     text-align: center;
@@ -418,116 +393,6 @@ const NavAnchor = styled.a`
   transform: ${p => (p.active ? 'translateX(0)' : 'translateY(30px)')};
   `};
 `
-
-const MobileNavList = styled.ul`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  flex-direction: column-reverse;
-  list-style: none;
-  width: 200px;
-
-  &::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    max-width: 250px;
-    right: 0;
-    left: 0;
-    margin: 0 auto;
-    height: 1px;
-    bottom: 0;
-    background: #cdcdcd;
-    transition: transform 0.6s cubic-bezier(0.25, 0.4, 0.4, 1) 0.5s;
-    transform: ${p => (p.active ? 'scale(1)' : 'scale(0)')};
-  }
-`
-
-const MobileNavListContainer = styled.div`
-  position: fixed;
-  overflow: hidden;
-  z-index: 100000;
-  list-style: none;
-  display: none;
-  width: 100%;
-  height: 100vh;
-  background: #fff;
-  top: 16px;
-  left: 0;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  transform: translateY(${p => (p.active ? '0' : '100vh')});
-  transition: ${p =>
-    p.active
-      ? 'transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1)'
-      : 'transform 0.4s ease-in'};
-  will-change: transform;
-
-  ${media.phablet`
-    display: block;
-  `};
-`
-
-const SocialLinksContainer = styled.div`
-  margin: 0 auto;
-  max-width: 300px;
-  padding: 25px 25px 0;
-  display: flex;
-  justify-content: space-between;
-
-  transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.9) 0.5s,
-    transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.9) 0.5s;
-  opacity: ${p => (p.active ? 1 : 0)};
-  transform: ${p => (p.active ? 'translateX(0)' : 'translateY(30px)')};
-`
-
-const MobileNavCenter = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`
-const MobileNavControlsContainer = styled.div`
-  position: fixed;
-  z-index: 1;
-  top: 34px;
-  width: 100%;
-  padding: 0 40px;
-  display: flex;
-  justify-content: space-between;
-
-  transform: translateY(${p => (p.active ? '0' : '-100vh')});
-  transition: ${p =>
-    p.active
-      ? 'transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1)'
-      : 'transform 0.4s ease-in'};
-`
-
-const CloseIcon = () => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      fillRule="evenodd"
-      clipRule="evenodd"
-      d="M0 0H24V24H0V0Z"
-      stroke="black"
-      strokeOpacity="0.01"
-      strokeWidth="0"
-    />
-    <path
-      fillRule="evenodd"
-      clipRule="evenodd"
-      d="M19 6.4L17.6 5L12 10.6L6.4 5L5 6.4L10.6 12L5 17.6L6.4 19L12 13.4L17.6 19L19 17.6L13.4 12L19 6.4Z"
-      fill="black"
-    />
-  </svg>
-)
 
 const BackChevron = () => (
   <svg

@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
+import settings from '../../settings'
 
 import * as SocialIcons from '../../icons/social'
 import mediaqueries from '@styles/media'
@@ -9,28 +10,28 @@ const SocialLinks = ({ fill = 'white' }: { fill: string }) => (
     <SocialIconContainer
       target="_blank"
       rel="noopener"
-      href="https://www.facebook.com/narative.co/"
+      href={settings.urls.facebook}
     >
       <SocialIcons.FacebookIcon fill={fill} />
     </SocialIconContainer>
     <SocialIconContainer
       target="_blank"
       rel="noopener"
-      href="https://twitter.com/narative_co"
+      href={settings.urls.twitter}
     >
       <SocialIcons.TwitterIcon fill={fill} />
     </SocialIconContainer>
     <SocialIconContainer
       target="_blank"
       rel="noopener"
-      href="https://www.instagram.com/narative.co/"
+      href={settings.urls.instagram}
     >
       <SocialIcons.InstagramIcon fill={fill} />
     </SocialIconContainer>
     <SocialIconContainer
       target="_blank"
       rel="noopener"
-      href="https://www.linkedin.com/company/narative/"
+      href={settings.urls.linkedin}
     >
       <SocialIcons.LinkedinIcon fill={fill} />
     </SocialIconContainer>

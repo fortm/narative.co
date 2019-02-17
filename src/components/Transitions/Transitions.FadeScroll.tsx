@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 import { isMobile } from 'react-device-detect'
 import { IntersectionObserver } from '@components'
 
-class AnimatorFadeUp extends Component<{
+/**
+ * <TransitionsFadeScroll />
+ *
+ * As the element scrolls on and off screen we want to fade it in and out
+ * depending on the intersectionRatio.
+ */
+class TransitionsFadeScroll extends Component<{
   children: React.ReactNode
   enabledOnMobile?: boolean
 }> {
@@ -47,4 +53,4 @@ class AnimatorFadeUp extends Component<{
   }
 }
 
-export default AnimatorFadeUp
+export default TransitionsFadeScroll

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import { media } from '@styles'
+import mediaqueries from '@styles/media'
 
 interface CopyToClipboardProps {
   copyOnClick: string
@@ -86,7 +86,7 @@ const CopyIconText = styled.p`
     margin-left: 0.9rem;
   }
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     font-size: 1.4rem;
   `};
 `

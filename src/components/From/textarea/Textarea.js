@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { isMobile } from 'react-device-detect'
 
-import { media } from '@styles'
+import mediaqueries from '@styles/media'
 
 class Textarea extends Component {
   textarea = React.createRef()
@@ -74,7 +74,7 @@ const InputContainer = styled.div`
   padding: 1.4rem 0 1rem;
   width: 500px;
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     top: 0;
     padding: 1.4rem 0 2rem;
     width: 100%;
@@ -86,7 +86,7 @@ const InputError = styled.div`
   color: ${p => p.theme.colors.red};
   font-size: 1.2rem;
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     bottom: 0.5rem;
   `};
 `
@@ -94,7 +94,7 @@ const InputError = styled.div`
 const InputBorder = styled.div`
   position: relative;
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     padding: 0.35em 0;
   ${p =>
     p.hasError
@@ -104,7 +104,7 @@ const InputBorder = styled.div`
 `
 
 const InputBorderActive = styled.div`
-  ${media.tablet`
+  ${mediaqueries.tablet`
     position: absolute;
     left: 0;
     right: 0;
@@ -127,7 +127,7 @@ const StyledLabel = styled.label`
   border: none;
   pointer-events: none;
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     font-size: 1.6rem;
     color: ${p => (p.hasError ? p.theme.colors.red : 'rgba(0,0,0,0.33)')};
   `};
@@ -162,7 +162,7 @@ const LabelAnimation = styled.span`
       translateZ(0.001px);
   `};
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
   ${p =>
     p.hasValue &&
     `
@@ -171,7 +171,7 @@ const LabelAnimation = styled.span`
         translateZ(0.001px);
         `}`};
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     padding-top: 0.55rem;
   `};
 `
@@ -188,7 +188,7 @@ const StyledInput = styled.textarea`
   -webkit-text-fill-color: ${p => p.theme.colors.grey};
   resize: none;
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     font-size: 1.6rem;
     height: 1.8rem;
     color: #000;
@@ -209,7 +209,7 @@ const StyledInput = styled.textarea`
     transform: translateY(-1.28125em) scale(0.45) perspective(100px)
       translateZ(0.001px);
 
-    ${media.tablet`
+    ${mediaqueries.tablet`
       width: 133.3333333%;
       transform: translateY(-1.28125em) scale(0.8) perspective(100px)
         translateZ(0.001px);
@@ -226,7 +226,7 @@ const StyledInput = styled.textarea`
     transform: translateY(-1.28125em) scale(0.45) perspective(100px)
       translateZ(0.001px);
 
-    ${media.tablet`
+    ${mediaqueries.tablet`
       width: 133.3333333%;
       transform: translateY(-1.28125em) scale(0.8) perspective(100px)
         translateZ(0.001px);

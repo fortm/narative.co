@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import mediaqueries, { media } from '@styles/media'
+import mediaqueries from '@styles/media'
 
 export default ({ mode, toggleMode }) => (
   <>

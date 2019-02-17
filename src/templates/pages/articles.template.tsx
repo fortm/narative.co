@@ -2,15 +2,16 @@ import React, { Component, Fragment } from 'react'
 import { graphql, navigate } from 'gatsby'
 import styled from 'styled-components'
 
-import { media, transitions } from '@styles'
-import { Section, Helmet, Layout } from '@components'
 import Heading from '@components/Heading'
 import Footer from '@components/Navigation/Navigation.Footer'
-import { startAnimation } from '@utils'
 
 import ArticlesGrid from '../../sections/articles/Articles.Grid'
 import ArticlesFeatured from '../../sections/articles/Articles.Featured'
+
 import mediaqueries from '@styles/media'
+import transitions from '@styles/transitions'
+import { Section, SEO, Layout } from '@components'
+import { startAnimation } from '@utils'
 
 class ArticlesPage extends Component {
   contentful = this.props.data.allContentfulHomePage.edges[0].node
@@ -47,7 +48,7 @@ class ArticlesPage extends Component {
     return (
       <Layout nav={navConfig}>
         <Fragment>
-          <Helmet
+          <SEO
             title={seo.title}
             description={seo.description}
             image={seo.image.file.url}
@@ -132,7 +133,7 @@ const ContentContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
 
-  ${media.phablet`
+  ${mediaqueries.phablet`
     height: calc(100vh - 90px);
     padding: 0;
     top: -45px;
@@ -150,7 +151,7 @@ const MainText = styled.p`
   color: ${p => p.theme.colors.grey};
   line-height: 1.3;
 
-  ${media.phablet`
+  ${mediaqueries.phablet`
     font-size: 2.2rem;
   `};
 `

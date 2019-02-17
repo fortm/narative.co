@@ -12,20 +12,20 @@ const toEm = (size: number) => size / 16 + 'em'
  *
  * @example
  *
- *    ${media.phone` width: 100px; `};
- *    ${media.tablet_up` width: 200px; `};
+ *    ${mediaqueries.phone` width: 100px; `};
+ *    ${mediaqueries.tablet_up` width: 200px; `};
  */
 
 const mediaqueries: IMediaqueries = theme.breakpoints.reduce(
   (acc, [label, size], i) => ({
     ...acc,
-    // max-width media query e.g. media.desktop
+    // max-width media query e.g. mediaqueries.desktop
     [label]: (...args: TemplateStringsArray[]) => css`
       @media (max-width: ${toEm(size)}) {
         ${css(...args)};
       }
     `,
-    // min-width media query e.g. media.desktop_up
+    // min-width media query e.g. mediaqueries.desktop_up
     // This is the breakpoint prior's size +1
     [`${label}_up`]: (...args: TemplateStringsArray[]) => css`
       @media (min-width: ${toEm(theme.breakpoints[i - 1][1] + 1)}) {

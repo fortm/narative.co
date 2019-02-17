@@ -12,7 +12,7 @@ import {
   Form,
   SocialLinks,
 } from '@components'
-import { media } from '@styles'
+import mediaqueries from '@styles/media'
 import { apiCall, startAnimation } from '@utils'
 import { SubmittedCheckIcon } from '../../icons/ui'
 
@@ -196,7 +196,7 @@ const FormHeader = styled(Heading.h2)`
   width: 265px;
   padding-right: ${p => (p.morePadding ? '100px' : '76px')};
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     width: 100%;
     padding: 0;
     margin-bottom: 5px;
@@ -208,7 +208,7 @@ const FormSection = styled.div`
   display: flex;
   margin-bottom: ${p => (p.spacing === 'large' ? '7rem' : '2.5rem')};
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     margin-bottom: ${p => (p.spacing === 'large' ? '2rem' : '1rem')};
     flex-direction: column;
   `};
@@ -236,7 +236,7 @@ const MobileContactWithEmail = styled.a`
   color: rgba(0, 0, 0, 0.33);
   margin-top: 40px;
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     display: block;
   `};
 
@@ -277,7 +277,7 @@ const ContactWithEmail = styled.div`
     background: #c6c6c6;
   }
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     display: none;
   `};
 `
@@ -289,18 +289,18 @@ const StyledFormikForm = styled(FormikForm)`
   background: #fff;
   z-index: 99999;
 
-  ${media.desktop_large`
+  ${mediaqueries.desktop_large`
     margin-left: 0;
     width: 100%;
     padding: 0 4rem 5rem;
   `};
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     margin: 0 auto;
     padding: 0 0 5rem;
   `};
 
-  ${media.phablet`
+  ${mediaqueries.phablet`
     width: 100%;
   `};
 `
@@ -319,7 +319,7 @@ const SubmittedScreen = styled.div`
   opacity: 0;
   animation: ${fadeIn} 50ms 500ms ${p => p.theme.transitions.in} forwards;
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     padding-bottom: 0;
     margin: 0 auto;
   `};
@@ -367,7 +367,7 @@ const ButtonContainer = styled.div`
   opacity: ${p => (p.animation ? 1 : 0)};
   transform: ${p => (p.animation ? 'translateY(0)' : 'translateY(20px)')};
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     display: none;
   `};
 `
@@ -375,7 +375,7 @@ const ButtonContainer = styled.div`
 const MobileButtonContainer = styled.div`
   display: none;
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     display: block;
   `};
 `

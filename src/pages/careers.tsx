@@ -4,18 +4,19 @@ import Img from 'gatsby-image'
 import styled from 'styled-components'
 
 import {
-  AnimatorFadeUp,
+  Transitions,
   CareersAccordian,
   CareersGraph,
   CareersImages,
   Section,
   Heading,
-  Helmet,
+  SEO,
   Layout,
   Perks,
 } from '@components'
 import Footer from '@components/Navigation/Navigation.Footer'
-import { media, transitions } from '@styles'
+import mediaqueries from '@styles/media'
+import transitions from '@styles/transitions'
 import { startAnimation } from '@utils'
 
 class CareersPage extends Component<{}, { animation: string }> {
@@ -42,7 +43,7 @@ class CareersPage extends Component<{}, { animation: string }> {
 
     return (
       <Layout background={pageBackground} nav={navConfig}>
-        <Helmet
+        <SEO
           title={contentful.seo.title}
           description={contentful.seo.description}
           image={contentful.seo.image.file.url}
@@ -158,6 +159,27 @@ class CareersPage extends Component<{}, { animation: string }> {
 
 export default CareersPage
 
+const CareerRow = ({
+  children,
+  header,
+  hideOverflow,
+}: {
+  children: React.ReactNode
+  header: string
+  hideOverflow?: boolean
+}) => (
+  <CareerRowSpacer>
+    <Transitions.FadeScroll>
+      <Section hideOverflow={hideOverflow}>
+        <CareerRowContainer>
+          <CareerRowHeader>{header}</CareerRowHeader>
+          <CareerRowContent>{children}</CareerRowContent>
+        </CareerRowContainer>
+      </Section>
+    </Transitions.FadeScroll>
+  </CareerRowSpacer>
+)
+
 export const pageQuery = graphql`
   query CareersPageQuery {
     allContentfulCareersPage {
@@ -200,31 +222,18 @@ export const pageQuery = graphql`
   }
 `
 
-const CareerRow = ({ children, header, hideOverflow }) => (
-  <CareerRowSpacer>
-    <AnimatorFadeUp>
-      <Section hideOverflow={hideOverflow}>
-        <CareerRowContainer>
-          <CareerRowHeader>{header}</CareerRowHeader>
-          <CareerRowContent>{children}</CareerRowContent>
-        </CareerRowContainer>
-      </Section>
-    </AnimatorFadeUp>
-  </CareerRowSpacer>
-)
-
 const CareerRowSpacer = styled.div`
   padding-bottom: 20rem;
 
-  ${media.desktop_large`
+  ${mediaqueries.desktop_large`
     padding-bottom: 15rem;
   `};
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     padding-bottom: 10rem;
   `};
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     padding-bottom: 6rem;
   `};
 `
@@ -232,7 +241,7 @@ const CareerRowSpacer = styled.div`
 const CareerRowContainer = styled.div`
   display: flex;
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     flex-direction: column;
   `};
 `
@@ -247,12 +256,12 @@ const CareerRowHeader = styled(Heading.h2)`
   padding-bottom: 1rem;
   margin-right: 6.3rem;
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     flex-direction: column;
     margin: 0 0 3.5rem 0;
   `};
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     padding-bottom: 0;
     margin-bottom: 1rem;
     width: 100%;
@@ -273,7 +282,7 @@ const GridContainer = styled.div`
   height: calc(88vh - 130px);
   width: 100%;
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     height: initial
     grid-template-columns: 1fr;
 
@@ -282,7 +291,7 @@ const GridContainer = styled.div`
     top: -45px;
   `};
 
-  ${media.phone`
+  ${mediaqueries.phone`
     width: 100%;
   `};
 `
@@ -290,7 +299,7 @@ const GridContainer = styled.div`
 const TextContainer = styled.div`
   ${transitions.fadeUp};
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     transition-delay: 0ms !important;
     transition-duration: 500ms !important;
   `};
@@ -314,7 +323,7 @@ const MainText = styled.p`
   color: ${p => p.theme.colors.grey};
   line-height: 1.3;
 
-  ${media.phablet`
+  ${mediaqueries.phablet`
     font-size: 2.2rem;
   `};
 `
@@ -326,7 +335,7 @@ const LeftContainer = styled.div`
   align-items: center;
   max-width: 62.1rem;
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     justify-content: flex-start;
     width: 100%;
     height: initial;
@@ -340,11 +349,11 @@ const ImageContainer = styled.div`
   right: -8rem;
   margin: 0 auto;
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     right: 0;
   `};
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     margin-bottom: 12rem;
   `};
 `
@@ -389,22 +398,22 @@ const ImageTraceContainer = styled.div`
     }
   }
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     left: -21px;
     top: -13px;
   `};
 
-  ${media.phablet`
+  ${mediaqueries.phablet`
     left: -16px;
     top: -13px;
   `};
 
-  ${media.phone`
+  ${mediaqueries.phone`
     left: -15px;
     top: -10px;
   `};
 
-  ${media.phone_small`
+  ${mediaqueries.phone_small`
     left: -12px;
     top: -9px;
   `};
@@ -432,7 +441,7 @@ const ScrollLine = styled.div`
     background: ${p => p.theme.colors.grey};
   }
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     animation: slideUpMore 1.4s var(--ease-out-cubic) forwards;
   `};
 
@@ -459,12 +468,12 @@ const RightContainer = styled.div`
   justify-content: flex-end;
   padding-top: 4rem;
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     justify-content: center;
     margin-bottom: 5rem;
   `};
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     display: none;
   `};
 `
@@ -474,13 +483,13 @@ const SectionCopy = styled.p`
   line-height: 1.2;
   max-width: ${props => (props.maxWidth ? props.maxWidth : '100%')};
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     font-size: 2.2rem;
     line-height: 1.4;
     max-width: 100%;
   `};
 
-  ${media.tablet`
+  ${mediaqueries.tablet`
     font-size: 1.8rem;
   `};
 `
@@ -498,7 +507,7 @@ const WhatWeDoList = styled.ul`
   width: 38rem;
   list-style: none;
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     width: 100%;
   `};
 `
@@ -507,7 +516,7 @@ const FlexColumn = styled.div`
   display: flex;
   justify-content: space-between;
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     flex-direction: column;
   `};
 `
@@ -517,7 +526,7 @@ const WhatWeDoContent = styled.div`
   flex-direction: column;
   justify-content: space-between;
 
-  ${media.desktop`
+  ${mediaqueries.desktop`
     margin-bottom: 2.5rem;
   `};
 `
@@ -528,7 +537,7 @@ const Content = styled.div`
 `
 
 const MobileHero = styled.div`
-  ${media.tablet`
+  ${mediaqueries.tablet`
     left: 0;
     right: 0;
     width: 100vw;
@@ -536,7 +545,7 @@ const MobileHero = styled.div`
 `
 
 const MobileBody = styled.div`
-  ${media.tablet`
+  ${mediaqueries.tablet`
     padding-top: 7rem;
     z-index: 8;
     position: relative;
