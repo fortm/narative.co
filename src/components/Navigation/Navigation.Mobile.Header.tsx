@@ -118,7 +118,7 @@ const StyledLink = styled(Link)`
   opacity: ${p => (p.active ? 1 : 0)};
   transform: translateY(${p => (p.active ? 0 : -10)}px);
   transition: all 0.5s cubic-bezier(0.32, 0.08, 0.24, 1)
-    ${p => p.index * 24 + 75}ms;
+    ${p => p.index * 28 + 100}ms;
 
   &[data-active='true'] {
     color: #7a8085;
