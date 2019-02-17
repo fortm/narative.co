@@ -129,7 +129,7 @@ class LayoutContainer extends Component<LayoutProps, { animation: string }> {
 
     return (
       <>
-        <NavigationMobile navigateOut={this.navigateOut} />
+        <NavigationMobile active={active} navigateOut={this.navigateOut} />
         <Swipeable onSwipedUp={this.closeMobileNav}>
           <SiteContainer
             active={active}
