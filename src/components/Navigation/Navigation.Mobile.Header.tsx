@@ -80,7 +80,7 @@ const SocialIconsFooter = styled.div`
 
   opacity: ${p => (p.active ? 1 : 0)};
   transform: translateY(${p => (p.active ? 0 : -12)}px);
-  transition: all 0.5s var(--ease-out-quad) 200ms;
+  transition: all 0.5s var(--ease-out-quad) 100ms;
 
   @media screen and (max-height: 700px) {
     margin-bottom: 40px;
@@ -118,7 +118,7 @@ const StyledLink = styled(Link)`
   opacity: ${p => (p.active ? 1 : 0)};
   transform: translateY(${p => (p.active ? 0 : -10)}px);
   transition: all 0.5s cubic-bezier(0.32, 0.08, 0.24, 1)
-    ${p => p.index * 45 + 200}ms;
+    ${p => p.index * 45 + 150}ms;
 
   &[data-active='true'] {
     color: #7a8085;
