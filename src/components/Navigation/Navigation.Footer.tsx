@@ -161,6 +161,11 @@ const FooterLink = styled(Link)`
 
   ${mediaqueries.tablet`
     font-weight: 400;
+    opacity: 1;
+
+    &:hover {
+      opacity: 1;
+    }
 
     &:not(:last-child) {
       margin: 0 auto 35px;

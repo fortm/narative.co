@@ -172,6 +172,5 @@ const ContentContainer = styled.div`
   ${mediaqueries.phablet`
     height: calc(100vh - 90px);
     padding: 0;
-    top: -45px;
   `};
 `

@@ -1,5 +1,8 @@
 const { BLOCKS } = require('@contentful/rich-text-types')
 // Options used in the documentToHtmlString renderer
+const highlightCode = require('./prism/highlight-code.js')
+var Prism = require('prismjs')
+require('prismjs/plugins/keep-markup/prism-keep-markup.js')
 
 module.exports.HTMLRendererOpts = {
   renderNode: {
@@ -8,6 +11,32 @@ module.exports.HTMLRendererOpts = {
 
       let { align, image, text, id } = node.data.target.fields
       const contentfulId = node.data.target.sys.contentType.sys.id
+
+      if (contentfulId === 'code') {
+        const code = `var data = 1; \
+        var data = 1; \
+        var data = 1;`
+
+        const higlighted = Prism.highlight(
+          code,
+          Prism.languages.javascript,
+          node.data.target.fields.language.en.toLowerCase()
+        )
+
+        return `
+          <pre class="language-js">
+            <code class="language-js">
+              ${higlighted}
+            </code>
+          </pre>
+        `
+
+        return Prism.highlight(
+          code,
+          Prism.languages.javascript,
+          node.data.target.fields.language.en.toLowerCase()
+        )
+      }
 
       if (id && id.en && contentfulId === 'embed') {
         return `

@@ -69,7 +69,7 @@ class CareersAccordian extends Component<
                     believe you have something unique to bring to the team, get
                     in touch at{' '}
                     <a href="mailto:careers@narative.co">careers@narative.co</a>
-                    . We love meeting new people!
+                    .<HideOnMobile> We love meeting new people!</HideOnMobile>
                   </span>
                   <button
                     onClick={() => this.setState({ copied: true })}
@@ -189,6 +189,10 @@ const AccordianContainer = styled.div`
     margin:  0 auto 10rem;
     top: ${p => (p.empty ? '0rem' : '-4rem')};
     height: auto;
+    background: #1D2128;
+    border-radius: 5px;
+    border: none;
+    padding: 2rem;
   `};
 
   ${mediaqueries.phone`
@@ -311,13 +315,16 @@ const AccordianCareersEmail = styled.p`
 
   ${mediaqueries.tablet`
     font-size: 1.4rem;
+    margin-top: 0;
 
     span {
       width: 80%;
     }
-
-    & > button {
-      margin-top: 1rem;
-    }
   `};
+`
+
+const HideOnMobile = styled.span`
+  ${mediaqueries.tablet`
+    display: none; 
+  `}
 `

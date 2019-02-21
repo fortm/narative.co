@@ -101,6 +101,10 @@ const IconWrapper = styled.button`
     display: inline-flex;
     margin: 0 20px 0 0;
     width: 63px;
+   
+    &:hover {
+      opacity: 0.25;
+    }
   `}
 `
 

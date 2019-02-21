@@ -57,7 +57,7 @@ class ContactPage extends Component<{}, { animation: string }> {
     const { animation } = this.state
     const navConfig = {
       offset: true,
-      fixed: false,
+      fixed: true,
       theme: 'light',
     }
 

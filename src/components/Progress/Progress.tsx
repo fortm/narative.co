@@ -10,12 +10,14 @@ export interface IProgress {
   onClose?: () => void
 }
 
-class Progress extends Component<IProgress, { value: number }> {
+class Progress extends Component<IProgress, { value: number; tacks: [] }> {
   ticking = false
 
-  state = { value: 0 }
+  state = { value: 0, tacks: [] }
 
   componentDidMount() {
+    this.handleProgressHeadings()
+
     window.addEventListener('scroll', this.onScroll)
     window.addEventListener('resize', this.onScroll)
   }
@@ -25,6 +27,33 @@ class Progress extends Component<IProgress, { value: number }> {
       window.removeEventListener('scroll', this.onScroll)
       window.removeEventListener('resize', this.onScroll)
     }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.height !== this.props.height) {
+      this.handleProgressHeadings()
+    }
+  }
+
+  handleProgressHeadings = () => {
+    const { height } = this.props
+    const h1 = document.querySelector('h1')
+    const headings = Array.from(document.querySelectorAll('h2')).reverse()
+    headings.push(h1)
+
+    const tacks = headings.map(heading => {
+      const offsetTop = heading.offsetTop
+      const text = heading.innerText
+      const headingOffset = (offsetTop / height) * 100
+
+      return {
+        text,
+        offset: offsetTop,
+        offetPercentage: headingOffset,
+      }
+    })
+
+    this.setState({ tacks })
   }
 
   onScroll = (event: Event) => {
@@ -48,8 +77,7 @@ class Progress extends Component<IProgress, { value: number }> {
   }
 
   render = () => {
-    const { value } = this.state
-    const tacks = Array(4).fill('')
+    const { value, tacks } = this.state
     const progressOffset = { transform: `translateY(${value - 100}%)` }
 
     return (
@@ -57,16 +85,21 @@ class Progress extends Component<IProgress, { value: number }> {
         <Trackline aria-hidden="true" value={value} max={100}>
           <ProgressLine style={progressOffset} />
         </Trackline>
-        <Tracks>
-          {tacks.map((tack: string, index: number) => (
-            <Tack
-              key={index}
-              index={index}
-              value={value}
-              total={tacks.length}
-            />
-          ))}
-        </Tracks>
+        <Headings>
+          <HeadingsHover>
+            {tacks.map((tack: string, index: number) => (
+              <Heading
+                key={tack.text}
+                index={index}
+                value={value}
+                offset={tack.offetPercentage}
+                onClick={() => scrollTo(0, tack.offset + this.props.offset)}
+              >
+                {tack.text}
+              </Heading>
+            ))}
+          </HeadingsHover>
+        </Headings>
       </Frame>
     )
   }
@@ -76,35 +109,40 @@ export default Progress
 
 const Frame = memo(styled.div`
   position: relative;
-  opacity: 0.5;
 `)
 
-const Tracks = styled.div`
+const Headings = styled.div`
   position: absolute;
   top: 0;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 `
 
-const Tack = styled.span`
+const HeadingsHover = styled.div`
   position: relative;
-  width: 7px;
-  height: 1px;
-  right: 3px;
-  background-color: ${p =>
-    p.index * (99.9 / (p.total - 1)) <= p.value
-      ? p.theme.mode.progress.complete
-      : p.theme.mode.progress.bg};
-  transition: background 0.2s;
+  opacity: 0;
+  width: 180px;
+  height: 100%;
+  transition: opacity 0.3s linear;
 
-  &:first-child {
-    top: -1px;
+  &:hover {
+    opacity: 1;
   }
+`
 
-  &:last-child {
-    top: 1px;
+const Heading = styled.span`
+  position: absolute;
+  cursor: pointer;
+  top: ${p => p.offset}%;
+  left: 11px;
+  width: 180px;
+  line-height: 1.2;
+  color: ${p => p.theme.mode.text};
+  opacity: ${p =>
+    p.value - 6 > p.offset || p.value + 1 < p.offset ? 0.25 : '1 !important'};
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.5;
   }
 `
 

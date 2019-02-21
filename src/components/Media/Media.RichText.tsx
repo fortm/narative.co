@@ -10,7 +10,12 @@ import { IRichText } from '@typings'
 // Specifically handling Twitter embeds that get passed from our htmls htmlRenderer
 const transform = node => {
   if (node.name === 'twitter' && node.attribs.twitterid) {
-    return <TwitterTweetEmbed tweetId={node.attribs.twitterid} />
+    return (
+      <TwitterTweetEmbed
+        key={node.attribs.twitterid}
+        tweetId={node.attribs.twitterid}
+      />
+    )
   }
 }
 
@@ -50,20 +55,6 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
 
-  * {
-    line-height: 1.5;
-    font-size: 2.2rem;
-    font-family: ${p => p.theme.fontfamily.sansSerif};
-    color: ${p => p.theme.mode.text};
-    margin-bottom: 2rem;
-    ${transitionColor};
-
-    & + h1,
-    & + h2,
-    & + h3 {
-    }
-  }
-
   h1,
   h2,
   h3,
@@ -95,11 +86,11 @@ const Content = styled.div`
     font-size: 2.2rem;
     line-height: 1.45;
     margin-bottom: 2rem;
-    margin-top: 45px;
+    padding-top: 45px;
 
     ${mediaqueries.desktop_up`
       font-size: 3.2rem;
-      margin-top: 65px;
+      paddng-top: 65px;
       margin-bottom: 2.5rem;
     `};
   }
@@ -184,7 +175,7 @@ const Content = styled.div`
 
   blockquote.pull__quote {
     margin: 35px auto 65px;
-    line-height: 1.1;
+    line-height: 1.25;
     max-width: 780px;
     color: ${p => p.theme.mode.text};
     font-family: ${p => p.theme.fontfamily.serif};
@@ -255,7 +246,7 @@ const Content = styled.div`
     font-weight: 600;
     position: absolute;
     left: -3rem;
-    top: 0.1rem;
+    top: 0.85rem;
 
     ${mediaqueries.tablet`
       left: 0;
@@ -292,7 +283,7 @@ const Content = styled.div`
     max-width: ${imageWidths.regular};;
 
     ${mediaqueries.tablet`
-      padding: 0 20px;
+      width: calc(100vw - 40px);
     `}
   }
 

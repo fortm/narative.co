@@ -146,7 +146,7 @@ class CareersPage extends Component<{}, { animation: string }> {
                 great things, you might fit right in.
               </SectionCopy>
             </CareerRow>
-            <Section>
+            <Section narrow>
               <CareersAccordian />
             </Section>
             <Footer />
@@ -170,7 +170,7 @@ const CareerRow = ({
 }) => (
   <CareerRowSpacer>
     <Transitions.FadeScroll>
-      <Section hideOverflow={hideOverflow}>
+      <Section hideOverflow={hideOverflow} narrow>
         <CareerRowContainer>
           <CareerRowHeader>{header}</CareerRowHeader>
           <CareerRowContent>{children}</CareerRowContent>
@@ -285,10 +285,8 @@ const GridContainer = styled.div`
   ${mediaqueries.desktop`
     height: initial
     grid-template-columns: 1fr;
-
-        height: calc(100vh - 140px);
+    height: calc(100vh - 140px);
     padding: 0;
-    top: -45px;
   `};
 
   ${mediaqueries.phone`
@@ -445,6 +443,10 @@ const ScrollLine = styled.div`
     animation: slideUpMore 1.4s var(--ease-out-cubic) forwards;
   `};
 
+  @media screen and (max-height: 700px) and (max-width: 768px) {
+    top: 7rem;
+  }
+
   @keyframes slideUp {
     to {
       transform: translateY(0);
@@ -549,7 +551,7 @@ const MobileBody = styled.div`
     padding-top: 7rem;
     z-index: 8;
     position: relative;
-    background: linear-gradient(rgb(9, 10, 12),rgb(17, 18, 22) 60%,#242A33 100%);
+    background: linear-gradient(rgb(9, 10, 12),rgb(17, 18, 22) 78%,#242A33 100%);
   `};
 `
 

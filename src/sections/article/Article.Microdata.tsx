@@ -41,7 +41,15 @@ export default ({ article, location }: { article: IArticleNode }) => (
 )
 
 const Microdata = ({
-  article: { title, excerpt, author, hero, postDate, backgroundImage },
+  article: {
+    canonical,
+    title,
+    excerpt,
+    author,
+    hero,
+    postDate,
+    backgroundImage,
+  },
   location,
   publicationLogo,
   sectionName,
@@ -73,7 +81,12 @@ const Microdata = ({
           { name: title, item: location.href },
         ]}
       />
-      <SEO title={title} description={excerpt} image={backgroundImage.seo.src}>
+      <SEO
+        title={title}
+        description={excerpt}
+        image={backgroundImage.seo.src}
+        canonical={canonical}
+      >
         <script type="application/ld+json">
           {`
           {

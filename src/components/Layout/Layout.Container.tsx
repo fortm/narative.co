@@ -6,6 +6,8 @@ import Swipeable from 'react-swipeable'
 import NavigationDesktop from '@components/Navigation/Navigation.Header'
 import NavigationMobile from '@components/Navigation/Navigation.Mobile.Header'
 
+import { ExIcon } from '../../icons/ui'
+
 import mediaqueries from '@styles/media'
 
 import {
@@ -24,11 +26,19 @@ interface LayoutProps {
   }
 }
 
+interface LayoutState {
+  active: boolean
+  mobileNavOffset: number
+  mask: boolean
+  previousPath: string
+  showPreviousPath: boolean
+}
+
 const MOBILE_NAV_DURATION = 500
 const MOBILE_NAV_OFFSET = 576
 const MOBILE_NAV_OFFSET_SHORT = 420
 
-class LayoutContainer extends Component<LayoutProps, { animation: string }> {
+class LayoutContainer extends Component<LayoutProps, LayoutState> {
   static defaultProps = {
     nav: {
       theme: 'light',
@@ -38,16 +48,47 @@ class LayoutContainer extends Component<LayoutProps, { animation: string }> {
   }
 
   container = React.createRef()
-  state = { active: false, mobileNavOffset: 0, mask: false }
+
+  state = {
+    active: false,
+    mobileNavOffset: 0,
+    mask: false,
+    previousPath: '',
+    showPreviousPath: false,
+  }
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResize)
+
+    window.addEventListener('beforeunload', () => {
+      window.localStorage.setItem('previousPath', '')
+    })
   }
 
   componentWillUnmount() {
     if (typeof window !== 'undefined') {
       window.removeEventListener('resize', this.handleResize)
     }
+  }
+
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    if (typeof window !== 'undefined') {
+      const previousPathFromStorage = localStorage.getItem('previousPath')
+      const urlsThatUseBackButton = [{ path: '/articles', checkNest: true }]
+      const currentPath = window.location.pathname
+      const isNestedRoute = currentPath.split('/')[2]
+
+      if (prevState.previousPath !== previousPathFromStorage) {
+        this.setState({
+          previousPath: previousPathFromStorage,
+          showPreviousPath: urlsThatUseBackButton.some(rule => {
+            const nest = rule.checkNest ? isNestedRoute : true
+            return nest && currentPath.indexOf(rule.path) >= 0
+          }),
+        })
+      }
+    }
+    return null
   }
 
   /**
@@ -124,7 +165,13 @@ class LayoutContainer extends Component<LayoutProps, { animation: string }> {
 
   render() {
     const { background, children, nav } = this.props
-    const { active, mask, mobileNavOffset } = this.state
+    const {
+      active,
+      mask,
+      mobileNavOffset,
+      previousPath,
+      showPreviousPath,
+    } = this.state
     const navTheme = nav.theme
 
     return (
@@ -145,9 +192,24 @@ class LayoutContainer extends Component<LayoutProps, { animation: string }> {
              * it's absolutely positioned and needs the relative parent to properly
              * animate opened and closed
              */}
-            <MobileHamburger active={active} onClick={this.openMobileNav}>
-              <LeftToggle active={active} theme={navTheme} />
-              <RightToggle theme={navTheme} />
+
+            <MobileHamburger
+              fixed={nav.fixed}
+              active={active}
+              onClick={
+                showPreviousPath
+                  ? () => navigate(`/${previousPath.split('/')[1]}`)
+                  : this.openMobileNav
+              }
+            >
+              {showPreviousPath ? (
+                <ExIcon />
+              ) : (
+                <>
+                  <LeftToggle active={active} theme={navTheme} />
+                  <RightToggle theme={navTheme} />
+                </>
+              )}
             </MobileHamburger>
 
             {/* The desktop navigation also sits in the SiteContainer */}
@@ -172,7 +234,9 @@ export default LayoutContainer
 
 const SiteContainer = styled.div`
   position: ${p => (p.active || p.mask ? 'fixed' : 'relative')};
-  background: linear-gradient(180deg, #08080b 0%, #0b0b0e 44.18%, #111216 100%);
+  background: ${p =>
+    p.background ||
+    `linear-gradient(180deg, #08080b 0%, #0b0b0e 44.18%, #111216 100%)`};
   min-height: 100vh;
 
   ${p =>
@@ -187,8 +251,8 @@ const SiteContainer = styled.div`
   `};
 
   ${mediaqueries.tablet`
-    transform: translateY(${p =>
-      p.active ? p.mobileNavOffset : 0}px) translateZ(0);
+    transform: ${p =>
+      p.active ? `translateY(${p.mobileNavOffset}px)` : 'none'};
     transition: transform ${MOBILE_NAV_DURATION +
       60}ms cubic-bezier(0.52, 0.16, 0.24, 1);
     width: 100vw;
@@ -226,7 +290,7 @@ const SiteContainer = styled.div`
 `
 
 const MobileHamburger = styled.button`
-  position: absolute;
+  position: ${p => (p.fixed ? 'fixed' : 'absolute')};
   z-index: 999;
   width: 30px;
   height: 30px;

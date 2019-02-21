@@ -27,9 +27,9 @@ const NavigationMobile = ({
   naviagteOut: (Event, string) => void
 }) => (
   <Frame>
-    <SocialIconsFooter active={active}>
+    <SocialIconsHeader active={active}>
       <SocialLinks fill="#fff" />
-    </SocialIconsFooter>
+    </SocialIconsHeader>
     <HorizontalRule active={active} />
     <MobileLinks active={active}>
       {footerLinks.map((link, index) => (
@@ -72,7 +72,7 @@ const Frame = styled.nav`
   `}
 `
 
-const SocialIconsFooter = styled.div`
+const SocialIconsHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,7 +80,7 @@ const SocialIconsFooter = styled.div`
 
   opacity: ${p => (p.active ? 1 : 0)};
   transform: translateY(${p => (p.active ? 0 : -12)}px);
-  transition: all 0.5s var(--ease-out-quad) 25ms;
+  transition: all 0.5s var(--ease-out-quad) 100ms;
 
   @media screen and (max-height: 700px) {
     margin-bottom: 40px;
@@ -98,7 +98,7 @@ const HorizontalRule = styled.hr`
   transition: transform 0.5s var(--ease-out-quad), opacity 0.4s ease-out;
 
   @media screen and (max-height: 700px) {
-    margin: 0 20px 25px;
+    margin: 0 40px 25px;
   }
 `
 
@@ -118,7 +118,7 @@ const StyledLink = styled(Link)`
   opacity: ${p => (p.active ? 1 : 0)};
   transform: translateY(${p => (p.active ? 0 : -10)}px);
   transition: all 0.5s cubic-bezier(0.32, 0.08, 0.24, 1)
-    ${p => p.index * 28 + 100}ms;
+    ${p => p.index * 28 + 175}ms;
 
   &[data-active='true'] {
     color: #7a8085;

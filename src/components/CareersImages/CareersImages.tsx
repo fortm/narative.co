@@ -120,6 +120,7 @@ class CareersImages extends Component {
         </CareersImagesContainer>
         <CareersImagesContainerMobile>
           <HorizontalScroll
+            narrow
             list={this.props.images}
             name="image"
             render={({ image }) => (

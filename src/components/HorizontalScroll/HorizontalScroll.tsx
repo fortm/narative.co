@@ -25,15 +25,21 @@ interface HorizontalScrollProps {
   list: []
   name: string
   render: () => void
+  narrow?: boolean
 }
 
-const HorizontalScroll = ({ list, name, render }: HorizontalScrollProps) => (
-  <HorizontalScrollContainer>
+const HorizontalScroll = ({
+  list,
+  name,
+  render,
+  narrow,
+}: HorizontalScrollProps) => (
+  <HorizontalScrollContainer narrow={narrow}>
     <HorizontalScrollInner>
       <HorizontalScroller>
         {list.map((props, index) => {
           return (
-            <HorizontalScrollItem key={index}>
+            <HorizontalScrollItem key={index} narrow={narrow}>
               {render({ [name]: props, index })}
             </HorizontalScrollItem>
           )
@@ -51,8 +57,8 @@ HorizontalScroll.defaultProps = {
 export default HorizontalScroll
 
 const HorizontalScrollContainer = styled.div`
-  margin-right: -4rem !important;
-  margin-left: -4rem !important;
+  margin-right: -${p => (p.narrow ? 2 : 4)}rem !important;
+  margin-left: -${p => (p.narrow ? 2 : 4)}rem !important;
   overflow-y: hidden !important;
   overflow-x: hidden !important;
   -webkit-overflow-scrolling: touch;
@@ -79,10 +85,10 @@ const HorizontalScrollItem = styled.div`
   margin-left: 0.75rem !important;
 
   &:first-child {
-    margin-left: 4rem !important;
+    margin-left: ${p => (p.narrow ? 2 : 4)}rem !important;
   }
 
   &:last-child {
-    margin-right: 4rem !important;
+    margin-right: ${p => (p.narrow ? 2 : 4)}rem !important;
   }
 `

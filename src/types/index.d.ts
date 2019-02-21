@@ -118,6 +118,7 @@ export interface IDetailPage extends IGatsbyMadePage {
 
 export interface IArticleNode extends IBasicNode {
   slug: string
+  canonical?: string
   author: IAuthor
   category: ICategory[]
   hero: IGraphqlContentfulImage

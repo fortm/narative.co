@@ -26,6 +26,7 @@ interface HelmetProps {
   pathname: string
   image?: string
   url?: string
+  canonical?: string
   contentType?: string
   published?: string
   updated?: string
@@ -106,6 +107,7 @@ const SEO = ({
   title,
   description = seoDescription,
   pathname,
+  canonical,
   image,
   contentType,
   published,
@@ -121,7 +123,9 @@ const SEO = ({
       link={[
         {
           rel: 'canonical',
-          href: `https://www.narative.co${pathname ? pathname : '/'}`,
+          href: canonical
+            ? canonical
+            : `https://www.narative.co${pathname ? pathname : '/'}`,
         },
       ]}
       meta={getMetaTags({

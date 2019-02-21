@@ -143,8 +143,9 @@ const Item = styled.div`
   `}
 `
 
-const Title = styled(Heading.h2)`
+const Title = styled(Heading.h3)`
   font-size: 22px;
+  line-height: 1.2;
   margin-bottom: ${p => (p.hasOverflow ? '45px' : '10px')};
   color: ${p => p.theme.mode.text};
   transition: color 0.3s ease-in-out;

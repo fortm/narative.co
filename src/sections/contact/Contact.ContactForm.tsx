@@ -322,6 +322,8 @@ const SubmittedScreen = styled.div`
   ${mediaqueries.desktop`
     padding-bottom: 0;
     margin: 0 auto;
+    width: 100%;
+    padding-bottom: 8rem;
   `};
 
   svg {

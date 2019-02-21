@@ -110,7 +110,7 @@ class Article extends Component<ArticleProps, PostState> {
         <ArticleMicrodata article={article} location={location} />
         <ArticleHero article={article} />
         <Aside {...scrollInfo}>
-          <Progress {...scrollInfo} />
+          <Progress {...scrollInfo} {...scrollInfo} />
         </Aside>
         <Aside right {...scrollInfo}>
           <ArticleControls toggleMode={toggleMode} mode={mode} />

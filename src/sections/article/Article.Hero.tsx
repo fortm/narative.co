@@ -111,7 +111,7 @@ const HeroTitle = styled(Heading.h1)`
 
 const HeroSubtitle = styled.div`
   font-size: 18px;
-  color: #7a8085;
+  color: rgba(0, 0, 0, 0.25);
   font-weight: 800;
 `
 
@@ -123,11 +123,11 @@ const RelativeSection = styled(Section)`
 
 const ReadingTime = styled.div`
   position: absolute;
-  left: -5px;
+  left: -8px;
   bottom: 180px;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.25);
-  transform: rotate(90deg);
+  transform: rotate(-90deg);
 
   &::after {
     content: '';
@@ -135,7 +135,7 @@ const ReadingTime = styled.div`
     height: 1px;
     top: 12px;
     width: 130px;
-    right: -150px;
+    left: -150px;
     background: #111216;
   }
 
@@ -143,6 +143,10 @@ const ReadingTime = styled.div`
     left: 2px;
     font-size: 14px;
   `}
+
+  @media screen and (max-height: 700px) and (max-width: 768px) {
+    bottom: 80px;
+  }
 `
 
 const Image = styled.div`
@@ -166,8 +170,6 @@ const Image = styled.div`
   }
 
   ${mediaqueries.tablet`
-    right: -50%;
-    width: 720px;
-    opacity: 0.2;
+    display: none;
   `}
 `

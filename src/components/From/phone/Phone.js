@@ -31,9 +31,9 @@ const InputBorder = styled.div`
   ${props =>
     props.hasError
       ? `border-bottom: 1px solid ${props.theme.colors.red}`
-      : `border-bottom: 1px solid #fff`};
+      : `border-bottom: 1px solid #7A8085`};
 
-  padding: 0.3em 0;
+  padding: 0.7rem 0;
 
   svg {
     position: absolute;
@@ -108,9 +108,8 @@ const StyledButton = styled.button`
   top: 0.5rem;
   background: transparent;
   border: none;
-  font-weight: 500;
+  font-weight: 600;
   color: ${props => props.theme.colors.grey};
-  color: #fff;
 `
 
 const PhoneIcon = ({ hasError }) => (

@@ -47,14 +47,18 @@ const themes = {
   },
 }
 
-class Navigation extends Component {
+interface NavigationProps {
+  active: boolean
+  previousPath: string
+  showPreviousPath: boolean
+}
+class Navigation extends Component<> {
   leftToggle = React.createRef()
 
   state = {
     active: false,
     previousPath: '',
     showPreviousPath: false,
-    autoOpen: false,
   }
 
   componentDidMount() {
@@ -141,12 +145,10 @@ class Navigation extends Component {
   }
 
   render() {
-    const { active, autoOpen, previousPath, showPreviousPath } = this.state
+    const { active, previousPath, showPreviousPath } = this.state
     const { nav } = this.props
     const fill = nav.theme === 'dark' ? '#000' : '#fff'
     const theme = themes[nav.theme]
-
-    const isActive = active || autoOpen
 
     return (
       <ThemeProvider theme={theme}>
@@ -164,14 +166,11 @@ class Navigation extends Component {
                 </LogoContainer>
                 <Nav>
                   <DesktopNavList>
-                    <NavItems
-                      active={isActive}
-                      handleClick={this.navigateOut}
-                    />
+                    <NavItems active={active} handleClick={this.navigateOut} />
                   </DesktopNavList>
                   <ToggleContainer onClick={this.handleToggleClick}>
-                    <LeftToggle active={isActive} ref={this.leftToggle} />
-                    <RightToggle active={isActive} />
+                    <LeftToggle active={active} ref={this.leftToggle} />
+                    <RightToggle active={active} />
                   </ToggleContainer>
                 </Nav>
               </NavContainer>

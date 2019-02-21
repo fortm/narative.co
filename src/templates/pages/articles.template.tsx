@@ -136,7 +136,6 @@ const ContentContainer = styled.div`
   ${mediaqueries.phablet`
     height: calc(100vh - 90px);
     padding: 0;
-    top: -45px;
   `};
 `
 
@@ -177,16 +176,20 @@ const LearnMore = styled.div`
   left: 12px;
   font-size: 12px;
   opacity: ${p => (p.animation ? 1 : 0)};
-  transform: rotate(90deg) translateX(${p => (p.animation ? '0' : '20px')});
+  transform: rotate(-90deg) translateX(${p => (p.animation ? '0' : '20px')});
   transition: all 1s ease-out 0.5s;
 
   &::after {
     content: '';
     position: absolute;
     width: 100px;
-    right: -120px;
+    left: -120px;
     height: 1px;
     top: 9px;
     background: ${p => p.theme.colors.grey};
+  }
+
+  @media screen and (max-height: 700px) and (max-width: 768px) {
+    bottom: 60px;
   }
 `

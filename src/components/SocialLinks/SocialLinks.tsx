@@ -53,6 +53,6 @@ const SocialIconContainer = styled.a`
   }
 
   ${mediaqueries.tablet`
-    margin: 0 1.6rem;
+    margin: 0 2.2rem;
   `};
 `

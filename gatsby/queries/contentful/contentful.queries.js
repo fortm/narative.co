@@ -142,6 +142,7 @@ const articlePreview = `
 const articleNode = `
   ${basicNode}
   slug
+  canonical
   featured
   publicationDate(formatString: "MMM. D, YYYY")
   ${heroImageryField}

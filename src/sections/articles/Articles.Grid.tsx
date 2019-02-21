@@ -334,7 +334,7 @@ const HorizontalRule = styled.div`
     position: relative;
     display: inline-block;
     background: #fafafa;
-    z-index: 1;
+    z-index: 0;
     width: ${(230 / 1140) * 100}%;
 
     ${mediaqueries.tablet`
