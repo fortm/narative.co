@@ -119,6 +119,7 @@ const limitToTwoLines = css`
     -webkit-line-clamp: 3;
   `}
 `
+
 const Grid = styled.div`
   position: relative;
   display: grid;
@@ -141,22 +142,13 @@ const Grid = styled.div`
 const Image = styled.div`
   position: relative;
   height: 280px;
-  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.3),
+    0 18px 36px -18px rgba(0, 0, 0, 0.33);
   border-radius: 5px;
   margin-bottom: 30px;
   background-color: ${p => p.background};
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    box-shadow: 0px 10px 100px rgba(0, 0, 0, 0.18);
-    transition: opacity 0.25s ease-in-out;
-  }
+  transition: transform 0.3s var(--ease-out-quad),
+    box-shadow 0.3s var(--ease-out-quad);
 
   & > div {
     height: 100%;
@@ -242,9 +234,9 @@ const ArticleLink = styled(Link)`
   transition: transform 0.33s var(--ease-out-quart);
 
   &:hover ${Image} {
-    &::after {
-      opacity: 1;
-    }
+    transform: translateY(-1px);
+    box-shadow: 0 50px 80px -20px rgba(0, 0, 0, 0.27),
+      0 30px 50px -30px rgba(0, 0, 0, 0.3);
   }
 
   &:hover h2 {
