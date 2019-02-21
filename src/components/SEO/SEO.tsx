@@ -33,6 +33,7 @@ interface HelmetProps {
   category?: string
   tags?: string
   twitter?: string
+  readingTime?: string
 }
 
 const seoURL = path => `https://narative.co${path}`

@@ -89,6 +89,7 @@ const Microdata = ({
         image={backgroundImage.seo.src}
         canonical={canonical}
         readingTime={readingTime.text}
+        published={isoDateStr}
       >
         <script type="application/ld+json">
           {`
