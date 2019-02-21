@@ -57,6 +57,7 @@ const getMetaTags = ({
   category,
   tags,
   twitter,
+  readingTime,
 }: HelmetProps) => {
   const metaTags = [
     { charset: 'utf-8' },
@@ -81,6 +82,7 @@ const getMetaTags = ({
     { name: 'twitter:title', content: title },
     { name: 'twitter:description', content: description },
     { name: 'twitter:creator', content: twitter || 'Narative' },
+
     {
       name: 'twitter:image',
       content: addHttps(image),
@@ -100,6 +102,11 @@ const getMetaTags = ({
   if (category) metaTags.push({ name: 'article:section', content: category })
   if (tags) metaTags.push({ name: 'article:tag', content: tags })
 
+  if (readingTime) {
+    metaTags.push({ name: 'twitter:label1', value: 'Reading time' })
+    metaTags.push({ name: 'twitter:data1', value: readingTime })
+  }
+
   return metaTags
 }
 
@@ -115,6 +122,7 @@ const SEO = ({
   category,
   tags,
   twitter,
+  readingTime,
 }: HelmetProps) => {
   return (
     <Helmet
@@ -139,6 +147,7 @@ const SEO = ({
         category,
         tags,
         twitter,
+        readingTime,
       })}
     />
   )
