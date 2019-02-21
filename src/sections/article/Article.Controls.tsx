@@ -82,7 +82,7 @@ const ToolTip = styled.div`
 `
 
 const IconWrapper = styled.button`
-  opacity: 0.25;
+  opacity: 0.5;
   position: relative;
   border-radius: 5px;
   width: 40px;
