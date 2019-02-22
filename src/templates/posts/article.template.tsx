@@ -79,6 +79,11 @@ class Article extends Component<ArticleProps, PostState> {
         if (!$img.complete) $img.onload = debouncedCalculation
       })
 
+      // Handle embedded tweets
+      twttr.ready(twttr => {
+        twttr.events.bind('rendered', this.calculateBodySize)
+      })
+
       // Prevent rerun of the listener attachment
       this.hasCalculatedHeightBefore = true
     }

@@ -25,21 +25,20 @@ const PublicLogoQuery = graphql`
 `
 
 // An SEO bomb we want to keep. This is another standard that's worth setting up.
-export default ({ article, location }: { article: IArticleNode }) =>
-  console.log(article) || (
-    <StaticQuery
-      query={PublicLogoQuery}
-      render={({ url: { edges } }) => (
-        <Microdata
-          article={article}
-          publicationLogo={edges[0].node.seo.image.file.url}
-          location={location}
-          sectionName={article.title}
-          sectionUrl={location.href}
-        />
-      )}
-    />
-  )
+export default ({ article, location }: { article: IArticleNode }) => (
+  <StaticQuery
+    query={PublicLogoQuery}
+    render={({ url: { edges } }) => (
+      <Microdata
+        article={article}
+        publicationLogo={edges[0].node.seo.image.file.url}
+        location={location}
+        sectionName={article.title}
+        sectionUrl={location.href}
+      />
+    )}
+  />
+)
 
 const Microdata = ({
   article: {

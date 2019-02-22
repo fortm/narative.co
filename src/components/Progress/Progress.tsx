@@ -1,5 +1,4 @@
 import React, { Component, memo } from 'react'
-
 import styled from 'styled-components'
 
 import { clamp } from '@utils'
@@ -10,10 +9,10 @@ export interface IProgress {
   onClose?: () => void
 }
 
-class Progress extends Component<IProgress, { value: number; tacks: [] }> {
+class Progress extends Component<IProgress, { value: number; headings: [] }> {
   ticking = false
 
-  state = { value: 0, tacks: [] }
+  state = { value: 0, headings: [] }
 
   componentDidMount() {
     this.handleProgressHeadings()
@@ -30,30 +29,35 @@ class Progress extends Component<IProgress, { value: number; tacks: [] }> {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.height !== this.props.height) {
+    if (
+      prevProps.offset !== this.props.offset ||
+      prevProps.height !== this.props.height
+    ) {
       this.handleProgressHeadings()
     }
   }
 
   handleProgressHeadings = () => {
     const { height } = this.props
-    const h1 = document.querySelector('h1')
-    const headings = Array.from(document.querySelectorAll('h2')).reverse()
-    headings.push(h1)
+    const titleHeading = document.querySelector('h1')
+    const allHeadings = Array.from(document.querySelectorAll('h2')).reverse()
+    allHeadings.push(titleHeading)
 
-    const tacks = headings.map(heading => {
-      const offsetTop = heading.offsetTop
-      const text = heading.innerText
-      const headingOffset = (offsetTop / height) * 100
+    const headings = allHeadings
+      .map(heading => {
+        const offsetTop = heading.offsetTop
+        const text = heading.innerText
+        const headingOffset = (offsetTop / height) * 100
 
-      return {
-        text,
-        offset: offsetTop,
-        offetPercentage: headingOffset,
-      }
-    })
+        return {
+          text,
+          offset: offsetTop,
+          offetPercentage: headingOffset,
+        }
+      })
+      .reverse()
 
-    this.setState({ tacks })
+    this.setState({ headings })
   }
 
   onScroll = (event: Event) => {
@@ -77,7 +81,7 @@ class Progress extends Component<IProgress, { value: number; tacks: [] }> {
   }
 
   render = () => {
-    const { value, tacks } = this.state
+    const { value, headings } = this.state
     const progressOffset = { transform: `translateY(${value - 100}%)` }
 
     return (
@@ -87,17 +91,30 @@ class Progress extends Component<IProgress, { value: number; tacks: [] }> {
         </Trackline>
         <Headings>
           <HeadingsHover>
-            {tacks.map((tack: string, index: number) => (
-              <Heading
-                key={tack.text}
-                index={index}
-                value={value}
-                offset={tack.offetPercentage}
-                onClick={() => scrollTo(0, tack.offset + this.props.offset)}
-              >
-                {tack.text}
-              </Heading>
-            ))}
+            {headings.map((heading: string, index: number) => {
+              const previousOffset = headings[index - 1]
+                ? headings[index - 1].offetPercentage
+                : 0
+              const nextOffset = headings[index + 1]
+                ? headings[index + 1].offetPercentage
+                : 0
+
+              return (
+                <Heading
+                  key={heading.text}
+                  index={index}
+                  value={value}
+                  offset={heading.offetPercentage}
+                  previousOffset={previousOffset}
+                  nextOffset={nextOffset}
+                  onClick={() =>
+                    scrollTo(0, heading.offset + this.props.offset)
+                  }
+                >
+                  {heading.text}
+                </Heading>
+              )
+            })}
           </HeadingsHover>
         </Headings>
       </Frame>
@@ -138,7 +155,9 @@ const Heading = styled.span`
   line-height: 1.2;
   color: ${p => p.theme.mode.text};
   opacity: ${p =>
-    p.value - 6 > p.offset || p.value + 1 < p.offset ? 0.25 : '1 !important'};
+    p.value > p.previousOffset && p.value > p.offset && p.value < p.nextOffset
+      ? '1 !important'
+      : 0.25};
   transition: opacity 0.3s;
 
   &:hover {
