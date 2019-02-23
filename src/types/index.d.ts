@@ -242,3 +242,11 @@ interface IGatsbyMadePage extends IBasicPage {
   pageContext: IPageContext
   pathContext: IPathContext
 }
+
+export interface IProgress {
+  height: number
+  offset: number
+  title: string
+  mode: string
+  onClose?: () => void
+}

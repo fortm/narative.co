@@ -22,6 +22,11 @@ const themes = {
       progress: {
         complete: '#000',
         bg: '#B5B8B9',
+        mobile: {
+          complete: '#08080B',
+          incomplete: '#EAEAEA',
+          bg: '#fafafa',
+        },
       },
       preview: {
         bg: '#fff',
@@ -39,6 +44,11 @@ const themes = {
       progress: {
         complete: '#fff',
         bg: '#7A8085',
+        mobile: {
+          complete: '#B5B8B9',
+          incomplete: '#1B1B1B',
+          bg: 'rgba(0,0,0,0.92)',
+        },
       },
       preview: {
         bg: '#1D2128',

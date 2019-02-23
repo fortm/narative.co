@@ -5,6 +5,7 @@ import Layout from '@components/Layout'
 import { RichText } from '@components/Media'
 import withDarkMode from '@components/DarkMode'
 import Progress from '@components/Progress'
+import ProgressMobile from '@components/Progress/Progress.Mobile'
 import Section from '@components/Section'
 import NavigationFooter from '@components/Navigation/Navigation.Footer'
 
@@ -142,6 +143,7 @@ class Article extends Component<ArticleProps, PostState> {
             text="Back to Articles"
           />
         </Gradient>
+        <ProgressMobile mode={mode} title={article.title} {...scrollInfo} />
       </Layout>
     )
   }

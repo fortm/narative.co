@@ -344,7 +344,7 @@ const Content = styled.div`
   .twitter-tweet {
     text-align: center;
     margin: 0 auto;
-    padding:0 20px 0 30px;
+    padding: 0 20px 0 30px;
     width: 540px !important;
   }
 
