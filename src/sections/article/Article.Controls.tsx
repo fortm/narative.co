@@ -13,6 +13,7 @@ export default ({ mode, toggleMode }) => (
 const DarkModeSelect = ({ toggleMode, mode }) => (
   <IconWrapper mode={mode} onClick={toggleMode}>
     <MoonOrSun isDarkMode={mode === 'dark'} />
+    <MoonMask isDarkMode={mode === 'dark'} />
   </IconWrapper>
 )
 
@@ -148,9 +149,10 @@ const MoonOrSun = styled.div`
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: ${p => p.theme.mode.text};
+  border: ${p => (p.isDarkMode ? '4px' : '2px')} solid ${p => p.theme.mode.text};
   transform: scale(${p => (p.isDarkMode ? 0.55 : 1)});
   transition: all 0.45s ease;
+  overflow: ${p => (p.isDarkMode ? 'visible' : 'hidden')};
 
   ${mediaqueries.tablet`
     width: 20px;
@@ -160,13 +162,14 @@ const MoonOrSun = styled.div`
   &::before {
     content: '';
     position: absolute;
-    right: -8px;
-    top: -8px;
+    right: -9px;
+    top: -9px;
     height: 24px;
     width: 24px;
-    background: ${p => p.theme.mode.background};
+    border: 2px solid ${p => p.theme.mode.text};
     border-radius: 50%;
     transform: translate(${p => (p.isDarkMode ? '14px, -14px' : '0, 0')});
+    opacity: ${p => (p.isDarkMode ? 0 : 1)};
     transition: transform 0.45s ease;
 
     ${mediaqueries.tablet`
@@ -197,4 +200,24 @@ const MoonOrSun = styled.div`
       transform: scale(${p => (p.isDarkMode ? 0.92 : 0)});
     `}
   }
+`
+
+const MoonMask = styled.div`
+  position: absolute;
+  right: -1px;
+  top: -8px;
+  height: 24px;
+  width: 24px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  transition: transform 0.45s ease;
+  border: 0;
+  background: #fff;
+  transform: translate(${p => (p.isDarkMode ? '14px, -14px' : '0, 0')});
+  opacity: ${p => (p.isDarkMode ? 0 : 1)};
+
+  ${mediaqueries.tablet`
+    width: 20px;
+    height: 20px;
+  `}
 `
