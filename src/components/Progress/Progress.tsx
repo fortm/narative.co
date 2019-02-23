@@ -97,7 +97,7 @@ class Progress extends Component<IProgress, { value: number; headings: [] }> {
                 : 0
               const nextOffset = headings[index + 1]
                 ? headings[index + 1].offetPercentage
-                : 0
+                : 100
 
               return (
                 <Heading
@@ -137,12 +137,13 @@ const Headings = styled.div`
 const HeadingsHover = styled.div`
   position: relative;
   opacity: 0;
-  width: 180px;
+  width: 200px;
   height: 100%;
-  transition: opacity 0.3s linear;
+  transition: opacity 0.5s linear 0.2s;
 
   &:hover {
     opacity: 1;
+    transition: opacity 0.3s linear;
   }
 `
 

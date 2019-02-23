@@ -68,7 +68,7 @@ const GridItem = ({ article, narrow }) => {
   return (
     <ArticleLink to={`/articles/${article.slug}`}>
       <Item>
-        <Image background={article.backgroundColor}>
+        <Image background={article.backgroundColor} narrow={narrow}>
           <Media src={article.backgroundImage.fluid} />
         </Image>
         <Title dark hasOverflow={hasOverflow}>
@@ -142,8 +142,8 @@ const Grid = styled.div`
 const Image = styled.div`
   position: relative;
   height: 280px;
-  box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.3),
-    0 18px 36px -18px rgba(0, 0, 0, 0.33);
+  box-shadow: 0 30px 60px -10px rgba(0, 0, 0, ${p => (p.narrow ? 0.22 : 0.3)}),
+    0 18px 36px -18px rgba(0, 0, 0, ${p => (p.narrow ? 0.25 : 0.33)});
   border-radius: 5px;
   margin-bottom: 30px;
   background-color: ${p => p.background};
@@ -245,9 +245,7 @@ const ArticleLink = styled(Link)`
 
   ${mediaqueries.tablet`
     &:hover ${Image} {
-      &::after {
-        opacity: 0;
-      }
+      box-shadow: none;
     }
 
     &:hover h2 {
