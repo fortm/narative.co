@@ -7,6 +7,12 @@ import mediaqueries from '@styles/media'
 import { ButtonArrow, Section, Heading, SEO, Layout } from '@components'
 import { startAnimation } from '@utils'
 
+import HomeAbout from '../sections/home/Home.About'
+import HomeCallToAction from '../sections/home/Home.CallToAction'
+import HomeTestimonial from '../sections/home/Home.Testimonial'
+import HomeValues from '../sections/home/Home.Values'
+import { backgrounds } from 'polished'
+
 class IndexPage extends Component<{}, { animation: string }> {
   state = { animation: '' }
 
@@ -28,9 +34,10 @@ class IndexPage extends Component<{}, { animation: string }> {
   render() {
     const { animation } = this.state
     const contentful = this.props.data.allContentfulHomePage.edges[0].node
+    const background = 'linear-gradient(180deg, #08080B 0%, #111216 44.18%);'
 
     return (
-      <Layout navOffset>
+      <Layout navOffset background={background}>
         <Fragment>
           <SEO
             title={contentful.seo.title}
@@ -54,26 +61,23 @@ class IndexPage extends Component<{}, { animation: string }> {
                 {/* With flexbox we need to have a mobile and desktop element
                 in the DOM so we can have the proper design in palce. This is
                 the Mobile only Contact button*/}
-                <MobileContactText
+                <ContactText
                   to="/contact"
                   onClick={event => this.navigateOut(event, '/contact')}
                   animation={animation}
                 >
                   <ButtonArrow text="Get in touch" />
-                </MobileContactText>
+                </ContactText>
               </TextContainer>
 
-              {/* And this is the Desktop only Contact button */}
-              <ContactText
-                to="/contact"
-                onClick={event => this.navigateOut(event, '/contact')}
-                animation={animation}
-              >
-                <ButtonArrow text="Get in touch" />
-              </ContactText>
+              <div />
             </ContentContainer>
             <div />
           </Section>
+          <HomeAbout />
+          <HomeValues />
+          <HomeTestimonial />
+          <HomeCallToAction />
         </Fragment>
       </Layout>
     )
@@ -122,6 +126,7 @@ const MainText = styled.p`
   font-weight: 400;
   color: ${p => p.theme.colors.grey};
   line-height: 1.3;
+  margin-bottom: 50px;
 
   ${mediaqueries.phablet`
     font-size: 2.2rem;

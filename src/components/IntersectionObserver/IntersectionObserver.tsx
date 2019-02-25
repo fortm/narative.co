@@ -11,7 +11,19 @@
 
 import React, { Component } from 'react'
 
-class IntersectionObserver extends Component {
+interface IOProps {
+  render: (any) => any
+}
+
+interface IOState {
+  boundingClientRect: {}
+  visiblePercentage: number
+  visible: boolean
+  entering: boolean
+  exiting: boolean
+}
+
+class IntersectionObserver extends Component<IOProps, IOState> {
   state = {
     boundingClientRect: {},
     visiblePercentage: 0,

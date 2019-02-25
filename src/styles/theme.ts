@@ -8,6 +8,7 @@ import { keyframes } from 'styled-components'
 
 const black = '#262626'
 const bg = '#111216'
+const gold = '#E9DAAC'
 const grey = '#7a8085'
 const red = '#f44336'
 const purple = '#6166DC'
@@ -33,6 +34,7 @@ export const theme = {
   colors: {
     black,
     bg,
+    gold,
     grey,
     red,
     purple,
