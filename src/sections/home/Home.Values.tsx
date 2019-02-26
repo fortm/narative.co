@@ -7,6 +7,7 @@ import IntersectionObserver from '@components/IntersectionObserver'
 import Section from '@components/Section'
 import Sticky from '@components/Sticky'
 
+import { getWindowDimensions } from '@utils'
 import mediaqueries from '@styles/media'
 
 const values = [
@@ -48,59 +49,130 @@ const values = [
   },
 ]
 
+const calculateActive = (progress: number) => (index: number): boolean => {
+  const total = values.length
+  const nextThreshold = ((100 / total) * (index + 1)) / 100
+  const threshold = ((100 / total) * index) / 100
+
+  if (index === 0) {
+    return progress < nextThreshold
+  }
+
+  if (index === 2) {
+    return progress > threshold
+  }
+
+  return progress > threshold && progress < nextThreshold
+}
+
+const calculateOffset = (progress: number) => {
+  if (typeof window === 'undefined') return 0
+  if (document.getElementById('grid-column')) {
+    const { height } = getWindowDimensions()
+    const $col = document.getElementById('grid-column').getBoundingClientRect()
+    const $val = document.getElementById('grid-value').getBoundingClientRect()
+
+    const total = ($val.height + 45) * 2
+    let offset = total * progress
+
+    if (progress < 0) {
+      offset = 0
+    }
+
+    return {
+      height: $val.height,
+      top: $val.y,
+      offset,
+    }
+  }
+
+  return {}
+}
+
 const HomesValues = () => {
   return (
     <Sticky
-      height="280vh"
-      render={({ progress }) => (
-        <Grid>
-          <Item>
-            {values.map((value, index) => {
-              const total = values.length
-              const nextThreshold = ((100 / total) * (index + 1)) / 100
-              const threshold = ((100 / total) * index) / 100
+      height="300vh"
+      render={({ progress }) => {
+        const getActive = calculateActive(progress)
+        const offset = calculateOffset(progress)
 
-              const active = progress > threshold && progress < nextThreshold
+        const firstActive: boolean = getActive(0)
+        const secondActive: boolean = getActive(1)
+        const thirdActive: boolean = getActive(2)
 
-              return (
-                <Value active={active} index={index}>
-                  <Transform active={active}>
-                    <Heading.h2>{value.heading}</Heading.h2>
-                    <List>
-                      {value.list.map(item => (
-                        <ListItem>{item}</ListItem>
-                      ))}
-                    </List>
-                  </Transform>
-                  <StyledLink to={value.link.to} active={active}>
-                    {value.link.text}
-                  </StyledLink>
-                </Value>
-              )
-            })}
-          </Item>
-          <Item />
-          <Item />
-          <Item />
-        </Grid>
-      )}
+        return (
+          <Grid>
+            <Column id="grid-column">
+              <Value id="grid-value" active={firstActive}>
+                <Heading.h2>Brand</Heading.h2>
+                <List>
+                  <ListItem>Visual identity</ListItem>
+                  <ListItem>Strategic messaging</ListItem>
+                  <ListItem>Customer journey analysis</ListItem>
+                </List>
+                <StyledLink to="/contact" active={firstActive}>
+                  Inquire about branding
+                </StyledLink>
+                <Progress
+                  style={{
+                    transform: `translateY(${offset.offset}px)`,
+                    height: '100%',
+                    top: 0,
+                  }}
+                />
+              </Value>
+              <Value active={secondActive}>
+                <Transform active={secondActive || thirdActive}>
+                  <Heading.h2>Build</Heading.h2>
+                  <List>
+                    <ListItem>Reponsive websitesy</ListItem>
+                    <ListItem>Content management systems</ListItem>
+                    <ListItem>Cross-platform apps</ListItem>
+                  </List>
+                </Transform>
+                <StyledLink to="/contact" active={secondActive}>
+                  Inquire about building
+                </StyledLink>
+              </Value>
+              <Value active={thirdActive}>
+                <Transform active={thirdActive}>
+                  <Heading.h2>Grow</Heading.h2>
+                  <List>
+                    <ListItem>Content strategy</ListItem>
+                    <ListItem>Conversion optimization</ListItem>
+                    <ListItem>Nurturing and onboarding</ListItem>
+                  </List>
+                </Transform>
+                <StyledLink to="/contact" active={thirdActive}>
+                  Inquire about growing
+                </StyledLink>
+              </Value>
+            </Column>
+            <Column />
+            <Column />
+            <Column />
+          </Grid>
+        )
+      }}
     />
   )
 }
+
 export default HomesValues
 
-const Grid = styled(Section)`
+const Grid = memo(styled(Section)`
   height: 100vh;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-`
+`)
 
-const Item = memo(styled.div`
+const Column = memo(styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 50px 0;
-  padding: 50px 0;
   border-left: 1px solid #1d2128;
 
   &:last-child {
@@ -112,23 +184,15 @@ const Value = memo(styled.div`
   position: relative;
 
   &:not(:last-child) {
-    margin-bottom: 70px;
-  }
-
-  &:first-child {
-    &::after {
-      content: '';
-      position: absolute;
-      right: 0;
-      top: 0;
-      width: 1px;
-      height: 100%;
-      background: ${p => p.theme.colors.grey};
-      transition: transform 0.6s var(--ease-out-cubic);
-    }
+    margin-bottom: 45px;
   }
 
   h2 {
+    color: ${p => (p.active ? '#fff' : p.theme.colors.grey)};
+    transition: color 0.3s var(--ease-out-quad);
+  }
+
+  li {
     color: ${p => (p.active ? '#fff' : p.theme.colors.grey)};
     transition: color 0.3s var(--ease-out-quad);
   }
@@ -136,7 +200,7 @@ const Value = memo(styled.div`
 
 const Transform = styled.div`
   transform: translateY(${p => (p.active ? 0 : 42)}px);
-  transition: transform 0.4s var(--ease-in-out-cubic);
+  transition: transform 0.6s var(--ease-out-cubic);
 `
 
 const StyledLink = styled(Link)`
@@ -156,6 +220,14 @@ const List = styled.ul`
 `
 
 const ListItem = styled.li`
-  font-size: 18px;
   color: #7a8085;
+`
+
+const Progress = styled.div`
+  position: absolute;
+  width: 1px;
+  right: -1px;
+  z-index: 1;
+  background: ${p => p.theme.colors.grey};
+  transition: opacity 0.3s var(--ease-out-quad);
 `

@@ -5,7 +5,6 @@ import Section from '@components/Section'
 import Heading from '@components/Heading'
 import IntersectionObserver from '@components/IntersectionObserver'
 import Sticky from '@components/Sticky'
-import Transitions from '@components/Transitions'
 
 import mediaqueries from '@styles/media'
 
@@ -23,29 +22,23 @@ const HomeAbout = () => {
         style={{ position: 'relative' }}
         render={({ visible }) => (
           <>
-            <Transitions.FadeScroll>
-              <Text>
-                Even the most brilliant companies hit points where their focus
-                is spread thin by the many challenges that growing businesses
-                face, blocking them from reaching their full potential. That's
-                where we come in.
-              </Text>
-            </Transitions.FadeScroll>
-            <Transitions.FadeScroll>
-              <Text>
-                Narative brings focus through the lens of a team that’s faced it
-                all before, at scrappy startups and established enterprises
-                alike. That’s why we don’t do big pitches or presentations —
-                it’s just not in our DNA.
-              </Text>
-            </Transitions.FadeScroll>
-            <Transitions.FadeScroll>
-              <Text>
-                Instead, we take the time to understand what drives your company
-                and customers as if they were our own, uncovering every problem
-                and opportunity along the way. Then we get straight to work.
-              </Text>
-            </Transitions.FadeScroll>
+            <Text>
+              Even the most brilliant companies hit points where their focus is
+              spread thin by the many challenges that growing businesses face,
+              blocking them from reaching their full potential. That's where we
+              come in.
+            </Text>
+            <Text>
+              Narative brings focus through the lens of a team that’s faced it
+              all before, at scrappy startups and established enterprises alike.
+              That’s why we don’t do big pitches or presentations — it’s just
+              not in our DNA.
+            </Text>
+            <Text>
+              Instead, we take the time to understand what drives your company
+              and customers as if they were our own, uncovering every problem
+              and opportunity along the way. Then we get straight to work.
+            </Text>
             <Fade visible={visible} />
           </>
         )}
@@ -84,6 +77,7 @@ const Fade = styled.div`
   top: 0;
   opacity ${p => (p.visible ? 1 : 0)};
   transition: opacity 0.2s linear;
+  pointer-events: none;
 
   &::before {
     content: '';
