@@ -24,6 +24,8 @@ interface IOState {
 }
 
 class IntersectionObserver extends Component<IOProps, IOState> {
+  element = React.createRef()
+
   state = {
     boundingClientRect: {},
     visiblePercentage: 0,
@@ -33,6 +35,7 @@ class IntersectionObserver extends Component<IOProps, IOState> {
   }
 
   componentDidMount() {
+    const $el = this.element.current
     this.observer = new window.IntersectionObserver(entries => {
       const element = entries[0]
       this.handleObservation(element)
@@ -40,7 +43,7 @@ class IntersectionObserver extends Component<IOProps, IOState> {
       this.hasStartedObservation = true
     }, this.generateObserverOptions())
 
-    this.observer.observe(this.elem)
+    this.observer.observe($el)
   }
 
   componentWillUnmount() {
@@ -81,11 +84,7 @@ class IntersectionObserver extends Component<IOProps, IOState> {
   }
 
   render() {
-    return (
-      <div ref={htmlElement => (this.elem = htmlElement)}>
-        {this.props.render(this.state)}
-      </div>
-    )
+    return <div ref={this.element}>{this.props.render(this.state)}</div>
   }
 }
 
