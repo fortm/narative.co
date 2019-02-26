@@ -152,6 +152,11 @@ const HomesValues = () => {
             <Column />
             <Column />
             <Column />
+            <ImageSlides>
+              <ImageSlide active={firstActive}>1</ImageSlide>
+              <ImageSlide active={secondActive}>2</ImageSlide>
+              <ImageSlide active={thirdActive}>3</ImageSlide>
+            </ImageSlides>
           </Grid>
         )
       }}
@@ -229,5 +234,30 @@ const Progress = styled.div`
   right: -1px;
   z-index: 1;
   background: ${p => p.theme.colors.grey};
+  transition: opacity 0.3s var(--ease-out-quad);
+`
+
+const ImageSlides = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 75%;
+  height: 100%;
+`
+
+const ImageSlide = styled.div`
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  background: #fafafa;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+  opacity: ${p => (p.active ? 1 : 0)};
   transition: opacity 0.3s var(--ease-out-quad);
 `

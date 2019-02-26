@@ -77,7 +77,6 @@ const Fade = styled.div`
   left: 25%;
   top: 0;
   opacity ${p => (p.visible ? 1 : 0)};
-  transition: opacity 0.2s linear;
   pointer-events: none;
 
   &::before {
@@ -96,7 +95,7 @@ const Fade = styled.div`
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 75%;
+    height: 50%;
     background: linear-gradient(transparent, #0b0b0e);
   }
 `

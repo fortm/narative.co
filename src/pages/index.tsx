@@ -58,10 +58,6 @@ class IndexPage extends Component<{}, { animation: string }> {
                   We're a team with senior startup experience here to help your
                   business take the next step.
                 </MainText>
-
-                {/* With flexbox we need to have a mobile and desktop element
-                in the DOM so we can have the proper design in palce. This is
-                the Mobile only Contact button*/}
                 <ContactText
                   to="/contact"
                   onClick={event => this.navigateOut(event, '/contact')}
@@ -71,6 +67,9 @@ class IndexPage extends Component<{}, { animation: string }> {
                 </ContactText>
               </TextContainer>
 
+              {/* With flexbox we need to have a mobile and desktop element
+                in the DOM so we can have the proper design in palce. This is
+                the Mobile only Contact button*/}
               <div />
             </ContentContainer>
             <div />
