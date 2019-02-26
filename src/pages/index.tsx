@@ -34,10 +34,9 @@ class IndexPage extends Component<{}, { animation: string }> {
   render() {
     const { animation } = this.state
     const contentful = this.props.data.allContentfulHomePage.edges[0].node
-    const background = 'linear-gradient(180deg, #08080B 0%, #111216 44.18%);'
 
     return (
-      <Layout navOffset background={background}>
+      <Layout navOffset>
         <Fragment>
           <SEO
             title={contentful.seo.title}

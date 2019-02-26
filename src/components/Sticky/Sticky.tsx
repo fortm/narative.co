@@ -61,7 +61,7 @@ class Sticky extends Component<StickProps, StickyState> {
     const { height, render, top } = this.props
 
     return (
-      <div ref={this.element} data-component="ScrollProvider">
+      <div ref={this.element} data-component="sticky">
         <StickyDuration height={height}>
           <StickyItemContainer>
             <StickyItem top={top}>{this.props.render(this.state)}</StickyItem>
@@ -87,7 +87,6 @@ const StickyItem = styled.div`
   z-index: 1;
   top: ${p => p.top || 0}px;
   min-height: initial;
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;

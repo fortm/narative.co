@@ -84,7 +84,11 @@ class IntersectionObserver extends Component<IOProps, IOState> {
   }
 
   render() {
-    return <div ref={this.element}>{this.props.render(this.state)}</div>
+    return (
+      <div data-component="intersection-observer" ref={this.element}>
+        {this.props.render(this.state)}
+      </div>
+    )
   }
 }
 

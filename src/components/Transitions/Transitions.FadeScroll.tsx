@@ -16,16 +16,16 @@ class TransitionsFadeScroll extends Component<{
     enabledOnMobile: false,
   }
 
-  calculateStyleCurves = ({ intersectionRatio, exiting }) => {
+  calculateStyleCurves = ({ intersectionRatio, exiting, ...rest }) => {
     // To avoid NaN errors, return out if there's no intersectionRatio
     if (!intersectionRatio) {
       return { opacity: 0, transform: 0 }
     }
 
     const opacityCurve = Math.pow(intersectionRatio, 2)
-    const transformCurve = Math.pow(intersectionRatio - 1, 2) * 30
+    const transformCurve = Math.pow(intersectionRatio - 1, 2) * 15
 
-    // Only change opacity when scrolling back up
+    // Only change transform when scrolling back up
     if (exiting) {
       return {
         opacity: opacityCurve,
@@ -34,7 +34,6 @@ class TransitionsFadeScroll extends Component<{
 
     return {
       opacity: opacityCurve,
-      transform: ` matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, ${transformCurve}, 0, 1)`,
     }
   }
 
@@ -45,9 +44,9 @@ class TransitionsFadeScroll extends Component<{
 
     return (
       <IntersectionObserver
-        render={data => {
-          return <div style={this.calculateStyleCurves(data)}>{children}</div>
-        }}
+        render={data => (
+          <div style={this.calculateStyleCurves(data)}>{children}</div>
+        )}
       />
     )
   }
