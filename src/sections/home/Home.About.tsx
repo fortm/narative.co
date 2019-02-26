@@ -37,7 +37,8 @@ const HomeAbout = () => {
             <Text>
               Instead, we take the time to understand what drives your company
               and customers as if they were our own, uncovering every problem
-              and opportunity along the way. Then we get straight to work.
+              and opportunity along the way.{' '}
+              <strong>Then we get straight to work</strong>.
             </Text>
             <Fade visible={visible} />
           </>
