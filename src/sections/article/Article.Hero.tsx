@@ -5,6 +5,7 @@ import { isMobile } from 'react-device-detect'
 import Heading from '@components/Heading'
 import IntersectionObserver from '@components/IntersectionObserver'
 import Section from '@components/Section'
+import ScrollIndicator from '@components/ScrollIndicator'
 import Media from '@components/Media/Media.Img'
 
 import mediaqueries from '@styles/media'
@@ -31,9 +32,6 @@ const ArticleHero = ({ article }: { article: IArticleNode }) => {
           transform: `translateY(${(100 - visiblePercentage) * 1.33}px)`,
           opacity: 1 - ((100 - visiblePercentage) / 100) * 1.66,
         })
-        const readingOffset = canAnimate({
-          transform: `translateY(${visiblePercentage / 1.5}px)`,
-        })
 
         return (
           <Hero>
@@ -47,7 +45,8 @@ const ArticleHero = ({ article }: { article: IArticleNode }) => {
                 </Header>
               </Section>
             </HeroContent>
-            <RelativeSection style={readingOffset}>
+            <RelativeSection>
+              <ScrollIndicator mode="dark" />
               <ReadingTime>{article.readingTime.text}</ReadingTime>
             </RelativeSection>
             <Image>
@@ -118,35 +117,19 @@ const HeroSubtitle = styled.div`
 const RelativeSection = styled(Section)`
   position: relative;
   width: 100%;
-  pointer-events: none;
+  position: absolute;
+  bottom: 0;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
 `
 
 const ReadingTime = styled.div`
+  top: 6px;
+  left: 51px;
   position: absolute;
-  left: -8px;
-  bottom: 180px;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.25);
-  transform: rotate(-90deg);
-
-  &::after {
-    content: '';
-    position: absolute;
-    height: 1px;
-    top: 12px;
-    width: 130px;
-    left: -150px;
-    background: #111216;
-  }
-
-  ${mediaqueries.tablet`
-    left: 2px;
-    font-size: 14px;
-  `}
-
-  @media screen and (max-height: 700px) and (max-width: 768px) {
-    bottom: 80px;
-  }
 `
 
 const Image = styled.div`

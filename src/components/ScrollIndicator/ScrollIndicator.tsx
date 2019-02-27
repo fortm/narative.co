@@ -3,9 +3,9 @@ import styled, { keyframes } from 'styled-components'
 
 import Section from '@components/Section'
 
-const ScrollIndicator = () => (
-  <Frame>
-    <Bar />
+const ScrollIndicator = ({ mode }: { mode?: string }) => (
+  <Frame mode={mode}>
+    <Bar mode={mode} />
   </Frame>
 )
 
@@ -15,8 +15,8 @@ const Frame = styled.div`
   position: relative;
   width: 1px;
   height: 90px;
-  background: rgba(255, 255, 255, 0.2);
-  top: ;
+  background: ${p =>
+    p.mode === 'dark' ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 0.2)'};
 `
 
 const animateUp = keyframes`
@@ -29,6 +29,6 @@ const Bar = styled.div`
   width: 1px;
   height: 30px;
   bottom: 0;
-  background: #fff;
+  background: ${p => (p.mode === 'dark' ? '#000' : '#fff')};
   animation: ${animateUp} 1s var(--ease-out-cubic) forwards;
 `

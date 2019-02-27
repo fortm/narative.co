@@ -101,10 +101,9 @@ const IconWrapper = styled.button`
   ${mediaqueries.tablet`
     display: inline-flex;
     margin: 0 20px 0 0;
-    width: 63px;
    
     &:hover {
-      opacity: 0.25;
+      opacity: 0.5;
     }
   `}
 `
@@ -154,11 +153,6 @@ const MoonOrSun = styled.div`
   transition: all 0.45s ease;
   overflow: ${p => (p.isDarkMode ? 'visible' : 'hidden')};
 
-  ${mediaqueries.tablet`
-    width: 20px;
-    height: 20px;
-  `}
-
   &::before {
     content: '';
     position: absolute;
@@ -171,11 +165,6 @@ const MoonOrSun = styled.div`
     transform: translate(${p => (p.isDarkMode ? '14px, -14px' : '0, 0')});
     opacity: ${p => (p.isDarkMode ? 0 : 1)};
     transition: transform 0.45s ease;
-
-    ${mediaqueries.tablet`
-      width: 20px;
-      height: 20px;
-    `}
   }
 
   &::after {
@@ -215,9 +204,4 @@ const MoonMask = styled.div`
   background: #fff;
   transform: translate(${p => (p.isDarkMode ? '14px, -14px' : '0, 0')});
   opacity: ${p => (p.isDarkMode ? 0 : 1)};
-
-  ${mediaqueries.tablet`
-    width: 20px;
-    height: 20px;
-  `}
 `
