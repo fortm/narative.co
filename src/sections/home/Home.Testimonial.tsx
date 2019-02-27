@@ -44,12 +44,26 @@ export default HomeTestimonial
 const Gradient = styled.div`
   padding: 250px 0 200px;
   background: linear-gradient(180deg, #111216 0%, #191d23 100%);
+
+  ${mediaqueries.tablet`
+    padding: 200px 0;
+  `}
 `
 
 const Grid = styled(Section)`
   display: grid;
   grid-template-columns: 132px 675px;
   grid-column-gap: 131px;
+
+  ${mediaqueries.tablet`
+    display: block;
+
+    & > svg {
+      width: 94.29px;
+      height: 25px;
+      margin-bottom:15px;
+    }
+  `}
 `
 
 const Text = styled.p`
@@ -58,6 +72,11 @@ const Text = styled.p`
   font-size: 36px;
   color: #fafafa;
   margin-bottom: 40px;
+
+  ${mediaqueries.tablet`
+    font-size: 24px;
+    margin-bottom: 45px;
+  `}
 `
 
 const StyledLink = styled(Link)`
@@ -85,6 +104,20 @@ const StyledLink = styled(Link)`
       fill-opacity: 1;
     }
   }
+
+  ${mediaqueries.tablet`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+    padding: 15px 0;
+
+
+    &:not(:last-child) {
+      margin-right: 0;
+      border-bottom: 1px solid rgba(255,255,255,0.25)};
+    }
+  `}
 `
 
 const HopperLogo = () => (

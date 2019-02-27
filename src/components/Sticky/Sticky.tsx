@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
+import mediaqueries from '@styles/media'
+
 interface StickyProps {
   children: React.Children
   height: number
   top?: number
+  disableOnMobile?: boolean
 }
 
 interface StickyState {
@@ -58,13 +61,15 @@ class Sticky extends Component<StickProps, StickyState> {
   }
 
   render() {
-    const { height, render, top } = this.props
+    const { height, render, top, disableOnMobile } = this.props
 
     return (
       <div ref={this.element} data-component="sticky">
-        <StickyDuration height={height}>
+        <StickyDuration height={height} disabled={disableOnMobile}>
           <StickyItemContainer>
-            <StickyItem top={top}>{this.props.render(this.state)}</StickyItem>
+            <StickyItem top={top} disabled={disableOnMobile}>
+              {this.props.render(this.state)}
+            </StickyItem>
           </StickyItemContainer>
         </StickyDuration>
       </div>
@@ -76,6 +81,10 @@ export default Sticky
 
 const StickyDuration = styled.div`
   height: ${p => p.height || '100vh'};
+
+  ${mediaqueries.tablet`
+    height: ${p => (p.disabled ? '100%' : p.height)};
+  `}
 `
 
 const StickyItemContainer = styled.div`
@@ -90,4 +99,9 @@ const StickyItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  ${mediaqueries.tablet`
+    position: ${p => (p.disabled ? 'static' : 'sticky')};
+    display: ${p => (p.disabled ? 'block' : 'flex')};
+  `}
 `

@@ -5,6 +5,7 @@ import { Link } from 'gatsby'
 import Heading from '@components/Heading'
 import IntersectionObserver from '@components/IntersectionObserver'
 import Section from '@components/Section'
+import MediaQuery from '@components/MediaQuery'
 import Sticky from '@components/Sticky'
 
 import { getWindowDimensions } from '@utils'
@@ -91,76 +92,78 @@ const calculateOffset = (progress: number) => {
 
 const HomesValues = () => {
   return (
-    <Sticky
-      height="300vh"
-      render={({ progress, visible }) => {
-        const getActive = calculateActive(progress)
-        const offset = calculateOffset(progress)
+    <MediaQuery minWidth="tablet">
+      <Sticky
+        height="300vh"
+        render={({ progress, visible }) => {
+          const getActive = calculateActive(progress)
+          const offset = calculateOffset(progress)
 
-        const firstActive: boolean = getActive(0)
-        const secondActive: boolean = getActive(1)
-        const thirdActive: boolean = getActive(2)
+          const firstActive: boolean = getActive(0)
+          const secondActive: boolean = getActive(1)
+          const thirdActive: boolean = getActive(2)
 
-        return (
-          <Grid>
-            <Column id="grid-column">
-              <Value id="grid-value" active={firstActive}>
-                <Heading.h2>Brand</Heading.h2>
-                <List>
-                  <ListItem>Visual identity</ListItem>
-                  <ListItem>Strategic messaging</ListItem>
-                  <ListItem>Customer journey analysis</ListItem>
-                </List>
-                <StyledLink to="/contact" active={firstActive}>
-                  Inquire about branding
-                </StyledLink>
-                <Progress
-                  style={{
-                    transform: `translateY(${offset.offset}px)`,
-                    height: '100%',
-                    top: 0,
-                  }}
-                />
-              </Value>
-              <Value active={secondActive}>
-                <Transform active={secondActive || thirdActive}>
-                  <Heading.h2>Build</Heading.h2>
+          return (
+            <Grid>
+              <Column id="grid-column">
+                <Value id="grid-value" active={firstActive}>
+                  <Heading.h2>Brand</Heading.h2>
                   <List>
-                    <ListItem>Reponsive websitesy</ListItem>
-                    <ListItem>Content management systems</ListItem>
-                    <ListItem>Cross-platform apps</ListItem>
+                    <ListItem>Visual identity</ListItem>
+                    <ListItem>Strategic messaging</ListItem>
+                    <ListItem>Customer journey analysis</ListItem>
                   </List>
-                </Transform>
-                <StyledLink to="/contact" active={secondActive}>
-                  Inquire about building
-                </StyledLink>
-              </Value>
-              <Value active={thirdActive}>
-                <Transform active={thirdActive}>
-                  <Heading.h2>Grow</Heading.h2>
-                  <List>
-                    <ListItem>Content strategy</ListItem>
-                    <ListItem>Conversion optimization</ListItem>
-                    <ListItem>Nurturing and onboarding</ListItem>
-                  </List>
-                </Transform>
-                <StyledLink to="/contact" active={thirdActive}>
-                  Inquire about growing
-                </StyledLink>
-              </Value>
-            </Column>
-            <Column />
-            <Column />
-            <Column withRightBorder />
-            <ImageSlides>
-              <ImageSlide active={firstActive}>1</ImageSlide>
-              <ImageSlide active={secondActive}>2</ImageSlide>
-              <ImageSlide active={thirdActive}>3</ImageSlide>
-            </ImageSlides>
-          </Grid>
-        )
-      }}
-    />
+                  <StyledLink to="/contact" active={firstActive}>
+                    Inquire about branding
+                  </StyledLink>
+                  <Progress
+                    style={{
+                      transform: `translateY(${offset.offset}px)`,
+                      height: '100%',
+                      top: 0,
+                    }}
+                  />
+                </Value>
+                <Value active={secondActive}>
+                  <Transform active={secondActive || thirdActive}>
+                    <Heading.h2>Build</Heading.h2>
+                    <List>
+                      <ListItem>Reponsive websitesy</ListItem>
+                      <ListItem>Content management systems</ListItem>
+                      <ListItem>Cross-platform apps</ListItem>
+                    </List>
+                  </Transform>
+                  <StyledLink to="/contact" active={secondActive}>
+                    Inquire about building
+                  </StyledLink>
+                </Value>
+                <Value active={thirdActive}>
+                  <Transform active={thirdActive}>
+                    <Heading.h2>Grow</Heading.h2>
+                    <List>
+                      <ListItem>Content strategy</ListItem>
+                      <ListItem>Conversion optimization</ListItem>
+                      <ListItem>Nurturing and onboarding</ListItem>
+                    </List>
+                  </Transform>
+                  <StyledLink to="/contact" active={thirdActive}>
+                    Inquire about growing
+                  </StyledLink>
+                </Value>
+              </Column>
+              <Column />
+              <Column />
+              <Column withRightBorder />
+              <ImageSlides>
+                <ImageSlide active={firstActive}>1</ImageSlide>
+                <ImageSlide active={secondActive}>2</ImageSlide>
+                <ImageSlide active={thirdActive}>3</ImageSlide>
+              </ImageSlides>
+            </Grid>
+          )
+        }}
+      />
+    </MediaQuery>
   )
 }
 

@@ -4,7 +4,9 @@ import { Link, graphql, StaticQuery } from 'gatsby'
 
 import Logo from '@components/Logo'
 import IntersectionObserver from '@components/IntersectionObserver'
+import Footer from '@components/Navigation/Navigation.Footer'
 import Section from '@components/Section'
+import MediaQuery from '@components/MediaQuery'
 
 import ContactSlideIn from '../contact/Contact.SlideIn'
 
@@ -47,41 +49,47 @@ class HomeCallToAction extends Component<{}, { animation: string }> {
       <StaticQuery
         query={imageQuery}
         render={({ file }) => (
-          <IntersectionObserver
-            render={({ visiblePercentage }) => (
-              <Frame>
-                <Nav inView={visiblePercentage > 90}>
-                  <Logo onlySymbol fill="rgba(255,255,255,0.25)" />
-                  <NavLinks>
-                    {ctaLinks.map(link => (
-                      <NavLink key={link.to} to={link.to}>
-                        {link.text}
-                      </NavLink>
-                    ))}
-                  </NavLinks>
-                </Nav>
-                <TextContainer>
-                  <TextBackground
-                    background={file.childImageSharp.original.src}
-                  >
-                    <Text>
-                      Together, we’ll discover what your company is truly
-                      capable of.
-                    </Text>
-                  </TextBackground>
-                </TextContainer>
-                <CallToAction onClick={this.handleActionClick}>
-                  <CTAText animation={animation}>
-                    Contact Us <ChevronDownIcon />
-                  </CTAText>
-                </CallToAction>
-                <ContactSlideIn
-                  animation={animation}
-                  onClose={this.handleClose}
-                />
-              </Frame>
-            )}
-          />
+          <>
+            <IntersectionObserver
+              render={({ visiblePercentage }) => (
+                <Frame narrow>
+                  <Nav inView={visiblePercentage > 90}>
+                    <Logo onlySymbol fill="rgba(255,255,255,0.25)" />
+                    <NavLinks>
+                      {ctaLinks.map(link => (
+                        <NavLink key={link.to} to={link.to}>
+                          {link.text}
+                        </NavLink>
+                      ))}
+                    </NavLinks>
+                  </Nav>
+                  <TextContainer>
+                    <TextBackground
+                      background={file.childImageSharp.original.src}
+                    >
+                      <Text>
+                        Together, we’ll discover what your company is truly
+                        capable of.
+                      </Text>
+                      <MobileAction to="/contact">Get in touch</MobileAction>
+                    </TextBackground>
+                  </TextContainer>
+                  <CallToAction onClick={this.handleActionClick}>
+                    <CTAText animation={animation}>
+                      Contact Us <ChevronDownIcon />
+                    </CTAText>
+                  </CallToAction>
+                  <ContactSlideIn
+                    animation={animation}
+                    onClose={this.handleClose}
+                  />
+                </Frame>
+              )}
+            />
+            <MediaQuery maxWidth="tablet">
+              <Footer />
+            </MediaQuery>
+          </>
         )}
       />
     )
@@ -118,9 +126,26 @@ const Nav = styled(Section)`
   opacity: ${p => (p.inView ? 1 : 0)};
   transition: opacity ${p => (p.inView ? '1s' : '0.5s')} linear;
   z-index: 1;
+
+  ${mediaqueries.tablet`
+    justify-content: center;
+    padding-top: 90px;
+
+    div {
+      margin: 0 auto;
+      height: 30px;
+      width: auto;
+    }
+  `}
 `
 
-const NavLinks = styled.div``
+const NavLinks = styled.div`
+  ${mediaqueries.desktop`
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+  `}
+`
 
 const NavLink = styled(Link)`
   font-weight: 600;
@@ -146,6 +171,7 @@ const TextContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 20px;
 `
 
 const TextBackground = styled.div`
@@ -166,6 +192,21 @@ const Text = styled.p`
   letter-spacing: -0.5px;
   max-width: 680px;
   color: transparent;
+
+  ${mediaqueries.desktop`
+    font-size: 60px;
+  `}
+  
+  ${mediaqueries.tablet`
+    margin-bottom: 75px;
+  `}
+
+  ${mediaqueries.phablet`
+    font-size: 39.29px;
+    line-height: 1.2;
+    text-align: center;
+    max-width: 335px;
+  `}
 `
 
 const CallToAction = styled.button`
@@ -178,6 +219,12 @@ const CallToAction = styled.button`
   border-top-right-radius: 20px;
   text-align: center;
   color: #000;
+
+  ${mediaqueries.tablet`
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+  `}
 `
 
 const CTAText = styled.span`
@@ -209,3 +256,22 @@ const ChevronDownIcon = () => (
     />
   </svg>
 )
+
+const MobileAction = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50px;
+  border: 1px solid #fafafa;
+  border-radius: 30px;
+  margin: 0 auto;
+  font-size: 18px;
+  text-align: center;
+  color: #fff;
+  font-weight: 600;
+
+  ${mediaqueries.desktop_up`
+    display: none;
+  `}
+`
