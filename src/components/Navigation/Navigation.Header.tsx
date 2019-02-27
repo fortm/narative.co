@@ -161,14 +161,17 @@ class Navigation extends Component<> {
                     <BackChevron />
                   </LogoBack>
                 )}
-                <LogoContainer to="/">
+                <LogoContainer to="/" aria-label="Back home">
                   <Logo onlySymbol fill={fill} />
                 </LogoContainer>
                 <Nav>
                   <DesktopNavList>
                     <NavItems active={active} handleClick={this.navigateOut} />
                   </DesktopNavList>
-                  <ToggleContainer onClick={this.handleToggleClick}>
+                  <ToggleContainer
+                    onClick={this.handleToggleClick}
+                    aria-label="Mobile Navigation Button"
+                  >
                     <LeftToggle active={active} ref={this.leftToggle} />
                     <RightToggle active={active} />
                   </ToggleContainer>

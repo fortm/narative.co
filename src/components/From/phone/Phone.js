@@ -114,7 +114,7 @@ const StyledButton = styled.button`
 
 const PhoneIcon = ({ hasError }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" version="1.1">
-    <g id="Canvas" fill="none">
+    <g fill="none">
       <g id="phone-icon">
         <path
           id="Stroke 1"

@@ -7,13 +7,11 @@ interface ButtonProps {
   isSubmitting?: boolean
 }
 
-const Button = ({ text, type, isSubmitting }: ButtonProps) => {
-  return (
-    <StyledButton type={type || 'submit'}>
-      {isSubmitting ? <Spinner /> : text}
-    </StyledButton>
-  )
-}
+const Button = ({ text, type, isSubmitting }: ButtonProps) => (
+  <StyledButton type={type || 'submit'} role="button" aria-label={text}>
+    {isSubmitting ? <Spinner /> : text}
+  </StyledButton>
+)
 
 export default Button
 

@@ -201,6 +201,7 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
                   ? () => navigate(`/${previousPath.split('/')[1]}`)
                   : this.openMobileNav
               }
+              aria-label="Mobile Navigation Button"
             >
               {showPreviousPath ? (
                 <ExIcon />

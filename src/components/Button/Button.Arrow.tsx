@@ -27,7 +27,14 @@ export default ({
   color = 'white',
   isSubmitting,
 }: ButtonArrowProps) => (
-  <ArrowButton as={as} to={to} onClick={onClick} color={color}>
+  <ArrowButton
+    as={as}
+    to={to}
+    onClick={onClick}
+    color={color}
+    aria-label={text}
+    role="button"
+  >
     {isSubmitting ? (
       <Spinner />
     ) : (
@@ -145,16 +152,14 @@ const ArrowAnimation = styled.div`
 
 export const ArrowRightIcon = ({ fill = 'white' }) => (
   <svg width="35" height="7" viewBox="0 0 35 7" version="1.1">
-    <g id="Canvas" fill="none">
-      <g id="arrow-left-icon">
+    <g fill="none">
+      <g>
         <path
-          id="triangle"
           d="M 3.5 0L 6.53109 5.25L 0.468911 5.25L 3.5 0Z"
           transform="matrix(0 1 -1 0 35 0)"
           fill={fill}
         />
         <line
-          id="Line"
           y1="-0.5"
           x2="30"
           y2="-0.5"

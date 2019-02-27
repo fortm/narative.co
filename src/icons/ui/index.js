@@ -2,16 +2,14 @@ import React from 'react'
 
 export const ArrowRightIcon = ({ fill = 'black' }) => (
   <svg width="35" height="7" viewBox="0 0 35 7" version="1.1">
-    <g id="Canvas" fill="none">
-      <g id="arrow-left-icon">
+    <g fill="none">
+      <g>
         <path
-          id="triangle"
           d="M 3.5 0L 6.53109 5.25L 0.468911 5.25L 3.5 0Z"
           transform="matrix(0 1 -1 0 35 0)"
           fill={fill}
         />
         <line
-          id="Line"
           y1="-0.5"
           x2="30"
           y2="-0.5"
@@ -25,7 +23,7 @@ export const ArrowRightIcon = ({ fill = 'black' }) => (
 
 export const CheckIcon = ({ fill = 'white' }) => (
   <svg width="18" height="14" viewBox="0 0 18 14" version="1.1">
-    <g id="Canvas" fill="none">
+    <g fill="none">
       <g id="check">
         <path
           id="Shape"
@@ -42,7 +40,7 @@ export const CheckIcon = ({ fill = 'white' }) => (
 
 export const ExIcon = ({ fill = 'black' }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" version="1.1">
-    <g id="Canvas" fill="none">
+    <g fill="none">
       <path
         id="Stroke 1"
         d="M 0 0L 24 0L 24 24L 0 24L 0 0Z"
@@ -64,7 +62,7 @@ export const ExIcon = ({ fill = 'black' }) => (
 
 export const ChevronDownIcon = () => (
   <svg width="24" height="25" viewBox="0 0 24 25" version="1.1">
-    <g id="Canvas" fill="none">
+    <g fill="none">
       <g id="chevron-down-icon">
         <path
           id="Stroke 1"
@@ -87,7 +85,7 @@ export const ChevronDownIcon = () => (
 
 export const PencilIcon = () => (
   <svg width="17" height="17" viewBox="0 0 17 17">
-    <g id="Canvas" fill="none">
+    <g fill="none">
       <path
         id="Vector"
         d="M 16.7 4C 17.1 3.6 17.1 3 16.7 2.6L 14.4 0.3C 14 -0.1 13.4 -0.1 13 0.3L 11 2.3L 14.7 6L 16.7 4ZM 13.7 7L 10 3.3L 0 13.3L 0 17L 3.7 17L 13.7 7Z"
