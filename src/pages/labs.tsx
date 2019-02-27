@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import { Section, Heading, SEO, Layout } from '@components'
 import Footer from '@components/Navigation/Navigation.Footer'
-
+import Media from '@components/Media/Media.Img'
 import { startAnimation } from '@utils'
 import mediaqueries from '@styles/media'
 import transitions from '@styles/transitions'
@@ -33,6 +33,7 @@ class LabsPage extends Component<{}, { animate: string }> {
     const { animation } = this.state
     const {
       allContentfulHomePage,
+      hero,
       needlBackground,
       feyBackground,
     } = this.props.data
@@ -98,7 +99,7 @@ class LabsPage extends Component<{}, { animate: string }> {
             image={seo.image.file.url}
             pathname={this.props.location.pathname}
           />
-          <Section>
+          <HeroSection>
             <ContentContainer>
               <div style={{ top: '-60px' }} />
               <TextContainer animation={animation}>
@@ -114,8 +115,10 @@ class LabsPage extends Component<{}, { animate: string }> {
               </TextContainer>
               <div />
             </ContentContainer>
-            <div />
-          </Section>
+            <HeroImage>
+              <Media src={hero.childImageSharp.fluid} />
+            </HeroImage>
+          </HeroSection>
           <Section narrow>
             {products.map(product => (
               <LabsPreview key={product.excerpt} product={product} />
@@ -147,6 +150,13 @@ export const pageQuery = graphql`
         }
       }
     }
+    hero: file(name: { regex: "/labs-hero-phone/" }) {
+      childImageSharp {
+        fluid(maxWidth: 1060, quality: 100) {
+          ...GatsbyImageSharpFluid_noBase64
+        }
+      }
+    }
     needlBackground: file(name: { regex: "/needl-labs/" }) {
       childImageSharp {
         fluid(maxWidth: 1140, maxHeight: 380, quality: 100) {
@@ -164,8 +174,23 @@ export const pageQuery = graphql`
   }
 `
 
+const HeroSection = styled(Section)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const HeroImage = styled.div`
+  width: 530px;
+
+  ${mediaqueries.phablet`
+    width: 100%;
+    margin-bottom: 60px;
+  `};
+`
+
 const TextContainer = styled.div`
-  max-width: 570px;
+  max-width: 560px;
   ${transitions.fadeUp};
 `
 
