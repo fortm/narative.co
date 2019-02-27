@@ -90,6 +90,5 @@ export const scrollable = (action: string) => {
   } else {
     document.body.style.overflow = 'hidden'
     document.body.style.height = '100%'
-    document.body.style.position = 'fixed'
   }
 }

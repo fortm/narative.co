@@ -93,7 +93,7 @@ const HomesValues = () => {
   return (
     <Sticky
       height="300vh"
-      render={({ progress }) => {
+      render={({ progress, visible }) => {
         const getActive = calculateActive(progress)
         const offset = calculateOffset(progress)
 
@@ -151,7 +151,7 @@ const HomesValues = () => {
             </Column>
             <Column />
             <Column />
-            <Column />
+            <Column withRightBorder />
             <ImageSlides>
               <ImageSlide active={firstActive}>1</ImageSlide>
               <ImageSlide active={secondActive}>2</ImageSlide>
@@ -180,9 +180,11 @@ const Column = memo(styled.div`
   margin: 50px 0;
   border-left: 1px solid #1d2128;
 
-  &:last-child {
+  ${p =>
+    p.withRightBorder &&
+    `
     border-right: 1px solid #1d2128;
-  }
+    `}
 `)
 
 const Value = memo(styled.div`
@@ -246,6 +248,7 @@ const ImageSlides = styled.div`
   right: 0;
   width: 75%;
   height: 100%;
+  pointer-events: none;
 `
 
 const ImageSlide = styled.div`

@@ -2,16 +2,17 @@ import React, { Component, Fragment } from 'react'
 import { Link, graphql, navigate } from 'gatsby'
 import styled from 'styled-components'
 
-import transitions from '@styles/transitions'
-import mediaqueries from '@styles/media'
 import { ButtonArrow, Section, Heading, SEO, Layout } from '@components'
-import { startAnimation } from '@utils'
+import ScrollIndicator from '@components/ScrollIndicator'
 
 import HomeAbout from '../sections/home/Home.About'
 import HomeCallToAction from '../sections/home/Home.CallToAction'
 import HomeTestimonial from '../sections/home/Home.Testimonial'
 import HomeValues from '../sections/home/Home.Values'
-import { backgrounds } from 'polished'
+
+import { startAnimation } from '@utils'
+import transitions from '@styles/transitions'
+import mediaqueries from '@styles/media'
 
 class IndexPage extends Component<{}, { animation: string }> {
   state = { animation: '' }
@@ -35,7 +36,7 @@ class IndexPage extends Component<{}, { animation: string }> {
     const { animation } = this.state
     const contentful = this.props.data.allContentfulHomePage.edges[0].node
     const background =
-      'linear-gradient(180deg,#08080b 0%,#0b0b0e 44.18%,#111216 100%)'
+      'linear-gradient(180deg,#08080b 0%,#0b0b0e 20%,#111216 33%)'
 
     return (
       <Layout navOffset background={background}>
@@ -70,7 +71,7 @@ class IndexPage extends Component<{}, { animation: string }> {
               {/* With flexbox we need to have a mobile and desktop element
                 in the DOM so we can have the proper design in palce. This is
                 the Mobile only Contact button*/}
-              <div />
+              <ScrollIndicator />
             </ContentContainer>
             <div />
           </Section>
@@ -167,7 +168,6 @@ const MobileContactText = styled.span`
 const ContentContainer = styled.div`
   height: calc(100vh - 140px);
   min-height: 440px;
-  padding: 0 0 100px;
 
   position: relative;
   display: flex;

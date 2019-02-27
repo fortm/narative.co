@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import Heading from '@components/Heading'
 import Footer from '@components/Navigation/Navigation.Footer'
+import ScrollIndicator from '@components/ScrollIndicator'
 
 import ArticlesGrid from '../../sections/articles/Articles.Grid'
 import ArticlesFeatured from '../../sections/articles/Articles.Featured'
@@ -55,7 +56,6 @@ class ArticlesPage extends Component {
             pathname={this.props.location.pathname}
           />
           <Section relative>
-            <LearnMore animation={animation}>Learn more</LearnMore>
             <ContentContainer>
               <div style={{ top: '-60px' }} />
               <TextContainer animation={animation}>
@@ -69,7 +69,7 @@ class ArticlesPage extends Component {
                   sharing what we do.
                 </MainText>
               </TextContainer>
-              <div />
+              <ScrollIndicator />
             </ContentContainer>
             <div />
           </Section>
@@ -121,7 +121,6 @@ const WhiteBackground = styled.div`
 const ContentContainer = styled.div`
   height: calc(100vh - 140px);
   min-height: 440px;
-  padding: 0 0 100px;
 
   a {
     color: #fff;
@@ -165,31 +164,4 @@ const HeaderPill = styled.div`
   font-weight: 500;
   min-width: 100px;
   text-align: center;
-`
-
-const LearnMore = styled.div`
-  position: absolute;
-  bottom: 100px;
-  left: 0;
-  color: ${p => p.theme.colors.grey};
-  font-weight: 600;
-  left: 12px;
-  font-size: 12px;
-  opacity: ${p => (p.animation ? 1 : 0)};
-  transform: rotate(-90deg) translateX(${p => (p.animation ? '0' : '20px')});
-  transition: all 1s ease-out 0.5s;
-
-  &::after {
-    content: '';
-    position: absolute;
-    width: 100px;
-    left: -120px;
-    height: 1px;
-    top: 9px;
-    background: ${p => p.theme.colors.grey};
-  }
-
-  @media screen and (max-height: 700px) and (max-width: 768px) {
-    bottom: 60px;
-  }
 `

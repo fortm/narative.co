@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Link, graphql, StaticQuery } from 'gatsby'
 
 import Logo from '@components/Logo'
 import IntersectionObserver from '@components/IntersectionObserver'
 import Section from '@components/Section'
+
+import ContactSlideIn from '../contact/Contact.SlideIn'
 
 import mediaqueries from '@styles/media'
 
@@ -27,15 +29,27 @@ const imageQuery = graphql`
   }
 `
 
-const HomeCallToAction = () => {
-  return (
-    <StaticQuery
-      query={imageQuery}
-      render={({ file }) => (
-        <IntersectionObserver
-          render={({ visiblePercentage }) => (
-            <Frame>
-              <Section>
+class HomeCallToAction extends Component<{}, { animation: string }> {
+  state = { animation: '' }
+
+  handleActionClick = () => {
+    this.setState({ animation: 'start' })
+  }
+
+  handleClose = () => {
+    this.setState({ animation: '' })
+  }
+
+  render() {
+    const { animation } = this.state
+
+    return (
+      <StaticQuery
+        query={imageQuery}
+        render={({ file }) => (
+          <IntersectionObserver
+            render={({ visiblePercentage }) => (
+              <Frame>
                 <Nav inView={visiblePercentage > 90}>
                   <Logo onlySymbol fill="rgba(255,255,255,0.25)" />
                   <NavLinks>
@@ -46,26 +60,32 @@ const HomeCallToAction = () => {
                     ))}
                   </NavLinks>
                 </Nav>
-              </Section>
-              <TextContainer>
-                <TextBackground background={file.childImageSharp.original.src}>
-                  <Text>
-                    Together, we’ll discover what your company is truly capable
-                    of.
-                  </Text>
-                </TextBackground>
-              </TextContainer>
-              <CallToAction>
-                <CTAText>
-                  Contact Us <ChevronDownIcon />
-                </CTAText>
-              </CallToAction>
-            </Frame>
-          )}
-        />
-      )}
-    />
-  )
+                <TextContainer>
+                  <TextBackground
+                    background={file.childImageSharp.original.src}
+                  >
+                    <Text>
+                      Together, we’ll discover what your company is truly
+                      capable of.
+                    </Text>
+                  </TextBackground>
+                </TextContainer>
+                <CallToAction onClick={this.handleActionClick}>
+                  <CTAText animation={animation}>
+                    Contact Us <ChevronDownIcon />
+                  </CTAText>
+                </CallToAction>
+                <ContactSlideIn
+                  animation={animation}
+                  onClose={this.handleClose}
+                />
+              </Frame>
+            )}
+          />
+        )}
+      />
+    )
+  }
 }
 
 export default HomeCallToAction
@@ -94,7 +114,7 @@ const Nav = styled(Section)`
   position: relative;
   display: flex;
   justify-content: space-between;
-  padding-top: 75px;
+  padding-top: 100px;
   opacity: ${p => (p.inView ? 1 : 0)};
   transition: opacity ${p => (p.inView ? '1s' : '0.5s')} linear;
   z-index: 1;
@@ -169,6 +189,9 @@ const CTAText = styled.span`
   top: 22px;
   font-weight: 600;
   pointer-events: none;
+
+  opacity: ${p => (p.animation ? 0 : 1)};
+  transition: opacity 0.3s linear ${p => (p.animation ? 0 : '0.5s')};
 `
 
 const ChevronDownIcon = () => (
