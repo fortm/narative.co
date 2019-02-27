@@ -86,7 +86,7 @@ const Fade = styled.div`
     left: 0;
     height: 140px;
     width: 100%;
-    background: linear-gradient(#0b0b0e, transparent);
+    background: linear-gradient(#111216, transparent);
   }
 
   &::after {
@@ -96,6 +96,6 @@ const Fade = styled.div`
     left: 0;
     width: 100%;
     height: 60%;
-    background: linear-gradient(transparent, #0b0b0e);
+    background: linear-gradient(transparent, #111216);
   }
 `

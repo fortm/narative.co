@@ -36,7 +36,7 @@ class IndexPage extends Component<{}, { animation: string }> {
     const { animation } = this.state
     const contentful = this.props.data.allContentfulHomePage.edges[0].node
     const background =
-      'linear-gradient(180deg,#08080b 0%,#0b0b0e 20%,#111216 33%)'
+      'linear-gradient(180deg,#08080b 0%,#0b0b0e 5%,#111216 11%)'
 
     return (
       <Layout navOffset background={background}>
@@ -115,6 +115,10 @@ export const pageQuery = graphql`
       }
     }
   }
+`
+
+const Gradient = styled.div`
+  background: linear-gradient(180deg, #08080b 0%, #0b0b0e 44.18%, #111216 100%);
 `
 
 const TextContainer = styled.div`
