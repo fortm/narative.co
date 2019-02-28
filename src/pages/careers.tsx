@@ -291,7 +291,8 @@ const GridContainer = styled.div`
     padding: 0;
   `};
 
-  ${mediaqueries.phone`
+  ${mediaqueries.phablet`
+    height: calc(100vh - 180px);
     width: 100%;
   `};
 `
@@ -303,6 +304,11 @@ const TextContainer = styled.div`
     transition-delay: 0ms !important;
     transition-duration: 500ms !important;
   `};
+
+  ${mediaqueries.phablet`
+    position: relative;
+    top: -50px;
+  `}
 `
 
 const HeaderPill = styled.div`

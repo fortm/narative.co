@@ -59,7 +59,7 @@ class ArticlesPage extends Component {
           />
           <HeroSection relative>
             <ContentContainer>
-              <div style={{ top: '-60px' }} />
+              <div />
               <TextContainer animation={animation}>
                 <HeaderPill>Articles</HeaderPill>
                 <Heading.h1>
@@ -168,6 +168,11 @@ const ContentContainer = styled.div`
 const TextContainer = styled.div`
   max-width: 570px;
   ${transitions.fadeUp};
+
+  ${mediaqueries.phablet`
+    position: relative;
+    top: -50px;
+  `};
 `
 
 const MainText = styled.p`

@@ -55,7 +55,7 @@ class IndexPage extends Component<{}, { animation: string }> {
           />
           <Section>
             <ContentContainer>
-              <div style={{ top: '-60px' }} />
+              <div />
               <TextContainer animation={animation}>
                 <Heading.h1>
                   <em>Narative</em> builds brands, websites and products for
@@ -73,7 +73,6 @@ class IndexPage extends Component<{}, { animation: string }> {
                   <ButtonArrow text="Get in touch" />
                 </ContactText>
               </TextContainer>
-
               <ScrollIndicator />
             </ContentContainer>
             <div />
@@ -127,6 +126,11 @@ const Gradient = styled.div`
 const TextContainer = styled.div`
   max-width: 570px;
   ${transitions.fadeUp};
+
+  ${mediaqueries.phablet`
+    position: relative;
+    top: -50px;
+  `}
 `
 
 const MainText = styled.p`

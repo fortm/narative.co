@@ -102,7 +102,7 @@ class LabsPage extends Component<{}, { animate: string }> {
           />
           <HeroSection>
             <ContentContainer>
-              <div style={{ top: '-60px' }} />
+              <div />
               <TextContainer animation={animation}>
                 <HeaderPill>Labs</HeaderPill>
                 <Heading.h1>
@@ -193,6 +193,11 @@ const HeroImage = styled.div`
 const TextContainer = styled.div`
   max-width: 560px;
   ${transitions.fadeUp};
+
+  ${mediaqueries.phablet`
+    position: relative;
+    top: -50px;
+  `}
 `
 
 const MainText = styled.p`

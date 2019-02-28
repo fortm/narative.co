@@ -232,6 +232,7 @@ const ArticleLink = styled(Link)`
   border-radius: 5px;
   z-index: 1;
   transition: transform 0.33s var(--ease-out-quart);
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 
   &:hover ${Image} {
     transform: translateY(-1px);
