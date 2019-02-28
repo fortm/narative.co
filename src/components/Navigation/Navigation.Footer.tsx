@@ -136,10 +136,6 @@ const SocialIconsFooter = styled.div`
 
   ${mediaqueries.tablet`
     margin: 0 auto;
-
-    svg * {
-      fill: #fff;
-    }
   `}
 `
 
