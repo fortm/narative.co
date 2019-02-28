@@ -48,7 +48,6 @@ class ArticlesPage extends Component {
       theme: 'light',
     }
 
-    console.log(this.props)
     return (
       <Layout nav={navConfig}>
         <Fragment>
