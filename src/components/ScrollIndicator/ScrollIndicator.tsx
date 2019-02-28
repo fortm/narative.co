@@ -30,5 +30,5 @@ const Bar = styled.div`
   height: 30px;
   bottom: 0;
   background: ${p => (p.mode === 'dark' ? '#000' : '#fff')};
-  animation: ${animateUp} 0.8s cubic-bezier(0.694, 0, 0.335, 1) forwards 0.3s;
+  animation: ${animateUp} 1.2s cubic-bezier(0.694, 0, 0.335, 1) forwards 0.5s;
 `

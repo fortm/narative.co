@@ -370,7 +370,7 @@ const HeroImageBottom = styled.div`
   margin: 0 auto;
   transform: translateY(80px);
 
-  animation: comeUp 2s cubic-bezier(0.175, 0.885, 0.4, 1.15) forwards 0.2s;
+  animation: comeUp 2.4s cubic-bezier(0.175, 0.885, 0.4, 1.15) forwards 0.2s;
 
   @keyframes comeUp {
     from {
@@ -388,7 +388,6 @@ const RightContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding-top: 4rem;
 
   ${mediaqueries.desktop`
     justify-content: center;

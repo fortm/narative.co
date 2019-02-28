@@ -44,14 +44,14 @@ const constants = {
   },
   h2: {
     fontsize: '3.2rem',
-    fontsizeMobile: '2.2rem',
+    fontsizeMobile: '2.3rem',
     fontFamily: "'ff-meta-serif-web-pro', serif",
     lineheight: 1.2,
   },
   h3: {
     fontsize: '2.4rem',
     fontFamily: "'ff-meta-serif-web-pro', serif",
-    fontsizeMobile: '2.2rem',
+    fontsizeMobile: '2.4rem',
     lineheight: 1.45,
   },
   h4: {

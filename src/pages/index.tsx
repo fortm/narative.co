@@ -37,6 +37,7 @@ class IndexPage extends Component<{}, { animation: string }> {
     const contentful = this.props.data.allContentfulHomePage.edges[0].node
     const background =
       'linear-gradient(180deg,#08080b 0%,#0b0b0e 5%,#111216 11%)'
+
     const navConfig = {
       offset: true,
       fixed: false,
@@ -73,9 +74,6 @@ class IndexPage extends Component<{}, { animation: string }> {
                 </ContactText>
               </TextContainer>
 
-              {/* With flexbox we need to have a mobile and desktop element
-                in the DOM so we can have the proper design in palce. This is
-                the Mobile only Contact button*/}
               <ScrollIndicator />
             </ContentContainer>
             <div />
@@ -150,12 +148,6 @@ const ContactText = styled(Link)`
   font-weight: 600;
   color: ${p => p.theme.colors.grey};
   ${transitions.fadeUp};
-
-  ${mediaqueries.tablet`
-    opacity: 0;
-    pointer-events: none;
-    flex-direction: column;
-  `};
 
   svg {
     margin-left: 1rem;

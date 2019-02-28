@@ -26,6 +26,7 @@ interface HorizontalScrollProps {
   name: string
   render: () => void
   narrow?: boolean
+  ref?: React.Ref
 }
 
 const HorizontalScroll = ({
@@ -33,10 +34,11 @@ const HorizontalScroll = ({
   name,
   render,
   narrow,
+  innerRef,
 }: HorizontalScrollProps) => (
   <HorizontalScrollContainer narrow={narrow}>
     <HorizontalScrollInner>
-      <HorizontalScroller>
+      <HorizontalScroller ref={innerRef}>
         {list.map((props, index) => {
           return (
             <HorizontalScrollItem key={index} narrow={narrow}>
@@ -81,6 +83,7 @@ const HorizontalScroller = styled.div`
 
 const HorizontalScrollItem = styled.div`
   display: inline-block;
+  width: calc(100vw - 6rem);
   margin-right: 0.75rem !important;
   margin-left: 0.75rem !important;
 

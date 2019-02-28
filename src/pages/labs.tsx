@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { Section, Heading, SEO, Layout } from '@components'
 import Footer from '@components/Navigation/Navigation.Footer'
 import Media from '@components/Media/Media.Img'
+
 import { startAnimation } from '@utils'
 import mediaqueries from '@styles/media'
 import transitions from '@styles/transitions'

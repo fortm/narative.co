@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import Heading from '@components/Heading'
 import Footer from '@components/Navigation/Navigation.Footer'
 import ScrollIndicator from '@components/ScrollIndicator'
+import Media from '@components/Media/Media.Img'
 
 import ArticlesGrid from '../../sections/articles/Articles.Grid'
 import ArticlesFeatured from '../../sections/articles/Articles.Featured'
@@ -18,6 +19,7 @@ class ArticlesPage extends Component {
   contentful = this.props.data.allContentfulHomePage.edges[0].node
   articles = this.props.pageContext.group
   featured = this.props.pageContext.additionalContext.featured[0]
+  hero = this.props.data.hero
 
   state = { animation: '' }
 
@@ -46,6 +48,7 @@ class ArticlesPage extends Component {
       theme: 'light',
     }
 
+    console.log(this.props)
     return (
       <Layout nav={navConfig}>
         <Fragment>
@@ -55,7 +58,7 @@ class ArticlesPage extends Component {
             image={seo.image.file.url}
             pathname={this.props.location.pathname}
           />
-          <Section relative>
+          <HeroSection relative>
             <ContentContainer>
               <div style={{ top: '-60px' }} />
               <TextContainer animation={animation}>
@@ -71,8 +74,10 @@ class ArticlesPage extends Component {
               </TextContainer>
               <ScrollIndicator />
             </ContentContainer>
-            <div />
-          </Section>
+            <HeroImage>
+              <Media src={this.hero.childImageSharp.fluid} />
+            </HeroImage>
+          </HeroSection>
           <WhiteBackground>
             <NoOverflowSection narrow>
               <ArticlesFeatured article={this.featured} />
@@ -105,6 +110,13 @@ export const pageQuery = graphql`
         }
       }
     }
+    hero: file(name: { regex: "/labs-hero-phone/" }) {
+      childImageSharp {
+        fluid(maxWidth: 1060, quality: 100) {
+          ...GatsbyImageSharpFluid_noBase64
+        }
+      }
+    }
   }
 `
 
@@ -113,6 +125,22 @@ const NoOverflowSection = styled(Section)`
     overflow: hidden;
   `}
 `
+
+const HeroSection = styled(Section)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const HeroImage = styled.div`
+  width: 530px;
+
+  ${mediaqueries.phablet`
+    width: 100%;
+    margin-bottom: 60px;
+  `};
+`
+
 const WhiteBackground = styled.div`
   position: relative;
   background: #fafafa;

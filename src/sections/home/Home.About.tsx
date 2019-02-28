@@ -117,5 +117,9 @@ const Fade = styled.div`
     width: 100%;
     height: 52%;
     background: linear-gradient(transparent, #111216);
+
+    ${mediaqueries.tablet`
+      content: none;
+    `}
   }
 `

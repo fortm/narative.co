@@ -1,3 +1,10 @@
+/**
+ * Why is this a template?
+ * In order to add pagination to the articles page we need to use createPagination
+ * during the onCreatePages Gatsby hook. Therefore, we need to create it dynamically
+ * using a template instead of putting it into the regular Gatsby /pages folder
+ */
+
 import React, { Component } from 'react'
 import styled from 'styled-components'
 

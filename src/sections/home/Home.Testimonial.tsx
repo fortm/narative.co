@@ -46,7 +46,7 @@ const Gradient = styled.div`
   background: linear-gradient(180deg, #111216 0%, #191d23 100%);
 
   ${mediaqueries.tablet`
-    padding: 200px 0;
+    padding: 50px 0 115px;
   `}
 `
 

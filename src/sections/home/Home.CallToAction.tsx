@@ -53,7 +53,7 @@ class HomeCallToAction extends Component<{}, { animation: string }> {
             <IntersectionObserver
               render={({ visiblePercentage }) => (
                 <Frame narrow>
-                  <Nav inView={visiblePercentage > 90}>
+                  <Nav inView={visiblePercentage > 88}>
                     <Logo onlySymbol fill="rgba(255,255,255,0.25)" />
                     <NavLinks>
                       {ctaLinks.map(link => (
@@ -71,8 +71,8 @@ class HomeCallToAction extends Component<{}, { animation: string }> {
                         Together, we’ll discover what your company is truly
                         capable of.
                       </Text>
-                      <MobileAction to="/contact">Get in touch</MobileAction>
                     </TextBackground>
+                    <MobileAction to="/contact">Get in touch</MobileAction>
                   </TextContainer>
                   <CallToAction onClick={this.handleActionClick}>
                     <CTAText animation={animation}>
@@ -171,6 +171,7 @@ const TextContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   padding: 0 20px;
 `
 
@@ -195,10 +196,6 @@ const Text = styled.p`
 
   ${mediaqueries.desktop`
     font-size: 60px;
-  `}
-  
-  ${mediaqueries.tablet`
-    margin-bottom: 75px;
   `}
 
   ${mediaqueries.phablet`
@@ -270,6 +267,7 @@ const MobileAction = styled(Link)`
   text-align: center;
   color: #fff;
   font-weight: 600;
+  margin-top: 75px;
 
   ${mediaqueries.desktop_up`
     display: none;
