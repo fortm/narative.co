@@ -249,7 +249,7 @@ const ChevronDownIcon = () => (
     <path
       d="M7.41 7.83984L12 12.4198L16.59 7.83984L18 9.24984L12 15.2498L6 9.24984L7.41 7.83984Z"
       fill="black"
-      fill-opacity="0.25"
+      fillOpacity="0.25"
     />
   </svg>
 )

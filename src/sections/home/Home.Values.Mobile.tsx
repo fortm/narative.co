@@ -51,10 +51,10 @@ class HomeValuesMobile extends Component {
               narrow
               innerRef={this.element}
               render={({ value }) => (
-                <Card>
+                <Card key={value.heading}>
                   <List>
                     {value.list.map(item => (
-                      <Item>{item}</Item>
+                      <Item key={item}>{item}</Item>
                     ))}
                   </List>
                   <CardLink to={value.link.to}>{value.link.text}</CardLink>
