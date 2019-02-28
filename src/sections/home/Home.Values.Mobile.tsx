@@ -14,11 +14,15 @@ class HomeValuesMobile extends Component {
   state = { progress: 0 }
 
   componentDidMount() {
-    this.element.current.addEventListener('scroll', this.handleScroll)
+    if (this.element.current) {
+      this.element.current.addEventListener('scroll', this.handleScroll)
+    }
   }
 
   componentWillUnmount() {
-    this.element.current.removeEventListener('scroll', this.handleScroll)
+    if (this.element.current && window !== 'undefined') {
+      this.element.current.removeEventListener('scroll', this.handleScroll)
+    }
   }
 
   handleScroll = () => {
