@@ -46,7 +46,7 @@ const ArticleHero = ({ article }: { article: IArticleNode }) => {
               </Section>
             </HeroContent>
             <RelativeSection>
-              <ScrollIndicator mode="dark" />
+              <ScrollIndicator mode="dark" disableScrollAnimation />
               <ReadingTime>{article.readingTime.text}</ReadingTime>
             </RelativeSection>
             <Image>
@@ -73,6 +73,7 @@ const Hero = styled.div`
 
   ${mediaqueries.tablet`
     min-height: 100vh;
+    background: #1d2128;
   `}
 `
 
@@ -86,6 +87,14 @@ const HeroContent = styled.div`
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
+
+  ${mediaqueries.tablet`
+    min-height: 100vh;
+    margin-top: 10px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background: #fafafa;
+  `}
 `
 
 const Header = styled.header`

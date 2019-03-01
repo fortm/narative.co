@@ -116,6 +116,7 @@ class Article extends Component<ArticleProps, PostState> {
       theme: 'dark',
       offset: false,
       fixed: false,
+      low: true,
     }
 
     return (

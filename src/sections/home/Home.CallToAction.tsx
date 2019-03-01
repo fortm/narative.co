@@ -128,6 +128,10 @@ const Nav = styled(Section)`
   transition: opacity ${p => (p.inView ? '1s' : '0.5s')} linear;
   z-index: 1;
 
+  ${mediaqueries.desktop`
+    display: flex;
+  `}
+
   ${mediaqueries.tablet`
     justify-content: center;
     padding-top: 90px;
@@ -141,7 +145,7 @@ const Nav = styled(Section)`
 `
 
 const NavLinks = styled.div`
-  ${mediaqueries.desktop`
+  ${mediaqueries.tablet`
     display: none;
     visibility: hidden;
     opacity: 0;

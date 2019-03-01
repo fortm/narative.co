@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import Img from 'gatsby-image'
 import styled, { keyframes } from 'styled-components'
 
@@ -128,12 +128,9 @@ class CareersPage extends Component<{}, { animation: string }> {
           }
         >
           <SectionCopy maxWidth="67rem">
-            We engage with{' '}
-            <Underline>
-              <UnderlineInner>exceptional clients</UnderlineInner>
-            </Underline>{' '}
-            to fund our own ideas. Displaying our core beliefs through the
-            development of our own products. We call this Narative Labs.
+            We engage with exceptional clients to fund our own ideas. Displaying
+            our core beliefs through the development of our own products. We
+            call this <LabsLink to="/labs">Narative Labs</LabsLink>.
           </SectionCopy>
         </CareerRow>
         <CareersGraph />
@@ -477,4 +474,15 @@ const Spacer = styled.div`
   ${mediaqueries.tablet`
     height: 45px;
   `};
+`
+
+const LabsLink = styled(Link)`
+  text-decoration: underline;
+  text-decoration-color: ${p => p.theme.colors.gold};
+  color: #fff;
+  transition: color 0.3s ease-out;
+
+  &:hover {
+    color: ${p => p.theme.colors.gold};
+  }
 `

@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { Section, Heading, SEO, Layout } from '@components'
 import Footer from '@components/Navigation/Navigation.Footer'
 import Media from '@components/Media/Media.Img'
+import ScrollIndicator from '@components/ScrollIndicator'
 
 import { startAnimation } from '@utils'
 import mediaqueries from '@styles/media'
@@ -114,8 +115,9 @@ class LabsPage extends Component<{}, { animate: string }> {
                   Narative.
                 </MainText>
               </TextContainer>
-              <div />
+              <MobileScrollIndicator />
             </ContentContainer>
+
             <HeroImage>
               <Media src={hero.childImageSharp.fluid} />
             </HeroImage>
@@ -173,6 +175,12 @@ export const pageQuery = graphql`
       }
     }
   }
+`
+
+const MobileScrollIndicator = styled(ScrollIndicator)`
+  ${mediaqueries.desktop_up`
+    display: none;
+  `}
 `
 
 const HeroSection = styled(Section)`

@@ -132,10 +132,10 @@ const HeroSection = styled(Section)`
 `
 
 const HeroImage = styled.div`
-  width: 900px;
+  width: 880px;
   position: absolute;
-  right: -130px;
-  top: -20px;
+  right: -140px;
+  top: -10px;
 
   ${mediaqueries.desktop_medium`
     display: none;

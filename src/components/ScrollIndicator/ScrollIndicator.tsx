@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import styled, { keyframes } from 'styled-components'
-
-import Section from '@components/Section'
+import styled from 'styled-components'
 
 function calculateWindowOffset() {
   return (
@@ -33,12 +31,24 @@ function useWindowOffset() {
   return windowOffset
 }
 
-const ScrollIndicator = ({ mode }: { mode?: string }) => {
+const ScrollIndicator = ({
+  mode,
+  disableScrollAnimation,
+}: {
+  mode?: string
+  disableScrollAnimation?: boolean
+}) => {
   const offset = useWindowOffset()
   const [mounted, setMounted] = useState(false)
   const [delayed, setDelayed] = useState(false)
-  const barStyles = offset ? { transform: `translateY(${offset}px) ` } : {}
-  const frameStyles = offset ? { transform: `scaleY(${1 - offset / 90})` } : {}
+  const barStyles =
+    offset && !disableScrollAnimation
+      ? { transform: `translateY(${offset}px) ` }
+      : {}
+  const frameStyles =
+    offset && !disableScrollAnimation
+      ? { transform: `scaleY(${1 - offset / 90})` }
+      : {}
 
   useEffect(() => {
     if (!mounted) setMounted(true)

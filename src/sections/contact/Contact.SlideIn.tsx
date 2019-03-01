@@ -2,11 +2,8 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import Transition from 'react-transition-group/Transition'
 
-import transitions from '@styles/transitions'
 import mediaqueries from '@styles/media'
-import { Section, Layout, SEO } from '@components'
-
-import { startAnimation, scrollable } from '@utils'
+import { scrollable } from '@utils'
 import { ExIcon } from '../../icons/ui'
 
 import ContactForm from './Contact.ContactForm'
@@ -107,26 +104,9 @@ const SlideInContainer = styled.div`
   filter: blur(0);
 
   ${mediaqueries.tablet`
-    width: 100%;
-    position: relative;
-    top: 220px;
-    height: calc(100vh - 340px);
-    box-shadow: none;
-    padding-top: 7rem;
-    overflow: initial;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 20px;
-      width: 42px;
-      margin: 0 auto;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: rgba(0, 0, 0, 0.2);
-      border-radius: 100px;
-    }
+    display: none;
+    opacity: 0;
+    visibility: hidden;
   `};
 `
 

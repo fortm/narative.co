@@ -44,6 +44,7 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
       theme: 'light',
       offset: true,
       fixed: true,
+      low: false,
     },
   }
 
@@ -148,7 +149,9 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
    */
   navigateOut = (event, path) => {
     event.preventDefault()
-    const isNavigatingToNewPage = !window.location.pathname.includes(path)
+    const pathname = window.location.pathname
+    const isNavigatingToNewPage =
+      !pathname.includes(path) || pathname.split('/')[2]
 
     // Nav closes
     this.closeMobileNav()
@@ -182,6 +185,7 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
             active={active}
             background={background}
             navOffset={nav.offset}
+            low={nav.low}
             mobileNavOffset={mobileNavOffset}
             onClick={active ? this.closeMobileNav : () => {}}
             theme={navTheme}
@@ -263,7 +267,7 @@ const SiteContainer = styled.div`
   &::after {
     content: '';
     position: absolute;
-    top: -20px;
+    top: ${p => (p.low ? '10px' : '-20px')};
     left: 0;
     width: 100%;
     height: 20px;
@@ -276,7 +280,7 @@ const SiteContainer = styled.div`
   &::before {
     content: '';
     position: absolute;
-    top: -21px;
+    top: ${p => (p.low ? '11px' : '-21px')};
     left: 0;
     right: 0;
     margin: 0 auto;

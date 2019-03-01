@@ -14,6 +14,7 @@ class HomeServicesMobile extends Component {
   state = { progress: 0 }
 
   componentDidMount() {
+    console.log('fured')
     if (this.element.current) {
       this.element.current.addEventListener('scroll', this.handleScroll)
     }
@@ -41,37 +42,35 @@ class HomeServicesMobile extends Component {
     const third = progress >= 0.667 && progress <= 1
 
     return (
-      <MediaQuery maxWidth="tablet">
-        <Frame>
-          <Section narrow>
-            <CardHeading>
-              Narative helps you <Highlight active={first}>brand</Highlight>,{' '}
-              <Highlight active={second}>build</Highlight> and{' '}
-              <Highlight active={third}>grow</Highlight>
-            </CardHeading>
-            <HorizontalScroll
-              list={services}
-              name="service"
-              narrow
-              innerRef={this.element}
-              render={({ service }) => (
-                <Card key={service.heading}>
-                  <List>
-                    {service.list.map(item => (
-                      <Item key={item}>{item}</Item>
-                    ))}
-                  </List>
-                  <CardLink to={service.link.to}>{service.link.text}</CardLink>
-                  <Image />
-                </Card>
-              )}
-            />
-            <Progress>
-              <Value progress={progress} />
-            </Progress>
-          </Section>
-        </Frame>
-      </MediaQuery>
+      <Frame>
+        <Section narrow>
+          <CardHeading>
+            Narative helps you <Highlight active={first}>brand</Highlight>,{' '}
+            <Highlight active={second}>build</Highlight> and{' '}
+            <Highlight active={third}>grow</Highlight>
+          </CardHeading>
+          <HorizontalScroll
+            list={services}
+            name="service"
+            narrow
+            innerRef={this.element}
+            render={({ service }) => (
+              <Card key={service.heading}>
+                <List>
+                  {service.list.map(item => (
+                    <Item key={item}>{item}</Item>
+                  ))}
+                </List>
+                <CardLink to={service.link.to}>{service.link.text}</CardLink>
+                <Image />
+              </Card>
+            )}
+          />
+          <Progress>
+            <Value progress={progress} />
+          </Progress>
+        </Section>
+      </Frame>
     )
   }
 }
