@@ -141,7 +141,7 @@ const SocialIconsFooter = styled.div`
 
 const FooterLink = styled(Link)`
   font-weight: 600;
-  font-size: 22px;
+  font-size: 18px;
   color: ${p => p.color};
   transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.9);
 
@@ -162,6 +162,7 @@ const FooterLink = styled(Link)`
   ${mediaqueries.tablet`
     font-weight: 400;
     opacity: 1;
+    font-size: 22px;
 
     &:hover {
       opacity: 1;
