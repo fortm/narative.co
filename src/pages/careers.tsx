@@ -376,7 +376,20 @@ const HeroImageBottom = styled.div`
   margin: 0 auto;
   transform: translateY(80px);
 
-  animation: comeUp 2.4s cubic-bezier(0.175, 0.885, 0.4, 1.15) forwards 0.2s;
+  animation: comeUp 2.4s cubic-bezier(0.175, 0.885, 0.4, 1.15) forwards 0.2s,
+    float 4.8s ease-in-out infinite 3s;
+
+  @keyframes float {
+    0% {
+      transform: translatey(0px);
+    }
+    50% {
+      transform: translatey(-8px);
+    }
+    100% {
+      transform: translatey(0px);
+    }
+  }
 
   @keyframes comeUp {
     from {
