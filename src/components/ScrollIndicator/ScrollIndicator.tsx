@@ -12,6 +12,8 @@ function calculateWindowOffset() {
 }
 
 function useWindowOffset() {
+  if (typeof window === 'undefined') return 0
+
   const [windowOffset, setWindowSize] = useState(calculateWindowOffset(0))
 
   function handleScroll() {
