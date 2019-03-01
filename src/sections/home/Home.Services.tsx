@@ -117,6 +117,7 @@ const HomeServices = () => {
                 <Section>
                   <HeadingBackground
                     background={file.childImageSharp.original.src}
+                    offset={visiblePercentage}
                     style={{
                       transform: `translateY(${visiblePercentage * 2.5}px)`,
                     }}
@@ -216,7 +217,7 @@ const HeadingBackground = styled.div`
   background-image: url(${p => p.background});
   background-size: cover;
   color: transparent !important;
-  background-position: center;
+  background-position: 0 ${p => p.offset * -2}px;
   max-width: 900px;
 `
 
