@@ -60,7 +60,7 @@ exports.plugins = [
   'gatsby-transformer-enhance-contentful',
   'gatsby-transformer-contentful-rich-text-html-renderer',
   'gatsby-plugin-netlify',
-  'gatsby-plugin-netlify-cache',
+  // 'gatsby-plugin-netlify-cache',
   {
     resolve: `gatsby-plugin-styled-components`,
     options: {
