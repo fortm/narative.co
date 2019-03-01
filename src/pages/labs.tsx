@@ -115,7 +115,9 @@ class LabsPage extends Component<{}, { animate: string }> {
                   Narative.
                 </MainText>
               </TextContainer>
-              <MobileScrollIndicator />
+              <MobileOnly>
+                <ScrollIndicator />
+              </MobileOnly>
             </ContentContainer>
 
             <HeroImage>
@@ -177,9 +179,9 @@ export const pageQuery = graphql`
   }
 `
 
-const MobileScrollIndicator = styled(ScrollIndicator)`
+const MobileOnly = styled.div`
   ${mediaqueries.desktop_up`
-    display: none;
+    opacity: 0;
   `}
 `
 
@@ -190,6 +192,7 @@ const HeroSection = styled(Section)`
 `
 
 const HeroImage = styled.div`
+  position: relative;
   width: 530px;
 
   ${mediaqueries.phablet`

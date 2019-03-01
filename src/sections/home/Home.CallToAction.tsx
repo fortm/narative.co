@@ -228,6 +228,17 @@ const CallToAction = styled.button`
     visibility: hidden;
     opacity: 0;
   `}
+
+  &::after {
+    content: '';
+    position: fixed;
+    bottom: -400px;
+    height: 400px;
+    width: 100%;
+    left: 0;
+    background: #fff;
+    z-index: 99;
+  }
 `
 
 const CTAText = styled.span`

@@ -135,9 +135,11 @@ const CloseContainer = styled.button`
   align-items: center;
   justify-content: center;
 
+  opacity: ${p => (p.animation ? 1 : 0)};
   transform: translateY(${p => (p.animation ? '0' : '-120px')});
   transition: transform 0.7s cubic-bezier(0.215, 0.61, 0.355, 1)
-    ${p => (p.animation ? '0.2s' : '0s')};
+      ${p => (p.animation ? '0.2s' : '0s')},
+    opacity 0s linear ${p => (p.animation ? '0s' : '1s')};
 
   ${mediaqueries.tablet`
     display: none;
