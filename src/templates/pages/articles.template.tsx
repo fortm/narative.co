@@ -109,9 +109,9 @@ export const pageQuery = graphql`
         }
       }
     }
-    hero: file(name: { regex: "/labs-hero-phone/" }) {
+    hero: file(name: { regex: "/articles-hero-typewriter/" }) {
       childImageSharp {
-        fluid(maxWidth: 1060, quality: 100) {
+        fluid(maxWidth: 1060, quality: 88) {
           ...GatsbyImageSharpFluid_noBase64
         }
       }
@@ -132,7 +132,14 @@ const HeroSection = styled(Section)`
 `
 
 const HeroImage = styled.div`
-  width: 530px;
+  width: 900px;
+  position: absolute;
+  right: -130px;
+  top: -20px;
+
+  ${mediaqueries.desktop_medium`
+    display: none;
+  `};
 
   ${mediaqueries.phablet`
     width: 100%;

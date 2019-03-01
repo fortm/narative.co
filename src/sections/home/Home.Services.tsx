@@ -119,7 +119,7 @@ const HomeServices = () => {
                     background={file.childImageSharp.original.src}
                     offset={visiblePercentage}
                     style={{
-                      transform: `translateY(${visiblePercentage * 2.5}px)`,
+                      transform: `translateY(${visiblePercentage * 2}px)`,
                     }}
                   >
                     <LargeHeading>
