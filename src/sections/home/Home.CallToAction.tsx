@@ -237,7 +237,7 @@ const CTAText = styled.span`
   pointer-events: none;
 
   opacity: ${p => (p.animation ? 0 : 1)};
-  transition: opacity 0.3s linear ${p => (p.animation ? 0 : '0.5s')};
+  transition: opacity 0.3s linear ${p => (p.animation ? 0 : '0.4s')};
 `
 
 const ChevronDownIcon = () => (
