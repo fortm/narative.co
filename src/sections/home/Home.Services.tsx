@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import { Link, StaticQuery } from 'gatsby'
+import { Link, graphql, StaticQuery } from 'gatsby'
 
 import Heading from '@components/Heading'
 import IntersectionObserver from '@components/IntersectionObserver'
