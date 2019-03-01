@@ -113,44 +113,42 @@ const HomeServices = () => {
           render={({ file }) => (
             <Section>
               <IntersectionObserver
-                render={({ visiblePercentage, entering, boundingClientRect }) =>
-                  console.log({
-                    visiblePercentage,
-                    entering,
-                    boundingClientRect,
-                  }) || (
-                    <Motion
-                      defaultStyle={{ transform: 0 }}
-                      style={{
-                        vp: visiblePercentage,
-                        top: boundingClientRect.top,
-                      }}
-                    >
-                      {value => (
-                        <HeadingBackground
-                          background={file.childImageSharp.original.src}
-                          style={
-                            entering
-                              ? {
-                                  transform: `translateY(${value.vp}px)`,
-                                }
-                              : {
-                                  transform: `translateY(${100}px)`,
-                                  opacity:
-                                    value.top > 192
-                                      ? 0
-                                      : 1 - Math.abs(value.top) / 192,
-                                }
-                          }
-                        >
-                          <LargeHeading>
-                            Narative helps you brand, build and grow.
-                          </LargeHeading>
-                        </HeadingBackground>
-                      )}
-                    </Motion>
-                  )
-                }
+                render={({
+                  visiblePercentage,
+                  entering,
+                  boundingClientRect,
+                }) => (
+                  <Motion
+                    defaultStyle={{ transform: 0 }}
+                    style={{
+                      vp: visiblePercentage,
+                      top: boundingClientRect.top,
+                    }}
+                  >
+                    {value => (
+                      <HeadingBackground
+                        background={file.childImageSharp.original.src}
+                        style={
+                          entering
+                            ? {
+                                transform: `translateY(${value.vp}px)`,
+                              }
+                            : {
+                                transform: `translateY(${100}px)`,
+                                opacity:
+                                  value.top > 192
+                                    ? 0
+                                    : 1 - Math.abs(value.top) / 192,
+                              }
+                        }
+                      >
+                        <LargeHeading>
+                          Narative helps you brand, build and grow.
+                        </LargeHeading>
+                      </HeadingBackground>
+                    )}
+                  </Motion>
+                )}
               />
             </Section>
           )}
