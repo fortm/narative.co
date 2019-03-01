@@ -8,10 +8,10 @@ import ScrollIndicator from '@components/ScrollIndicator'
 import HomeAbout from '../sections/home/Home.About'
 import HomeCallToAction from '../sections/home/Home.CallToAction'
 import HomeTestimonial from '../sections/home/Home.Testimonial'
-import HomeValues from '../sections/home/Home.Values'
+import HomeServices from '../sections/home/Home.Services'
 
-import { startAnimation } from '@utils'
 import transitions from '@styles/transitions'
+import { startAnimation } from '@utils'
 import mediaqueries from '@styles/media'
 
 class IndexPage extends Component<{}, { animation: string }> {
@@ -78,7 +78,7 @@ class IndexPage extends Component<{}, { animation: string }> {
             <div />
           </Section>
           <HomeAbout />
-          <HomeValues />
+          <HomeServices />
           <HomeTestimonial />
           <HomeCallToAction />
         </Fragment>

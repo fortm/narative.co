@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import { Link } from 'gatsby'
+import { Link, StaticQuery } from 'gatsby'
 
 import Heading from '@components/Heading'
 import IntersectionObserver from '@components/IntersectionObserver'
@@ -12,9 +12,9 @@ import Sticky from '@components/Sticky'
 import { getWindowDimensions } from '@utils'
 import mediaqueries from '@styles/media'
 
-import HomeValuesMobile from './Home.Values.Mobile'
+import HomeServicesMobile from './Home.Services.Mobile'
 
-export const values = [
+export const services = [
   {
     heading: 'Brand',
     list: [
@@ -53,8 +53,20 @@ export const values = [
   },
 ]
 
+const imageQuery = graphql`
+  query SerivesImageQuery {
+    file(name: { regex: "/waves-texture-2/" }) {
+      childImageSharp {
+        original {
+          src
+        }
+      }
+    }
+  }
+`
+
 const calculateActive = (progress: number) => (index: number): boolean => {
-  const total = values.length
+  const total = services.length
   const nextThreshold = ((100 / total) * (index + 1)) / 100
   const threshold = ((100 / total) * index) / 100
 
@@ -93,87 +105,131 @@ const calculateOffset = (progress: number) => {
   return {}
 }
 
-const HomesValues = () => {
+const HomeServices = () => {
   return (
     <>
-      <MediaQuery minWidth="tablet">
-        <Sticky
-          height="300vh"
-          render={({ progress, visible }) => {
-            const getActive = calculateActive(progress)
-            const offset = calculateOffset(progress)
+      <IntersectionObserver
+        render={({ visiblePercentage }) => (
+          <MediaQuery minWidth="tablet">
+            <StaticQuery
+              query={imageQuery}
+              render={({ file }) => (
+                <Section>
+                  <HeadingBackground
+                    background={file.childImageSharp.original.src}
+                    style={{
+                      transform: `translateY(${visiblePercentage * 2.5}px)`,
+                    }}
+                  >
+                    <LargeHeading>
+                      Narative helps you brand, build and grow.
+                    </LargeHeading>
+                  </HeadingBackground>
+                </Section>
+              )}
+            />
+            <Sticky
+              height="300vh"
+              render={({ progress, visible }) => {
+                const getActive = calculateActive(progress)
+                const offset = calculateOffset(progress)
 
-            const firstActive: boolean = getActive(0)
-            const secondActive: boolean = getActive(1)
-            const thirdActive: boolean = getActive(2)
+                const firstActive: boolean = getActive(0)
+                const secondActive: boolean = getActive(1)
+                const thirdActive: boolean = getActive(2)
 
-            return (
-              <Grid>
-                <Column id="grid-column">
-                  <Value id="grid-value" active={firstActive}>
-                    <Heading.h2>Brand</Heading.h2>
-                    <List>
-                      <ListItem>Visual identity</ListItem>
-                      <ListItem>Strategic messaging</ListItem>
-                      <ListItem>Customer journey analysis</ListItem>
-                    </List>
-                    <StyledLink to="/contact" active={firstActive}>
-                      Inquire about branding
-                    </StyledLink>
-                    <Progress
-                      style={{
-                        transform: `translateY(${offset.offset}px)`,
-                        height: '100%',
-                        top: 0,
-                      }}
-                    />
-                  </Value>
-                  <Value active={secondActive}>
-                    <Transform active={secondActive || thirdActive}>
-                      <Heading.h2>Build</Heading.h2>
-                      <List>
-                        <ListItem>Reponsive websitesy</ListItem>
-                        <ListItem>Content management systems</ListItem>
-                        <ListItem>Cross-platform apps</ListItem>
-                      </List>
-                    </Transform>
-                    <StyledLink to="/contact" active={secondActive}>
-                      Inquire about building
-                    </StyledLink>
-                  </Value>
-                  <Value active={thirdActive}>
-                    <Transform active={thirdActive}>
-                      <Heading.h2>Grow</Heading.h2>
-                      <List>
-                        <ListItem>Content strategy</ListItem>
-                        <ListItem>Conversion optimization</ListItem>
-                        <ListItem>Nurturing and onboarding</ListItem>
-                      </List>
-                    </Transform>
-                    <StyledLink to="/contact" active={thirdActive}>
-                      Inquire about growing
-                    </StyledLink>
-                  </Value>
-                </Column>
-                <Column />
-                <Column />
-                <Column withRightBorder />
-                <ImageSlides>
-                  <ImageSlide active={firstActive}>1</ImageSlide>
-                  <ImageSlide active={secondActive}>2</ImageSlide>
-                  <ImageSlide active={thirdActive}>3</ImageSlide>
-                </ImageSlides>
-              </Grid>
-            )
-          }}
-        />
-      </MediaQuery>
-      <HomeValuesMobile />
+                return (
+                  <Grid>
+                    <Column id="grid-column">
+                      <Value id="grid-value" active={firstActive}>
+                        <Heading.h2>Brand</Heading.h2>
+                        <List>
+                          <ListItem>Visual identity</ListItem>
+                          <ListItem>Strategic messaging</ListItem>
+                          <ListItem>Customer journey analysis</ListItem>
+                        </List>
+                        <StyledLink to="/contact" active={firstActive}>
+                          Inquire about branding
+                        </StyledLink>
+                        <Progress
+                          style={{
+                            transform: `translateY(${offset.offset}px)`,
+                            height: '100%',
+                            top: 0,
+                          }}
+                        />
+                      </Value>
+                      <Value active={secondActive}>
+                        <Transform active={secondActive || thirdActive}>
+                          <Heading.h2>Build</Heading.h2>
+                          <List>
+                            <ListItem>Reponsive websitesy</ListItem>
+                            <ListItem>Content management systems</ListItem>
+                            <ListItem>Cross-platform apps</ListItem>
+                          </List>
+                        </Transform>
+                        <StyledLink to="/contact" active={secondActive}>
+                          Inquire about building
+                        </StyledLink>
+                      </Value>
+                      <Value active={thirdActive}>
+                        <Transform active={thirdActive}>
+                          <Heading.h2>Grow</Heading.h2>
+                          <List>
+                            <ListItem>Content strategy</ListItem>
+                            <ListItem>Conversion optimization</ListItem>
+                            <ListItem>Nurturing and onboarding</ListItem>
+                          </List>
+                        </Transform>
+                        <StyledLink to="/contact" active={thirdActive}>
+                          Inquire about growing
+                        </StyledLink>
+                      </Value>
+                    </Column>
+                    <Column />
+                    <Column />
+                    <Column withRightBorder />
+                    <ImageSlides>
+                      <ImageSlide active={firstActive}>1</ImageSlide>
+                      <ImageSlide active={secondActive}>2</ImageSlide>
+                      <ImageSlide active={thirdActive}>3</ImageSlide>
+                    </ImageSlides>
+                  </Grid>
+                )
+              }}
+            />
+          </MediaQuery>
+        )}
+      />
+
+      <HomeServicesMobile />
     </>
   )
 }
 
-export default HomesValues
+export default HomeServices
+
+const HeadingBackground = styled.div`
+  -webkit-background-clip: text;
+
+  background-repeat: no-repeat;
+  background-image: url(${p => p.background});
+  background-size: cover;
+  color: transparent !important;
+  background-position: center;
+  max-width: 900px;
+`
+
+const LargeHeading = styled.h2`
+  font-weight: 700;
+  font-size: 80px;
+  letter-spacing: -0.5px;
+  margin: 0 0 160px;
+  line-height: 1.2;
+  font-family: ${p => p.theme.fontfamily.serif};
+  background: transparent;
+  color: transparent;
+`
 
 const Grid = memo(styled(Section)`
   height: 100vh;

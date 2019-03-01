@@ -7,9 +7,9 @@ import Section from '@components/Section'
 import MediaQuery from '@components/MediaQuery'
 import HorizontalScroll from '@components/HorizontalScroll'
 
-import { values } from './Home.Values'
+import { services } from './Home.Services'
 
-class HomeValuesMobile extends Component {
+class HomeServicesMobile extends Component {
   element = React.createRef()
   state = { progress: 0 }
 
@@ -50,18 +50,18 @@ class HomeValuesMobile extends Component {
               <Highlight active={third}>grow</Highlight>
             </CardHeading>
             <HorizontalScroll
-              list={values}
-              name="value"
+              list={services}
+              name="service"
               narrow
               innerRef={this.element}
-              render={({ value }) => (
-                <Card key={value.heading}>
+              render={({ service }) => (
+                <Card key={service.heading}>
                   <List>
-                    {value.list.map(item => (
+                    {service.list.map(item => (
                       <Item key={item}>{item}</Item>
                     ))}
                   </List>
-                  <CardLink to={value.link.to}>{value.link.text}</CardLink>
+                  <CardLink to={service.link.to}>{service.link.text}</CardLink>
                   <Image />
                 </Card>
               )}
@@ -76,7 +76,7 @@ class HomeValuesMobile extends Component {
   }
 }
 
-export default HomeValuesMobile
+export default HomeServicesMobile
 
 const Frame = styled.div`
   padding-top: 110px;
