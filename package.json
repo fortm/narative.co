@@ -56,6 +56,7 @@
     "react-dom": "^16.8.3",
     "react-helmet": "^5.2.0",
     "react-html-parser": "^2.0.2",
+    "react-motion": "^0.5.2",
     "react-outside-click-handler": "^1.2.2",
     "react-swipeable": "^4.3.1",
     "react-text-mask": "^5.4.0",

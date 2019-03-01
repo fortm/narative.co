@@ -1,9 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link, graphql, StaticQuery } from 'gatsby'
+import { Motion, spring } from 'react-motion'
 
 import Heading from '@components/Heading'
 import Section from '@components/Section'
+import IntersectionObserver from '@components/IntersectionObserver'
 import MediaQuery from '@components/MediaQuery'
 import Sticky from '@components/Sticky'
 
@@ -110,11 +112,31 @@ const HomeServices = () => {
           query={imageQuery}
           render={({ file }) => (
             <Section>
-              <HeadingBackground background={file.childImageSharp.original.src}>
-                <LargeHeading>
-                  Narative helps you brand, build and grow.
-                </LargeHeading>
-              </HeadingBackground>
+              <IntersectionObserver
+                render={({ visiblePercentage, entering }) => (
+                  <Motion
+                    defaultStyle={{ transform: 0 }}
+                    style={{ transform: visiblePercentage }}
+                  >
+                    {value => (
+                      <HeadingBackground
+                        background={file.childImageSharp.original.src}
+                        style={
+                          entering
+                            ? {
+                                transform: `translateY(${value.transform}px)`,
+                              }
+                            : { transform: `translateY(${100})` }
+                        }
+                      >
+                        <LargeHeading>
+                          Narative helps you brand, build and grow.
+                        </LargeHeading>
+                      </HeadingBackground>
+                    )}
+                  </Motion>
+                )}
+              />
             </Section>
           )}
         />
@@ -199,6 +221,7 @@ const HomeServices = () => {
 export default HomeServices
 
 const HeadingBackground = styled.div`
+  position: relative;
   -webkit-background-clip: text;
 
   background-repeat: no-repeat;
@@ -207,13 +230,16 @@ const HeadingBackground = styled.div`
   color: transparent !important;
   background-position: center;
   max-width: 900px;
+  margin-top: 100px;
+  top: -100px;
+  padding-bottom: calc(100vh - 252px);
+  margin-bottom: calc(-100vh + 252px);
 `
 
 const LargeHeading = styled.h2`
   font-weight: 700;
   font-size: 80px;
   letter-spacing: -0.5px;
-  margin-bottom: 60px;
   line-height: 1.2;
   font-family: ${p => p.theme.fontfamily.serif};
   background: transparent;
