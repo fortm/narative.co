@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 
 import Heading from '@components/Heading'
 import ButtonArrow from '@components/Button/Button.Arrow'
@@ -23,8 +23,7 @@ const ArticlesFeatured = ({ article }: { article: IArticleNode }) => (
       <ButtonArrow
         text="Read more"
         color="#000"
-        as={Link}
-        to={`/articles/${article.slug}`}
+        onClick={() => navigate(`/articles/${article.slug}`)}
       />
     </Left>
     <Right to={`/articles/${article.slug}`}>

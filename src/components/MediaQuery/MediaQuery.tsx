@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { getBreakpointFromTheme, getWindowDimensions } from '@utils'
 
-interface ShowProps {
+interface MediaQueryProps {
   maxWidth?: string
   minWidth?: string
   children: React.ReactNode
@@ -12,20 +12,26 @@ interface ShowProps {
  * based off https://github.com/rehooks/window-size
  */
 function useWindowSize() {
-  const [windowSize, setWindowSize] = useState(getWindowDimensions())
+  // If we don't check for window a whole lot of crazy build bugs occur!
+  if (typeof window !== 'undefined') {
+    const [windowSize, setWindowSize] = useState(getWindowDimensions())
 
-  function handleResize() {
-    setWindowSize(getWindowDimensions())
+    function handleResize() {
+      setWindowSize(getWindowDimensions())
+    }
+
+    useEffect(() => {
+      window.addEventListener('resize', handleResize)
+      return () => {
+        window.removeEventListener('resize', handleResize)
+      }
+    }, [])
+
+    return windowSize
   }
 
-  useEffect(() => {
-    window.addEventListener('resize', handleResize)
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
-  return windowSize
+  // Default to 0 when running gatsby-node (build process)
+  return 0
 }
 
 /**
@@ -39,7 +45,7 @@ function useWindowSize() {
  *
  * It's tied to mediaqueries set in theme.ts.
  */
-function MediaQuery({ maxWidth, minWidth, children }) {
+function MediaQuery({ maxWidth, minWidth, children }: MediaQueryProps) {
   const { width: windowWidth } = useWindowSize()
 
   const on = maxWidth || minWidth

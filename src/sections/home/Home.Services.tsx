@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Link, graphql, StaticQuery } from 'gatsby'
 
@@ -199,7 +199,6 @@ const HomeServices = () => {
           </MediaQuery>
         )}
       />
-
       <HomeServicesMobile />
     </>
   )
@@ -231,13 +230,13 @@ const LargeHeading = styled.h2`
   color: transparent;
 `
 
-const Grid = memo(styled(Section)`
+const Grid = styled(Section)`
   height: 100vh;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-`)
+`
 
-const Column = memo(styled.div`
+const Column = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -250,9 +249,9 @@ const Column = memo(styled.div`
     `
     border-right: 1px solid #1d2128;
     `}
-`)
+`
 
-const Value = memo(styled.div`
+const Value = styled.div`
   position: relative;
 
   &:not(:last-child) {
@@ -268,7 +267,7 @@ const Value = memo(styled.div`
     color: ${p => (p.active ? '#fff' : p.theme.colors.grey)};
     transition: color 0.3s var(--ease-out-quad);
   }
-`)
+`
 
 const Transform = styled.div`
   transform: translateY(${p => (p.active ? 0 : 42)}px);

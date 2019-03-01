@@ -72,11 +72,11 @@ class IndexPage extends Component<{}, { animation: string }> {
                   <ButtonArrow text="Get in touch" />
                 </ContactText>
               </TextContainer>
-              <Main>
+              {/* <Main>
                 <div />
                 <div />
                 <div />
-              </Main>
+              </Main> */}
             </ContentContainer>
             <ScrollIndicator />
           </Section>

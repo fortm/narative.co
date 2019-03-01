@@ -6,38 +6,36 @@ import Section from '@components/Section'
 
 import mediaqueries from '@styles/media'
 
-const HomeTestimonial = () => {
-  return (
-    <Gradient>
-      <Grid>
-        <HopperLogo />
-        <div>
-          <Text>
-            “Working with Narative on the new{' '}
-            <HighlightLink
-              href="https://hopper.com"
-              target="_blank"
-              rel="noopener"
-            >
-              Hopper.com
-            </HighlightLink>{' '}
-            has been an absolute pleasure. Not only is the team insanely smart
-            and efficient, they’re incredible human beings who truly care about
-            the work they touch.”
-          </Text>
-          <StyledLink to="/articles/building-the-new-hopper-com">
-            <HopperIcon />
-            More on Hopper
-          </StyledLink>
-          <StyledLink to="/articles">
-            <BookIcon />
-            All articles
-          </StyledLink>
-        </div>
-      </Grid>
-    </Gradient>
-  )
-}
+const HomeTestimonial = () => (
+  <Gradient>
+    <Grid>
+      <HopperLogo />
+      <div>
+        <Text>
+          “Working with Narative on the new{' '}
+          <HighlightLink
+            href="https://hopper.com"
+            target="_blank"
+            rel="noopener"
+          >
+            Hopper.com
+          </HighlightLink>{' '}
+          has been an absolute pleasure. Not only is the team insanely smart and
+          efficient, they’re incredible human beings who truly care about the
+          work they touch.”
+        </Text>
+        <StyledLink to="/articles/building-the-new-hopper-com">
+          <HopperIcon />
+          More on Hopper
+        </StyledLink>
+        <StyledLink to="/articles">
+          <BookIcon />
+          All articles
+        </StyledLink>
+      </div>
+    </Grid>
+  </Gradient>
+)
 
 export default HomeTestimonial
 
@@ -51,6 +49,7 @@ const Gradient = styled.div`
 `
 
 const Grid = styled(Section)`
+  position: relative;
   display: grid;
   grid-template-columns: 132px 675px;
   grid-column-gap: 131px;

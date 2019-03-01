@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import mediaqueries from '@styles/media'
 
 const Section = styled.section<{
-  relative: string
-  hideOnDesktop: boolean
-  hideOverflow: boolean
+  relative?: string
+  hideOnDesktop?: boolean
+  hideOverflow?: boolean
+  narrow?: boolean
 }>`
   position: ${p => (p.relative ? 'relative' : 'static')};
   width: 100%;

@@ -22,7 +22,6 @@
     "noEmit": true,
     "skipLibCheck": true,
     "target": "es6",
-    "module": "commonjs",
     "allowSyntheticDefaultImports": true,
     "strictPropertyInitialization": false,
     "baseUrl": "./",

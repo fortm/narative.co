@@ -1,6 +1,6 @@
-import React, { Component, memo } from 'react'
+import React, { Component } from 'react'
 
-import { ellipsis } from 'polished'
+// import { ellipsis } from 'polished'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
 
@@ -87,15 +87,15 @@ class Progress extends Component<
     const fill = mode === 'dark' ? '#fff' : '#000'
 
     return (
-      <MemoFrame aria-hidden="true" ref={this.frameRef} stuck={isStuck}>
-        <MemoContent narrow>
-          <MemoTitle>{title}</MemoTitle>
-          <MemoOnCloser to="/articles">
+      <Frame aria-hidden="true" ref={this.frameRef} stuck={isStuck}>
+        <Content narrow>
+          <Title>{title}</Title>
+          <OnCloser to="/articles">
             <ExIcon fill={fill} />
-          </MemoOnCloser>
-        </MemoContent>
+          </OnCloser>
+        </Content>
         <Trackline value={value} max={100} />
-      </MemoFrame>
+      </Frame>
     )
   }
 }
@@ -130,8 +130,6 @@ const Frame = styled.div`
   `}
 `
 
-const MemoFrame = memo(Frame)
-
 const Content = styled(Section)`
   ${mediaqueries.desktop_large`
     display: flex;
@@ -139,25 +137,19 @@ const Content = styled(Section)`
   `}
 `
 
-const MemoContent = memo(Content)
-
 const Title = styled.span`
   padding: 2rem 0;
   font-size: 16px;
-  ${ellipsis()}
+  /* ${ellipsis()} */
   display: block;
   color: ${p => p.theme.mode.text};
 `
-
-const MemoTitle = memo(Title)
 
 const OnCloser = styled(Link)`
   display: flex;
   align-items: center;
   padding-left: 2rem;
 `
-
-const MemoOnCloser = memo(OnCloser)
 
 const Trackline = styled.progress`
   &[value] {

@@ -1,4 +1,4 @@
-import React, { Component, memo } from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 
 import { clamp } from '@utils'
@@ -124,9 +124,9 @@ class Progress extends Component<IProgress, { value: number; headings: [] }> {
 
 export default Progress
 
-const Frame = memo(styled.div`
+const Frame = styled.div`
   position: relative;
-`)
+`
 
 const Headings = styled.div`
   position: absolute;
