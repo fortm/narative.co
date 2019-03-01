@@ -8,13 +8,13 @@ import MediaQuery from '@components/MediaQuery'
 import HorizontalScroll from '@components/HorizontalScroll'
 
 import { services } from './Home.Services'
+import mediaqueries from '@styles/media'
 
 class HomeServicesMobile extends Component {
   element = React.createRef()
   state = { progress: 0 }
 
   componentDidMount() {
-    console.log('fured')
     if (this.element.current) {
       this.element.current.addEventListener('scroll', this.handleScroll)
     }
@@ -80,6 +80,10 @@ export default HomeServicesMobile
 const Frame = styled.div`
   padding-top: 110px;
   padding-bottom: 80px;
+
+  ${mediaqueries.desktop_up`
+    display: none;
+  `}
 `
 
 const Card = styled.div`

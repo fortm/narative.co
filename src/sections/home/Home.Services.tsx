@@ -1,15 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link, graphql, StaticQuery } from 'gatsby'
-import { Motion, spring } from 'react-motion'
+import { Motion } from 'react-motion'
 
 import Heading from '@components/Heading'
 import Section from '@components/Section'
 import IntersectionObserver from '@components/IntersectionObserver'
-import MediaQuery from '@components/MediaQuery'
 import Sticky from '@components/Sticky'
 
 import { getWindowDimensions } from '@utils'
+import mediaqueries from '@styles/media'
 
 import HomeServicesMobile from './Home.Services.Mobile'
 
@@ -107,7 +107,7 @@ const calculateOffset = (progress: number) => {
 const HomeServices = () => {
   return (
     <>
-      <MediaQuery minWidth="tablet">
+      <HomeServicesDesktop>
         <StaticQuery
           query={imageQuery}
           render={({ file }) => (
@@ -210,15 +210,19 @@ const HomeServices = () => {
             )
           }}
         />
-      </MediaQuery>
-      <MediaQuery maxWidth="tablet">
-        <HomeServicesMobile />
-      </MediaQuery>
+      </HomeServicesDesktop>
+      <HomeServicesMobile />
     </>
   )
 }
 
 export default HomeServices
+
+const HomeServicesDesktop = styled.div`
+  ${mediaqueries.tablet`
+    display: none;
+  `}
+`
 
 const HeadingBackground = styled.div`
   position: relative;

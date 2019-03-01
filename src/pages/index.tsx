@@ -167,7 +167,7 @@ const ContentContainer = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  ${mediaqueries.phablet`
+  /* ${mediaqueries.phablet` */
     height: calc(100vh - 180px);
     padding: 0;
   `};
