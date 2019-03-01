@@ -10,42 +10,49 @@ import mediaqueries from '@styles/media'
 
 const HomeAbout = () => {
   return (
-    <IntersectionObserver
-      style={{ position: 'relative' }}
-      render={({ visible }) => (
-        <Grid narrow>
-          <Sticky
-            height="682px"
-            top={140}
-            disableOnMobile
-            render={({ progress }) => (
-              <AboutHeading>What our team is about</AboutHeading>
-            )}
-          />
-          <div>
-            <Text>
+    <Grid narrow>
+      <Sticky
+        height="682px"
+        top={140}
+        disableOnMobile
+        render={({ progress }) => (
+          <AboutHeading>What our team is about</AboutHeading>
+        )}
+      />
+      <div>
+        <IntersectionObserver
+          render={({ visiblePercentage }) => (
+            <Text style={{ opacity: visiblePercentage / 100 }}>
               Even the most brilliant companies hit points where their focus is
               spread thin by the many challenges that growing businesses face,
               blocking them from reaching their full potential. That's where we
               come in.
             </Text>
-            <Text>
+          )}
+        />
+        <IntersectionObserver
+          render={({ visiblePercentage }) => (
+            <Text style={{ opacity: visiblePercentage / 100 }}>
               Narative brings focus through the lens of a team that’s faced it
               all before, at scrappy startups and established enterprises alike.
               That’s why we don’t do big pitches or presentations — it’s just
               not in our DNA.
             </Text>
-            <Text>
+          )}
+        />
+        <IntersectionObserver
+          render={({ visiblePercentage }) => (
+            <Text style={{ opacity: visiblePercentage / 100 }}>
               Instead, we take the time to understand what drives your company
               and customers as if they were our own, uncovering every problem
               and opportunity along the way.{' '}
               <strong>Then we get straight to work</strong>.
             </Text>
-            <Fade visible={visible} />
-          </div>
-        </Grid>
-      )}
-    />
+          )}
+        />
+        {/* // <Fade visible={visible} /> */}
+      </div>
+    </Grid>
   )
 }
 
@@ -68,7 +75,8 @@ const Grid = styled(Section)`
 const Text = styled.p`
   font-size: 32px;
   color: #fff;
-  padding-bottom: 70px;
+  padding-bottom: 420px;
+  margin-bottom: -350px;
 
   ${mediaqueries.tablet`
     font-size: 22px;
