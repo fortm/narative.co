@@ -8,6 +8,21 @@ import Sticky from '@components/Sticky'
 
 import mediaqueries from '@styles/media'
 
+const aboutNarativeText = [
+  `Even the most brilliant companies hit points where their focus is
+  spread thin by the many challenges that growing businesses face,
+  blocking them from reaching their full potential. That's where we
+  come in.`,
+  `Narative brings focus through the lens of a team that’s faced it
+  all before, at scrappy startups and established enterprises alike.
+  That’s why we don’t do big pitches or presentations — it’s just
+  not in our DNA.`,
+  `Instead, we take the time to understand what drives your company
+  and customers as if they were our own, uncovering every problem
+  and opportunity along the way.
+  <strong>Then we get straight to work</strong>.`,
+]
+
 const HomeAbout = () => {
   return (
     <Grid narrow>
@@ -20,37 +35,17 @@ const HomeAbout = () => {
         )}
       />
       <div>
-        <IntersectionObserver
-          render={({ visiblePercentage }) => (
-            <Text style={{ opacity: visiblePercentage / 100 }}>
-              Even the most brilliant companies hit points where their focus is
-              spread thin by the many challenges that growing businesses face,
-              blocking them from reaching their full potential. That's where we
-              come in.
-            </Text>
-          )}
-        />
-        <IntersectionObserver
-          render={({ visiblePercentage }) => (
-            <Text style={{ opacity: visiblePercentage / 100 }}>
-              Narative brings focus through the lens of a team that’s faced it
-              all before, at scrappy startups and established enterprises alike.
-              That’s why we don’t do big pitches or presentations — it’s just
-              not in our DNA.
-            </Text>
-          )}
-        />
-        <IntersectionObserver
-          render={({ visiblePercentage }) => (
-            <Text style={{ opacity: visiblePercentage / 100 }}>
-              Instead, we take the time to understand what drives your company
-              and customers as if they were our own, uncovering every problem
-              and opportunity along the way.{' '}
-              <strong>Then we get straight to work</strong>.
-            </Text>
-          )}
-        />
-        {/* // <Fade visible={visible} /> */}
+        {aboutNarativeText.map(text => (
+          <IntersectionObserver
+            render={({ visiblePercentage }) => (
+              <Text
+                key={text}
+                style={{ opacity: visiblePercentage / 100 }}
+                dangerouslySetInnerHTML={{ __html: text }}
+              />
+            )}
+          />
+        ))}
       </div>
     </Grid>
   )
@@ -80,54 +75,11 @@ const Text = styled.p`
 
   ${mediaqueries.tablet`
     font-size: 22px;
-    padding-bottom: 40px;
+    padding-bottom: 240px;
+    margin-bottom: -200px;
   `}
 `
 
 const AboutHeading = styled(Heading.h2)`
   color: ${p => p.theme.colors.grey};
-`
-
-const Fade = styled.div`
-  position: fixed;
-  background: transparent;
-  height: 100%;
-  width: 75%;
-  left: 25%;
-  top: 0;
-  opacity ${p => (p.visible ? 1 : 0)};
-  pointer-events: none;
-
-  ${mediaqueries.tablet`
-    width: 100%;
-    left: 0;
-  `}
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 140px;
-    width: 100%;
-    background: linear-gradient(#111216, transparent);
-
-    ${mediaqueries.tablet`
-      content: none;
-    `}
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -2%;
-    left: 0;
-    width: 100%;
-    height: 52%;
-    background: linear-gradient(transparent, #111216);
-
-    ${mediaqueries.tablet`
-      content: none;
-    `}
-  }
 `

@@ -122,10 +122,6 @@ export const pageQuery = graphql`
   }
 `
 
-const Gradient = styled.div`
-  background: linear-gradient(180deg, #08080b 0%, #0b0b0e 44.18%, #111216 100%);
-`
-
 const TextContainer = styled.div`
   max-width: 570px;
   ${transitions.fadeUp};
@@ -162,19 +158,8 @@ const ContactText = styled(Link)`
   }
 `
 
-const MobileContactText = styled.span`
-  display: none;
-
-  ${mediaqueries.tablet`
-    opacity: 1;
-    pointer-events: initial;
-    margin-top: 50px;
-    display: block;
-  `};
-`
-
 const ContentContainer = styled.div`
-  height: calc(100vh - 140px);
+  height: calc(100vh - 210px);
   min-height: 440px;
 
   position: relative;
@@ -183,7 +168,7 @@ const ContentContainer = styled.div`
   justify-content: space-between;
 
   ${mediaqueries.phablet`
-    height: calc(100vh - 90px);
+    height: calc(100vh - 180px);
     padding: 0;
   `};
 `
