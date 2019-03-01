@@ -76,8 +76,6 @@ class IndexPage extends Component<{}, { animation: string }> {
                 <div />
                 <div />
                 <div />
-                <div />
-                <div />
               </Main>
             </ContentContainer>
             <ScrollIndicator />
@@ -209,10 +207,9 @@ const Main = styled.main`
     width: 3em;
     height: 3em;
     border-radius: 100% 95% 95% 105%;
-    mix-blend-mode: screen;
     animation: wobble calc(150ms * var(--t)) linear infinite;
     transform-origin: -var(--y) -var(--x);
-    box-shadow: 0.1em 0.1em 0.1em 0.1em #35344b inset, 0 0 0.15em 0 #444563;
+    box-shadow: 0.1em 0.1em 0.1em 0.1em #788ec1 inset, 0 0 0.15em 0 #444563;
     display: flex;
     align-items: center;
     justify-content: center;
