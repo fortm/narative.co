@@ -136,9 +136,9 @@ const HomeServices = () => {
                             : {
                                 transform: `translateY(${100}px)`,
                                 opacity:
-                                  value.top > 192
+                                  Math.abs(value.top) > 180
                                     ? 0
-                                    : 1 - Math.abs(value.top) / 192,
+                                    : 1 - Math.abs(value.top) / 180,
                               }
                         }
                       >
@@ -249,8 +249,8 @@ const HeadingBackground = styled.div`
   max-width: 900px;
   margin-top: 100px;
   top: -100px;
-  padding-bottom: calc(100vh - 252px);
-  margin-bottom: calc(-100vh + 252px);
+  padding-bottom: calc(100vh - 192px);
+  margin-bottom: calc(-100vh + 192px);
 `
 
 const LargeHeading = styled.h2`

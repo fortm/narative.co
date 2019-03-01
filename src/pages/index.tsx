@@ -159,7 +159,7 @@ const ContactText = styled(Link)`
 `
 
 const ContentContainer = styled.div`
-  height: calc(100vh - 210px);
+  height: calc(100vh - 230px);
   min-height: 440px;
 
   position: relative;
@@ -167,7 +167,7 @@ const ContentContainer = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  /* ${mediaqueries.phablet` */
+  ${mediaqueries.phablet`
     height: calc(100vh - 180px);
     padding: 0;
   `};
