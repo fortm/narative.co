@@ -66,6 +66,7 @@ class HomeCallToAction extends Component<{}, { animation: string }> {
                   <TextContainer>
                     <TextBackground
                       background={file.childImageSharp.original.src}
+                      visiblePercentage={visiblePercentage}
                     >
                       <Text>
                         Together, we’ll discover what your company is truly
@@ -177,12 +178,13 @@ const TextContainer = styled.div`
 
 const TextBackground = styled.div`
   -webkit-background-clip: text;
-
+  padding-top: 200px;
+  margin-top: -200px;
   background-repeat: no-repeat;
   background-image: url(${p => p.background});
   background-size: cover;
   color: transparent !important;
-  background-position: center;
+  background-position: 0 ${p => p.visiblePercentage * 1.8}px;
 `
 
 const Text = styled.p`
