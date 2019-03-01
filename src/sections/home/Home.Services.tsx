@@ -118,9 +118,6 @@ const HomeServices = () => {
                   <HeadingBackground
                     background={file.childImageSharp.original.src}
                     offset={visiblePercentage}
-                    style={{
-                      transform: `translateY(${visiblePercentage * 2}px)`,
-                    }}
                   >
                     <LargeHeading>
                       Narative helps you brand, build and grow.
@@ -217,15 +214,17 @@ const HeadingBackground = styled.div`
   background-image: url(${p => p.background});
   background-size: cover;
   color: transparent !important;
-  background-position: 0 ${p => p.offset * -2}px;
+  background-position: 0 ${p => p.offset}px;
   max-width: 900px;
+  padding-top: 200px;
+  margin-top: -200px;
 `
 
 const LargeHeading = styled.h2`
   font-weight: 700;
   font-size: 80px;
   letter-spacing: -0.5px;
-  margin: 0 0 160px;
+  margin-bottom: 60px;
   line-height: 1.2;
   font-family: ${p => p.theme.fontfamily.serif};
   background: transparent;
