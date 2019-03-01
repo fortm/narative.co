@@ -55,7 +55,6 @@ class IndexPage extends Component<{}, { animation: string }> {
           />
           <Section>
             <ContentContainer>
-              <div />
               <TextContainer animation={animation}>
                 <Heading.h1>
                   <em>Narative</em> builds brands, websites and products for
@@ -73,9 +72,15 @@ class IndexPage extends Component<{}, { animation: string }> {
                   <ButtonArrow text="Get in touch" />
                 </ContactText>
               </TextContainer>
-              <ScrollIndicator />
+              <Main>
+                <div />
+                <div />
+                <div />
+                <div />
+                <div />
+              </Main>
             </ContentContainer>
-            <div />
+            <ScrollIndicator />
           </Section>
           <HomeAbout />
           <HomeServices />
@@ -176,11 +181,71 @@ const ContentContainer = styled.div`
 
   position: relative;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: space-between;
 
   ${mediaqueries.phablet`
     height: calc(100vh - 90px);
     padding: 0;
   `};
+`
+
+const Main = styled.main`
+  :root {
+    --deg: 1;
+    --x: -50%;
+    --y: -50%;
+  }
+  position: relative;
+  right: 17%;
+  max-height: 425px;
+
+  & > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(var(--x, -50%), var(--y, -50%)) rotate(0deg);
+    font-size: 15vmin;
+    width: 3em;
+    height: 3em;
+    border-radius: 100% 95% 95% 105%;
+    mix-blend-mode: screen;
+    animation: wobble calc(150ms * var(--t)) linear infinite;
+    transform-origin: -var(--y) -var(--x);
+    box-shadow: 0.1em 0.1em 0.1em 0.1em #35344b inset, 0 0 0.15em 0 #444563;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::after {
+      font-size: 1em;
+      white-space: nowrap;
+    }
+    &:nth-child(12) {
+      --x: -47%;
+      --y: -52%;
+      --t: 58;
+    }
+    &:nth-child(3) {
+      --x: -45%;
+      --y: -50%;
+      --t: 46;
+    }
+    &:nth-child(4) {
+      --x: -53%;
+      --y: -45%;
+      --t: 72;
+    }
+    &:nth-child(5) {
+      --x: -55%;
+      --y: -45%;
+      --t: 62;
+    }
+  }
+
+  @keyframes wobble {
+    to {
+      transform: translate(var(--x), var(--y)) rotate(360deg);
+    }
+  }
 `
