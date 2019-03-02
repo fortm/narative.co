@@ -7,8 +7,8 @@ import Heading from '@components/Heading'
 import Section from '@components/Section'
 import IntersectionObserver from '@components/IntersectionObserver'
 import Sticky from '@components/Sticky'
+import Media from '@components/Media/Media.Img'
 
-import { getWindowDimensions } from '@utils'
 import mediaqueries from '@styles/media'
 
 import HomeServicesMobile from './Home.Services.Mobile'
@@ -54,10 +54,31 @@ export const services = [
 
 const imageQuery = graphql`
   query SerivesImageQuery {
-    file(name: { regex: "/waves-texture-2/" }) {
+    texture: file(name: { regex: "/waves-texture-2/" }) {
       childImageSharp {
         original {
           src
+        }
+      }
+    }
+    first: file(name: { regex: "/home-services-typewriter/" }) {
+      childImageSharp {
+        fluid(maxWidth: 787, quality: 100) {
+          ...GatsbyImageSharpFluid_noBase64
+        }
+      }
+    }
+    second: file(name: { regex: "/home-services-typewriter-1/" }) {
+      childImageSharp {
+        fluid(maxWidth: 787, quality: 100) {
+          ...GatsbyImageSharpFluid_noBase64
+        }
+      }
+    }
+    third: file(name: { regex: "/home-services-typewriter-2/" }) {
+      childImageSharp {
+        fluid(maxWidth: 787, quality: 100) {
+          ...GatsbyImageSharpFluid_noBase64
         }
       }
     }
@@ -82,9 +103,8 @@ const calculateActive = (progress: number) => (index: number): boolean => {
 
 const calculateOffset = (progress: number) => {
   if (typeof window === 'undefined') return 0
-  if (document.getElementById('grid-column')) {
-    const { height } = getWindowDimensions()
-    const $col = document.getElementById('grid-column').getBoundingClientRect()
+
+  if (document.getElementById('grid-value')) {
     const $val = document.getElementById('grid-value').getBoundingClientRect()
 
     const total = ($val.height + 45) * 2
@@ -104,13 +124,28 @@ const calculateOffset = (progress: number) => {
   return {}
 }
 
+const calculateAnimation = (
+  entering: boolean,
+  vp: number,
+  top: number
+): { transform: string; opacity?: number } => {
+  return entering
+    ? {
+        transform: `translateY(${vp}px)`,
+      }
+    : {
+        transform: `translateY(${100}px)`,
+        opacity: Math.abs(top) > 180 ? 0 : 1 - Math.abs(top) / 180,
+      }
+}
+
 const HomeServices = () => {
   return (
     <>
-      <HomeServicesDesktop>
-        <StaticQuery
-          query={imageQuery}
-          render={({ file }) => (
+      <StaticQuery
+        query={imageQuery}
+        render={({ texture, first, second, third }) => (
+          <HomeServicesDesktop>
             <Section>
               <IntersectionObserver
                 render={({
@@ -119,7 +154,7 @@ const HomeServices = () => {
                   boundingClientRect,
                 }) => (
                   <Motion
-                    defaultStyle={{ transform: 0 }}
+                    defaultStyle={{ vp: 0 }}
                     style={{
                       vp: visiblePercentage,
                       top: boundingClientRect.top,
@@ -127,20 +162,12 @@ const HomeServices = () => {
                   >
                     {value => (
                       <HeadingBackground
-                        background={file.childImageSharp.original.src}
-                        style={
-                          entering
-                            ? {
-                                transform: `translateY(${value.vp}px)`,
-                              }
-                            : {
-                                transform: `translateY(${100}px)`,
-                                opacity:
-                                  Math.abs(value.top) > 180
-                                    ? 0
-                                    : 1 - Math.abs(value.top) / 180,
-                              }
-                        }
+                        background={texture.childImageSharp.original.src}
+                        style={calculateAnimation(
+                          entering,
+                          value.vp,
+                          value.top
+                        )}
                       >
                         <LargeHeading>
                           Narative helps you brand, build and grow.
@@ -151,79 +178,86 @@ const HomeServices = () => {
                 )}
               />
             </Section>
-          )}
-        />
-        <Sticky
-          height="300vh"
-          render={({ progress }) => {
-            const getActive = calculateActive(progress)
-            const offset = calculateOffset(progress)
 
-            const firstActive: boolean = getActive(0)
-            const secondActive: boolean = getActive(1)
-            const thirdActive: boolean = getActive(2)
+            <Sticky
+              height="300vh"
+              render={({ progress }) => {
+                const getActive = calculateActive(progress)
+                const offset = calculateOffset(progress)
 
-            return (
-              <Grid>
-                <Column id="grid-column">
-                  <Value id="grid-value" active={firstActive}>
-                    <Heading.h2>Brand</Heading.h2>
-                    <List>
-                      <ListItem>Visual identity</ListItem>
-                      <ListItem>Strategic messaging</ListItem>
-                      <ListItem>Customer journey analysis</ListItem>
-                    </List>
-                    <StyledLink to="/contact" active={firstActive}>
-                      Inquire about branding
-                    </StyledLink>
-                    <Progress
-                      style={{
-                        transform: `translateY(${offset.offset}px)`,
-                        height: '100%',
-                        top: 0,
-                      }}
-                    />
-                  </Value>
-                  <Value active={secondActive}>
-                    <Transform active={secondActive || thirdActive}>
-                      <Heading.h2>Build</Heading.h2>
-                      <List>
-                        <ListItem>Reponsive websites</ListItem>
-                        <ListItem>Content management systems</ListItem>
-                        <ListItem>Cross-platform apps</ListItem>
-                      </List>
-                    </Transform>
-                    <StyledLink to="/contact" active={secondActive}>
-                      Inquire about building
-                    </StyledLink>
-                  </Value>
-                  <Value active={thirdActive}>
-                    <Transform active={thirdActive}>
-                      <Heading.h2>Grow</Heading.h2>
-                      <List>
-                        <ListItem>Content strategy</ListItem>
-                        <ListItem>Conversion optimization</ListItem>
-                        <ListItem>Nurturing and onboarding</ListItem>
-                      </List>
-                    </Transform>
-                    <StyledLink to="/contact" active={thirdActive}>
-                      Inquire about growing
-                    </StyledLink>
-                  </Value>
-                </Column>
-                <Column />
-                <Column />
-                <Column withRightBorder />
-                <ImageSlides>
-                  <ImageSlide active={firstActive}>1</ImageSlide>
-                  <ImageSlide active={secondActive}>2</ImageSlide>
-                  <ImageSlide active={thirdActive}>3</ImageSlide>
-                </ImageSlides>
-              </Grid>
-            )
-          }}
-        />
-      </HomeServicesDesktop>
+                const firstActive: boolean = getActive(0)
+                const secondActive: boolean = getActive(1)
+                const thirdActive: boolean = getActive(2)
+
+                return (
+                  <Grid>
+                    <Column>
+                      <Value id="grid-value" active={firstActive}>
+                        <Heading.h2>Brand</Heading.h2>
+                        <List>
+                          <ListItem>Visual identity</ListItem>
+                          <ListItem>Strategic messaging</ListItem>
+                          <ListItem>Customer journey analysis</ListItem>
+                        </List>
+                        <StyledLink to="/contact" active={firstActive}>
+                          Inquire about branding
+                        </StyledLink>
+                        <Progress
+                          style={{
+                            transform: `translateY(${offset.offset}px)`,
+                            height: '100%',
+                            top: 0,
+                          }}
+                        />
+                      </Value>
+                      <Value active={secondActive}>
+                        <Transform active={secondActive || thirdActive}>
+                          <Heading.h2>Build</Heading.h2>
+                          <List>
+                            <ListItem>Reponsive websites</ListItem>
+                            <ListItem>Content management systems</ListItem>
+                            <ListItem>Cross-platform apps</ListItem>
+                          </List>
+                        </Transform>
+                        <StyledLink to="/contact" active={secondActive}>
+                          Inquire about building
+                        </StyledLink>
+                      </Value>
+                      <Value active={thirdActive}>
+                        <Transform active={thirdActive}>
+                          <Heading.h2>Grow</Heading.h2>
+                          <List>
+                            <ListItem>Content strategy</ListItem>
+                            <ListItem>Conversion optimization</ListItem>
+                            <ListItem>Nurturing and onboarding</ListItem>
+                          </List>
+                        </Transform>
+                        <StyledLink to="/contact" active={thirdActive}>
+                          Inquire about growing
+                        </StyledLink>
+                      </Value>
+                    </Column>
+                    <Column />
+                    <Column />
+                    <Column withRightBorder />
+                    <ImageSlides>
+                      <ImageSlide active={firstActive}>
+                        <Media src={first.childImageSharp.fluid} />
+                      </ImageSlide>
+                      <ImageSlide active={secondActive}>
+                        <Media src={second.childImageSharp.fluid} />
+                      </ImageSlide>
+                      <ImageSlide active={thirdActive}>
+                        <Media src={third.childImageSharp.fluid} />
+                      </ImageSlide>
+                    </ImageSlides>
+                  </Grid>
+                )
+              }}
+            />
+          </HomeServicesDesktop>
+        )}
+      />
       <HomeServicesMobile />
     </>
   )
@@ -343,70 +377,29 @@ const ImageSlides = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  width: 75%;
+  width: 80%;
   height: 100%;
   pointer-events: none;
+
+  & > div {
+    width: 100%;
+  }
 `
 
 const ImageSlide = styled.div`
-  position: absolute;
-  width: 250px;
-  height: 250px;
-  background: #fafafa;
-  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 80px;
+  position: absolute;
+  top: 2%;
+  right: -5%;
+  width: 88%;
+  height: 100%;
+  pointer-events: none;
   opacity: ${p => (p.active ? 1 : 0)};
   transition: opacity 0.3s var(--ease-out-quad);
-`
 
-const Card = styled.div`
-  min-height: 400px;
-  background: #1d2128;
-  border-radius: 5px;
-  overflow: hidden;
-  text-align: center;
+  & > div {
+    width: 100%;
+  }
 `
-
-const CardHeading = styled(Heading.h3)`
-  color: ${p => p.theme.colors.grey};
-  max-width: 276px;
-  margin-bottom: 30px;
-`
-
-const CardImage = styled.div`
-  width: calc(100% - 4rem);
-  margin: 0 auto;
-  height: 300px;
-  background: #fafafa;
-  opacity: 0.1;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-`
-
-const CardList = styled.ul`
-  list-style: none;
-  margin: 35px auto 20px;
-`
-
-const CardItem = styled.li`
-  font-size: 18px;
-  color: #fafafa;
-`
-
-const CardLink = styled(Link)`
-  display: inline-block;
-  font-size: 18px;
-  font-weight: 600;
-  text-decoration-line: underline;
-  color: ${p => p.theme.colors.gold};
-  margin-bottom: 15px;
-`
-
-const Highlight = styled.span`
-  color: ${p => (p.active ? '#fff' : p.theme.colors.grey)};
-`
-
-const XProgress = styled.div``
