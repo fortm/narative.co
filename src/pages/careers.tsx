@@ -23,7 +23,7 @@ import transitions from '@styles/transitions'
 import { startAnimation } from '@utils'
 
 class CareersPage extends Component<{}, { animation: string }> {
-  state = { animation: '' }
+  state = { animation: '', startBulb: false }
 
   componentDidMount() {
     startAnimation(() => {
@@ -32,7 +32,7 @@ class CareersPage extends Component<{}, { animation: string }> {
   }
 
   render() {
-    const { animation } = this.state
+    const { animation, startBulb } = this.state
     const { data, location } = this.props
     const contentful = data.allContentfulCareersPage.edges[0].node
     const pageBackground =
@@ -73,8 +73,11 @@ class CareersPage extends Component<{}, { animation: string }> {
                 <HeroImageTop>
                   <Media src={data.heroTop.childImageSharp.fluid} />
                 </HeroImageTop>
-                <HeroImageBottom>
-                  <Media src={data.heroBottom.childImageSharp.fluid} />
+                <HeroImageBottom start={startBulb}>
+                  <Media
+                    onLoad={() => this.setState({ startBulb: true })}
+                    src={data.heroBottom.childImageSharp.fluid}
+                  />
                 </HeroImageBottom>
               </ImageContainer>
             </RightContainer>
@@ -371,10 +374,10 @@ const HeroImageTop = styled.div`
 const HeroImageBottom = styled.div`
   max-width: 381.46px;
   margin: 0 auto;
-  transform: translateY(80px);
+  transform: translateY(${p => (p.start ? '0' : '60px')});
+  transition: transform 1.4s var(--ease-in-out-cubic);
 
-  animation: comeUp 2.4s cubic-bezier(0.175, 0.885, 0.4, 1.15) forwards 0.2s,
-    float 4.8s ease-in-out infinite 3s;
+  ${p => p.start && 'animation: float 4.8s ease-in-out infinite 1.4s;'}
 
   @keyframes float {
     0% {
@@ -385,15 +388,6 @@ const HeroImageBottom = styled.div`
     }
     100% {
       transform: translatey(0px);
-    }
-  }
-
-  @keyframes comeUp {
-    from {
-      transform: translateY(60px);
-    }
-    to {
-      transform: translateY(0);
     }
   }
 `
