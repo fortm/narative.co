@@ -74,7 +74,7 @@ class ArticlesPage extends Component {
               <ScrollIndicator />
             </ContentContainer>
             <HeroImage>
-              <Media src={this.hero.childImageSharp.fluid} />
+              <Media critical src={this.hero.childImageSharp.fluid} />
             </HeroImage>
           </HeroSection>
           <WhiteBackground>

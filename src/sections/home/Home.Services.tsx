@@ -242,13 +242,13 @@ const HomeServices = () => {
                     <Column withRightBorder />
                     <ImageSlides>
                       <ImageSlide active={firstActive}>
-                        <Media src={first.childImageSharp.fluid} />
+                        <Media critical src={first.childImageSharp.fluid} />
                       </ImageSlide>
                       <ImageSlide active={secondActive}>
-                        <Media src={second.childImageSharp.fluid} />
+                        <Media critical src={second.childImageSharp.fluid} />
                       </ImageSlide>
                       <ImageSlide active={thirdActive}>
-                        <Media src={third.childImageSharp.fluid} />
+                        <Media critical src={third.childImageSharp.fluid} />
                       </ImageSlide>
                     </ImageSlides>
                   </Grid>

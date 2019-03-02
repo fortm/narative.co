@@ -86,10 +86,10 @@ class CareersPage extends Component<{}, { animation: string }> {
         <Section hideOnDesktop>
           <ImageContainer>
             <HeroImageTop>
-              <Media src={data.heroTop.childImageSharp.fluid} />
+              <Media critical src={data.heroTop.childImageSharp.fluid} />
             </HeroImageTop>
             <HeroImageBottom>
-              <Media src={data.heroBottom.childImageSharp.fluid} />
+              <Media critical src={data.heroBottom.childImageSharp.fluid} />
             </HeroImageBottom>
           </ImageContainer>
         </Section>

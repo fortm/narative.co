@@ -121,7 +121,7 @@ class LabsPage extends Component<{}, { animate: string }> {
             </ContentContainer>
 
             <HeroImage>
-              <Media src={hero.childImageSharp.fluid} />
+              <Media critical src={hero.childImageSharp.fluid} />
             </HeroImage>
           </HeroSection>
           <Section narrow>
