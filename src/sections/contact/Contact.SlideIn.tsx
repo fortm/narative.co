@@ -86,7 +86,8 @@ const SlideIn = ({ in: inProp, children }) => (
 )
 
 const SlideInContainer = styled.div`
-  width: 100%;
+  width: 100vw;
+  overflow-y: hidden;
   height: calc(100vh - 40px);
   top: 0px;
   right: 0px;
@@ -114,7 +115,6 @@ const FormContainer = styled.div`
   position: relative;
   width: 100%;
   margin: 0 auto;
-  width: 100%;
   background: #fff;
   z-index: 99999;
 `

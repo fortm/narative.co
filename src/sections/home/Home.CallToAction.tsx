@@ -188,16 +188,18 @@ const TextBackground = styled.div`
   background-image: url(${p => p.background});
   background-size: cover;
   color: transparent !important;
-  background-position: 0 ${p => p.visiblePercentage * 1.8}px;
+  background-position: 0 120px;
+  max-width: 680px;
 `
 
 const Text = styled.p`
+  display: inline;
   font-family: ${p => p.theme.fontfamily.serif};
   font-weight: 700;
   line-height: 1.1;
   font-size: 80px;
   letter-spacing: -0.5px;
-  max-width: 680px;
+
   color: transparent;
 
   ${mediaqueries.desktop`

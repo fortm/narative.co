@@ -226,6 +226,7 @@ export const pageQuery = graphql`
 
 const CareerRowSpacer = styled.div`
   padding-bottom: 20rem;
+  overflow-x: hidden;
 
   ${mediaqueries.desktop_large`
     padding-bottom: 15rem;

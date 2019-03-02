@@ -8,8 +8,8 @@ import Logo from '@components/Logo'
 import mediaqueries from '@styles/media'
 
 const footerLinks = [
-  { to: '/labs', text: 'Labs' },
   { to: '/careers', text: 'Careers' },
+  { to: '/labs', text: 'Labs' },
   { to: '/articles', text: 'Articles' },
   { to: '/contact', text: 'Contact' },
 ]
@@ -38,7 +38,14 @@ const Footer = ({ mode = 'dark' }: { mode?: string }) => {
         </Left>
         <Right>
           {footerLinks.map(link => (
-            <FooterLink key={link.to} color={color} to={link.to}>
+            <FooterLink
+              key={link.to}
+              color={color}
+              to={link.to}
+              getProps={({ isPartiallyCurrent }) =>
+                isPartiallyCurrent ? { ['data-active']: 'true' } : null
+              }
+            >
               {link.text}
             </FooterLink>
           ))}
@@ -140,10 +147,25 @@ const SocialIconsFooter = styled.div`
 `
 
 const FooterLink = styled(Link)`
+  position: relative;
   font-weight: 600;
   font-size: 18px;
   color: ${p => p.color};
   transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.9);
+
+  &[data-active='true'] {
+    &::after {
+      content: '';
+      position: absolute;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+      bottom: -5px;
+      height: 1px;
+      width: 20px;
+      background: ${p => p.color};
+    }
+  }
 
   &:hover {
     opacity: 0.6;

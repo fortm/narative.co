@@ -129,6 +129,15 @@ const calculateAnimation = (
   vp: number,
   top: number
 ): { transform: string; opacity?: number } => {
+  const isFirefox = typeof InstallTrigger !== 'undefined'
+
+  // background-text-clip breaks if you animate values in Firefox
+  if (isFirefox) {
+    return {
+      transform: `translateY(60px)`,
+    }
+  }
+
   return entering
     ? {
         transform: `translateY(${vp}px)`,
@@ -154,7 +163,7 @@ const HomeServices = () => {
                   boundingClientRect,
                 }) => (
                   <Motion
-                    defaultStyle={{ vp: 0 }}
+                    defaultStyle={{ vp: 0, top: 0 }}
                     style={{
                       vp: visiblePercentage,
                       top: boundingClientRect.top,
@@ -274,6 +283,7 @@ const HomeServicesDesktop = styled.div`
 const HeadingBackground = styled.div`
   position: relative;
   -webkit-background-clip: text;
+  background-clip: text;
 
   background-repeat: no-repeat;
   background-image: url(${p => p.background});
@@ -288,6 +298,7 @@ const HeadingBackground = styled.div`
 `
 
 const LargeHeading = styled.h2`
+  display: inline;
   font-weight: 700;
   font-size: 80px;
   letter-spacing: -0.5px;
@@ -392,7 +403,7 @@ const ImageSlide = styled.div`
   justify-content: center;
   position: absolute;
   top: 2%;
-  right: -5%;
+  right: 0;
   width: 88%;
   height: 100%;
   pointer-events: none;

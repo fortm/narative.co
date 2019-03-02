@@ -224,7 +224,7 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
              * Finally, this Mask is only applied when navigation to a new page. It's how
              * we're able to make it feel smooth between mobile navigations
              */}
-            <MaskMobile mask={mask} theme={navTheme} />
+            <MaskMobile shouldMask={mask} theme={navTheme} />
 
             {/*The rest of the site lives in children!*/}
             {children}
@@ -332,7 +332,7 @@ const RightToggle = styled(Toggle)`
 
 const MaskMobile = styled.div`
   opacity: 0;
-  opacity: ${p => (p.mask ? 1 : 0)};
+  opacity: ${p => (p.shouldMask ? 1 : 0)};
   transition: opacity 0.5s linear;
   pointer-events: none;
 

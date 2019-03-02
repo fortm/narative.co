@@ -37,9 +37,9 @@ const HomeAbout = () => {
       <div>
         {aboutNarativeText.map(text => (
           <IntersectionObserver
+            key={text}
             render={({ visiblePercentage }) => (
               <Text
-                key={text}
                 style={{ opacity: visiblePercentage / 100 }}
                 dangerouslySetInnerHTML={{ __html: text }}
               />

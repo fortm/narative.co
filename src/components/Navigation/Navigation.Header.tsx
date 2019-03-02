@@ -8,8 +8,8 @@ import { Section, Logo } from '@components'
 import mediaqueries from '@styles/media'
 
 const navLinks = [
-  { to: '/labs', text: 'Labs' },
   { to: '/careers', text: 'Careers' },
+  { to: '/labs', text: 'Labs' },
   { to: '/articles', text: 'Articles' },
   { to: '/contact', text: 'Contact' },
 ]
@@ -98,14 +98,16 @@ class Navigation extends Component<> {
   }
 
   handleToggleClick = () => {
+    const $toggle = this.leftToggle.current
+    console.log($toggle)
     this.setState(
       {
         active: !this.state.active,
       },
       () => {
         if (!isMobileOnly) {
-          if (this.state.active) {
-            this.leftToggle.current.animate(animateIn, {
+          if (this.state.active && $toggle) {
+            $toggle.animate(animateIn, {
               duration: 900,
               fill: 'both',
               easing: 'cubic-bezier(0.075, 0.82, 0.165, 1)',
@@ -119,11 +121,15 @@ class Navigation extends Component<> {
   }
 
   handleCloseAnimation = () => {
-    this.leftToggle.current.animate(animateOut, {
-      duration: 250,
-      fill: 'both',
-      easing: 'cubic-bezier(0.075, 0.82, 0.165, 1)',
-    })
+    const $toggle = this.leftToggle.current
+
+    if ($toggle) {
+      $toggle.animate(animateOut, {
+        duration: 250,
+        fill: 'both',
+        easing: 'cubic-bezier(0.075, 0.82, 0.165, 1)',
+      })
+    }
   }
 
   handleOutsideClick = () => {
@@ -262,7 +268,13 @@ const LogoBack = styled(Link)`
   `}
 `
 
-const LogoContainer = styled(Link)``
+const LogoContainer = styled(Link)`
+  transition: opacity 0.3s var(--ease-out-quad);
+
+  &:hover {
+    opacity: 0.6;
+  }
+`
 
 const ToggleContainer = styled.button`
   position: relative;
