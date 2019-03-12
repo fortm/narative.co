@@ -251,7 +251,7 @@ const HomeServices = () => {
                     <Column withRightBorder />
                     <ImageSlides>
                       <ImageSlide active={firstActive}>
-                        <Media critical src={first.childImageSharp.fluid} />
+                        <Media src={first.childImageSharp.fluid} />
                       </ImageSlide>
                       <ImageSlide active={secondActive}>
                         <Media critical src={second.childImageSharp.fluid} />

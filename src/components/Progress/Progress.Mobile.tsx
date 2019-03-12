@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-// import { ellipsis } from 'polished'
+import { ellipsis } from 'polished'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
 
@@ -140,7 +140,7 @@ const Content = styled(Section)`
 const Title = styled.span`
   padding: 2rem 0;
   font-size: 16px;
-  /* ${ellipsis()} */
+  ${ellipsis()}
   display: block;
   color: ${p => p.theme.mode.text};
 `

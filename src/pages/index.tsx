@@ -72,6 +72,9 @@ class IndexPage extends Component<{}, { animation: string }> {
                   <ButtonArrow text="Get in touch" />
                 </ContactText>
               </TextContainer>
+              <SlashContainer>
+                <Slash />
+              </SlashContainer>
               {/* <Main>
                 <div />
                 <div />
@@ -231,3 +234,193 @@ const Main = styled.main`
     }
   }
 `
+
+const SlashContainer = styled.div`
+  width: 200px;
+  width: 50%;
+  position: relative;
+  top: 10%;
+`
+
+const Slash = () => (
+  <svg
+    width="758"
+    height="919"
+    viewBox="0 0 758 919"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g filter="url(#filter0_f)">
+      <path
+        d="M529.998 594.561L245 795.141V892.469L529.984 692.782L529.998 594.561Z"
+        stroke="url(#paint0_linear)"
+        stroke-width="12"
+      />
+    </g>
+    <g filter="url(#filter1_f)">
+      <rect
+        x="200"
+        y="200"
+        width="375"
+        height="375"
+        fill="#66748D"
+        fill-opacity="0.15"
+      />
+    </g>
+    <g filter="url(#filter2_dd)">
+      <path
+        d="M529.998 537.319L245 336.816V239.528L529.984 439.14L529.998 537.319Z"
+        stroke="white"
+        stroke-width="12"
+      />
+    </g>
+    <rect
+      x="235.5"
+      y="224.5"
+      width="6"
+      height="6"
+      fill="black"
+      stroke="#6166DC"
+    />
+    <rect
+      x="235.5"
+      y="546.5"
+      width="6"
+      height="6"
+      fill="black"
+      stroke="#6166DC"
+    />
+    <rect
+      x="533.5"
+      y="546.5"
+      width="6"
+      height="6"
+      fill="black"
+      stroke="#6166DC"
+    />
+    <rect
+      x="533.5"
+      y="224.5"
+      width="6"
+      height="6"
+      fill="black"
+      stroke="#6166DC"
+    />
+    <rect x="242" y="227" width="291" height="1" fill="#6166DC" />
+    <rect x="242" y="549" width="291" height="1" fill="#6166DC" />
+    <rect
+      x="537.041"
+      y="231"
+      width="315"
+      height="1.08246"
+      transform="rotate(90 537.041 231)"
+      fill="#6166DC"
+    />
+    <rect
+      x="239.041"
+      y="231"
+      width="315"
+      height="1.08246"
+      transform="rotate(90 239.041 231)"
+      fill="#6166DC"
+    />
+    <defs>
+      <filter
+        id="filter0_f"
+        x="224"
+        y="568"
+        width="327"
+        height="351"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="BackgroundImageFix"
+          result="shape"
+        />
+        <feGaussianBlur stdDeviation="7.5" result="effect1_foregroundBlur" />
+      </filter>
+      <filter
+        id="filter1_f"
+        x="0"
+        y="0"
+        width="775"
+        height="775"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="BackgroundImageFix"
+          result="shape"
+        />
+        <feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur" />
+      </filter>
+      <filter
+        id="filter2_dd"
+        x="169"
+        y="158"
+        width="437"
+        height="460.877"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset />
+        <feGaussianBlur stdDeviation="35" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0.399641 0 0 0 0 0.453299 0 0 0 0 0.554653 0 0 0 0.6 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset />
+        <feGaussianBlur stdDeviation="5" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.2 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="effect1_dropShadow"
+          result="effect2_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect2_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <linearGradient
+        id="paint0_linear"
+        x1="387.5"
+        y1="710"
+        x2="387.5"
+        y2="583"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="white" stop-opacity="0" />
+        <stop offset="1" stop-color="white" stop-opacity="0.2" />
+      </linearGradient>
+    </defs>
+  </svg>
+)

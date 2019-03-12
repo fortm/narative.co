@@ -140,6 +140,7 @@ const Progress = styled.div`
   width: 100%;
   height: 1px;
   background: #1d2128;
+  overflow: hidden;
 `
 
 const Value = styled.div`
