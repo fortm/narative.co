@@ -281,6 +281,7 @@ const Numbers = styled.div`
 
 const OutlineGlow = styled.div`
   opacity: ${p => (p.show ? 0 : 1)};
+  transition: opacity 0.3s ease;
 
   &::after {
     content: '';
@@ -382,6 +383,7 @@ const BRight = styled(Corner)`
 
 const SlashContainer = styled.div`
   opacity: ${p => (p.show ? 0 : 1)};
+  transition: opacity 0.3s ease;
   width: 100%;
   height: 100%;
   left: -17px;
