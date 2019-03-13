@@ -6,6 +6,7 @@ import { ButtonArrow, Section, Heading, SEO, Layout } from '@components'
 import ScrollIndicator from '@components/ScrollIndicator'
 
 import HomeAbout from '../sections/home/Home.About'
+import HomeSlash from '../sections/home/Home.Slash'
 import HomeCallToAction from '../sections/home/Home.CallToAction'
 import HomeTestimonial from '../sections/home/Home.Testimonial'
 import HomeServices from '../sections/home/Home.Services'
@@ -72,14 +73,7 @@ class IndexPage extends Component<{}, { animation: string }> {
                   <ButtonArrow text="Get in touch" />
                 </ContactText>
               </TextContainer>
-              <SlashContainer>
-                <Slash />
-              </SlashContainer>
-              {/* <Main>
-                <div />
-                <div />
-                <div />
-              </Main> */}
+              <HomeSlash />
             </ContentContainer>
             <ScrollIndicator />
           </Section>
