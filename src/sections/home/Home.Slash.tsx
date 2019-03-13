@@ -1,9 +1,12 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 
 function HomeSlash() {
+  const [show, setShow] = useState(true)
   const pane = useRef()
   const innerPane = useRef()
+  const numbers = useRef()
+  const glow = useRef()
 
   // Minimum resizable area
   const minWidth: number = 80
@@ -32,15 +35,28 @@ function HomeSlash() {
 
   // Mouse events
   useEffect(() => {
-    pane.current.addEventListener('mousedown', onMouseDown)
-    document.addEventListener('mousemove', onMove)
-    document.addEventListener('mouseup', onUp)
+    if (show) {
+      pane.current.addEventListener('mousedown', onMouseDown)
+      document.addEventListener('mousemove', onMove)
+      document.addEventListener('mouseup', onUp)
 
-    // Touch events
-    pane.current.addEventListener('touchstart', onTouchDown)
-    document.addEventListener('touchmove', onTouchMove)
-    document.addEventListener('touchend', onTouchEnd)
-  }, [])
+      // Touch events
+      pane.current.addEventListener('touchstart', onTouchDown)
+      document.addEventListener('touchmove', onTouchMove)
+      document.addEventListener('touchend', onTouchEnd)
+    }
+
+    return () => {
+      pane.current.removeEventListener('mousedown', onMouseDown)
+      document.removeEventListener('mousemove', onMove)
+      document.removeEventListener('mouseup', onUp)
+
+      // Touch events
+      pane.current.removeEventListener('touchstart', onTouchDown)
+      document.removeEventListener('touchmove', onTouchMove)
+      document.removeEventListener('touchend', onTouchEnd)
+    }
+  }, [show])
 
   function onTouchDown(event) {
     onDown(event.touches[0])
@@ -61,6 +77,7 @@ function HomeSlash() {
   }
 
   function onDown(event) {
+    pane.current.style.transition = ''
     calc(event)
 
     let isResizing = onRightEdge || onBottomEdge || onTopEdge || onLeftEdge
@@ -119,6 +136,13 @@ function HomeSlash() {
     if (clicked && clicked.isResizing) {
       if (clicked.onRightEdge) {
         pane.current.style.width = Math.max(x, minWidth) + 'px'
+        const scale = num => `scale(${(event.clientX + num) / num})`
+
+        if (event.clientX > 1350) {
+          innerPane.current.style.transform = scale(55000)
+        } else {
+          innerPane.current.style.transform = scale(100000)
+        }
       }
 
       if (clicked.onBottomEdge) {
@@ -130,8 +154,19 @@ function HomeSlash() {
           clicked.cx - event.clientX + clicked.w,
           minWidth
         )
+
         if (currentWidth > minWidth) {
           pane.current.style.width = currentWidth + 'px'
+        }
+
+        const scale = num => `scale(${(currentWidth + num) / num})`
+
+        if (currentWidth > 1400) {
+          innerPane.current.style.transform = scale(44000)
+        } else if (currentWidth > 800) {
+          innerPane.current.style.transform = scale(34000)
+        } else {
+          innerPane.current.style.transform = scale(28000)
         }
       }
 
@@ -140,10 +175,21 @@ function HomeSlash() {
           clicked.cy - event.clientY + clicked.h,
           minHeight
         )
+
         if (currentHeight > minHeight) {
           pane.current.style.height = currentHeight + 'px'
         }
       }
+
+      let computed = getComputedStyle(pane.current)
+      const cleanNum = num =>
+        Math.round(parseInt(num.replace('[\\D.]', ''), 10))
+
+      numbers.current.innerHTML = `${cleanNum(computed.width)} x ${cleanNum(
+        computed.height
+      )}`
+
+      numbers.current.style.opacity = 1
 
       return
     }
@@ -167,53 +213,40 @@ function HomeSlash() {
 
   function onUp(event) {
     calc(event)
+
+    pane.current.style.transition = `width 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
+      height 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)`
+    pane.current.style.width = '299px'
+    pane.current.style.height = '324px'
+    innerPane.current.style.transform = ''
+    numbers.current.style.opacity = 0
     clicked = null
+  }
+
+  function handleToggle() {
+    if (!clicked) {
+      setShow(!show)
+    }
   }
 
   return (
     <Frame>
-      <Outline ref={pane}>
-        <Slash />
-        {/* <svg height="100%" width="100%">
-          <g style={{ transform: 'scale(0.96) translate(6px, 6px)' }}>
-            <line
-              x1="-8px"
-              y1="0px"
-              x2="100%"
-              y2="66%"
-              stroke="#fff"
-              strokeWidth="13"
-            />
-            <line
-              x1="-6px"
-              y1="31%"
-              x2="100%"
-              y2="100%"
-              stroke="#fff"
-              strokeWidth="13"
-            />
-            <line
-              x1="0"
-              y1="6px"
-              x2="0"
-              y2="33%"
-              stroke="#fff"
-              strokeWidth="13"
-            />
-            <line
-              x1="100%"
-              y1="66%"
-              x2="100%"
-              y2="100%"
-              stroke="#fff"
-              strokeWidth="13"
-            />
-          </g>
-        </svg> */}
-        <TLeft />
-        <TRight />
-        <BLeft />
-        <BRight />
+      <Outline ref={pane} show={show} onClick={handleToggle}>
+        {/* <OutlineGlow ref={glow}> */}
+        <InnerMask>
+          <InnerOutline ref={innerPane}>
+            <Slash />
+          </InnerOutline>
+        </InnerMask>
+        <Numbers ref={numbers} />
+        {/* </OutlineGlow> */}
+
+        <Corners show={show}>
+          <TLeft />
+          <TRight />
+          <BLeft />
+          <BRight />
+        </Corners>
       </Outline>
     </Frame>
   )
@@ -223,29 +256,82 @@ export default HomeSlash
 
 const Frame = styled.div`
   position: relative;
-  width: 50%;
+  width: 45%;
   display: flex;
   justify-items: flex-start;
-  height: 100%;
+  height: 90%;
   justify-content: center;
   align-items: center;
+  align-self: flex-start;
 `
 
+const Numbers = styled.div`
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 10px;
+  color: #6166dc;
+  transition: opacity 0.1s linear;
+`
+
+const OutlineGlow = styled.div`
+  &::after {
+    content: '';
+    position: absolute;
+    width: 130%;
+    height: 130%;
+    top: -15%;
+    left: -15%;
+
+    background: rgba(102, 116, 141, 0.15);
+    filter: blur(200px);
+  }
+`
 const Outline = styled.div`
   position: absolute;
   height: 324px;
   width: 299px;
-  border: 1px solid #6166dc;
+  border: 1px solid transparent;
+  cursor: pointer;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    cursor: pointer;
+    z-index: 1;
+    width: calc(100% - 8px);
+    height: calc(100% - 8px);
+  }
+
+  ${p =>
+    p.show &&
+    `
+  border-color: #6166dc;
 
   &::after {
     content: '';
     position: absolute;
-    left: -2px;
-    top: -2px;
+    left: -5px;
+    top: -5px;
     border: 4px solid transparent;
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
   }
+  `}
+`
+
+const InnerMask = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
 `
 
 const InnerOutline = styled.div`
@@ -255,6 +341,10 @@ const InnerOutline = styled.div`
   top: 0;
   left: 0;
   overflow: hidden;
+`
+
+const Corners = styled.div`
+  opacity: ${p => (p.show ? 1 : 0)};
 `
 
 const Corner = styled.div`
