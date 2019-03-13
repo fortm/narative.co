@@ -30,6 +30,8 @@ function HomeSlash() {
   let x: number
   let y: number
 
+  let startAngle: number
+
   let redraw = false
   let event
 
@@ -82,6 +84,14 @@ function HomeSlash() {
 
     let isResizing = onRightEdge || onBottomEdge || onTopEdge || onLeftEdge
 
+    let center = {
+      x: b.left + b.width / 2,
+      y: b.top + b.height / 2,
+    }
+    let x = event.clientX - center.x
+    let y = event.clientY - center.y
+    startAngle = (180 / Math.PI) * Math.atan2(y, x)
+
     clicked = {
       x: x,
       y: y,
@@ -95,6 +105,7 @@ function HomeSlash() {
       onLeftEdge: onLeftEdge,
       onRightEdge: onRightEdge,
       onBottomEdge: onBottomEdge,
+      startAngle: startAngle,
     }
   }
 
@@ -192,6 +203,20 @@ function HomeSlash() {
 
       numbers.current.style.opacity = 1
 
+      const { x, y } = pane.current.getBoundingClientRect()
+      let center_x = x + pane.current.offsetWidth / 2
+      let center_y = y + pane.current.offsetHeight / 2
+
+      let mouse_x = event.pageX
+      let mouse_y = event.pageY
+
+      let radians = Math.atan2(mouse_x - center_x, mouse_y - center_y)
+      let degree = radians * (180 / Math.PI) * -1 + 100
+      let rotation = degree - clicked.startAngle
+      let normalize = rotation >= 360 ? rotation - 360 : rotation
+
+      pane.current.style.transform = `rotate(${normalize}deg)`
+
       return
     }
 
@@ -216,10 +241,11 @@ function HomeSlash() {
     calc(event)
 
     pane.current.style.transition = `width 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
-      height 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)`
+      height 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), transform 0.3s ease`
     pane.current.style.width = '299px'
     pane.current.style.height = '324px'
     innerPane.current.style.transform = ''
+    pane.current.style.transform = ''
     numbers.current.style.opacity = 0
     clicked = null
   }
