@@ -136,6 +136,7 @@ function HomeSlash() {
     if (clicked && clicked.isResizing) {
       if (clicked.onRightEdge) {
         pane.current.style.width = Math.max(x, minWidth) + 'px'
+
         const scale = num => `scale(${(event.clientX + num) / num})`
 
         if (event.clientX > 1350) {
@@ -232,21 +233,22 @@ function HomeSlash() {
   return (
     <Frame>
       <Outline ref={pane} show={show} onClick={handleToggle}>
-        {/* <OutlineGlow ref={glow}> */}
+        <OutlineGlow show={show} />
         <InnerMask>
           <InnerOutline ref={innerPane}>
             <Slash />
           </InnerOutline>
         </InnerMask>
         <Numbers ref={numbers} />
-        {/* </OutlineGlow> */}
-
         <Corners show={show}>
           <TLeft />
           <TRight />
           <BLeft />
           <BRight />
         </Corners>
+        <SlashContainer show={show}>
+          <SlashReflection />
+        </SlashContainer>
       </Outline>
     </Frame>
   )
@@ -278,6 +280,8 @@ const Numbers = styled.div`
 `
 
 const OutlineGlow = styled.div`
+  opacity: ${p => (p.show ? 0 : 1)};
+
   &::after {
     content: '';
     position: absolute;
@@ -376,15 +380,14 @@ const BRight = styled(Corner)`
   right: -3px;
 `
 
-// const Parallelogram = styled.div`
-//   width: 100%;
-//   height: 33%;
-//   transform: skewY(35deg);
-//   border: 16px solid #fff;
-//   position: absolute;
-//   top: 31.3%;
-//   left: 0;
-// `
+const SlashContainer = styled.div`
+  opacity: ${p => (p.show ? 0 : 1)};
+  width: 100%;
+  height: 100%;
+  left: -17px;
+  top: 105%;
+  position: absolute;
+`
 
 const Slash = () => (
   <svg
@@ -405,19 +408,51 @@ const Slash = () => (
   </svg>
 )
 
-const NewSlash = () => (
+const SlashReflection = () => (
   <svg
-    width="100%"
-    height="100%"
+    width="327"
+    height="351"
+    viewBox="0 0 327 351"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 297 321"
-    preserveAspectRatio="none"
   >
-    <path
-      d="M211 171L6.5 12.5L7 88L211 246.5V171Z"
-      stroke="white"
-      strokeWidth="12"
-    />
+    <g filter="url(#filter0_f)">
+      <path
+        d="M305.998 26.5609L21 227.141V324.469L305.984 124.782L305.998 26.5609Z"
+        stroke="url(#paint0_linear)"
+        stroke-width="12"
+      />
+    </g>
+    <defs>
+      <filter
+        id="filter0_f"
+        x="0"
+        y="0"
+        width="327"
+        height="351"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="BackgroundImageFix"
+          result="shape"
+        />
+        <feGaussianBlur stdDeviation="7.5" result="effect1_foregroundBlur" />
+      </filter>
+      <linearGradient
+        id="paint0_linear"
+        x1="163.5"
+        y1="142"
+        x2="163.5"
+        y2="15"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="white" stop-opacity="0" />
+        <stop offset="1" stop-color="white" stop-opacity="0.2" />
+      </linearGradient>
+    </defs>
   </svg>
 )
