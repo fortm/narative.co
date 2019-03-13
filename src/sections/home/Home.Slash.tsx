@@ -106,6 +106,10 @@ function HomeSlash() {
   }
 
   function animate() {
+    if (typeof window !== 'undefined') {
+      return
+    }
+
     requestAnimationFrame(animate)
 
     if (!redraw) return
