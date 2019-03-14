@@ -323,14 +323,14 @@ function HomeSlash() {
 
   function handleToggle() {
     if (!clicked) {
-      setShow(!show)
+      // setShow(!show)
     }
   }
 
   return (
     <Frame>
       <Relative ref={relativePane}>
-        <Outline ref={pane} show={show} onClick={handleToggle}>
+        <Outline ref={pane} show={true} onClick={handleToggle}>
           <OutlineGlow show={true} />
           <InnerMask>
             <InnerOutline ref={innerPane}>
@@ -344,7 +344,7 @@ function HomeSlash() {
             <BLeft />
             <BRight />
           </Corners>
-          <SlashContainer show={true}>
+          <SlashContainer show={false}>
             <SlashReflection />
           </SlashContainer>
         </Outline>
