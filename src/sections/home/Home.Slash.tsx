@@ -1,16 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 
+import cursorTopLeftImage from '../../assets/cursors/rotate-top-left.svg'
+import cursorTopRightImage from '../../assets/cursors/rotate-top-right.svg'
+import cursorBottomLeftImage from '../../assets/cursors/rotate-bottom-left.svg'
+import cursorBottomRightImage from '../../assets/cursors/rotate-bottom-right.svg'
+
 function HomeSlash() {
   const [show, setShow] = useState(true)
   const pane = useRef()
+  const relativePane = useRef()
   const innerPane = useRef()
   const numbers = useRef()
-  const glow = useRef()
+
+  const cornerRotation = useRef()
 
   // Minimum resizable area
-  const minWidth: number = 80
-  const minHeight: number = 100
+  const minWidth: number = 0
+  const minHeight: number = 0
 
   // Thresholds
   const MARGINS: number = 4
@@ -26,6 +33,9 @@ function HomeSlash() {
   let rightScreenEdge: number
   let bottomScreenEdge: number
 
+  let alt: boolean
+  let shift: boolean
+
   let b: number
   let x: number
   let y: number
@@ -39,8 +49,11 @@ function HomeSlash() {
   useEffect(() => {
     if (show) {
       pane.current.addEventListener('mousedown', onMouseDown)
+      cornerRotation.current.addEventListener('mousedown', onMouseDownRotation)
       document.addEventListener('mousemove', onMove)
       document.addEventListener('mouseup', onUp)
+      document.addEventListener('keydown', onKeydown)
+      document.addEventListener('keyup', onKeyup)
 
       // Touch events
       pane.current.addEventListener('touchstart', onTouchDown)
@@ -48,10 +61,14 @@ function HomeSlash() {
       document.addEventListener('touchend', onTouchEnd)
     }
 
+    // Remove all the events when unselected
     return () => {
       pane.current.removeEventListener('mousedown', onMouseDown)
+      cornerRotation.current.addEventListener('mousedown', onMouseDownRotation)
       document.removeEventListener('mousemove', onMove)
       document.removeEventListener('mouseup', onUp)
+      document.removeEventListener('keydown', onKeydown)
+      document.removeEventListener('keyup', onKeyup)
 
       // Touch events
       pane.current.removeEventListener('touchstart', onTouchDown)
@@ -78,7 +95,25 @@ function HomeSlash() {
     event.preventDefault()
   }
 
-  function onDown(event) {
+  function onMouseDownRotation(event) {
+    onDown(event, 'rotation')
+    event.preventDefault()
+  }
+
+  function onKeydown(event) {
+    alt = event.key === 'Alt'
+    shift = event.key === 'Shift'
+    redraw = true
+  }
+
+  function onKeyup(event) {
+    event.preventDefault()
+    alt = false
+    shift = false
+    redraw = true
+  }
+
+  function onDown(event, src) {
     pane.current.style.transition = ''
     calc(event)
 
@@ -106,6 +141,7 @@ function HomeSlash() {
       onRightEdge: onRightEdge,
       onBottomEdge: onBottomEdge,
       startAngle: startAngle,
+      rotate: src === 'rotation',
     }
   }
 
@@ -134,9 +170,7 @@ function HomeSlash() {
   }
 
   function animate() {
-    if (typeof window === 'undefined') {
-      return
-    }
+    if (typeof window === 'undefined') return
 
     requestAnimationFrame(animate)
 
@@ -144,21 +178,27 @@ function HomeSlash() {
 
     redraw = false
 
+    if (clicked && clicked.rotate) {
+      return rotate()
+    }
+
     if (clicked && clicked.isResizing) {
       if (clicked.onRightEdge) {
+        let currentWidth = Math.max(x, minWidth)
         pane.current.style.width = Math.max(x, minWidth) + 'px'
+        handleShift(currentWidth)
 
-        const scale = num => `scale(${(event.clientX + num) / num})`
-
-        if (event.clientX > 1350) {
-          innerPane.current.style.transform = scale(55000)
-        } else {
-          innerPane.current.style.transform = scale(100000)
-        }
+        pane.current.style.left = 0
+        pane.current.style.right = ''
       }
 
       if (clicked.onBottomEdge) {
-        pane.current.style.height = Math.max(y, minHeight) + 'px'
+        let currentHeight = Math.max(y, minHeight)
+        pane.current.style.height = currentHeight + 'px'
+        handleShift(currentHeight)
+
+        pane.current.style.top = 0
+        pane.current.style.bottom = ''
       }
 
       if (clicked.onLeftEdge) {
@@ -167,19 +207,14 @@ function HomeSlash() {
           minWidth
         )
 
+        let w = alt ? (currentWidth - 299) * 2 + 299 : currentWidth
+
         if (currentWidth > minWidth) {
-          pane.current.style.width = currentWidth + 'px'
+          pane.current.style.width = w + 'px'
+          handleShift(w)
         }
-
-        const scale = num => `scale(${(currentWidth + num) / num})`
-
-        if (currentWidth > 1400) {
-          innerPane.current.style.transform = scale(44000)
-        } else if (currentWidth > 800) {
-          innerPane.current.style.transform = scale(34000)
-        } else {
-          innerPane.current.style.transform = scale(28000)
-        }
+        pane.current.style.right = 0
+        pane.current.style.left = ''
       }
 
       if (clicked.onTopEdge) {
@@ -190,34 +225,34 @@ function HomeSlash() {
 
         if (currentHeight > minHeight) {
           pane.current.style.height = currentHeight + 'px'
+          handleShift(currentHeight)
+        }
+        pane.current.style.bottom = 0
+        pane.current.style.top = ''
+      }
+
+      function handleShift(len) {
+        if (shift) {
+          pane.current.style.width = len + 'px'
+          pane.current.style.height = len + 'px'
         }
       }
 
-      let computed = getComputedStyle(pane.current)
-      const cleanNum = num =>
-        Math.round(parseInt(num.replace('[\\D.]', ''), 10))
+      addWidthAndHeightUnits()
+    }
 
-      numbers.current.innerHTML = `${cleanNum(computed.width)} x ${cleanNum(
-        computed.height
-      )}`
-
-      numbers.current.style.opacity = 1
-
-      const { x, y } = pane.current.getBoundingClientRect()
-      let center_x = x + pane.current.offsetWidth / 2
-      let center_y = y + pane.current.offsetHeight / 2
-
-      let mouse_x = event.pageX
-      let mouse_y = event.pageY
-
-      let radians = Math.atan2(mouse_x - center_x, mouse_y - center_y)
-      let degree = radians * (180 / Math.PI) * -1 + 100
-      let rotation = degree - clicked.startAngle
-      let normalize = rotation >= 360 ? rotation - 360 : rotation
-
-      pane.current.style.transform = `rotate(${normalize}deg)`
-
-      return
+    if (alt) {
+      pane.current.style.top = ''
+      pane.current.style.right = ''
+      pane.current.style.bottom = ''
+      pane.current.style.left = ''
+      relativePane.current.style.display = 'flex'
+      relativePane.current.style.alignItems = 'center'
+      relativePane.current.style.justifyContent = 'center'
+    } else {
+      relativePane.current.style.display = ''
+      relativePane.current.style.alignItems = ''
+      relativePane.current.style.justifyContent = ''
     }
 
     // This code executes when mouse moves without clicking
@@ -235,20 +270,56 @@ function HomeSlash() {
     }
   }
 
-  animate()
+  function addWidthAndHeightUnits() {
+    numbers.current.innerHTML = `${Math.round(b.width)} x ${Math.round(
+      b.height
+    )}`
+    numbers.current.style.opacity = 1
+  }
 
-  function onUp(event) {
-    calc(event)
+  function rotate() {
+    const { left, top } = pane.current.getBoundingClientRect()
+    const center = {
+      x: left + pane.current.offsetWidth / 2,
+      y: top + pane.current.offsetHeight / 2,
+    }
+
+    let mouse_x = event.pageX
+    let mouse_y = event.pageY
+
+    let radians = Math.atan2(mouse_x - center.x, mouse_y - center.y)
+    let degree = radians * (180 / Math.PI) * -1 + 100
+    let rotation = degree - clicked.startAngle
+    let normalize = rotation >= 360 ? rotation - 360 : rotation
+
+    console.log(normalize)
+    pane.current.style.transform = `rotate(${normalize - 10}deg)`
+  }
+
+  function resetStyles() {
+    if (pane.current.style.transform.includes('rotate')) {
+      const deg = Number(pane.current.style.transform.replace(/[^0-9\.]+/g, ''))
+      const result = Math.abs(deg - 360) > Math.abs(0 - deg) ? 0 : 360
+      pane.current.style.transform = `rotate(${result}deg)`
+    } else {
+      pane.current.style.transform = ''
+    }
 
     pane.current.style.transition = `width 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
       height 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), transform 0.3s ease`
     pane.current.style.width = '299px'
     pane.current.style.height = '324px'
-    innerPane.current.style.transform = ''
-    pane.current.style.transform = ''
     numbers.current.style.opacity = 0
+  }
+
+  function onUp(event) {
+    calc(event)
+    resetStyles()
+
     clicked = null
   }
+
+  animate()
 
   function handleToggle() {
     if (!clicked) {
@@ -258,24 +329,32 @@ function HomeSlash() {
 
   return (
     <Frame>
-      <Outline ref={pane} show={show} onClick={handleToggle}>
-        <OutlineGlow show={show} />
-        <InnerMask>
-          <InnerOutline ref={innerPane}>
-            <Slash />
-          </InnerOutline>
-        </InnerMask>
-        <Numbers ref={numbers} />
-        <Corners show={show}>
-          <TLeft />
-          <TRight />
-          <BLeft />
-          <BRight />
-        </Corners>
-        <SlashContainer show={show}>
-          <SlashReflection />
-        </SlashContainer>
-      </Outline>
+      <Relative ref={relativePane}>
+        <Outline ref={pane} show={show} onClick={handleToggle}>
+          <OutlineGlow show={true} />
+          <InnerMask>
+            <InnerOutline ref={innerPane}>
+              <SlashWithGlow />
+            </InnerOutline>
+          </InnerMask>
+          <Numbers ref={numbers} />
+          <Corners show={show}>
+            <TLeft />
+            <TRight />
+            <BLeft />
+            <BRight />
+          </Corners>
+          <SlashContainer show={true}>
+            <SlashReflection />
+          </SlashContainer>
+        </Outline>
+        <CornerControls ref={cornerRotation}>
+          <TLeftControl />
+          <TRightControl />
+          <BLeftControl />
+          <BRightControl />
+        </CornerControls>
+      </Relative>
     </Frame>
   )
 }
@@ -293,6 +372,13 @@ const Frame = styled.div`
   align-self: flex-start;
 `
 
+const Relative = styled.div`
+  position: relative;
+  height: 324px;
+  width: 299px;
+  border: 1px solid transparent;
+`
+
 const Numbers = styled.div`
   position: absolute;
   bottom: -20px;
@@ -303,19 +389,21 @@ const Numbers = styled.div`
   font-size: 10px;
   color: #6166dc;
   transition: opacity 0.1s linear;
+  pointer-events: none;
 `
 
 const OutlineGlow = styled.div`
   opacity: ${p => (p.show ? 0 : 1)};
   transition: opacity 0.3s ease;
+  pointer-events: none;
 
   &::after {
     content: '';
     position: absolute;
-    width: 130%;
-    height: 130%;
-    top: -15%;
-    left: -15%;
+    width: 110%;
+    height: 110%;
+    top: -5%;
+    left: -5%;
 
     background: rgba(102, 116, 141, 0.15);
     filter: blur(200px);
@@ -342,17 +430,18 @@ const Outline = styled.div`
   ${p =>
     p.show &&
     `
-  border-color: #6166dc;
+    border-color: #6166dc;
 
-  &::after {
-    content: '';
-    position: absolute;
-    left: -5px;
-    top: -5px;
-    border: 4px solid transparent;
-    width: calc(100% + 10px);
-    height: calc(100% + 10px);
-  }
+    &::after {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: -5px;
+      border: 4px solid transparent;
+      width: calc(100% + 10px);
+      height: calc(100% + 10px);
+      z-index: 10;
+    }
   `}
 `
 
@@ -362,7 +451,7 @@ const InnerMask = styled.div`
   width: 100%;
   top: 0;
   left: 0;
-  overflow: hidden;
+  pointer-events: none;
 `
 
 const InnerOutline = styled.div`
@@ -371,7 +460,37 @@ const InnerOutline = styled.div`
   width: 100%;
   top: 0;
   left: 0;
-  overflow: hidden;
+`
+
+const CornerControls = styled.div``
+
+const CornerControl = styled.div`
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 0;
+`
+
+const TRightControl = styled(CornerControl)`
+  right: -20px;
+  top: -20px;
+  cursor: url(${cursorTopRightImage}), auto;
+`
+const TLeftControl = styled(CornerControl)`
+  left: -20px;
+  top: -20px;
+  cursor: url(${cursorTopLeftImage}), auto;
+`
+const BLeftControl = styled(CornerControl)`
+  left: -20px;
+  bottom: -20px;
+  cursor: url(${cursorBottomLeftImage}), auto;
+`
+const BRightControl = styled(CornerControl)`
+  right: -20px;
+  bottom: -20px;
+  cursor: url(${cursorBottomRightImage}), auto;
 `
 
 const Corners = styled.div`
@@ -415,6 +534,7 @@ const SlashContainer = styled.div`
   left: -17px;
   top: 105%;
   position: absolute;
+  pointer-events: none;
 `
 
 const Slash = () => (
@@ -433,6 +553,77 @@ const Slash = () => (
       vectorEffect="non-scaling-stroke"
       strokeLinejoin="miter"
     />
+  </svg>
+)
+
+const SlashWithGlow = () => (
+  <svg
+    width="100%"
+    height="100%"
+    viewBox="0 0 437 461"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="none"
+    style={{ transform: 'scale(1.47, 1.44)' }}
+  >
+    <g filter="url(#filter0_dd)">
+      <path
+        d="M360.998 379.319L76 178.816V81.528L360.984 281.14L360.998 379.319Z"
+        stroke="white"
+        stroke-width="12"
+      />
+    </g>
+    <defs>
+      <filter
+        id="filter0_dd"
+        x="0"
+        y="0"
+        width="437"
+        height="460.877"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset />
+        <feGaussianBlur stdDeviation="35" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0.399641 0 0 0 0 0.453299 0 0 0 0 0.554653 0 0 0 0.6 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset />
+        <feGaussianBlur stdDeviation="5" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.2 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="effect1_dropShadow"
+          result="effect2_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect2_dropShadow"
+          result="shape"
+        />
+      </filter>
+    </defs>
   </svg>
 )
 
