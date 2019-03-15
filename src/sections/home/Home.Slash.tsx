@@ -409,7 +409,7 @@ const Relative = styled.div`
 
 const Mirror = styled(Relative)`
   position: absolute;
-  top: 90%;
+  bottom: -250px;
   filter: blur(6px);
 
   &::after {
