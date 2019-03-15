@@ -9,6 +9,7 @@ import cursorBottomRightImage from '../../assets/cursors/rotate-bottom-right.svg
 function HomeSlash() {
   const [show, setShow] = useState(true)
   const pane = useRef()
+  const mirrorPane = useRef()
   const relativePane = useRef()
   const innerPane = useRef()
   const numbers = useRef()
@@ -115,6 +116,7 @@ function HomeSlash() {
 
   function onDown(event, src) {
     pane.current.style.transition = ''
+    mirrorPane.current.style.transition = ''
     calc(event)
 
     let isResizing = onRightEdge || onBottomEdge || onTopEdge || onLeftEdge
@@ -186,19 +188,26 @@ function HomeSlash() {
       if (clicked.onRightEdge) {
         let currentWidth = Math.max(x, minWidth)
         pane.current.style.width = Math.max(x, minWidth) + 'px'
+        mirrorPane.current.style.width = Math.max(x, minWidth) + 'px'
         handleShift(currentWidth)
 
         pane.current.style.left = 0
         pane.current.style.right = ''
+        mirrorPane.current.style.left = 0
+        mirrorPane.current.style.right = ''
       }
 
       if (clicked.onBottomEdge) {
         let currentHeight = Math.max(y, minHeight)
         pane.current.style.height = currentHeight + 'px'
+        mirrorPane.current.style.height = currentHeight + 'px'
         handleShift(currentHeight)
 
         pane.current.style.top = 0
         pane.current.style.bottom = ''
+
+        mirrorPane.current.style.bottom = 0
+        mirrorPane.current.style.top = ''
       }
 
       if (clicked.onLeftEdge) {
@@ -211,10 +220,13 @@ function HomeSlash() {
 
         if (currentWidth > minWidth) {
           pane.current.style.width = w + 'px'
+          mirrorPane.current.style.width = w + 'px'
           handleShift(w)
         }
         pane.current.style.right = 0
         pane.current.style.left = ''
+        mirrorPane.current.style.right = 0
+        mirrorPane.current.style.left = ''
       }
 
       if (clicked.onTopEdge) {
@@ -225,10 +237,13 @@ function HomeSlash() {
 
         if (currentHeight > minHeight) {
           pane.current.style.height = currentHeight + 'px'
+          mirrorPane.current.style.height = currentHeight + 'px'
           handleShift(currentHeight)
         }
         pane.current.style.bottom = 0
         pane.current.style.top = ''
+        mirrorPane.current.style.top = 0
+        mirrorPane.current.style.bottom = ''
       }
 
       function handleShift(len) {
@@ -292,8 +307,8 @@ function HomeSlash() {
     let rotation = degree - clicked.startAngle
     let normalize = rotation >= 360 ? rotation - 360 : rotation
 
-    console.log(normalize)
     pane.current.style.transform = `rotate(${normalize - 10}deg)`
+    mirrorPane.current.style.transform = `rotate(${(normalize - 10) * -1}deg)`
   }
 
   function resetStyles() {
@@ -301,8 +316,10 @@ function HomeSlash() {
       const deg = Number(pane.current.style.transform.replace(/[^0-9\.]+/g, ''))
       const result = Math.abs(deg - 360) > Math.abs(0 - deg) ? 0 : 360
       pane.current.style.transform = `rotate(${result}deg)`
+      mirrorPane.current.style.transform = `rotate(${result}deg)`
     } else {
       pane.current.style.transform = ''
+      mirrorPane.current.style.transform = ''
     }
 
     pane.current.style.transition = `width 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
@@ -310,6 +327,11 @@ function HomeSlash() {
     pane.current.style.width = '299px'
     pane.current.style.height = '324px'
     numbers.current.style.opacity = 0
+
+    mirrorPane.current.style.transition = `width 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
+      height 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), transform 0.3s ease`
+    mirrorPane.current.style.width = '299px'
+    mirrorPane.current.style.height = '324px'
   }
 
   function onUp(event) {
@@ -344,9 +366,6 @@ function HomeSlash() {
             <BLeft />
             <BRight />
           </Corners>
-          <SlashContainer show={false}>
-            <SlashReflection />
-          </SlashContainer>
         </Outline>
         <CornerControls ref={cornerRotation}>
           <TLeftControl />
@@ -355,6 +374,15 @@ function HomeSlash() {
           <BRightControl />
         </CornerControls>
       </Relative>
+      <Mirror>
+        <Outline ref={mirrorPane}>
+          <InnerMask>
+            <InnerOutline ref={innerPane}>
+              <MirrorSlashWithGlow />
+            </InnerOutline>
+          </InnerMask>
+        </Outline>
+      </Mirror>
     </Frame>
   )
 }
@@ -377,6 +405,21 @@ const Relative = styled.div`
   height: 324px;
   width: 299px;
   border: 1px solid transparent;
+`
+
+const Mirror = styled(Relative)`
+  position: absolute;
+  top: 90%;
+  filter: blur(6px);
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: -100vw;
+    width: 300vw;
+    height: 110%;
+    background: linear-gradient(rgba(16, 18, 22, 0.8), #101216 33%);
+  }
 `
 
 const Numbers = styled.div`
@@ -577,6 +620,77 @@ const SlashWithGlow = () => (
       <filter
         id="filter0_dd"
         x="0"
+        y="0"
+        width="437"
+        height="460.877"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset />
+        <feGaussianBlur stdDeviation="35" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0.399641 0 0 0 0 0.453299 0 0 0 0 0.554653 0 0 0 0.6 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset />
+        <feGaussianBlur stdDeviation="5" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.2 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="effect1_dropShadow"
+          result="effect2_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect2_dropShadow"
+          result="shape"
+        />
+      </filter>
+    </defs>
+  </svg>
+)
+
+const MirrorSlashWithGlow = () => (
+  <svg
+    width="100%"
+    height="100%"
+    viewBox="0 0 437 461"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="none"
+    style={{ transform: 'scale(1.47, 1.44)' }}
+  >
+    <g filter="url(#filter0_dd)">
+      <path
+        d="M76.002 379.319L361 178.816V81.528L76.0164 281.14L76.002 379.319Z"
+        stroke="white"
+        stroke-width="12"
+      />
+    </g>
+    <defs>
+      <filter
+        id="filter0_dd"
+        x="0.000244141"
         y="0"
         width="437"
         height="460.877"
