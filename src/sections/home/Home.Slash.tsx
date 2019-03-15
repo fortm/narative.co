@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 
 import cursorTopLeftImage from '../../assets/cursors/rotate-top-left.svg'
@@ -7,7 +7,6 @@ import cursorBottomLeftImage from '../../assets/cursors/rotate-bottom-left.svg'
 import cursorBottomRightImage from '../../assets/cursors/rotate-bottom-right.svg'
 
 function HomeSlash() {
-  const [show, setShow] = useState(true)
   const pane = useRef()
   const mirrorPane = useRef()
   const relativePane = useRef()
@@ -48,19 +47,17 @@ function HomeSlash() {
 
   // Mouse events
   useEffect(() => {
-    if (show) {
-      pane.current.addEventListener('mousedown', onMouseDown)
-      cornerRotation.current.addEventListener('mousedown', onMouseDownRotation)
-      document.addEventListener('mousemove', onMove)
-      document.addEventListener('mouseup', onUp)
-      document.addEventListener('keydown', onKeydown)
-      document.addEventListener('keyup', onKeyup)
+    pane.current.addEventListener('mousedown', onMouseDown)
+    cornerRotation.current.addEventListener('mousedown', onMouseDownRotation)
+    document.addEventListener('mousemove', onMove)
+    document.addEventListener('mouseup', onUp)
+    document.addEventListener('keydown', onKeydown)
+    document.addEventListener('keyup', onKeyup)
 
-      // Touch events
-      pane.current.addEventListener('touchstart', onTouchDown)
-      document.addEventListener('touchmove', onTouchMove)
-      document.addEventListener('touchend', onTouchEnd)
-    }
+    // Touch events
+    pane.current.addEventListener('touchstart', onTouchDown)
+    document.addEventListener('touchmove', onTouchMove)
+    document.addEventListener('touchend', onTouchEnd)
 
     // Remove all the events when unselected
     return () => {
@@ -76,7 +73,7 @@ function HomeSlash() {
       document.removeEventListener('touchmove', onTouchMove)
       document.removeEventListener('touchend', onTouchEnd)
     }
-  }, [show])
+  }, [])
 
   function onTouchDown(event) {
     onDown(event.touches[0])
@@ -198,7 +195,9 @@ function HomeSlash() {
       }
 
       if (clicked.onBottomEdge) {
-        let currentHeight = Math.max(y, minHeight)
+        let currentHeight =
+          Math.max(y, minHeight) > 350 ? 350 : Math.max(y, minHeight)
+
         pane.current.style.height = currentHeight + 'px'
         mirrorPane.current.style.height = currentHeight + 'px'
         handleShift(currentHeight)
@@ -343,24 +342,18 @@ function HomeSlash() {
 
   animate()
 
-  function handleToggle() {
-    if (!clicked) {
-      // setShow(!show)
-    }
-  }
-
   return (
     <Frame>
       <Relative ref={relativePane}>
-        <Outline ref={pane} show={true} onClick={handleToggle}>
-          <OutlineGlow show={true} />
+        <Outline ref={pane}>
+          <OutlineGlow />
           <InnerMask>
             <InnerOutline ref={innerPane}>
               <SlashWithGlow />
             </InnerOutline>
           </InnerMask>
           <Numbers ref={numbers} />
-          <Corners show={show}>
+          <Corners>
             <TLeft />
             <TRight />
             <BLeft />
@@ -375,7 +368,7 @@ function HomeSlash() {
         </CornerControls>
       </Relative>
       <Mirror>
-        <Outline ref={mirrorPane}>
+        <Outline ref={mirrorPane} hideControls>
           <InnerMask>
             <InnerOutline ref={innerPane}>
               <MirrorSlashWithGlow />
@@ -405,19 +398,22 @@ const Relative = styled.div`
   height: 324px;
   width: 299px;
   border: 1px solid transparent;
+  z-index: 1;
 `
 
 const Mirror = styled(Relative)`
   position: absolute;
   bottom: -250px;
   filter: blur(6px);
+  z-index: 0;
 
   &::after {
     content: '';
     position: absolute;
     left: -100vw;
+    top: -10%;
     width: 300vw;
-    height: 110%;
+    height: 120%;
     background: linear-gradient(rgba(16, 18, 22, 0.8), #101216 33%);
   }
 `
@@ -436,7 +432,6 @@ const Numbers = styled.div`
 `
 
 const OutlineGlow = styled.div`
-  opacity: ${p => (p.show ? 0 : 1)};
   transition: opacity 0.3s ease;
   pointer-events: none;
 
@@ -456,7 +451,11 @@ const Outline = styled.div`
   position: absolute;
   height: 324px;
   width: 299px;
-  border: 1px solid transparent;
+
+  ${p =>
+    !p.hideControls &&
+    `
+  border: 1px solid #6166dc;
   cursor: pointer;
 
   &::before {
@@ -470,21 +469,16 @@ const Outline = styled.div`
     height: calc(100% - 8px);
   }
 
-  ${p =>
-    p.show &&
-    `
-    border-color: #6166dc;
-
-    &::after {
-      content: '';
-      position: absolute;
-      left: -5px;
-      top: -5px;
-      border: 4px solid transparent;
-      width: calc(100% + 10px);
-      height: calc(100% + 10px);
-      z-index: 10;
-    }
+  &::after {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: -5px;
+    border: 4px solid transparent;
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    z-index: 10;
+  }
   `}
 `
 
@@ -536,9 +530,7 @@ const BRightControl = styled(CornerControl)`
   cursor: url(${cursorBottomRightImage}), auto;
 `
 
-const Corners = styled.div`
-  opacity: ${p => (p.show ? 1 : 0)};
-`
+const Corners = styled.div``
 
 const Corner = styled.div`
   height: 7px;
@@ -568,36 +560,6 @@ const BRight = styled(Corner)`
   bottom: -3px;
   right: -3px;
 `
-
-const SlashContainer = styled.div`
-  opacity: ${p => (p.show ? 0 : 1)};
-  transition: opacity 0.3s ease;
-  width: 100%;
-  height: 100%;
-  left: -17px;
-  top: 105%;
-  position: absolute;
-  pointer-events: none;
-`
-
-const Slash = () => (
-  <svg
-    width="100%"
-    height="100%"
-    viewBox="0 0 297 321"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    preserveAspectRatio="none"
-  >
-    <path
-      d="M290.998 309.319L6 108.816V11.528L290.984 211.14L290.998 309.319Z"
-      stroke="white"
-      strokeWidth="12"
-      vectorEffect="non-scaling-stroke"
-      strokeLinejoin="miter"
-    />
-  </svg>
-)
 
 const SlashWithGlow = () => (
   <svg
@@ -737,55 +699,6 @@ const MirrorSlashWithGlow = () => (
           result="shape"
         />
       </filter>
-    </defs>
-  </svg>
-)
-
-const SlashReflection = () => (
-  <svg
-    width="327"
-    height="351"
-    viewBox="0 0 327 351"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <g filter="url(#filter0_f)">
-      <path
-        d="M305.998 26.5609L21 227.141V324.469L305.984 124.782L305.998 26.5609Z"
-        stroke="url(#paint0_linear)"
-        stroke-width="12"
-      />
-    </g>
-    <defs>
-      <filter
-        id="filter0_f"
-        x="0"
-        y="0"
-        width="327"
-        height="351"
-        filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
-      >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-        <feBlend
-          mode="normal"
-          in="SourceGraphic"
-          in2="BackgroundImageFix"
-          result="shape"
-        />
-        <feGaussianBlur stdDeviation="7.5" result="effect1_foregroundBlur" />
-      </filter>
-      <linearGradient
-        id="paint0_linear"
-        x1="163.5"
-        y1="142"
-        x2="163.5"
-        y2="15"
-        gradientUnits="userSpaceOnUse"
-      >
-        <stop stop-color="white" stop-opacity="0" />
-        <stop offset="1" stop-color="white" stop-opacity="0.2" />
-      </linearGradient>
     </defs>
   </svg>
 )
