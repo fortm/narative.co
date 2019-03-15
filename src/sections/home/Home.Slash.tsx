@@ -456,7 +456,7 @@ const Numbers = styled.div`
 `
 
 const OutlineGlow = styled.div`
-  transition: opacity 0.3s ease;
+  transition: opacity 0.1s linear;
   pointer-events: none;
 
   &::after {
