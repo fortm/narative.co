@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 
 import cursorTopLeftImage from '../../assets/cursors/rotate-top-left.svg'
@@ -9,9 +9,11 @@ import cursorBottomRightImage from '../../assets/cursors/rotate-bottom-right.svg
 function HomeSlash() {
   const pane = useRef()
   const mirrorPane = useRef()
+  const relativeMirrorPane = useRef()
   const relativePane = useRef()
   const innerPane = useRef()
   const numbers = useRef()
+  const glow = useRef()
 
   const cornerRotation = useRef()
 
@@ -177,6 +179,10 @@ function HomeSlash() {
 
     redraw = false
 
+    if (clicked) {
+      glow.current.style.opacity = 0
+    }
+
     if (clicked && clicked.rotate) {
       return rotate()
     }
@@ -196,7 +202,7 @@ function HomeSlash() {
 
       if (clicked.onBottomEdge) {
         let currentHeight =
-          Math.max(y, minHeight) > 350 ? 350 : Math.max(y, minHeight)
+          Math.max(y, minHeight) > 345 ? 345 : Math.max(y, minHeight)
 
         pane.current.style.height = currentHeight + 'px'
         mirrorPane.current.style.height = currentHeight + 'px'
@@ -234,6 +240,8 @@ function HomeSlash() {
           minHeight
         )
 
+        currentHeight = alt && currentHeight > 345 ? 345 : currentHeight
+
         if (currentHeight > minHeight) {
           pane.current.style.height = currentHeight + 'px'
           mirrorPane.current.style.height = currentHeight + 'px'
@@ -249,6 +257,8 @@ function HomeSlash() {
         if (shift) {
           pane.current.style.width = len + 'px'
           pane.current.style.height = len + 'px'
+          mirrorPane.current.style.width = len + 'px'
+          mirrorPane.current.style.height = len + 'px'
         }
       }
 
@@ -263,10 +273,20 @@ function HomeSlash() {
       relativePane.current.style.display = 'flex'
       relativePane.current.style.alignItems = 'center'
       relativePane.current.style.justifyContent = 'center'
+      mirrorPane.current.style.top = ''
+      mirrorPane.current.style.right = ''
+      mirrorPane.current.style.bottom = ''
+      mirrorPane.current.style.left = ''
+      relativeMirrorPane.current.style.display = 'flex'
+      relativeMirrorPane.current.style.alignItems = 'center'
+      relativeMirrorPane.current.style.justifyContent = 'center'
     } else {
       relativePane.current.style.display = ''
       relativePane.current.style.alignItems = ''
       relativePane.current.style.justifyContent = ''
+      relativeMirrorPane.current.style.display = ''
+      relativeMirrorPane.current.style.alignItems = ''
+      relativeMirrorPane.current.style.justifyContent = ''
     }
 
     // This code executes when mouse moves without clicking
@@ -306,6 +326,8 @@ function HomeSlash() {
     let rotation = degree - clicked.startAngle
     let normalize = rotation >= 360 ? rotation - 360 : rotation
 
+    normalize = normalize > 18 ? 18 : normalize
+
     pane.current.style.transform = `rotate(${normalize - 10}deg)`
     mirrorPane.current.style.transform = `rotate(${(normalize - 10) * -1}deg)`
   }
@@ -331,6 +353,8 @@ function HomeSlash() {
       height 0.3s cubic-bezier(0.215, 0.61, 0.355, 1), transform 0.3s ease`
     mirrorPane.current.style.width = '299px'
     mirrorPane.current.style.height = '324px'
+
+    glow.current.style.opacity = 1
   }
 
   function onUp(event) {
@@ -346,7 +370,7 @@ function HomeSlash() {
     <Frame>
       <Relative ref={relativePane}>
         <Outline ref={pane}>
-          <OutlineGlow />
+          <OutlineGlow ref={glow} />
           <InnerMask>
             <InnerOutline ref={innerPane}>
               <SlashWithGlow />
@@ -367,7 +391,7 @@ function HomeSlash() {
           <BRightControl />
         </CornerControls>
       </Relative>
-      <Mirror>
+      <Mirror ref={relativeMirrorPane}>
         <Outline ref={mirrorPane} hideControls>
           <InnerMask>
             <InnerOutline ref={innerPane}>
@@ -398,12 +422,12 @@ const Relative = styled.div`
   height: 324px;
   width: 299px;
   border: 1px solid transparent;
-  z-index: 1;
+  z-index: 0;
 `
 
 const Mirror = styled(Relative)`
   position: absolute;
-  bottom: -250px;
+  top: 90%;
   filter: blur(6px);
   z-index: 0;
 
@@ -642,63 +666,10 @@ const MirrorSlashWithGlow = () => (
     preserveAspectRatio="none"
     style={{ transform: 'scale(1.47, 1.44)' }}
   >
-    <g filter="url(#filter0_dd)">
-      <path
-        d="M76.002 379.319L361 178.816V81.528L76.0164 281.14L76.002 379.319Z"
-        stroke="white"
-        stroke-width="12"
-      />
-    </g>
-    <defs>
-      <filter
-        id="filter0_dd"
-        x="0.000244141"
-        y="0"
-        width="437"
-        height="460.877"
-        filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
-      >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-        <feColorMatrix
-          in="SourceAlpha"
-          type="matrix"
-          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-        />
-        <feOffset />
-        <feGaussianBlur stdDeviation="35" />
-        <feColorMatrix
-          type="matrix"
-          values="0 0 0 0 0.399641 0 0 0 0 0.453299 0 0 0 0 0.554653 0 0 0 0.6 0"
-        />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
-        <feColorMatrix
-          in="SourceAlpha"
-          type="matrix"
-          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-        />
-        <feOffset />
-        <feGaussianBlur stdDeviation="5" />
-        <feColorMatrix
-          type="matrix"
-          values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.2 0"
-        />
-        <feBlend
-          mode="normal"
-          in2="effect1_dropShadow"
-          result="effect2_dropShadow"
-        />
-        <feBlend
-          mode="normal"
-          in="SourceGraphic"
-          in2="effect2_dropShadow"
-          result="shape"
-        />
-      </filter>
-    </defs>
+    <path
+      d="M76.002 379.319L361 178.816V81.528L76.0164 281.14L76.002 379.319Z"
+      stroke="white"
+      stroke-width="12"
+    />
   </svg>
 )
