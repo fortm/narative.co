@@ -1,5 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useLayoutEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
+
+import ShapeShifter from '@components/ShapeShifter'
 
 import cursorTopLeftImage from '../../assets/cursors/rotate-top-left.svg'
 import cursorTopRightImage from '../../assets/cursors/rotate-top-right.svg'
@@ -48,7 +50,7 @@ function HomeSlash() {
   let event
 
   // Mouse events
-  useEffect(() => {
+  useLayoutEffect(() => {
     pane.current.addEventListener('mousedown', onMouseDown)
     cornerRotation.current.addEventListener('mousedown', onMouseDownRotation)
     document.addEventListener('mousemove', onMove)
@@ -326,7 +328,7 @@ function HomeSlash() {
     let rotation = degree - clicked.startAngle
     let normalize = rotation >= 360 ? rotation - 360 : rotation
 
-    normalize = normalize > 18 ? 18 : normalize
+    // normalize = normalize > 18 ? 18 : normalize
 
     pane.current.style.transform = `rotate(${normalize - 10}deg)`
     mirrorPane.current.style.transform = `rotate(${(normalize - 10) * -1}deg)`
@@ -368,13 +370,12 @@ function HomeSlash() {
 
   return (
     <Frame>
-      <Relative ref={relativePane}>
+      <ShapeShifter />
+      {/* <Relative ref={relativePane}>
         <Outline ref={pane}>
           <OutlineGlow ref={glow} />
           <InnerMask>
-            <InnerOutline ref={innerPane}>
-              <SlashWithGlow />
-            </InnerOutline>
+            <SlashWithGlow />
           </InnerMask>
           <Numbers ref={numbers} />
           <Corners>
@@ -394,12 +395,10 @@ function HomeSlash() {
       <Mirror ref={relativeMirrorPane}>
         <Outline ref={mirrorPane} hideControls>
           <InnerMask>
-            <InnerOutline ref={innerPane}>
-              <MirrorSlashWithGlow />
-            </InnerOutline>
+            <MirrorSlashWithGlow />
           </InnerMask>
         </Outline>
-      </Mirror>
+      </Mirror> */}
     </Frame>
   )
 }
@@ -423,6 +422,7 @@ const Relative = styled.div`
   width: 299px;
   border: 1px solid transparent;
   z-index: 0;
+  will-change: width, height;
 `
 
 const Mirror = styled(Relative)`
@@ -456,7 +456,7 @@ const Numbers = styled.div`
 `
 
 const OutlineGlow = styled.div`
-  transition: opacity 0.2s ease-out;
+  transition: opacity 0.3s ease;
   pointer-events: none;
 
   &::after {
@@ -471,6 +471,7 @@ const OutlineGlow = styled.div`
     filter: blur(200px);
   }
 `
+
 const Outline = styled.div`
   position: absolute;
   height: 324px;
@@ -671,5 +672,225 @@ const MirrorSlashWithGlow = () => (
       stroke="white"
       stroke-width="12"
     />
+  </svg>
+)
+
+const SquareWithGlow = () => (
+  <svg
+    width="100%"
+    height="100%"
+    viewBox="0 0 437 437"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="none"
+    style={{ transform: 'scale(1.47)' }}
+  >
+    <g filter="url(#filter0_dd)">
+      <rect
+        x="76"
+        y="76"
+        width="285"
+        height="285"
+        stroke="white"
+        stroke-width="12"
+      />
+    </g>
+    <defs>
+      <filter
+        id="filter0_dd"
+        x="0"
+        y="0"
+        width="437"
+        height="437"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset />
+        <feGaussianBlur stdDeviation="35" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0.399641 0 0 0 0 0.453299 0 0 0 0 0.554653 0 0 0 0.6 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset />
+        <feGaussianBlur stdDeviation="5" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.2 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="effect1_dropShadow"
+          result="effect2_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect2_dropShadow"
+          result="shape"
+        />
+      </filter>
+    </defs>
+  </svg>
+)
+
+const CircleWithGlow = () => (
+  <svg
+    width="100%"
+    height="100%"
+    viewBox="0 0 437 437"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="none"
+    style={{ transform: 'scale(1.47)' }}
+  >
+    <g filter="url(#filter0_dd)">
+      <circle
+        cx="218.5"
+        cy="218.5"
+        r="142.5"
+        stroke="white"
+        stroke-width="12"
+      />
+    </g>
+    <defs>
+      <filter
+        id="filter0_dd"
+        x="0"
+        y="0"
+        width="437"
+        height="437"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset />
+        <feGaussianBlur stdDeviation="35" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0.399641 0 0 0 0 0.453299 0 0 0 0 0.554653 0 0 0 0.6 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset />
+        <feGaussianBlur stdDeviation="5" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.2 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="effect1_dropShadow"
+          result="effect2_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect2_dropShadow"
+          result="shape"
+        />
+      </filter>
+    </defs>
+  </svg>
+)
+
+const TriangleWithGlow = () => (
+  <svg
+    width="100%"
+    height="100%"
+    viewBox="0 0 436 395"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{ transform: 'scale(1.47)' }}
+  >
+    <g filter="url(#filter0_dd)">
+      <mask id="path-1-inside-1" fill="white">
+        <path d="M218 70L365.224 325H70.7758L218 70Z" />
+      </mask>
+      <path
+        d="M218 70L228.392 64L218 46L207.608 64L218 70ZM365.224 325V337H386.009L375.617 319L365.224 325ZM70.7758 325L60.3835 319L49.9911 337H70.7758V325ZM207.608 76L354.832 331L375.617 319L228.392 64L207.608 76ZM365.224 313H70.7758V337H365.224V313ZM81.1681 331L228.392 76L207.608 64L60.3835 319L81.1681 331Z"
+        fill="white"
+        mask="url(#path-1-inside-1)"
+      />
+    </g>
+    <defs>
+      <filter
+        id="filter0_dd"
+        x="0.775757"
+        y="0"
+        width="434.449"
+        height="395"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset />
+        <feGaussianBlur stdDeviation="35" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0.399641 0 0 0 0 0.453299 0 0 0 0 0.554653 0 0 0 0.6 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset />
+        <feGaussianBlur stdDeviation="5" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.2 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="effect1_dropShadow"
+          result="effect2_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect2_dropShadow"
+          result="shape"
+        />
+      </filter>
+    </defs>
   </svg>
 )

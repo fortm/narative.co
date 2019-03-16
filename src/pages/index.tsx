@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import { ButtonArrow, Section, Heading, SEO, Layout } from '@components'
 import ScrollIndicator from '@components/ScrollIndicator'
+import ShapeShifter from '@components/ShapeShifter'
 
 import HomeAbout from '../sections/home/Home.About'
 import HomeSlash from '../sections/home/Home.Slash'
@@ -73,7 +74,7 @@ class IndexPage extends Component<{}, { animation: string }> {
                   <ButtonArrow text="Get in touch" />
                 </ContactText>
               </TextContainer>
-              <HomeSlash />
+              <ShapeShifter />
             </ContentContainer>
             <ScrollIndicator />
           </Section>
