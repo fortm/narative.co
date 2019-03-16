@@ -121,6 +121,8 @@ export const pageQuery = graphql`
 `
 
 const TextContainer = styled.div`
+  position: relative;
+  z-index: 1;
   max-width: 570px;
   ${transitions.fadeUp};
 

@@ -8,7 +8,7 @@ export const Slash = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     preserveAspectRatio="none"
-    style={{ transform: 'scale(1.47, 1.44)' }}
+    style={{ transform: 'scale(1.47, 1.44)', pointerEvents: 'none' }}
   >
     <g filter="url(#filter0_dd)">
       <path
@@ -79,7 +79,7 @@ export const SlashMirror = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     preserveAspectRatio="none"
-    style={{ transform: 'scale(1.47, 1.44)' }}
+    style={{ transform: 'scale(1.47, 1.44)', pointerEvents: 'none' }}
   >
     <path
       d="M76.002 379.319L361 178.816V81.528L76.0164 281.14L76.002 379.319Z"
@@ -97,7 +97,7 @@ export const Square = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     preserveAspectRatio="none"
-    style={{ transform: 'scale(1.47)' }}
+    style={{ transform: 'scale(1.47)', pointerEvents: 'none' }}
   >
     <g filter="url(#filter0_dd)">
       <rect
@@ -171,7 +171,7 @@ export const SquareMirror = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     preserveAspectRatio="none"
-    style={{ transform: 'scale(1.47)' }}
+    style={{ transform: 'scale(1.47)', pointerEvents: 'none' }}
   >
     <rect
       x="76"
@@ -192,7 +192,7 @@ export const Circle = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     preserveAspectRatio="none"
-    style={{ transform: 'scale(1.465)' }}
+    style={{ transform: 'scale(1.465)', pointerEvents: 'none' }}
   >
     <g filter="url(#filter0_dd)">
       <circle
@@ -265,7 +265,7 @@ export const CircleMirror = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     preserveAspectRatio="none"
-    style={{ transform: 'scale(1.465)' }}
+    style={{ transform: 'scale(1.465)', pointerEvents: 'none' }}
   >
     <circle cx="218.5" cy="218.5" r="142.5" stroke="white" stroke-width="12" />
   </svg>
@@ -279,7 +279,7 @@ export const Triangle = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     preserveAspectRatio="none"
-    style={{ transform: 'scale(1.48, 1.55)' }}
+    style={{ transform: 'scale(1.48, 1.55)', pointerEvents: 'none' }}
   >
     <g filter="url(#filter0_dd)">
       <mask id="path-1-inside-1" fill="white">
@@ -353,9 +353,12 @@ export const TriangleMirror = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     preserveAspectRatio="none"
-    style={{ transform: 'scale(1.48, 1.55) rotate(180deg)' }}
+    style={{
+      transform: 'scale(1.48, 1.55) rotate(180deg)',
+      pointerEvents: 'none',
+    }}
   >
-    <g filter="url(#filter0_dd)">
+    <g>
       <mask id="path-1-inside-1" fill="white">
         <path d="M218 70L365.224 325H70.7758L218 70Z" />
       </mask>
