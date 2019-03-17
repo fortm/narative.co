@@ -170,6 +170,10 @@ function ShapeShifter() {
     `
     $el.style.width = `${reset.width}px`
     $el.style.height = `${reset.height}px`
+    $el.style.top = `unset`
+    $el.style.right = `unset`
+    $el.style.bottom = `unset`
+    $el.style.left = `unset`
 
     if (!mirror) {
       $el.style.borderColor = '#6166dc'
