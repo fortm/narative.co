@@ -63,6 +63,8 @@ let pressedKeys: {} = {}
 
 function ShapeShifter() {
   const [activeShape, setActiveShape] = useState(0)
+  const [animate, setAnimate] = useState(false)
+
   const Active = shapes[activeShape]
   const activeStyles = {
     width: Active.width,
@@ -84,6 +86,7 @@ function ShapeShifter() {
   const glow = useRef()
 
   useLayoutEffect(() => {
+    setAnimate(true)
     const $shape = shape.current
     const $rotationControls = rotationControls.current
 
@@ -187,8 +190,8 @@ function ShapeShifter() {
 
   function onDown(event) {
     updateGlobalSettings(event)
-    shape.current.style.transition = ''
-    shapeMirror.current.style.transition = ''
+    shape.current.style.transition = 'unset'
+    shapeMirror.current.style.transition = 'unset'
     glow.current.style.opacity = 0
 
     let isResizing = onRightEdge || onBottomEdge || onTopEdge || onLeftEdge
@@ -487,15 +490,18 @@ function ShapeShifter() {
             style={activeStyles}
             ref={shape}
             data-reset={resetActiveStyles}
+            animate={animate}
           >
             <Active.Shape />
             <ShapeGlow ref={glow} />
             <Numbers ref={numbers} />
             <HandleShapeShift onClick={handleActiveShapeClick} />
-            <TopLeftCorner data-corner="top-left" />
-            <TopRightCorner data-corner="top-right" />
-            <BottomLeftCorner data-corner="bottom-left" />
-            <BottomRightCorner data-corner="bottom-right" />
+            <Corners animate={animate}>
+              <TopLeftCorner data-corner="top-left" />
+              <TopRightCorner data-corner="top-right" />
+              <BottomLeftCorner data-corner="bottom-left" />
+              <BottomRightCorner data-corner="bottom-right" />
+            </Corners>
           </ShapeContainer>
           <RotationControls ref={rotationControls}>
             <TopLeftRotate />
@@ -510,6 +516,7 @@ function ShapeShifter() {
               style={activeStyles}
               data-reset={resetActiveStyles}
               ref={shapeMirror}
+              animate={animate}
               mirror
             >
               <Blur>
@@ -594,10 +601,13 @@ const Relative = styled.div`
 
 const ShapeContainer = styled.div`
   position: absolute;
-  border: 1px solid #6166dc;
   cursor: pointer;
   will-change: width, height, transform;
+  border: 1px solid transparent;
+  border-color: ${p => (p.animate ? '#6166dc' : 'transparent')};
+  opacity: ${p => (p.animate ? 1 : 0)};
   z-index: 1;
+  transition: opacity 1.4s ease 0.3s, border-color 3s 1.3s linear;
 
   &::after {
     content: '';
@@ -645,6 +655,11 @@ const ShapeGlow = styled.div`
   }
 `
 
+const Corners = styled.div`
+  opacity: ${p => (p.animate ? 1 : 0)};
+  transition: opacity 3s 1.3s;
+`
+
 const Corner = styled.div`
   height: 7px;
   width: 7px;
@@ -676,6 +691,7 @@ const BottomRightCorner = styled(Corner)`
 const Numbers = styled.div`
   position: absolute;
   bottom: -24px;
+  min-width: 50px;
   left: 0;
   right: 0;
   margin: 0 auto;
