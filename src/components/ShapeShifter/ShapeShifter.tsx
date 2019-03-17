@@ -7,16 +7,6 @@ import cursorTopLeftImage from '../../assets/cursors/rotate-top-left.svg'
 import cursorTopRightImage from '../../assets/cursors/rotate-top-right.svg'
 import cursorBottomLeftImage from '../../assets/cursors/rotate-bottom-left.svg'
 import cursorBottomRightImage from '../../assets/cursors/rotate-bottom-right.svg'
-// ShapeShifter
-
-// Refs to the shapes
-// Array of shapes, reflections, dimensions, and refs
-
-// Some sort of state management for active shape
-// Some sort of event handling to add and remove events
-
-// Handle keydown, shortcuts
-//
 
 const minWidth: number = 0
 const minHeight: number = 0
@@ -40,10 +30,7 @@ let b: number
 let x: number
 let y: number
 
-let startAngle: number
-
 let redraw: boolean = false
-let rotate: boolean = false
 
 let pressedKeys: {} = {}
 
@@ -77,8 +64,14 @@ let pressedKeys: {} = {}
 function ShapeShifter() {
   const [activeShape, setActiveShape] = useState(0)
   const Active = shapes[activeShape]
-  const activeStyles = { width: Active.width, height: Active.height }
-  const resetActiveStyles = JSON.stringify(activeStyles)
+  const activeStyles = {
+    width: Active.width,
+    height: Active.height,
+  }
+  const resetActiveStyles = JSON.stringify({
+    ...activeStyles,
+    maxHeight: Active.maxHeight,
+  })
 
   const shape = useRef()
   const shapeMirror = useRef()
@@ -154,6 +147,8 @@ function ShapeShifter() {
 
   function resetStyles($el, mirror) {
     const reset = JSON.parse($el.getAttribute('data-reset'))
+    const corners = document.querySelectorAll('[data-corner]')
+    corners.forEach(corner => (corner.style.borderColor = '#6166dc'))
 
     if ($el.style.transform.includes('rotate')) {
       const deg = Number($el.style.transform.replace(/[^0-9\.]+/g, ''))
@@ -176,8 +171,14 @@ function ShapeShifter() {
     $el.style.width = `${reset.width}px`
     $el.style.height = `${reset.height}px`
 
+    if (!mirror) {
+      $el.style.borderColor = '#6166dc'
+    }
+
     numbers.current.style.opacity = 0
+    numbers.current.style.color = '#6166dc'
     glow.current.style.opacity = 1
+    glow.current.style.transition = 'opacity 1.6s linear'
   }
 
   function onDown(event) {
@@ -194,7 +195,14 @@ function ShapeShifter() {
     }
     let x = event.clientX - center.x
     let y = event.clientY - center.y
-    startAngle = (180 / Math.PI) * Math.atan2(y, x)
+    let startAngle = (180 / Math.PI) * Math.atan2(x, y)
+    const startDegree = startAngle * -1 + 100
+
+    // const radians = Math.atan2(mouse_x - center.x, mouse_y - center.y)
+    // const degree = radians * (180 / Math.PI) * -1 + 100
+
+    let maxLeftAngle = 93
+    let maxRightAngle = 10
 
     clicked = {
       x,
@@ -209,6 +217,9 @@ function ShapeShifter() {
       onRightEdge,
       onBottomEdge,
       startAngle,
+      startDegree,
+      maxLeftAngle,
+      maxRightAngle,
     }
   }
 
@@ -253,7 +264,8 @@ function ShapeShifter() {
   }
 
   function handleShift($el, len) {
-    const limitedLength = pressedKeys.Alt && len > 345 ? 345 : len
+    const maxHeight = JSON.parse($el.getAttribute('data-reset')).maxHeight
+    const limitedLength = pressedKeys.Alt && len > maxHeight ? maxHeight : len
 
     if (pressedKeys.Shift) {
       $el.style.width = `${limitedLength}px`
@@ -268,38 +280,70 @@ function ShapeShifter() {
       y: top + shape.current.offsetHeight / 2,
     }
 
-    let mouse_x = event.pageX
-    let mouse_y = event.pageY
+    const mouse_x = event.pageX
+    const mouse_y = event.pageY
 
-    let radians = Math.atan2(mouse_x - center.x, mouse_y - center.y)
-    let degree = radians * (180 / Math.PI) * -1 + 100
+    const radians = Math.atan2(mouse_x - center.x, mouse_y - center.y)
+    const degree = radians * (180 / Math.PI) * -1 + 100
+
     let rotation = degree - clicked.startAngle
+
+    if (degree >= clicked.startDegree + clicked.maxRightAngle) {
+      console.log('fire max right')
+    }
+    if (degree < clicked.startDegree - clicked.maxLeftAngle) {
+      console.log('fire max left')
+    }
+
     let normalize = rotation >= 360 ? rotation - 360 : rotation
+
+    let x = event.clientX - center.x
+    let y = event.clientY - center.y
 
     shape.current.style.transform = `rotate(${normalize - 10}deg)`
     shapeMirror.current.style.transform = `rotate(${(normalize - 10) * -1}deg)`
   }
 
   function handleLeft($el, len) {
-    if (len > minWidth) {
+    if (len > minWidth && !pressedKeys.Shift) {
       $el.style.width = `${len}px`
+      $el.style.transform = `scaleX(1)`
+      numbers.current.style.transform = `scaleX(1)`
+      $el.style.right = 0
+      $el.style.left = ''
+    } else {
+      $el.style.width = `${Math.abs(len)}px`
+      $el.style.transform = `scaleX(-1)`
+      numbers.current.style.transform = `scaleX(-1)`
+      $el.style.left = '100%'
+      $el.style.right = ''
     }
-    $el.style.right = 0
-    $el.style.left = ''
   }
 
   function handleRight($el, len) {
-    $el.style.width = `${len}px`
-    $el.style.left = 0
-    $el.style.right = ''
+    if (len > minWidth && !pressedKeys.Shift) {
+      $el.style.width = `${len}px`
+      $el.style.transform = `scaleX(1)`
+      numbers.current.style.transform = `scaleX(1)`
+      $el.style.left = 0
+      $el.style.right = ''
+    } else {
+      $el.style.width = `${Math.abs(len)}px`
+      $el.style.transform = `scaleX(-1)`
+      numbers.current.style.transform = `scaleX(-1)`
+      $el.style.right = '100%'
+      $el.style.left = ''
+    }
   }
 
   function handleTop($el, len, mirror) {
-    const lengthLimited = pressedKeys.Alt && len > 345 ? 345 : len
+    const maxHeight = JSON.parse($el.getAttribute('data-reset')).maxHeight
+    const lengthLimited = pressedKeys.Alt && len > maxHeight ? maxHeight : len
 
     if (len > minHeight) {
       $el.style.height = `${lengthLimited}px`
     }
+
     if (mirror) {
       $el.style.top = 0
       $el.style.bottom = ''
@@ -310,13 +354,19 @@ function ShapeShifter() {
   }
 
   function handleBottom($el, len, mirror) {
-    $el.style.height = `${len}px`
-    if (mirror) {
-      $el.style.top = 'unset'
-      $el.style.bottom = 0
-    } else {
-      $el.style.bottom = ''
+    if (len > minHeight && !pressedKeys.Shift) {
+      $el.style.height = `${len}px`
+      $el.style.transform = `scaleY(1)`
+      numbers.current.style.transform = `scaleY(1)`
       $el.style.top = 0
+    } else {
+      if (!mirror) {
+        $el.style.height = `${Math.abs(len)}px`
+        $el.style.transform = `scaleY(-1)`
+        numbers.current.style.transform = `scaleY(-1)`
+        $el.style.bottom = '100%'
+        $el.style.top = 'unset'
+      }
     }
   }
 
@@ -332,6 +382,8 @@ function ShapeShifter() {
     const $shapeMirror = shapeMirror.current
     const $relMirror = relMirror.current
 
+    const corners = document.querySelectorAll('[data-corner]')
+
     redraw = false
 
     if (clicked && clicked.rotate) {
@@ -340,7 +392,8 @@ function ShapeShifter() {
 
     if (clicked && clicked.isResizing) {
       if (clicked.onRightEdge) {
-        let currentWidth = Math.max(x, minWidth)
+        let currentWidth = event.clientX - clicked.cx + clicked.w
+        console.log(currentWidth)
 
         handleRight($shape, currentWidth)
         handleRight($shapeMirror, currentWidth, 'mirror')
@@ -349,8 +402,21 @@ function ShapeShifter() {
       }
 
       if (clicked.onBottomEdge) {
-        const currentHeight =
-          Math.max(y, minHeight) > 345 ? 345 : Math.max(y, minHeight)
+        const maxHeight = JSON.parse($shape.getAttribute('data-reset'))
+          .maxHeight
+
+        let currentHeight = clicked.h + event.clientY - clicked.cy
+
+        if (Math.max(y, minHeight) > maxHeight) {
+          currentHeight = maxHeight
+          $shape.style.borderColor = '#FF5E5E'
+          corners.forEach(corner => (corner.style.borderColor = '#FF5E5E'))
+          numbers.current.style.color = '#FF5E5E'
+        } else {
+          $shape.style.borderColor = '#6166dc'
+          numbers.current.style.color = '#6166dc'
+          corners.forEach(corner => (corner.style.borderColor = '#6166dc'))
+        }
 
         handleBottom($shape, currentHeight)
         handleBottom($shapeMirror, currentHeight, 'mirror')
@@ -359,10 +425,8 @@ function ShapeShifter() {
       }
 
       if (clicked.onLeftEdge) {
-        const currentWidth = Math.max(
-          clicked.cx - event.clientX + clicked.w,
-          minWidth
-        )
+        const currentWidth = clicked.cx - event.clientX + clicked.w
+
         handleLeft($shape, currentWidth)
         handleLeft($shapeMirror, currentWidth, 'mirror')
         handleShift($shape, currentWidth)
@@ -374,6 +438,16 @@ function ShapeShifter() {
           clicked.cy - event.clientY + clicked.h,
           minHeight
         )
+
+        if (currentHeight <= 0) {
+          $shape.style.borderColor = '#FF5E5E'
+          corners.forEach(corner => (corner.style.borderColor = '#FF5E5E'))
+          numbers.current.style.color = '#FF5E5E'
+        } else {
+          $shape.style.borderColor = '#6166dc'
+          numbers.current.style.color = '#6166dc'
+          corners.forEach(corner => (corner.style.borderColor = '#6166dc'))
+        }
 
         handleTop($shape, currentHeight)
         handleTop($shapeMirror, currentHeight, 'mirror')
@@ -414,10 +488,10 @@ function ShapeShifter() {
             <ShapeGlow ref={glow} />
             <Numbers ref={numbers} />
             <HandleShapeShift onClick={handleActiveShapeClick} />
-            <TopLeftCorner />
-            <TopRightCorner />
-            <BottomLeftCorner />
-            <BottomRightCorner />
+            <TopLeftCorner data-corner="top-left" />
+            <TopRightCorner data-corner="top-right" />
+            <BottomLeftCorner data-corner="bottom-left" />
+            <BottomRightCorner data-corner="bottom-right" />
           </ShapeContainer>
           <RotationControls ref={rotationControls}>
             <TopLeftRotate />
@@ -434,7 +508,9 @@ function ShapeShifter() {
               ref={shapeMirror}
               mirror
             >
-              <Active.Mirror />
+              <Blur>
+                <Active.Mirror />
+              </Blur>
             </ShapeContainer>
           </Relative>
         </Mirror>
@@ -459,13 +535,13 @@ const Frame = styled.div`
 
 const ShapesContainer = styled.div`
   position: absolute;
-  top: 100px;
+  top: calc(50% - 195px);
+  right: 80px;
 `
 
 const Mirror = styled.div`
   position: absolute;
   top: 100%;
-  filter: blur(6px);
   z-index: 0;
 
   &::after {
@@ -474,9 +550,19 @@ const Mirror = styled.div`
     left: -100vw;
     top: 0%;
     width: 300vw;
-    height: 200%;
-    background: linear-gradient(rgba(16, 18, 22, 0.75), #101216 26%);
+    height: 800px;
+    background: linear-gradient(
+      rgba(17, 16, 20, 0.8),
+      rgba(17, 16, 20, 1) 20%,
+      #101216 100%
+    );
   }
+`
+
+const Blur = styled.div`
+  filter: blur(6px);
+  width: 100%;
+  height: 100%;
 `
 
 const HandleShapeShift = styled.div`
@@ -520,6 +606,16 @@ const ShapeContainer = styled.div`
   }
 
   ${p =>
+    !p.mirror &&
+    `
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  `}
+
+  ${p =>
     p.mirror &&
     `
     z-index: 0;
@@ -535,14 +631,13 @@ const ShapeGlow = styled.div`
   &::after {
     content: '';
     position: absolute;
-    width: 110%;
-    height: 110%;
-    top: -5%;
-    left: -5%;
+    width: 130%;
+    height: 130%;
+    top: -15%;
+    left: -15%;
     z-index: 2;
-
-    background: rgba(102, 116, 141, 0.15);
-    filter: blur(200px);
+    background: rgba(102, 116, 141, 0.1);
+    filter: blur(150px);
   }
 `
 
@@ -576,12 +671,12 @@ const BottomRightCorner = styled(Corner)`
 
 const Numbers = styled.div`
   position: absolute;
-  bottom: -20px;
+  bottom: -24px;
   left: 0;
   right: 0;
   margin: 0 auto;
   text-align: center;
-  font-size: 10px;
+  font-size: 12px;
   color: #6166dc;
   transition: opacity 0.1s linear;
   pointer-events: none;
@@ -593,6 +688,7 @@ const RotationControl = styled.div`
   height: 20px;
   width: 20px;
   position: absolute;
+  z-index: 1;
 `
 
 const TopLeftRotate = styled(RotationControl)`

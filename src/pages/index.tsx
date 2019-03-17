@@ -37,8 +37,7 @@ class IndexPage extends Component<{}, { animation: string }> {
   render() {
     const { animation } = this.state
     const contentful = this.props.data.allContentfulHomePage.edges[0].node
-    const background =
-      'linear-gradient(180deg,#08080b 0%,#0b0b0e 5%,#111216 11%)'
+    const background = 'linear-gradient(180deg,#08080b 0%, #111216 11%)'
 
     const navConfig = {
       offset: true,

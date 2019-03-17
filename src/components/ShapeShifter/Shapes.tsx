@@ -377,23 +377,27 @@ export default [
     Mirror: SlashMirror,
     width: 297,
     height: 320.88,
+    maxHeight: 342,
   },
   {
     Shape: Circle,
     Mirror: CircleMirror,
     width: 297,
     height: 297,
+    maxHeight: 312,
   },
   {
     Shape: Triangle,
     Mirror: TriangleMirror,
     width: 294.45,
     height: 255,
+    maxHeight: 267,
   },
   {
     Shape: Square,
     Mirror: SquareMirror,
     width: 305,
     height: 305,
+    maxHeight: 321,
   },
 ]
