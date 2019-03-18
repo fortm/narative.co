@@ -1,12 +1,6 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-
 import shapes from './Shapes'
-
-import cursorTopLeftImage from '../../assets/cursors/rotate-top-left.svg'
-import cursorTopRightImage from '../../assets/cursors/rotate-top-right.svg'
-import cursorBottomLeftImage from '../../assets/cursors/rotate-bottom-left.svg'
-import cursorBottomRightImage from '../../assets/cursors/rotate-bottom-right.svg'
 
 const minWidth: number = 0
 const minHeight: number = 0
@@ -34,33 +28,6 @@ let redraw: boolean = false
 
 let pressedKeys: {} = {}
 
-// useLayoutEffect(() => {
-//   pane.current.addEventListener('mousedown', onMouseDown)
-//   cornerRotation.current.addEventListener('mousedown', onMouseDownRotation)
-//   document.addEventListener('mousemove', onMove)
-//   document.addEventListener('mouseup', onUp)
-
-//   // Touch events
-//   pane.current.addEventListener('touchstart', onTouchDown)
-//   document.addEventListener('touchmove', onTouchMove)
-//   document.addEventListener('touchend', onTouchEnd)
-
-//   // Remove all the events when unselected
-//   return () => {
-//     pane.current.removeEventListener('mousedown', onMouseDown)
-//     cornerRotation.current.addEventListener('mousedown', onMouseDownRotation)
-//     document.removeEventListener('mousemove', onMove)
-//     document.removeEventListener('mouseup', onUp)
-//     document.removeEventListener('keydown', onKeydown)
-//     document.removeEventListener('keyup', onKeyup)
-
-//     // Touch events
-//     pane.current.removeEventListener('touchstart', onTouchDown)
-//     document.removeEventListener('touchmove', onTouchMove)
-//     document.removeEventListener('touchend', onTouchEnd)
-//   }
-// }, [])
-
 function ShapeShifter() {
   const [activeShape, setActiveShape] = useState(0)
   const [animate, setAnimate] = useState(false)
@@ -81,30 +48,36 @@ function ShapeShifter() {
   const rel = useRef()
   const relMirror = useRef()
 
-  const rotationControls = useRef()
   const numbers = useRef()
   const glow = useRef()
 
   useLayoutEffect(() => {
     setAnimate(true)
     const $shape = shape.current
-    const $rotationControls = rotationControls.current
 
     $shape.addEventListener('mousedown', onMouseDown)
-    $rotationControls.addEventListener('mousedown', onRotate)
     document.addEventListener('mousemove', onMove)
     document.addEventListener('mouseup', onUp)
     document.addEventListener('keydown', onKeydown)
     document.addEventListener('keyup', onKeyup)
 
+    // Touch events
+    $shape.addEventListener('touchstart', onTouchDown)
+    document.addEventListener('touchmove', onTouchMove)
+    document.addEventListener('touchend', onTouchEnd)
+
     // Remove all the events when unselected
     return () => {
       $shape.removeEventListener('mousedown', onMouseDown)
-      $rotationControls.removeEventListener('mousedown', onRotate)
       document.removeEventListener('mousemove', onMove)
       document.removeEventListener('mouseup', onUp)
       document.removeEventListener('keydown', onKeydown)
       document.removeEventListener('keyup', onKeyup)
+
+      // Touch events
+      $shape.removeEventListener('touchstart', onTouchDown)
+      document.removeEventListener('touchmove', onTouchMove)
+      document.removeEventListener('touchend', onTouchEnd)
     }
   }, [])
 
@@ -129,9 +102,17 @@ function ShapeShifter() {
     redraw = true
   }
 
-  function onRotate(event) {
-    onDown(event)
-    clicked.rotate = true
+  function onTouchDown(event) {
+    onDown(event.touches[0])
+    event.preventDefault()
+  }
+
+  function onTouchMove(event) {
+    onMove(event.touches[0])
+  }
+
+  function onTouchEnd(event) {
+    if (event.touches.length == 0) onUp(event.changedTouches[0])
   }
 
   function updateGlobalSettings(event) {
@@ -153,19 +134,7 @@ function ShapeShifter() {
     const corners = document.querySelectorAll('[data-corner]')
     corners.forEach(corner => (corner.style.borderColor = '#6166dc'))
 
-    if ($el.style.transform.includes('rotate')) {
-      const deg = Number($el.style.transform.replace(/[^0-9\.]+/g, ''))
-      const result = Math.abs(deg - 360) > Math.abs(0 - deg) ? 0 : 360
-
-      if (mirror) {
-        $el.style.transform = `rotate(-${result}deg)`
-      } else {
-        $el.style.transform = `rotate(${result}deg)`
-      }
-    } else {
-      $el.style.transform = ''
-    }
-
+    $el.style.transform = ''
     $el.style.transition = `
       width 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
       height 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
@@ -280,37 +249,6 @@ function ShapeShifter() {
     }
   }
 
-  function handleRotate() {
-    const { left, top } = shape.current.getBoundingClientRect()
-    const center = {
-      x: left + shape.current.offsetWidth / 2,
-      y: top + shape.current.offsetHeight / 2,
-    }
-
-    const mouse_x = event.pageX
-    const mouse_y = event.pageY
-
-    const radians = Math.atan2(mouse_x - center.x, mouse_y - center.y)
-    const degree = radians * (180 / Math.PI) * -1 + 100
-
-    let rotation = degree - clicked.startAngle
-
-    if (degree >= clicked.startDegree + clicked.maxRightAngle) {
-      console.log('fire max right')
-    }
-    if (degree < clicked.startDegree - clicked.maxLeftAngle) {
-      console.log('fire max left')
-    }
-
-    let normalize = rotation >= 360 ? rotation - 360 : rotation
-
-    let x = event.clientX - center.x
-    let y = event.clientY - center.y
-
-    shape.current.style.transform = `rotate(${normalize - 10}deg)`
-    shapeMirror.current.style.transform = `rotate(${(normalize - 10) * -1}deg)`
-  }
-
   function handleLeft($el, len) {
     if (len > minWidth && !pressedKeys.Shift) {
       $el.style.width = `${len}px`
@@ -393,14 +331,9 @@ function ShapeShifter() {
 
     redraw = false
 
-    if (clicked && clicked.rotate) {
-      return handleRotate()
-    }
-
     if (clicked && clicked.isResizing) {
       if (clicked.onRightEdge) {
         let currentWidth = event.clientX - clicked.cx + clicked.w
-        console.log(currentWidth)
 
         handleRight($shape, currentWidth)
         handleRight($shapeMirror, currentWidth, 'mirror')
@@ -503,12 +436,6 @@ function ShapeShifter() {
               <BottomRightCorner data-corner="bottom-right" />
             </Corners>
           </ShapeContainer>
-          <RotationControls ref={rotationControls}>
-            <TopLeftRotate />
-            <TopRightRotate />
-            <BottomLeftRotate />
-            <BottomRightRotate />
-          </RotationControls>
         </Relative>
         <Mirror>
           <Relative ref={relMirror} style={activeStyles} mirror>
@@ -700,37 +627,4 @@ const Numbers = styled.div`
   color: #6166dc;
   transition: opacity 0.1s linear;
   pointer-events: none;
-`
-
-const RotationControls = styled.div``
-
-const RotationControl = styled.div`
-  height: 20px;
-  width: 20px;
-  position: absolute;
-  z-index: 1;
-`
-
-const TopLeftRotate = styled(RotationControl)`
-  cursor: url(${cursorTopLeftImage}), auto;
-  left: -22px;
-  top: -22px;
-`
-
-const TopRightRotate = styled(RotationControl)`
-  cursor: url(${cursorTopRightImage}), auto;
-  right: -22px;
-  top: -22px;
-`
-
-const BottomLeftRotate = styled(RotationControl)`
-  cursor: url(${cursorBottomLeftImage}), auto;
-  left: -22px;
-  bottom: -22px;
-`
-
-const BottomRightRotate = styled(RotationControl)`
-  cursor: url(${cursorBottomRightImage}), auto;
-  right: -22px;
-  bottom: -22px;
 `
