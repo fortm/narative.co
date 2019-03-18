@@ -526,10 +526,10 @@ const Blur = styled.div`
 
 const HandleShapeShift = styled.div`
   position: absolute;
-  left: 0px;
-  top: 0px;
-  width: calc(100% - 1px);
-  height: calc(100% - 1px);
+  left: 3px;
+  top: 3px;
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
   z-index: 2;
   cursor: pointer;
 `
@@ -605,6 +605,7 @@ const ShapeGlow = styled.div`
 const Corners = styled.div`
   opacity: ${p => (p.animate ? 1 : 0)};
   transition: opacity 1.5s 1.3s;
+  pointer-events: none;
 `
 
 const Corner = styled.div`
