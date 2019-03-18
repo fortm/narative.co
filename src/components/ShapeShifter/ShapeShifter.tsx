@@ -33,6 +33,7 @@ function ShapeShifter() {
   const [activeShape, setActiveShape] = useState(0)
   const [animate, setAnimate] = useState(false)
 
+  console.log(activeShape)
   const Active = shapes[activeShape]
   const activeStyles = {
     width: Active.width,
@@ -53,8 +54,9 @@ function ShapeShifter() {
   const glow = useRef()
 
   useLayoutEffect(() => {
-    setAnimate(true)
     const $shape = shape.current
+    setAnimate(true)
+    createMirrorMask()
 
     $shape.addEventListener('mousedown', onMouseDown)
     document.addEventListener('mousemove', onMove)
@@ -84,7 +86,34 @@ function ShapeShifter() {
       document.removeEventListener('touchmove', onTouchMove)
       document.removeEventListener('touchend', onTouchEnd)
     }
-  }, [])
+  }, [activeShape])
+
+  function createMirrorMask() {
+    const offsetTop = shape.current.getBoundingClientRect().bottom
+    const previousMask = document.getElementById('mirror-mask')
+    const homeHero = document.getElementById('home-hero')
+    const mask = document.createElement('div')
+
+    if (previousMask) {
+      previousMask.remove()
+    }
+
+    mask.id = 'mirror-mask'
+    mask.style.cssText = `
+      position: absolute;
+      top: ${offsetTop}px;
+      left: 0;
+      width: 100%;
+      height: 800px;
+      background: linear-gradient(
+        rgba(17, 16, 20, 0.8),
+        rgba(17, 16, 20, 1) 20%,
+        #101216 100%
+      );
+      pointer-events: none;
+    `
+    homeHero.appendChild(mask)
+  }
 
   function onKeydown(event) {
     pressedKeys[event.key] = event.key
@@ -166,6 +195,7 @@ function ShapeShifter() {
   function resetStyles($el, mirror) {
     const reset = JSON.parse($el.getAttribute('data-reset'))
     const corners = document.querySelectorAll('[data-corner]')
+    const isInverted = $el.style.transform.includes('-1')
     corners.forEach(corner => (corner.style.borderColor = '#6166dc'))
 
     $el.style.transform = ''
@@ -176,10 +206,13 @@ function ShapeShifter() {
     `
     $el.style.width = `${reset.width}px`
     $el.style.height = `${reset.height}px`
-    $el.style.top = `unset`
-    $el.style.right = `unset`
-    $el.style.bottom = `unset`
-    $el.style.left = `unset`
+
+    if (isInverted) {
+      $el.style.top = `unset`
+      $el.style.right = `unset`
+      $el.style.bottom = `unset`
+      $el.style.left = `unset`
+    }
 
     if (!mirror) {
       $el.style.borderColor = '#6166dc'
@@ -299,6 +332,20 @@ function ShapeShifter() {
     }
   }
 
+  function handleOutOfBoundsError(isOutOfBounds: boolean) {
+    const corners = document.querySelectorAll('[data-corner]')
+
+    if (isOutOfBounds) {
+      shape.current.style.borderColor = '#FF5E5E'
+      corners.forEach(corner => (corner.style.borderColor = '#FF5E5E'))
+      numbers.current.style.color = '#FF5E5E'
+    } else {
+      shape.current.style.borderColor = '#6166dc'
+      numbers.current.style.color = '#6166dc'
+      corners.forEach(corner => (corner.style.borderColor = '#6166dc'))
+    }
+  }
+
   ;(function animate() {
     if (typeof window === 'undefined') return
     requestAnimationFrame(animate)
@@ -310,8 +357,6 @@ function ShapeShifter() {
 
     const $shapeMirror = shapeMirror.current
     const $relMirror = relMirror.current
-
-    const corners = document.querySelectorAll('[data-corner]')
 
     redraw = false
 
@@ -330,22 +375,17 @@ function ShapeShifter() {
           .maxHeight
 
         let currentHeight = clicked.h + event.clientY - clicked.cy
+        const isOutOfBounds = Math.max(y, minHeight) > maxHeight
 
-        if (Math.max(y, minHeight) > maxHeight) {
+        if (isOutOfBounds) {
           currentHeight = maxHeight
-          $shape.style.borderColor = '#FF5E5E'
-          corners.forEach(corner => (corner.style.borderColor = '#FF5E5E'))
-          numbers.current.style.color = '#FF5E5E'
-        } else {
-          $shape.style.borderColor = '#6166dc'
-          numbers.current.style.color = '#6166dc'
-          corners.forEach(corner => (corner.style.borderColor = '#6166dc'))
         }
 
         handleBottom($shape, currentHeight)
         handleBottom($shapeMirror, currentHeight, 'mirror')
         handleShift($shape, currentHeight)
         handleShift($shapeMirror, currentHeight)
+        handleOutOfBoundsError(isOutOfBounds)
       }
 
       if (clicked.onLeftEdge) {
@@ -363,20 +403,11 @@ function ShapeShifter() {
           minHeight
         )
 
-        if (currentHeight <= 0) {
-          $shape.style.borderColor = '#FF5E5E'
-          corners.forEach(corner => (corner.style.borderColor = '#FF5E5E'))
-          numbers.current.style.color = '#FF5E5E'
-        } else {
-          $shape.style.borderColor = '#6166dc'
-          numbers.current.style.color = '#6166dc'
-          corners.forEach(corner => (corner.style.borderColor = '#6166dc'))
-        }
-
         handleTop($shape, currentHeight)
         handleTop($shapeMirror, currentHeight, 'mirror')
         handleShift($shape, currentHeight)
         handleShift($shapeMirror, currentHeight)
+        handleOutOfBoundsError(currentHeight <= 0)
       }
 
       addWidthAndHeightUnits()
@@ -470,7 +501,7 @@ const Mirror = styled.div`
   top: 100%;
   z-index: 0;
 
-  &::after {
+  /* &::after {
     content: '';
     position: absolute;
     left: -100vw;
@@ -482,7 +513,7 @@ const Mirror = styled.div`
       rgba(17, 16, 20, 1) 20%,
       #101216 100%
     );
-  }
+  } */
 `
 
 const Blur = styled.div`
@@ -507,7 +538,6 @@ const Relative = styled.div`
   ${p =>
     p.mirror &&
     `
-    position: relative;
     top: 35px;
     z-index: 0;
     pointer-events: none;

@@ -47,12 +47,13 @@ const themes = {
   },
 }
 
-interface NavigationProps {
+interface NavigationState {
   active: boolean
   previousPath: string
   showPreviousPath: boolean
 }
-class Navigation extends Component<> {
+
+class Navigation extends Component<{}, NavigationState> {
   leftToggle = React.createRef()
 
   state = {
@@ -99,7 +100,7 @@ class Navigation extends Component<> {
 
   handleToggleClick = () => {
     const $toggle = this.leftToggle.current
-    console.log($toggle)
+
     this.setState(
       {
         active: !this.state.active,

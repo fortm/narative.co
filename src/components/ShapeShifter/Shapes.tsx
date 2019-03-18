@@ -14,7 +14,7 @@ export const Slash = () => (
       <path
         d="M360.998 379.319L76 178.816V81.528L360.984 281.14L360.998 379.319Z"
         stroke="white"
-        stroke-width="12"
+        strokeWidth="12"
       />
     </g>
     <defs>
@@ -25,9 +25,9 @@ export const Slash = () => (
         width="437"
         height="460.877"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           type="matrix"
@@ -84,7 +84,7 @@ export const SlashMirror = () => (
     <path
       d="M76.002 379.319L361 178.816V81.528L76.0164 281.14L76.002 379.319Z"
       stroke="white"
-      stroke-width="12"
+      strokeWidth="12"
     />
   </svg>
 )
@@ -106,7 +106,7 @@ export const Square = () => (
         width="285"
         height="285"
         stroke="white"
-        stroke-width="12"
+        strokeWidth="12"
       />
     </g>
     <defs>
@@ -117,9 +117,9 @@ export const Square = () => (
         width="437"
         height="437"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           type="matrix"
@@ -179,7 +179,7 @@ export const SquareMirror = () => (
       width="285"
       height="285"
       stroke="white"
-      stroke-width="12"
+      strokeWidth="12"
     />
   </svg>
 )
@@ -195,13 +195,7 @@ export const Circle = () => (
     style={{ transform: 'scale(1.465)', pointerEvents: 'none' }}
   >
     <g filter="url(#filter0_dd)">
-      <circle
-        cx="218.5"
-        cy="218.5"
-        r="142.5"
-        stroke="white"
-        stroke-width="12"
-      />
+      <circle cx="218.5" cy="218.5" r="142.5" stroke="white" strokeWidth="12" />
     </g>
     <defs>
       <filter
@@ -211,9 +205,9 @@ export const Circle = () => (
         width="437"
         height="437"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           type="matrix"
@@ -267,7 +261,7 @@ export const CircleMirror = () => (
     preserveAspectRatio="none"
     style={{ transform: 'scale(1.465)', pointerEvents: 'none' }}
   >
-    <circle cx="218.5" cy="218.5" r="142.5" stroke="white" stroke-width="12" />
+    <circle cx="218.5" cy="218.5" r="142.5" stroke="white" strokeWidth="12" />
   </svg>
 )
 
@@ -299,9 +293,9 @@ export const Triangle = () => (
         width="434.449"
         height="395"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           type="matrix"

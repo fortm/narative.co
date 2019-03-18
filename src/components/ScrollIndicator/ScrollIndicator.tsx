@@ -80,6 +80,7 @@ const Frame = styled.div`
   width: 1px;
   height: 90px;
   overflow: hidden;
+  z-index: 1;
 `
 
 const Background = styled.div`

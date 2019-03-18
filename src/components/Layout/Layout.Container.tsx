@@ -177,6 +177,7 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
     } = this.state
     const navTheme = nav.theme
 
+    console.log(nav)
     return (
       <>
         <NavigationMobile active={active} navigateOut={this.navigateOut} />
@@ -243,7 +244,6 @@ const SiteContainer = styled.div`
     p.background ||
     `linear-gradient(180deg, #08080b 0%, #0b0b0e 44.18%, #111216 100%)`};
   min-height: 100vh;
-  overflow-x: hidden;
 
   ${p =>
     p.navOffset &&
