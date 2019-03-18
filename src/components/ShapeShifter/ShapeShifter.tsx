@@ -552,7 +552,7 @@ const ShapeContainer = styled.div`
   border-color: ${p => (p.animate ? '#6166dc' : 'transparent')};
   opacity: ${p => (p.animate ? 1 : 0)};
   z-index: 1;
-  transition: opacity 1.4s ease 0.3s, border-color 3s 1.3s linear;
+  transition: opacity 1.4s ease 0.3s, border-color 1.5s 1.3s linear;
 
   &::after {
     content: '';
@@ -602,7 +602,7 @@ const ShapeGlow = styled.div`
 
 const Corners = styled.div`
   opacity: ${p => (p.animate ? 1 : 0)};
-  transition: opacity 3s 1.3s;
+  transition: opacity 1.5s 1.3s;
 `
 
 const Corner = styled.div`
