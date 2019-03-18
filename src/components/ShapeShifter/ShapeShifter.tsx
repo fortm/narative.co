@@ -33,7 +33,6 @@ function ShapeShifter() {
   const [activeShape, setActiveShape] = useState(0)
   const [animate, setAnimate] = useState(false)
 
-  console.log(activeShape)
   const Active = shapes[activeShape]
   const activeStyles = {
     width: Active.width,
@@ -187,9 +186,6 @@ function ShapeShifter() {
     onLeftEdge = x < MARGINS
     onRightEdge = x >= b.width - MARGINS
     onBottomEdge = y >= b.height - MARGINS
-
-    rightScreenEdge = window.innerWidth - MARGINS
-    bottomScreenEdge = window.innerHeight - MARGINS
   }
 
   function resetStyles($el, mirror) {
@@ -261,13 +257,13 @@ function ShapeShifter() {
     const limitedLength = pressedKeys.Alt && len > maxHeight ? maxHeight : len
 
     if (pressedKeys.Shift) {
-      $el.style.width = `${limitedLength}px`
-      $el.style.height = `${limitedLength}px`
+      $el.style.width = `${Math.abs(limitedLength)}px`
+      $el.style.height = `${Math.abs(limitedLength)}px`
     }
   }
 
   function handleLeft($el, len) {
-    if (len > minWidth && !pressedKeys.Shift) {
+    if (len > minWidth) {
       $el.style.width = `${len}px`
       $el.style.transform = `scaleX(1)`
       numbers.current.style.transform = `scaleX(1)`
@@ -283,7 +279,7 @@ function ShapeShifter() {
   }
 
   function handleRight($el, len) {
-    if (len > minWidth && !pressedKeys.Shift) {
+    if (len > minWidth) {
       $el.style.width = `${len}px`
       $el.style.transform = `scaleX(1)`
       numbers.current.style.transform = `scaleX(1)`
@@ -316,11 +312,17 @@ function ShapeShifter() {
   }
 
   function handleBottom($el, len, mirror) {
-    if (len > minHeight && !pressedKeys.Shift) {
+    if (len > minHeight) {
       $el.style.height = `${len}px`
       $el.style.transform = `scaleY(1)`
       numbers.current.style.transform = `scaleY(1)`
+      $el.style.bottom = ''
       $el.style.top = 0
+
+      if (mirror) {
+        $el.style.top = 'unset'
+        $el.style.bottom = 0
+      }
     } else {
       if (!mirror) {
         $el.style.height = `${Math.abs(len)}px`
