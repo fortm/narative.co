@@ -597,8 +597,8 @@ const ShapeGlow = styled.div`
     top: -15%;
     left: -15%;
     z-index: 2;
-    background: rgba(102, 116, 141, 0.1);
-    filter: blur(150px);
+    background: rgba(102, 116, 141, 0.15);
+    filter: blur(200px);
   }
 `
 
