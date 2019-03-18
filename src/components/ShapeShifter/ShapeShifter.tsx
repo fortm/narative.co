@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import shapes from './Shapes'
+import mediaqueries from '@styles/media'
 
 const minWidth: number = 0
 const minHeight: number = 0
@@ -58,6 +59,8 @@ function ShapeShifter() {
     $shape.addEventListener('mousedown', onMouseDown)
     document.addEventListener('mousemove', onMove)
     document.addEventListener('mouseup', onUp)
+
+    // Alt and Shift
     document.addEventListener('keydown', onKeydown)
     document.addEventListener('keyup', onKeyup)
 
@@ -71,6 +74,8 @@ function ShapeShifter() {
       $shape.removeEventListener('mousedown', onMouseDown)
       document.removeEventListener('mousemove', onMove)
       document.removeEventListener('mouseup', onUp)
+
+      // Alt and Shift
       document.removeEventListener('keydown', onKeydown)
       document.removeEventListener('keyup', onKeyup)
 
@@ -115,6 +120,35 @@ function ShapeShifter() {
     if (event.touches.length == 0) onUp(event.changedTouches[0])
   }
 
+  function onDown(event) {
+    updateGlobalSettings(event)
+    shape.current.style.transition = 'unset'
+    shapeMirror.current.style.transition = 'unset'
+    glow.current.style.opacity = 0
+
+    let isResizing = onRightEdge || onBottomEdge || onTopEdge || onLeftEdge
+
+    clicked = {
+      cx: event.clientX,
+      cy: event.clientY,
+      w: b.width,
+      h: b.height,
+      isResizing,
+      onTopEdge,
+      onLeftEdge,
+      onRightEdge,
+      onBottomEdge,
+    }
+  }
+
+  function onUp(event) {
+    updateGlobalSettings(event)
+    resetStyles(shape.current)
+    resetStyles(shapeMirror.current, 'mirror')
+
+    clicked = null
+  }
+
   function updateGlobalSettings(event) {
     b = shape.current.getBoundingClientRect()
     x = event.clientX - b.left
@@ -155,56 +189,6 @@ function ShapeShifter() {
     numbers.current.style.color = '#6166dc'
     glow.current.style.opacity = 1
     glow.current.style.transition = 'opacity 1.6s linear'
-  }
-
-  function onDown(event) {
-    updateGlobalSettings(event)
-    shape.current.style.transition = 'unset'
-    shapeMirror.current.style.transition = 'unset'
-    glow.current.style.opacity = 0
-
-    let isResizing = onRightEdge || onBottomEdge || onTopEdge || onLeftEdge
-
-    let center = {
-      x: b.left + b.width / 2,
-      y: b.top + b.height / 2,
-    }
-    let x = event.clientX - center.x
-    let y = event.clientY - center.y
-    let startAngle = (180 / Math.PI) * Math.atan2(x, y)
-    const startDegree = startAngle * -1 + 100
-
-    // const radians = Math.atan2(mouse_x - center.x, mouse_y - center.y)
-    // const degree = radians * (180 / Math.PI) * -1 + 100
-
-    let maxLeftAngle = 93
-    let maxRightAngle = 10
-
-    clicked = {
-      x,
-      y,
-      cx: event.clientX,
-      cy: event.clientY,
-      w: b.width,
-      h: b.height,
-      isResizing,
-      onTopEdge,
-      onLeftEdge,
-      onRightEdge,
-      onBottomEdge,
-      startAngle,
-      startDegree,
-      maxLeftAngle,
-      maxRightAngle,
-    }
-  }
-
-  function onUp(event) {
-    updateGlobalSettings(event)
-    resetStyles(shape.current)
-    resetStyles(shapeMirror.current, 'mirror')
-
-    clicked = null
   }
 
   function handleActiveShapeClick() {
@@ -469,6 +453,10 @@ const Frame = styled.div`
   align-items: center;
   align-self: flex-start;
   flex-direction: column;
+
+  ${mediaqueries.desktop`
+    display: none;
+  `}
 `
 
 const ShapesContainer = styled.div`
