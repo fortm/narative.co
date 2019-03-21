@@ -177,7 +177,6 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
     } = this.state
     const navTheme = nav.theme
 
-    console.log(nav)
     return (
       <>
         <NavigationMobile active={active} navigateOut={this.navigateOut} />

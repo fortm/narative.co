@@ -487,6 +487,15 @@ const Frame = styled.div`
   align-self: flex-start;
   flex-direction: column;
 
+  #heart {
+    stroke-width: 2px;
+    stroke: #933;
+  }
+
+  #star {
+    visibility: hidden;
+  }
+
   ${mediaqueries.desktop`
     display: none;
   `}
@@ -502,20 +511,6 @@ const Mirror = styled.div`
   position: absolute;
   top: 100%;
   z-index: 0;
-
-  /* &::after {
-    content: '';
-    position: absolute;
-    left: -100vw;
-    top: 0%;
-    width: 300vw;
-    height: 800px;
-    background: linear-gradient(
-      rgba(17, 16, 20, 0.8),
-      rgba(17, 16, 20, 1) 20%,
-      #101216 100%
-    );
-  } */
 `
 
 const Blur = styled.div`
