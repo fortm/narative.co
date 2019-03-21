@@ -18,6 +18,8 @@ import SocialLinks from '@components/SocialLinks'
 import Transitions from '@components/Transitions'
 import Video from '@components/Video'
 
+// TODO: remove the need for this file
+
 export {
   Button,
   ButtonArrow,
