@@ -365,6 +365,10 @@ export const TriangleMirror = () => (
   </svg>
 )
 
+/**
+ * The list of shapes a user can cycle through on the homepage.
+ * The shapes have their own settings!
+ */
 export default [
   {
     Shape: Slash,
