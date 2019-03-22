@@ -167,7 +167,7 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
   }
 
   render() {
-    const { background, children, nav } = this.props
+    const { background, children, nav, location } = this.props
     const {
       active,
       mask,
@@ -190,6 +190,7 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
             onClick={active ? this.closeMobileNav : () => {}}
             theme={navTheme}
             ref={this.container}
+            pathname={location && location.pathname}
           >
             {/*
              * This mobile navigation has to be within the main SiteContainer because
@@ -271,7 +272,12 @@ const SiteContainer = styled.div`
     left: 0;
     width: 100%;
     height: 20px;
-    background: ${p => (p.theme !== 'dark' ? '#08080b' : '#fafafa')};
+    background: ${p =>
+      p.theme !== 'dark'
+        ? p.pathname === '/'
+          ? '#0f0f12'
+          : '#08080b'
+        : '#fafafa'};
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     box-shadow: 0px -20px 40px rgba(0, 0, 0, 0.2);
@@ -304,6 +310,15 @@ const MobileHamburger = styled.button`
   opacity: ${p => (p.active ? 0.5 : 1)};
   transition: transform 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
 
+  &::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    left: -80%;
+    top: -50%;
+  }
+
   ${mediaqueries.desktop_up`
     display: none;
     visibility: hidden;
@@ -331,7 +346,6 @@ const RightToggle = styled(Toggle)`
 `
 
 const MaskMobile = styled.div`
-  opacity: 0;
   opacity: ${p => (p.shouldMask ? 1 : 0)};
   transition: opacity 0.5s linear;
   pointer-events: none;

@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link, graphql, StaticQuery } from 'gatsby'
-import { Motion } from 'react-motion'
 
 import Heading from '@components/Heading'
 import Section from '@components/Section'
@@ -22,7 +21,7 @@ export const services = [
       'Customer journey analysis',
     ],
     link: {
-      text: 'Inquiry about branding',
+      text: "Let's talk about your brand",
       to: '/contact',
     },
   },
@@ -34,7 +33,7 @@ export const services = [
       'Cross-platform apps',
     ],
     link: {
-      text: 'Inquiry about building',
+      text: "Let's build something together",
       to: '/contact',
     },
   },
@@ -46,7 +45,7 @@ export const services = [
       'Nurturing and onboarding',
     ],
     link: {
-      text: 'Inquiry about growing',
+      text: "Let's grow your business",
       to: '/contact',
     },
   },
@@ -162,28 +161,19 @@ const HomeServices = () => {
                   entering,
                   boundingClientRect,
                 }) => (
-                  <Motion
-                    defaultStyle={{ vp: 0, top: 0 }}
-                    style={{
-                      vp: visiblePercentage,
-                      top: boundingClientRect.top,
-                    }}
-                  >
-                    {value => (
-                      <HeadingBackground
-                        background={texture.childImageSharp.original.src}
-                        style={calculateAnimation(
-                          entering,
-                          value.vp,
-                          value.top
-                        )}
-                      >
-                        <LargeHeading>
-                          Narative helps you brand, build and grow.
-                        </LargeHeading>
-                      </HeadingBackground>
+                  <HeadingBackground
+                    visible={visiblePercentage > 0}
+                    background={texture.childImageSharp.original.src}
+                    style={calculateAnimation(
+                      entering,
+                      visiblePercentage,
+                      boundingClientRect.top
                     )}
-                  </Motion>
+                  >
+                    <LargeHeading>
+                      Narative helps you brand, build and grow.
+                    </LargeHeading>
+                  </HeadingBackground>
                 )}
               />
             </Section>
@@ -209,7 +199,7 @@ const HomeServices = () => {
                           <ListItem>Customer journey analysis</ListItem>
                         </List>
                         <StyledLink to="/contact" active={firstActive}>
-                          Inquire about branding
+                          Let’s talk about your brand
                         </StyledLink>
                         <Progress
                           style={{

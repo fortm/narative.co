@@ -138,7 +138,7 @@ const Progress = styled.div`
   margin-top: 40px;
   position: relative;
   width: 100%;
-  height: 1px;
+  height: 2px;
   background: #1d2128;
   overflow: hidden;
 `
@@ -147,7 +147,7 @@ const Value = styled.div`
   position: absolute;
   left: 0;
   width: 33%;
-  height: 1px;
+  height: 2px;
   background: #fff;
   transform: translateX(${p => p.progress * 200}%);
 `

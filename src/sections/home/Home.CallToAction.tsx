@@ -69,7 +69,7 @@ class HomeCallToAction extends Component<{}, { animation: string }> {
                       visiblePercentage={visiblePercentage}
                     >
                       <Text>
-                        Together, we’ll discover what your company is truly
+                        Together, let's discover what your company is truly
                         capable of.
                       </Text>
                     </TextBackground>
@@ -84,6 +84,7 @@ class HomeCallToAction extends Component<{}, { animation: string }> {
                     animation={animation}
                     onClose={this.handleClose}
                   />
+                  <MobileCopy>More about Narative</MobileCopy>
                 </Frame>
               )}
             />
@@ -117,6 +118,11 @@ const Frame = styled.div`
       rgba(255, 255, 255, 0.02) 100%
     );
   }
+
+  ${mediaqueries.tablet`
+    min-height: 88vh;
+    overflow: visible;
+  `}
 `
 
 const Nav = styled(Section)`
@@ -178,6 +184,11 @@ const TextContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   padding: 0 20px;
+
+  ${mediaqueries.tablet`
+    padding-top: 100px;
+    text-align: center;
+  `}
 `
 
 const TextBackground = styled.div`
@@ -291,4 +302,23 @@ const MobileAction = styled(Link)`
   ${mediaqueries.desktop_up`
     display: none;
   `}
+`
+
+const MobileCopy = styled.div`
+  ${mediaqueries.tablet_up`
+    display: none;
+  `}
+
+  max-width: 184px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -85px;
+  margin: 0 auto;
+  text-align: center;
+  background: #101216;
+  padding: 10px 15px;
+  z-index: 1;
+  font-size: 18px;
+  color: ${p => p.theme.colors.grey};
 `

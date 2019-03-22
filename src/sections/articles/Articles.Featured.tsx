@@ -79,18 +79,10 @@ const Right = styled(Link)`
   width: 100%;
   height: 100%;
   right: -8%;
+  transform: scale(1.088);
 
   ${mediaqueries.tablet`
-    position: absolute;
-    width: 90%
-    right: -50%;
-    z-index: 0;
-    opacity: 0.25;
-
-    & > div {
-      top: 50%;
-      transform: translateY(-50%);
-    }
+    display: none;
   `}
 `
 

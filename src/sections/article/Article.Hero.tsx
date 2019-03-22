@@ -40,7 +40,8 @@ const ArticleHero = ({ article }: { article: IArticleNode }) => {
                 <Header style={headerOffset}>
                   <HeroTitle>{article.title}</HeroTitle>
                   <HeroSubtitle>
-                    By {author.name} – {author.title}
+                    By {author.name}
+                    {author.title && ` , ${author.title}`}
                   </HeroSubtitle>
                 </Header>
               </Section>

@@ -59,11 +59,12 @@ const Grid = styled(Section)`
   grid-template-columns: 135px 670px;
   grid-column-gap: 128px;
   padding-top: 100px;
-  padding-bottom: 100px;
+  padding-bottom: 300px;
 
   ${mediaqueries.tablet`
     padding-top: 80px;
     display: block;
+    padding-bottom: 100;
   `}
 `
 

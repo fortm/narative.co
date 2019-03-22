@@ -151,7 +151,6 @@ const Content = styled.div`
     font-style: italic;
     ${transitionColor};
 
-
     p {
       position: relative;
       padding-left: 30px;
@@ -203,7 +202,7 @@ const Content = styled.div`
       position: relative;
       margin-bottom: 1.5rem;
 
-        ${mediaqueries.tablet`
+      ${mediaqueries.tablet`
           padding-left: 20px;
         `}
 
@@ -280,7 +279,7 @@ const Content = styled.div`
 
   img.image__regular {
     width: 100%;
-    max-width: ${imageWidths.regular};;
+    max-width: ${imageWidths.regular};
 
     ${mediaqueries.tablet`
       width: calc(100vw - 40px);
@@ -355,8 +354,7 @@ const Content = styled.div`
     margin: 25px auto 60px;
     border: 0;
     height: 14.36px;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='10' height='15' viewBox='0 0 10 15' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3crect x='0.326172' y='14.1777' width='16' height='1' transform='rotate(-60 0.326172 14.1777)' fill='${p =>
-      p.theme.mode.text}'/%3e%3c/svg%3e ");
+    background-image: url("${p => p.theme.mode.hr}");
     background-repeat: repeat-x;
     box-sizing: border-box;
 

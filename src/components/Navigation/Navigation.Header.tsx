@@ -200,29 +200,19 @@ const NavItems = ({ active, handleClick }) =>
 
     return (
       <NavItem key={nav.to}>
-        {nav.external ? (
-          <NavAnchor
-            target="_blank"
-            rel="noopener"
-            active={active ? active : undefined}
-            disabled={nav.disabled}
-            href={nav.to}
-            delay={delay}
-          >
-            {nav.text}
-          </NavAnchor>
-        ) : (
-          <NavAnchor
-            active={active ? active : undefined}
-            disabled={nav.disabled}
-            to={nav.to}
-            delay={delay}
-            as={Link}
-            onClick={event => handleClick(event, nav.to)}
-          >
-            {nav.text}
-          </NavAnchor>
-        )}
+        <NavAnchor
+          active={active ? active : undefined}
+          disabled={nav.disabled}
+          to={nav.to}
+          delay={delay}
+          as={Link}
+          onClick={event => handleClick(event, nav.to)}
+          getProps={({ isPartiallyCurrent }) =>
+            isPartiallyCurrent ? { ['data-active']: 'true' } : null
+          }
+        >
+          {nav.text}
+        </NavAnchor>
       </NavItem>
     )
   })
@@ -387,6 +377,20 @@ const NavAnchor = styled.a`
   pointer-events: ${p => (p.active ? 'initial' : 'none')};
   opacity: ${p => (p.active ? (p.disabled ? 0.15 : 1) : 0)};
   transform: ${p => (p.active ? 'translateX(0)' : 'translateX(12px)')};
+
+  &[data-active='true'] {
+    &::after {
+      content: '';
+      position: absolute;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+      bottom: 4px;
+      height: 1px;
+      width: 20px;
+      background: ${p => p.theme.color};
+    }
+  }
 
   &:hover {
     opacity: ${p => (p.disabled ? 0.15 : 0.6)};

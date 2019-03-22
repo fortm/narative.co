@@ -193,10 +193,27 @@ const HeroSection = styled(Section)`
 
 const HeroImage = styled.div`
   position: relative;
-  width: 530px;
+  width: 610px;
+  top: -60px;
+  right: -10px;
+  animation: float 4.8s ease-in-out infinite 1.4s;
+
+  @keyframes float {
+    0% {
+      transform: translatey(0px);
+    }
+    50% {
+      transform: translatey(-8px);
+    }
+    100% {
+      transform: translatey(0px);
+    }
+  }
 
   ${mediaqueries.phablet`
     width: 100%;
+    top: 0;
+    right: 0;
     margin-bottom: 60px;
   `};
 `

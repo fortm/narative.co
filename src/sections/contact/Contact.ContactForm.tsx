@@ -39,7 +39,10 @@ const validate = values => {
   return errors
 }
 
-class ContactForm extends Component {
+class ContactForm extends Component<
+  { baseDelay: number },
+  { animation: string; submitted: boolean; firstName: string }
+> {
   state = {
     animation: '',
     submitted: false,
@@ -77,6 +80,7 @@ class ContactForm extends Component {
   }
 
   render() {
+    const { baseDelay } = this.props
     const { animation, firstName, submitted } = this.state
 
     return (
@@ -111,7 +115,7 @@ class ContactForm extends Component {
                 <StyledFormikForm>
                   <FormSection
                     animation={animation}
-                    delay={1350}
+                    delay={baseDelay + 350}
                     spacing="large"
                   >
                     <FormHeader morePadding>Tell us about you</FormHeader>
@@ -134,7 +138,7 @@ class ContactForm extends Component {
                       />
                     </span>
                   </FormSection>
-                  <FormSection animation={animation} delay={1480}>
+                  <FormSection animation={animation} delay={baseDelay + 480}>
                     <FormHeader>Tell us about your idea</FormHeader>
                     <Field
                       component={Form.Textarea}
@@ -143,7 +147,10 @@ class ContactForm extends Component {
                       rows={1}
                     />
                   </FormSection>
-                  <ButtonContainer animation={animation} delay={1610}>
+                  <ButtonContainer
+                    animation={animation}
+                    delay={baseDelay + 610}
+                  >
                     <ButtonArrow
                       isSubmitting={props.isSubmitting}
                       color="black"

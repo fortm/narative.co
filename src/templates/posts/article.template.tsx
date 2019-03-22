@@ -137,7 +137,8 @@ class Article extends Component<ArticleProps, PostState> {
           <Meta>
             <div>Posted on {article.publicationDate}</div>
             <div>
-              By {author.name} – {author.title}
+              By {author.name}
+              {author.title && ` , ${author.title}`}
             </div>
           </Meta>
           <NextArticle narrow>
@@ -218,7 +219,7 @@ const FooterNext = styled.div`
     content: '';
     position: absolute;
     background: ${p => p.theme.mode.text};
-    width: ${(875 / 1140) * 100}%;
+    width: ${(910 / 1140) * 100}%;
     height: 1px;
     right: 0;
     top: 11px;

@@ -25,7 +25,7 @@ const Footer = ({ mode = 'dark' }: { mode?: string }) => {
     mode === 'dark' ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.25)'
 
   return (
-    <Section>
+    <Section narrow>
       <Frame color={color}>
         <CopyRight>© {new Date().getFullYear()} Narative Studio Inc.</CopyRight>
         <Left color={color}>

@@ -20,7 +20,7 @@ function IndexPage({ data, location }) {
   }
 
   return (
-    <Layout nav={navConfig} background={background}>
+    <Layout nav={navConfig} background={background} location={location}>
       <>
         <SEO
           title={contentful.seo.title}

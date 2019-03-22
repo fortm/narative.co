@@ -45,9 +45,11 @@ class ContactSlideIn extends Component<{ animation?: string }> {
     return (
       <>
         <SlideIn in={animation === 'start'}>
-          <FormContainer animation={animation}>
-            <ContactForm />
-          </FormContainer>
+          {animation && (
+            <FormContainer>
+              <ContactForm baseDelay={500} />
+            </FormContainer>
+          )}
         </SlideIn>
         <CloseContainer onClick={this.props.onClose} animation={animation}>
           <ExIcon />

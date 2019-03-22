@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
+import { isSafari } from 'react-device-detect'
 import shapes from './Shapes'
 import mediaqueries from '@styles/media'
 
@@ -57,33 +58,27 @@ function ShapeShifter() {
     setAnimate(true)
     createMirrorMask()
 
+    if (isSafari) return
+
     $shape.addEventListener('mousedown', onMouseDown)
     document.addEventListener('mousemove', onMove)
     document.addEventListener('mouseup', onUp)
+    window.addEventListener('resize', createMirrorMask)
 
     // Alt and Shift
     document.addEventListener('keydown', onKeydown)
     document.addEventListener('keyup', onKeyup)
-
-    // Touch events
-    $shape.addEventListener('touchstart', onTouchDown)
-    document.addEventListener('touchmove', onTouchMove)
-    document.addEventListener('touchend', onTouchEnd)
 
     // Remove all the events when unselected
     return () => {
       $shape.removeEventListener('mousedown', onMouseDown)
       document.removeEventListener('mousemove', onMove)
       document.removeEventListener('mouseup', onUp)
+      window.removeEventListener('resize', createMirrorMask)
 
       // Alt and Shift
       document.removeEventListener('keydown', onKeydown)
       document.removeEventListener('keyup', onKeyup)
-
-      // Touch events
-      $shape.removeEventListener('touchstart', onTouchDown)
-      document.removeEventListener('touchmove', onTouchMove)
-      document.removeEventListener('touchend', onTouchEnd)
     }
   }, [activeShape])
 
@@ -196,8 +191,8 @@ function ShapeShifter() {
 
     $el.style.transform = ''
     $el.style.transition = `
-      width 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
-      height 0.3s cubic-bezier(0.215, 0.61, 0.355, 1),
+      width 0.45s cubic-bezier(0.1, 0.8, 0.1, 1.2),
+      height 0.45s cubic-bezier(0.1, 0.8, 0.1, 1.2),
       transform 0.3s ease
     `
     $el.style.width = `${reset.width}px`
@@ -352,10 +347,11 @@ function ShapeShifter() {
     if (typeof window === 'undefined') return
     requestAnimationFrame(animate)
 
-    if (!redraw) return
-
     const $shape = shape.current
     const $rel = rel.current
+
+    if (!$shape) return
+    if (!redraw) return
 
     const $shapeMirror = shapeMirror.current
     const $relMirror = relMirror.current
