@@ -18,7 +18,7 @@ const ArticlesFeatured = ({ article }: { article: IArticleNode }) => (
   <Frame>
     <Left to={`/articles/${article.slug}`}>
       <SuperScript>Featured article</SuperScript>
-      <Heading.h2 dark>{article.title}</Heading.h2>
+      <FeaturedTitle dark>{article.title}</FeaturedTitle>
       <Excerpt>{article.excerpt}</Excerpt>
       <ButtonArrow
         text="Read more"
@@ -63,6 +63,10 @@ const Frame = styled.div`
   ${mediaqueries.phablet`
     padding: 60px 0 80px;
   `}
+`
+
+const FeaturedTitle = styled(Heading.h2)`
+  margin-bottom: 15px;
 `
 
 const Left = styled(Link)`
@@ -110,7 +114,7 @@ const SuperScript = styled.div`
 const Excerpt = styled.p`
   ${limitToTwoLines};
   font-size: 18px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   color: ${p => p.theme.colors.grey};
   display: ${p => (p.hasOverflow ? 'none' : 'box')};
   max-width: ${p => (p.narrow ? '415px' : '515px')};

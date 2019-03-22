@@ -6,6 +6,7 @@ import { Section, Heading, SEO, Layout } from '@components'
 import Footer from '@components/Navigation/Navigation.Footer'
 import Media from '@components/Media/Media.Img'
 import ScrollIndicator from '@components/ScrollIndicator'
+import Pill from '@components/Pill'
 
 import { startAnimation } from '@utils'
 import mediaqueries from '@styles/media'
@@ -64,11 +65,14 @@ class LabsPage extends Component<{}, { animate: string }> {
           <>
             <HorizontalRule />
             <div>
-              <LinkToProduct to="https://feyapp.com">
+              <LinkToProduct target="_blank" href="https://feyapp.com">
                 <GlobeIcon />
-                Read more
+                Visit website
               </LinkToProduct>
-              <LinkToProduct to="https://narative.co/design/open/fey">
+              <LinkToProduct
+                target="_blank"
+                href="https://narative.co/design/open/fey"
+              >
                 <FigmaIcon /> View in Figma
               </LinkToProduct>
             </div>
@@ -105,7 +109,7 @@ class LabsPage extends Component<{}, { animate: string }> {
             <ContentContainer>
               <div />
               <TextContainer animation={animation}>
-                <HeaderPill>Labs</HeaderPill>
+                <Pill text="Labs" />
                 <Heading.h1>
                   Whether with our clients or all by ourselves, we're always
                   busy building something new.
@@ -115,9 +119,7 @@ class LabsPage extends Component<{}, { animate: string }> {
                   Narative.
                 </MainText>
               </TextContainer>
-              <MobileOnly>
-                <ScrollIndicator />
-              </MobileOnly>
+              <ScrollIndicator />
             </ContentContainer>
 
             <HeroImage>
@@ -242,7 +244,6 @@ const MainText = styled.p`
 const ContentContainer = styled.div`
   height: calc(100vh - 140px);
   min-height: 440px;
-  padding: 0 0 100px;
 
   position: relative;
   display: flex;
@@ -253,18 +254,6 @@ const ContentContainer = styled.div`
     height: calc(100vh - 90px);
     padding: 0;
   `};
-`
-
-const HeaderPill = styled.div`
-  color: ${p => p.theme.colors.grey};
-  border: 1px solid ${p => p.theme.colors.grey};
-  border-radius: 3px;
-  padding: 0.1rem 1.2rem;
-  margin-bottom: 1.5rem;
-  display: inline-block;
-  font-weight: 500;
-  min-width: 100px;
-  text-align: center;
 `
 
 const HorizontalRule = styled.hr`

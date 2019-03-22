@@ -86,10 +86,10 @@ class ContactPage extends Component<{}, { animation: string }> {
           <SlideIn in={animation === 'start'}>
             <FormContainer
               animation={animation}
-              transitionDelay={1000}
+              transitionDelay={500}
               transitionDelayMobile={300}
             >
-              <ContactForm baseDelay={1000} />
+              <ContactForm baseDelay={800} />
             </FormContainer>
           </SlideIn>
           <CloseContainer onClick={this.exitContactPage} animation={animation}>

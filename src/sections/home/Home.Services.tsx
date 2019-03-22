@@ -232,7 +232,7 @@ const HomeServices = () => {
                           </List>
                         </Transform>
                         <StyledLink to="/contact" active={thirdActive}>
-                          Inquire about growing
+                          Let’s grow your business
                         </StyledLink>
                       </Value>
                     </Column>

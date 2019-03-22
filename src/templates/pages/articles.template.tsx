@@ -6,6 +6,7 @@ import Heading from '@components/Heading'
 import Footer from '@components/Navigation/Navigation.Footer'
 import ScrollIndicator from '@components/ScrollIndicator'
 import Media from '@components/Media/Media.Img'
+import Pill from '@components/Pill'
 
 import ArticlesGrid from '../../sections/articles/Articles.Grid'
 import ArticlesFeatured from '../../sections/articles/Articles.Featured'
@@ -61,7 +62,7 @@ class ArticlesPage extends Component {
             <ContentContainer>
               <div />
               <TextContainer animation={animation}>
-                <HeaderPill>Articles</HeaderPill>
+                <Pill text="Articles" />
                 <Heading.h1>
                   Perspectives on technology, design and business from the team
                   at Narative.
@@ -78,10 +79,10 @@ class ArticlesPage extends Component {
             </HeroImage>
           </HeroSection>
           <WhiteBackground>
-            <NoOverflowSection narrow>
+            <Section narrow>
               <ArticlesFeatured article={this.featured} />
               <ArticlesGrid articles={this.articles} />
-            </NoOverflowSection>
+            </Section>
             <Footer mode="light" />
           </WhiteBackground>
         </Fragment>
@@ -117,12 +118,6 @@ export const pageQuery = graphql`
       }
     }
   }
-`
-
-const NoOverflowSection = styled(Section)`
-  ${mediaqueries.tablet`
-    overflow: hidden;
-  `}
 `
 
 const HeroSection = styled(Section)`
@@ -191,16 +186,4 @@ const MainText = styled.p`
   ${mediaqueries.phablet`
     font-size: 2.2rem;
   `};
-`
-
-const HeaderPill = styled.div`
-  color: ${p => p.theme.colors.grey};
-  border: 1px solid ${p => p.theme.colors.grey};
-  border-radius: 3px;
-  padding: 0.1rem 1.2rem;
-  margin-bottom: 1.5rem;
-  display: inline-block;
-  font-weight: 500;
-  min-width: 100px;
-  text-align: center;
 `

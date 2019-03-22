@@ -133,8 +133,8 @@ const Content = styled.div`
       ${articleWidth};
       font-family: ${p => p.theme.fontfamily.sansSerif};
       color: ${p => p.theme.mode.text};
-      opacity: 0.25;
-      font-size: 2.2rem;
+      opacity: 0.5;
+      font-size: 16px;
       display: block;
       margin-bottom: 60px;
 

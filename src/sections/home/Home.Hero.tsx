@@ -63,7 +63,12 @@ class HomeHero extends Component<{}, { animation: string }> {
 
 export default HomeHero
 
-const HomeHeroContainer = styled.div``
+const HomeHeroContainer = styled.div`
+  ${mediaqueries.desktop`
+    #mirror-mask {
+      display: none;
+  `}
+`
 
 const TextContainer = styled.div`
   position: relative;

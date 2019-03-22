@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { graphql, Link } from 'gatsby'
-import Img from 'gatsby-image'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 
 import {
   Transitions,
@@ -17,6 +16,7 @@ import {
 import Footer from '@components/Navigation/Navigation.Footer'
 import Media from '@components/Media/Media.Img'
 import ScrollIndicator from '@components/ScrollIndicator'
+import Pill from '@components/Pill'
 
 import mediaqueries from '@styles/media'
 import transitions from '@styles/transitions'
@@ -56,7 +56,7 @@ class CareersPage extends Component<{}, { animation: string }> {
           <GridContainer>
             <LeftContainer>
               <TextContainer animation={animation}>
-                <HeaderPill>Careers</HeaderPill>
+                <Pill text="Careers" />
                 <Heading.h1>
                   Narative is a tight-knit team from across the world building
                   great things for our clients and ourselves.
@@ -310,18 +310,6 @@ const TextContainer = styled.div`
     position: relative;
     top: -50px;
   `}
-`
-
-const HeaderPill = styled.div`
-  color: ${p => p.theme.colors.grey};
-  border: 1px solid ${p => p.theme.colors.grey};
-  border-radius: 3px;
-  padding: 0.1rem 1.2rem;
-  margin-bottom: 1.5rem;
-  display: inline-block;
-  font-weight: 500;
-  min-width: 100px;
-  text-align: center;
 `
 
 const MainText = styled.p`
