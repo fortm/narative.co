@@ -219,7 +219,7 @@ const HomeServices = () => {
                           </List>
                         </Transform>
                         <StyledLink to="/contact" active={secondActive}>
-                          Inquire about building
+                          Let's build something together
                         </StyledLink>
                       </Value>
                       <Value active={thirdActive}>
