@@ -576,7 +576,7 @@ const ShapeContainer = styled.div`
 `
 
 const ShapeGlow = styled.div`
-  transition: opacity 0.3s ease;
+  transition: opacity 0.1s ease;
   will-change: opacity;
   pointer-events: none;
 
