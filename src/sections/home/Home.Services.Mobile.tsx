@@ -4,7 +4,6 @@ import { Link } from 'gatsby'
 
 import Heading from '@components/Heading'
 import Section from '@components/Section'
-import MediaQuery from '@components/MediaQuery'
 import HorizontalScroll from '@components/HorizontalScroll'
 
 import { services } from './Home.Services'
