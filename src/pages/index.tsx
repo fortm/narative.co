@@ -1,7 +1,8 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 
-import { SEO, Layout } from '@components'
+import Layout from '@components/Layout'
+import SEO from '@components/SEO'
 
 import HomeHero from '../sections/home/Home.Hero'
 import HomeAbout from '../sections/home/Home.About'
@@ -15,7 +16,7 @@ function IndexPage({ data, location }) {
 
   const navConfig = {
     offset: true,
-    fixed: false,
+    fixed: true,
     theme: 'light',
   }
 

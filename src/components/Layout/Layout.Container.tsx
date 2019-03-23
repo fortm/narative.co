@@ -5,10 +5,13 @@ import Swipeable from 'react-swipeable'
 
 import NavigationDesktop from '@components/Navigation/Navigation.Header'
 import NavigationMobile from '@components/Navigation/Navigation.Mobile.Header'
+import IntersectionObserver from '@components/IntersectionObserver'
 
+import { calculateStyles } from './Layout.Hero.Mobile'
 import { ExIcon } from '../../icons/ui'
 
 import mediaqueries from '@styles/media'
+import { useScrollPosition } from '@utils'
 
 import {
   debounce,
@@ -29,6 +32,8 @@ interface LayoutProps {
 interface LayoutState {
   active: boolean
   mobileNavOffset: number
+  position: number
+  element: string | HTMLElement
   mask: boolean
   previousPath: string
   showPreviousPath: boolean
@@ -52,7 +57,9 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
 
   state = {
     active: false,
+    element: 'placeholder',
     mobileNavOffset: 0,
+    position: 0,
     mask: false,
     previousPath: '',
     showPreviousPath: false,
@@ -60,15 +67,21 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResize)
+    window.addEventListener('scroll', this.handleScroll)
 
     window.addEventListener('beforeunload', () => {
       window.localStorage.setItem('previousPath', '')
+    })
+
+    this.setState({
+      element: document.querySelector('[data-component="hero-mobile"]'),
     })
   }
 
   componentWillUnmount() {
     if (typeof window !== 'undefined') {
       window.removeEventListener('resize', this.handleResize)
+      window.removeEventListener('scroll', this.handleScroll)
     }
   }
 
@@ -91,6 +104,8 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
     }
     return null
   }
+
+  handleScroll = () => this.setState({ position: window.pageYOffset })
 
   /**
    * If the user were to resize their browser window to be larger
@@ -167,11 +182,12 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
   }
 
   render() {
-    const { background, children, nav, location } = this.props
+    const { background, children, nav } = this.props
     const {
       active,
       mask,
       mobileNavOffset,
+      position,
       previousPath,
       showPreviousPath,
     } = this.state
@@ -190,7 +206,6 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
             onClick={active ? this.closeMobileNav : () => {}}
             theme={navTheme}
             ref={this.container}
-            pathname={location && location.pathname}
           >
             {/*
              * This mobile navigation has to be within the main SiteContainer because
@@ -198,28 +213,30 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
              * animate opened and closed
              */}
 
-            <MobileHamburger
-              fixed={nav.fixed}
-              active={active}
-              onClick={
-                showPreviousPath
-                  ? () => navigate(`/${previousPath.split('/')[1]}`)
-                  : this.openMobileNav
-              }
-              aria-label="Mobile Navigation Button"
-            >
-              {showPreviousPath ? (
-                <ExIcon />
-              ) : (
-                <>
-                  <LeftToggle active={active} theme={navTheme} />
-                  <RightToggle theme={navTheme} />
-                </>
-              )}
-            </MobileHamburger>
+            <MobileScroll style={calculateStyles(position)}>
+              <MobileHamburger
+                fixed={nav.fixed}
+                active={active}
+                onClick={
+                  showPreviousPath
+                    ? () => navigate(`/${previousPath.split('/')[1]}`)
+                    : this.openMobileNav
+                }
+                aria-label="Mobile Navigation Button"
+              >
+                {showPreviousPath ? (
+                  <ExIcon />
+                ) : (
+                  <>
+                    <LeftToggle active={active} theme={navTheme} />
+                    <RightToggle theme={navTheme} />
+                  </>
+                )}
+              </MobileHamburger>
 
-            {/* The desktop navigation also sits in the SiteContainer */}
-            <NavigationDesktop nav={nav} />
+              {/* The desktop navigation also sits in the SiteContainer */}
+              <NavigationDesktop nav={nav} />
+            </MobileScroll>
 
             {/**
              * Finally, this Mask is only applied when navigation to a new page. It's how
@@ -253,7 +270,7 @@ const SiteContainer = styled.div`
   ${p =>
     p.navOffset &&
     mediaqueries.tablet`
-      padding-top: 90px; 
+      padding-top: 0; 
   `};
 
   ${mediaqueries.tablet`
@@ -272,12 +289,7 @@ const SiteContainer = styled.div`
     left: 0;
     width: 100%;
     height: 20px;
-    background: ${p =>
-      p.theme !== 'dark'
-        ? p.pathname === '/'
-          ? '#0f0f12'
-          : '#08080b'
-        : '#fafafa'};
+    background: ${p => (p.theme !== 'dark' ? '#08080b' : '#fafafa')};
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     box-shadow: 0px -20px 40px rgba(0, 0, 0, 0.2);
@@ -358,5 +370,15 @@ const MaskMobile = styled.div`
     width: 100%;
     background: ${p => (p.theme !== 'dark' ? '#08080b' : '#fff')};
     z-index: 9; 
+  `}
+`
+
+const MobileScroll = styled.div`
+  ${mediaqueries.tablet`
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
   `}
 `

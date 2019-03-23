@@ -3,6 +3,7 @@ import { graphql, navigate } from 'gatsby'
 import styled from 'styled-components'
 
 import { Section, Heading, SEO, Layout } from '@components'
+import LayoutHeroMobile from '@components/Layout/Layout.Hero.Mobile'
 import Footer from '@components/Navigation/Navigation.Footer'
 import Media from '@components/Media/Media.Img'
 import ScrollIndicator from '@components/ScrollIndicator'
@@ -105,27 +106,32 @@ class LabsPage extends Component<{}, { animate: string }> {
             image={seo.image.file.url}
             pathname={this.props.location.pathname}
           />
-          <HeroSection>
-            <ContentContainer>
-              <div />
-              <TextContainer animation={animation}>
-                <Pill text="Labs" />
-                <Heading.h1>
-                  Whether with our clients or all by ourselves, we're always
-                  busy building something new.
-                </Heading.h1>
-                <MainText>
-                  Take a peek at the products we're creating in-house at
-                  Narative.
-                </MainText>
-              </TextContainer>
-              <ScrollIndicator />
-            </ContentContainer>
+          <LayoutHeroMobile>
+            <HeroSection>
+              <ContentContainer>
+                <div />
+                <TextContainer animation={animation}>
+                  <Pill text="Labs" />
+                  <Heading.h1>
+                    Whether with our clients or all by ourselves, we're always
+                    busy building something new.
+                  </Heading.h1>
+                  <MainText>
+                    Take a peek at the products we're creating in-house at
+                    Narative.
+                  </MainText>
+                </TextContainer>
+                <ScrollIndicator />
+              </ContentContainer>
 
-            <HeroImage>
-              <Media critical src={hero.childImageSharp.fluid} />
-            </HeroImage>
-          </HeroSection>
+              <HeroImage>
+                <Media critical src={hero.childImageSharp.fluid} />
+              </HeroImage>
+            </HeroSection>
+          </LayoutHeroMobile>
+          <HeroImageMobile>
+            <Media critical src={hero.childImageSharp.fluid} />
+          </HeroImageMobile>
           <Section narrow>
             {products.map(product => (
               <LabsPreview key={product.excerpt} product={product} />
@@ -213,11 +219,18 @@ const HeroImage = styled.div`
   }
 
   ${mediaqueries.phablet`
+    display: none;
+  `};
+`
+
+const HeroImageMobile = styled(HeroImage)`
+  ${mediaqueries.phablet`
+    display: block;
     width: 100%;
     top: 0;
     right: 0;
     margin-bottom: 60px;
-  `};
+`};
 `
 
 const TextContainer = styled.div`

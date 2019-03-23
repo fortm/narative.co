@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { apiCall } from '@utils/api'
 import { startAnimation } from '@utils/startAnimation'
 import { theme } from '@styles'
@@ -91,4 +92,19 @@ export const scrollable = (action: string) => {
     document.body.style.overflow = 'hidden'
     document.body.style.height = '100%'
   }
+}
+
+export function useScrollPosition() {
+  const [offset, setOffset] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => setOffset(window.pageYOffset)
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  return offset
 }

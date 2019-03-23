@@ -16,6 +16,7 @@ import {
 import Footer from '@components/Navigation/Navigation.Footer'
 import Media from '@components/Media/Media.Img'
 import ScrollIndicator from '@components/ScrollIndicator'
+import LayoutHeroMobile from '@components/Layout/Layout.Hero.Mobile'
 import Pill from '@components/Pill'
 
 import mediaqueries from '@styles/media'
@@ -52,47 +53,59 @@ class CareersPage extends Component<{}, { animation: string }> {
           image={contentful.seo.image.file.url}
           pathname={location.pathname}
         />
-        <Section>
-          <GridContainer>
-            <LeftContainer>
-              <TextContainer animation={animation}>
-                <Pill text="Careers" />
-                <Heading.h1>
-                  Narative is a tight-knit team from across the world building
-                  great things for our clients and ourselves.
-                </Heading.h1>
-                <MainText>
-                  We’re enthusiastic about partnering with and creating brands
-                  worth believing in.
-                </MainText>
-              </TextContainer>
-              <div />
-            </LeftContainer>
-            <RightContainer>
-              <ImageContainer>
-                <HeroImageTop>
-                  <Media src={data.heroTop.childImageSharp.fluid} />
-                </HeroImageTop>
-                <HeroImageBottom start={startBulb}>
-                  <Media
-                    onLoad={() => this.setState({ startBulb: true })}
-                    src={data.heroBottom.childImageSharp.fluid}
-                  />
-                </HeroImageBottom>
-              </ImageContainer>
-            </RightContainer>
-          </GridContainer>
-        </Section>
-        <Section>
-          <ScrollIndicator />
-        </Section>
+        <LayoutHeroMobile>
+          <>
+            <Section>
+              <GridContainer>
+                <LeftContainer>
+                  <TextContainer animation={animation}>
+                    <Pill text="Careers" />
+                    <Heading.h1>
+                      Narative is a tight-knit team from across the world
+                      building great things for our clients and ourselves.
+                    </Heading.h1>
+                    <MainText>
+                      We’re enthusiastic about partnering with and creating
+                      brands worth believing in.
+                    </MainText>
+                  </TextContainer>
+                  <div />
+                </LeftContainer>
+                <RightContainer>
+                  <ImageContainer>
+                    <HeroImageTop>
+                      <Media
+                        critical
+                        src={data.heroTop.childImageSharp.fluid}
+                      />
+                    </HeroImageTop>
+                    <HeroImageBottom start={startBulb}>
+                      <Media
+                        critical
+                        onLoad={() => this.setState({ startBulb: true })}
+                        src={data.heroBottom.childImageSharp.fluid}
+                      />
+                    </HeroImageBottom>
+                  </ImageContainer>
+                </RightContainer>
+              </GridContainer>
+            </Section>
+            <Section>
+              <ScrollIndicator />
+            </Section>
+          </>
+        </LayoutHeroMobile>
         <Section hideOnDesktop>
           <ImageContainer>
             <HeroImageTop>
               <Media critical src={data.heroTop.childImageSharp.fluid} />
             </HeroImageTop>
             <HeroImageBottom>
-              <Media critical src={data.heroBottom.childImageSharp.fluid} />
+              <Media
+                critical
+                src={data.heroBottom.childImageSharp.fluid}
+                onLoad={() => this.setState({ startBulb: true })}
+              />
             </HeroImageBottom>
           </ImageContainer>
         </Section>
@@ -349,7 +362,8 @@ const ImageContainer = styled.div`
   `};
 
   ${mediaqueries.tablet`
-    margin-bottom: 12rem;
+    margin-bottom: 50px;
+    padding: 0 10px;
   `};
 `
 
@@ -358,6 +372,10 @@ const HeroImageTop = styled.div`
   margin: 0 auto;
   position: relative;
   left: -6px;
+
+  ${mediaqueries.tablet`
+    max-width: 130px;
+  `}
 `
 
 const HeroImageBottom = styled.div`
@@ -379,6 +397,10 @@ const HeroImageBottom = styled.div`
       transform: translatey(0px);
     }
   }
+
+  ${mediaqueries.tablet`
+    transform: none;
+  `}
 `
 
 const RightContainer = styled.div`
@@ -455,7 +477,7 @@ const Spacer = styled.div`
   height: 145px;
 
   ${mediaqueries.tablet`
-    height: 45px;
+    height: 0;
   `};
 `
 

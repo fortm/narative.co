@@ -41,9 +41,11 @@ const animateOut = [
 const themes = {
   light: {
     color: '#fff',
+    pseudo: 'transparent',
   },
   dark: {
     color: '#000',
+    pseudo: '#fafafa',
   },
 }
 
@@ -302,6 +304,16 @@ const LeftToggle = styled(Toggle)`
     top: 15px;
     width: 15px;
   `};
+
+  &::after {
+    content: '';
+    position: absolute;
+    height: 1px;
+    background: ${p => p.theme.pseudo};
+    width: 100%;
+    bottom: -1px;
+    left: 0;
+  }
 `
 
 const RightToggle = styled(Toggle)`
@@ -314,6 +326,16 @@ const RightToggle = styled(Toggle)`
     top: 9px;
     transform: initial;
   `};
+
+  &::after {
+    content: '';
+    position: absolute;
+    height: 1px;
+    background: ${p => p.theme.pseudo};
+    width: 100%;
+    bottom: -1px;
+    left: 0;
+  }
 `
 
 const Nav = styled.nav`

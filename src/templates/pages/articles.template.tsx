@@ -7,6 +7,7 @@ import Footer from '@components/Navigation/Navigation.Footer'
 import ScrollIndicator from '@components/ScrollIndicator'
 import Media from '@components/Media/Media.Img'
 import Pill from '@components/Pill'
+import LayoutHeroMobile from '@components/Layout/Layout.Hero.Mobile'
 
 import ArticlesGrid from '../../sections/articles/Articles.Grid'
 import ArticlesFeatured from '../../sections/articles/Articles.Featured'
@@ -58,26 +59,28 @@ class ArticlesPage extends Component {
             image={seo.image.file.url}
             pathname={this.props.location.pathname}
           />
-          <HeroSection relative>
-            <ContentContainer>
-              <div />
-              <TextContainer animation={animation}>
-                <Pill text="Articles" />
-                <Heading.h1>
-                  Perspectives on technology, design and business from the team
-                  at Narative.
-                </Heading.h1>
-                <MainText>
-                  Because the only thing we love more than doing what we do is
-                  sharing what we do.
-                </MainText>
-              </TextContainer>
-              <ScrollIndicator />
-            </ContentContainer>
-            <HeroImage>
-              <Media critical src={this.hero.childImageSharp.fluid} />
-            </HeroImage>
-          </HeroSection>
+          <LayoutHeroMobile>
+            <HeroSection relative>
+              <ContentContainer>
+                <div />
+                <TextContainer animation={animation}>
+                  <Pill text="Articles" />
+                  <Heading.h1>
+                    Perspectives on technology, design and business from the
+                    team at Narative.
+                  </Heading.h1>
+                  <MainText>
+                    Because the only thing we love more than doing what we do is
+                    sharing what we do.
+                  </MainText>
+                </TextContainer>
+                <ScrollIndicator />
+              </ContentContainer>
+              <HeroImage>
+                <Media critical src={this.hero.childImageSharp.fluid} />
+              </HeroImage>
+            </HeroSection>
+          </LayoutHeroMobile>
           <WhiteBackground>
             <Section narrow>
               <ArticlesFeatured article={this.featured} />

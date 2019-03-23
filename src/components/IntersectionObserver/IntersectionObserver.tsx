@@ -11,11 +11,12 @@
 
 import React, { Component } from 'react'
 
-interface IOProps {
+interface IntersectionObserverProps {
+  element?: HTMLElement
   render: (any) => any
 }
 
-interface IOState {
+interface IntersectionObserverState {
   boundingClientRect: {}
   visiblePercentage: number
   visible: boolean
@@ -23,7 +24,10 @@ interface IOState {
   exiting: boolean
 }
 
-class IntersectionObserver extends Component<IOProps, IOState> {
+class IntersectionObserver extends Component<
+  IntersectionObserverProps,
+  IntersectionObserverState
+> {
   element = React.createRef()
 
   state = {
@@ -35,7 +39,31 @@ class IntersectionObserver extends Component<IOProps, IOState> {
   }
 
   componentDidMount() {
-    const $el = this.element.current
+    /**
+     * Because Gatsby and React have a fun way of dealing with the
+     * window and DOM elements we want to indicate we'll be passing
+     * an element later by first sending "placeholder". This will bypass
+     * setting of an intersection observer until the element has arrived.
+     */
+    if (this.props.element !== 'placeholder') {
+      this.setupObserver()
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.observer && typeof this.observer.disconnect === 'function') {
+      this.observer.disconnect()
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.element !== prevProps.element) {
+      this.setupObserver()
+    }
+  }
+
+  setupObserver = () => {
+    const $el = this.props.element || this.element.current
     this.observer = new window.IntersectionObserver(entries => {
       const element = entries[0]
       this.handleObservation(element)
@@ -44,12 +72,6 @@ class IntersectionObserver extends Component<IOProps, IOState> {
     }, this.generateObserverOptions())
 
     this.observer.observe($el)
-  }
-
-  componentWillUnmount() {
-    if (this.observer && typeof this.observer.disconnect === 'function') {
-      this.observer.disconnect()
-    }
   }
 
   handleObservation = element => {

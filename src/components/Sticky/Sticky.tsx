@@ -15,7 +15,7 @@ interface StickyState {
   progress: number
 }
 
-class Sticky extends Component<StickProps, StickyState> {
+class Sticky extends Component<StickyProps, StickyState> {
   element = React.createRef()
 
   state = {
@@ -68,7 +68,7 @@ class Sticky extends Component<StickProps, StickyState> {
         <StickyDuration height={height} disabled={disableOnMobile}>
           <StickyItemContainer>
             <StickyItem top={top} disabled={disableOnMobile}>
-              {this.props.render(this.state)}
+              {render(this.state)}
             </StickyItem>
           </StickyItemContainer>
         </StickyDuration>

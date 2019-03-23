@@ -31,7 +31,7 @@ const Card = styled.div`
   margin: 0 auto;
 
   &:not(:last-child) {
-    margin-bottom: 60px;
+    margin: 30px auto;
   }
 
   &::after {
