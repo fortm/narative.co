@@ -36,9 +36,9 @@ class HomeServicesMobile extends Component {
   render() {
     const { progress } = this.state
 
-    const first = progress >= 0 && progress <= 0.333
+    const first = progress <= 0.333
     const second = progress >= 0.334 && progress <= 0.666
-    const third = progress >= 0.667 && progress <= 1
+    const third = progress >= 0.667
 
     return (
       <Frame>
