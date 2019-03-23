@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import { graphql } from 'gatsby'
 
 import Layout from '@components/Layout'
@@ -29,8 +30,10 @@ function IndexPage({ data, location }) {
           pathname={location.pathname}
         />
         <HomeHero />
-        <HomeAbout />
-        <HomeServices />
+        <HomeGradient>
+          <HomeAbout />
+          <HomeServices />
+        </HomeGradient>
         <HomeTestimonial />
         <HomeCallToAction />
       </>
@@ -68,4 +71,8 @@ export const pageQuery = graphql`
       }
     }
   }
+`
+
+const HomeGradient = styled.div`
+  background: linear-gradient(180deg, #08080b 0%, #111216 100%);
 `
