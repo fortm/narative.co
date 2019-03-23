@@ -17,7 +17,7 @@ export function calculateStyles(position: number): {} {
     transform: `translateY(-${position * 0.2}px)`,
   }
 
-  return width > breakpoint ? {} : styles
+  return width > breakpoint || position <= 0 ? {} : styles
 }
 
 function LayoutHeroMobile({ children }) {
