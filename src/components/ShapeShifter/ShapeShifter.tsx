@@ -433,7 +433,7 @@ function ShapeShifter() {
         <Frame>
           <ShapesContainer>
             <Relative ref={rel} style={activeStyles}>
-              <ShapeGlow ref={glow}>
+              <ShapeGlow ref={glow} animate={animate}>
                 <Media src={glowImage.childImageSharp.fixed} />
               </ShapeGlow>
               <ShapeContainer
@@ -582,7 +582,8 @@ const ShapeContainer = styled.div`
 `
 
 const ShapeGlow = styled.div`
-  transition: opacity 0.2s ease;
+  opacity: ${p => (p.animate ? 1 : 0)};
+  transition: opacity 0.25s ease;
   pointer-events: none;
   position: absolute;
   width: 375px;
