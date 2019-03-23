@@ -38,6 +38,8 @@ class LabsPage extends Component<{}, { animate: string }> {
     const {
       allContentfulHomePage,
       hero,
+      heroBody,
+      heroScreen,
       needlBackground,
       feyBackground,
     } = this.props.data
@@ -125,7 +127,19 @@ class LabsPage extends Component<{}, { animate: string }> {
               </ContentContainer>
 
               <HeroImage>
-                <Media critical src={hero.childImageSharp.fluid} />
+                <Media
+                  critical
+                  onLoad={() => this.setState({ showScreen: true })}
+                  src={heroBody.childImageSharp.fluid}
+                />
+                <div
+                  style={{
+                    opacity: this.state.showScreen ? 1 : 0,
+                    transition: 'opacity 0.45 ease',
+                  }}
+                >
+                  <Media critical src={heroScreen.childImageSharp.fluid} />
+                </div>
               </HeroImage>
             </HeroSection>
           </LayoutHeroMobile>
@@ -170,6 +184,20 @@ export const pageQuery = graphql`
         }
       }
     }
+    heroBody: file(name: { regex: "/labs-floating-phone-body/" }) {
+      childImageSharp {
+        fluid(maxWidth: 1060, quality: 100) {
+          ...GatsbyImageSharpFluid_noBase64
+        }
+      }
+    }
+    heroScreen: file(name: { regex: "/labs-floating-phone-screen/" }) {
+      childImageSharp {
+        fluid(maxWidth: 1060, quality: 100) {
+          ...GatsbyImageSharpFluid_noBase64
+        }
+      }
+    }
     needlBackground: file(name: { regex: "/needl-labs/" }) {
       childImageSharp {
         fluid(maxWidth: 1140, maxHeight: 380, quality: 100) {
@@ -202,7 +230,7 @@ const HeroSection = styled(Section)`
 const HeroImage = styled.div`
   position: relative;
   width: 610px;
-  top: -60px;
+  top: -180px;
   right: -10px;
   animation: float 4.8s ease-in-out infinite 1.4s;
 
@@ -218,19 +246,35 @@ const HeroImage = styled.div`
     }
   }
 
-  ${mediaqueries.phablet`
+  ${mediaqueries.tablet`
     display: none;
   `};
+
+  .gatsby-image-wrapper {
+    position: absolute !important;
+    top: -180px;
+    left: 0;
+    width: 100%;
+  }
 `
 
 const HeroImageMobile = styled(HeroImage)`
-  ${mediaqueries.phablet`
+  display: none;
+
+  ${mediaqueries.tablet`
     display: block;
     width: 100%;
     top: 0;
     right: 0;
     margin-bottom: 60px;
 `};
+
+  .gatsby-image-wrapper {
+    position: relative !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
 `
 
 const TextContainer = styled.div`
