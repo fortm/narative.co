@@ -40,9 +40,8 @@ const Spacer = styled.div`
 `
 
 const Frame = styled.div`
-  height: 100vh;
-
   ${mediaqueries.tablet`
+    height: 100vh;
     top: 90px;
     position: fixed;
   `}

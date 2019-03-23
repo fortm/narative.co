@@ -98,10 +98,10 @@ function ShapeShifter() {
   }, [activeShape])
 
   function createMirrorMask() {
-    const offsetTop = shape.current.getBoundingClientRect().bottom
     const previousMask = document.getElementById('mirror-mask')
     const homeHero = document.getElementById('home-hero')
     const mask = document.createElement('div')
+    const offsetTop = shape.current.getBoundingClientRect().bottom
 
     if (previousMask) {
       previousMask.remove()
@@ -110,12 +110,13 @@ function ShapeShifter() {
     mask.id = 'mirror-mask'
     mask.style.cssText = `
       position: absolute;
-      top: ${offsetTop}px;
+      top: ${offsetTop + 30}px;
       left: 0;
       width: 100%;
       height: 800px;
-      background: linear-gradient(rgba(8, 8, 11, 0.8), #08080B 20%);
+      background: linear-gradient(rgba(8, 8, 11, 0.1), rgb(8, 8, 11) 20%);
       pointer-events: none;
+      z-index: 1;
     `
     homeHero.appendChild(mask)
   }
@@ -511,7 +512,8 @@ const ShapesContainer = styled.div`
 const Mirror = styled.div`
   position: absolute;
   top: 100%;
-  z-index: 0;
+  z-index: 1;
+  opacity: 0.2;
 `
 
 const Blur = styled.div`
@@ -583,14 +585,14 @@ const ShapeContainer = styled.div`
 
 const ShapeGlow = styled.div`
   opacity: ${p => (p.animate ? 1 : 0)};
-  transition: opacity 0.25s ease;
+  transition: opacity 0.15s ease;
   pointer-events: none;
   position: absolute;
   width: 375px;
   height: 375px;
   left: -40px;
   top: -30px;
-  transform: scale(1.6);
+  transform: scale(1.8);
 `
 
 const Corners = styled.div`
