@@ -41,6 +41,7 @@ const ScrollIndicator = ({
   const offset = useWindowOffset()
   const [mounted, setMounted] = useState(false)
   const [delayed, setDelayed] = useState(false)
+
   const barStyles =
     offset && !disableScrollAnimation
       ? { transform: `translateY(${offset}px) ` }
@@ -80,7 +81,7 @@ const Frame = styled.div`
   width: 1px;
   height: 90px;
   overflow: hidden;
-  z-index: 1;
+  z-index: 10;
 `
 
 const Background = styled.div`
