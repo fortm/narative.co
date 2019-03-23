@@ -1,7 +1,10 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
+import { StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 import { isSafari } from 'react-device-detect'
 import shapes from './Shapes'
+
+import Media from '@components/Media/Media.Img'
 import mediaqueries from '@styles/media'
 
 const minWidth: number = 0
@@ -29,6 +32,18 @@ let y: number
 let redraw: boolean = false
 
 let pressedKeys: {} = {}
+
+const query = graphql`
+  query ShapeShipfterQuery {
+    glowImage: file(name: { regex: "/glow@2x/" }) {
+      childImageSharp {
+        fixed(width: 375, height: 375, quality: 100) {
+          ...GatsbyImageSharpFixed_noBase64
+        }
+      }
+    }
+  }
+`
 
 function ShapeShifter() {
   const [activeShape, setActiveShape] = useState(0)
@@ -99,11 +114,7 @@ function ShapeShifter() {
       left: 0;
       width: 100%;
       height: 800px;
-      background: linear-gradient(
-        rgba(17, 16, 20, 0.8),
-        rgba(17, 16, 20, 1) 20%,
-        #101216 100%
-      );
+      background: linear-gradient(rgba(8, 8, 11, 0.8), #08080B 20%);
       pointer-events: none;
     `
     homeHero.appendChild(mask)
@@ -128,19 +139,6 @@ function ShapeShifter() {
     updateGlobalSettings(e)
     event = e
     redraw = true
-  }
-
-  function onTouchDown(event) {
-    onDown(event.touches[0])
-    event.preventDefault()
-  }
-
-  function onTouchMove(event) {
-    onMove(event.touches[0])
-  }
-
-  function onTouchEnd(event) {
-    if (event.touches.length == 0) onUp(event.changedTouches[0])
   }
 
   function onDown(event) {
@@ -429,44 +427,51 @@ function ShapeShifter() {
   })()
 
   return (
-    <Frame>
-      <ShapesContainer>
-        <Relative ref={rel} style={activeStyles}>
-          <ShapeContainer
-            style={activeStyles}
-            ref={shape}
-            data-reset={resetActiveStyles}
-            animate={animate}
-          >
-            <Active.Shape />
-            <ShapeGlow ref={glow} />
-            <Numbers ref={numbers} />
-            <HandleShapeShift onClick={handleActiveShapeClick} />
-            <Corners animate={animate}>
-              <TopLeftCorner data-corner="top-left" />
-              <TopRightCorner data-corner="top-right" />
-              <BottomLeftCorner data-corner="bottom-left" />
-              <BottomRightCorner data-corner="bottom-right" />
-            </Corners>
-          </ShapeContainer>
-        </Relative>
-        <Mirror>
-          <Relative ref={relMirror} style={activeStyles} mirror>
-            <ShapeContainer
-              style={activeStyles}
-              data-reset={resetActiveStyles}
-              ref={shapeMirror}
-              animate={animate}
-              mirror
-            >
-              <Blur>
-                <Active.Mirror />
-              </Blur>
-            </ShapeContainer>
-          </Relative>
-        </Mirror>
-      </ShapesContainer>
-    </Frame>
+    <StaticQuery
+      query={query}
+      render={({ glowImage }) => (
+        <Frame>
+          <ShapesContainer>
+            <Relative ref={rel} style={activeStyles}>
+              <ShapeGlow ref={glow}>
+                <Media src={glowImage.childImageSharp.fixed} />
+              </ShapeGlow>
+              <ShapeContainer
+                style={activeStyles}
+                ref={shape}
+                data-reset={resetActiveStyles}
+                animate={animate}
+              >
+                <Active.Shape />
+                <Numbers ref={numbers} />
+                <HandleShapeShift onClick={handleActiveShapeClick} />
+                <Corners animate={animate}>
+                  <TopLeftCorner data-corner="top-left" />
+                  <TopRightCorner data-corner="top-right" />
+                  <BottomLeftCorner data-corner="bottom-left" />
+                  <BottomRightCorner data-corner="bottom-right" />
+                </Corners>
+              </ShapeContainer>
+            </Relative>
+            <Mirror>
+              <Relative ref={relMirror} style={activeStyles} mirror>
+                <ShapeContainer
+                  style={activeStyles}
+                  data-reset={resetActiveStyles}
+                  ref={shapeMirror}
+                  animate={animate}
+                  mirror
+                >
+                  <Blur>
+                    <Active.Mirror />
+                  </Blur>
+                </ShapeContainer>
+              </Relative>
+            </Mirror>
+          </ShapesContainer>
+        </Frame>
+      )}
+    />
   )
 }
 
@@ -527,6 +532,7 @@ const HandleShapeShift = styled.div`
 
 const Relative = styled.div`
   position: relative;
+  z-index: 1;
 
   ${p =>
     p.mirror &&
@@ -576,21 +582,14 @@ const ShapeContainer = styled.div`
 `
 
 const ShapeGlow = styled.div`
-  transition: opacity 0.1s ease;
-  will-change: opacity;
+  transition: opacity 0.2s ease;
   pointer-events: none;
-
-  &::after {
-    content: '';
-    position: absolute;
-    width: 130%;
-    height: 130%;
-    top: -15%;
-    left: -15%;
-    z-index: 2;
-    background: rgba(102, 116, 141, 0.15);
-    filter: blur(200px);
-  }
+  position: absolute;
+  width: 375px;
+  height: 375px;
+  left: -40px;
+  top: -30px;
+  transform: scale(1.6);
 `
 
 const Corners = styled.div`
