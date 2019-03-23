@@ -135,7 +135,7 @@ class LabsPage extends Component<{}, { animate: string }> {
                 <div
                   style={{
                     opacity: this.state.showScreen ? 1 : 0,
-                    transition: 'opacity 0.45 ease',
+                    transition: 'opacity 0.45s ease',
                   }}
                 >
                   <Media critical src={heroScreen.childImageSharp.fluid} />
