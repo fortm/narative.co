@@ -35,9 +35,7 @@ const HomeAbout = () => {
           height="682px"
           top={140}
           disableOnMobile
-          render={({ progress }) => (
-            <AboutHeading>What our team is about</AboutHeading>
-          )}
+          render={() => <AboutHeading>What our team is about</AboutHeading>}
         />
         <div>
           {aboutNarativeText.map(text => (
@@ -66,6 +64,7 @@ const Grid = styled(Section)`
   grid-column-gap: 128px;
   padding-top: 100px;
   padding-bottom: 300px;
+  z-index: 1;
 
   ${mediaqueries.tablet`
     padding-top: 80px;
