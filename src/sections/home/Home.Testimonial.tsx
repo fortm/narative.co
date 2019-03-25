@@ -40,7 +40,7 @@ const HomeTestimonial = () => (
 export default HomeTestimonial
 
 const Gradient = styled.div`
-  padding: 250px 0 200px;
+  padding: 250px 0;
   background: linear-gradient(180deg, #101216 0%, #191d23 100%);
 
   ${mediaqueries.tablet`

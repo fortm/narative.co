@@ -74,7 +74,7 @@ class Navigation extends Component<{}, NavigationState> {
   getSnapshotBeforeUpdate(prevProps, prevState) {
     if (typeof window !== 'undefined') {
       const previousPathFromStorage = localStorage.getItem('previousPath')
-      const urlsThatUseBackButton = ['/articles']
+      const urlsThatUseBackButton = ['/articles/']
 
       if (prevState.previousPath !== previousPathFromStorage) {
         this.setState({

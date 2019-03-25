@@ -97,7 +97,7 @@ const SlideInContainer = styled.div`
   z-index: 9;
   position: fixed;
   overflow-y: scroll;
-  transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
   will-change: transform;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
@@ -140,7 +140,7 @@ const CloseContainer = styled.button`
   opacity: ${p => (p.animation ? 1 : 0)};
   transform: translateY(${p => (p.animation ? '0' : '-120px')});
   transition: transform 0.7s cubic-bezier(0.215, 0.61, 0.355, 1)
-      ${p => (p.animation ? '0.2s' : '0s')},
+      ${p => (p.animation ? '0.4s' : '0s')},
     opacity 0s linear ${p => (p.animation ? '0s' : '1s')};
 
   ${mediaqueries.tablet`
