@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import throttle from 'lodash/throttle'
 import { StaticQuery, graphql } from 'gatsby'
-import { isSafari } from 'react-device-detect'
+import { isSafari, isFireFox } from 'react-device-detect'
 
 import shapes from './Shapes'
 
@@ -30,6 +30,8 @@ let bottomScreenEdge: number
 let b: number
 let x: number
 let y: number
+
+let event
 
 let redraw: boolean = false
 
@@ -75,7 +77,7 @@ function ShapeShifter() {
     setAnimate(true)
     createMirrorMask()
 
-    if (isSafari) return
+    if (isSafari || isFireFox) return
 
     $shape.addEventListener('mousedown', onMouseDown)
     document.addEventListener('mousemove', onMove)
