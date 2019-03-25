@@ -64,7 +64,7 @@ const Grid = styled(Section)`
   grid-template-columns: 135px 670px;
   grid-column-gap: 128px;
   padding-top: 100px;
-  padding-bottom: 300px;
+  padding-bottom: 250px;
   z-index: 1;
 
   ${mediaqueries.tablet`

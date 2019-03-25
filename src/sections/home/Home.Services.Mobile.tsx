@@ -1,13 +1,40 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { Link } from 'gatsby'
+import { Link, StaticQuery, graphql } from 'gatsby'
 
 import Heading from '@components/Heading'
 import Section from '@components/Section'
 import HorizontalScroll from '@components/HorizontalScroll'
+import Media from '@components/Media/Media.Img'
 
 import { services } from './Home.Services'
 import mediaqueries from '@styles/media'
+
+const imageQuery = graphql`
+  query SerivesMobileImageQuery {
+    firstImage: file(name: { regex: "/home-brand/" }) {
+      childImageSharp {
+        fluid(maxWidth: 440, quality: 100) {
+          ...GatsbyImageSharpFluid_noBase64
+        }
+      }
+    }
+    secondImage: file(name: { regex: "/home-build/" }) {
+      childImageSharp {
+        fluid(maxWidth: 440, quality: 100) {
+          ...GatsbyImageSharpFluid_noBase64
+        }
+      }
+    }
+    thirdImage: file(name: { regex: "/home-grow/" }) {
+      childImageSharp {
+        fluid(maxWidth: 440, quality: 100) {
+          ...GatsbyImageSharpFluid_noBase64
+        }
+      }
+    }
+  }
+`
 
 class HomeServicesMobile extends Component {
   element = React.createRef()
@@ -40,36 +67,62 @@ class HomeServicesMobile extends Component {
     const second = progress >= 0.334 && progress <= 0.666
     const third = progress >= 0.667
 
+    console.log(progress)
     return (
-      <Frame>
-        <Section narrow>
-          <CardHeading>
-            Narative helps you <Highlight active={first}>brand</Highlight>,{' '}
-            <Highlight active={second}>build</Highlight> and{' '}
-            <Highlight active={third}>grow</Highlight>
-          </CardHeading>
-          <HorizontalScroll
-            list={services}
-            name="service"
-            narrow
-            innerRef={this.element}
-            render={({ service }) => (
-              <Card key={service.heading}>
-                <List>
-                  {service.list.map(item => (
-                    <Item key={item}>{item}</Item>
-                  ))}
-                </List>
-                <CardLink to={service.link.to}>{service.link.text}</CardLink>
-                <Image />
-              </Card>
-            )}
-          />
-          <Progress>
-            <Value progress={progress} />
-          </Progress>
-        </Section>
-      </Frame>
+      <StaticQuery
+        query={imageQuery}
+        render={({ firstImage, secondImage, thirdImage }) => {
+          const images = [firstImage, secondImage, thirdImage]
+
+          return (
+            <Frame>
+              <Section narrow>
+                <CardHeading>
+                  Narative helps you <Highlight active={first}>brand</Highlight>
+                  , <Highlight active={second}>build</Highlight> and{' '}
+                  <Highlight active={third}>grow</Highlight>
+                </CardHeading>
+                <HorizontalScroll
+                  list={services}
+                  name="service"
+                  narrow
+                  innerRef={this.element}
+                  render={({ service, index }) => {
+                    const progressOffset = {
+                      transform: `translateX(-${progress * 120}px)`,
+                    }
+                    const startingOffset = {
+                      transform: `translateX(${index * 40}px)`,
+                    }
+
+                    return (
+                      <Card key={service.heading}>
+                        <List>
+                          {service.list.map(item => (
+                            <Item key={item}>{item}</Item>
+                          ))}
+                        </List>
+                        <CardLink to={service.link.to}>
+                          {service.link.text}
+                        </CardLink>
+                        <Image style={progressOffset}>
+                          <Media
+                            style={startingOffset}
+                            src={images[index].childImageSharp.fluid}
+                          />
+                        </Image>
+                      </Card>
+                    )
+                  }}
+                />
+                <Progress>
+                  <Value progress={progress} />
+                </Progress>
+              </Section>
+            </Frame>
+          )
+        }}
+      />
     )
   }
 }
@@ -100,13 +153,13 @@ const CardHeading = styled(Heading.h3)`
 `
 
 const Image = styled.div`
-  width: calc(100% - 4rem);
+  position: relative;
   margin: 0 auto;
   height: 300px;
-  background: #fafafa;
-  opacity: 0.1;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  width: 150%;
+  left: -25%;
+  top: -20px;
+  z-index: 0;
 `
 
 const List = styled.ul`
@@ -120,12 +173,14 @@ const Item = styled.li`
 `
 
 const CardLink = styled(Link)`
+  position: relative;
   display: inline-block;
   font-size: 18px;
   font-weight: 600;
   text-decoration-line: underline;
   color: ${p => p.theme.colors.gold};
   margin-bottom: 15px;
+  z-index: 1;
 `
 
 const Highlight = styled.span`

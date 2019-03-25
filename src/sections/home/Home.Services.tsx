@@ -191,7 +191,7 @@ const HomeServices = () => {
                 return (
                   <Grid>
                     <ImageSlides>
-                      <ImageSlide active={firstActive}>
+                      <ImageSlide critical active={firstActive}>
                         <Media src={first.childImageSharp.fluid} />
                       </ImageSlide>
                       <ImageSlide active={secondActive}>
@@ -266,6 +266,7 @@ export default HomeServices
 
 const HomeServicesDesktop = styled.div`
   background: #101216;
+  padding-top: 100px;
 
   ${mediaqueries.tablet`
     display: none;
@@ -283,7 +284,7 @@ const HeadingBackground = styled.div`
   color: transparent !important;
   background-position: center;
   max-width: 900px;
-  padding-top: 100px;
+  margin-top: 100px;
   top: -100px;
   padding-bottom: calc(100vh - 192px);
   margin-bottom: calc(-100vh + 192px);
