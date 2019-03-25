@@ -437,7 +437,7 @@ function ShapeShifter() {
     <StaticQuery
       query={query}
       render={({ glowImage }) => (
-        <Frame>
+        <Frame animate={animate}>
           <ShapesContainer>
             <Relative ref={rel} style={activeStyles}>
               <ShapeGlow ref={glow} animate={animate}>
@@ -494,15 +494,9 @@ const Frame = styled.div`
   align-items: center;
   align-self: flex-start;
   flex-direction: column;
-
-  #heart {
-    stroke-width: 2px;
-    stroke: #933;
-  }
-
-  #star {
-    visibility: hidden;
-  }
+  border-color: ${p => (p.animate ? '#6166dc' : 'transparent')};
+  transform: scale(${p => (p.animate ? 1 : 1.1)});
+  transition: transform 3.9s cubic-bezier(0.25, 0.1, 0.25, 1);
 
   ${mediaqueries.desktop`
     display: none;
@@ -559,7 +553,7 @@ const ShapeContainer = styled.div`
   border-color: ${p => (p.animate ? '#6166dc' : 'transparent')};
   opacity: ${p => (p.animate ? 1 : 0)};
   z-index: 1;
-  transition: opacity 1.4s ease 0.3s, border-color 1.5s 1.3s linear;
+  transition: opacity 2s ease 0.3s, border-color 1.4s 2.2s;
 
   &::after {
     content: '';
@@ -591,19 +585,19 @@ const ShapeContainer = styled.div`
 
 const ShapeGlow = styled.div`
   opacity: ${p => (p.animate ? 1 : 0)};
-  transition: opacity 1.5s 1.3s;
+  transition: opacity 1.4s 2.2s;
   pointer-events: none;
   position: absolute;
   width: 375px;
   height: 375px;
   left: -40px;
-  top: -30px;
-  transform: scale(2);
+  top: -50px;
+  transform: scale(2.8);
 `
 
 const Corners = styled.div`
   opacity: ${p => (p.animate ? 1 : 0)};
-  transition: opacity 1.5s 1.3s;
+  transition: opacity 1.4s 2.2s;
   pointer-events: none;
 `
 
