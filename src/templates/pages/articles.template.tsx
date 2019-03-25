@@ -50,7 +50,7 @@ class ArticlesPage extends Component<
     var text = ' help your business take the next step'
     var speed = Math.floor(Math.random() * 60) + 30
 
-    if (current < text.length) {
+    if (current < text.length && this.text.current) {
       this.text.current.innerHTML += text.charAt(current)
       this.setState({ current: current + 1 })
 
