@@ -60,21 +60,21 @@ const imageQuery = graphql`
         }
       }
     }
-    first: file(name: { regex: "/home-services-typewriter/" }) {
+    first: file(name: { regex: "/home-brand/" }) {
       childImageSharp {
         fluid(maxWidth: 787, quality: 100) {
           ...GatsbyImageSharpFluid_noBase64
         }
       }
     }
-    second: file(name: { regex: "/home-services-typewriter-1/" }) {
+    second: file(name: { regex: "/home-build/" }) {
       childImageSharp {
         fluid(maxWidth: 787, quality: 100) {
           ...GatsbyImageSharpFluid_noBase64
         }
       }
     }
-    third: file(name: { regex: "/home-services-typewriter-2/" }) {
+    third: file(name: { regex: "/home-grow/" }) {
       childImageSharp {
         fluid(maxWidth: 787, quality: 100) {
           ...GatsbyImageSharpFluid_noBase64
@@ -179,7 +179,7 @@ const HomeServices = () => {
             </Section>
 
             <Sticky
-              height="300vh"
+              height="333vh"
               render={({ progress }) => {
                 const getActive = calculateActive(progress)
                 const offset = calculateOffset(progress)
@@ -190,6 +190,17 @@ const HomeServices = () => {
 
                 return (
                   <Grid>
+                    <ImageSlides>
+                      <ImageSlide active={firstActive}>
+                        <Media src={first.childImageSharp.fluid} />
+                      </ImageSlide>
+                      <ImageSlide active={secondActive}>
+                        <Media critical src={second.childImageSharp.fluid} />
+                      </ImageSlide>
+                      <ImageSlide active={thirdActive}>
+                        <Media critical src={third.childImageSharp.fluid} />
+                      </ImageSlide>
+                    </ImageSlides>
                     <Column>
                       <Value id="grid-value" active={firstActive}>
                         <Heading.h2>Brand</Heading.h2>
@@ -236,20 +247,9 @@ const HomeServices = () => {
                         </StyledLink>
                       </Value>
                     </Column>
+                    <Column gradient />
+                    <Column gradient />
                     <Column />
-                    <Column />
-                    <Column withRightBorder />
-                    <ImageSlides>
-                      <ImageSlide active={firstActive}>
-                        <Media src={first.childImageSharp.fluid} />
-                      </ImageSlide>
-                      <ImageSlide active={secondActive}>
-                        <Media critical src={second.childImageSharp.fluid} />
-                      </ImageSlide>
-                      <ImageSlide active={thirdActive}>
-                        <Media critical src={third.childImageSharp.fluid} />
-                      </ImageSlide>
-                    </ImageSlides>
                   </Grid>
                 )
               }}
@@ -265,6 +265,8 @@ const HomeServices = () => {
 export default HomeServices
 
 const HomeServicesDesktop = styled.div`
+  background: #101216;
+
   ${mediaqueries.tablet`
     display: none;
   `}
@@ -281,7 +283,7 @@ const HeadingBackground = styled.div`
   color: transparent !important;
   background-position: center;
   max-width: 900px;
-  margin-top: 100px;
+  padding-top: 100px;
   top: -100px;
   padding-bottom: calc(100vh - 192px);
   margin-bottom: calc(-100vh + 192px);
@@ -310,13 +312,24 @@ const Column = styled.div`
   flex-direction: column;
   justify-content: center;
   margin: 50px 0;
-  border-left: 1px solid #1d2128;
 
-  ${p =>
-    p.withRightBorder &&
-    `
-    border-right: 1px solid #1d2128;
-    `}
+  &::before {
+    content: '';
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: ${p =>
+      p.gradient
+        ? `linear-gradient(
+            rgba(255, 255, 255, 0.1),
+            transparent 33%,
+            transparent 70%,
+            rgba(255, 255, 255, 0.1)
+          )`
+        : 'rgba(255, 255, 255, 0.1)'};
+  }
 `
 
 const Value = styled.div`
@@ -365,7 +378,7 @@ const ListItem = styled.li`
 const Progress = styled.div`
   position: absolute;
   width: 1px;
-  right: -1px;
+  right: 0px;
   z-index: 1;
   background: ${p => p.theme.colors.grey};
   transition: opacity 0.3s var(--ease-out-quad);
@@ -377,7 +390,7 @@ const ImageSlides = styled.div`
   justify-content: center;
   position: absolute;
   top: 0;
-  right: 0;
+  right: -40px;
   width: 80%;
   height: 100%;
   pointer-events: none;

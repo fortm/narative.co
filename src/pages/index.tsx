@@ -30,10 +30,8 @@ function IndexPage({ data, location }) {
           pathname={location.pathname}
         />
         <HomeHero />
-        <HomeGradient>
-          <HomeAbout />
-          <HomeServices />
-        </HomeGradient>
+        <HomeAbout />
+        <HomeServices />
         <HomeTestimonial />
         <HomeCallToAction />
       </>
@@ -71,8 +69,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
-
-const HomeGradient = styled.div`
-  background: linear-gradient(180deg, #08080b 0%, #111216 100%);
 `

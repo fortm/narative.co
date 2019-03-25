@@ -41,7 +41,7 @@ export default HomeTestimonial
 
 const Gradient = styled.div`
   padding: 250px 0 200px;
-  background: linear-gradient(180deg, #111216 0%, #191d23 100%);
+  background: linear-gradient(180deg, #101216 0%, #191d23 100%);
 
   ${mediaqueries.tablet`
     padding: 50px 0 115px;

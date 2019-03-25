@@ -23,40 +23,41 @@ const aboutNarativeText = [
   <strong>Then we get straight to work</strong>.`,
 ]
 
-const HomeAbout = () => {
-  return (
-    <>
-      <MobileContainer>
-        <MobileShapeShifter />
-      </MobileContainer>
-      <MobileSpacer />
-      <Grid narrow>
-        <Sticky
-          height="682px"
-          top={140}
-          disableOnMobile
-          render={() => <AboutHeading>The Narative Approach</AboutHeading>}
-        />
-        <div>
-          {aboutNarativeText.map(text => (
-            <IntersectionObserver
-              key={text}
-              render={({ visiblePercentage }) => (
-                <Text
-                  style={{ opacity: visiblePercentage / 100 }}
-                  dangerouslySetInnerHTML={{ __html: text }}
-                />
-              )}
-            />
-          ))}
-        </div>
-      </Grid>
-    </>
-  )
-}
+const HomeAbout = () => (
+  <Gradient>
+    <MobileContainer>
+      <MobileShapeShifter />
+    </MobileContainer>
+    <MobileSpacer />
+    <Grid narrow>
+      <Sticky
+        height="682px"
+        top={140}
+        disableOnMobile
+        render={() => <AboutHeading>The Narative Approach</AboutHeading>}
+      />
+      <div>
+        {aboutNarativeText.map(text => (
+          <IntersectionObserver
+            key={text}
+            render={({ visiblePercentage }) => (
+              <Text
+                style={{ opacity: visiblePercentage / 100 }}
+                dangerouslySetInnerHTML={{ __html: text }}
+              />
+            )}
+          />
+        ))}
+      </div>
+    </Grid>
+  </Gradient>
+)
 
 export default HomeAbout
 
+const Gradient = styled.div`
+  background: linear-gradient(180deg, #08080b 70%, #101216 100%);
+`
 const Grid = styled(Section)`
   position: relative;
   display: grid;

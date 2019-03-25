@@ -47,7 +47,7 @@ class ArticlesPage extends Component<
 
   handleTyping = () => {
     const { current } = this.state
-    var text = ' help your business take the next step'
+    var text = ' help your business take the next step.'
     var speed = Math.floor(Math.random() * 60) + 30
 
     if (current < text.length && this.text.current) {
@@ -108,7 +108,7 @@ class ArticlesPage extends Component<
                 <HeroImageText imageLoaded={imageLoaded}>
                   Narative builds brands, websites, and products for grow-minded
                   companies. We're a team with senior startup experience here to
-                  <span ref={this.text} />.
+                  <Caret ref={this.text} />
                 </HeroImageText>
               </HeroImage>
             </HeroSection>
@@ -163,10 +163,10 @@ const HeroSection = styled(Section)`
 `
 
 const HeroImage = styled.div`
-  width: 860px;
+  width: 640px;
   position: absolute;
-  right: -140px;
-  top: 45%;
+  right: -10px;
+  top: 42%;
   transform: translateY(-50%);
 
   ${mediaqueries.desktop_medium`
@@ -185,10 +185,35 @@ const HeroImageText = styled.p`
   position: absolute;
   color: #b798f2;
   width: 215.87px;
-  top: 180px;
-  left: 300px;
+  top: 198px;
+  left: 170px;
   font-size: 12px;
   transform: perspective(333px) rotateX(-42deg);
+`
+
+const Caret = styled.span`
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: -2px;
+    top: 4px;
+    height: 70%;
+    width: 1px;
+    background: #b798f2;
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    from,
+    to {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
 `
 
 const WhiteBackground = styled.div`
