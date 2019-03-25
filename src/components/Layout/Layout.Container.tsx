@@ -71,7 +71,7 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
       window.localStorage.setItem('previousPath', '')
     })
 
-    if (this.props.nav.fixed) {
+    if (!this.props.nav.fixed) {
       window.addEventListener('scroll', this.handleScroll)
       this.setState({
         element: document.querySelector('[data-component="hero-mobile"]'),
@@ -83,7 +83,7 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
     if (typeof window !== 'undefined') {
       window.removeEventListener('resize', this.handleResize)
 
-      if (this.props.nav.fixed) {
+      if (!this.props.nav.fixed) {
         window.removeEventListener('scroll', this.handleScroll)
       }
     }
