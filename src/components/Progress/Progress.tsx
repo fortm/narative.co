@@ -40,9 +40,7 @@ class Progress extends Component<IProgress, { value: number; headings: [] }> {
 
   handleProgressHeadings = () => {
     const { height } = this.props
-    const titleHeading = document.querySelector('h1')
     const allHeadings = Array.from(document.querySelectorAll('h2')).reverse()
-    allHeadings.push(titleHeading)
 
     const headings = allHeadings
       .map(heading => {
