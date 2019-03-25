@@ -97,7 +97,7 @@ function ShapeShifter() {
       document.removeEventListener('keydown', onKeydown)
       document.removeEventListener('keyup', onKeyup)
     }
-  }, [activeShape])
+  }, [activeShape, animate])
 
   const createMirrorMask = throttle(function() {
     const previousMask = document.getElementById('mirror-mask')

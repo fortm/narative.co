@@ -138,7 +138,7 @@ const calculateAnimation = (
         transform: `translateY(${vp}px)`,
       }
     : {
-        transform: `translateY(${100}px)`,
+        transform: `translateY(${200 + -1 * vp}px)`,
         opacity: Math.abs(top) > 180 ? 0 : 1 - Math.abs(top) / 180,
       }
 }
@@ -269,6 +269,10 @@ const HomeServicesDesktop = styled.div`
   `}
 `
 
+const HeadingSpacer = styled.div`
+  padding-bottom: 0;
+`
+
 const HeadingBackground = styled.div`
   position: relative;
   -webkit-background-clip: text;
@@ -280,10 +284,8 @@ const HeadingBackground = styled.div`
   color: transparent !important;
   background-position: center;
   max-width: 900px;
-  margin-top: 100px;
-  top: -100px;
-  padding-bottom: calc(100vh - 192px);
-  margin-bottom: calc(-100vh + 192px);
+  padding-bottom: calc(40vh + 120px);
+  margin-bottom: calc(-40vh);
 `
 
 const LargeHeading = styled.h2`
@@ -295,6 +297,7 @@ const LargeHeading = styled.h2`
   font-family: ${p => p.theme.fontfamily.serif};
   background: transparent;
   color: transparent;
+  padding-bottom: 200px;
 `
 
 const Grid = styled(Section)`
@@ -387,8 +390,8 @@ const ImageSlides = styled.div`
   justify-content: center;
   position: absolute;
   top: 0;
-  right: 0;
-  width: 76%;
+  right: 80px;
+  width: 70%;
   height: 100%;
   pointer-events: none;
 
