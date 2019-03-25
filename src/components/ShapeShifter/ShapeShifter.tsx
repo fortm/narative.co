@@ -1,7 +1,9 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
-import { StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
+import throttle from 'lodash/throttle'
+import { StaticQuery, graphql } from 'gatsby'
 import { isSafari } from 'react-device-detect'
+
 import shapes from './Shapes'
 
 import Media from '@components/Media/Media.Img'
@@ -97,7 +99,7 @@ function ShapeShifter() {
     }
   }, [activeShape])
 
-  function createMirrorMask() {
+  const createMirrorMask = throttle(function() {
     const previousMask = document.getElementById('mirror-mask')
     const homeHero = document.getElementById('home-hero')
     const mask = document.createElement('div')
@@ -113,13 +115,19 @@ function ShapeShifter() {
       top: ${offsetTop + 30}px;
       left: 0;
       width: 100%;
-      height: 400px;
-      background: linear-gradient(rgba(8, 8, 11, 0.1), rgb(8, 8, 11) 40%);
+      height: 800px;
+      background: linear-gradient(rgba(8, 8, 11, 0.1), rgb(8, 8, 11) 20%);
       pointer-events: none;
       z-index: 1;
     `
     homeHero.appendChild(mask)
-  }
+  }, 16)
+
+  const onMove = throttle(function(e) {
+    updateGlobalSettings(e)
+    event = e
+    redraw = true
+  }, 16)
 
   function onKeydown(event) {
     pressedKeys[event.key] = event.key
@@ -136,17 +144,12 @@ function ShapeShifter() {
     event.preventDefault()
   }
 
-  function onMove(e) {
-    updateGlobalSettings(e)
-    event = e
-    redraw = true
-  }
-
   function onDown(event) {
     updateGlobalSettings(event)
     shape.current.style.transition = 'unset'
     shapeMirror.current.style.transition = 'unset'
     glow.current.style.opacity = 0
+    glow.current.style.transition = 'opacity 0.1s'
 
     let isResizing = onRightEdge || onBottomEdge || onTopEdge || onLeftEdge
 
@@ -209,6 +212,7 @@ function ShapeShifter() {
     }
 
     numbers.current.style.opacity = 0
+    numbers.current.style.transform = ''
     numbers.current.style.color = '#6166dc'
     glow.current.style.opacity = 1
     glow.current.style.transition = 'opacity 1.6s linear'
@@ -302,6 +306,8 @@ function ShapeShifter() {
     } else {
       $el.style.bottom = 0
       $el.style.top = ''
+      $el.style.transform = `scaleX(1)`
+      numbers.current.style.transform = `scaleX(1)`
     }
   }
 
@@ -585,14 +591,14 @@ const ShapeContainer = styled.div`
 
 const ShapeGlow = styled.div`
   opacity: ${p => (p.animate ? 1 : 0)};
-  transition: opacity 0.15s ease;
+  transition: opacity 1.5s 1.3s;
   pointer-events: none;
   position: absolute;
   width: 375px;
   height: 375px;
   left: -40px;
   top: -30px;
-  transform: scale(1.8);
+  transform: scale(2);
 `
 
 const Corners = styled.div`

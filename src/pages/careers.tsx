@@ -313,6 +313,8 @@ const GridContainer = styled.div`
 
 const TextContainer = styled.div`
   ${transitions.fadeUp};
+  top: -10px;
+  position: relative;
 
   ${mediaqueries.desktop`
     transition-delay: 0ms !important;
@@ -320,8 +322,7 @@ const TextContainer = styled.div`
   `};
 
   ${mediaqueries.phablet`
-    position: relative;
-    top: -50px;
+    top: -60px;
   `}
 `
 

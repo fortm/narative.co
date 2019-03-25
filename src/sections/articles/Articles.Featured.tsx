@@ -51,7 +51,7 @@ const limitToTwoLines = css`
 const Frame = styled.div`
   position: relative;
   display: flex;
-  padding: 100px 0;
+  padding: 60px 0 100px;
   align-items: center;
   overflow: hidden;
 

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, createRef } from 'react'
 import { graphql, navigate } from 'gatsby'
 import styled from 'styled-components'
 
@@ -17,13 +17,18 @@ import transitions from '@styles/transitions'
 import { Section, SEO, Layout } from '@components'
 import { startAnimation } from '@utils'
 
-class ArticlesPage extends Component {
+class ArticlesPage extends Component<
+  {},
+  { imageLoaded: boolean; animation: string; current: number }
+> {
   contentful = this.props.data.allContentfulHomePage.edges[0].node
   articles = this.props.pageContext.group
   featured = this.props.pageContext.additionalContext.featured[0]
   hero = this.props.data.hero
 
-  state = { animation: '' }
+  text = createRef()
+
+  state = { animation: '', current: 0, imageLoaded: false }
 
   componentDidMount() {
     startAnimation(() => {
@@ -40,8 +45,26 @@ class ArticlesPage extends Component {
     }, 350)
   }
 
+  handleTyping = () => {
+    const { current } = this.state
+    var text = ' help your business take the next step'
+    var speed = Math.floor(Math.random() * 60) + 30
+
+    if (current < text.length) {
+      this.text.current.innerHTML += text.charAt(current)
+      this.setState({ current: current + 1 })
+
+      setTimeout(this.handleTyping, speed)
+    }
+  }
+
+  handleImageLoaded = () => {
+    this.setState({ imageLoaded: true })
+    this.handleTyping()
+  }
+
   render() {
-    const { animation } = this.state
+    const { animation, imageLoaded } = this.state
     const { seo } = this.contentful
 
     const navConfig = {
@@ -52,7 +75,7 @@ class ArticlesPage extends Component {
 
     return (
       <Layout nav={navConfig}>
-        <Fragment>
+        <>
           <SEO
             title={seo.title}
             description={seo.description}
@@ -77,7 +100,16 @@ class ArticlesPage extends Component {
                 <ScrollIndicator />
               </ContentContainer>
               <HeroImage>
-                <Media critical src={this.hero.childImageSharp.fluid} />
+                <Media
+                  critical
+                  src={this.hero.childImageSharp.fluid}
+                  onLoad={this.handleImageLoaded}
+                />
+                <HeroImageText imageLoaded={imageLoaded}>
+                  Narative builds brands, websites, and products for grow-minded
+                  companies. We're a team with senior startup experience here to
+                  <span ref={this.text} />.
+                </HeroImageText>
               </HeroImage>
             </HeroSection>
           </LayoutHeroMobile>
@@ -88,7 +120,7 @@ class ArticlesPage extends Component {
             </Section>
             <Footer mode="light" />
           </WhiteBackground>
-        </Fragment>
+        </>
       </Layout>
     )
   }
@@ -127,13 +159,15 @@ const HeroSection = styled(Section)`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  overflow-x: hidden;
 `
 
 const HeroImage = styled.div`
-  width: 880px;
+  width: 860px;
   position: absolute;
   right: -140px;
-  top: -10px;
+  top: 45%;
+  transform: translateY(-50%);
 
   ${mediaqueries.desktop_medium`
     display: none;
@@ -143,6 +177,18 @@ const HeroImage = styled.div`
     width: 100%;
     margin-bottom: 60px;
   `};
+`
+
+const HeroImageText = styled.p`
+  opacity: ${p => (p.imageLoaded ? 1 : 0)};
+  transition: opacity 0.3s;
+  position: absolute;
+  color: #b798f2;
+  width: 215.87px;
+  top: 180px;
+  left: 300px;
+  font-size: 12px;
+  transform: perspective(333px) rotateX(-42deg);
 `
 
 const WhiteBackground = styled.div`
@@ -176,7 +222,7 @@ const TextContainer = styled.div`
 
   ${mediaqueries.phablet`
     position: relative;
-    top: -50px;
+    top: -60px;
   `};
 `
 

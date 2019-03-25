@@ -1,5 +1,6 @@
 import React, { Component, ReactNode } from 'react'
 import styled from 'styled-components'
+import throttle from 'lodash/throttle'
 
 interface OverlapProps {
   children: ReactNode[]
@@ -35,7 +36,7 @@ class HandleOverlap extends Component<OverlapProps, OverlapState> {
     window.removeEventListener('resize', this.onScroll)
   }
 
-  onScroll = () => {
+  onScroll = throttle(() => {
     if (!this.ticking) {
       // RAF and make our progress calculation
       // on callback of the setState clear the thread
@@ -74,7 +75,7 @@ class HandleOverlap extends Component<OverlapProps, OverlapState> {
       // Prevent further scrolls triggers
       this.ticking = true
     }
-  }
+  }, 16)
 
   // Is the current element within the window's frame? That's all we care about!
   isVisible = (element: HTMLElement): boolean => {

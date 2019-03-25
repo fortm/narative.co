@@ -57,7 +57,7 @@ class ContactPage extends Component<{}, { animation: string }> {
     const { animation } = this.state
     const navConfig = {
       offset: true,
-      fixed: true,
+      fixed: false,
       theme: 'light',
     }
 
@@ -162,7 +162,7 @@ const SlideInContainer = styled.div`
   ${mediaqueries.tablet`
     width: 100%;
     position: relative;
-    top: 220px;
+    top: 310px;
     height: calc(100vh - 340px);
     box-shadow: none;
     padding-top: 7rem;
@@ -210,7 +210,7 @@ const PhoneFormContainer = styled.div`
 
   ${mediaqueries.tablet`
     display: block;
-    padding: 4rem 0 1rem;
+    padding: 13rem 0 1rem;
   `};
 `
 

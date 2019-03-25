@@ -75,13 +75,14 @@ const HomeHeroContainer = styled.div`
 
 const TextContainer = styled.div`
   position: relative;
-  z-index: 1;
+  z-index: 10;
   max-width: 570px;
+  top: 10px;
   ${transitions.fadeUp};
 
   ${mediaqueries.phablet`
+    top: 0;
     position: relative;
-    top: -50px;
   `}
 `
 
@@ -114,6 +115,7 @@ const ContactText = styled(Link)`
 const ContentContainer = styled.div`
   height: calc(100vh - 230px);
   min-height: 440px;
+  padding-top: 10px;
 
   position: relative;
   display: flex;

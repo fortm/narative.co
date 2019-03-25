@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import throttle from 'lodash/throttle'
 
 import { clamp } from '@utils'
 
@@ -60,7 +61,7 @@ class Progress extends Component<IProgress, { value: number; headings: [] }> {
     this.setState({ headings })
   }
 
-  onScroll = (event: Event) => {
+  onScroll = throttle((event: Event) => {
     if (!this.ticking) {
       // RAF and make our progress calculation
       // on callback of the setState clear the thread
@@ -78,7 +79,7 @@ class Progress extends Component<IProgress, { value: number; headings: [] }> {
       // Prevent further scrolls triggers
       this.ticking = true
     }
-  }
+  })
 
   render = () => {
     const { value, headings } = this.state

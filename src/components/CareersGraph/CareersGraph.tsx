@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import throttle from 'lodash/throttle'
 
 import { IntersectionObserver } from '@components'
 import mediaqueries from '@styles/media'
@@ -25,13 +26,13 @@ class CareersGraph extends Component {
     window.addEventListener('resize', this.handleResize)
   }
 
-  handleResize = () => {
+  handleResize = throttle(() => {
     if (!this.graph || !this.container) return
 
     const subractor = this.graph.offsetHeight > 250 ? 13 : 9
 
     this.container.style.height = `${this.graph.offsetHeight - subractor}px`
-  }
+  }, 16)
 
   handlePercentage = visiblePercentage => {
     if (visiblePercentage > 33) {

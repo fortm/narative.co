@@ -35,7 +35,7 @@ const HomeAbout = () => {
           height="682px"
           top={140}
           disableOnMobile
-          render={() => <AboutHeading>What our team is about</AboutHeading>}
+          render={() => <AboutHeading>The Narative Approach</AboutHeading>}
         />
         <div>
           {aboutNarativeText.map(text => (

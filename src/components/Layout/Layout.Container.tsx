@@ -2,16 +2,15 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { navigate } from 'gatsby'
 import Swipeable from 'react-swipeable'
+import throttle from 'lodash/throttle'
 
 import NavigationDesktop from '@components/Navigation/Navigation.Header'
 import NavigationMobile from '@components/Navigation/Navigation.Mobile.Header'
-import IntersectionObserver from '@components/IntersectionObserver'
 
 import { calculateStyles } from './Layout.Hero.Mobile'
 import { ExIcon } from '../../icons/ui'
 
 import mediaqueries from '@styles/media'
-import { useScrollPosition } from '@utils'
 
 import {
   debounce,
@@ -67,21 +66,26 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResize)
-    window.addEventListener('scroll', this.handleScroll)
 
     window.addEventListener('beforeunload', () => {
       window.localStorage.setItem('previousPath', '')
     })
 
-    this.setState({
-      element: document.querySelector('[data-component="hero-mobile"]'),
-    })
+    if (this.props.nav.fixed) {
+      window.addEventListener('scroll', this.handleScroll)
+      this.setState({
+        element: document.querySelector('[data-component="hero-mobile"]'),
+      })
+    }
   }
 
   componentWillUnmount() {
     if (typeof window !== 'undefined') {
       window.removeEventListener('resize', this.handleResize)
-      window.removeEventListener('scroll', this.handleScroll)
+
+      if (this.props.nav.fixed) {
+        window.removeEventListener('scroll', this.handleScroll)
+      }
     }
   }
 
@@ -114,7 +118,7 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
    * and it's now behing handled by desktop we should close it and
    * pretend like nothing ever happened.
    */
-  handleResize = debounce(() => {
+  handleResize = throttle(() => {
     const { width } = getWindowDimensions()
     const tablet = getBreakpointFromTheme('tablet')
 
@@ -122,7 +126,7 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
     if (width > tablet && this.state.active) {
       this.closeMobileNav()
     }
-  })
+  }, 20)
 
   /**
    * When we close the mobile nav we have to play a small trick
@@ -213,7 +217,7 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
              * animate opened and closed
              */}
 
-            <MobileScroll style={calculateStyles(position)}>
+            <MobileScroll fixed={nav.fixed} style={calculateStyles(position)}>
               <MobileHamburger
                 fixed={nav.fixed}
                 active={active}

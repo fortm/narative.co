@@ -7,6 +7,7 @@
 
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import throttle from 'lodash/throttle'
 
 import Layout from '@components/Layout'
 import { RichText } from '@components/Media'
@@ -68,7 +69,7 @@ class Article extends Component<ArticleProps, PostState> {
    * the component's height but then we want to recalculate everytime
    * an image in the content's body has loaded
    */
-  calculateBodySize = () => {
+  calculateBodySize = throttle(() => {
     // Get the narrow content section
     const $contentSection = this.contentSectionRef.current!
 
@@ -101,7 +102,7 @@ class Article extends Component<ArticleProps, PostState> {
       contentHeight: $contentSection.getBoundingClientRect().height,
       contentOffset: $contentSection.offsetTop,
     })
-  }
+  }, 20)
 
   render = () => {
     const { contentHeight, contentOffset } = this.state

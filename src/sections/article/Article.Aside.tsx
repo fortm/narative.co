@@ -1,5 +1,6 @@
 import React, { Component, ReactNode } from 'react'
 import styled from 'styled-components'
+import throttle from 'lodash/throttle'
 
 import HandleOverlap from './Article.HandleOverlap'
 
@@ -45,7 +46,7 @@ class Aside extends Component<AsideProps, { value: number }> {
     }
   }
 
-  onScroll = (event: Event) => {
+  onScroll = throttle((event: Event) => {
     if (!this.ticking) {
       // RAF and make our progress calculation
       // on callback of the setState clear the thread
@@ -63,7 +64,7 @@ class Aside extends Component<AsideProps, { value: number }> {
       // Prevent further scrolls triggers
       this.ticking = true
     }
-  }
+  }, 16)
 
   render() {
     const { children, right } = this.props

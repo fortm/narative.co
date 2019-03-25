@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import throttle from 'lodash/throttle'
 import { getBreakpointFromTheme, getWindowDimensions } from '@utils'
 
 interface MediaQueryProps {
@@ -16,9 +17,9 @@ function useWindowSize() {
   if (typeof window !== 'undefined') {
     const [windowSize, setWindowSize] = useState(getWindowDimensions())
 
-    function handleResize() {
+    const handleResize = throttle(function() {
       setWindowSize(getWindowDimensions())
-    }
+    })
 
     useEffect(() => {
       window.addEventListener('resize', handleResize)
