@@ -592,7 +592,7 @@ const ShapeGlow = styled.div`
   height: 375px;
   left: -40px;
   top: -50px;
-  transform: scale(2.8);
+  transform: scale(1.8, 2.8);
 `
 
 const Corners = styled.div`

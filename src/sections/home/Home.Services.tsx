@@ -15,11 +15,7 @@ import HomeServicesMobile from './Home.Services.Mobile'
 export const services = [
   {
     heading: 'Brand',
-    list: [
-      'Visual identity',
-      'Strategic messaging',
-      'Customer journey analysis',
-    ],
+    list: ['Visual identity', 'Strategic messaging', 'Customer journeys'],
     link: {
       text: "Let's talk about your brand",
       to: '/contact',
@@ -28,7 +24,7 @@ export const services = [
   {
     heading: 'Build',
     list: [
-      'Reponsive websites',
+      'Responsive websites',
       'Content management systems',
       'Cross-platform apps',
     ],
@@ -207,7 +203,7 @@ const HomeServices = () => {
                         <List>
                           <ListItem>Visual identity</ListItem>
                           <ListItem>Strategic messaging</ListItem>
-                          <ListItem>Customer journey analysis</ListItem>
+                          <ListItem>Customer journeys</ListItem>
                         </List>
                         <StyledLink to="/contact" active={firstActive}>
                           Let’s talk about your brand
@@ -224,7 +220,7 @@ const HomeServices = () => {
                         <Transform active={secondActive || thirdActive}>
                           <Heading.h2>Build</Heading.h2>
                           <List>
-                            <ListItem>Reponsive websites</ListItem>
+                            <ListItem>Responsive websites</ListItem>
                             <ListItem>Content management systems</ListItem>
                             <ListItem>Cross-platform apps</ListItem>
                           </List>
@@ -391,8 +387,8 @@ const ImageSlides = styled.div`
   justify-content: center;
   position: absolute;
   top: 0;
-  right: -40px;
-  width: 80%;
+  right: 0;
+  width: 76%;
   height: 100%;
   pointer-events: none;
 

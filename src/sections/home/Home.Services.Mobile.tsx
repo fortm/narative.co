@@ -9,6 +9,7 @@ import Media from '@components/Media/Media.Img'
 
 import { services } from './Home.Services'
 import mediaqueries from '@styles/media'
+import { clamp } from '@utils'
 
 const imageQuery = graphql`
   query SerivesMobileImageQuery {
@@ -56,7 +57,7 @@ class HomeServicesMobile extends Component {
     const $el = this.element.current
     const maxOffset = $el.scrollWidth - $el.clientWidth
 
-    const progress = $el.scrollLeft / maxOffset
+    const progress = clamp($el.scrollLeft / maxOffset, 0, 100)
     this.setState({ progress })
   }
 
@@ -67,7 +68,6 @@ class HomeServicesMobile extends Component {
     const second = progress >= 0.334 && progress <= 0.666
     const third = progress >= 0.667
 
-    console.log(progress)
     return (
       <StaticQuery
         query={imageQuery}
@@ -160,6 +160,7 @@ const Image = styled.div`
   left: -25%;
   top: -20px;
   z-index: 0;
+  pointer-events: none;
 `
 
 const List = styled.ul`
