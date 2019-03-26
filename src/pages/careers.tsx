@@ -41,7 +41,7 @@ class CareersPage extends Component<{}, { animation: string }> {
 
     const navConfig = {
       offset: true,
-      fixed: false,
+      fixed: true,
       theme: 'light',
     }
 
@@ -62,7 +62,7 @@ class CareersPage extends Component<{}, { animation: string }> {
                     <Pill text="Careers" />
                     <Heading.h1>
                       Narative is a tight-knit team from across the world
-                      building great things for our clients and ourselves.
+                      building great things.
                     </Heading.h1>
                     <MainText>
                       We’re enthusiastic about partnering with and creating
@@ -71,23 +71,18 @@ class CareersPage extends Component<{}, { animation: string }> {
                   </TextContainer>
                   <div />
                 </LeftContainer>
-                <RightContainer>
-                  <ImageContainer>
-                    <HeroImageTop>
-                      <Media
-                        critical
-                        src={data.heroTop.childImageSharp.fluid}
-                      />
-                    </HeroImageTop>
-                    <HeroImageBottom start={startBulb}>
-                      <Media
-                        critical
-                        onLoad={() => this.setState({ startBulb: true })}
-                        src={data.heroBottom.childImageSharp.fluid}
-                      />
-                    </HeroImageBottom>
-                  </ImageContainer>
-                </RightContainer>
+                <ImageContainer desktop>
+                  <HeroImageTop>
+                    <Media critical src={data.heroTop.childImageSharp.fluid} />
+                  </HeroImageTop>
+                  <HeroImageBottom start={startBulb}>
+                    <Media
+                      critical
+                      onLoad={() => this.setState({ startBulb: true })}
+                      src={data.heroBottom.childImageSharp.fluid}
+                    />
+                  </HeroImageBottom>
+                </ImageContainer>
               </GridContainer>
             </Section>
             <Section>
@@ -291,11 +286,13 @@ const CareerRowContent = styled.div`
 
 const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: 621px 1fr;
+  grid-template-columns: 505px 1fr;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  height: calc(88vh - 120px);
+  height: calc(100vh - 140px);
+  min-height: 440px;
+
   width: 100%;
 
   ${mediaqueries.desktop`
@@ -315,6 +312,10 @@ const TextContainer = styled.div`
   ${transitions.fadeUp};
   top: -10px;
   position: relative;
+
+  h1 {
+    max-width: 470px;
+  }
 
   ${mediaqueries.desktop`
     transition-delay: 0ms !important;
@@ -352,19 +353,24 @@ const LeftContainer = styled.div`
 `
 
 const ImageContainer = styled.div`
-  position: relative;
+  position: absolute;
   width: 100%;
-  max-width: 460px;
-  right: -8rem;
-  margin: 0 auto;
+  width: 460px;
+  right: 8%;
 
-  ${mediaqueries.desktop`
-    right: 0;
+  ${mediaqueries.desktop_medium`
+    right: -2%;
   `};
 
-  ${mediaqueries.tablet`
+  ${mediaqueries.desktop`
+    display:  ${p => (p.desktop ? ' none' : 'initial')}
+    right: 0;
+    left: 0;
+    position: relative;
+    margin: 0 auto;
     margin-bottom: 50px;
-    padding: 0 10px;
+    display: block;
+    width: 100%;
   `};
 `
 
@@ -404,22 +410,6 @@ const HeroImageBottom = styled.div`
   `}
 `
 
-const RightContainer = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-
-  ${mediaqueries.desktop`
-    justify-content: center;
-    margin-bottom: 5rem;
-  `};
-
-  ${mediaqueries.tablet`
-    display: none;
-  `};
-`
 const SectionCopy = styled.p`
   color: #fff;
   font-size: 3.2rem;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Link, StaticQuery, graphql } from 'gatsby'
+import throttle from 'lodash/throttle'
 
 import Heading from '@components/Heading'
 import Section from '@components/Section'
@@ -13,21 +14,21 @@ import { clamp } from '@utils'
 
 const imageQuery = graphql`
   query SerivesMobileImageQuery {
-    firstImage: file(name: { regex: "/home-brand/" }) {
+    firstImage: file(name: { regex: "/mobile-home-brand/" }) {
       childImageSharp {
         fluid(maxWidth: 440, quality: 100) {
           ...GatsbyImageSharpFluid_noBase64
         }
       }
     }
-    secondImage: file(name: { regex: "/home-build/" }) {
+    secondImage: file(name: { regex: "/mobile-home-build/" }) {
       childImageSharp {
         fluid(maxWidth: 440, quality: 100) {
           ...GatsbyImageSharpFluid_noBase64
         }
       }
     }
-    thirdImage: file(name: { regex: "/home-grow/" }) {
+    thirdImage: file(name: { regex: "/mobile-home-grow/" }) {
       childImageSharp {
         fluid(maxWidth: 440, quality: 100) {
           ...GatsbyImageSharpFluid_noBase64
@@ -53,13 +54,13 @@ class HomeServicesMobile extends Component {
     }
   }
 
-  handleScroll = () => {
+  handleScroll = throttle(() => {
     const $el = this.element.current
     const maxOffset = $el.scrollWidth - $el.clientWidth
 
     const progress = clamp($el.scrollLeft / maxOffset, 0, 100)
     this.setState({ progress })
-  }
+  }, 10)
 
   render() {
     const { progress } = this.state
@@ -89,10 +90,10 @@ class HomeServicesMobile extends Component {
                   innerRef={this.element}
                   render={({ service, index }) => {
                     const progressOffset = {
-                      transform: `translateX(-${progress * 120}px)`,
+                      transform: `translateX(-${progress * 150}px)`,
                     }
                     const startingOffset = {
-                      transform: `translateX(${index * 40}px)`,
+                      transform: `translateX(${index * 60}px)`,
                     }
 
                     return (
@@ -132,6 +133,7 @@ export default HomeServicesMobile
 const Frame = styled.div`
   padding-top: 110px;
   padding-bottom: 80px;
+  background: linear-gradient(#0f1015, #101216);
 
   ${mediaqueries.desktop_up`
     display: none;
@@ -160,7 +162,6 @@ const Image = styled.div`
   left: -25%;
   top: -20px;
   z-index: 0;
-  pointer-events: none;
 `
 
 const List = styled.ul`

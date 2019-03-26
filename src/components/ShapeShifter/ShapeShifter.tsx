@@ -88,6 +88,14 @@ function ShapeShifter() {
     document.addEventListener('keydown', onKeydown)
     document.addEventListener('keyup', onKeyup)
 
+    // TweenLite.to('#start', 1, {
+    //   morphSVG: '#end',
+    //   yoyo: true,
+    //   repeat: -1,
+    //   repeatDelay: 0.5,
+    //   ease: Power2.easeInOut,
+    // })
+
     // Remove all the events when unselected
     return () => {
       $shape.removeEventListener('mousedown', onMouseDown)
@@ -127,9 +135,10 @@ function ShapeShifter() {
 
   const onMove = throttle(function(e) {
     updateGlobalSettings(e)
+
     event = e
     redraw = true
-  }, 16)
+  }, 20)
 
   function onKeydown(event) {
     pressedKeys[event.key] = event.key
@@ -190,7 +199,7 @@ function ShapeShifter() {
   function resetStyles($el, mirror) {
     const reset = JSON.parse($el.getAttribute('data-reset'))
     const corners = document.querySelectorAll('[data-corner]')
-    const isInverted = $el.style.transform.includes('-1')
+    const isInverted = $el.style.transform.includes('scale')
     corners.forEach(corner => (corner.style.borderColor = '#6166dc'))
 
     $el.style.transform = ''
@@ -497,7 +506,7 @@ const Frame = styled.div`
   align-self: flex-start;
   flex-direction: column;
   border-color: ${p => (p.animate ? '#6166dc' : 'transparent')};
-  transform: scale(${p => (p.animate ? 1 : 1.1)});
+  transform: scale(${p => (p.animate ? 1 : 1.12)});
   transition: transform 3.9s cubic-bezier(0.25, 0.1, 0.25, 1);
 
   ${mediaqueries.desktop`
@@ -516,6 +525,7 @@ const Mirror = styled.div`
   top: 100%;
   z-index: 1;
   opacity: 0.2;
+  pointer-events: none;
 `
 
 const Blur = styled.div`

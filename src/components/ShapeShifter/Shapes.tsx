@@ -15,6 +15,14 @@ export const Slash = () => (
         d="M360.998 379.319L76 178.816V81.528L360.984 281.14L360.998 379.319Z"
         stroke="white"
         strokeWidth="12"
+        id="start"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M218.5 355C293.887 355 355 293.887 355 218.5C355 143.113 293.887 82 218.5 82C143.113 82 82 143.113 82 218.5C82 293.887 143.113 355 218.5 355ZM218.5 367C300.514 367 367 300.514 367 218.5C367 136.486 300.514 70 218.5 70C136.486 70 70 136.486 70 218.5C70 300.514 136.486 367 218.5 367Z"
+        fill="white"
+        id="end"
       />
     </g>
     <defs>
@@ -195,7 +203,12 @@ export const Circle = () => (
     style={{ transform: 'scale(1.465)', pointerEvents: 'none' }}
   >
     <g filter="url(#filter0_dd)">
-      <circle cx="218.5" cy="218.5" r="142.5" stroke="white" strokeWidth="12" />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M218.5 355C293.887 355 355 293.887 355 218.5C355 143.113 293.887 82 218.5 82C143.113 82 82 143.113 82 218.5C82 293.887 143.113 355 218.5 355ZM218.5 367C300.514 367 367 300.514 367 218.5C367 136.486 300.514 70 218.5 70C136.486 70 70 136.486 70 218.5C70 300.514 136.486 367 218.5 367Z"
+        fill="white"
+      />
     </g>
     <defs>
       <filter
@@ -261,7 +274,12 @@ export const CircleMirror = () => (
     preserveAspectRatio="none"
     style={{ transform: 'scale(1.465)', pointerEvents: 'none' }}
   >
-    <circle cx="218.5" cy="218.5" r="142.5" stroke="white" strokeWidth="12" />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M218.5 355C293.887 355 355 293.887 355 218.5C355 143.113 293.887 82 218.5 82C143.113 82 82 143.113 82 218.5C82 293.887 143.113 355 218.5 355ZM218.5 367C300.514 367 367 300.514 367 218.5C367 136.486 300.514 70 218.5 70C136.486 70 70 136.486 70 218.5C70 300.514 136.486 367 218.5 367Z"
+      fill="white"
+    />
   </svg>
 )
 
@@ -371,6 +389,7 @@ export const TriangleMirror = () => (
  */
 export default [
   {
+    name: 'Slash',
     Shape: Slash,
     Mirror: SlashMirror,
     width: 297,
@@ -378,6 +397,7 @@ export default [
     maxHeight: 342,
   },
   {
+    name: 'Circle',
     Shape: Circle,
     Mirror: CircleMirror,
     width: 297,
@@ -385,6 +405,7 @@ export default [
     maxHeight: 312,
   },
   {
+    name: 'Triangle',
     Shape: Triangle,
     Mirror: TriangleMirror,
     width: 294.45,
@@ -392,6 +413,7 @@ export default [
     maxHeight: 267,
   },
   {
+    name: 'Square',
     Shape: Square,
     Mirror: SquareMirror,
     width: 305,

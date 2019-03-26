@@ -44,5 +44,6 @@ const Frame = styled.div`
     height: 100vh;
     top: 90px;
     position: fixed;
+    z-index: 0;
   `}
 `

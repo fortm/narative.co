@@ -79,6 +79,7 @@ const HorizontalScroller = styled.div`
   overflow-x: scroll !important;
   padding-bottom: 3rem !important;
   margin-bottom: -3rem !important;
+  -webkit-overflow-scrolling: touch;
 `
 
 const HorizontalScrollItem = styled.div`

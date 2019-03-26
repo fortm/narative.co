@@ -262,15 +262,11 @@ export default HomeServices
 
 const HomeServicesDesktop = styled.div`
   background: #101216;
-  padding-top: 100px;
+  padding-top: 160px;
 
   ${mediaqueries.tablet`
     display: none;
   `}
-`
-
-const HeadingSpacer = styled.div`
-  padding-bottom: 0;
 `
 
 const HeadingBackground = styled.div`
@@ -360,6 +356,7 @@ const StyledLink = styled(Link)`
   color: ${p => p.theme.colors.gold};
   opacity: ${p => (p.active ? 1 : 0)};
   transition: opacity 0.3s var(--ease-out-quad);
+  pointer-events: ${p => (p.active ? 'initial' : 'none')};
 
   &:hover {
     text-decoration: underline;
