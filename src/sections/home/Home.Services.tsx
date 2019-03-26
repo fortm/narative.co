@@ -56,21 +56,21 @@ const imageQuery = graphql`
         }
       }
     }
-    first: file(name: { regex: "/home-brand/" }) {
+    first: file(name: { regex: "/desktop-home-brand/" }) {
       childImageSharp {
         fluid(maxWidth: 787, quality: 100) {
           ...GatsbyImageSharpFluid_noBase64
         }
       }
     }
-    second: file(name: { regex: "/home-build/" }) {
+    second: file(name: { regex: "/desktop-home-build/" }) {
       childImageSharp {
         fluid(maxWidth: 787, quality: 100) {
           ...GatsbyImageSharpFluid_noBase64
         }
       }
     }
-    third: file(name: { regex: "/home-grow/" }) {
+    third: file(name: { regex: "/desktop-home-grow/" }) {
       childImageSharp {
         fluid(maxWidth: 787, quality: 100) {
           ...GatsbyImageSharpFluid_noBase64
