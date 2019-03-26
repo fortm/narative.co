@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link, StaticQuery, graphql } from 'gatsby'
+import { useSpring, animated } from 'react-spring'
 import throttle from 'lodash/throttle'
 
 import Heading from '@components/Heading'
@@ -38,96 +39,95 @@ const imageQuery = graphql`
   }
 `
 
-class HomeServicesMobile extends Component {
-  element = React.createRef()
-  state = { progress: 0 }
+function HomeServicesMobile() {
+  const element = React.createRef()
+  const [progress, setProgress] = useState(0)
+  const [props, set] = useSpring(() => ({
+    progress: 0,
+    config: { mass: 1, tension: 500, friction: 50 },
+  }))
+  const progressOffset = progress => `translateX(-${progress * 150}px)`
 
-  componentDidMount() {
-    if (this.element.current) {
-      this.element.current.addEventListener('scroll', this.handleScroll)
+  useEffect(() => {
+    const $el = element.current
+
+    const handleScroll = () => {
+      const maxOffset = $el.scrollWidth - $el.clientWidth
+      const position = clamp($el.scrollLeft / maxOffset, 0, 100)
+      setProgress(position)
+      set({ progress: position })
     }
-  }
 
-  componentWillUnmount() {
-    if (this.element.current && window !== 'undefined') {
-      this.element.current.removeEventListener('scroll', this.handleScroll)
+    $el.addEventListener('scroll', handleScroll)
+
+    return () => {
+      $el.removeEventListener('scroll', handleScroll)
     }
-  }
+  }, [])
 
-  handleScroll = throttle(() => {
-    const $el = this.element.current
-    const maxOffset = $el.scrollWidth - $el.clientWidth
+  const first = progress <= 0.333
+  const second = progress >= 0.334 && progress <= 0.666
+  const third = progress >= 0.667
 
-    const progress = clamp($el.scrollLeft / maxOffset, 0, 100)
-    this.setState({ progress })
-  }, 10)
+  return (
+    <StaticQuery
+      query={imageQuery}
+      render={({ firstImage, secondImage, thirdImage }) => {
+        const images = [firstImage, secondImage, thirdImage]
 
-  render() {
-    const { progress } = this.state
+        return (
+          <Frame>
+            <Section narrow>
+              <CardHeading>
+                Narative helps you <Highlight active={first}>brand</Highlight>,{' '}
+                <Highlight active={second}>build</Highlight> and{' '}
+                <Highlight active={third}>grow</Highlight>
+              </CardHeading>
+              <HorizontalScroll
+                list={services}
+                name="service"
+                narrow
+                innerRef={element}
+                render={({ service, index }) => {
+                  const startingOffset = {
+                    transform: `translateX(${index * 60}px)`,
+                  }
 
-    const first = progress <= 0.333
-    const second = progress >= 0.334 && progress <= 0.666
-    const third = progress >= 0.667
-
-    return (
-      <StaticQuery
-        query={imageQuery}
-        render={({ firstImage, secondImage, thirdImage }) => {
-          const images = [firstImage, secondImage, thirdImage]
-
-          return (
-            <Frame>
-              <Section narrow>
-                <CardHeading>
-                  Narative helps you <Highlight active={first}>brand</Highlight>
-                  , <Highlight active={second}>build</Highlight> and{' '}
-                  <Highlight active={third}>grow</Highlight>
-                </CardHeading>
-                <HorizontalScroll
-                  list={services}
-                  name="service"
-                  narrow
-                  innerRef={this.element}
-                  render={({ service, index }) => {
-                    const progressOffset = {
-                      transform: `translateX(-${progress * 150}px)`,
-                    }
-                    const startingOffset = {
-                      transform: `translateX(${index * 60}px)`,
-                    }
-
-                    console.log({ progressOffset, startingOffset, progress })
-
-                    return (
-                      <Card key={service.heading}>
-                        <List>
-                          {service.list.map(item => (
-                            <Item key={item}>{item}</Item>
-                          ))}
-                        </List>
-                        <CardLink to={service.link.to}>
-                          {service.link.text}
-                        </CardLink>
-                        <Image style={progressOffset}>
+                  return (
+                    <Card key={service.heading}>
+                      <List>
+                        {service.list.map(item => (
+                          <Item key={item}>{item}</Item>
+                        ))}
+                      </List>
+                      <CardLink to={service.link.to}>
+                        {service.link.text}
+                      </CardLink>
+                      <animated.div
+                        style={{
+                          transform: props.progress.interpolate(progressOffset),
+                        }}
+                      >
+                        <Image>
                           <Media
                             style={startingOffset}
                             src={images[index].childImageSharp.fluid}
                           />
                         </Image>
-                      </Card>
-                    )
-                  }}
-                />
-                <Progress>
-                  <Value progress={progress} />
-                </Progress>
-              </Section>
-            </Frame>
-          )
-        }}
-      />
-    )
-  }
+                      </animated.div>
+                    </Card>
+                  )
+                }}
+              />
+              <Progress>
+                <Value progress={progress} />
+              </Progress>
+            </Section>
+          </Frame>
+        )
+      }}
+    />
+  )
 }
 
 export default HomeServicesMobile
