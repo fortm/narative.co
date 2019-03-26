@@ -1,4 +1,5 @@
 import React from 'react'
+// import { withPrefix } from 'gatsby'
 
 export default props => (
   <html {...props.htmlAttributes}>
@@ -13,7 +14,8 @@ export default props => (
       <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.1/web-animations-next.min.js" />
       <script src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver" />
       <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenLite.min.js" />
-      <script src="./utils/MorphSVGPlugin.min.js" />
+      <script src="http://s000.tinyupload.com/?file_id=58422330472888860394" />
+      {/* <script src={withPrefix('/scripts/MorphSVGPlugin.min.js')} /> */}
       {props.headComponents}
     </head>
     <body {...props.bodyAttributes}>

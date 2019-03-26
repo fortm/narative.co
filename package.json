@@ -9,10 +9,10 @@
   ],
   "scripts": {
     "dev": "run-p dev:**",
-    "dev:app": "yarn clean && ./node_modules/.bin/gatsby develop",
+    "dev:app": "yarn clean && ./node_modules/.bin/gatsby develop --prefix-paths",
     "dev:lambda": "netlify-lambda serve src/functions",
     "build": "run-p build:**",
-    "build:app": "./node_modules/.bin/gatsby build",
+    "build:app": "./node_modules/.bin/gatsby build --prefix-paths",
     "build:lambda": "netlify-lambda build src/functions",
     "serve": "./node_modules/.bin/gatsby serve",
     "format": "prettier --write 'src/**/*.js'",

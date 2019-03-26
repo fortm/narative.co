@@ -9,6 +9,8 @@ import shapes from './Shapes'
 import Media from '@components/Media/Media.Img'
 import mediaqueries from '@styles/media'
 
+import { SlashMorph } from './Shapes'
+
 const minWidth: number = 0
 const minHeight: number = 0
 
@@ -232,14 +234,17 @@ function ShapeShifter() {
   }
 
   function handleActiveShapeClick() {
-    shape.current.style.transition = ''
-    shapeMirror.current.style.transition = ''
+    console.log('fired')
+    TweenLite.to('#start', 1, { morphSVG: '#end' })
 
-    if (activeShape === shapes.length - 1) {
-      setActiveShape(0)
-    } else {
-      setActiveShape(curr => curr + 1)
-    }
+    // shape.current.style.transition = ''
+    // shapeMirror.current.style.transition = ''
+
+    // if (activeShape === shapes.length - 1) {
+    //   setActiveShape(0)
+    // } else {
+    //   setActiveShape(curr => curr + 1)
+    // }
   }
 
   function addWidthAndHeightUnits() {
@@ -462,7 +467,7 @@ function ShapeShifter() {
                 data-reset={resetActiveStyles}
                 animate={animate}
               >
-                <Active.Shape />
+                <SlashMorph />
                 <Numbers ref={numbers} />
                 <HandleShapeShift onClick={handleActiveShapeClick} />
                 <Corners animate={animate}>
@@ -514,6 +519,10 @@ const Frame = styled.div`
   ${mediaqueries.desktop`
     display: none;
   `}
+
+  #end {
+    visibility: hidden;
+  }
 `
 
 const ShapesContainer = styled.div`

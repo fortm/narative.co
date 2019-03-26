@@ -8,7 +8,8 @@
       "plugins/**/*.js",
       "migration/**/*.js",
       "fallbacks/**/*.svg",
-      "functions/**/*.js"
+      "functions/**/*.js",
+      "src/scripts/*.js"
     ]
   },
   "rules": {

@@ -5,6 +5,7 @@ const proxy = require('http-proxy-middleware')
 exports.siteMetadata = {
   title: 'Narative',
   siteUrl: 'https://narative.co',
+  pathPrefix: `/`,
 }
 
 exports.plugins = [

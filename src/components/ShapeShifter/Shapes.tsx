@@ -421,3 +421,81 @@ export default [
     maxHeight: 321,
   },
 ]
+
+export const SlashMorph = () => (
+  <svg
+    width="437"
+    height="461"
+    viewBox="0 0 437 461"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g filter="url(#filter0_dd)">
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M82.0002 175.701L354.997 367.76L354.985 284.263L82.0002 93.056V175.701ZM70.0002 70V181.93L367 390.877L366.984 278.016L70.0002 70Z"
+        fill="white"
+        id="start"
+      />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M355 82H82V355H355V82ZM70 70V367H367V70H70Z"
+        fill="white"
+        id="end"
+      />
+    </g>
+    <defs>
+      <filter
+        id="filter0_dd"
+        x="0.000244141"
+        y="0"
+        width="437"
+        height="460.877"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset />
+        <feGaussianBlur stdDeviation="35" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0.399641 0 0 0 0 0.453299 0 0 0 0 0.554653 0 0 0 0.6 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset />
+        <feGaussianBlur stdDeviation="5" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.2 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="effect1_dropShadow"
+          result="effect2_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect2_dropShadow"
+          result="shape"
+        />
+      </filter>
+    </defs>
+  </svg>
+)
