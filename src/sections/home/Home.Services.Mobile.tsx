@@ -146,7 +146,8 @@ const Card = styled.div`
   min-height: 400px;
   background: #1d2128;
   border-radius: 5px;
-  overflow: hidden;
+  overflow-x: scroll;
+  pointer-events: none;
   text-align: center;
   -webkit-overflow-scrolling: touch;
 `
