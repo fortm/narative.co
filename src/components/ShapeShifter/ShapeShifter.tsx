@@ -9,7 +9,7 @@ import shapes from './Shapes'
 import Media from '@components/Media/Media.Img'
 import mediaqueries from '@styles/media'
 
-import { SlashMorph } from './Shapes'
+import { SlashMorph, SquareMorph } from './Shapes'
 
 const minWidth: number = 0
 const minHeight: number = 0
@@ -65,6 +65,9 @@ function ShapeShifter() {
     maxHeight: Active.maxHeight,
   })
 
+  const vector = useRef()
+  const vectorMirror = useRef()
+
   const shape = useRef()
   const shapeMirror = useRef()
 
@@ -89,14 +92,6 @@ function ShapeShifter() {
     // Alt and Shift
     document.addEventListener('keydown', onKeydown)
     document.addEventListener('keyup', onKeyup)
-
-    // TweenLite.to('#start', 1, {
-    //   morphSVG: '#end',
-    //   yoyo: true,
-    //   repeat: -1,
-    //   repeatDelay: 0.5,
-    //   ease: Power2.easeInOut,
-    // })
 
     // Remove all the events when unselected
     return () => {
@@ -133,6 +128,7 @@ function ShapeShifter() {
       background: linear-gradient(rgba(8, 8, 11, 0.05), rgb(8, 8, 11) 20%);
       pointer-events: none;
       z-index: 1;
+      transition: transform 0.6s ease;
     `
     homeHero.appendChild(mask)
   }, 16)
@@ -161,8 +157,8 @@ function ShapeShifter() {
 
   function onDown(event) {
     updateGlobalSettings(event)
-    shape.current.style.transition = 'unset'
-    shapeMirror.current.style.transition = 'unset'
+    // shape.current.style.transition = 'unset'
+    // shapeMirror.current.style.transition = 'unset'
     glow.current.style.opacity = 0
     glow.current.style.transition = 'opacity 0.1s'
 
@@ -231,20 +227,6 @@ function ShapeShifter() {
     numbers.current.style.color = '#6166dc'
     glow.current.style.opacity = 1
     glow.current.style.transition = 'opacity 1.6s linear'
-  }
-
-  function handleActiveShapeClick() {
-    console.log('fired')
-    TweenLite.to('#start', 1, { morphSVG: '#end' })
-
-    // shape.current.style.transition = ''
-    // shapeMirror.current.style.transition = ''
-
-    // if (activeShape === shapes.length - 1) {
-    //   setActiveShape(0)
-    // } else {
-    //   setActiveShape(curr => curr + 1)
-    // }
   }
 
   function addWidthAndHeightUnits() {
@@ -451,6 +433,56 @@ function ShapeShifter() {
     }
   })()
 
+  function handleActiveShapeClick() {
+    const mask = document.getElementById('mirror-mask')
+
+    TweenLite.to('#start', 0.6, {
+      morphSVG: '#end',
+      yoyo: true,
+      shapeIndex: [10],
+      ease: Power4.easeInOut,
+    })
+    TweenLite.to('#start-mirror', 0.6, {
+      morphSVG: '#end-mirror',
+      yoyo: true,
+      shapeIndex: [10],
+      ease: Power4.easeInOut,
+    })
+
+    let nextShape
+
+    if (activeShape + 1 === shapes.length) {
+      nextShape = shapes[0]
+    } else {
+      nextShape = shapes[activeShape + 1]
+    }
+
+    mask.style.transform = `translateY(${(Active.height - nextShape.height) *
+      -1}px)`
+
+    vector.current.style.transform = nextShape.styles.transform
+    vectorMirror.current.style.transform = nextShape.styles.transform
+    rel.current.style.width = nextShape.width + 'px'
+    rel.current.style.height = nextShape.height + 'px'
+    relMirror.current.style.width = nextShape.width + 'px'
+    relMirror.current.style.height = nextShape.height + 'px'
+    shape.current.style.width = nextShape.width + 'px'
+    shape.current.style.height = nextShape.height + 'px'
+    shapeMirror.current.style.width = nextShape.width + 'px'
+    shapeMirror.current.style.height = nextShape.height + 'px'
+
+    setTimeout(() => {
+      shape.current.style.transition = ''
+      shapeMirror.current.style.transition = ''
+
+      if (activeShape === shapes.length - 1) {
+        setActiveShape(0)
+      } else {
+        setActiveShape(curr => curr + 1)
+      }
+    }, 600)
+  }
+
   return (
     <StaticQuery
       query={query}
@@ -467,7 +499,9 @@ function ShapeShifter() {
                 data-reset={resetActiveStyles}
                 animate={animate}
               >
-                <SlashMorph />
+                <Vector style={Active.styles} ref={vector}>
+                  <Active.Shape />
+                </Vector>
                 <Numbers ref={numbers} />
                 <HandleShapeShift onClick={handleActiveShapeClick} />
                 <Corners animate={animate}>
@@ -488,7 +522,9 @@ function ShapeShifter() {
                   mirror
                 >
                   <Blur>
-                    <Active.Mirror />
+                    <Vector style={Active.styles} ref={vectorMirror}>
+                      <Active.Mirror />
+                    </Vector>
                   </Blur>
                 </ShapeContainer>
               </Relative>
@@ -520,9 +556,16 @@ const Frame = styled.div`
     display: none;
   `}
 
-  #end {
+  #end, #end-mirror {
     visibility: hidden;
   }
+`
+
+const Vector = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s ease;
 `
 
 const ShapesContainer = styled.div`
@@ -558,6 +601,7 @@ const HandleShapeShift = styled.div`
 const Relative = styled.div`
   position: relative;
   z-index: 1;
+  transition: width 0.6s ease, height 0.6s ease;
 
   ${p =>
     p.mirror &&
@@ -565,7 +609,7 @@ const Relative = styled.div`
     top: 35px;
     z-index: 0;
     pointer-events: none;
-  `}
+  `};
 `
 
 const ShapeContainer = styled.div`
@@ -576,7 +620,8 @@ const ShapeContainer = styled.div`
   border-color: ${p => (p.animate ? '#6166dc' : 'transparent')};
   opacity: ${p => (p.animate ? 1 : 0)};
   z-index: 1;
-  transition: opacity 2s ease 0.3s, border-color 1.4s 2.2s;
+  transition: opacity 2s ease 0.3s, border-color 1.4s 2.2s, width 0.6s,
+    height 0.6s;
 
   &::after {
     content: '';

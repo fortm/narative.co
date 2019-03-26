@@ -112,8 +112,8 @@ const Text = styled.p`
   ${mediaqueries.tablet`
     font-size: 22px;
     top: 0;
-    padding: 0;
-    margin: 0 0 40px 0;
+    margin: 0;
+    padding: 0 0 40px 0;
   `};
 `
 

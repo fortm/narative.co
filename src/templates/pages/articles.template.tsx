@@ -69,7 +69,7 @@ class ArticlesPage extends Component<
 
     const navConfig = {
       offset: true,
-      fixed: false,
+      fixed: true,
       theme: 'light',
     }
 

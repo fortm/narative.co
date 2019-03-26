@@ -8,8 +8,7 @@
     "static",
     "**/*.spec.ts",
     "fallbacks",
-    "migrations",
-    "./src/scripts/*"
+    "migrations"
   ],
   "compilerOptions": {
     "lib": ["dom", "es2017"],

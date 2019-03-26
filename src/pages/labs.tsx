@@ -47,7 +47,7 @@ class LabsPage extends Component<{}, { animate: string }> {
     const pageBackground = 'linear-gradient(180deg, #08080b 50%, #191D23 100%)'
 
     const navConfig = {
-      fixed: false,
+      fixed: true,
       theme: 'light',
       offset: true,
     }

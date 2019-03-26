@@ -323,7 +323,7 @@ const TextContainer = styled.div`
   `};
 
   ${mediaqueries.phablet`
-    top: -60px;
+    top: -70px;
   `}
 `
 
@@ -363,13 +363,12 @@ const ImageContainer = styled.div`
   `};
 
   ${mediaqueries.desktop`
-    display:  ${p => (p.desktop ? ' none' : 'initial')}
+    display:  ${p => (p.desktop ? ' none' : 'block')}
     right: 0;
     left: 0;
     position: relative;
     margin: 0 auto;
     margin-bottom: 50px;
-    display: block;
     width: 100%;
   `};
 `
