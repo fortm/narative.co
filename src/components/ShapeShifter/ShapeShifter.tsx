@@ -113,7 +113,9 @@ function ShapeShifter() {
     const previousMask = document.getElementById('mirror-mask')
     const homeHero = document.getElementById('home-hero')
     const mask = document.createElement('div')
-    const offsetTop = shape.current.getBoundingClientRect().bottom
+    const offsetTop =
+      shape.current.getBoundingClientRect().bottom +
+      document.documentElement.scrollTop
 
     if (previousMask) {
       previousMask.remove()
@@ -126,7 +128,7 @@ function ShapeShifter() {
       left: 0;
       width: 100%;
       height: 800px;
-      background: linear-gradient(rgba(8, 8, 11, 0.1), rgb(8, 8, 11) 20%);
+      background: linear-gradient(rgba(8, 8, 11, 0.05), rgb(8, 8, 11) 20%);
       pointer-events: none;
       z-index: 1;
     `
