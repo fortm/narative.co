@@ -109,12 +109,11 @@ const Text = styled.p`
   padding-bottom: 140px;
   margin-bottom: -70px;
 
-  /* padding: 100px 0 100px;
-  margin: -100px 0 -100px; */
   ${mediaqueries.tablet`
     font-size: 22px;
-    padding-bottom: 240px;
-    margin-bottom: -200px;
+    top: 0;
+    padding: 0;
+    margin: 0 0 40px 0;
   `};
 `
 

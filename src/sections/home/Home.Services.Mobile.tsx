@@ -96,6 +96,8 @@ class HomeServicesMobile extends Component {
                       transform: `translateX(${index * 60}px)`,
                     }
 
+                    console.log({ progressOffset, startingOffset, progress })
+
                     return (
                       <Card key={service.heading}>
                         <List>
