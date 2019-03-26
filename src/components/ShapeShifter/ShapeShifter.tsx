@@ -565,7 +565,7 @@ const Vector = styled.div`
 
 const ShapesContainer = styled.div`
   position: absolute;
-  top: calc(50% - 195px);
+  top: calc(50% - 185px);
   right: 80px;
 `
 
