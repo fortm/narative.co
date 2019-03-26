@@ -6,6 +6,8 @@ import Heading from '@components/Heading'
 import ButtonArrow from '@components/Button/Button.Arrow'
 import Media from '@components/Media/Media.Img'
 
+import ArticlesFeaturedMobile from './Articles.Featured.Mobile'
+
 import mediaqueries from '@styles/media'
 
 import { IArticleNode } from '@typings'
@@ -15,21 +17,24 @@ import { IArticleNode } from '@typings'
  * Featured: true in Contentful. This does not fit in the Grid below.
  */
 const ArticlesFeatured = ({ article }: { article: IArticleNode }) => (
-  <Frame>
-    <Left to={`/articles/${article.slug}`}>
-      <SuperScript>Featured article</SuperScript>
-      <FeaturedTitle dark>{article.title}</FeaturedTitle>
-      <Excerpt>{article.excerpt}</Excerpt>
-      <ButtonArrow
-        text="Read more"
-        color="#000"
-        onClick={() => navigate(`/articles/${article.slug}`)}
-      />
-    </Left>
-    <Right to={`/articles/${article.slug}`}>
-      <Media src={article.hero.Article__Featured} />
-    </Right>
-  </Frame>
+  <>
+    <Frame>
+      <Left to={`/articles/${article.slug}`}>
+        <SuperScript>Featured article</SuperScript>
+        <FeaturedTitle dark>{article.title}</FeaturedTitle>
+        <Excerpt>{article.excerpt}</Excerpt>
+        <ButtonArrow
+          text="Read more"
+          color="#000"
+          onClick={() => navigate(`/articles/${article.slug}`)}
+        />
+      </Left>
+      <Right to={`/articles/${article.slug}`}>
+        <Media src={article.hero.Article__Featured} />
+      </Right>
+    </Frame>
+    <ArticlesFeaturedMobile article={article} />
+  </>
 )
 
 export default ArticlesFeatured
@@ -56,12 +61,7 @@ const Frame = styled.div`
   overflow: hidden;
 
   ${mediaqueries.tablet`
-    padding: 100px 0;
-    overflow: visible;
-  `}
-
-  ${mediaqueries.phablet`
-    padding: 60px 0 80px;
+    display: none;
   `}
 `
 
