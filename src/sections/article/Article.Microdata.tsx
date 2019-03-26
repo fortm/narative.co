@@ -68,7 +68,7 @@ const Microdata = ({
     isoDateStr = new Date(postDate!).toISOString()
   } catch (error) {
     // Now all browsers can parse our date string. That's fine. The crawler can
-    // console.log(error)
+    console.warn(error)
   }
 
   return (

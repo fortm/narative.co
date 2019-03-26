@@ -121,13 +121,13 @@ const Frame = styled.div`
 `
 
 const Card = styled.div`
+  position: relative;
   min-height: 400px;
   background: #1d2128;
   border-radius: 5px;
-  overflow-x: scroll;
+  overflow: hidden;
   pointer-events: none;
   text-align: center;
-  -webkit-overflow-scrolling: touch;
 `
 
 const CardHeading = styled(Heading.h3)`
@@ -137,18 +137,20 @@ const CardHeading = styled(Heading.h3)`
 `
 
 const Image = styled.div`
-  position: relative;
+  position: absolute;
   margin: 0 auto;
   height: 300px;
-  width: 150%;
-  left: -25%;
-  top: -20px;
+  width: 130%;
+  left: -15%;
+  bottom: -8%;
   z-index: 0;
 `
 
 const List = styled.ul`
+  position: relative;
   list-style: none;
   margin: 35px auto 20px;
+  z-index: 1;
 `
 
 const Item = styled.li`
@@ -179,7 +181,6 @@ const Progress = styled.div`
   height: 2px;
   background: #1d2128;
   overflow: hidden;
-  -webkit-overflow-scrolling: touch;
 `
 
 const Value = styled.div`

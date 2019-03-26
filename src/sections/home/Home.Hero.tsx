@@ -126,4 +126,8 @@ const ContentContainer = styled.div`
     height: calc(100vh - 180px);
     padding: 0;
   `};
+
+  @media screen and (max-height: 600px) {
+    min-height: 100%;
+  }
 `

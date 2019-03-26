@@ -96,6 +96,7 @@ const Grid = styled(Section)`
   padding-top: 100px;
   padding-bottom: 30px;
   z-index: 1;
+  pointer-events: none;
 
   ${mediaqueries.tablet`
     padding-top: 80px;
@@ -116,6 +117,7 @@ const Grid = styled(Section)`
     height: 200px;
     background: linear-gradient(transparent, #08080b);
     opacity ${p => (p.visible ? 1 : 0)};
+    pointer-events: none;
   }
 `
 

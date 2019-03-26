@@ -42,8 +42,13 @@ const Spacer = styled.div`
 const Frame = styled.div`
   ${mediaqueries.tablet`
     height: 100vh;
+    min-height: 550px;
     top: 90px;
     position: fixed;
     z-index: 0;
+
+    @media screen and (max-height: 600px) {
+      padding-top: 60px;
+    }
   `}
 `

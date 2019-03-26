@@ -159,7 +159,6 @@ const HeroSection = styled(Section)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  overflow-x: hidden;
 `
 
 const HeroImage = styled.div`

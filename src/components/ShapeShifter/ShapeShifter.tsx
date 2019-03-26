@@ -554,6 +554,10 @@ const Frame = styled.div`
   #end, #end-mirror {
     visibility: hidden;
   }
+
+  svg {
+    pointer-events: none;
+  }
 `
 
 const Vector = styled.div`
@@ -561,6 +565,7 @@ const Vector = styled.div`
   width: 100%;
   height: 100%;
   transition: transform 0.6s ease;
+  pointer-events: none;
 `
 
 const ShapesContainer = styled.div`
@@ -656,6 +661,10 @@ const ShapeGlow = styled.div`
   left: -40px;
   top: -50px;
   transform: scale(1.8, 2.8);
+
+  ${mediaqueries.desktop_large`
+      transform: scale(1.4, 2.4);
+  `}
 `
 
 const Corners = styled.div`

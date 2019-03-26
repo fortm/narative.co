@@ -379,7 +379,8 @@ const MaskMobile = styled.div`
 
 const MobileScroll = styled.div`
   ${mediaqueries.tablet`
-    position: fixed;
+  position: ${p => (p.fixed ? 'fixed' : 'absolute')};
+
     width: 100%;
     top: 0;
     left: 0;
