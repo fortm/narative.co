@@ -148,6 +148,7 @@ const Card = styled.div`
   border-radius: 5px;
   overflow: hidden;
   text-align: center;
+  -webkit-overflow-scrolling: touch;
 `
 
 const CardHeading = styled(Heading.h3)`
@@ -199,6 +200,7 @@ const Progress = styled.div`
   height: 2px;
   background: #1d2128;
   overflow: hidden;
+  -webkit-overflow-scrolling: touch;
 `
 
 const Value = styled.div`
