@@ -48,7 +48,7 @@ const HomeAbout = () => (
         <MobileSpacer />
         <IntersectionObserver
           render={({ visible, boundingClientRect }) => (
-            <Grid narrow visible={visible && boundingClientRect.bottom > 420}>
+            <Grid narrow visible={visible && boundingClientRect.bottom > 500}>
               <Sticky
                 height="682px"
                 top={140}

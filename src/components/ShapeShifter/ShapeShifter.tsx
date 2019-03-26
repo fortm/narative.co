@@ -9,8 +9,6 @@ import shapes from './Shapes'
 import Media from '@components/Media/Media.Img'
 import mediaqueries from '@styles/media'
 
-import { SlashMorph, SquareMorph } from './Shapes'
-
 const minWidth: number = 0
 const minHeight: number = 0
 
@@ -36,6 +34,7 @@ let y: number
 let event
 
 let redraw: boolean = false
+let shift: boolean = false
 
 let pressedKeys: {} = {}
 
@@ -157,8 +156,8 @@ function ShapeShifter() {
 
   function onDown(event) {
     updateGlobalSettings(event)
-    // shape.current.style.transition = 'unset'
-    // shapeMirror.current.style.transition = 'unset'
+    shape.current.style.transition = 'unset'
+    shapeMirror.current.style.transition = 'unset'
     glow.current.style.opacity = 0
     glow.current.style.transition = 'opacity 0.1s'
 
@@ -433,47 +432,43 @@ function ShapeShifter() {
     }
   })()
 
-  function handleActiveShapeClick() {
+  function handleShapeMorph(start, end, $el, $rel) {
     const mask = document.getElementById('mirror-mask')
+    const nextShape =
+      activeShape + 1 === shapes.length ? shapes[0] : shapes[activeShape + 1]
 
-    TweenLite.to('#start', 0.6, {
-      morphSVG: '#end',
+    const maskOffset = (Active.height - nextShape.height) * -1
+
+    TweenLite.to(start, 0.6, {
+      morphSVG: end,
       yoyo: true,
       shapeIndex: [10],
       ease: Power4.easeInOut,
     })
-    TweenLite.to('#start-mirror', 0.6, {
-      morphSVG: '#end-mirror',
-      yoyo: true,
-      shapeIndex: [10],
-      ease: Power4.easeInOut,
-    })
 
-    let nextShape
-
-    if (activeShape + 1 === shapes.length) {
-      nextShape = shapes[0]
-    } else {
-      nextShape = shapes[activeShape + 1]
-    }
-
-    mask.style.transform = `translateY(${(Active.height - nextShape.height) *
-      -1}px)`
-
+    $rel.style.width = `${nextShape.width}px`
+    $rel.style.height = `${nextShape.height}px`
+    $el.style.width = `${nextShape.width}px`
+    $el.style.height = `${nextShape.height}px`
+    mask.style.transform = `translateY(${maskOffset}px)`
     vector.current.style.transform = nextShape.styles.transform
     vectorMirror.current.style.transform = nextShape.styles.transform
-    rel.current.style.width = nextShape.width + 'px'
-    rel.current.style.height = nextShape.height + 'px'
-    relMirror.current.style.width = nextShape.width + 'px'
-    relMirror.current.style.height = nextShape.height + 'px'
-    shape.current.style.width = nextShape.width + 'px'
-    shape.current.style.height = nextShape.height + 'px'
-    shapeMirror.current.style.width = nextShape.width + 'px'
-    shapeMirror.current.style.height = nextShape.height + 'px'
+  }
+
+  function handleShapeMorphClick() {
+    if (shift) return
+    shift = true
+
+    handleShapeMorph('#start', '#end', shape.current, rel.current)
+    handleShapeMorph(
+      '#start-mirror',
+      '#end-mirror',
+      shapeMirror.current,
+      relMirror.current
+    )
 
     setTimeout(() => {
-      shape.current.style.transition = ''
-      shapeMirror.current.style.transition = ''
+      shift = false
 
       if (activeShape === shapes.length - 1) {
         setActiveShape(0)
@@ -503,7 +498,7 @@ function ShapeShifter() {
                   <Active.Shape />
                 </Vector>
                 <Numbers ref={numbers} />
-                <HandleShapeShift onClick={handleActiveShapeClick} />
+                <HandleShapeShift onClick={handleShapeMorphClick} />
                 <Corners animate={animate}>
                   <TopLeftCorner data-corner="top-left" />
                   <TopRightCorner data-corner="top-right" />
