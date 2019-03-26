@@ -8,7 +8,7 @@ import IntersectionObserver from '@components/IntersectionObserver'
 import Sticky from '@components/Sticky'
 import Media from '@components/Media/Media.Img'
 
-import mediaqueries, { media } from '@styles/media'
+import mediaqueries from '@styles/media'
 
 const aboutNarativeText = [
   `Even the most brilliant companies hit points where their focus is
@@ -46,27 +46,33 @@ const HomeAbout = () => (
           <Media critical src={shape.childImageSharp.fluid} />
         </MobileContainer>
         <MobileSpacer />
-        <Grid narrow>
-          <Sticky
-            height="682px"
-            top={140}
-            disableOnMobile
-            render={() => <AboutHeading>The Narative Approach</AboutHeading>}
-          />
-          <div>
-            {aboutNarativeText.map(text => (
-              <IntersectionObserver
-                key={text}
-                render={({ visiblePercentage }) => (
-                  <Text
-                    style={{ opacity: visiblePercentage / 2 / 50 }}
-                    dangerouslySetInnerHTML={{ __html: text }}
-                  />
+        <IntersectionObserver
+          render={({ visible, boundingClientRect }) => (
+            <Grid narrow visible={visible && boundingClientRect.bottom > 420}>
+              <Sticky
+                height="682px"
+                top={140}
+                disableOnMobile
+                render={() => (
+                  <AboutHeading>The Narative Approach</AboutHeading>
                 )}
               />
-            ))}
-          </div>
-        </Grid>
+              <div>
+                {aboutNarativeText.map(text => (
+                  <IntersectionObserver
+                    key={text}
+                    render={({ visiblePercentage }) => (
+                      <Text
+                        style={{ opacity: visiblePercentage / 100 }}
+                        dangerouslySetInnerHTML={{ __html: text }}
+                      />
+                    )}
+                  />
+                ))}
+              </div>
+            </Grid>
+          )}
+        />
       </Gradient>
     )}
   />
@@ -75,11 +81,12 @@ const HomeAbout = () => (
 export default HomeAbout
 
 const Gradient = styled.div`
-  background: linear-gradient(180deg, #08080b 70%, #101216 100%);
+  background: #08080b;
+  background: linear-gradient(#08080b 70%, #101216 100%);
 
   ${mediaqueries.tablet`
     background: linear-gradient(180deg,#121318 70%,#101216 100%);
-  `}
+  `};
 `
 const Grid = styled(Section)`
   position: relative;
@@ -94,7 +101,22 @@ const Grid = styled(Section)`
     padding-top: 80px;
     display: block;
     padding-bottom: 100;
+
+    &::after {
+      content: none;
+    }
   `}
+
+  &::after {
+    content: '';
+    position: fixed;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    height: 200px;
+    background: linear-gradient(transparent, #08080b);
+    opacity ${p => (p.visible ? 1 : 0)};
+  }
 `
 
 const Text = styled.p`
@@ -118,7 +140,19 @@ const Text = styled.p`
 `
 
 const AboutHeading = styled(Heading.h2)`
+  position: relative;
   color: ${p => p.theme.colors.grey};
+`
+
+const Shadow = styled.div`
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  background: red;
+
+  ${mediaqueries.tablet`
+    display: none;
+  `};
 `
 
 const MobileContainer = styled.div`

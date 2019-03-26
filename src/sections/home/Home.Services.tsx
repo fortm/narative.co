@@ -173,7 +173,6 @@ const HomeServices = () => {
                 )}
               />
             </Section>
-
             <Sticky
               height="333vh"
               render={({ progress }) => {
@@ -276,12 +275,12 @@ const HeadingBackground = styled.div`
 
   background-repeat: no-repeat;
   background-image: url(${p => p.background});
-  background-size: cover;
   color: transparent !important;
-  background-position: center;
+  background-position: bottom left;
   max-width: 900px;
-  padding-bottom: calc(40vh + 120px);
-  margin-bottom: calc(-40vh);
+  padding-bottom: 400px;
+  margin-bottom: -250px;
+  z-index: 4;
 `
 
 const LargeHeading = styled.h2`

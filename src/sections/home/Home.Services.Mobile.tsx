@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link, StaticQuery, graphql } from 'gatsby'
-import { useSpring, animated } from 'react-spring'
-import throttle from 'lodash/throttle'
 
 import Heading from '@components/Heading'
 import Section from '@components/Section'
@@ -42,11 +40,6 @@ const imageQuery = graphql`
 function HomeServicesMobile() {
   const element = React.createRef()
   const [progress, setProgress] = useState(0)
-  const [props, set] = useSpring(() => ({
-    progress: 0,
-    config: { mass: 1, tension: 500, friction: 50 },
-  }))
-  const progressOffset = progress => `translateX(-${progress * 150}px)`
 
   useEffect(() => {
     const $el = element.current
@@ -55,7 +48,6 @@ function HomeServicesMobile() {
       const maxOffset = $el.scrollWidth - $el.clientWidth
       const position = clamp($el.scrollLeft / maxOffset, 0, 100)
       setProgress(position)
-      set({ progress: position })
     }
 
     $el.addEventListener('scroll', handleScroll)
@@ -88,36 +80,22 @@ function HomeServicesMobile() {
                 name="service"
                 narrow
                 innerRef={element}
-                render={({ service, index }) => {
-                  const startingOffset = {
-                    transform: `translateX(${index * 60}px)`,
-                  }
+                render={({ service, index }) => (
+                  <Card key={service.heading}>
+                    <List>
+                      {service.list.map(item => (
+                        <Item key={item}>{item}</Item>
+                      ))}
+                    </List>
+                    <CardLink to={service.link.to}>
+                      {service.link.text}
+                    </CardLink>
 
-                  return (
-                    <Card key={service.heading}>
-                      <List>
-                        {service.list.map(item => (
-                          <Item key={item}>{item}</Item>
-                        ))}
-                      </List>
-                      <CardLink to={service.link.to}>
-                        {service.link.text}
-                      </CardLink>
-                      <animated.div
-                        style={{
-                          transform: props.progress.interpolate(progressOffset),
-                        }}
-                      >
-                        <Image>
-                          <Media
-                            style={startingOffset}
-                            src={images[index].childImageSharp.fluid}
-                          />
-                        </Image>
-                      </animated.div>
-                    </Card>
-                  )
-                }}
+                    <Image>
+                      <Media src={images[index].childImageSharp.fluid} />
+                    </Image>
+                  </Card>
+                )}
               />
               <Progress>
                 <Value progress={progress} />
