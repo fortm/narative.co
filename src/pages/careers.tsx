@@ -356,7 +356,7 @@ const ImageContainer = styled.div`
   position: absolute;
   width: 100%;
   width: 460px;
-  right: 8%;
+  right: 14%;
 
   ${mediaqueries.desktop_medium`
     right: -2%;
