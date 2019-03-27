@@ -231,7 +231,7 @@ const HeroImage = styled.div`
   position: relative;
   width: 610px;
   top: -180px;
-  right: -10px;
+  right: -40px;
   animation: float 4.8s ease-in-out infinite 1.4s;
 
   @keyframes float {

@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { ButtonArrow, Section, Heading } from '@components'
 import ScrollIndicator from '@components/ScrollIndicator'
 import ShapeShifter from '@components/ShapeShifter'
+import IntersectionObserver from '@components/IntersectionObserver'
 import LayoutHeroMobile from '@components/Layout/Layout.Hero.Mobile'
 
 import transitions from '@styles/transitions'
@@ -36,26 +37,30 @@ class HomeHero extends Component<{}, { animation: string }> {
       <LayoutHeroMobile>
         <HomeHeroContainer id="home-hero">
           <Section>
-            <ContentContainer>
-              <TextContainer animation={animation}>
-                <Heading.h1>
-                  <em>Narative</em> builds brands, websites and products for
-                  growth-minded companies.
-                </Heading.h1>
-                <MainText>
-                  We're a team with senior startup experience here to help your
-                  business take the next step.
-                </MainText>
-                <ContactText
-                  to="/contact"
-                  onClick={event => this.navigateOut(event, '/contact')}
-                  animation={animation}
-                >
-                  <ButtonArrow text="Get in touch" />
-                </ContactText>
-              </TextContainer>
-              <ShapeShifter />
-            </ContentContainer>
+            <IntersectionObserver
+              render={({ intersectionRatio }) => (
+                <ContentContainer style={{ opacity: intersectionRatio }}>
+                  <TextContainer animation={animation}>
+                    <Heading.h1>
+                      <em>Narative</em> builds brands, websites and products for
+                      growth-minded companies.
+                    </Heading.h1>
+                    <MainText>
+                      We're a team with senior startup experience here to help
+                      your business take the next step.
+                    </MainText>
+                    <ContactText
+                      to="/contact"
+                      onClick={event => this.navigateOut(event, '/contact')}
+                      animation={animation}
+                    >
+                      <ButtonArrow text="Get in touch" />
+                    </ContactText>
+                  </TextContainer>
+                  <ShapeShifter />
+                </ContentContainer>
+              )}
+            />
             <ScrollIndicator />
           </Section>
         </HomeHeroContainer>
