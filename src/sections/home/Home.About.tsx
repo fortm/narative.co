@@ -47,8 +47,12 @@ const HomeAbout = () => (
         </MobileContainer>
         <MobileSpacer />
         <IntersectionObserver
-          render={({ visible, boundingClientRect }) => (
-            <Grid narrow visible={visible && boundingClientRect.bottom > 500}>
+          render={({ visible, exiting, boundingClientRect }) => (
+            <Grid
+              narrow
+              visible={visible && boundingClientRect.top > -200}
+              exiting={exiting}
+            >
               <Sticky
                 height="682px"
                 top={140}
@@ -82,7 +86,7 @@ export default HomeAbout
 
 const Gradient = styled.div`
   background: #08080b;
-  background: linear-gradient(#08080b 70%, #101216 100%);
+  background: linear-gradient(#08080b 60%, #101216 100%);
 
   ${mediaqueries.tablet`
     background: linear-gradient(180deg,#121318 70%,#101216 100%);
@@ -117,6 +121,7 @@ const Grid = styled(Section)`
     height: 200px;
     background: linear-gradient(transparent, #08080b);
     opacity ${p => (p.visible ? 1 : 0)};
+    transition: opacity ${p => (p.exiting ? '0.8s' : '0')};
     pointer-events: none;
   }
 `
@@ -144,17 +149,6 @@ const Text = styled.p`
 const AboutHeading = styled(Heading.h2)`
   position: relative;
   color: ${p => p.theme.colors.grey};
-`
-
-const Shadow = styled.div`
-  position: absolute;
-  height: 100px;
-  width: 100px;
-  background: red;
-
-  ${mediaqueries.tablet`
-    display: none;
-  `};
 `
 
 const MobileContainer = styled.div`

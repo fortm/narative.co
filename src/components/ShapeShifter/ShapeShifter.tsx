@@ -123,8 +123,8 @@ function ShapeShifter() {
       top: ${offsetTop + 30}px;
       left: 0;
       width: 100%;
-      height: 800px;
-      background: linear-gradient(rgba(8, 8, 11, 0.05), rgb(8, 8, 11) 20%);
+      height: 600px;
+      background: linear-gradient(rgba(8, 8, 11, 0.05), rgb(8, 8, 11) 30%, rgb(8, 8, 11, 0.8));
       pointer-events: none;
       z-index: 1;
       transition: transform 0.6s ease;

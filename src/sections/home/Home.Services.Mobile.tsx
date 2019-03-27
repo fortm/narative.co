@@ -91,15 +91,15 @@ function HomeServicesMobile() {
                       {service.link.text}
                     </CardLink>
 
-                    {/* <Image>
+                    <Image>
                       <Media src={images[index].childImageSharp.fluid} />
-                    </Image> */}
+                    </Image>
                   </Card>
                 )}
               />
-              <Progress>
+              {/* <Progress>
                 <Value progress={progress} />
-              </Progress>
+              </Progress> */}
             </Section>
           </Frame>
         )
