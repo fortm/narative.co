@@ -85,6 +85,8 @@ const HomeAbout = () => (
 export default HomeAbout
 
 const Gradient = styled.div`
+  position: relative;
+  z-index: 3;
   background: #08080b;
   background: linear-gradient(#08080b 60%, #101216 100%);
 

@@ -13,7 +13,7 @@ import { ExIcon } from '../../icons/ui'
 import mediaqueries from '@styles/media'
 
 import {
-  debounce,
+  clamp,
   getBreakpointFromTheme,
   getWindowDimensions,
   scrollable,
@@ -109,7 +109,8 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
     return null
   }
 
-  handleScroll = () => this.setState({ position: window.pageYOffset })
+  handleScroll = () =>
+    this.setState({ position: clamp(window.pageYOffset, 0, 1000) })
 
   /**
    * If the user were to resize their browser window to be larger

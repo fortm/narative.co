@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import mediaqueries from '@styles/media'
 import {
+  clamp,
   getWindowDimensions,
   getBreakpointFromTheme,
   useScrollPosition,
@@ -21,7 +22,7 @@ export function calculateStyles(position: number): {} {
 }
 
 function LayoutHeroMobile({ children }) {
-  const position = useScrollPosition()
+  const position = clamp(useScrollPosition(), 0, 1000)
 
   return (
     <>

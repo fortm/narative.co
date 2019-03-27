@@ -97,9 +97,11 @@ function HomeServicesMobile() {
                   </Card>
                 )}
               />
-              {/* <Progress>
-                <Value progress={progress} />
-              </Progress> */}
+              <Progress>
+                <Value
+                  style={{ transform: `translateX(${progress * 200}%)` }}
+                />
+              </Progress>
             </Section>
           </Frame>
         )
@@ -111,6 +113,8 @@ function HomeServicesMobile() {
 export default HomeServicesMobile
 
 const Frame = styled.div`
+  position: relative;
+  z-index: 3;
   padding-top: 110px;
   padding-bottom: 80px;
   background: linear-gradient(#0f1015, #101216);
@@ -188,5 +192,4 @@ const Value = styled.div`
   width: 33%;
   height: 2px;
   background: #fff;
-  transform: translateX(${p => p.progress * 200}%);
 `
