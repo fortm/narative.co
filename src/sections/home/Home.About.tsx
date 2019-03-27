@@ -160,25 +160,12 @@ const AboutHeading = styled(Heading.h2)`
 
 const MobileContainer = styled.div`
   position: relative;
-  width: 100%;
+  max-width: 100vw;
   margin-bottom: -85%;
+  overflow-x: hidden;
 
   ${mediaqueries.tablet_up`
     display: none;
-  `}
-`
-
-const MobileSpacer = styled.div`
-  ${mediaqueries.tablet_up`
-    display: none;
-  `}
-
-  ${mediaqueries.phablet`
-    height: 100vh;
-  `}
-
-  ${mediaqueries.phone`
-    height: 600px;
   `}
 `
 
