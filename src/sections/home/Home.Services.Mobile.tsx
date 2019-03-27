@@ -66,6 +66,7 @@ function HomeServicesMobile() {
       query={imageQuery}
       render={({ firstImage, secondImage, thirdImage }) => {
         const images = [firstImage, secondImage, thirdImage]
+        const progressOffset = { transform: `translateX(-${progress * 150}px)` }
 
         return (
           <Frame>
@@ -80,22 +81,31 @@ function HomeServicesMobile() {
                 name="service"
                 narrow
                 innerRef={element}
-                render={({ service, index }) => (
-                  <Card key={service.heading}>
-                    <List>
-                      {service.list.map(item => (
-                        <Item key={item}>{item}</Item>
-                      ))}
-                    </List>
-                    <CardLink to={service.link.to}>
-                      {service.link.text}
-                    </CardLink>
+                render={({ service, index }) => {
+                  const startingOffset = {
+                    transform: `translateX(${index * 60}px)`,
+                  }
 
-                    <Image>
-                      <Media src={images[index].childImageSharp.fluid} />
-                    </Image>
-                  </Card>
-                )}
+                  return (
+                    <Card key={service.heading}>
+                      <List>
+                        {service.list.map(item => (
+                          <Item key={item}>{item}</Item>
+                        ))}
+                      </List>
+                      <CardLink to={service.link.to}>
+                        {service.link.text}
+                      </CardLink>
+
+                      <Image style={progressOffset}>
+                        <Media
+                          style={startingOffset}
+                          src={images[index].childImageSharp.fluid}
+                        />
+                      </Image>
+                    </Card>
+                  )
+                }}
               />
               <Progress>
                 <Value
@@ -125,6 +135,7 @@ const Frame = styled.div`
 `
 
 const Card = styled.div`
+  position: relative;
   min-height: 400px;
   background: #1d2128;
   border-radius: 5px;
@@ -140,12 +151,12 @@ const CardHeading = styled(Heading.h3)`
 `
 
 const Image = styled.div`
-  position: relative;
+  position: absolute;
   margin: 0 auto;
-  height: 300px;
-  width: 150%;
-  left: -25%;
-  bottom: 20px;
+  height: 60%;
+  width: 130%;
+  left: -15%;
+  bottom: 9%;
   z-index: 0;
 `
 
