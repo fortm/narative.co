@@ -91,9 +91,9 @@ function HomeServicesMobile() {
                       {service.link.text}
                     </CardLink>
 
-                    <Image>
+                    {/* <Image>
                       <Media src={images[index].childImageSharp.fluid} />
-                    </Image>
+                    </Image> */}
                   </Card>
                 )}
               />
@@ -121,7 +121,6 @@ const Frame = styled.div`
 `
 
 const Card = styled.div`
-  position: relative;
   min-height: 400px;
   background: #1d2128;
   border-radius: 5px;
@@ -137,12 +136,12 @@ const CardHeading = styled(Heading.h3)`
 `
 
 const Image = styled.div`
-  position: absolute;
+  position: relative;
   margin: 0 auto;
   height: 300px;
-  width: 130%;
-  left: -15%;
-  bottom: -8%;
+  width: 150%;
+  left: -25%;
+  bottom: 20px;
   z-index: 0;
 `
 
