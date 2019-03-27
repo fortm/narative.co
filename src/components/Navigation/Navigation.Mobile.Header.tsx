@@ -26,7 +26,7 @@ const NavigationMobile = ({
   active: boolean
   naviagteOut: (Event, string) => void
 }) => (
-  <Frame>
+  <Frame active={active}>
     <SocialIconsHeader active={active}>
       <SocialLinks fill="#fff" />
     </SocialIconsHeader>
@@ -60,7 +60,8 @@ const Frame = styled.nav`
   z-index: 0;
   padding: 80px 0;
   height: 100vh;
-  background: #1d2128;
+  background: ${p => (p.active ? '#1d2128' : '#08080b')};
+  transition: background 0s ${p => (p.active ? '0' : '0.5s')};
 
   @media screen and (max-height: 700px) {
     padding: 40px 0;
