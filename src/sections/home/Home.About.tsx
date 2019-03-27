@@ -185,6 +185,7 @@ const MobileSpacer = styled.div`
 const MediaContainer = styled.div`
   position: absolute;
   left: 0;
+  top: -100px;
   height: 100%;
   width: 100%;
 `
