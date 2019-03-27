@@ -24,7 +24,7 @@ const NavigationMobile = ({
   navigateOut,
 }: {
   active: boolean
-  naviagteOut: (Event, string) => void
+  navigateOut: (Event, string) => void
 }) => (
   <Frame active={active}>
     <SocialIconsHeader active={active}>
