@@ -15,7 +15,7 @@ export function calculateStyles(position: number): {} {
 
   const styles = {
     opacity: 1 - position / height / 0.7,
-    transform: `translateY(-${position * 0.3}px)`,
+    transform: `translateY(-${position * 0.24}px)`,
   }
 
   return width > breakpoint || position <= 0 ? {} : styles
