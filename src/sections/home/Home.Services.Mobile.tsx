@@ -66,7 +66,7 @@ function HomeServicesMobile() {
       query={imageQuery}
       render={({ firstImage, secondImage, thirdImage }) => {
         const images = [firstImage, secondImage, thirdImage]
-        const progressOffset = { transform: `translateX(-${progress * 150}px)` }
+        const progressOffset = { transform: `translateX(-${progress * 160}px)` }
 
         return (
           <Frame>
@@ -83,7 +83,7 @@ function HomeServicesMobile() {
                 innerRef={element}
                 render={({ service, index }) => {
                   const startingOffset = {
-                    transform: `translateX(${index * 60}px)`,
+                    transform: `translateX(${index * 80}px)`,
                   }
 
                   return (
