@@ -140,7 +140,6 @@ const Card = styled.div`
   background: #1d2128;
   border-radius: 5px;
   overflow: hidden;
-  pointer-events: none;
   text-align: center;
 `
 
