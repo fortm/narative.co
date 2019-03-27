@@ -158,18 +158,9 @@ const AboutHeading = styled(Heading.h2)`
   color: ${p => p.theme.colors.grey};
 `
 
-const MediaContainer = styled.div`
-  position: absolute;
-  top: -100px;
-  left: 0;
-  height: 100%;
-  width: 100%;
-`
-
 const MobileContainer = styled.div`
   position: relative;
   width: 100%;
-  margin-top: -50px;
   margin-bottom: -85%;
 
   ${mediaqueries.tablet_up`
@@ -189,6 +180,13 @@ const MobileSpacer = styled.div`
   ${mediaqueries.phone`
     height: 600px;
   `}
+`
+
+const MediaContainer = styled.div`
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 100%;
 `
 
 const Slash = () => (
