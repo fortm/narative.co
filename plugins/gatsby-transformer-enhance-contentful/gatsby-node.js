@@ -24,7 +24,8 @@ const getReadingTime = refNode => {
 
   // Use the Contentful HTML renderer to render this to a string
   const html = documentToHtmlString({ content, nodeType }, HTMLRendererOpts)
-  const { minutes, ...rest } = readingTime(html)
+  const options = { wordsPerMinute: 250 }
+  const { minutes, ...rest } = readingTime(html, options)
 
   return {
     ...rest,

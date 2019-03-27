@@ -9,15 +9,13 @@ module.exports.HTMLRendererOpts = {
     [INLINES.HYPERLINK]: node => {
       // Adding external links default to links in articles
       if (node.nodeType === 'hyperlink') {
-        return `
-          <a
+        return `<a
             href=${node.data.uri}
             target="_blank"
             rel="noopener"
           >
             ${node.content[0].value}
-          </a>
-        `
+          </a>`
       }
     },
     [BLOCKS.EMBEDDED_ENTRY]: node => {
