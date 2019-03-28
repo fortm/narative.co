@@ -116,7 +116,7 @@ const ContactText = styled(Link)`
 
 const ContentContainer = styled.div`
   height: calc(100vh - 230px);
-  min-height: 440px;
+  min-height: 600px;
   padding-top: 10px;
 
   position: relative;
@@ -130,7 +130,6 @@ const ContentContainer = styled.div`
   `};
 
   @media screen and (max-height: 670px) {
-    min-height: 100%;
     top: -40px;
   }
 `

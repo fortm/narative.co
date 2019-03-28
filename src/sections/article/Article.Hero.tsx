@@ -66,7 +66,7 @@ export default ArticleHero
 const Hero = styled.div`
   position: relative;
   z-index: 5;
-  min-height: 640px;
+  min-height: 600px;
   height: 100vh;
   width: 100vw;
   background: #fafafa;

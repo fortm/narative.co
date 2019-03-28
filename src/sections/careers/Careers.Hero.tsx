@@ -134,7 +134,7 @@ const GridContainer = styled.div`
   justify-content: center;
   margin: 0 auto;
   height: calc(100vh - 230px);
-  min-height: 440px;
+  min-height: 600px;
   width: 100%;
 
   ${mediaqueries.desktop`

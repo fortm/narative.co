@@ -101,7 +101,8 @@ const Background = styled.div`
 
 const Frame = styled.div`
   position: relative;
-  min-height: 100vh;
+  height: 100vh;
+  min-height: 800px;
   overflow: hidden;
 
   &::before {
@@ -130,7 +131,9 @@ const Nav = styled(Section)`
   justify-content: space-between;
   padding-top: 100px;
   opacity: ${p => (p.inView ? 1 : 0)};
-  transition: opacity ${p => (p.inView ? '1s' : '0.5s')} linear;
+  transform: translateY(${p => (p.inView ? 0 : -4)}px);
+  transition: opacity ${p => (p.inView ? '1s' : '0.5s')} linear,
+    transform 0.5s ease-out;
   z-index: 1;
 
   ${mediaqueries.desktop`

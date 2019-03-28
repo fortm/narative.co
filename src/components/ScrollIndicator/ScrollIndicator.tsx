@@ -14,11 +14,9 @@ function useWindowOffset() {
 
   const [windowOffset, setWindowSize] = useState(calculateWindowOffset(0))
 
-  function handleScroll() {
-    setWindowSize(calculateWindowOffset())
-  }
-
   useEffect(() => {
+    const handleScroll = () => setWindowSize(calculateWindowOffset())
+
     // We don't want to add the listener beyond the height of the indicator
     if (windowOffset < 90) {
       window.addEventListener('scroll', handleScroll)

@@ -227,7 +227,7 @@ const WhiteBackground = styled.div`
 
 const ContentContainer = styled.div`
   height: calc(100vh - 140px);
-  min-height: 440px;
+  min-height: 600px;
 
   a {
     color: #fff;

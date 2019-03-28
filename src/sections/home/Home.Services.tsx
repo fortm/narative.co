@@ -512,6 +512,10 @@ const ImageSlide = styled.div`
 const Digits = styled.div`
   font-size: 24px;
   font-weight: 200;
+
+  @media only screen and (max-width: 1220px) {
+    font-size: 18px;
+  }
 `
 
 const TimeContainer = styled.span`
@@ -523,6 +527,22 @@ const TimeContainer = styled.span`
   color: #fafafa;
   opacity: 0.7;
   text-align: center;
+
+  @media only screen and (max-height: 800px) {
+    top: 55%;
+  }
+
+  @media only screen and (max-width: 1300px) {
+    left: 15.5%;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    left: 14.6%;
+  }
+
+  @media only screen and (max-width: 900px) {
+    display: none;
+  }
 `
 
 const FullDate = styled.div`
@@ -531,12 +551,20 @@ const FullDate = styled.div`
   top: 1px;
   font-size: 7px;
   font-weight: 600;
+
+  @media only screen and (max-width: 1220px) {
+    font-size: 5px;
+  }
 `
 
 const CodeContainer = styled.span`
   display: block;
   color: #33749f;
   font-size: 6px;
+
+  @media only screen and (max-width: 1100px) {
+    font-size: 5px;
+  }
 `
 
 const VectorTop = styled.div`
@@ -544,6 +572,19 @@ const VectorTop = styled.div`
   left: 33%;
   top: 38%;
   max-width: 18%;
+
+  @media only screen and (max-height: 800px) {
+    top: 35%;
+  }
+
+  @media only screen and (max-width: 1100px) {
+    top: 42%;
+    max-width: 22%;
+  }
+
+  @media only screen and (max-width: 900px) {
+    display: none;
+  }
 `
 
 const VectorBottom = styled.div`
@@ -551,4 +592,16 @@ const VectorBottom = styled.div`
   left: 33%;
   top: 50%;
   max-width: 18%;
+
+  @media only screen and (max-height: 800px) {
+    top: 50%;
+  }
+
+  @media only screen and (max-width: 1100px) {
+    max-width: 22%;
+  }
+
+  @media only screen and (max-width: 900px) {
+    display: none;
+  }
 `
