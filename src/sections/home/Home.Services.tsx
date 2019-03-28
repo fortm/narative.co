@@ -130,7 +130,7 @@ const calcOpacity = (entering: boolean, top: number): { opacity?: number } =>
       }
 
 const calcTransform = (offset: number): string =>
-  `translateY(${offset * 125}px)`
+  `translateY(${offset * 180}px)`
 
 function HomeServices() {
   const config = { mass: 1, tension: 200, friction: 25 }
