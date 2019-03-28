@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { Section, Heading, SEO, Layout, SocialLinks } from '@components'
 import mediaqueries from '@styles/media'
 
-function NotFound({ data }) {
+function NotFound({ data, location }) {
   const { seo } = data.allContentfulHomePage.edges[0].node
 
   return (
@@ -14,7 +14,7 @@ function NotFound({ data }) {
         title={seo.title}
         description={seo.description}
         image={seo.image.file.url}
-        pathname={this.props.location.pathname}
+        pathname={location.pathname}
       />
       <div style={{ overflow: 'hidden' }}>
         <Layout>
