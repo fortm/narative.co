@@ -75,7 +75,7 @@ const Hero = styled.div`
 
   ${mediaqueries.tablet`
     min-height: 100vh;
-    background: #1d2128;
+    background: #08080B;
   `}
 `
 

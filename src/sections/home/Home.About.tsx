@@ -69,9 +69,9 @@ const HomeAbout = () => (
             />
             <div>
               {/*
-                    Then each Text node gets it's own IntersectionObserver to handle
-                    the margin and padding trick!
-                  */}
+                Then each Text node gets it's own IntersectionObserver to handle
+                the margin and padding trick!
+              */}
               {aboutNarativeText.map(text => (
                 <IntersectionObserver
                   key={text}
@@ -143,6 +143,10 @@ const TextContainer = styled.div`
 const Text = styled.p`
   font-size: 32px;
   color: #fff;
+
+  ${mediaqueries.tablet`
+    font-size: 22px;
+  `};
 `
 
 const AboutHeading = styled(Heading.h2)`
@@ -336,8 +340,8 @@ const Slash = () => (
         y2="425"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="white" stop-opacity="0" />
-        <stop offset="1" stop-color="white" stop-opacity="0.2" />
+        <stop stopColor="white" stopOpacity="0" />
+        <stop offset="1" stopColor="white" stopOpacity="0.2" />
       </linearGradient>
     </defs>
   </svg>

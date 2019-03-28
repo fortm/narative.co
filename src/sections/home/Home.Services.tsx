@@ -1,4 +1,4 @@
-import React, { createRef, useEffect } from 'react'
+import React, { createRef, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Link, graphql, StaticQuery } from 'gatsby'
 import { useSpring, animated } from 'react-spring'
@@ -132,8 +132,80 @@ const calcOpacity = (entering: boolean, top: number): { opacity?: number } =>
 const calcTransform = (offset: number): string =>
   `translateY(${offset * 180}px)`
 
+function getTime() {
+  const now = new Date()
+  const hours = now.getHours()
+  const days = ['Sun.', 'Mon.', 'Tues.', 'Wed.', 'Thurs.', 'Fri.', 'Sat.']
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sept',
+    'Nov',
+    'Dec',
+  ]
+
+  return {
+    month: months[now.getMonth()],
+    date: now.getDate(),
+    day: days[now.getDay()],
+    hours: hours > 12 ? hours - 12 : hours,
+    minutes: ('0' + now.getMinutes()).slice(-2),
+  }
+}
+
+function Time() {
+  const [time, setTime] = useState(getTime())
+
+  useEffect(() => {
+    const tick = setInterval(() => {
+      setTime(getTime())
+    }, 1000)
+
+    return () => {
+      clearInterval(tick)
+    }
+  }, [])
+
+  return (
+    <TimeContainer>
+      <Digits>
+        {time.hours}:{time.minutes}
+      </Digits>
+      <FullDate>
+        {time.day},{time.month} {time.date}
+      </FullDate>
+    </TimeContainer>
+  )
+}
+
+function Code() {
+  return (
+    <CodeContainer>
+      <VectorTop>
+        {`<svg width="23" height="30" viewBox="0 0 23 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 30H22.9091V26.4595H0V30Z" fill="#111216"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.00598145 24.7176L7.01982 19.7873L7.01897 15.2965L0.00598145 10.3745V24.7176Z" fill="#111216"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M22.8917 0L15.8492 4.87412V9.29375L22.894 14.2569L22.8918 0H22.8917Z" fill="#111216"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.0065918 0V8.62637L22.8961 24.7297L22.8948 16.0316L0.0065918 0Z" fill="#111216"/>
+                        </svg>`}
+      </VectorTop>
+      <VectorBottom>
+        {`<svg width="23" height="30" viewBox="0 0 23 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 30H22.9091V26.4595H0V30Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd`}
+      </VectorBottom>
+    </CodeContainer>
+  )
+}
 function HomeServices() {
   const config = { mass: 1, tension: 200, friction: 25 }
+
   const [props, set] = useSpring(() => ({
     offset: 1,
     config,
@@ -214,9 +286,11 @@ function HomeServices() {
                     <ImageSlides>
                       <ImageSlide critical active={firstActive}>
                         <Media src={first.childImageSharp.fluid} />
+                        <Time />
                       </ImageSlide>
                       <ImageSlide active={secondActive}>
                         <Media critical src={second.childImageSharp.fluid} />
+                        <Code />
                       </ImageSlide>
                       <ImageSlide active={thirdActive}>
                         <Media critical src={third.childImageSharp.fluid} />
@@ -401,6 +475,7 @@ const Progress = styled.div`
 `
 
 const ImageSlides = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -432,4 +507,48 @@ const ImageSlide = styled.div`
   & > div {
     width: 100%;
   }
+`
+
+const Digits = styled.div`
+  font-size: 24px;
+  font-weight: 200;
+`
+
+const TimeContainer = styled.span`
+  position: absolute;
+  width: 80px;
+  top: 55%;
+  left: 16.5%;
+  transform: rotate(-6deg);
+  color: #fafafa;
+  opacity: 0.7;
+  text-align: center;
+`
+
+const FullDate = styled.div`
+  position: relative;
+  left: 1px;
+  top: 1px;
+  font-size: 7px;
+  font-weight: 600;
+`
+
+const CodeContainer = styled.span`
+  display: block;
+  color: #33749f;
+  font-size: 6px;
+`
+
+const VectorTop = styled.div`
+  position: absolute;
+  left: 33%;
+  top: 38%;
+  max-width: 18%;
+`
+
+const VectorBottom = styled.div`
+  position: absolute;
+  left: 33%;
+  top: 50%;
+  max-width: 18%;
 `
