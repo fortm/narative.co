@@ -17,6 +17,14 @@ import transitions from '@styles/transitions'
 import { Section, SEO, Layout } from '@components'
 import { startAnimation } from '@utils'
 
+/**
+ * Narative.co/articles
+ *
+ * This template is used to present our wonderful articles that we pull
+ * from Contentful. This is not located in the /pages folder because we're
+ * using it in the createPages lifecycle event
+ */
+
 class ArticlesPage extends Component<
   {},
   { imageLoaded: boolean; animation: string; current: number }
@@ -36,15 +44,12 @@ class ArticlesPage extends Component<
     })
   }
 
-  navigateOut = (event, path) => {
-    event.preventDefault()
-    this.setState({ animation: '' })
-
-    setTimeout(() => {
-      navigate(path)
-    }, 350)
-  }
-
+  /**
+   * handleTyping()
+   * This will initiate the typing life effect we have displayed over the
+   * hero image typewriter. Basically go through the string one char at a time
+   * and udpate the counter until we're out of characters to type!
+   */
   handleTyping = () => {
     const { current } = this.state
     var text = ' help your business take the next step.'

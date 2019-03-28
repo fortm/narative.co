@@ -3,6 +3,12 @@ import styled from 'styled-components'
 
 import mediaqueries from '@styles/media'
 
+/**
+ * <ArticleControls />
+ * For each Article we have controls such as toggling the dark mode
+ * and copying the link. This is component to handle that!
+ */
+
 export default ({ mode, toggleMode }) => (
   <>
     <ShareButton mode={mode} />

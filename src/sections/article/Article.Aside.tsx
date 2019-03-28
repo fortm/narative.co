@@ -15,7 +15,7 @@ interface AsideProps {
 }
 
 /**
- * Aside, the wonderful fixed positioning elements that are to the left
+ * Aside: the wonderful fixed positioned elements that are to the left
  * and the right of the written content on our articles. For example, the
  * progress bar and dark controls are within an Aside. The main responsibility
  * of this component is to show or hide its children if it's at the top or bottom
@@ -23,10 +23,10 @@ interface AsideProps {
  *
  * The left and right Asides!
  *
- * |  content  |
- * |  content  |
- * |  content  |
- * |  content  |
+ * left Aside ----> |  content  | <--- right Aside
+ *                  |  content  |
+ *                  |  content  |
+ *                  |  content  |
  *
  */
 class Aside extends Component<AsideProps, { value: number }> {

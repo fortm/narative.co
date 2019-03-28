@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, navigate } from 'gatsby'
 import styled from 'styled-components'
 
@@ -12,61 +12,58 @@ import transitions from '@styles/transitions'
 import { startAnimation } from '@utils'
 import mediaqueries from '@styles/media'
 
-class HomeHero extends Component<{}, { animation: string }> {
-  state = { animation: '' }
+function HomeHero() {
+  // Fade in the text as we do on all the headings
+  const [animation, setAnimation] = useState('')
 
-  componentDidMount() {
+  useEffect(() => {
     startAnimation(() => {
-      this.setState({ animation: 'start' })
+      setAnimation('start')
     })
-  }
+  }, [])
 
-  navigateOut = (event, path) => {
+  const navigateOut = (event, path) => {
     event.preventDefault()
-    this.setState({ animation: '' })
+    setAnimation('')
 
     setTimeout(() => {
       navigate(path)
     }, 350)
   }
 
-  render() {
-    const { animation } = this.state
-
-    return (
-      <LayoutHeroMobile>
-        <HomeHeroContainer id="home-hero">
-          <Section>
-            <IntersectionObserver
-              render={({ intersectionRatio }) => (
-                <ContentContainer style={{ opacity: intersectionRatio }}>
-                  <TextContainer animation={animation}>
-                    <Heading.h1>
-                      <em>Narative</em> builds brands, websites and products for
-                      growth-minded companies.
-                    </Heading.h1>
-                    <MainText>
-                      We're a team with senior startup experience here to help
-                      your business take the next step.
-                    </MainText>
-                    <ContactText
-                      to="/contact"
-                      onClick={event => this.navigateOut(event, '/contact')}
-                      animation={animation}
-                    >
-                      <ButtonArrow text="Get in touch" />
-                    </ContactText>
-                  </TextContainer>
-                  <ShapeShifter />
-                </ContentContainer>
-              )}
-            />
-            <ScrollIndicator />
-          </Section>
-        </HomeHeroContainer>
-      </LayoutHeroMobile>
-    )
-  }
+  return (
+    <LayoutHeroMobile>
+      <HomeHeroContainer id="home-hero">
+        <Section>
+          <IntersectionObserver
+            render={({ intersectionRatio }) => (
+              <ContentContainer style={{ opacity: intersectionRatio }}>
+                <TextContainer animation={animation}>
+                  <Heading.h1>
+                    <em>Narative</em> builds brands, websites and products for
+                    growth-minded companies.
+                  </Heading.h1>
+                  <MainText>
+                    We're a team with senior startup experience here to help
+                    your business take the next step.
+                  </MainText>
+                  <ContactText
+                    to="/contact"
+                    onClick={event => navigateOut(event, '/contact')}
+                    animation={animation}
+                  >
+                    <ButtonArrow text="Get in touch" />
+                  </ContactText>
+                </TextContainer>
+                <ShapeShifter />
+              </ContentContainer>
+            )}
+          />
+          <ScrollIndicator />
+        </Section>
+      </HomeHeroContainer>
+    </LayoutHeroMobile>
+  )
 }
 
 export default HomeHero

@@ -12,6 +12,7 @@ import mediaqueries from '@styles/media'
 
 import { IArticleNode } from '@typings'
 
+// Based on a condition will animate or not. A workaround for media queries
 const inlineAnimate = (cond: boolean) => (obj: any) => (cond ? obj : {})
 
 const ArticleHero = ({ article }: { article: IArticleNode }) => {

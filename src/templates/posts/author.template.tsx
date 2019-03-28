@@ -1,6 +1,9 @@
 import React from 'react'
 
-// A placeholder
-export default props => {
-  return <div>Authors</div>
-}
+/**
+ * Placeholder
+ *
+ * We have the capability to generate these pages but decided against
+ * creating Author pages until we have a larger pool of content to pull from!
+ */
+export default () => <div>Authors</div>

@@ -3,9 +3,17 @@ import styled from 'styled-components'
 import { Link } from 'gatsby'
 
 import Section from '@components/Section'
-
 import mediaqueries from '@styles/media'
 
+/**
+ * ============================= CAUTION ====================================
+ * We have links to dynamic content hardcoded in here. If we ever update the
+ * link to the Building the new Hopper.com article it needs to be manually
+ * updated here!
+ *============================================================================
+
+ A simple component that shows Hopper's appreciation of our Studio work :)
+ */
 const HomeTestimonial = () => (
   <Gradient>
     <Grid>

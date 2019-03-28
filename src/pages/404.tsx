@@ -1,47 +1,45 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link, graphql } from 'gatsby'
 import styled from 'styled-components'
 
 import { Section, Heading, SEO, Layout, SocialLinks } from '@components'
 import mediaqueries from '@styles/media'
 
-class NotFound extends Component {
-  render() {
-    const { seo } = this.props.data.allContentfulHomePage.edges[0].node
+function NotFound({ data }) {
+  const { seo } = data.allContentfulHomePage.edges[0].node
 
-    return (
-      <>
-        <SEO
-          title={seo.title}
-          description={seo.description}
-          image={seo.image.file.url}
-          pathname={this.props.location.pathname}
-        />
-        <div style={{ overflow: 'hidden' }}>
-          <Layout>
-            <Section hideOverflow>
-              <GridContainer>
-                <TextContainer>
-                  <div />
-                  <WelcomeHeader>
-                    Oops, there's nothing here. But don’t worry, you can just go{' '}
-                    <TextLink to="/">back home</TextLink> or{' '}
-                    <TextLink to="/contact">contact us</TextLink>.
-                  </WelcomeHeader>
-                  <SocialLinksContainer>
-                    <p>Looking for something else?</p> <SocialLinks />
-                  </SocialLinksContainer>
-                </TextContainer>
-                <ImageContainer>
-                  <NotFoundIcon />
-                </ImageContainer>
-              </GridContainer>
-            </Section>
-          </Layout>
-        </div>
-      </>
-    )
-  }
+  return (
+    <>
+      <SEO
+        title={seo.title}
+        description={seo.description}
+        image={seo.image.file.url}
+        pathname={this.props.location.pathname}
+      />
+      <div style={{ overflow: 'hidden' }}>
+        <Layout>
+          <Section hideOverflow>
+            <GridContainer>
+              <TextContainer>
+                <div />
+                <WelcomeHeader>
+                  Oops, there's nothing here. But don’t worry, you can just go{' '}
+                  <TextLink to="/">back home</TextLink> or{' '}
+                  <TextLink to="/contact">contact us</TextLink>.
+                </WelcomeHeader>
+                <SocialLinksContainer>
+                  <p>Looking for something else?</p> <SocialLinks />
+                </SocialLinksContainer>
+              </TextContainer>
+              <ImageContainer>
+                <NotFoundIcon />
+              </ImageContainer>
+            </GridContainer>
+          </Section>
+        </Layout>
+      </div>
+    </>
+  )
 }
 
 export default NotFound

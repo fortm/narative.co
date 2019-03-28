@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from 'react'
-import { graphql, navigate } from 'gatsby'
+import React, { useEffect, useState } from 'react'
+import { graphql } from 'gatsby'
 import styled from 'styled-components'
 
 import { Section, Heading, SEO, Layout } from '@components'
@@ -15,147 +15,140 @@ import transitions from '@styles/transitions'
 
 import LabsPreview from '../sections/labs/Labs.Preview'
 
-class LabsPage extends Component<{}, { animate: string }> {
-  state = { animation: '' }
+/**
+ * The labs page is a bit of a mess with the inlined Product Array but it
+ * works for now. In the event that we redesign this page it's recommended
+ * to start a new file to handle things neater!
+ */
 
-  componentDidMount() {
+function LabsPage({ data, location }) {
+  const {
+    allContentfulHomePage,
+    hero,
+    heroBody,
+    heroScreen,
+    needlBackground,
+    feyBackground,
+  } = data
+  const { seo } = allContentfulHomePage.edges[0].node
+  const pageBackground = 'linear-gradient(180deg, #08080b 50%, #191D23 100%)'
+  const navConfig = {
+    fixed: true,
+    theme: 'light',
+    offset: true,
+  }
+
+  // Fade in the text as we do on all the headings
+  const [animation, setAnimation] = useState('')
+
+  // Start the bulb up animation once the image has laoded
+  const [showScreen, setShowScreen] = useState(false)
+
+  useEffect(() => {
     startAnimation(() => {
-      this.setState({ animation: 'start' })
+      setAnimation('start')
     })
-  }
+  }, [])
 
-  navigateOut = (event, path) => {
-    event.preventDefault()
-    this.setState({ animation: '' })
-
-    setTimeout(() => {
-      navigate(path)
-    }, 350)
-  }
-
-  render() {
-    const { animation } = this.state
-    const {
-      allContentfulHomePage,
-      hero,
-      heroBody,
-      heroScreen,
-      needlBackground,
-      feyBackground,
-    } = this.props.data
-    const { seo } = allContentfulHomePage.edges[0].node
-    const pageBackground = 'linear-gradient(180deg, #08080b 50%, #191D23 100%)'
-
-    const navConfig = {
-      fixed: true,
-      theme: 'light',
-      offset: true,
-    }
-
-    /**
-     * This labs page is a bit of limbo in terms of pulling data from Contentful
-     * and locally. Therefore, we're constructing the products array within the component
-     * itself in a ...not so clean way :). It works for now!
-     */
-    const products = [
-      {
-        logo: FeyLogo,
-        background: feyBackground.childImageSharp.fluid,
-        backgroundColor: '#1A1A1A',
-        excerpt:
-          'Sick of tracking your trades across Evernote, Excel files and countless screenshots? Fey gives you the complete picture of your portfolio, with fast data entry, always-on risk analysis and more.',
-        children: (
-          <>
-            <HorizontalRule />
-            <div>
-              <LinkToProduct target="_blank" href="https://feyapp.com">
-                <GlobeIcon />
-                Visit website
-              </LinkToProduct>
-              <LinkToProduct
-                target="_blank"
-                href="https://narative.co/design/open/fey"
-              >
-                <FigmaIcon /> View in Figma
-              </LinkToProduct>
-            </div>
-          </>
-        ),
-      },
-      {
-        logo: NeedlLogo,
-        background: needlBackground.childImageSharp.fluid,
-        backgroundColor: '#D6D9DE',
-        excerpt:
-          "Whether you're looking to get inked or you're a tattoo artist yourself, this upcoming app will help you get what you need. Find artists and styles, schedule appointments, book flashes and get paid.",
-        children: (
-          <>
-            <HorizontalRule dark />
-            <LinkToProduct dark as="div">
-              Coming: when it’s ready
+  // Inlining our products to get the right variables we need in scope!
+  const products = [
+    {
+      logo: FeyLogo,
+      background: feyBackground.childImageSharp.fluid,
+      backgroundColor: '#1A1A1A',
+      excerpt:
+        'Sick of tracking your trades across Evernote, Excel files and countless screenshots? Fey gives you the complete picture of your portfolio, with fast data entry, always-on risk analysis and more.',
+      children: (
+        <>
+          <HorizontalRule />
+          <div>
+            <LinkToProduct target="_blank" href="https://feyapp.com">
+              <GlobeIcon />
+              Visit website
             </LinkToProduct>
-          </>
-        ),
-      },
-    ]
+            <LinkToProduct
+              target="_blank"
+              href="https://narative.co/design/open/fey"
+            >
+              <FigmaIcon /> View in Figma
+            </LinkToProduct>
+          </div>
+        </>
+      ),
+    },
+    {
+      logo: NeedlLogo,
+      background: needlBackground.childImageSharp.fluid,
+      backgroundColor: '#D6D9DE',
+      excerpt:
+        "Whether you're looking to get inked or you're a tattoo artist yourself, this upcoming app will help you get what you need. Find artists and styles, schedule appointments, book flashes and get paid.",
+      children: (
+        <>
+          <HorizontalRule dark />
+          <LinkToProduct dark as="div">
+            Coming: when it’s ready
+          </LinkToProduct>
+        </>
+      ),
+    },
+  ]
 
-    return (
-      <Layout nav={navConfig} background={pageBackground}>
-        <Fragment>
-          <SEO
-            title={seo.title}
-            description={seo.description}
-            image={seo.image.file.url}
-            pathname={this.props.location.pathname}
-          />
-          <LayoutHeroMobile>
-            <HeroSection>
-              <ContentContainer>
-                <div />
-                <TextContainer animation={animation}>
-                  <Pill text="Labs" />
-                  <Heading.h1>
-                    Whether with our clients or all by ourselves, we're always
-                    busy building something new.
-                  </Heading.h1>
-                  <MainText>
-                    Take a peek at the products we're creating in-house at
-                    Narative.
-                  </MainText>
-                </TextContainer>
-                <ScrollIndicator />
-              </ContentContainer>
+  return (
+    <Layout nav={navConfig} background={pageBackground}>
+      <>
+        <SEO
+          title={seo.title}
+          description={seo.description}
+          image={seo.image.file.url}
+          pathname={location.pathname}
+        />
+        <LayoutHeroMobile>
+          <HeroSection>
+            <ContentContainer>
+              <div />
+              <TextContainer animation={animation}>
+                <Pill text="Labs" />
+                <Heading.h1>
+                  Whether with our clients or all by ourselves, we're always
+                  busy building something new.
+                </Heading.h1>
+                <MainText>
+                  Take a peek at the products we're creating in-house at
+                  Narative.
+                </MainText>
+              </TextContainer>
+              <ScrollIndicator />
+            </ContentContainer>
 
-              <HeroImage>
-                <Media
-                  critical
-                  onLoad={() => this.setState({ showScreen: true })}
-                  src={heroBody.childImageSharp.fluid}
-                />
-                <div
-                  style={{
-                    opacity: this.state.showScreen ? 1 : 0,
-                    transition: 'opacity 1s ease 0.5s',
-                  }}
-                >
-                  <Media critical src={heroScreen.childImageSharp.fluid} />
-                </div>
-              </HeroImage>
-            </HeroSection>
-          </LayoutHeroMobile>
-          <HeroImageMobile>
-            <Media critical src={hero.childImageSharp.fluid} />
-          </HeroImageMobile>
-          <Section narrow>
-            {products.map(product => (
-              <LabsPreview key={product.excerpt} product={product} />
-            ))}
-          </Section>
-          <Footer />
-        </Fragment>
-      </Layout>
-    )
-  }
+            <HeroImage>
+              <Media
+                critical
+                onLoad={() => setShowScreen(true)}
+                src={heroBody.childImageSharp.fluid}
+              />
+              <div
+                style={{
+                  opacity: showScreen ? 1 : 0,
+                  transition: 'opacity 1s ease 0.5s',
+                }}
+              >
+                <Media critical src={heroScreen.childImageSharp.fluid} />
+              </div>
+            </HeroImage>
+          </HeroSection>
+        </LayoutHeroMobile>
+        <HeroImageMobile>
+          <Media critical src={hero.childImageSharp.fluid} />
+        </HeroImageMobile>
+        <Section narrow>
+          {products.map(product => (
+            <LabsPreview key={product.excerpt} product={product} />
+          ))}
+        </Section>
+        <Footer />
+      </>
+    </Layout>
+  )
 }
 
 export default LabsPage
@@ -213,12 +206,6 @@ export const pageQuery = graphql`
       }
     }
   }
-`
-
-const MobileOnly = styled.div`
-  ${mediaqueries.desktop_up`
-    opacity: 0;
-  `}
 `
 
 const HeroSection = styled(Section)`

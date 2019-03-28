@@ -17,7 +17,9 @@ import { IArticleNode } from '@typings'
  * of Articles.Grid.tsx. It works well for now but eventually we may want to
  * abstract the <Grid>...items</Grid> since there's duplicate code.
  *
- *  [LONG], [SHORT]
+ *  [..............], [.........]
+ *  [.....LONG.....], [..SHORT..]
+ *  [..............], [.........]
  */
 const ArticlesPreview = ({ articles }: { articles: IArticleNode[] }) => {
   return (

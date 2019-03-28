@@ -20,6 +20,7 @@ interface OverlapState {
  * and decides wether or not they're overlapping (with some buffer). If they are overlapping
  * we want to hide the top element.
  */
+
 class HandleOverlap extends Component<OverlapProps, OverlapState> {
   asideRef: React.RefObject<HTMLElement> = React.createRef()
   ticking = false

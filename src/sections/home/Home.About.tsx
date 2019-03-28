@@ -7,6 +7,7 @@ import Heading from '@components/Heading'
 import IntersectionObserver from '@components/IntersectionObserver'
 import Sticky from '@components/Sticky'
 import Media from '@components/Media/Media.Img'
+import Transitions from '@components/Transitions'
 
 import mediaqueries from '@styles/media'
 
@@ -37,6 +38,16 @@ const imageQuery = graphql`
   }
 `
 
+/**
+ * <HomeAbout />
+ *
+ * The challenge was to create a FadeIn and FadeOut effect as the user
+ * scrolls over the main Paragraphs of the homepage.
+ *
+ * To accomplish this we do two things
+ * 1. Using a Padding/Margin trick to get the FadeOut to work nicely
+ * 2. Overlaying a fixed gradient to get the FadeIn to work nicely
+ */
 const HomeAbout = () => (
   <StaticQuery
     query={imageQuery}
@@ -49,37 +60,35 @@ const HomeAbout = () => (
           </MediaContainer>
         </MobileContainer>
         <Gradient>
-          <IntersectionObserver
-            render={({ visible, exiting, boundingClientRect }) => (
-              <Grid
-                narrow
-                visible={visible && boundingClientRect.top > -200}
-                exiting={exiting}
-              >
-                <Sticky
-                  height="682px"
-                  top={140}
-                  disableOnMobile
-                  render={() => (
-                    <AboutHeading>The Narative Approach</AboutHeading>
-                  )}
-                />
-                <div>
-                  {aboutNarativeText.map(text => (
-                    <IntersectionObserver
-                      key={text}
-                      render={({ visiblePercentage }) => (
+          <Grid narrow>
+            <Sticky
+              height="682px"
+              top={140}
+              disableOnMobile
+              render={() => <AboutHeading>The Narative Approach</AboutHeading>}
+            />
+            <div>
+              {/*
+                    Then each Text node gets it's own IntersectionObserver to handle
+                    the margin and padding trick!
+                  */}
+              {aboutNarativeText.map(text => (
+                <IntersectionObserver
+                  key={text}
+                  render={({ visiblePercentage }) => (
+                    <TextContainer>
+                      <Transitions.FadeScroll>
                         <Text
                           style={{ opacity: visiblePercentage / 100 }}
                           dangerouslySetInnerHTML={{ __html: text }}
                         />
-                      )}
-                    />
-                  ))}
-                </div>
-              </Grid>
-            )}
-          />
+                      </Transitions.FadeScroll>
+                    </TextContainer>
+                  )}
+                />
+              ))}
+            </div>
+          </Grid>
         </Gradient>
       </>
     )}
@@ -92,10 +101,10 @@ const Gradient = styled.div`
   position: relative;
   z-index: 3;
   background: #08080b;
-  background: linear-gradient(#08080b 60%, #101216 100%);
+  background: linear-gradient(#08080b, #101216);
 
   ${mediaqueries.tablet`
-    background: linear-gradient(transparent, #101216 100%);
+    background: linear-gradient(transparent, #101216);
   `};
 `
 const Grid = styled(Section)`
@@ -108,37 +117,16 @@ const Grid = styled(Section)`
   z-index: 1;
   pointer-events: none;
 
-  &::after {
-    content: '';
-    position: fixed;
-    left: 0;
-    width: 100%;
-    bottom: 0;
-    height: 200px;
-    background: linear-gradient(transparent, #08080b);
-    opacity ${p => (p.visible ? 1 : 0)};
-    transition: opacity ${p => (p.exiting ? '0.8s' : '0')};
-    pointer-events: none;
-  }
-
   ${mediaqueries.tablet`
     padding-top: 80px;
     display: block;
     padding-bottom: 100;
-
-    &::after {
-      content: none;
-      display: none;
-    }
   `}
 `
 
-const Text = styled.p`
+const TextContainer = styled.div`
   position: relative;
   top: 70px;
-  font-size: 32px;
-  color: #fff;
-
   padding-top: 280px;
   margin-top: -350px;
 
@@ -151,6 +139,10 @@ const Text = styled.p`
     margin: 0;
     padding: 0 0 40px 0;
   `};
+`
+const Text = styled.p`
+  font-size: 32px;
+  color: #fff;
 `
 
 const AboutHeading = styled(Heading.h2)`

@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import { apiCall } from '@utils/api'
-import { startAnimation } from '@utils/startAnimation'
 import { theme } from '@styles'
 
-export { apiCall, startAnimation }
+export { apiCall }
 
 /**
  * Clamp a number between min and max
@@ -107,4 +106,18 @@ export function useScrollPosition() {
   }, [])
 
   return offset
+}
+
+/**
+ * Used in componentDidMount to start an animation.
+ * This avoids the annoying behaviour of triggering
+ * and animation on mount but it not flowing correctly
+ * due to fram timing.
+ */
+export function startAnimation(callback) {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      callback()
+    })
+  })
 }

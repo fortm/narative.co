@@ -1,19 +1,40 @@
-import React, { useLayoutEffect, useRef, useState } from 'react'
+/**
+ * <ShapeShift />
+ * The editable, morphing shape in the Hero of the homepage.
+ *
+ * This Component is closely referenced from this codepen:
+ * https://codepen.io/zz85/pen/gbOoVP
+ *
+ * Yes, it's a bit of spaghetti, but I ended up continuing down the
+ * original codepend's path instead of refactoring and coming up
+ * with a full new solution.
+ *
+ * Yes, it animates width/height of an HTML element which is extremely
+ * costly to do. In fact, it only works decently well on Chrome and is
+ * disabled on Safari and Firefox
+ *
+ * With all that said, enjoy.
+ */
+
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import throttle from 'lodash/throttle'
 import { StaticQuery, graphql } from 'gatsby'
 import { isSafari, isFireFox } from 'react-device-detect'
 
-import shapes from './Shapes'
-
 import Media from '@components/Media/Media.Img'
 import mediaqueries from '@styles/media'
+
+// The SVG shapes and data required to properly morph and place them
+import shapes from './Shapes'
 
 const minWidth: number = 0
 const minHeight: number = 0
 
 // Thresholds
 const MARGINS: number = 4
+
+// Round utility
 const round = num => Math.round(num)
 
 // End of what's configurable.
@@ -24,20 +45,24 @@ let onBottomEdge: boolean
 let onLeftEdge: boolean
 let onTopEdge: boolean
 
-let rightScreenEdge: number
-let bottomScreenEdge: number
-
 let b: number
 let x: number
 let y: number
 
-let event
+let event: Event
 
 let redraw: boolean = false
 let shift: boolean = false
 
 let pressedKeys: {} = {}
 
+/**
+ * To avoid rendering a linear-gradient or using the original CSS
+ * blur and scale effects we're loading in a static image to display
+ * as the Glow.
+ *
+ * This avoids gradient banding as much as we can!
+ */
 const query = graphql`
   query ShapeShipfterQuery {
     glowImage: file(name: { regex: "/glow@2x/" }) {
@@ -50,6 +75,7 @@ const query = graphql`
   }
 `
 
+// The main component
 function ShapeShifter() {
   const [activeShape, setActiveShape] = useState(0)
   const [animate, setAnimate] = useState(false)
@@ -64,6 +90,14 @@ function ShapeShifter() {
     maxHeight: Active.maxHeight,
   })
 
+  /**
+   * Refs
+   *
+   * Throughout the component we use refs a lot. The original shape and
+   * the mirror both need their own refs so there is a bit of repeating
+   * in that case.
+   */
+
   const vector = useRef()
   const vectorMirror = useRef()
 
@@ -76,7 +110,11 @@ function ShapeShifter() {
   const numbers = useRef()
   const glow = useRef()
 
-  useLayoutEffect(() => {
+  /**
+   * Attaching all the event listeners and initializating the ShapeShifter
+   * We're also disabling the events for Safari and Firefox in this case.
+   */
+  useEffect(() => {
     const $shape = shape.current
     setAnimate(true)
     createMirrorMask()
@@ -105,7 +143,15 @@ function ShapeShifter() {
     }
   }, [activeShape, animate])
 
-  const createMirrorMask = throttle(function() {
+  /**
+   * The Mirror Mask is what sits on top of the Mirror Shape to create that
+   * gradient effect. If you were to remove this function then the Mirror
+   * shape would look like the original except slightly blurry.
+   *
+   * Do note that each time the shape changes or the screen resizes we have
+   * to delete the previous mask and create a new one.
+   */
+  const createMirrorMask = throttle(() => {
     const previousMask = document.getElementById('mirror-mask')
     const homeHero = document.getElementById('home-hero')
     const mask = document.createElement('div')
@@ -123,8 +169,8 @@ function ShapeShifter() {
       top: ${offsetTop + 30}px;
       left: 0;
       width: 100%;
-      height: 600px;
-      background: linear-gradient(rgba(8, 8, 11, 0.05), rgb(8, 8, 11) 30%, rgb(8, 8, 11, 0.8));
+      height: 800px;
+      background: linear-gradient(rgba(8, 8, 11, 0.05), rgb(8, 8, 11) 20%);
       pointer-events: none;
       z-index: 1;
       transition: transform 0.6s ease;
@@ -132,6 +178,13 @@ function ShapeShifter() {
     homeHero.appendChild(mask)
   }, 16)
 
+  /**
+   * |
+   * |
+   * Creating all the events listeners for the ShapeShifter
+   * |
+   * |
+   */
   const onMove = throttle(function(e) {
     updateGlobalSettings(e)
 
@@ -184,6 +237,13 @@ function ShapeShifter() {
     clicked = null
   }
 
+  /**
+   * updateGlobalSettings()
+   * Think of this as a mass setState, except mutating and inline.
+   * Pretty gross, but pretty effective!
+   *
+   * On each move and up we reset the globals.
+   */
   function updateGlobalSettings(event) {
     b = shape.current.getBoundingClientRect()
     x = event.clientX - b.left
@@ -195,6 +255,11 @@ function ShapeShifter() {
     onBottomEdge = y >= b.height - MARGINS
   }
 
+  /**
+   * resetStyles()
+   * After the user has interacted with shape and let go we need to spring
+   * the shape back into its original position and state.
+   */
   function resetStyles($el, mirror) {
     const reset = JSON.parse($el.getAttribute('data-reset'))
     const corners = document.querySelectorAll('[data-corner]')
@@ -228,11 +293,16 @@ function ShapeShifter() {
     glow.current.style.transition = 'opacity 1.6s linear'
   }
 
+  // Handles showing of the Width x Heights units under the shape
   function addWidthAndHeightUnits() {
     numbers.current.innerHTML = `${round(b.width)} x ${round(b.height)}`
     numbers.current.style.opacity = 1
   }
 
+  /**
+   * When the user presses Alt we want to center align the Shape so when
+   * its being resized it mirrors it and keeps the shape center.
+   */
   function handleAlt($el, $rel) {
     if (pressedKeys.Alt) {
       $el.style.top = ''
@@ -249,6 +319,10 @@ function ShapeShifter() {
     }
   }
 
+  /**
+   * There's also the ability to press shift! This will alter the shape
+   * to have the same width and height at all times.
+   */
   function handleShift($el, len) {
     const maxHeight = JSON.parse($el.getAttribute('data-reset')).maxHeight
     const limitedLength = pressedKeys.Alt && len > maxHeight ? maxHeight : len
@@ -259,6 +333,7 @@ function ShapeShifter() {
     }
   }
 
+  // User clicked the left edge of the shape
   function handleLeft($el, len) {
     if (len > minWidth) {
       $el.style.width = `${len}px`
@@ -275,6 +350,7 @@ function ShapeShifter() {
     }
   }
 
+  // User clicked the right edge of the shape
   function handleRight($el, len) {
     if (len > minWidth) {
       $el.style.width = `${len}px`
@@ -291,6 +367,7 @@ function ShapeShifter() {
     }
   }
 
+  // User clicked the top edge of the shape
   function handleTop($el, len, mirror) {
     const maxHeight = JSON.parse($el.getAttribute('data-reset')).maxHeight
     const lengthLimited = pressedKeys.Alt && len > maxHeight ? maxHeight : len
@@ -310,6 +387,7 @@ function ShapeShifter() {
     }
   }
 
+  // User clicked the bottom edge of the shape
   function handleBottom($el, len, mirror) {
     if (len > minHeight) {
       $el.style.height = `${len}px`
@@ -333,6 +411,11 @@ function ShapeShifter() {
     }
   }
 
+  /**
+   * If the user has moved their mouse into the area of the reflection or
+   * below then indicate that it's not possible to resize a shape like that
+   * by changing the outline to red.
+   */
   function handleOutOfBoundsError(isOutOfBounds: boolean) {
     const corners = document.querySelectorAll('[data-corner]')
 

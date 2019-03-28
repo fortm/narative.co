@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import { graphql } from 'gatsby'
 
 import Layout from '@components/Layout'
@@ -11,6 +10,9 @@ import HomeCallToAction from '../sections/home/Home.CallToAction'
 import HomeTestimonial from '../sections/home/Home.Testimonial'
 import HomeServices from '../sections/home/Home.Services'
 
+/**
+ * The home page of Narative.co!
+ */
 function IndexPage({ data, location }) {
   const contentful = data.allContentfulHomePage.edges[0].node
 

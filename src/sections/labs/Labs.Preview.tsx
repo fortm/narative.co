@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Media from '@components/Media/Media.Img'
-
 import mediaqueries from '@styles/media'
 
 const ArticlePreview = ({ product }) => (

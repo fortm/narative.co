@@ -12,6 +12,15 @@ import { ExIcon } from '../icons/ui'
 import ContactForm from '../sections/contact/Contact.ContactForm'
 import PhoneForm from '../sections/contact/Contact.PhoneForm'
 
+/**
+ * The contact page has a bit more complexity to it due to the nature
+ * of animating in and wanting this page to handle more like a modal
+ * than a regular page.
+ *
+ * Starting the animation will slidein the form.
+ * Pressing the ESC key will navigate from the page like a modal.
+ */
+
 class ContactPage extends Component<{}, { animation: string }> {
   state = { animation: '' }
 

@@ -125,6 +125,7 @@ export interface IArticleNode extends IBasicNode {
   backgroundImage: IGraphqlContentfulImage
   type?: string
   backgroundColor: string
+  readingTime?: {}
   path?: string
   fields: {
     path: string

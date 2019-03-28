@@ -176,7 +176,7 @@ export default ContactForm
 
 const ContactByEmail = ({ animation }) => (
   <>
-    <ContactWithEmail animation={animation} delay={1740}>
+    <ContactWithEmail animation={animation} delay={1240}>
       <ContactWithEmailText>
         <CopyToClipboard
           copyOnClick="contact@narative.co"

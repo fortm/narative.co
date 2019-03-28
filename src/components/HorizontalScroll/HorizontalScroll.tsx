@@ -26,7 +26,7 @@ interface HorizontalScrollProps {
   name: string
   render: () => void
   narrow?: boolean
-  ref?: React.Ref
+  innerRef?: React.Ref
 }
 
 const HorizontalScroll = ({

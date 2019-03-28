@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Link, graphql, StaticQuery } from 'gatsby'
 
@@ -31,71 +31,66 @@ const imageQuery = graphql`
   }
 `
 
-class HomeCallToAction extends Component<{}, { animation: string }> {
-  state = { animation: '' }
+/**
+ * <HomeCallToAction />
+ * - appearing navigation
+ * - background text with an image clip
+ * - contact form
+ */
 
-  handleActionClick = () => {
-    this.setState({ animation: 'start' })
-  }
+function HomeCallToAction() {
+  const [animation, setAnimation] = useState('')
 
-  handleClose = () => {
-    this.setState({ animation: '' })
-  }
+  const handleActionClick = () => setAnimation('start')
+  const handleClose = () => setAnimation('')
 
-  render() {
-    const { animation } = this.state
-
-    return (
-      <StaticQuery
-        query={imageQuery}
-        render={({ file }) => (
-          <>
-            <IntersectionObserver
-              render={({ visiblePercentage }) => (
-                <Frame narrow>
-                  <Nav inView={visiblePercentage > 88}>
-                    <Logo onlySymbol fill="rgba(255,255,255,0.25)" />
-                    <NavLinks>
-                      {ctaLinks.map(link => (
-                        <NavLink key={link.to} to={link.to}>
-                          {link.text}
-                        </NavLink>
-                      ))}
-                    </NavLinks>
-                  </Nav>
-                  <TextContainer>
-                    <TextBackground
-                      background={file.childImageSharp.original.src}
-                      visiblePercentage={visiblePercentage}
-                    >
-                      <Text>
-                        Together, let's discover what your company is truly
-                        capable of.
-                      </Text>
-                    </TextBackground>
-                    <MobileAction to="/contact">Get in touch</MobileAction>
-                  </TextContainer>
-                  <CallToAction onClick={this.handleActionClick}>
-                    <CTAText animation={animation}>
-                      Contact Us <ChevronDownIcon />
-                    </CTAText>
-                  </CallToAction>
-                  <ContactSlideIn
-                    animation={animation}
-                    onClose={this.handleClose}
-                  />
-                  <MobileCopy>More about Narative</MobileCopy>
-                </Frame>
-              )}
-            />
-            <MediaQuery maxWidth="tablet">
-              <Footer />
-            </MediaQuery>
-          </>
-        )}
-      />
-    )
-  }
+  return (
+    <StaticQuery
+      query={imageQuery}
+      render={({ file }) => (
+        <>
+          <IntersectionObserver
+            render={({ visiblePercentage }) => (
+              <Frame narrow>
+                <Nav inView={visiblePercentage > 88}>
+                  <Logo onlySymbol fill="rgba(255,255,255,0.25)" />
+                  <NavLinks>
+                    {ctaLinks.map(link => (
+                      <NavLink key={link.to} to={link.to}>
+                        {link.text}
+                      </NavLink>
+                    ))}
+                  </NavLinks>
+                </Nav>
+                <TextContainer>
+                  <TextBackground
+                    background={file.childImageSharp.original.src}
+                    visiblePercentage={visiblePercentage}
+                  >
+                    <Text>
+                      Together, let's discover what your company is truly
+                      capable of.
+                    </Text>
+                  </TextBackground>
+                  <MobileAction to="/contact">Get in touch</MobileAction>
+                </TextContainer>
+                <CallToAction onClick={handleActionClick}>
+                  <CTAText animation={animation}>
+                    Contact Us <ChevronDownIcon />
+                  </CTAText>
+                </CallToAction>
+                <ContactSlideIn animation={animation} onClose={handleClose} />
+                <MobileCopy>More about Narative</MobileCopy>
+              </Frame>
+            )}
+          />
+          <MediaQuery maxWidth="tablet">
+            <Footer />
+          </MediaQuery>
+        </>
+      )}
+    />
+  )
 }
 
 export default HomeCallToAction
