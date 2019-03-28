@@ -41,18 +41,11 @@ class ContactPage extends Component<{}, { animation: string }> {
   }
 
   exitContactPage = () => {
-    const previousPath = localStorage.getItem('previousPath')
-    let pathname = previousPath || '/'
-
-    if (previousPath.includes('contact')) {
-      pathname = '/'
-    }
-
     this.setState({ animation: '' })
 
     // Wait for the animation out to navigate to the previous page
     setTimeout(() => {
-      navigate(pathname)
+      window.history.back()
     }, 550)
   }
 
