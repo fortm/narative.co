@@ -23,7 +23,6 @@ class TransitionsFadeScroll extends Component<{
     }
 
     const opacityCurve = Math.pow(intersectionRatio, 2)
-    const transformCurve = Math.pow(intersectionRatio - 1, 2) * 15
 
     // Only change transform when scrolling back up
     if (exiting) {

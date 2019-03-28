@@ -127,14 +127,14 @@ function CareersHero() {
 export default CareersHero
 
 const GridContainer = styled.div`
+  position: relative;
   display: grid;
   grid-template-columns: 505px 1fr;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  height: calc(100vh - 140px);
+  height: calc(100vh - 230px);
   min-height: 440px;
-
   width: 100%;
 
   ${mediaqueries.desktop`
@@ -152,7 +152,6 @@ const GridContainer = styled.div`
 
 const TextContainer = styled.div`
   ${transitions.fadeUp};
-  top: -10px;
   position: relative;
 
   h1 {
@@ -195,10 +194,10 @@ const LeftContainer = styled.div`
 `
 
 const ImageContainer = styled.div`
-  position: relative;
+  position: absolute;
   width: 100%;
   width: 460px;
-  top: -80px;
+  right: -20px;
   justify-self: flex-end;
 
   ${mediaqueries.desktop_medium`

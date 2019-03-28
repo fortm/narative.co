@@ -166,7 +166,7 @@ class Navigation extends Component<{}, NavigationState> {
             <Section>
               <NavContainer>
                 {previousPath && showPreviousPath && (
-                  <LogoBack to={`/${previousPath.split('/')[1]}`}>
+                  <LogoBack onClick={() => window.history.back()}>
                     <BackChevron />
                   </LogoBack>
                 )}
@@ -244,7 +244,7 @@ const NavContainer = styled.div`
   `};
 `
 
-const LogoBack = styled(Link)`
+const LogoBack = styled.button`
   position: absolute;
   left: -44px;
 
