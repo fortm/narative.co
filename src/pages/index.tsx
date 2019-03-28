@@ -15,7 +15,7 @@ import HomeServices from '../sections/home/Home.Services'
  */
 function IndexPage({ data, location }) {
   const contentful = data.allContentfulHomePage.edges[0].node
-
+  const background = '#08080b'
   const navConfig = {
     offset: true,
     fixed: true,
@@ -23,7 +23,7 @@ function IndexPage({ data, location }) {
   }
 
   return (
-    <Layout nav={navConfig} location={location}>
+    <Layout nav={navConfig} location={location} background="#08080b">
       <>
         <SEO
           title={contentful.seo.title}

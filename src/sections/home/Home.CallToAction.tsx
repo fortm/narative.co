@@ -48,7 +48,7 @@ function HomeCallToAction() {
     <StaticQuery
       query={imageQuery}
       render={({ file }) => (
-        <>
+        <Background>
           <IntersectionObserver
             render={({ visiblePercentage }) => (
               <Frame narrow>
@@ -87,13 +87,17 @@ function HomeCallToAction() {
           <MediaQuery maxWidth="tablet">
             <Footer />
           </MediaQuery>
-        </>
+        </Background>
       )}
     />
   )
 }
 
 export default HomeCallToAction
+
+const Background = styled.div`
+  background: #111216;
+`
 
 const Frame = styled.div`
   position: relative;

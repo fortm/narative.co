@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { createRef, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link, graphql, StaticQuery } from 'gatsby'
+import { useSpring, animated } from 'react-spring'
+import throttle from 'lodash/throttle'
 
 import Heading from '@components/Heading'
 import Section from '@components/Section'
@@ -9,6 +11,7 @@ import Sticky from '@components/Sticky'
 import Media from '@components/Media/Media.Img'
 
 import mediaqueries from '@styles/media'
+import { getWindowDimensions } from '@utils'
 
 import HomeServicesMobile from './Home.Services.Mobile'
 
@@ -119,31 +122,46 @@ const calculateOffset = (progress: number) => {
   return {}
 }
 
-const calculateAnimation = (
-  entering: boolean,
-  vp: number,
-  top: number
-): { transform: string; opacity?: number } => {
-  const isFirefox = typeof InstallTrigger !== 'undefined'
+const calcOpacity = (entering: boolean, top: number): { opacity?: number } =>
+  entering
+    ? {}
+    : {
+        opacity: Math.abs(top) > 250 ? 0 : 1 - Math.abs(top) / 250,
+      }
 
-  // background-text-clip breaks if you animate values in Firefox
-  if (isFirefox) {
-    return {
-      transform: `translateY(60px)`,
+const calcTransform = (offset: number): string =>
+  `translateY(${offset * 125}px)`
+
+function HomeServices() {
+  const config = { mass: 1, tension: 200, friction: 25 }
+  const [props, set] = useSpring(() => ({
+    offset: 1,
+    config,
+  }))
+  const heading = createRef()
+
+  useEffect(() => {
+    const handleScroll = throttle(() => {
+      if (heading.current) {
+        const { height } = getWindowDimensions()
+        const offset = heading.current.getBoundingClientRect().top
+        set({ offset: 1 - offset / height })
+      }
+    })
+
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
     }
+  }, [])
+
+  const animatedStyles = {
+    transform: props.offset.interpolate(calcTransform),
+    position: 'relative',
+    zIndex: 2,
+    pointerEvents: 'none',
   }
 
-  return entering
-    ? {
-        transform: `translateY(${vp}px)`,
-      }
-    : {
-        transform: `translateY(${200 + -1 * vp}px)`,
-        opacity: Math.abs(top) > 180 ? 0 : 1 - Math.abs(top) / 180,
-      }
-}
-
-const HomeServices = () => {
   return (
     <>
       <StaticQuery
@@ -152,25 +170,20 @@ const HomeServices = () => {
           <HomeServicesDesktop>
             <Section>
               <IntersectionObserver
-                render={({
-                  visiblePercentage,
-                  entering,
-                  boundingClientRect,
-                }) => (
-                  <HeadingBackground
-                    visible={visiblePercentage > 0}
-                    background={texture.childImageSharp.original.src}
-                    style={calculateAnimation(
-                      entering,
-                      visiblePercentage,
-                      boundingClientRect.top
-                    )}
-                  >
-                    <LargeHeading>
-                      Narative helps you brand, build and grow.
-                    </LargeHeading>
-                  </HeadingBackground>
-                )}
+                render={({ entering, boundingClientRect }) => {
+                  return (
+                    <animated.div style={animatedStyles}>
+                      <HeadingBackground
+                        background={texture.childImageSharp.original.src}
+                        style={calcOpacity(entering, boundingClientRect.top)}
+                      >
+                        <LargeHeading ref={heading}>
+                          Narative helps you brand, build and grow.
+                        </LargeHeading>
+                      </HeadingBackground>
+                    </animated.div>
+                  )
+                }}
               />
             </Section>
             <Sticky
@@ -182,6 +195,19 @@ const HomeServices = () => {
                 const firstActive: boolean = getActive(0)
                 const secondActive: boolean = getActive(1)
                 const thirdActive: boolean = getActive(2)
+
+                const background = firstActive
+                  ? '#556767'
+                  : secondActive
+                  ? '#5f6f82'
+                  : '#59698a'
+
+                const progressStyles = {
+                  transform: `translateY(${offset.offset}px)`,
+                  height: '100%',
+                  top: 0,
+                  background,
+                }
 
                 return (
                   <Grid>
@@ -207,13 +233,7 @@ const HomeServices = () => {
                         <StyledLink to="/contact" active={firstActive}>
                           Let’s talk about your brand
                         </StyledLink>
-                        <Progress
-                          style={{
-                            transform: `translateY(${offset.offset}px)`,
-                            height: '100%',
-                            top: 0,
-                          }}
-                        />
+                        <Progress style={progressStyles} />
                       </Value>
                       <Value active={secondActive}>
                         <Transform active={secondActive || thirdActive}>
@@ -261,7 +281,7 @@ export default HomeServices
 
 const HomeServicesDesktop = styled.div`
   background: #101216;
-  padding-top: 160px;
+  padding-top: 130px;
 
   ${mediaqueries.tablet`
     display: none;
