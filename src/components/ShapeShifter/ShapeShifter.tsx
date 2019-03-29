@@ -627,8 +627,8 @@ const Frame = styled.div`
   align-self: flex-start;
   flex-direction: column;
   border-color: ${p => (p.animate ? '#6166dc' : 'transparent')};
-  transform: scale(${p => (p.animate ? 1 : 1.22)});
-  transition: transform 4s cubic-bezier(0.25, 0.1, 0.25, 1);
+  transform: scale(${p => (p.animate ? 1 : 1.2)});
+  transition: transform 4.4s cubic-bezier(0.25, 0.1, 0.25, 1);
 
   ${mediaqueries.desktop`
     display: none;
@@ -703,8 +703,7 @@ const ShapeContainer = styled.div`
   border-color: ${p => (p.animate ? '#6166dc' : 'transparent')};
   opacity: ${p => (p.animate ? 1 : 0)};
   z-index: 1;
-  transition: opacity 2s ease 0.3s, border-color 1.4s 2.2s, width 0.6s,
-    height 0.6s;
+  transition: opacity 3s ease, border-color 1.4s 2.8s, width 0.6s, height 0.6s;
 
   &::after {
     content: '';
@@ -752,7 +751,7 @@ const ShapeGlow = styled.div`
 
 const Corners = styled.div`
   opacity: ${p => (p.animate ? 1 : 0)};
-  transition: opacity 1.4s 2.2s;
+  transition: opacity 1.4s 2.8s;
   pointer-events: none;
 `
 
