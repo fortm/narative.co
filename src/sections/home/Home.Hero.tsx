@@ -83,7 +83,6 @@ const TextContainer = styled.div`
   ${transitions.fadeUp};
 
   ${mediaqueries.phablet`
-    top: 0;
     position: relative;
   `}
 `
@@ -126,6 +125,7 @@ const ContentContainer = styled.div`
 
   ${mediaqueries.phablet`
     height: calc(100vh - 180px);
+    min-height: 100%;
     padding: 0;
   `};
 

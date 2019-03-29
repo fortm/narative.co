@@ -140,6 +140,7 @@ const TextContainer = styled.div`
     padding: 0 0 40px 0;
   `};
 `
+
 const Text = styled.p`
   font-size: 32px;
   color: #fff;

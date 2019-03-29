@@ -75,7 +75,7 @@ const Hero = styled.div`
 
   ${mediaqueries.tablet`
     min-height: 100vh;
-    background: #08080B;
+    background: linear-gradient(#191c22, #08080B 3%);
   `}
 `
 

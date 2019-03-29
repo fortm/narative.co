@@ -12,7 +12,7 @@ function calculateWindowOffset() {
 function useWindowOffset() {
   if (typeof window === 'undefined') return 0
 
-  const [windowOffset, setWindowSize] = useState(calculateWindowOffset(0))
+  const [windowOffset, setWindowSize] = useState(calculateWindowOffset())
 
   useEffect(() => {
     const handleScroll = () => setWindowSize(calculateWindowOffset())
@@ -56,7 +56,7 @@ const ScrollIndicator = ({
         setDelayed(true)
       }, 1625)
     }
-  })
+  }, [])
 
   return (
     <Frame>

@@ -141,6 +141,7 @@ const GridContainer = styled.div`
     height: initial
     grid-template-columns: 1fr;
     height: calc(100vh - 140px);
+    min-height: 100%;
     padding: 0;
   `};
 
@@ -164,7 +165,7 @@ const TextContainer = styled.div`
   `};
 
   ${mediaqueries.phablet`
-    top: -70px;
+    top: -50px;
   `}
 `
 

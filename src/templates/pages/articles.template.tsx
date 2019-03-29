@@ -251,7 +251,7 @@ const TextContainer = styled.div`
 
   ${mediaqueries.phablet`
     position: relative;
-    top: -60px;
+    top: -50px;
   `};
 `
 
