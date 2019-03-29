@@ -14,13 +14,7 @@ import mediaqueries from '@styles/media'
 
 function HomeHero() {
   // Fade in the text as we do on all the headings
-  const [animation, setAnimation] = useState('')
-
-  useEffect(() => {
-    startAnimation(() => {
-      setAnimation('start')
-    })
-  }, [])
+  const [animation, setAnimation] = useState('start')
 
   const navigateOut = (event, path) => {
     event.preventDefault()

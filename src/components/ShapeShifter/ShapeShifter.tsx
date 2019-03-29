@@ -627,8 +627,8 @@ const Frame = styled.div`
   align-self: flex-start;
   flex-direction: column;
   border-color: ${p => (p.animate ? '#6166dc' : 'transparent')};
-  transform: scale(${p => (p.animate ? 1 : 1.12)});
-  transition: transform 3.9s cubic-bezier(0.25, 0.1, 0.25, 1);
+  transform: scale(${p => (p.animate ? 1 : 1.22)});
+  transition: transform 4s cubic-bezier(0.25, 0.1, 0.25, 1);
 
   ${mediaqueries.desktop`
     display: none;
@@ -736,7 +736,7 @@ const ShapeContainer = styled.div`
 
 const ShapeGlow = styled.div`
   opacity: ${p => (p.animate ? 1 : 0)};
-  transition: opacity 1.4s 2.2s;
+  transition: opacity 1.4s 3s;
   pointer-events: none;
   position: absolute;
   width: 375px;

@@ -19,19 +19,21 @@ import { IArticleNode } from '@typings'
 const ArticlesFeatured = ({ article }: { article: IArticleNode }) => (
   <>
     <Frame>
-      <Left to={`/articles/${article.slug}`}>
-        <SuperScript>Featured article</SuperScript>
-        <FeaturedTitle dark>{article.title}</FeaturedTitle>
-        <Excerpt>{article.excerpt}</Excerpt>
-        <ButtonArrow
-          text="Read more"
-          color="#000"
-          onClick={() => navigate(`/articles/${article.slug}`)}
-        />
-      </Left>
-      <Right to={`/articles/${article.slug}`}>
-        <Media src={article.hero.Article__Featured} />
-      </Right>
+      <StyledLink to={`/articles/${article.slug}`}>
+        <Left>
+          <SuperScript>Featured article</SuperScript>
+          <FeaturedTitle dark>{article.title}</FeaturedTitle>
+          <Excerpt>{article.excerpt}</Excerpt>
+          <ButtonArrow
+            text="Read more"
+            color="#000"
+            onClick={() => navigate(`/articles/${article.slug}`)}
+          />
+        </Left>
+        <Right>
+          <Media src={article.hero.Article__Featured} />
+        </Right>
+      </StyledLink>
     </Frame>
     <ArticlesFeaturedMobile article={article} />
   </>
@@ -65,11 +67,22 @@ const Frame = styled.div`
   `}
 `
 
-const FeaturedTitle = styled(Heading.h2)`
-  margin-bottom: 15px;
+const StyledLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  &:hover h2 {
+    color: ${p => p.theme.colors.purple};
+  }
 `
 
-const Left = styled(Link)`
+const FeaturedTitle = styled(Heading.h2)`
+  margin-bottom: 15px;
+  transition: color 0.3s ease-in-out;
+`
+
+const Left = styled.div`
   display: block;
   width: 100%;
   max-width: 500px;
@@ -77,7 +90,7 @@ const Left = styled(Link)`
   z-index: 1;
 `
 
-const Right = styled(Link)`
+const Right = styled.div`
   display: block;
   position: relative;
   width: 100%;
