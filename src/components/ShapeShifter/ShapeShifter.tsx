@@ -703,7 +703,8 @@ const ShapeContainer = styled.div`
   border-color: ${p => (p.animate ? '#6166dc' : 'transparent')};
   opacity: ${p => (p.animate ? 1 : 0)};
   z-index: 1;
-  transition: opacity 3s ease, border-color 1.4s 2.8s, width 0.6s, height 0.6s;
+  transition: opacity 3s ease-out, border-color 1.4s 2.8s, width 0.6s,
+    height 0.6s;
 
   &::after {
     content: '';

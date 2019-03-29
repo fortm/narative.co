@@ -29,8 +29,8 @@ function HomeHero() {
       <HomeHeroContainer id="home-hero">
         <Section>
           <IntersectionObserver
-            render={({ intersectionRatio }) => (
-              <ContentContainer style={{ opacity: intersectionRatio }}>
+            render={({ intersectionRatio: ir }) => (
+              <ContentContainer style={{ opacity: ir * ir }}>
                 <TextContainer animation={animation}>
                   <Heading.h1>
                     <em>Narative</em> builds brands, websites and products for
