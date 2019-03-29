@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link, navigate } from 'gatsby'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 import { ButtonArrow, Section, Heading } from '@components'
 import ScrollIndicator from '@components/ScrollIndicator'
@@ -9,7 +9,6 @@ import IntersectionObserver from '@components/IntersectionObserver'
 import LayoutHeroMobile from '@components/Layout/Layout.Hero.Mobile'
 
 import transitions from '@styles/transitions'
-import { startAnimation } from '@utils'
 import mediaqueries from '@styles/media'
 
 function HomeHero() {
@@ -69,12 +68,17 @@ const HomeHeroContainer = styled.div`
   `}
 `
 
+const fadein = keyframes`
+  from { opacity : 0}
+  to { opacity : 1}
+`
+
 const TextContainer = styled.div`
   position: relative;
   z-index: 10;
   max-width: 570px;
   top: 10px;
-  ${transitions.fadeUp};
+  animation: ${fadein} 1.4s ease-out;
 
   ${mediaqueries.phablet`
     position: relative;
