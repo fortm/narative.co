@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, navigate } from 'gatsby'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 
 import { ButtonArrow, Section, Heading } from '@components'
 import ScrollIndicator from '@components/ScrollIndicator'
@@ -10,10 +10,17 @@ import LayoutHeroMobile from '@components/Layout/Layout.Hero.Mobile'
 
 import transitions from '@styles/transitions'
 import mediaqueries from '@styles/media'
+import { startAnimation } from '@utils'
 
 function HomeHero() {
   // Fade in the text as we do on all the headings
-  const [animation, setAnimation] = useState('start')
+  const [animation, setAnimation] = useState('')
+
+  useEffect(() => {
+    startAnimation(() => {
+      setAnimation('start')
+    })
+  }, [])
 
   const navigateOut = (event, path) => {
     event.preventDefault()
@@ -30,8 +37,11 @@ function HomeHero() {
         <Section>
           <IntersectionObserver
             render={({ intersectionRatio: ir }) => (
-              <ContentContainer style={{ opacity: ir * ir }}>
-                <TextContainer animation={animation}>
+              <ContentContainer
+                style={{ opacity: ir * ir }}
+                animation={animation}
+              >
+                <TextContainer>
                   <Heading.h1>
                     <em>Narative</em> builds brands, websites and products for
                     growth-minded companies.
@@ -68,17 +78,11 @@ const HomeHeroContainer = styled.div`
   `}
 `
 
-const fadein = keyframes`
-  from { opacity : 0}
-  to { opacity : 1}
-`
-
 const TextContainer = styled.div`
   position: relative;
   z-index: 10;
   max-width: 570px;
   top: 10px;
-  animation: ${fadein} 1.4s ease-out;
 
   ${mediaqueries.phablet`
     position: relative;
@@ -103,7 +107,6 @@ const ContactText = styled(Link)`
   font-size: 1.8rem;
   font-weight: 600;
   color: ${p => p.theme.colors.grey};
-  ${transitions.fadeUp};
 
   svg {
     margin-left: 1rem;
@@ -120,6 +123,9 @@ const ContentContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  opacity: ${p => (p.animation ? 1 : 0)};
+  transition: opacity 1.2s ease-out;
 
   ${mediaqueries.phablet`
     height: calc(100vh - 180px);
