@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import throttle from 'lodash/throttle'
 
 function calculateWindowOffset() {
   return (
@@ -12,10 +13,13 @@ function calculateWindowOffset() {
 function useWindowOffset() {
   if (typeof window === 'undefined') return 0
 
-  const [windowOffset, setWindowSize] = useState(calculateWindowOffset())
+  const [windowOffset, setWindowSize] = useState(0)
 
   useEffect(() => {
-    const handleScroll = () => setWindowSize(calculateWindowOffset())
+    const handleScroll = throttle(
+      () => setWindowSize(calculateWindowOffset()),
+      15
+    )
 
     // We don't want to add the listener beyond the height of the indicator
     if (windowOffset < 90) {
@@ -24,7 +28,7 @@ function useWindowOffset() {
         window.removeEventListener('scroll', handleScroll)
       }
     }
-  })
+  }, [])
 
   return windowOffset
 }
