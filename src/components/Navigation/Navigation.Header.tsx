@@ -5,7 +5,7 @@ import OutsideClickHandler from 'react-outside-click-handler'
 import { isMobileOnly } from 'react-device-detect'
 
 import { Section, Logo } from '@components'
-import mediaqueries from '@styles/media'
+import mediaqueries, { media } from '@styles/media'
 
 const navLinks = [
   { to: '/careers', text: 'Careers' },
@@ -170,9 +170,11 @@ class Navigation extends Component<{}, NavigationState> {
                     <BackChevron />
                   </LogoBack>
                 )}
-                <LogoContainer to="/" aria-label="Back home">
-                  <Logo onlySymbol fill={fill} />
-                </LogoContainer>
+                <LogoMask>
+                  <LogoContainer to="/" aria-label="Back home">
+                    <Logo fill={fill} />
+                  </LogoContainer>
+                </LogoMask>
                 <Nav>
                   <DesktopNavList>
                     <NavItems active={active} handleClick={this.navigateOut} />
@@ -263,10 +265,23 @@ const LogoBack = styled.button`
 
 const LogoContainer = styled(Link)`
   transition: opacity 0.3s var(--ease-out-quad);
+  max-width: 114px;
 
   &:hover {
     opacity: 0.6;
   }
+
+  ${mediaqueries.tablet`
+    .hide-on-mobile {
+      visibility: hidden;
+    }
+  `}
+`
+
+const LogoMask = styled.div`
+  display: inline-block;
+  max-width: 114px;
+  overflow: hidden;
 `
 
 const ToggleContainer = styled.button`

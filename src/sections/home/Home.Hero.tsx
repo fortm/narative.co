@@ -42,7 +42,7 @@ function HomeHero() {
               >
                 <TextContainer>
                   <Heading.h1>
-                    <em>Narative</em> builds brands, websites and products for
+                    Narative builds brands, websites and products for
                     growth-minded companies.
                   </Heading.h1>
                   <MainText>
