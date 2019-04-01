@@ -2,3 +2,8 @@
   Command = "yarn build"
   Functions = "functions"
   Publish = "public"
+
+[context.production]
+  command = "make production"
+[context.branch-deploy]
+  command = "make deploy_preview"
