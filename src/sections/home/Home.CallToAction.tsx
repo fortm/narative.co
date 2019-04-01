@@ -53,7 +53,9 @@ function HomeCallToAction() {
             render={({ visiblePercentage }) => (
               <Frame narrow>
                 <Nav inView={visiblePercentage > 88}>
-                  <Logo onlySymbol fill="rgba(255,255,255,0.25)" />
+                  <LogoContainer>
+                    <Logo fill="rgba(255,255,255,0.25)" />
+                  </LogoContainer>
                   <NavLinks>
                     {ctaLinks.map(link => (
                       <NavLink key={link.to} to={link.to}>
@@ -323,4 +325,15 @@ const MobileCopy = styled.div`
   z-index: 1;
   font-size: 18px;
   color: ${p => p.theme.colors.grey};
+`
+
+const LogoContainer = styled.div`
+  max-width: 114px;
+
+  ${mediaqueries.tablet`
+    position: relative;
+    left: 60px;
+    max-width: 160px;
+    height: 30px;
+  `}
 `

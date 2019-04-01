@@ -236,4 +236,10 @@ export const GlobalStyles = createGlobalStyle`
       }
     }
   }
+
+  @media screen and (max-width: 768px) {
+    .hide-on-mobile {
+      visibility: hidden;
+    }
+  }
 `

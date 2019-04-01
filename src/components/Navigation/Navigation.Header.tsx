@@ -249,6 +249,7 @@ const NavContainer = styled.div`
 const LogoBack = styled.button`
   position: absolute;
   left: -44px;
+  top: 107px;
 
   svg {
     transition: transform 0.25s var(--ease-out-quad);
@@ -270,12 +271,6 @@ const LogoContainer = styled(Link)`
   &:hover {
     opacity: 0.6;
   }
-
-  ${mediaqueries.tablet`
-    .hide-on-mobile {
-      visibility: hidden;
-    }
-  `}
 `
 
 const LogoMask = styled.div`
