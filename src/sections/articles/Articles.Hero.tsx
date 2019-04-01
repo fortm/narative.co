@@ -182,7 +182,7 @@ const ContentContainer = styled.div`
 
 const TextContainer = styled.div`
   max-width: 570px;
-  ${transitions.fadeUp};
+  ${transitions.fadeIn};
 
   ${mediaqueries.phablet`
     position: relative;

@@ -187,7 +187,7 @@ const SlideInContainer = styled.div`
 `
 
 const TextContainer = styled.div`
-  ${transitions.fadeUp};
+  ${transitions.fadeIn};
 `
 
 const MainText = styled.p`

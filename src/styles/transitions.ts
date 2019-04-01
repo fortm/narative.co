@@ -23,6 +23,26 @@ const blurIn = css`
     opacity 1.2s 1300ms cubic-bezier(0.694, 0, 0.335, 1);
 `
 
+const fadeIn = css`
+  ${p =>
+    p.animation !== 'start' &&
+    `
+    opacity: 0;
+  `};
+
+  transition: opacity 0.6s cubic-bezier(0.215, 0.61, 0.355, 1)
+    ${p => (p.transitionDelay ? `${p.transitionDelay}ms` : '')};
+
+  ${mediaqueries.tablet`
+      transition: opacity 0.6s
+      ${p =>
+        p.transitionDelay
+          ? `${p.transitionDelayMobile || p.transitionDelay}ms`
+          : ''}
+      cubic-bezier(0.694, 0, 0.335, 1);
+    `}
+`
+
 /**
  * fadeUp
  * Fades in and Up the selected element.
@@ -41,13 +61,15 @@ const fadeUp = css`
     p.animation !== 'start' &&
     `
     opacity: 0;
+    transform: translate3d(0, 1.4rem, 0);
   `};
 
-  transition: all 1s ${p => (p.transitionDelay ? `${p.transitionDelay}ms` : '')}
+  transition: all 800ms
+    ${p => (p.transitionDelay ? `${p.transitionDelay}ms` : '')}
     cubic-bezier(0.694, 0, 0.335, 1);
 
   ${mediaqueries.tablet`
-      transition: all 1s
+      transition: all 800ms
       ${p =>
         p.transitionDelay
           ? `${p.transitionDelayMobile || p.transitionDelay}ms`
@@ -79,12 +101,14 @@ const fadeUpLong = css`
 
 export const transitions = {
   blurIn,
+  fadeIn,
   fadeUp,
   fadeUpLong,
 }
 
 export default {
   blurIn,
+  fadeIn,
   fadeUp,
   fadeUpLong,
 }

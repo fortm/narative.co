@@ -266,7 +266,7 @@ const HeroImageMobile = styled(HeroImage)`
 
 const TextContainer = styled.div`
   max-width: 560px;
-  ${transitions.fadeUp};
+  ${transitions.fadeIn};
 
   ${mediaqueries.phablet`
     position: relative;

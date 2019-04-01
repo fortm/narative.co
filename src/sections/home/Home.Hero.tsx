@@ -8,7 +8,6 @@ import ShapeShifter from '@components/ShapeShifter'
 import IntersectionObserver from '@components/IntersectionObserver'
 import LayoutHeroMobile from '@components/Layout/Layout.Hero.Mobile'
 
-import transitions from '@styles/transitions'
 import mediaqueries from '@styles/media'
 import { startAnimation } from '@utils'
 

@@ -142,7 +142,7 @@ const GridContainer = styled.div`
 `
 
 const TextContainer = styled.div`
-  ${transitions.fadeUp};
+  ${transitions.fadeIn};
   position: relative;
 
   h1 {
