@@ -14,16 +14,6 @@ import { startAnimation } from '@utils'
 
 const heroQuery = graphql`
   query CareersHeroPageQuery {
-    allContentfulCareersPage {
-      edges {
-        node {
-          heading
-          text {
-            text
-          }
-        }
-      }
-    }
     heroTop: file(name: { regex: "/careers-hero-cable/" }) {
       childImageSharp {
         fluid(maxWidth: 322, quality: 100) {

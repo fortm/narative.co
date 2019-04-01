@@ -23,14 +23,14 @@ import LabsPreview from '../sections/labs/Labs.Preview'
 
 function LabsPage({ data, location }) {
   const {
-    allContentfulHomePage,
+    allContentfulPage,
     hero,
     heroBody,
     heroScreen,
     needlBackground,
     feyBackground,
   } = data
-  const { seo } = allContentfulHomePage.edges[0].node
+  const { seo } = allContentfulPage.edges[0].node
   const pageBackground = 'linear-gradient(180deg, #08080b 50%, #191D23 100%)'
   const navConfig = {
     fixed: true,
@@ -155,7 +155,7 @@ export default LabsPage
 
 export const pageQuery = graphql`
   query LabsPageQuery {
-    allContentfulHomePage {
+    allContentfulPage(filter: { pageName: { eq: "Labs" } }) {
       edges {
         node {
           seo {

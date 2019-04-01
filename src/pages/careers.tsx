@@ -9,7 +9,7 @@ import CareersHero from '../sections/careers/Careers.Hero'
 import CareersBody from '../sections/careers/Careers.Body'
 
 function CareersPage({ data, location }) {
-  const contentful = data.allContentfulCareersPage.edges[0].node
+  const contentful = data.allContentfulPage.edges[0].node
   const pageBackground =
     'linear-gradient(rgb(9, 10, 12),rgb(17, 18, 22) 60%,#1a1e24 100%)'
 
@@ -38,7 +38,7 @@ export default CareersPage
 
 export const pageQuery = graphql`
   query CareersPageQuery {
-    allContentfulCareersPage {
+    allContentfulPage(filter: { pageName: { eq: "Careers" } }) {
       edges {
         node {
           seo {

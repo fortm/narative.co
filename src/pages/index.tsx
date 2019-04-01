@@ -14,8 +14,7 @@ import HomeServices from '../sections/home/Home.Services'
  * The home page of Narative.co!
  */
 function IndexPage({ data, location }) {
-  const contentful = data.allContentfulHomePage.edges[0].node
-  const background = '#08080b'
+  const contentful = data.allContentfulPage.edges[0].node
   const navConfig = {
     offset: true,
     fixed: true,
@@ -45,7 +44,7 @@ export default IndexPage
 
 export const pageQuery = graphql`
   query HomePageQuery {
-    allContentfulHomePage {
+    allContentfulPage(filter: { pageName: { eq: "Home" } }) {
       edges {
         node {
           seo {
@@ -55,16 +54,6 @@ export const pageQuery = graphql`
               file {
                 url
               }
-            }
-          }
-          heading {
-            childMarkdownRemark {
-              html
-            }
-          }
-          text {
-            childMarkdownRemark {
-              html
             }
           }
         }

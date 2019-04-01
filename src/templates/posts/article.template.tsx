@@ -106,7 +106,7 @@ class Article extends Component<ArticleProps, PostState> {
 
   render = () => {
     const { contentHeight, contentOffset } = this.state
-    const { location, mode, toggleMode, ...props } = this.props
+    const { location, mode, toggleMode } = this.props
 
     const scrollInfo = { height: contentHeight, offset: contentOffset }
     const article = this.article
