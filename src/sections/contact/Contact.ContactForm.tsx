@@ -183,7 +183,9 @@ const ContactByEmail = ({ animation }) => (
           iconFill="rgba(0,0,0,0.3)"
         >
           Prefer to send us an email instead?{' '}
-          <button>contact@narative.co</button>
+          <button>
+            <address>contact@narative.co</address>
+          </button>
         </CopyToClipboard>
       </ContactWithEmailText>
     </ContactWithEmail>

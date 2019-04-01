@@ -260,7 +260,7 @@ class LayoutContainer extends Component<LayoutProps, LayoutState> {
 
 export default LayoutContainer
 
-const SiteContainer = styled.div`
+const SiteContainer = styled.main`
   position: ${p => (p.active || p.mask ? 'fixed' : 'relative')};
   background: ${p =>
     p.background ||

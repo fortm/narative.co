@@ -51,7 +51,7 @@ const transitionColor = css`
   transition: color 0.3s ease;
 `
 
-const Content = styled.div`
+const Content = styled.article`
   display: flex;
   flex-direction: column;
 
