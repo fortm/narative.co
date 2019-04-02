@@ -56,11 +56,28 @@ function HomeCallToAction() {
                     <MobileLogo />
                   </MobileLogoContainer>
                   <NavLinks>
-                    {ctaLinks.map(link => (
-                      <NavLink key={link.to} to={link.to}>
-                        {link.text}
-                      </NavLink>
-                    ))}
+                    {ctaLinks.map(link => {
+                      if (link.to === '/contact') {
+                        return (
+                          <NavLink
+                            key={link.to}
+                            to={link.to}
+                            onClick={event => {
+                              event.preventDefault()
+                              toggleContact()
+                            }}
+                          >
+                            {link.text}
+                          </NavLink>
+                        )
+                      }
+
+                      return (
+                        <NavLink key={link.to} to={link.to}>
+                          {link.text}
+                        </NavLink>
+                      )
+                    })}
                   </NavLinks>
                 </Nav>
                 <TextContainer>
