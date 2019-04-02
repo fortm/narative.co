@@ -204,6 +204,7 @@ function Code() {
     </CodeContainer>
   )
 }
+
 function HomeServices() {
   const config = { mass: 1, tension: 200, friction: 25 }
 
@@ -212,7 +213,7 @@ function HomeServices() {
     config,
   }))
   const heading = createRef()
-  const { toggleContact } = useContext(ContactContext)
+  const { showContact, toggleContact } = useContext(ContactContext)
 
   useEffect(() => {
     const handleScroll = throttle(() => {
@@ -227,7 +228,7 @@ function HomeServices() {
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [])
+  }, [showContact])
 
   const animatedStyles = {
     transform: props.offset.interpolate(calcTransform),
@@ -549,10 +550,6 @@ const TimeContainer = styled.span`
   }
 
   @media only screen and (max-width: 1024px) {
-    left: 14.6%;
-  }
-
-  @media only screen and (max-width: 900px) {
     display: none;
   }
 `

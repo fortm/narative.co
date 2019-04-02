@@ -95,7 +95,6 @@ const SlideInContainer = styled.div`
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   background: #fff;
-  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   filter: blur(0);
 

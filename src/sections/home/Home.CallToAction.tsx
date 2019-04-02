@@ -9,7 +9,7 @@ import Section from '@components/Section'
 import MediaQuery from '@components/MediaQuery'
 import { ContactContext } from '@components/Contact/Contact.Context'
 
-import mediaqueries from '@styles/media'
+import mediaqueries, { media } from '@styles/media'
 
 const ctaLinks = [
   { to: '/careers', text: 'Careers' },
@@ -48,10 +48,13 @@ function HomeCallToAction() {
           <IntersectionObserver
             render={({ visiblePercentage }) => (
               <Frame narrow>
-                <Nav inView={visiblePercentage > 88}>
+                <Nav inView={visiblePercentage > 80}>
                   <LogoContainer>
                     <Logo fill="rgba(255,255,255,0.25)" />
                   </LogoContainer>
+                  <MobileLogoContainer>
+                    <MobileLogo />
+                  </MobileLogoContainer>
                   <NavLinks>
                     {ctaLinks.map(link => (
                       <NavLink key={link.to} to={link.to}>
@@ -326,9 +329,55 @@ const LogoContainer = styled.div`
   max-width: 114px;
 
   ${mediaqueries.tablet`
+    display: none;
     position: relative;
     left: 60px;
     max-width: 160px;
     height: 30px;
   `}
 `
+
+const MobileLogoContainer = styled.div`
+  ${mediaqueries.desktop_up`
+    display: none;
+  `}
+`
+
+const MobileLogo = () => (
+  <svg
+    width="23px"
+    height="30px"
+    viewBox="0 0 23 30"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M0 30H22.9091V26.4595H0V30Z"
+      fill="white"
+      fill-opacity="0.25"
+    />
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M0.00610352 24.7176L7.01994 19.7873L7.01909 15.2965L0.00610352 10.3745V24.7176Z"
+      fill="white"
+      fill-opacity="0.25"
+    />
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M22.8919 0L15.8494 4.87412V9.29375L22.8941 14.2569L22.892 0H22.8919Z"
+      fill="white"
+      fill-opacity="0.25"
+    />
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M0.0065918 0V8.62637L22.8961 24.7297L22.8948 16.0316L0.0065918 0Z"
+      fill="white"
+      fill-opacity="0.25"
+    />
+  </svg>
+)
