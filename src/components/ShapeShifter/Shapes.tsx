@@ -11,15 +11,15 @@ export const SlashToSquare = () => (
   >
     <g filter="url(#filter0_dd)">
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M82.0002 175.701L354.997 367.76L354.985 284.263L82.0002 93.056V175.701ZM70.0002 70V181.93L367 390.877L366.984 278.016L70.0002 70Z"
         fill="white"
         id="start"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M355 94H82V367H355V94ZM70 82V379H367V82H70Z"
         fill="white"
         id="end"
@@ -91,16 +91,16 @@ export const SlashToCircle = () => (
   >
     <g filter="url(#filter0_dd)">
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M82.0002 175.701L354.997 367.76L354.985 284.263L82.0002 93.056V175.701ZM70.0002 70V181.93L367 390.877L366.984 278.016L70.0002 70Z"
         fill="white"
         id="start"
         data-shape="slash"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M218.5 368C293.887 368 355 306.887 355 231.5C355 156.113 293.887 95 218.5 95C143.113 95 82 156.113 82 231.5C82 306.887 143.113 368 218.5 368ZM218.5 380C300.514 380 367 313.514 367 231.5C367 149.486 300.514 83 218.5 83C136.486 83 70 149.486 70 231.5C70 313.514 136.486 380 218.5 380Z"
         fill="white"
         id="end"
@@ -171,8 +171,8 @@ export const SlashMirror = () => (
     preserveAspectRatio="none"
   >
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M355 175.701L82.0036 367.76L82.0159 284.263L355 93.056V175.701ZM367 70V181.93L70.0002 390.877L70.0168 278.016L367 70Z"
       fill="white"
       id="start"
@@ -180,8 +180,8 @@ export const SlashMirror = () => (
     />
 
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M355 82H82V355H355V82ZM70 70V367H367V70H70Z"
       fill="white"
       id="end"
@@ -201,8 +201,8 @@ export const Square = () => (
   >
     <g filter="url(#filter0_dd)">
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M355 94H82V367H355V94ZM70 82V379H367V82H70Z"
         fill="white"
         id="start"
@@ -210,8 +210,8 @@ export const Square = () => (
       />
 
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M82.0002 175.701L354.997 367.76L354.985 284.263L82.0002 93.056V175.701ZM70.0002 70V181.93L367 390.877L366.984 278.016L70.0002 70Z"
         fill="white"
         id="end"
@@ -282,16 +282,16 @@ export const SquareMirror = () => (
     preserveAspectRatio="none"
   >
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M355 94H82V367H355V94ZM70 82V379H367V82H70Z"
       fill="white"
       id="start-mirror"
       data-shape="square"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M355 175.701L82.0036 367.76L82.0159 284.263L355 93.056V175.701ZM367 70V181.93L70.0002 390.877L70.0168 278.016L367 70Z"
       fill="white"
       id="end-mirror"
@@ -310,8 +310,8 @@ export const CircleMorphMirror = () => (
     preserveAspectRatio="none"
   >
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M218.5 368C143.113 368 82 306.887 82 231.5C82 156.113 143.113 95 218.5 95C293.887 95 355 156.113 355 231.5C355 306.887 293.887 368 218.5 368ZM218.5 380C136.486 380 70 313.514 70 231.5C70 149.486 136.486 83 218.5 83C300.514 83 367 149.486 367 231.5C367 313.514 300.514 380 218.5 380Z"
       fill="white"
       id="start-mirror"
@@ -319,8 +319,8 @@ export const CircleMorphMirror = () => (
     />
 
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M355 175.701L82.0036 367.76L82.0159 284.263L355 93.056V175.701ZM367 70V181.93L70.0002 390.877L70.0168 278.016L367 70Z"
       fill="white"
       id="end-mirror"
@@ -340,8 +340,8 @@ export const CircleMorph = () => (
   >
     <g filter="url(#filter0_dd)">
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M218.5 368C293.887 368 355 306.887 355 231.5C355 156.113 293.887 95 218.5 95C143.113 95 82 156.113 82 231.5C82 306.887 143.113 368 218.5 368ZM218.5 380C300.514 380 367 313.514 367 231.5C367 149.486 300.514 83 218.5 83C136.486 83 70 149.486 70 231.5C70 313.514 136.486 380 218.5 380Z"
         fill="white"
         id="start"
@@ -349,8 +349,8 @@ export const CircleMorph = () => (
       />
 
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M82.0002 175.701L354.997 367.76L354.985 284.263L82.0002 93.056V175.701ZM70.0002 70V181.93L367 390.877L366.984 278.016L70.0002 70Z"
         fill="white"
         id="end"

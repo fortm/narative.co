@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component, useContext } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import { Link, navigate } from 'gatsby'
 import OutsideClickHandler from 'react-outside-click-handler'
 import { isMobileOnly } from 'react-device-detect'
 
 import { Section, Logo } from '@components'
-import mediaqueries, { media } from '@styles/media'
+import mediaqueries from '@styles/media'
+import { ContactContext } from '@components/Contact/Contact.Context'
 
 const navLinks = [
   { to: '/careers', text: 'Careers' },
@@ -177,7 +178,11 @@ class Navigation extends Component<{}, NavigationState> {
                 </LogoMask>
                 <Nav>
                   <DesktopNavList>
-                    <NavItems active={active} handleClick={this.navigateOut} />
+                    <NavItems
+                      active={active}
+                      handleClick={this.navigateOut}
+                      handleOutsideClick={this.handleOutsideClick}
+                    />
                   </DesktopNavList>
                   <ToggleContainer
                     onClick={this.handleToggleClick}
@@ -198,9 +203,35 @@ class Navigation extends Component<{}, NavigationState> {
 
 export default Navigation
 
-const NavItems = ({ active, handleClick }) =>
-  navLinks.map((nav, index) => {
+const NavItems = ({ active, handleClick, handleOutsideClick }) => {
+  const { toggleContact } = useContext(ContactContext)
+
+  return navLinks.map((nav, index) => {
     const delay = active ? 30 * (navLinks.length - index) : 30 * index
+
+    if (nav.to === '/contact') {
+      return (
+        <NavItem key={nav.to}>
+          <NavAnchor
+            active={active ? active : undefined}
+            disabled={nav.disabled}
+            to={nav.to}
+            delay={delay}
+            as={Link}
+            onClick={event => {
+              event.preventDefault()
+              toggleContact()
+              handleOutsideClick()
+            }}
+            getProps={({ isPartiallyCurrent }) =>
+              isPartiallyCurrent ? { ['data-active']: 'true' } : null
+            }
+          >
+            {nav.text}
+          </NavAnchor>
+        </NavItem>
+      )
+    }
 
     return (
       <NavItem key={nav.to}>
@@ -220,6 +251,7 @@ const NavItems = ({ active, handleClick }) =>
       </NavItem>
     )
   })
+}
 
 const NavFixedContainer = styled.div`
   position: absolute;

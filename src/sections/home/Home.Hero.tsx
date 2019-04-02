@@ -113,9 +113,10 @@ const ContentContainer = styled.div`
     height: calc(100vh - 180px);
     min-height: 100%;
     padding: 0;
+    top: -40px;
   `};
 
   @media screen and (max-height: 670px) {
-    top: -40px;
+    top: -60px;
   }
 `

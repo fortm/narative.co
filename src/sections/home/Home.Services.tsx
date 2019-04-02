@@ -190,16 +190,17 @@ function Code() {
     <CodeContainer>
       <VectorTop>
         {`<svg width="23" height="30" viewBox="0 0 23 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 30H22.9091V26.4595H0V30Z" fill="#111216"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.00598145 24.7176L7.01982 19.7873L7.01897 15.2965L0.00598145 10.3745V24.7176Z" fill="#111216"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M22.8917 0L15.8492 4.87412V9.29375L22.894 14.2569L22.8918 0H22.8917Z" fill="#111216"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.0065918 0V8.62637L22.8961 24.7297L22.8948 16.0316L0.0065918 0Z" fill="#111216"/>
-                        </svg>`}
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0 30H22.9091V26.4595H0V30Z" fill="#111216"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.00598145 24.7176L7.01982 19.7873L7.01897 15.2965L0.00598145 10.3745V24.7176Z" fill="#111216"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M22.8917 0L15.8492 4.87412V9.29375L22.894 14.2569L22.8918 0H22.8917Z" fill="#111216"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.0065918 0V8.62637L22.8961 24.7297L22.8948 16.0316L0.0065918 0Z" fill="#111216"/>
+          </svg>`}
       </VectorTop>
       <VectorBottom>
         {`<svg width="23" height="30" viewBox="0 0 23 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M0 30H22.9091V26.4595H0V30Z" fill="white"/>
-<path fill-rule="evenodd" clip-rule="evenodd`}
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0 30H22.9091V26.4595H0V30Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd
+        `}
       </VectorBottom>
     </CodeContainer>
   )

@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
 
 import Section from '@components/Section'
 import SocialLinks from '@components/SocialLinks'
 import Logo from '@components/Logo'
+import { ContactContext } from '@components/Contact/Contact.Context'
+
 import mediaqueries from '@styles/media'
 
 const footerLinks = [
@@ -20,6 +22,7 @@ const footerLinks = [
  * render accordinly!
  */
 const Footer = ({ mode = 'dark' }: { mode?: string }) => {
+  const { toggleContact } = useContext(ContactContext)
   const color = mode === 'dark' ? '#fff' : '#000'
   const transparentColor =
     mode === 'dark' ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.25)'
@@ -37,18 +40,39 @@ const Footer = ({ mode = 'dark' }: { mode?: string }) => {
           </SocialIconsFooter>
         </Left>
         <Right>
-          {footerLinks.map(link => (
-            <FooterLink
-              key={link.to}
-              color={color}
-              to={link.to}
-              getProps={({ isPartiallyCurrent }) =>
-                isPartiallyCurrent ? { ['data-active']: 'true' } : null
-              }
-            >
-              {link.text}
-            </FooterLink>
-          ))}
+          {footerLinks.map(link => {
+            if (link.to === '/contact') {
+              return (
+                <FooterLink
+                  key={link.to}
+                  color={color}
+                  onClick={event => {
+                    event.preventDefault()
+                    toggleContact()
+                  }}
+                  to={link.to}
+                  getProps={({ isPartiallyCurrent }) =>
+                    isPartiallyCurrent ? { ['data-active']: 'true' } : null
+                  }
+                >
+                  {link.text}
+                </FooterLink>
+              )
+            }
+
+            return (
+              <FooterLink
+                key={link.to}
+                color={color}
+                to={link.to}
+                getProps={({ isPartiallyCurrent }) =>
+                  isPartiallyCurrent ? { ['data-active']: 'true' } : null
+                }
+              >
+                {link.text}
+              </FooterLink>
+            )
+          })}
         </Right>
       </Frame>
     </Section>

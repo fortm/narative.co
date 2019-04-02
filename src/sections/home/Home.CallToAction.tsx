@@ -234,7 +234,7 @@ const CallToAction = styled.button`
   height: 50vh;
   background: #fff;
   border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  border-topright-radius: 20px;
   text-align: center;
   color: #000;
 
@@ -352,32 +352,32 @@ const MobileLogo = () => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M0 30H22.9091V26.4595H0V30Z"
       fill="white"
-      fill-opacity="0.25"
+      fillOpacity="0.25"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M0.00610352 24.7176L7.01994 19.7873L7.01909 15.2965L0.00610352 10.3745V24.7176Z"
       fill="white"
-      fill-opacity="0.25"
+      fillOpacity="0.25"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M22.8919 0L15.8494 4.87412V9.29375L22.8941 14.2569L22.892 0H22.8919Z"
       fill="white"
-      fill-opacity="0.25"
+      fillOpacity="0.25"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M0.0065918 0V8.62637L22.8961 24.7297L22.8948 16.0316L0.0065918 0Z"
       fill="white"
-      fill-opacity="0.25"
+      fillOpacity="0.25"
     />
   </svg>
 )
