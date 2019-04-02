@@ -134,7 +134,7 @@ const SEO = ({
           rel: 'canonical',
           href: canonical
             ? canonical
-            : `https://www.narative.co${pathname ? pathname : '/'}`,
+            : `https://www.narative.co/${pathname.replace(/^\/+/g, '')}`,
         },
       ]}
       meta={getMetaTags({

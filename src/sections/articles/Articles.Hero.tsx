@@ -86,7 +86,7 @@ function ArticlesHero() {
                 onLoad={() => setImageLoaded(true)}
               />
               <HeroImageText imageLoaded={imageLoaded}>
-                Narative builds brands, websites, and products for grow-minded
+                Narative builds brands, websites and products for growth-minded
                 companies. We're a team with senior startup experience here to
                 <Caret ref={text} />
               </HeroImageText>
@@ -128,7 +128,7 @@ const HeroImageText = styled.p`
   transition: opacity 0.3s;
   position: absolute;
   color: #b798f2;
-  width: 215.87px;
+  width: 214.87px;
   top: 198px;
   left: 170px;
   font-size: 12px;
