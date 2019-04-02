@@ -626,6 +626,7 @@ const Frame = styled.div`
   align-items: center;
   align-self: flex-start;
   flex-direction: column;
+  user-select: none;
   border-color: ${p => (p.animate ? '#6166dc' : 'transparent')};
   transform: scale(${p => (p.animate ? 1 : 1.1)});
   transition: transform 2s cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -709,10 +710,10 @@ const ShapeContainer = styled.div`
   &::after {
     content: '';
     position: absolute;
-    left: -3px;
-    top: -3px;
-    height: calc(100% + 6px);
-    width: calc(100% + 6px);
+    left: -8px;
+    top: -8px;
+    height: calc(100% + 16px);
+    width: calc(100% + 16px);
     z-index: 1;
   }
 
