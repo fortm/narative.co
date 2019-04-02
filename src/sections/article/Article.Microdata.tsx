@@ -50,6 +50,7 @@ const Microdata = ({
     postDate,
     backgroundImage,
     readingTime,
+    path,
   },
   location,
   publicationLogo,
@@ -87,6 +88,7 @@ const Microdata = ({
         description={excerpt}
         image={backgroundImage.seo.src}
         canonical={canonical}
+        pathname={path}
         readingTime={readingTime.text}
         published={isoDateStr}
       >
