@@ -4,6 +4,8 @@ import { ThemeProvider } from 'styled-components'
 import { GlobalStyles, theme } from '@styles'
 
 import Container from '@components/Layout/Layout.Container'
+import { ContactProvider } from '@components/Contact/Contact.Context'
+import ContactSlideIn from '@components/Contact/Contact.SlideIn'
 
 interface LayoutProps {
   background?: string
@@ -21,10 +23,13 @@ interface LayoutProps {
  */
 const Layout = ({ children, ...rest }: LayoutProps) => (
   <ThemeProvider theme={theme}>
-    <>
-      <GlobalStyles />
-      <Container {...rest}>{children}</Container>
-    </>
+    <ContactProvider>
+      <>
+        <GlobalStyles />
+        <Container {...rest}>{children}</Container>
+        <ContactSlideIn />
+      </>
+    </ContactProvider>
   </ThemeProvider>
 )
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
 import { Link, graphql, StaticQuery } from 'gatsby'
 
@@ -7,8 +7,7 @@ import IntersectionObserver from '@components/IntersectionObserver'
 import Footer from '@components/Navigation/Navigation.Footer'
 import Section from '@components/Section'
 import MediaQuery from '@components/MediaQuery'
-
-import ContactSlideIn from '../contact/Contact.SlideIn'
+import { ContactContext } from '@components/Contact/Contact.Context'
 
 import mediaqueries from '@styles/media'
 
@@ -39,10 +38,7 @@ const imageQuery = graphql`
  */
 
 function HomeCallToAction() {
-  const [animation, setAnimation] = useState('')
-
-  const handleActionClick = () => setAnimation('start')
-  const handleClose = () => setAnimation('')
+  const { showContact, toggleContact } = useContext(ContactContext)
 
   return (
     <StaticQuery
@@ -76,12 +72,11 @@ function HomeCallToAction() {
                   </TextBackground>
                   <MobileAction to="/contact">Get in touch</MobileAction>
                 </TextContainer>
-                <CallToAction onClick={handleActionClick}>
-                  <CTAText animation={animation}>
+                <CallToAction onClick={toggleContact}>
+                  <CTAText animation={showContact}>
                     Contact Us <ChevronDownIcon />
                   </CTAText>
                 </CallToAction>
-                <ContactSlideIn animation={animation} onClose={handleClose} />
                 <MobileCopy>More about Narative</MobileCopy>
               </Frame>
             )}

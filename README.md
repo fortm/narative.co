@@ -1,11 +1,15 @@
-![Narative Logo Header](https://res.cloudinary.com/narative/image/upload/v1546451163/narative-header.jpg)
+![Narative Logo Header](https://res.cloudinary.com/narative/image/upload/v1554161802/home-meta.jpg)
 
 <br />
 
 # Narative.co
 
-Narative brings decades of design, marketing and engineering expertise directly to your team. <br />
-We help you build the products you've always dreamed of, and the ones you're yet to dream up.
+Narative builds brands, websites and products for growth-minded companies.. <br />
+We're a team with senior startup experience here to help your business take the next step.
+
+#### Technology
+
+Narative.co is powered by [Gatsby](gatsbyjs.org) that pulls data from [Contentful](https://www.contentful.com) and is hosted on [Netlify's](https://netlify.com). Apart from that, we aim to keep things as barebones as we can.
 
 #### Installation
 

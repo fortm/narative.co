@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useEffect, useContext } from 'react'
 import styled from 'styled-components'
 import Transition from 'react-transition-group/Transition'
 
@@ -6,57 +6,45 @@ import mediaqueries from '@styles/media'
 import { scrollable } from '@utils'
 import { ExIcon } from '../../icons/ui'
 
-import ContactForm from './Contact.ContactForm'
+import ContactForm from '../../sections/contact/Contact.ContactForm'
 
-class ContactSlideIn extends Component<{ animation?: string }> {
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleEscKeyPress)
-  }
+import { ContactContext } from '@components/Contact/Contact.Context'
 
-  componentWillUnmount() {
-    if (typeof window !== 'undefined') {
-      window.removeEventListener('keydown', this.handleEscKeyPress)
-    }
-  }
+function ContactSlideIn() {
+  const { showContact, toggleContact } = useContext(ContactContext)
 
-  componentDidUpdate(prevProps) {
-    if (this.props.animation !== prevProps.animation) {
-      if (this.props.animation === 'start') {
-        scrollable('disable')
-      } else {
-        scrollable('enable')
+  useEffect(() => {
+    if (showContact) {
+      scrollable('disable')
+
+      function handleEscKeyPress({ key }) {
+        if (key === 'Escape') {
+          toggleContact()
+        }
       }
+
+      window.addEventListener('keydown', handleEscKeyPress)
+
+      return () => window.removeEventListener('keydown', handleEscKeyPress)
+    } else {
+      scrollable('enable')
     }
-  }
+  }, [showContact])
 
-  exitContactSlideIn = () => {
-    this.props.onClose()
-  }
-
-  handleEscKeyPress = ({ key }) => {
-    if (key === 'Escape') {
-      this.exitContactSlideIn()
-    }
-  }
-
-  render() {
-    const { animation } = this.props
-
-    return (
-      <>
-        <SlideIn in={animation === 'start'}>
-          {animation && (
-            <FormContainer>
-              <ContactForm baseDelay={500} />
-            </FormContainer>
-          )}
-        </SlideIn>
-        <CloseContainer onClick={this.props.onClose} animation={animation}>
-          <ExIcon />
-        </CloseContainer>
-      </>
-    )
-  }
+  return (
+    <Frame>
+      <SlideIn in={showContact}>
+        {showContact && (
+          <FormContainer>
+            <ContactForm baseDelay={300} />
+          </FormContainer>
+        )}
+      </SlideIn>
+      <CloseContainer onClick={toggleContact} animation={showContact}>
+        <ExIcon />
+      </CloseContainer>
+    </Frame>
+  )
 }
 
 export default ContactSlideIn
@@ -87,6 +75,11 @@ const SlideIn = ({ in: inProp, children }) => (
   </Transition>
 )
 
+const Frame = styled.div`
+  position: relative;
+  z-index: 11;
+`
+
 const SlideInContainer = styled.div`
   width: 100vw;
   overflow-y: hidden;
@@ -97,7 +90,7 @@ const SlideInContainer = styled.div`
   z-index: 9;
   position: fixed;
   overflow-y: scroll;
-  transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
   will-change: transform;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
@@ -140,7 +133,7 @@ const CloseContainer = styled.button`
   opacity: ${p => (p.animation ? 1 : 0)};
   transform: translateY(${p => (p.animation ? '0' : '-120px')});
   transition: transform 0.7s cubic-bezier(0.215, 0.61, 0.355, 1)
-      ${p => (p.animation ? '0.4s' : '0s')},
+      ${p => (p.animation ? '0.2s' : '0s')},
     opacity 0s linear ${p => (p.animation ? '0s' : '1s')};
 
   ${mediaqueries.tablet`

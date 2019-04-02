@@ -1,6 +1,6 @@
-import React, { createRef, useEffect, useState } from 'react'
+import React, { createRef, useEffect, useState, useContext } from 'react'
 import styled from 'styled-components'
-import { Link, graphql, StaticQuery } from 'gatsby'
+import { graphql, StaticQuery } from 'gatsby'
 import { useSpring, animated } from 'react-spring'
 import throttle from 'lodash/throttle'
 
@@ -9,6 +9,7 @@ import Section from '@components/Section'
 import IntersectionObserver from '@components/IntersectionObserver'
 import Sticky from '@components/Sticky'
 import Media from '@components/Media/Media.Img'
+import { ContactContext } from '@components/Contact/Contact.Context'
 
 import mediaqueries from '@styles/media'
 import { getWindowDimensions } from '@utils'
@@ -211,6 +212,7 @@ function HomeServices() {
     config,
   }))
   const heading = createRef()
+  const { toggleContact } = useContext(ContactContext)
 
   useEffect(() => {
     const handleScroll = throttle(() => {
@@ -304,7 +306,10 @@ function HomeServices() {
                           <ListItem>Strategic messaging</ListItem>
                           <ListItem>Customer journeys</ListItem>
                         </List>
-                        <StyledLink to="/contact" active={firstActive}>
+                        <StyledLink
+                          onClick={toggleContact}
+                          active={firstActive}
+                        >
                           Let’s talk about your brand
                         </StyledLink>
                         <Progress style={progressStyles} />
@@ -318,7 +323,10 @@ function HomeServices() {
                             <ListItem>Cross-platform apps</ListItem>
                           </List>
                         </Transform>
-                        <StyledLink to="/contact" active={secondActive}>
+                        <StyledLink
+                          onClick={toggleContact}
+                          active={secondActive}
+                        >
                           Let's build something together
                         </StyledLink>
                       </Value>
@@ -331,7 +339,10 @@ function HomeServices() {
                             <ListItem>Nurturing and onboarding</ListItem>
                           </List>
                         </Transform>
-                        <StyledLink to="/contact" active={thirdActive}>
+                        <StyledLink
+                          onClick={toggleContact}
+                          active={thirdActive}
+                        >
                           Let’s grow your business
                         </StyledLink>
                       </Value>
@@ -444,11 +455,12 @@ const Transform = styled.div`
   transition: transform 0.6s var(--ease-out-cubic);
 `
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.button`
   font-weight: 600;
   color: ${p => p.theme.colors.gold};
   opacity: ${p => (p.active ? 1 : 0)};
   transition: opacity 0.3s var(--ease-out-quad);
+  cursor: pointer;
   pointer-events: ${p => (p.active ? 'initial' : 'none')};
 
   &:hover {

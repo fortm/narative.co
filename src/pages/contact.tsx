@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { graphql, navigate } from 'gatsby'
+import { graphql } from 'gatsby'
 import styled from 'styled-components'
 import Transition from 'react-transition-group/Transition'
 
@@ -92,7 +92,7 @@ class ContactPage extends Component<{}, { animation: string }> {
               transitionDelay={500}
               transitionDelayMobile={300}
             >
-              <ContactForm baseDelay={800} />
+              <ContactForm baseDelay={1000} />
             </FormContainer>
           </SlideIn>
           <CloseContainer onClick={this.exitContactPage} animation={animation}>
@@ -153,7 +153,7 @@ const SlideInContainer = styled.div`
   z-index: 0;
   position: fixed;
   overflow-y: scroll;
-  transition: transform 1.4s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: transform 1.1s cubic-bezier(0.19, 1, 0.22, 1);
   will-change: transform;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;

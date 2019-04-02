@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link, navigate } from 'gatsby'
 import styled from 'styled-components'
 
@@ -7,6 +7,7 @@ import ScrollIndicator from '@components/ScrollIndicator'
 import ShapeShifter from '@components/ShapeShifter'
 import IntersectionObserver from '@components/IntersectionObserver'
 import LayoutHeroMobile from '@components/Layout/Layout.Hero.Mobile'
+import { ContactContext } from '@components/Contact/Contact.Context'
 
 import mediaqueries from '@styles/media'
 import { startAnimation } from '@utils'
@@ -14,6 +15,7 @@ import { startAnimation } from '@utils'
 function HomeHero() {
   // Fade in the text as we do on all the headings
   const [animation, setAnimation] = useState('')
+  const { toggleContact } = useContext(ContactContext)
 
   useEffect(() => {
     startAnimation(() => {
@@ -49,13 +51,7 @@ function HomeHero() {
                     We're a team with senior startup experience here to help
                     your business take the next step.
                   </MainText>
-                  <ContactText
-                    to="/contact"
-                    onClick={event => navigateOut(event, '/contact')}
-                    animation={animation}
-                  >
-                    <ButtonArrow text="Get in touch" />
-                  </ContactText>
+                  <ButtonArrow onClick={toggleContact} text="Get in touch" />
                 </TextContainer>
                 <ShapeShifter />
               </ContentContainer>
@@ -98,19 +94,6 @@ const MainText = styled.p`
   ${mediaqueries.phablet`
     font-size: 2.2rem;
   `};
-`
-
-const ContactText = styled(Link)`
-  display: flex;
-  flex-direction: row;
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: ${p => p.theme.colors.grey};
-
-  svg {
-    margin-left: 1rem;
-    transition: transform 300ms ${p => p.theme.transitions.in};
-  }
 `
 
 const ContentContainer = styled.div`
