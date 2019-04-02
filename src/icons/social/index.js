@@ -98,7 +98,7 @@ export const MediumIcon = ({ fill = 'white' }) => (
 
 export const GithubIcon = ({ fill = 'white' }) => (
   <svg width="13" height="13" viewBox="0 0 13 13" version="1.1">
-    <g id="Canvas" fill="none">
+    <g fill="none">
       <g id="git-icon">
         <path
           id="git-icon_2"
@@ -112,7 +112,7 @@ export const GithubIcon = ({ fill = 'white' }) => (
 
 export const DribbleIcon = ({ fill = 'white' }) => (
   <svg width="13" height="13" viewBox="0 0 13 13" version="1.1">
-    <g id="Canvas" fill="none">
+    <g fill="none">
       <g id="dribble-icon">
         <path
           id="dribble-icon_2"

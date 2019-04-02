@@ -1,18 +1,22 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/browser-apis/
- */
+exports.shouldUpdateScroll = ({
+  routerProps: { location },
+  prevRouterProps,
+  getSavedScrollPosition,
+}) => {
+  const currentPosition = getSavedScrollPosition(location)
 
-exports.shouldUpdateScroll = ({ prevRouterProps }) => {
+  if (location.action === 'POP') {
+    window.scrollTo(...(currentPosition || [0, 0]))
+  } else {
+    window.scrollTo(0, 0)
+  }
+
+  // Set previousPath for "back" functionality
   if (prevRouterProps) {
     window.localStorage.setItem(
       'previousPath',
       prevRouterProps.location.pathname
     )
   }
-
-  window.scrollTo(0, 0)
-
   return false
 }

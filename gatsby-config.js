@@ -1,15 +1,22 @@
 require('dotenv').config()
 
+const proxy = require('http-proxy-middleware')
+
 exports.siteMetadata = {
   title: 'Narative',
+  siteUrl: 'https://narative.co',
+  pathPrefix: `/`,
 }
 
 exports.plugins = [
   'gatsby-plugin-react-helmet',
   `gatsby-image`,
+  `gatsby-plugin-typescript`,
   `gatsby-plugin-sharp`,
   `gatsby-transformer-sharp`,
   `gatsby-transformer-remark`,
+  'gatsby-plugin-netlify',
+  'gatsby-plugin-netlify-cache',
   {
     resolve: `gatsby-plugin-styled-components`,
     options: {
@@ -27,19 +34,11 @@ exports.plugins = [
     resolve: `gatsby-source-contentful`,
     options: {
       spaceId: process.env.CONTENTFUL_SPACE_ID,
-      accessToken: process.env.CONTENTFUL_PREVIEW_API_KEY,
-      environment: process.env.CONTENTFUL_ENVIRONMENT,
-      host: `preview.contentful.com`,
-    },
-  },
-  {
-    resolve: `gatsby-source-contentful`,
-    options: {
-      spaceId: process.env.CONTENTFUL_SPACE_ID,
       accessToken: process.env.CONTENTFUL_DELIVERY_API_KEY,
       environment: process.env.CONTENTFUL_ENVIRONMENT,
     },
   },
+
   {
     resolve: 'gatsby-plugin-manifest',
     options: {
@@ -57,6 +56,7 @@ exports.plugins = [
     options: {
       host: 'https://narative.co',
       sitemap: 'https://narative.co/sitemap.xml',
+      policy: [{ userAgent: '*', disallow: ['/.netlify/'] }],
     },
   },
   {
@@ -71,4 +71,22 @@ exports.plugins = [
       pixelId: '2183075648607369',
     },
   },
+
+  // These are our local plugins that can be found within ./plugins
+  'gatsby-transformer-enhance-contentful',
+  'gatsby-transformer-contentful-rich-text-html-renderer',
+  `gatsby-plugin-twitter`,
 ]
+
+// For lambda functions
+exports.developMiddleware = app => {
+  app.use(
+    '/.netlify/functions/',
+    proxy({
+      target: 'http://localhost:9000',
+      pathRewrite: {
+        '/.netlify/functions/': '',
+      },
+    })
+  )
+}

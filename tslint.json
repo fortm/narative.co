@@ -1,0 +1,39 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier"],
+  "jsRules": {},
+  "linterOptions": {
+    "exclude": [
+      "gatsby/**/*.js",
+      "plugins/**/*.js",
+      "migration/**/*.js",
+      "fallbacks/**/*.svg",
+      "functions/**/*.js"
+    ]
+  },
+  "rules": {
+    "interface-name": false,
+    "semicolon": [true, "never"],
+    "member-access": [false],
+    "ordered-imports": [true],
+    "no-console": [false],
+    "no-var-requires": true,
+    "jsx-boolean-value": [false],
+    "quotemark": [true, "single", "jsx-double"],
+    "curly": [false],
+    "no-implicit-dependencies": [
+      true,
+      [
+        "@components",
+        "@i18n",
+        "@styles",
+        "@utils",
+        "@icons",
+        "@assets",
+        "@queries",
+        "@typings"
+      ]
+    ]
+  },
+  "rulesDirectory": []
+}
