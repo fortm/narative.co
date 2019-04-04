@@ -69,7 +69,7 @@ function withDarkMode(WrappedComponent) {
     componentDidMount() {
       const mode = localStorage.getItem('mode')
 
-      if (mode !== this.state.mode) {
+      if (mode === 'dark') {
         this.toggleMode()
       }
     }
